@@ -18,6 +18,15 @@ module.config(['$routeProvider', '$locationProvider', function ($routeProvider, 
                 }
             }
         })             
+        .when('/dashboard', {
+            templateUrl: 'app/components/home/homeView.html',
+            controller: 'homeController',
+            data: {
+                meta: {
+                    'title': 'Homepage'
+                }
+            }
+        })
         .otherwise({
             redirectTo: '/home'
         });

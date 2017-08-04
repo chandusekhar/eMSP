@@ -29,7 +29,7 @@ namespace eMSP.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                        "~/Content/bootstrap.min.css",
-                       "~/font-awesome/css/font-awesome.css",
+                       "~/fonts/font-awesome/css/font-awesome.css",
                        "~/Content/plugins/toastr/toastr.min.css",
                        "~/Scripts/plugins/gritter/jquery.gritter.css",
                        "~/Content/animate.css",

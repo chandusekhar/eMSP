@@ -314,9 +314,9 @@
     <Content Include="Content\SqlScripts\eMSP_20170802.sql" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="font-awesome\css\font-awesome.css" />
-    <Content Include="font-awesome\css\font-awesome.min.css" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -671,11 +671,11 @@
     <Content Include="Content\plugins\summernote\font\summernote6659.ttf" />
     <Content Include="Content\plugins\summernote\font\summernote6659.woff" />
     <Content Include="Content\plugins\summernote\font\summernoted41d.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
-    <Content Include="font-awesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfontd41d.eot" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -60,7 +60,7 @@ namespace eMSP.Web
                         "~/app/components/home/homeController.js"
                         ));
 
-
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

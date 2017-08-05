@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F8
 		..\..\..\eMSP_20170802.sql = ..\..\..\eMSP_20170802.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMSP.WebAPI", "eMSP.WebAPI\eMSP.WebAPI.csproj", "{FF985A03-DD33-499F-9E21-A7EE3D3338A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{BB4AA89F-E947-4DA2-BBDF-33D0E1CD1A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB4AA89F-E947-4DA2-BBDF-33D0E1CD1A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB4AA89F-E947-4DA2-BBDF-33D0E1CD1A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF985A03-DD33-499F-9E21-A7EE3D3338A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF985A03-DD33-499F-9E21-A7EE3D3338A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF985A03-DD33-499F-9E21-A7EE3D3338A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF985A03-DD33-499F-9E21-A7EE3D3338A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

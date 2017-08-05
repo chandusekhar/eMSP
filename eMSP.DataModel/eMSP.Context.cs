@@ -26,6 +26,8 @@ namespace eMSP.DataModel
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoleGroupRole> AspNetRoleGroupRoles { get; set; }
+        public virtual DbSet<AspNetRoleGroup> AspNetRoleGroups { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
@@ -35,6 +37,7 @@ namespace eMSP.DataModel
         public virtual DbSet<tblCountryState> tblCountryStates { get; set; }
         public virtual DbSet<tblLocation> tblLocations { get; set; }
         public virtual DbSet<tblMSPDetail> tblMSPDetails { get; set; }
+        public virtual DbSet<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
         public virtual DbSet<tblMSPUser> tblMSPUsers { get; set; }
         public virtual DbSet<tblUserLocationBranch> tblUserLocationBranches { get; set; }
         public virtual DbSet<tblUserProfile> tblUserProfiles { get; set; }

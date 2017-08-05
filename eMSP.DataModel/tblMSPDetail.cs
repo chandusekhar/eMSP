@@ -17,6 +17,7 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblMSPDetail()
         {
+            this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
         }
     
@@ -34,6 +35,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
     }

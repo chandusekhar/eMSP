@@ -54,6 +54,12 @@
     <Compile Include="AspNetRole.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetRoleGroup.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRoleGroupRole.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUser.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -95,6 +101,9 @@
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPDetail.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPLocationBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPUser.cs">

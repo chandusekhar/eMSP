@@ -214,8 +214,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\components\accounts\forgot-password\forgotPasswordController.js" />
+    <Content Include="app\components\accounts\forgot-password\forgotPasswordView.html" />
+    <Content Include="app\components\accounts\registration\registrationController.js" />
+    <Content Include="app\components\accounts\registration\registrationView.html" />
+    <Content Include="app\components\accounts\login\loginController.js" />
+    <Content Include="app\components\accounts\login\loginView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
+    <Content Include="app\services\user-service.js" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -315,9 +322,9 @@
     <Content Include="Content\SqlScripts\eMSP_20170802.sql" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\font-awesome\css\font-awesome.css" />
-    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="font-awesome\css\font-awesome.css" />
+    <Content Include="font-awesome\css\font-awesome.min.css" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -672,11 +679,11 @@
     <Content Include="Content\plugins\summernote\font\summernote6659.ttf" />
     <Content Include="Content\plugins\summernote\font\summernote6659.woff" />
     <Content Include="Content\plugins\summernote\font\summernoted41d.eot" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.eot" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="font-awesome\fonts\fontawesome-webfontd41d.eot" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -836,7 +843,6 @@
   <ItemGroup>
     <Folder Include="app\config\" />
     <Folder Include="app\directives\" />
-    <Folder Include="app\services\" />
     <Folder Include="app\shared\" />
     <Folder Include="App_Data\" />
   </ItemGroup>

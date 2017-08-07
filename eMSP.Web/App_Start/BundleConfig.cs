@@ -8,6 +8,9 @@ namespace eMSP.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //Other code has been removed for clarity
+            BundleTable.EnableOptimizations = false;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -29,7 +32,7 @@ namespace eMSP.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                        "~/Content/bootstrap.min.css",
-                       "~/fonts/font-awesome/css/font-awesome.css",
+                       "~/font-awesome/css/font-awesome.css",
                        "~/Content/plugins/toastr/toastr.min.css",
                        "~/Scripts/plugins/gritter/jquery.gritter.css",
                        "~/Content/animate.css",
@@ -57,7 +60,11 @@ namespace eMSP.Web
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
                         "~/app/app.js",
-                        "~/app/components/home/homeController.js"
+                        "~/app/components/home/homeController.js",
+                        "~/app/components/accounts/login/loginController.js",
+                        "~/app/components/accounts/registration/registrationController.js",
+                        "~/app/components/accounts/forgot-password/forgotPasswordController.js"
+
                         ));
 
             BundleTable.EnableOptimizations = true;

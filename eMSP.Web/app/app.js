@@ -14,7 +14,34 @@ module.config(['$routeProvider', '$locationProvider', function ($routeProvider, 
             controller: 'homeController',
             data: {
                 meta: {
-                    'title': 'Homepage'
+                    'title': 'Home Page'
+                }
+            }
+        })        
+        .when('/login', {
+            templateUrl: 'app/components/accounts/login/loginView.html',
+            controller: 'loginController',
+            data: {
+                meta: {
+                    'title': 'Login Page'
+                }
+            }
+        })
+        .when('/registration', {
+            templateUrl: 'app/components/accounts/registration/registrationView.html',
+            controller: 'registrationController',
+            data: {
+                meta: {
+                    'title': 'Registration'
+                }
+            }
+        })
+        .when('/forgot-password', {
+            templateUrl: 'app/components/accounts/login/forgotPasswordView.html',
+            controller: 'forgotPasswordController',
+            data: {
+                meta: {
+                    'title': 'Forgot Password'
                 }
             }
         })
@@ -23,7 +50,7 @@ module.config(['$routeProvider', '$locationProvider', function ($routeProvider, 
             controller: 'homeController',
             data: {
                 meta: {
-                    'title': 'Homepage'
+                    'title': 'Home Page'
                 }
             }
         })

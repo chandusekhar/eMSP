@@ -1,4 +1,4 @@
-﻿var eMSPAppControllers = angular.module("eMSPApp.Controllers", []);
+﻿var eMSPAppControllers = angular.module("eMSPApp");
 
 eMSPAppControllers.controller("loginController", ['$scope', '$http', function ($scope, $http) {
 

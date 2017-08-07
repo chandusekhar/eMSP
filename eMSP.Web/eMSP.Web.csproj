@@ -214,15 +214,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\components\accounts\forgot-password\forgotPasswordController.js" />
-    <Content Include="app\components\accounts\forgot-password\forgotPasswordView.html" />
+    <Content Include="app\components\accounts\forgotPassword\forgotPasswordController.js" />
+    <Content Include="app\components\accounts\forgotPassword\forgotPasswordView.html" />
     <Content Include="app\components\accounts\registration\registrationController.js" />
     <Content Include="app\components\accounts\registration\registrationView.html" />
     <Content Include="app\components\accounts\login\loginController.js" />
     <Content Include="app\components\accounts\login\loginView.html" />
+    <Content Include="app\components\dashboard\dashboardController.js" />
+    <Content Include="app\components\dashboard\dashboardView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\homeView.html" />
-    <Content Include="app\services\user-service.js" />
+    <Content Include="app\config\eMSPConfig.js" />
+    <Content Include="app\directives\eMSPDirectives.js" />
+    <Content Include="app\services\eMSPService.js" />
+    <Content Include="app\shared\eMSPFactory.js" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -842,9 +847,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\config\" />
-    <Folder Include="app\directives\" />
-    <Folder Include="app\shared\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

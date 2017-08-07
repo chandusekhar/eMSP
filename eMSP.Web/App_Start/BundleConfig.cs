@@ -8,8 +8,7 @@ namespace eMSP.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //Other code has been removed for clarity
-            BundleTable.EnableOptimizations = false;
+            
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
@@ -55,19 +54,29 @@ namespace eMSP.Web
                         "~/Scripts/plugins/gritter/jquery.gritter.min.js",
                         "~/Scripts/plugins/sparkline/jquery.sparkline.min.js",
                         "~/Scripts/plugins/chartJs/Chart.min.js",
-                        "~/Scripts/plugins/toastr/toastr.min.js"
+                        "~/Scripts/plugins/toastr/toastr.min.js",
+                        "~/Scripts/plugins/iCheck/icheck.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
                         "~/app/app.js",
+                        "~/app/components/dashboard/dashboardController.js",
                         "~/app/components/home/homeController.js",
                         "~/app/components/accounts/login/loginController.js",
                         "~/app/components/accounts/registration/registrationController.js",
-                        "~/app/components/accounts/forgot-password/forgotPasswordController.js"
-
+                        "~/app/components/accounts/forgotPassword/forgotPasswordController.js"
+                        
                         ));
 
-            BundleTable.EnableOptimizations = true;
+            bundles.Add(new ScriptBundle("~/bundles/services").Include(
+                        "~/app/directives/eMSPDirectives.js",
+                        "~/app/services/eMSPService.js",
+                        "~/app/shared/eMSPFactory.js",
+                        "~/app/config/eMSPConfig.js"
+                        ));
+
+            //Other code has been removed for clarity
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

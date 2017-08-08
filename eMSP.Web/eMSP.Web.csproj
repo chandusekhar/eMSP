@@ -89,9 +89,9 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.11\lib\net45\NLog.dll</HintPath>
@@ -220,6 +220,10 @@
     <Content Include="app\components\accounts\registration\registrationView.html" />
     <Content Include="app\components\accounts\login\loginController.js" />
     <Content Include="app\components\accounts\login\loginView.html" />
+    <Content Include="app\components\Company\Controller\createCompanyController.js" />
+    <Content Include="app\components\Company\Controller\searchCompanyController.js" />
+    <Content Include="app\components\Company\View\createCompany.html" />
+    <Content Include="app\components\Company\View\searchCompany.html" />
     <Content Include="app\components\dashboard\dashboardController.js" />
     <Content Include="app\components\dashboard\dashboardView.html" />
     <Content Include="app\components\home\homeController.js" />
@@ -690,6 +694,12 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff" />
     <Content Include="font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
     <Content Include="font-awesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="app\components\Company\Config\CreateCustomer.json" />
+    <Content Include="app\components\Company\Config\CreateMSP.json" />
+    <Content Include="app\components\Company\Config\CreateSupplier.json" />
+    <Content Include="app\components\Company\Config\SearchCustomers.json" />
+    <Content Include="app\components\Company\Config\SearchMSP.json" />
+    <Content Include="app\components\Company\Config\SearchSuppliers.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -697,6 +707,7 @@
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -1,4 +1,4 @@
-﻿var module = angular.module("eMSPApp", ["ngRoute", "eMSPApp.Controllers"])
+﻿var eMSPApp = angular.module("eMSPApp", ["ngRoute", "LocalStorageModule"])
 
 .controller('ctrlMain', ['$scope', '$http', function ($scope, $http) {
     $('html,body').scrollTop(0);

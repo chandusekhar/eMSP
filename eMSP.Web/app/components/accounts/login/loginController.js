@@ -1,15 +1,28 @@
-﻿var eMSPAppControllers = angular.module("eMSPApp");
+﻿eMSPApp.controller("loginController", ['$scope', '$location', 'authService', function ($scope, $location, authService) {
 
-eMSPAppControllers.controller("loginController", ['$scope', '$http', function ($scope, $http) {
-
-    $scope.credentials = { username: "", password: ""};
-    function login() {
-        alert(credentials.username + " " + credentials.password);
-        
+    $scope.loginData = {
+        userName: "",
+        password: "",
+        useRefreshTokens: false
     };
-    
+
+    $scope.message = "";
+
+    $scope.login = function () {
+        console.log($scope.loginData);
+
+        authService.login($scope.loginData).then(function (response) {
+
+            $location.path('/dashboard');
+
+        },
+         function (err) {
+             $scope.message = err.error_description;
+         });
+    };
+
     $(".small-chat-box,.footer,.navbar-default,.border-bottom").hide();
     $("#page-wrapper").css({ margin: "0 0 0 0" });
-    
+
 
 }]);

@@ -1,6 +1,4 @@
-﻿var eMSPAppControllers = angular.module("eMSPApp");
-
-eMSPAppControllers.controller("registrationController", ['$scope', '$http', function ($scope, $http) {
+﻿eMSPApp.controller("registrationController", ['$scope', '$http', function ($scope, $http) {
     
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',

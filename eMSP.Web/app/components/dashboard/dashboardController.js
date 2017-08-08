@@ -1,6 +1,4 @@
-﻿var eMSPAppControllers = angular.module("eMSPApp.Controllers", []);
-
-eMSPAppControllers.controller("dashboardController", ['$scope', '$http', function ($scope, $http) {
+﻿eMSPApp.controller("dashboardController", ['$scope', '$http', function ($scope, $http) {
 
     setTimeout(function () {
         toastr.options = {

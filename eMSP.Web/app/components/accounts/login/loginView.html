@@ -11,18 +11,27 @@
         <h3>Welcome to eMSP</h3>
         
         <p>Login in. To see it in action.</p>
-        <form class="m-t" name="form" ng-submit="login()" ng-action="login()" role="form">
-            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                <input type="text" name="username" id="username" ng-model="credentials.username" required 
+        <form class="m-t" name="form" role="form">
+            <div class="form-group" ng-class="{ 'has-error': form.userName.$dirty && form.userName.$error.required }">
+                <input type="text" name="userName" ng-model="loginData.userName" required 
                         class="form-control" placeholder="Username" />
-                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                <span ng-show="form.userName.$dirty && form.userName.$error.required" class="help-block">Username is required</span>
             </div>
             <div class="form-group"  ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
                 <input type="password" class="form-control" placeholder="Password" 
-                       name="password" id="password"  ng-model="credentials.password" required />
+                       name="password" ng-model="loginData.password" required />
                 <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b form-actions" ng-disabled="form.$invalid || credentials.dataLoading">Login</button>            
+            <div class="form-group">
+                <div class="checkbox i-checks">
+                    <label>
+                        <input type="checkbox" ng-model="loginData.useRefreshTokens">
+                        <i></i>  Use Refresh Tokens
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b form-actions"  ng-click="login()"
+                    ng-disabled="form.$invalid || loginData.dataLoading">Login</button>            
 
             <a href="/forgot-password"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>

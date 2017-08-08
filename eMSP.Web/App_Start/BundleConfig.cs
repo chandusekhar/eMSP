@@ -18,7 +18,11 @@ namespace eMSP.Web
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.min.js",
-                        "~/Scripts/angular-*"));
+                        "~/Scripts/angular-*",
+                        "~/Scripts/angular-local-storage.min.js"
+                        //"~/Scripts/angular-idle.js",
+                        //"~/Scripts/angular-translate.min.js"
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -27,12 +31,14 @@ namespace eMSP.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      //"~/Scripts/ui-bootstrap-tpls-1.1.2.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                        "~/Content/bootstrap.min.css",
                        "~/font-awesome/css/font-awesome.css",
                        "~/Content/plugins/toastr/toastr.min.css",
+                       "~/Content/plugins/iCheck/custom.css",
                        "~/Scripts/plugins/gritter/jquery.gritter.css",
                        "~/Content/animate.css",
                        "~/Content/style.css"));
@@ -42,6 +48,7 @@ namespace eMSP.Web
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/plugins/metisMenu/jquery.metisMenu.js",
                         "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js",
+                        //"~/Scripts/ocLazyLoad.min.js",
                         "~/Scripts/plugins/flot/jquery.flot.js",
                         "~/Scripts/plugins/flot/jquery.flot.tooltip.min.js",
                         "~/Scripts/plugins/flot/jquery.flot.spline.js",
@@ -69,8 +76,11 @@ namespace eMSP.Web
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
+                        "~/app/services/authService.js",
+                        "~/app/services/authInterceptorService.js",
+                        "~/app/services/tokensManagerService.js",
+                        "~/app/services/ordersService.js",
                         "~/app/directives/eMSPDirectives.js",
-                        "~/app/services/eMSPService.js",
                         "~/app/shared/eMSPFactory.js",
                         "~/app/config/eMSPConfig.js"
                         ));

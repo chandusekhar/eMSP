@@ -71,7 +71,9 @@ namespace eMSP.Web
                         "~/app/components/home/homeController.js",
                         "~/app/components/accounts/login/loginController.js",
                         "~/app/components/accounts/registration/registrationController.js",
-                        "~/app/components/accounts/forgotPassword/forgotPasswordController.js"
+                        "~/app/components/accounts/forgotPassword/forgotPasswordController.js",
+                        "~/app/components/Company/Controller/searchCompanyController.js",
+                        "~/app/components/Company/Controller/createCompanyController.js"
                         
                         ));
 

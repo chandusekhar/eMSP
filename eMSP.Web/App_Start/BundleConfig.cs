@@ -64,17 +64,19 @@ namespace eMSP.Web
                         "~/Scripts/plugins/toastr/toastr.min.js",
                         "~/Scripts/plugins/iCheck/icheck.min.js"
                         ));
+            bundles.Add(new ScriptBundle("~/bundles/config").Include(
+                       "~/app/app.js",
+                       "~/app/config/eMSPConfig.js"
+                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/controllers").Include(
-                        "~/app/app.js",
+            bundles.Add(new ScriptBundle("~/bundles/controllers").Include(                       
                         "~/app/components/dashboard/dashboardController.js",
                         "~/app/components/home/homeController.js",
                         "~/app/components/accounts/login/loginController.js",
                         "~/app/components/accounts/registration/registrationController.js",
                         "~/app/components/accounts/forgotPassword/forgotPasswordController.js",
                         "~/app/components/Company/Controller/searchCompanyController.js",
-                        "~/app/components/Company/Controller/createCompanyController.js"
-                        
+                        "~/app/components/Company/Controller/createCompanyController.js"                        
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/services").Include(
@@ -83,8 +85,7 @@ namespace eMSP.Web
                         "~/app/services/tokensManagerService.js",
                         "~/app/services/ordersService.js",
                         "~/app/directives/eMSPDirectives.js",
-                        "~/app/shared/eMSPFactory.js",
-                        "~/app/config/eMSPConfig.js"
+                        "~/app/shared/eMSPFactory.js"
                         ));
 
             //Other code has been removed for clarity

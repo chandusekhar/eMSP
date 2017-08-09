@@ -12,18 +12,18 @@ namespace eMSP.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            //routes.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            //);
-
             routes.MapRoute(
-                name: "eMSPApp",
+               name: "eMSPAppAccounts",
+               url: "Account",
+               defaults: new { controller = "Home", action = "Login" }
+           );
+            routes.MapRoute(
+                name: "eMSPAppDefault",
                 url: "{*url}",
                 defaults: new { controller = "Home", action = "Index" }
             );
+
+           
         }
     }
 }

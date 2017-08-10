@@ -35,6 +35,16 @@
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_5">{{ 'DASHBOARD' | translate }} v.5 </a></li>
                 </ul>
             </li>
+            <li ng-class="{active: $state.includes('company')}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">{{'Company'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('company')}">
+                    <li ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Company'|translate}}ManageMSP</a></li>
+                    <li ui-sref-active="active"><a ui-sref="company.searchSuppliers">{{'Company'|translate}}Manage Suppliers</a></li>
+                    <li ui-sref-active="active"><a ui-sref="company.searchCustomers">{{'Company'|translate}}Manage Customers</a></li>
+                    <li ui-sref-active="active"><a ui-sref="company.createSupplier">{{'Company'|translate}}Create Supplier</a></li>
+                    <li ui-sref-active="active"><a ui-sref="company.createCustomer">{{'Company'|translate}}Create Customer</a></li>
+                </ul>
+            </li>
             <li ui-sref-active="active">
                 <a ui-sref="layouts"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'LAYOUTS' | translate }}</span> </a>
             </li>

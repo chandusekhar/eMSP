@@ -30,6 +30,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/dashboards",
             templateUrl: "views/common/content.html",
         })
+
         .state('dashboards.dashboard_1', {
             url: "/dashboard_1",
             templateUrl: "views/dashboard_1.html",
@@ -1485,6 +1486,103 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/outlook.html",
             data: { pageTitle: 'Outlook view', specialClass: 'fixed-sidebar' }
         })
+        //company Routes starts
+        .state('company', {
+            abstract: true,
+            url: "/company",
+            templateUrl: "views/common/content.html",
+        })
+        .state("company.searchMSP", {
+            url: '/searchMSP',
+            templateUrl: 'components/Company/View/searchCompany.html',
+            controller: 'searchCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("/components/Company/Config/SearchMSP.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.searchSuppliers", {
+            url: '/searchSuppliers',
+            templateUrl: 'components/Company/View/searchCompany.html',
+            controller: 'searchCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("/components/Company/Config/SearchSuppliers.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.searchCustomers", {
+            url: '/searchCustomers',
+            templateUrl: 'components/Company/View/searchCompany.html',
+            controller: 'searchCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("/components/Company/Config/SearchCustomers.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.createMSP", {
+            url: '/createMSP',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.createSupplier", {
+            url: '/createSupplier',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.createCustomer", {
+            url: '/createCustomer',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.editMSP", {
+            url: '/editMSP',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.editSupplier", {
+            url: '/editSupplier',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                }
+            }
+        })
+        .state("company.editCustomer", {
+            url: '/editCustomer',
+            templateUrl: 'components/Company/View/createCompany.html',
+            controller: 'createCompanyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                }
+            }
+        })
+        //company Routes end
         .state('off_canvas', {
             url: "/off_canvas",
             templateUrl: "views/off_canvas.html",

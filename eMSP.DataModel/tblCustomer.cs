@@ -12,42 +12,41 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblBranch
+    public partial class tblCustomer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblBranch()
+        public tblCustomer()
         {
             this.tblCustomerLocationBranches = new HashSet<tblCustomerLocationBranch>();
-            this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
-            this.tblSupplierLocationBranches = new HashSet<tblSupplierLocationBranch>();
-            this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
+            this.tblCustomerUsers = new HashSet<tblCustomerUser>();
+            this.tblMSPCustomers = new HashSet<tblMSPCustomer>();
+            this.tblVacancies = new HashSet<tblVacancy>();
         }
     
         public long ID { get; set; }
-        public long LocationID { get; set; }
-        public string BranchName { get; set; }
+        public string Name { get; set; }
+        public string WebSite { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
-        public string StreetLine1 { get; set; }
-        public string StreetLine2 { get; set; }
+        public string Address { get; set; }
         public string City { get; set; }
-        public Nullable<int> StateID { get; set; }
-        public Nullable<int> CountryID { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
+        public string LogoPath { get; set; }
+        public Nullable<long> StateID { get; set; }
+        public Nullable<long> CountryID { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblLocation tblLocation { get; set; }
+        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblCountryState tblCountryState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomerLocationBranch> tblCustomerLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
+        public virtual ICollection<tblCustomerUser> tblCustomerUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
+        public virtual ICollection<tblMSPCustomer> tblMSPCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
+        public virtual ICollection<tblVacancy> tblVacancies { get; set; }
     }
 }

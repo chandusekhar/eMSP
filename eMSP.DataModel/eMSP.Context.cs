@@ -33,13 +33,32 @@ namespace eMSP.DataModel
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<tblBranch> tblBranches { get; set; }
+        public virtual DbSet<tblCandidate> tblCandidates { get; set; }
+        public virtual DbSet<tblComment> tblComments { get; set; }
+        public virtual DbSet<tblCommentUser> tblCommentUsers { get; set; }
         public virtual DbSet<tblCountry> tblCountries { get; set; }
         public virtual DbSet<tblCountryState> tblCountryStates { get; set; }
+        public virtual DbSet<tblCustomerLocationBranch> tblCustomerLocationBranches { get; set; }
+        public virtual DbSet<tblCustomer> tblCustomers { get; set; }
+        public virtual DbSet<tblCustomerUser> tblCustomerUsers { get; set; }
+        public virtual DbSet<tblIndustry> tblIndustries { get; set; }
+        public virtual DbSet<tblIndustrySkill> tblIndustrySkills { get; set; }
         public virtual DbSet<tblLocation> tblLocations { get; set; }
+        public virtual DbSet<tblMSPCustomer> tblMSPCustomers { get; set; }
         public virtual DbSet<tblMSPDetail> tblMSPDetails { get; set; }
         public virtual DbSet<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
         public virtual DbSet<tblMSPUser> tblMSPUsers { get; set; }
+        public virtual DbSet<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
+        public virtual DbSet<tblSupplier> tblSuppliers { get; set; }
+        public virtual DbSet<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
+        public virtual DbSet<tblSupplierUser> tblSupplierUsers { get; set; }
         public virtual DbSet<tblUserLocationBranch> tblUserLocationBranches { get; set; }
         public virtual DbSet<tblUserProfile> tblUserProfiles { get; set; }
+        public virtual DbSet<tblVacancy> tblVacancies { get; set; }
+        public virtual DbSet<tblVacancieSkill> tblVacancieSkills { get; set; }
+        public virtual DbSet<tblVacancyComment> tblVacancyComments { get; set; }
+        public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
+        public virtual DbSet<tblVacancyLocation> tblVacancyLocations { get; set; }
+        public virtual DbSet<tblVacancySupplier> tblVacancySuppliers { get; set; }
     }
 }

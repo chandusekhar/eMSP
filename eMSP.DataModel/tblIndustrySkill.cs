@@ -12,20 +12,17 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCountryState
+    public partial class tblIndustrySkill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCountryState()
+        public tblIndustrySkill()
         {
-            this.tblCustomers = new HashSet<tblCustomer>();
-            this.tblMSPDetails = new HashSet<tblMSPDetail>();
-            this.tblSuppliers = new HashSet<tblSupplier>();
+            this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
         }
     
         public long ID { get; set; }
-        public long CountryID { get; set; }
+        public long IndustryID { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -33,12 +30,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblIndustry tblIndustry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCustomer> tblCustomers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMSPDetail> tblMSPDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
+        public virtual ICollection<tblVacancieSkill> tblVacancieSkills { get; set; }
     }
 }

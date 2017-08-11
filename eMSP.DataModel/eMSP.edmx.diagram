@@ -5,35 +5,87 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bbc09aaffbdb47b98109f6920a821809" Name="Diagram1">
-        <EntityTypeShape EntityType="eVMSModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroupRole" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroup" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRole" Width="1.5" PointX="0.75" PointY="7" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.75" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUser" Width="1.5" PointX="3" PointY="5.75" />
-        <EntityTypeShape EntityType="eVMSModel.tblBranch" Width="1.5" PointX="5.25" PointY="14.125" />
-        <EntityTypeShape EntityType="eVMSModel.tblCountry" Width="1.5" PointX="10.75" PointY="1.125" />
-        <EntityTypeShape EntityType="eVMSModel.tblCountryState" Width="1.5" PointX="13" PointY="1" />
-        <EntityTypeShape EntityType="eVMSModel.tblLocation" Width="1.5" PointX="3" PointY="14.375" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPDetail" Width="1.5" PointX="8.25" PointY="3.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPLocationBranch" Width="1.5" PointX="13.5" PointY="10.375" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPUser" Width="1.5" PointX="10.5" PointY="8.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblUserLocationBranch" Width="1.5" PointX="7.5" PointY="8.625" />
-        <EntityTypeShape EntityType="eVMSModel.tblUserProfile" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="eVMSModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroupRole" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroup" Width="1.5" PointX="7.75" PointY="1.375" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="eVMSModel.AspNetUser" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="eVMSModel.tblBranch" Width="1.5" PointX="8.25" PointY="13" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidate" Width="1.5" PointX="7.75" PointY="4.375" />
+        <EntityTypeShape EntityType="eVMSModel.tblComment" Width="1.5" PointX="13.5" PointY="39.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblCommentUser" Width="1.5" PointX="18.75" PointY="23" />
+        <EntityTypeShape EntityType="eVMSModel.tblCountry" Width="1.5" PointX="0.75" PointY="25.75" />
+        <EntityTypeShape EntityType="eVMSModel.tblCountryState" Width="1.5" PointX="3" PointY="25.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblCustomerLocationBranch" Width="1.5" PointX="13.5" PointY="20.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblCustomer" Width="1.5" PointX="8.25" PointY="25" />
+        <EntityTypeShape EntityType="eVMSModel.tblCustomerUser" Width="1.5" PointX="13.5" PointY="25.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblIndustry" Width="1.5" PointX="8.25" PointY="38.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblIndustrySkill" Width="1.5" PointX="10.5" PointY="38.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblLocation" Width="1.5" PointX="6" PointY="13.25" />
+        <EntityTypeShape EntityType="eVMSModel.tblMSPCustomer" Width="1.5" PointX="10.5" PointY="25.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblMSPDetail" Width="1.5" PointX="5.25" PointY="25" />
+        <EntityTypeShape EntityType="eVMSModel.tblMSPLocationBranch" Width="1.5" PointX="13.5" PointY="30.75" />
+        <EntityTypeShape EntityType="eVMSModel.tblMSPUser" Width="1.5" PointX="16.5" PointY="25.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblMSPVacancieType" Width="1.5" PointX="7.5" PointY="34" />
+        <EntityTypeShape EntityType="eVMSModel.tblSupplier" Width="1.5" PointX="5.25" PointY="19.125" />
+        <EntityTypeShape EntityType="eVMSModel.tblSupplierLocationBranch" Width="1.5" PointX="10.5" PointY="19.75" />
+        <EntityTypeShape EntityType="eVMSModel.tblSupplierUser" Width="1.5" PointX="7.5" PointY="19.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblUserLocationBranch" Width="1.5" PointX="10.5" PointY="10.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblUserProfile" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancy" Width="1.5" PointX="10.5" PointY="29.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancieSkill" Width="1.5" PointX="12.75" PointY="35.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancyComment" Width="1.5" PointX="15.75" PointY="34.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancyFile" Width="1.5" PointX="12.75" PointY="43.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancyLocation" Width="1.5" PointX="15.75" PointY="30" />
+        <EntityTypeShape EntityType="eVMSModel.tblVacancySupplier" Width="1.5" PointX="15.75" PointY="21.125" />
         <AssociationConnector Association="eVMSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="eVMSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="eVMSModel.FK_tblUserProfile_AspNetUsers" />
         <AssociationConnector Association="eVMSModel.FK_tblBranches_tblLocations" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblBranches" />
         <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblBranches" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblBranches" />
         <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblBranches" />
+        <AssociationConnector Association="eVMSModel.FK_tblCommentUsers_tblComments" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyComments_tblComments" />
+        <AssociationConnector Association="eVMSModel.FK_tblCommentUsers_tblUserProfile" />
         <AssociationConnector Association="eVMSModel.FK_tblCountryStates_tblCountries" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomers_tblCountries" />
+        <AssociationConnector Association="eVMSModel.FK_tblMSPDetails_tblCountries" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplier_tblCountries" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomers_tblCountryStates" />
+        <AssociationConnector Association="eVMSModel.FK_tblMSPDetails_tblCountryStates" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplier_tblCountryStates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblCustomers" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblLocations" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyLocations_tblCustomerLocationBranches" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomerUsers_tblCustomers" />
+        <AssociationConnector Association="eVMSModel.FK_tblMSPCustomers_tblCustomers" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancies_tblCustomers" />
+        <AssociationConnector Association="eVMSModel.FK_tblCustomerUsers_tblUserProfile" />
+        <AssociationConnector Association="eVMSModel.FK_tblIndustrySkills_tblIndustries" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancieSkills_tblIndustrySkills" />
         <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblLocations" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblLocations" />
         <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblLocations" />
+        <AssociationConnector Association="eVMSModel.FK_tblMSPCustomers_tblMSPDetails" />
         <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblMSPDetails" />
         <AssociationConnector Association="eVMSModel.FK_tblMSPUsers_tblMSPDetails" />
+        <AssociationConnector Association="eVMSModel.FK_tblMSPVacancieTypes_tblMSPDetails" />
         <AssociationConnector Association="eVMSModel.FK_tblMSPUsers_tblUserProfile" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancies_tblMSPVacancieTypes" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblSupplier" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplierUsers_tblSupplier" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancySuppliers_tblSupplier" />
+        <AssociationConnector Association="eVMSModel.FK_tblSupplierUsers_tblUserProfile" />
         <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblUserProfile" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancieSkills_tblVacancies" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyComments_tblVacancies" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyFiles_tblVacancies" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyLocations_tblVacancies" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancySuppliers_tblVacancies" />
         <AssociationConnector Association="eVMSModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>

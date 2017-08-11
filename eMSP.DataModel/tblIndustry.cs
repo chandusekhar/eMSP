@@ -12,20 +12,17 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCountryState
+    public partial class tblIndustry
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCountryState()
+        public tblIndustry()
         {
-            this.tblCustomers = new HashSet<tblCustomer>();
-            this.tblMSPDetails = new HashSet<tblMSPDetail>();
-            this.tblSuppliers = new HashSet<tblSupplier>();
+            this.tblIndustrySkills = new HashSet<tblIndustrySkill>();
         }
     
         public long ID { get; set; }
-        public long CountryID { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
+        public string Description { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -33,12 +30,7 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCountry tblCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCustomer> tblCustomers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMSPDetail> tblMSPDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
+        public virtual ICollection<tblIndustrySkill> tblIndustrySkills { get; set; }
     }
 }

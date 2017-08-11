@@ -12,20 +12,18 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCountryState
+    public partial class tblCustomerLocationBranch
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCountryState()
+        public tblCustomerLocationBranch()
         {
-            this.tblCustomers = new HashSet<tblCustomer>();
-            this.tblMSPDetails = new HashSet<tblMSPDetail>();
-            this.tblSuppliers = new HashSet<tblSupplier>();
+            this.tblVacancyLocations = new HashSet<tblVacancyLocation>();
         }
     
         public long ID { get; set; }
-        public long CountryID { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public long CustomerID { get; set; }
+        public long LocationID { get; set; }
+        public Nullable<long> BranchID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -33,12 +31,10 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblBranch tblBranch { get; set; }
+        public virtual tblCustomer tblCustomer { get; set; }
+        public virtual tblLocation tblLocation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCustomer> tblCustomers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMSPDetail> tblMSPDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
+        public virtual ICollection<tblVacancyLocation> tblVacancyLocations { get; set; }
     }
 }

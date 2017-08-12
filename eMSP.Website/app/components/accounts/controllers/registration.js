@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('eMSPApp').controller("registrationController", ['$scope', '$http', function ($scope, $http) {
+angular.module('eMSPApp').controller("registrationController", ['$scope', '$http', 'mspRegistrationService', function ($scope, $http, mspRegistrationService) {
     
 
     $scope.regData = {
@@ -13,6 +13,17 @@ angular.module('eMSPApp').controller("registrationController", ['$scope', '$http
         country: "",
         password: "",
         agree: false
+    };
+
+    $scope.login = function () {
+        console.log($scope.regData);
+
+        mspRegistrationService.saveRegistration($scope.regData).then(function (response) {
+            $location.path('/dashboard');
+        },
+         function (err) {
+             $scope.message = err.error_description;
+         });
     };
 
     $('.i-checks').iCheck({

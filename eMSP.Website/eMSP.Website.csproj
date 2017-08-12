@@ -110,6 +110,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\components\accounts\services\mspRegistrationService.js" />
+    <Content Include="app\components\location-branch\controller\branch.js" />
+    <Content Include="app\components\location-branch\controller\location.js" />
+    <Content Include="app\components\location-branch\service\location-branch-service.js" />
+    <Content Include="app\components\location-branch\view\branch.html" />
+    <Content Include="app\components\location-branch\view\location.html" />
+    <Content Include="app\components\users-roles\controller\roles.js" />
+    <Content Include="app\components\users-roles\controller\users.js" />
+    <Content Include="app\components\users-roles\service\user-role-service.js" />
+    <Content Include="app\components\users-roles\view\roles.html" />
+    <Content Include="app\components\users-roles\view\users.html" />
     <Content Include="app\HtmlPage1.html" />
     <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
@@ -2643,7 +2654,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\accounts\services\" />
     <Folder Include="app\components\dashboard\service\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>

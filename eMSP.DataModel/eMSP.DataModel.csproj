@@ -91,13 +91,40 @@
     <Compile Include="tblBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidate.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblComment.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCommentUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblCountry.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCountryState.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCustomer.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCustomerLocationBranch.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCustomerUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblIndustry.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblIndustrySkill.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblLocation.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPCustomer.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPDetail.cs">
@@ -109,10 +136,40 @@
     <Compile Include="tblMSPUser.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblMSPVacancieType.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSupplier.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSupplierLocationBranch.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSupplierUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblUserLocationBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserProfile.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancieSkill.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancy.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancyComment.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancyFile.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancyLocation.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacancySupplier.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
   </ItemGroup>

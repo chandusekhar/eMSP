@@ -17,7 +17,10 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblUserProfile()
         {
+            this.tblCommentUsers = new HashSet<tblCommentUser>();
+            this.tblCustomerUsers = new HashSet<tblCustomerUser>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
+            this.tblSupplierUsers = new HashSet<tblSupplierUser>();
             this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
         }
     
@@ -25,6 +28,8 @@ namespace eMSP.DataModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
+        public string UserProfilePhotoPath { get; set; }
+        public string RoleGroupId { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public Nullable<int> StateID { get; set; }
@@ -38,7 +43,13 @@ namespace eMSP.DataModel
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCommentUser> tblCommentUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCustomerUser> tblCustomerUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSupplierUser> tblSupplierUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
     }

@@ -14,6 +14,14 @@ namespace eMSP.DataModel
     
     public partial class tblCountryState
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblCountryState()
+        {
+            this.tblCustomers = new HashSet<tblCustomer>();
+            this.tblMSPDetails = new HashSet<tblMSPDetail>();
+            this.tblSuppliers = new HashSet<tblSupplier>();
+        }
+    
         public long ID { get; set; }
         public long CountryID { get; set; }
         public string Name { get; set; }
@@ -26,5 +34,11 @@ namespace eMSP.DataModel
         public string UpdatedUserID { get; set; }
     
         public virtual tblCountry tblCountry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCustomer> tblCustomers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMSPDetail> tblMSPDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
     }
 }

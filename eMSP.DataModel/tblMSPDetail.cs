@@ -17,8 +17,10 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblMSPDetail()
         {
+            this.tblMSPCustomers = new HashSet<tblMSPCustomer>();
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
+            this.tblMSPVacancieTypes = new HashSet<tblMSPVacancieType>();
         }
     
         public long ID { get; set; }
@@ -28,16 +30,23 @@ namespace eMSP.DataModel
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public Nullable<int> StateID { get; set; }
-        public Nullable<int> CountryID { get; set; }
+        public string LogoPath { get; set; }
+        public Nullable<long> StateID { get; set; }
+        public Nullable<long> CountryID { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblCountryState tblCountryState { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMSPCustomer> tblMSPCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
     }
 }

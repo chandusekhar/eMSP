@@ -18,7 +18,9 @@ namespace eMSP.DataModel
         public tblLocation()
         {
             this.tblBranches = new HashSet<tblBranch>();
+            this.tblCustomerLocationBranches = new HashSet<tblCustomerLocationBranch>();
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
+            this.tblSupplierLocationBranches = new HashSet<tblSupplierLocationBranch>();
             this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
         }
     
@@ -39,7 +41,11 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBranch> tblBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCustomerLocationBranch> tblCustomerLocationBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
     }

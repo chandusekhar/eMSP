@@ -1,56 +1,110 @@
-﻿<style type="text/css">
-    .middle-box h1 {
-        font-size: 100px;
-    }
-</style>
-<div class="middle-box text-center loginscreen   animated fadeInDown">
+﻿<div class="loginColumns  animated fadeInDown" data-ng-controller="registrationController">
     <div>
-        <div>
-            <h1 class="logo-name">eMSP</h1>
-        </div>
-        <h3>Register eMSP</h3>
-        <p>Create account to see it in action.</p>
-        <form class="m-t" role="form" action="#">
-            <div class="form-group">
-                <input type="text" class="form-control" name="companyName" placeholder="Company Name" required="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="companyWebsite" placeholder="Website" required="">
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email" name="email" required="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" required="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="address" placeholder="Address" required="">
-            </div>            
-            <div class="form-group">
-                <input type="text" class="form-control" name="city" placeholder="City" required="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="state" placeholder="State" required="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="country" placeholder="Country" required="">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="">
-            </div>
-            <div class="form-group">
-                <div class="checkbox i-checks">
-                    <label>
-                        <input type="checkbox">
-                        <i></i> Agree the terms and policy
-                    </label>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div>
+                    <h2 class="font-bold">Welcome to eMSP</h2>
                 </div>
+                <h3>Register eMSP</h3>
+                <p>Create account to see it in action.</p>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+            <div class="col-md-12">
+                <div class="ibox-content">
+                    <form class="m-t" name="form">
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.companyName.$dirty && form.companyName.$error.required }">
+                            <input type="text" class="form-control" name="companyName"
+                                   ng-model="regData.companyName"
+                                   placeholder="Company Name"
+                                   required="">
+                            <span ng-show="form.companyName.$dirty && form.companyName.$error.required" class="help-block">
+                                Company Name is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.companyWebsite.$dirty && form.companyWebsite.$error.required }">
+                            <input type="text" class="form-control" name="companyWebsite"
+                                   ng-model="regData.companyWebsite"
+                                   placeholder="Website" required="">
+                            <span ng-show="form.companyWebsite.$dirty && form.companyWebsite.$error.required" class="help-block">
+                                Website is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+                            <input type="email" class="form-control"
+                                   ng-model="regData.email"
+                                   placeholder="Email" name="email" required="">
+                            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">
+                                Email is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.phoneNumber.$dirty && form.phoneNumber.$error.required }">
+                            <input type="text" class="form-control"
+                                   ng-model="regData.phoneNumber"
+                                   name="phoneNumber" placeholder="Phone Number" required="">
+                            <span ng-show="form.phoneNumber.$dirty && form.phoneNumber.$error.required" class="help-block">
+                                Phone Number is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+                            <input type="text" class="form-control"
+                                   ng-model="regData.address"
+                                   name="address" placeholder="Address" required="">
+                            <span ng-show="form.address.$dirty && form.address.$error.required" class="help-block">
+                                Address is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                            <input type="text" class="form-control"
+                                   ng-model="regData.city"
+                                   name="city" placeholder="City" required="">
+                            <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                                City is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
+                            <input type="text" class="form-control"
+                                   ng-model="regData.state"
+                                   name="state" placeholder="State" required="">
+                            <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
+                                state is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
+                            <input type="text" class="form-control"
+                                   ng-model="regData.country"
+                                   name="country" placeholder="Country" required="">
+                            <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
+                                country is required
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                            <input type="password" class="form-control"
+                                   ng-model="regData.password"
+                                   placeholder="Password" name="password" required="">
+                            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">
+                                password is required
+                            </span>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': form.agree.$dirty && form.agree.$error.required }">
+                            <div class="checkbox i-checks">
+                                <label>
+                                    <input type="checkbox" name="agree" ng-model="regData.agree">
+                                    <i></i> Agree the terms and policy
+                                </label>
+                            </div>
+                            <span ng-show="form.agree.$dirty && form.agree.$error.required" class="help-block">
+                                Accept terms and conditions
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
 
-            <p class="text-muted text-center"><small>Already have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="login.html">Login</a>
-        </form>
+                        <p class="text-muted text-center"><small>Already have an account?</small></p>
+                        <a class="btn btn-sm btn-white btn-block" href="login.html">Login</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
         <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
     </div>
 </div>

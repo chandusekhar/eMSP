@@ -21,8 +21,8 @@ namespace eMSP.WebAPI.Controllers.MSP
             mService = new ManageMSP();
         }
 
-        [Route("~api/mspdetails")]
-        [HttpPost]
+        [Route("getmspdetails")]
+        [HttpGet]
         [ResponseType(typeof(MSPDetailsUIModel))]
         public async Task<IHttpActionResult> GetMspDetails(string id)
         {

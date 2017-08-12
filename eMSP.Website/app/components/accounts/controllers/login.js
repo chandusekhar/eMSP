@@ -1,4 +1,5 @@
-﻿eMSPApp.controller("loginController", ['$scope', '$location', 'authService', function ($scope, $location, authService) {
+﻿'use strict';
+angular.module('eMSPApp').controller("loginController", ['$scope', '$location', 'authService', function ($scope, $location, authService) {
 
     $scope.loginData = {
         userName: "",
@@ -12,9 +13,7 @@
         console.log($scope.loginData);
 
         authService.login($scope.loginData).then(function (response) {
-
             $location.path('/dashboard');
-
         },
          function (err) {
              $scope.message = err.error_description;

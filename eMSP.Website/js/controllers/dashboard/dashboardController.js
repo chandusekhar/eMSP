@@ -1,4 +1,5 @@
-﻿eMSPApp.controller("dashboardController", ['$scope', '$http', function ($scope, $http) {
+﻿'use strict';
+angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', function ($scope, $http) {
 
     setTimeout(function () {
         toastr.options = {

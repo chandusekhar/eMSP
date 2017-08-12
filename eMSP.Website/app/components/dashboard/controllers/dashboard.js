@@ -1,8 +1,7 @@
-﻿var eMSPAppControllers = angular.module("eMSPApp");
+﻿'use strict';
+angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', function ($scope, $http) {
 
-eMSPAppControllers.controller("homeController", ['$scope', '$http', function ($scope, $http) {   
-
-    setTimeout(function () {        
+    setTimeout(function () {
         toastr.options = {
             closeButton: true,
             progressBar: true,

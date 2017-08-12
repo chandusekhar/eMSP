@@ -110,6 +110,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\HtmlPage1.html" />
     <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
     <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
@@ -1092,6 +1093,7 @@
     <Content Include="js\angular\angular-csp.css" />
     <Content Include="js\angular\angular-loader.js" />
     <Content Include="js\angular\angular-loader.min.js" />
+    <Content Include="js\angular\angular-local-storage.min.js" />
     <Content Include="js\angular\angular-message-format.js" />
     <Content Include="js\angular\angular-message-format.min.js" />
     <Content Include="js\angular\angular-messages.js" />
@@ -1853,28 +1855,31 @@
     <Content Include="js\angular\i18n\angular-locale_zu-za.js" />
     <Content Include="js\angular\i18n\angular-locale_zu.js" />
     <Content Include="js\angular\version.txt" />
-    <Content Include="js\app.js" />
+    <Content Include="app\app.js" />
     <Content Include="js\bootstrap\angular-bootstrap-checkbox.js" />
     <Content Include="js\bootstrap\bootstrap.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\bootstrap\ui-bootstrap-tpls-1.1.2.min.js" />
-    <Content Include="components\accounts\forgotPassword\forgotPasswordController.js" />
-    <Content Include="components\accounts\forgotPassword\forgotPasswordView.html" />
-    <Content Include="components\accounts\login\loginController.js" />
-    <Content Include="components\accounts\login\loginView.html" />
-    <Content Include="components\accounts\registration\registrationController.js" />
-    <Content Include="components\accounts\registration\registrationView.html" />
-    <Content Include="components\Company\Controller\createCompanyController.js" />
-    <Content Include="components\Company\Controller\searchCompanyController.js" />
-    <Content Include="components\Company\View\createCompany.html" />
-    <Content Include="components\Company\View\searchCompany.html" />
-    <Content Include="components\dashboard\dashboardController.js" />
-    <Content Include="components\dashboard\dashboardView.html" />
-    <Content Include="components\home\homeController.js" />
-    <Content Include="components\home\homeView.html" />
-    <Content Include="js\config.js" />
+    <Content Include="app\components\accounts\controllers\forgotPassword.js" />
+    <Content Include="app\components\accounts\view\forgotPassword.html" />
+    <Content Include="app\components\accounts\controllers\login.js" />
+    <Content Include="app\components\accounts\controllers\registration.js" />
+    <Content Include="app\components\accounts\view\registration.html" />
+    <Content Include="app\components\Company\Controller\createCompanyController.js" />
+    <Content Include="app\components\Company\Controller\searchCompanyController.js" />
+    <Content Include="app\components\Company\View\createCompany.html" />
+    <Content Include="app\components\Company\View\searchCompany.html" />
+    <Content Include="app\components\dashboard\controllers\dashboard.js" />
+    <Content Include="app\components\dashboard\view\dashboard.html" />
+    <Content Include="app\config.js" />
     <Content Include="js\controllers.js" />
-    <Content Include="js\directives.js" />
+    <Content Include="js\controllers\accounts\forgotPasswordController.js" />
+    <Content Include="js\controllers\accounts\loginController.js" />
+    <Content Include="js\controllers\accounts\registrationController.js" />
+    <Content Include="js\controllers\company\createCompanyController.js" />
+    <Content Include="js\controllers\company\searchCompanyController.js" />
+    <Content Include="js\controllers\dashboard\dashboardController.js" />
+    <Content Include="app\directives.js" />
     <Content Include="js\inspinia.js" />
     <Content Include="js\jquery\jquery-2.1.1.min.js" />
     <Content Include="js\jquery\jquery-3.1.1.min.js" />
@@ -2378,6 +2383,9 @@
     <Content Include="js\plugins\uiTree\angular-ui-tree.min.js" />
     <Content Include="js\plugins\validate\jquery.validate.min.js" />
     <Content Include="js\plugins\wow\wow.min.js" />
+    <Content Include="app\shared\authInterceptorService.js" />
+    <Content Include="app\shared\authService.js" />
+    <Content Include="app\shared\tokensManagerService.js" />
     <Content Include="js\translations.js" />
     <Content Include="js\ui-router\angular-ui-router.js" />
     <Content Include="js\ui-router\angular-ui-router.min.js" />
@@ -2472,12 +2480,12 @@
     <Content Include="js\plugins\topojson\LICENSE" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="pdf\example.pdf" />
-    <Content Include="components\Company\Config\CreateCustomer.json" />
-    <Content Include="components\Company\Config\CreateMSP.json" />
-    <Content Include="components\Company\Config\CreateSupplier.json" />
-    <Content Include="components\Company\Config\SearchCustomers.json" />
-    <Content Include="components\Company\Config\SearchMSP.json" />
-    <Content Include="components\Company\Config\SearchSuppliers.json" />
+    <Content Include="app\components\Company\Config\CreateCustomer.json" />
+    <Content Include="app\components\Company\Config\CreateMSP.json" />
+    <Content Include="app\components\Company\Config\CreateSupplier.json" />
+    <Content Include="app\components\Company\Config\SearchCustomers.json" />
+    <Content Include="app\components\Company\Config\SearchMSP.json" />
+    <Content Include="app\components\Company\Config\SearchSuppliers.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2488,6 +2496,7 @@
   <ItemGroup>
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="app\components\accounts\view\login.html" />
     <Content Include="views\activity_stream.html" />
     <Content Include="views\agile_board.html" />
     <Content Include="views\article.html" />
@@ -2634,6 +2643,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\components\accounts\services\" />
+    <Folder Include="app\components\dashboard\service\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup>

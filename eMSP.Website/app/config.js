@@ -1,3 +1,7 @@
+/// <reference path="components/accounts/view/login.html" />
+/// <reference path="config.js" />
+/// <reference path="app.js" />
+/// <reference path="app.js" />
 /**
  * INSPINIA - Responsive Admin Theme
  *
@@ -7,14 +11,14 @@
  *
  */
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdleProvider, KeepaliveProvider, $locationProvider) {
-   
-
+    
+    
     // Configure Idle settings
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
 
-    //$urlRouterProvider.otherwise("/dashboards/dashboard_1");
     $urlRouterProvider.otherwise("/dashboards/dashboard_1");
+    //$urlRouterProvider.otherwise("/login");
     
     //$locationProvider.html5Mode(true);
 
@@ -24,6 +28,27 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     });
 
     $stateProvider
+
+        .state('login', {
+            url: "/login",
+            templateUrl: "app/components/accounts/view/login.html",
+            data: { pageTitle: 'Login', specialClass: 'gray-bg' }
+        })
+        .state('registration', {
+            url: "/registration",
+            templateUrl: "app/components/accounts/view/registration.html",
+            data: { pageTitle: 'Registration', specialClass: 'gray-bg' }
+        })
+        .state('forgot-password', {
+            url: "/forgot-password",
+            templateUrl: "app/components/accounts/view/forgotPassword.html",
+            data: { pageTitle: 'Forgot Password', specialClass: 'gray-bg' }
+        })
+        .state('dashboard', {
+            abstract: true,
+            url: "/dashboards",
+            templateUrl: "app/components/dashboard/view/dashboard.html",
+        })
 
         .state('dashboards', {
             abstract: true,
@@ -1596,3 +1621,22 @@ angular
     .run(function($rootScope, $state) {
         $rootScope.$state = $state;
     });
+
+
+var serviceBase = 'http://localhost:50001/';
+//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+angular
+    .module('eMSPApp').constant('ngAuthSettings', {
+    apiServiceBaseUri: serviceBase,
+    clientId: 'ngAuthApp'
+});
+
+angular
+    .module('eMSPApp').config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+});
+
+angular
+    .module('eMSPApp').run(['authService', function (authService) {
+    authService.fillAuthData();
+}]);

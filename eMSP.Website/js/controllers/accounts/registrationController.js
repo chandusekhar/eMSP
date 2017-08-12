@@ -1,4 +1,5 @@
-﻿eMSPApp.controller("registrationController", ['$scope', '$http', function ($scope, $http) {
+﻿'use strict';
+angular.module('eMSPApp').controller("registrationController", ['$scope', '$http', function ($scope, $http) {
     
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',

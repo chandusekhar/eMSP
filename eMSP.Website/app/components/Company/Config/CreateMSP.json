@@ -1,3 +1,7 @@
 {
-  "Title": "Create MSP"
+  "title": "MSP",
+  "titleFormCreate":"Add a MSP",
+  "titleFormEdit":"Edit MSP",
+  "urlCreate":"/api/mspdetails/create",
+  "urlUpdate":"/api/mspdetails/update"
 }

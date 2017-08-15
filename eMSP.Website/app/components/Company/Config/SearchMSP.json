@@ -1,3 +1,20 @@
 {
-  "Title": "Manage MSP"
+  "title": "Manage MSP",
+  "titleForm":"Search MSP",
+  "searchUrl":"/api/mspdetails/getmspdetails",
+  "createUrl":"company.createMSP",
+  "gridElements":[
+  {
+  "lable":"ID",
+  "id":"id"
+  },
+  {
+  "lable":"First Name",
+  "id":"firstName"
+  },
+  {
+  "lable":"Last Name",
+  "id":"lastName"
+  }
+  ]
 }

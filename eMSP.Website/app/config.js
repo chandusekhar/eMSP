@@ -1593,91 +1593,259 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         })
         .state("company.searchMSP", {
             url: '/searchMSP',
-            templateUrl: 'components/Company/View/searchCompany.html',
+            templateUrl: 'app/components/Company/View/searchCompany.html',
             controller: 'searchCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("/components/Company/Config/SearchMSP.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/SearchMSP.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.searchSuppliers", {
             url: '/searchSuppliers',
-            templateUrl: 'components/Company/View/searchCompany.html',
+            templateUrl: 'app/components/Company/View/searchCompany.html',
             controller: 'searchCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("/components/Company/Config/SearchSuppliers.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/SearchSuppliers.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.searchCustomers", {
             url: '/searchCustomers',
-            templateUrl: 'components/Company/View/searchCompany.html',
+            templateUrl: 'app/components/Company/View/searchCompany.html',
             controller: 'searchCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("/components/Company/Config/SearchCustomers.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/SearchCustomers.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.createMSP", {
             url: '/createMSP',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.createSupplier", {
             url: '/createSupplier',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.createCustomer", {
             url: '/createCustomer',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.editMSP", {
             url: '/editMSP',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.editSupplier", {
             url: '/editSupplier',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })
         .state("company.editCustomer", {
             url: '/editCustomer',
-            templateUrl: 'components/Company/View/createCompany.html',
+            templateUrl: 'app/components/Company/View/createCompany.html',
             controller: 'createCompanyController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                    return $http.get("app/components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
                 }
             }
         })

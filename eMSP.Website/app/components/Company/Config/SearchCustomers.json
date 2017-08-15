@@ -1,3 +1,20 @@
 {
-  "Title": "Search Customer"
+  "title": "Manage Customer",
+  "titleForm":"Search Customer",
+  "searchUrl":"/api/customerdetails/getcustomers",
+  "createUrl":"company.createCustomer",
+  "gridElements":[
+  {
+  "lable":"ID",
+  "id":"id"
+  },
+  {
+  "lable":"First Name",
+  "id":"firstName"
+  },
+  {
+  "lable":"Last Name",
+  "id":"lastName"
+  }
+  ]
 }

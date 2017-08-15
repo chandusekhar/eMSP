@@ -1,3 +1,8 @@
 {
-  "Title": "Create Customer"
+  "title": "Customer",
+  "titleFormCreate":"Add a Customer",
+  "titleFormEdit":"Edit Customer",
+  "urlCreate":"/api/customerdetails/create",
+  "urlUpdate":"/api/customerdetails/update"
+
 }

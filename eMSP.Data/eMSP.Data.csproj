@@ -53,7 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataServices\MSP\ManageMSP.cs" />
+    <Compile Include="DataServices\Company\CompanyManager.cs" />
+    <Compile Include="DataServices\Company\Customer\ManageCustomer.cs" />
+    <Compile Include="DataServices\Company\MSP\ManageMSP.cs" />
+    <Compile Include="DataServices\Company\Supplier\ManageSupplier.cs" />
+    <Compile Include="Extensions\CompanyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +80,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.MSP
 {
-    public class CompanySearchModel
+
+    public class CompanyModel
+    {
+        public CompanyModel() { }
+        public string companyType { get; set; }
+        public string companyName { get; set; }
+        public string id { get; set; }
+
+        
+    }
+    public class CompanySearchModel : CompanyModel
     {
         public CompanySearchModel()
         {
@@ -14,19 +24,28 @@ namespace eMSP.ViewModel.MSP
         }
 
         public string companyBranch { get; set; }
-        public string companyName { get; set; }
         public string companyLocation { get; set; }    
     }
 
-    class CompanyCreateModel
+    public class CompanyCreateModel : CompanyModel
     {
         public CompanyCreateModel()
         {
 
         }
-
-        public string companyBranch { get; set; }
-        public string companyName { get; set; }
-        public string companyLocation { get; set; }  
+  
+        public string companyWebsite { get; set; }
+        public string companyEmail { get; set; }
+        public string companyPhoneNumber { get; set; }
+        public string companyAddress { get; set; }
+        public string companyCity { get; set; }
+        public Nullable<long> StateID { get; set; }
+        public string companyState { get; set; }
+        public Nullable<long> CountryID { get; set; }
+        public string companyCountry { get; set; }
+        public DateTime createdTimestamp { get; set; }
+        public string createdUserID { get; set; }
+        public Nullable<DateTime> updatedTimestamp { get; set; }
+        public string updatedUserID { get; set; }
     }
 }

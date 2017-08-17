@@ -40,8 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Company\CommonModel.cs" />
     <Compile Include="MSP\MSPDetailsUIModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eMSP.DataModel\eMSP.DataModel.csproj">
+      <Project>{a4420703-6080-4e1a-940c-668d33a69d44}</Project>
+      <Name>eMSP.DataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

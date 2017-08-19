@@ -12,22 +12,17 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCandidate
+    public partial class tblFile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCandidate()
+        public tblFile()
         {
             this.tblCandidateFiles = new HashSet<tblCandidateFile>();
-            this.tblCandidateIndustries = new HashSet<tblCandidateIndustry>();
-            this.tblCandidateSkills = new HashSet<tblCandidateSkill>();
         }
     
         public long ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public string UniqueSocialID { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -37,9 +32,5 @@ namespace eMSP.DataModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateFile> tblCandidateFiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateIndustry> tblCandidateIndustries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateSkill> tblCandidateSkills { get; set; }
     }
 }

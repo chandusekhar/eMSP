@@ -60,5 +60,10 @@ namespace eMSP.DataModel
         public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
         public virtual DbSet<tblVacancyLocation> tblVacancyLocations { get; set; }
         public virtual DbSet<tblVacancySupplier> tblVacancySuppliers { get; set; }
+        public virtual DbSet<tblCandidateFile> tblCandidateFiles { get; set; }
+        public virtual DbSet<tblCandidateIndustry> tblCandidateIndustries { get; set; }
+        public virtual DbSet<tblCandidateSkill> tblCandidateSkills { get; set; }
+        public virtual DbSet<tblFile> tblFiles { get; set; }
+        public virtual DbSet<tblFileType> tblFileTypes { get; set; }
     }
 }

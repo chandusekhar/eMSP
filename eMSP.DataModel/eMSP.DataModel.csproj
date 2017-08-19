@@ -94,6 +94,15 @@
     <Compile Include="tblCandidate.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidateFile.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateIndustry.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSkill.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblComment.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -113,6 +122,12 @@
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCustomerUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFile.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFileType.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblIndustry.cs">

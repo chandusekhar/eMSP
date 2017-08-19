@@ -333,6 +333,7 @@
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\SqlScripts\eMSP_20170802.sql" />
     <Content Include="Content\SqlScripts\InsertScript_20170805.sql" />
+    <Content Include="Content\SqlScripts\SQLQuery_20170818.sql" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />

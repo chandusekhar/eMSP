@@ -1856,6 +1856,67 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+
+        .state('company.locations', {
+            url: "/locations",
+            templateUrl: "app/components/Company/view/manageMSPLocation.html",
+            controller: 'manageMSPLocationController',
+            data: { pageTitle: 'Location' },
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Company/config/ManageLocation.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('company.branches', {
+            url: "/branches",
+            templateUrl: "app/components/Company/view/manageMSPBranch.html",
+            controller: 'manageMSPBranchController',
+            data: { pageTitle: 'Branch' },
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Company/config/ManageBranch.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
         //company Routes end
         .state('off_canvas', {
             url: "/off_canvas",

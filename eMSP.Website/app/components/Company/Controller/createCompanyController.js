@@ -1,16 +1,20 @@
 ﻿'use strict';
 angular.module('eMSPApp')
 .controller('createCompanyController', createCompanyController)
-function createCompanyController($scope, configJSON, formAction, apiCall) {
+function createCompanyController($scope,localStorageService, configJSON, formAction, apiCall) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.dataJSON.companyType = $scope.configJSON.companyType;
-
+    $scope.edit = false;
    $scope.formAction = formAction;
-   $scope.edit = $scope.formAction == "Update" ? true : false;
+   if ($scope.formAction == "Update") {
+       $scope.edit = true;
+       $scope.dataJSON = localStorageService.get('editMSPData');;
+   } 
 
-    $scope.submit = function () {
-        if ($scope.form.valid) {
+
+    $scope.submit = function (form) {
+        if (form.$valid) {
 
             alert("Form submitted");
 

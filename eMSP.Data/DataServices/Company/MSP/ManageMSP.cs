@@ -14,11 +14,11 @@ namespace eMSP.Data.DataServices.Company
     {
         #region Initialization
 
-        internal static eMSPEntities mContext;
+        internal static eMSPEntities db;
 
         static ManageMSP()
         {
-            mContext = new eMSPEntities();
+           
         }
 
         #endregion
@@ -28,7 +28,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
                     long id = Convert.ToInt64(ConfigurationManager.AppSettings["MSP_ID"]);
                     Id= id != null ? id : Id ;
@@ -48,7 +48,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblMSPDetails.Where(x => x.CompanyName == model.companyName).ToList());
                 }
@@ -68,7 +68,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     model = db.tblMSPDetails.Add(model);
 
@@ -93,7 +93,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     db.Entry(model).State = EntityState.Modified;
 
@@ -118,7 +118,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     tblMSPDetail obj = await db.tblMSPDetails.FindAsync(Id);
                     db.tblMSPDetails.Remove(obj);

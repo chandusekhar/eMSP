@@ -27,7 +27,7 @@
                             <div ibox-tools></div>
                         </div>
                         <div class="ibox-content">
-                            <form class="m-t" name="form">
+                            <form class="m-t" name="form" novalidate>
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': form.companyName.$dirty && form.companyName.$error.required }">
                                     <input type="text" class="form-control" name="companyName"
                                            ng-model="dataJSON.companyName"
@@ -94,7 +94,7 @@
                                     </span>
                                 </div>
                                
-                                <div><button type="submit" ng-click="submit()" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
+                                <div><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
                                 
                             </form>
                         </div>

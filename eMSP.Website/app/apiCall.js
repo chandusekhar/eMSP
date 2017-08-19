@@ -8,11 +8,11 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
         var apiUrl = apiBaseURL + url;
 
         
-        $http({            
+       return $http({            
             url: apiUrl,
             method: type,
             data: param
-        }).success(function (result, status, headers) {
+        }).success(function (result) {
 
             return result;
 
@@ -26,10 +26,10 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
     }
     return {
         get: function (url, param) {
-            return apicall('GET', url, param);
+            return apicall('GET', url, param).then(function (data) { return data.data });
         },
         post: function (url, param) {
-            return apicall('POST', url, param);
+            return apicall('POST', url, param).then(function (data) { return data.data });
         }
     };
 }]);

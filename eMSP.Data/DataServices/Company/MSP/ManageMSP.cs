@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace eMSP.Data.DataServices.Company
 {
@@ -29,6 +30,8 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (var db = mContext)
                 {
+                    long id = Convert.ToInt64(ConfigurationManager.AppSettings["MSP_ID"]);
+                    Id= id != null ? id : Id ;
                     return await Task.Run(() => db.tblMSPDetails.Where(x => x.ID == Id).SingleOrDefault());
 
 
@@ -48,8 +51,6 @@ namespace eMSP.Data.DataServices.Company
                 using (var db = mContext)
                 {
                     return await Task.Run(() => db.tblMSPDetails.Where(x => x.CompanyName == model.companyName).ToList());
-
-
                 }
             }
             catch (Exception)

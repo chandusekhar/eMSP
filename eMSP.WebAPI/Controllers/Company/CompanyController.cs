@@ -31,7 +31,7 @@ namespace eMSP.WebAPI.Controllers.Company
         #region Get
 
         [Route("getCompany")]
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> GetCompany(CompanyModel data)
         {
@@ -47,7 +47,7 @@ namespace eMSP.WebAPI.Controllers.Company
         }
 
         [Route("getAllCompanies")]
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> GetCompanies(CompanySearchModel data)
         {
@@ -87,7 +87,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         #region Update
 
-        [Route("UpdateCompany")]
+        [Route("updateCompany")]
         [HttpPost]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> UpdateCompany(CompanyCreateModel data)

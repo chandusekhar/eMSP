@@ -17,7 +17,7 @@
         <div class="col-lg-2">
         </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+    <div ng-if="!IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
         <div class="row">
             <!--serach Form start-->
             <div class="col-lg-12">
@@ -89,6 +89,9 @@
             </div>
             <!--serach Results start-->
         </div>
+    </div>
+    <div ng-if="IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <h2>MSP Template</h2>
     </div>
 
 </div>

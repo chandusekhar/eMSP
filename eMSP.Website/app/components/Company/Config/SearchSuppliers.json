@@ -3,6 +3,7 @@
   "titleForm":"Search Supplier",
   "searchUrl":"/api/supplierdetails/getSuppliers",
   "createUrl":"company.createSupplier",
+  "companyType":"Supplier",
   "gridElements":[
   {
   "lable":"ID",

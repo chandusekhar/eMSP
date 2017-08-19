@@ -30,7 +30,7 @@ namespace eMSP.Data.DataServices.Company
             try
             {
                 CompanyCreateModel model = null;
-                long Id = Convert.ToInt64(data.id);
+                long Id = data != null ?Convert.ToInt64(data.id):0;
                 switch (data.companyType)
                 {
                     case "MSP":

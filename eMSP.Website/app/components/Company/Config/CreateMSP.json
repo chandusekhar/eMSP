@@ -2,6 +2,7 @@
   "title": "MSP",
   "titleFormCreate":"Add a MSP",
   "titleFormEdit":"Edit MSP",
+  "companyType":"MSP",
   "urlCreate":"/api/mspdetails/create",
   "urlUpdate":"/api/mspdetails/update"
 }

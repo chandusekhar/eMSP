@@ -2,6 +2,7 @@
   "title": "Customer",
   "titleFormCreate":"Add a Customer",
   "titleFormEdit":"Edit Customer",
+  "companyType":"Customer",
   "urlCreate":"/api/customerdetails/create",
   "urlUpdate":"/api/customerdetails/update"
 

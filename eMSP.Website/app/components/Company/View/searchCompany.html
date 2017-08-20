@@ -95,7 +95,7 @@
     <div ng-if="IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
       
         <div ng-if="res"class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox">
                         <div class="ibox-content">
@@ -122,6 +122,12 @@
                                         <dd> {{res.companyWebsite}}</dd>
                                         <dt>Address:</dt>
                                         <dd>{{res.companyAddress}}</dd>
+                                        <dt>City:</dt>
+                                        <dd>{{res.companyCity}}</dd>
+                                        <dt>State:</dt>
+                                        <dd>{{res.companyState}}</dd>
+                                        <dt>Country:</dt>
+                                        <dd>{{res.companyCountry}}</dd>
                                         <dt>Contact:</dt>
                                         <dd> {{res.companyPhoneNumber}}</dd>
                                     </dl>

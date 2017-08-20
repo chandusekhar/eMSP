@@ -14,11 +14,11 @@ namespace eMSP.Data.DataServices.Company
 
         #region Initialization
 
-        internal static eMSPEntities mContext;
+        internal static eMSPEntities db;
 
         static ManageSupplier()
         {
-            mContext = new eMSPEntities();
+            
         }
 
         #endregion
@@ -28,9 +28,12 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblSuppliers.Where(x => x.ID == Id).SingleOrDefault());
+                    return await Task.Run(() => db.tblSuppliers
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(b => b.tblCountryState)
+                                                  .Where(x => x.ID == Id).SingleOrDefault());
 
 
                 }
@@ -46,11 +49,22 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblSuppliers.Where(x => x.Name == model.companyName).ToList());
+                    if (model.companyName == "%")
+                    {
+                        return await Task.Run(() => db.tblSuppliers
+                                                      .Include(a => a.tblCountry)
+                                                      .Include(b => b.tblCountryState)
+                                                      .Select(x => x).ToList());
+                    }
+                    else { 
+                    return await Task.Run(() => db.tblSuppliers
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(b => b.tblCountryState)
+                                                  .Where(x => x.Name == model.companyName).ToList());
 
-
+                    }
                 }
             }
             catch (Exception)
@@ -68,7 +82,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     model = db.tblSuppliers.Add(model);
 
@@ -93,7 +107,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     db.Entry(model).State = EntityState.Modified;
 
@@ -118,7 +132,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     tblSupplier obj = await db.tblSuppliers.FindAsync(Id);
                     db.tblSuppliers.Remove(obj);

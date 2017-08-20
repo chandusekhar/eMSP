@@ -4,5 +4,6 @@
   "titleFormEdit":"Edit MSP",
   "companyType":"MSP",
   "urlCreate":"/api/mspdetails/create",
-  "urlUpdate":"/api/mspdetails/update"
+  "urlUpdate":"/api/mspdetails/update",
+  "successURL":"company.searchMSP"
 }

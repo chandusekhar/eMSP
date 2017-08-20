@@ -4,5 +4,6 @@
   "titleFormEdit":"Edit Supplier",
   "companyType":"Supplier",
   "urlCreate":"/api/supplierdetails/create",
-  "urlUpdate":"/api/supplierdetails/update"
+  "urlUpdate":"/api/supplierdetails/update",
+  "successURL":"company.searchSuppliers"
 }

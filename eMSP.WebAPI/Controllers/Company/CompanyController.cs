@@ -46,9 +46,10 @@ namespace eMSP.WebAPI.Controllers.Company
             }
         }
 
+        
         [Route("getAllCompanies")]
         [HttpPost]
-        [ResponseType(typeof(CompanyCreateModel))]
+        [ResponseType(typeof(List<CompanyCreateModel>))]
         public async Task<IHttpActionResult> GetCompanies(CompanySearchModel data)
         {
             try

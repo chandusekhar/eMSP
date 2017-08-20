@@ -11,12 +11,18 @@ function searchCompanyController($scope,localStorageService,configJSON, APP_CONS
         $scope.dataJSON.companyName = "";
         $scope.dataJSON.id = 0;
         $scope.IsMSP = true;
-        var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);        
+        var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
         apires.then(function (data) {
             $scope.res = data;
             localStorageService.set('editMSPData', data);
         });
-        
+
+    } else {
+        $scope.dataJSON.companyName = "%";
+        var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.dataJSON);
+        res.then(function (data) {
+            $scope.searchResults = data;
+        });
     }
     $scope.submit = function () {
         if ($scope.form.valid) {

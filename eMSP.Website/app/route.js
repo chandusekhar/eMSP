@@ -1622,35 +1622,42 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
-        .state("company.createMSP", {
-            url: '/createMSP',
-            templateUrl: 'app/components/Company/View/createCompany.html',
-            controller: 'createCompanyController',
-            resolve: {
-                configJSON: function ($http) {
-                    return $http.get("app/components/Company/Config/CreateMSP.json").success(function (data) { return data; });
-                },
-                formAction: function () { return "Create"; },
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            serie: true,
-                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables',
-                            files: ['js/plugins/dataTables/angular-datatables.min.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables.buttons',
-                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
-                        }
-                    ]);
-                }
-            }
-        })
+        //.state("company.createMSP", {
+        //    url: '/createMSP',
+        //    templateUrl: 'app/components/Company/View/createCompany.html',
+        //    controller: 'createCompanyController',
+        //    resolve: {
+        //        configJSON: function ($http) {
+        //            return $http.get("app/components/Company/Config/CreateMSP.json").success(function (data) { return data; });
+        //        },
+        //        formAction: function () { return "Create"; },
+        //        AppCoutries: function (apiCall, APP_CONSTANTS) {
+        //            return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+        //            .then(function (data) {
+        //                return data;
+        //            });
+
+        //        },
+        //        loadPlugin: function ($ocLazyLoad) {
+        //            return $ocLazyLoad.load([
+        //                {
+        //                    serie: true,
+        //                    files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+        //                },
+        //                {
+        //                    serie: true,
+        //                    name: 'datatables',
+        //                    files: ['js/plugins/dataTables/angular-datatables.min.js']
+        //                },
+        //                {
+        //                    serie: true,
+        //                    name: 'datatables.buttons',
+        //                    files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+        //                }
+        //            ]);
+        //        }
+        //    }
+        //})
         .state("company.createSupplier", {
             url: '/createSupplier',
             templateUrl: 'app/components/Company/View/createCompany.html',
@@ -1660,6 +1667,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Create"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -1689,6 +1703,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Create"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -1718,6 +1739,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/CreateMSP.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Update"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -1747,6 +1775,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/CreateSupplier.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Update"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -1776,6 +1811,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/CreateCustomer.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Update"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {

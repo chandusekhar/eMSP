@@ -30,9 +30,11 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    long id = Convert.ToInt64(ConfigurationManager.AppSettings["MSP_ID"]);
-                    Id= id != null ? id : Id ;
-                    return await Task.Run(() => db.tblMSPDetails.Where(x => x.ID == Id).SingleOrDefault());
+                    
+                    return await Task.Run(() => db.tblMSPDetails
+                                                  .Include(a=>a.tblCountry)
+                                                  .Include(b=>b.tblCountryState)
+                                                  .Where(x => x.ID == Id).SingleOrDefault());
 
 
                 }

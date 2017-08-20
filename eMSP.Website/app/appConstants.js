@@ -9,6 +9,10 @@ angular.module('eMSPApp')
                          CREATEURL: "api/company/creatCompany",
                          UPDATEURL: "api/company/updateCompany",
                          DELETEURL: "api/company/deleteCompany"
+                     },
+                     APP: {
+                         GETCOUNTRYURL: "api/App/getCountries",
+                         GETSTATEURL: "api/App/getStates?Id="
                      }
                  }
              });

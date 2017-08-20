@@ -4,6 +4,6 @@
   "titleFormEdit":"Edit Customer",
   "companyType":"Customer",
   "urlCreate":"/api/customerdetails/create",
-  "urlUpdate":"/api/customerdetails/update"
-
+  "urlUpdate":"/api/customerdetails/update",
+  "successURL":"company.searchCustomers"
 }

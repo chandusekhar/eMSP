@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eMSP.DataModel;
+using System.Configuration;
 
 namespace eMSP.Data.DataServices.Company
 {
@@ -31,9 +32,12 @@ namespace eMSP.Data.DataServices.Company
             {
                 CompanyCreateModel model = null;
                 long Id = data != null ?Convert.ToInt64(data.id):0;
+                
                 switch (data.companyType)
                 {
                     case "MSP":
+                        long id = Convert.ToInt64(ConfigurationManager.AppSettings["MSP_ID"]);
+                        Id = id != null ? id : Id;
                         tblMSPDetail dataMSP = await Task.Run(() => ManageMSP.GetMSPDetails(Id));
                         model = dataMSP.ConvertTocompany();
                         break;

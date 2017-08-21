@@ -11,4 +11,17 @@ angular.module('eMSPApp')
                 alert("Form submitted");
             }
         }
+        $scope.branchData = {
+            BranchName: "",
+            EmailAddress: "",
+            PhoneNumber: "",
+            StreetLine1: "",
+            StreetLine2: "",
+            City: "",
+            StateID: "",
+            CountryID: "",
+            IsActive: "",
+            IsDeleted: "",
+            UserID: ""
+        };
     }]);

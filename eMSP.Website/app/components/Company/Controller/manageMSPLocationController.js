@@ -1,14 +1,15 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller("manageMSPLocationController", ['$scope', '$http', 'configJSON', 'formAction',
-        function ($scope, $http, configJSON, formAction) {
-            debugger;
-            console.log(configJSON.data);
+        function ($scope, $http, configJSON, formAction) {           
+            
             $scope.configJSON = configJSON.data;
             $scope.formAction = formAction;
             $scope.edit = $scope.formAction == "Update" ? true : false;
             $scope.submit = function () {
-                if ($scope.form.valid) {
+                debugger;
+                if ($scope.formLocation.$valid) {
+                    console.log($scope.formLocation.locationData);
                     alert("Form submitted");
                 }
             }
@@ -18,8 +19,8 @@ angular.module('eMSPApp')
                 StreetLine1: "",
                 StreetLine2: "",
                 City: "",
-                StateID: "",
-                CountryID: "",
+                State: "",
+                Country: "",
                 IsActive: ""
             };
 

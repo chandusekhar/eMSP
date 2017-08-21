@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('eMSPApp').factory('applicationSettingsService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+angular.module('eMSPApp').factory('mspCompanyService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var mspRegServiceFactory = {}; 

@@ -29,7 +29,95 @@
                         <div ibox-tools></div>
                     </div>
                     <div class="ibox-content">
+                        <form class="m-t" name="form">
+                            <div class="form-group col-md-12" ng-class="{ 'has-error': form.BranchName.$dirty && form.BranchName.$error.required }">
+                                <input type="text" class="form-control" name="BranchName"
+                                       ng-model="locationData.BranchName"
+                                       placeholder="Location Name"
+                                       required="">
+                                <span ng-show="form.BranchName.$dirty && form.BranchName.$error.required" class="help-block">
+                                    Location Name is required
+                                </span>
+                            </div>
 
+
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.EmailAddress.$dirty && form.EmailAddress.$error.required }">
+                                <input type="text" class="form-control" name="EmailAddress"
+                                       ng-model="locationData.EmailAddress"
+                                       placeholder="Email Address" required="">
+                                <span ng-show="form.EmailAddress.$dirty && form.EmailAddress.$error.required" class="help-block">
+                                    Email Address is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.PhoneNumber.$dirty && form.PhoneNumber.$error.required }">
+                                <input type="email" class="form-control"
+                                       ng-model="locationData.PhoneNumber"
+                                       placeholder="Phone Number" name="PhoneNumber" required="">
+                                <span ng-show="form.PhoneNumber.$dirty && form.PhoneNumber.$error.required" class="help-block">
+                                    Phone Number is required
+                                </span>
+                            </div>
+
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.StreetLine1.$dirty && form.StreetLine1.$error.required }">
+                                <input type="text" class="form-control" name="StreetLine1"
+                                       ng-model="locationData.StreetLine1"
+                                       placeholder="Street Line 1" required="">
+                                <span ng-show="form.StreetLine1.$dirty && form.StreetLine1.$error.required" class="help-block">
+                                    Street Line 1 is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.StreetLine2.$dirty && form.StreetLine2.$error.required }">
+                                <input type="email" class="form-control"
+                                       ng-model="locationData.StreetLine2"
+                                       placeholder="Street Line 2" name="StreetLine2" required="">
+                                <span ng-show="form.StreetLine2.$dirty && form.StreetLine2.$error.required" class="help-block">
+                                    Street Line 2 is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.City.$dirty && form.City.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="locationData.City"
+                                       name="City" placeholder="City" required="">
+                                <span ng-show="form.City.$dirty && form.City.$error.required" class="help-block">
+                                    City is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.State.$dirty && form.State.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="locationData.State"
+                                       name="State" placeholder="State" required="">
+                                <span ng-show="form.State.$dirty && form.State.$error.required" class="help-block">
+                                    State is required
+                                </span>
+                            </div>
+
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$dirty && form.Country.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="locationData.Country"
+                                       name="Country" placeholder="Country" required="">
+                                <span ng-show="form.Country.$dirty && form.Country.$error.required" class="help-block">
+                                    country is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input type="checkbox" name="IsActive" ng-model="locationData.IsActive">
+                                        <i></i> Is Active
+                                    </label>
+                                </div>
+                                <span ng-show="form.IsActive.$dirty && form.IsActive.$error.required" class="help-block">
+                                    Accept terms and conditions
+                                </span>
+                            </div>
+
+                            <h5 ng-if="!edit">
+                                <button type="submit" class="btn btn-primary m-b">Create</button>
+                            </h5>
+                            <h5 ng-if="edit">
+                                <button type="submit" class="btn btn-primary m-b">Update</button>
+                            </h5>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -40,21 +128,19 @@
                         <div ibox-tools></div>
                     </div>
                     <div class="ibox-content">
-                        <table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th ng-repeat="header in configJSON.gridElements">
-                                        {{header.lable}}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="res in searchResults">
-                                    <td ng-repeat="header in configJSON.gridElements">{{ res[header.id] }}</td>
 
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-info-circle"></i> Branch Name
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

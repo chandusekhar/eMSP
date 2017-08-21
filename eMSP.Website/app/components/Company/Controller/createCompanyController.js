@@ -23,7 +23,7 @@ function createCompanyController($scope,$state, localStorageService, configJSON,
     }
    if ($scope.formAction == "Update") {
        $scope.edit = true;
-       $scope.dataJSON = localStorageService.get('editMSPData');
+       $scope.dataJSON = localStorageService.get('editCompanyData');
        $scope.getStateList();
    } 
   

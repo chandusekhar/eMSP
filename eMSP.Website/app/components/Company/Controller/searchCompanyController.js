@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
 .controller('searchCompanyController', searchCompanyController)
-function searchCompanyController($scope,localStorageService,configJSON, APP_CONSTANTS, apiCall) {// APP_CONSTANTS, apiCall
+function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall) {// APP_CONSTANTS, apiCall
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
@@ -14,7 +14,7 @@ function searchCompanyController($scope,localStorageService,configJSON, APP_CONS
         var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
         apires.then(function (data) {
             $scope.res = data;
-            localStorageService.set('editMSPData', data);
+            localStorageService.set('editCompanyData', data);
         });
 
     } else {
@@ -23,6 +23,23 @@ function searchCompanyController($scope,localStorageService,configJSON, APP_CONS
         res.then(function (data) {
             $scope.searchResults = data;
         });
+    }
+    $scope.edit = function (data) {
+        if (data) {
+
+            localStorageService.set('editCompanyData', data);
+
+            $state.go($scope.configJSON.editUrl);
+        }
+
+    }
+    $scope.view = function (data) {
+        if (data) {
+            $scope.IsMSP = true;
+            $scope.res = data;
+            localStorageService.set('editCompanyData', data);
+        }
+
     }
     $scope.submit = function () {
         if ($scope.form.valid) {

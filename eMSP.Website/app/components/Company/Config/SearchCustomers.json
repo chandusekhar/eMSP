@@ -3,6 +3,7 @@
   "titleForm":"Search Customer",
   "searchUrl":"/api/customerdetails/getcustomers",
   "createUrl":"company.createCustomer",
+  "editUrl":"company.editCustomer",
   "companyType":"Customer",
   "gridElements":[
   {

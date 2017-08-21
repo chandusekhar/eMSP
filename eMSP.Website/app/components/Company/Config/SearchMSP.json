@@ -3,6 +3,7 @@
   "titleForm":"Search MSP",
   "searchUrl":"/api/mspdetails/getmspdetails",
   "createUrl":"company.createMSP",
+  "editUrl":"company.editMSP",
   "companyType":"MSP",
   "gridElements":[
   {

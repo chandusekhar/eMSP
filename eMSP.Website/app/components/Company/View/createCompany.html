@@ -27,7 +27,7 @@
                             <div ibox-tools></div>
                         </div>
                         <div class="ibox-content">
-                            <form class="m-t" name="form">
+                            <form class="m-t" name="form" novalidate>
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': form.companyName.$dirty && form.companyName.$error.required }">
                                     <input type="text" class="form-control" name="companyName"
                                            ng-model="dataJSON.companyName"
@@ -69,32 +69,42 @@
                                         Address is required
                                     </span>
                                 </div>
-                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
-                                    <input type="text" class="form-control"
-                                           ng-model="dataJSON.companyCity"
-                                           name="city" placeholder="City" required="">
-                                    <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
-                                        City is required
-                                    </span>
-                                </div>
-                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
-                                    <input type="text" class="form-control"
-                                           ng-model="dataJSON.companyState"
-                                           name="state" placeholder="State" required="">
-                                    <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
-                                        state is required
-                                    </span>
-                                </div>
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
-                                    <input type="text" class="form-control"
+                                    <!--<input type="text" class="form-control"
                                            ng-model="dataJSON.companyCountry"
-                                           name="country" placeholder="Country" required="">
+                                           name="country" placeholder="Country" required="">-->
+                                    <select ng-model="dataJSON.CountryID" class="form-control" ng-change="getStateList()">
+                                        <option value="">Country</option>
+                                        <option ng-repeat=" res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
+                                    </select>
                                     <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
                                         country is required
                                     </span>
                                 </div>
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
+                                    <!--<input type="text" class="form-control"
+                                           ng-model="dataJSON.companyState"
+                                           name="state" placeholder="State" required="">-->
+                                    <select ng-model="dataJSON.StateID" class="form-control">
+                                        <option value="">State</option>
+                                        <option ng-repeat=" res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
+                                    </select>
+                                    <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
+                                        state is required
+                                    </span>
+                                </div>
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                                    <input type="text" class="form-control"
+                                           ng-model="dataJSON.companyCity"
+                                           name="city" placeholder="City" required="">
+                                    
+                                    <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                                        City is required
+                                    </span>
+                                </div>                           
                                
-                                <div><button type="submit" ng-click="submit()" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
+                               
+                                <div><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
                                 
                             </form>
                         </div>

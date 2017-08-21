@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="eVMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="eVMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -102,6 +102,35 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="tblCandidateFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="FileID" Type="bigint" Nullable="false" />
+          <Property Name="FileTypeID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateIndustries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="IndustryID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="tblCandidates">
           <Key>
             <PropertyRef Name="ID" />
@@ -112,6 +141,20 @@
           <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="UniqueSocialID" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSkills">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="SkillsID" Type="bigint" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -219,6 +262,34 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerID" Type="bigint" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblFileTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSPID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -598,6 +669,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateFiles_tblCandidates">
+          <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
+          <End Role="tblCandidateFiles" Type="Self.tblCandidateFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFiles">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateFiles_tblFiles">
+          <End Role="tblFiles" Type="Self.tblFiles" Multiplicity="1" />
+          <End Role="tblCandidateFiles" Type="Self.tblCandidateFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFiles">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateFiles_tblFileTypes">
+          <End Role="tblFileTypes" Type="Self.tblFileTypes" Multiplicity="1" />
+          <End Role="tblCandidateFiles" Type="Self.tblCandidateFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFileTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFiles">
+              <PropertyRef Name="FileTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateIndustries_tblCandidates">
+          <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
+          <End Role="tblCandidateIndustries" Type="Self.tblCandidateIndustries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateIndustries">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateIndustries_tblIndustries">
+          <End Role="tblIndustries" Type="Self.tblIndustries" Multiplicity="1" />
+          <End Role="tblCandidateIndustries" Type="Self.tblCandidateIndustries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIndustries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateIndustries">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSkills_tblCandidates">
+          <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
+          <End Role="tblCandidateSkills" Type="Self.tblCandidateSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSkills">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSkills_tblIndustrySkills">
+          <End Role="tblIndustrySkills" Type="Self.tblIndustrySkills" Multiplicity="1" />
+          <End Role="tblCandidateSkills" Type="Self.tblCandidateSkills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIndustrySkills">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSkills">
+              <PropertyRef Name="SkillsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCommentUsers_tblComments">
           <End Role="tblComments" Type="Self.tblComments" Multiplicity="1" />
           <End Role="tblCommentUsers" Type="Self.tblCommentUsers" Multiplicity="*" />
@@ -715,6 +870,18 @@
             </Principal>
             <Dependent Role="tblCustomerUsers">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFileTypes_tblMSPDetails">
+          <End Role="tblMSPDetails" Type="Self.tblMSPDetails" Multiplicity="1" />
+          <End Role="tblFileTypes" Type="Self.tblFileTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblFileTypes">
+              <PropertyRef Name="MSPID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1124,7 +1291,10 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBranches" EntityType="Self.tblBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateFiles" EntityType="Self.tblCandidateFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateIndustries" EntityType="Self.tblCandidateIndustries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidates" EntityType="Self.tblCandidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSkills" EntityType="Self.tblCandidateSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblComments" EntityType="Self.tblComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCommentUsers" EntityType="Self.tblCommentUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCountries" EntityType="Self.tblCountries" Schema="dbo" store:Type="Tables" />
@@ -1132,6 +1302,8 @@
           <EntitySet Name="tblCustomerLocationBranches" EntityType="Self.tblCustomerLocationBranches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCustomerUsers" EntityType="Self.tblCustomerUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFiles" EntityType="Self.tblFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFileTypes" EntityType="Self.tblFileTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblIndustries" EntityType="Self.tblIndustries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblIndustrySkills" EntityType="Self.tblIndustrySkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLocations" EntityType="Self.tblLocations" Schema="dbo" store:Type="Tables" />
@@ -1170,6 +1342,34 @@
           <AssociationSet Name="FK_tblBranches_tblLocations" Association="Self.FK_tblBranches_tblLocations">
             <End Role="tblLocations" EntitySet="tblLocations" />
             <End Role="tblBranches" EntitySet="tblBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateFiles_tblCandidates" Association="Self.FK_tblCandidateFiles_tblCandidates">
+            <End Role="tblCandidates" EntitySet="tblCandidates" />
+            <End Role="tblCandidateFiles" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateFiles_tblFiles" Association="Self.FK_tblCandidateFiles_tblFiles">
+            <End Role="tblFiles" EntitySet="tblFiles" />
+            <End Role="tblCandidateFiles" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateFiles_tblFileTypes" Association="Self.FK_tblCandidateFiles_tblFileTypes">
+            <End Role="tblFileTypes" EntitySet="tblFileTypes" />
+            <End Role="tblCandidateFiles" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateIndustries_tblCandidates" Association="Self.FK_tblCandidateIndustries_tblCandidates">
+            <End Role="tblCandidates" EntitySet="tblCandidates" />
+            <End Role="tblCandidateIndustries" EntitySet="tblCandidateIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateIndustries_tblIndustries" Association="Self.FK_tblCandidateIndustries_tblIndustries">
+            <End Role="tblIndustries" EntitySet="tblIndustries" />
+            <End Role="tblCandidateIndustries" EntitySet="tblCandidateIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSkills_tblCandidates" Association="Self.FK_tblCandidateSkills_tblCandidates">
+            <End Role="tblCandidates" EntitySet="tblCandidates" />
+            <End Role="tblCandidateSkills" EntitySet="tblCandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSkills_tblIndustrySkills" Association="Self.FK_tblCandidateSkills_tblIndustrySkills">
+            <End Role="tblIndustrySkills" EntitySet="tblIndustrySkills" />
+            <End Role="tblCandidateSkills" EntitySet="tblCandidateSkills" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCommentUsers_tblComments" Association="Self.FK_tblCommentUsers_tblComments">
             <End Role="tblComments" EntitySet="tblComments" />
@@ -1210,6 +1410,10 @@
           <AssociationSet Name="FK_tblCustomerUsers_tblUserProfile" Association="Self.FK_tblCustomerUsers_tblUserProfile">
             <End Role="tblUserProfile" EntitySet="tblUserProfile" />
             <End Role="tblCustomerUsers" EntitySet="tblCustomerUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFileTypes_tblMSPDetails" Association="Self.FK_tblFileTypes_tblMSPDetails">
+            <End Role="tblMSPDetails" EntitySet="tblMSPDetails" />
+            <End Role="tblFileTypes" EntitySet="tblFileTypes" />
           </AssociationSet>
           <AssociationSet Name="FK_tblIndustrySkills_tblIndustries" Association="Self.FK_tblIndustrySkills_tblIndustries">
             <End Role="tblIndustries" EntitySet="tblIndustries" />
@@ -1572,6 +1776,43 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="tblCandidateFiles" EntityType="eVMSModel.tblCandidateFile" />
+          <EntitySet Name="tblCandidateIndustries" EntityType="eVMSModel.tblCandidateIndustry" />
+          <EntitySet Name="tblCandidateSkills" EntityType="eVMSModel.tblCandidateSkill" />
+          <EntitySet Name="tblFiles" EntityType="eVMSModel.tblFile" />
+          <EntitySet Name="tblFileTypes" EntityType="eVMSModel.tblFileType" />
+          <AssociationSet Name="FK_tblCandidateFiles_tblCandidates" Association="eVMSModel.FK_tblCandidateFiles_tblCandidates">
+            <End Role="tblCandidate" EntitySet="tblCandidates" />
+            <End Role="tblCandidateFile" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateFiles_tblFiles" Association="eVMSModel.FK_tblCandidateFiles_tblFiles">
+            <End Role="tblFile" EntitySet="tblFiles" />
+            <End Role="tblCandidateFile" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateFiles_tblFileTypes" Association="eVMSModel.FK_tblCandidateFiles_tblFileTypes">
+            <End Role="tblFileType" EntitySet="tblFileTypes" />
+            <End Role="tblCandidateFile" EntitySet="tblCandidateFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateIndustries_tblCandidates" Association="eVMSModel.FK_tblCandidateIndustries_tblCandidates">
+            <End Role="tblCandidate" EntitySet="tblCandidates" />
+            <End Role="tblCandidateIndustry" EntitySet="tblCandidateIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateIndustries_tblIndustries" Association="eVMSModel.FK_tblCandidateIndustries_tblIndustries">
+            <End Role="tblIndustry" EntitySet="tblIndustries" />
+            <End Role="tblCandidateIndustry" EntitySet="tblCandidateIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSkills_tblCandidates" Association="eVMSModel.FK_tblCandidateSkills_tblCandidates">
+            <End Role="tblCandidate" EntitySet="tblCandidates" />
+            <End Role="tblCandidateSkill" EntitySet="tblCandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSkills_tblIndustrySkills" Association="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills">
+            <End Role="tblIndustrySkill" EntitySet="tblIndustrySkills" />
+            <End Role="tblCandidateSkill" EntitySet="tblCandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFileTypes_tblMSPDetails" Association="eVMSModel.FK_tblFileTypes_tblMSPDetails">
+            <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
+            <End Role="tblFileType" EntitySet="tblFileTypes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1690,6 +1931,9 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateFiles" Relationship="eVMSModel.FK_tblCandidateFiles_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateFile" />
+          <NavigationProperty Name="tblCandidateIndustries" Relationship="eVMSModel.FK_tblCandidateIndustries_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateIndustry" />
+          <NavigationProperty Name="tblCandidateSkills" Relationship="eVMSModel.FK_tblCandidateSkills_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateSkill" />
         </EntityType>
         <EntityType Name="tblComment">
           <Key>
@@ -1836,6 +2080,7 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblIndustrySkills" Relationship="eVMSModel.FK_tblIndustrySkills_tblIndustries" FromRole="tblIndustry" ToRole="tblIndustrySkill" />
+          <NavigationProperty Name="tblCandidateIndustries" Relationship="eVMSModel.FK_tblCandidateIndustries_tblIndustries" FromRole="tblIndustry" ToRole="tblCandidateIndustry" />
         </EntityType>
         <EntityType Name="tblIndustrySkill">
           <Key>
@@ -1852,6 +2097,7 @@
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblIndustry" Relationship="eVMSModel.FK_tblIndustrySkills_tblIndustries" FromRole="tblIndustrySkill" ToRole="tblIndustry" />
           <NavigationProperty Name="tblVacancieSkills" Relationship="eVMSModel.FK_tblVacancieSkills_tblIndustrySkills" FromRole="tblIndustrySkill" ToRole="tblVacancieSkill" />
+          <NavigationProperty Name="tblCandidateSkills" Relationship="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills" FromRole="tblIndustrySkill" ToRole="tblCandidateSkill" />
         </EntityType>
         <EntityType Name="tblLocation">
           <Key>
@@ -1916,6 +2162,7 @@
           <NavigationProperty Name="tblMSPLocationBranches" Relationship="eVMSModel.FK_tblMSPLocationBranches_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPLocationBranch" />
           <NavigationProperty Name="tblMSPUsers" Relationship="eVMSModel.FK_tblMSPUsers_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPUser" />
           <NavigationProperty Name="tblMSPVacancieTypes" Relationship="eVMSModel.FK_tblMSPVacancieTypes_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPVacancieType" />
+          <NavigationProperty Name="tblFileTypes" Relationship="eVMSModel.FK_tblFileTypes_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblFileType" />
         </EntityType>
         <EntityType Name="tblMSPLocationBranch">
           <Key>
@@ -2744,6 +2991,183 @@
           <End Type="eVMSModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="eVMSModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="tblCandidateFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="FileID" Type="Int64" Nullable="false" />
+          <Property Name="FileTypeID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidate" Relationship="eVMSModel.FK_tblCandidateFiles_tblCandidates" FromRole="tblCandidateFile" ToRole="tblCandidate" />
+          <NavigationProperty Name="tblFile" Relationship="eVMSModel.FK_tblCandidateFiles_tblFiles" FromRole="tblCandidateFile" ToRole="tblFile" />
+          <NavigationProperty Name="tblFileType" Relationship="eVMSModel.FK_tblCandidateFiles_tblFileTypes" FromRole="tblCandidateFile" ToRole="tblFileType" />
+        </EntityType>
+        <EntityType Name="tblCandidateIndustry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="IndustryID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidate" Relationship="eVMSModel.FK_tblCandidateIndustries_tblCandidates" FromRole="tblCandidateIndustry" ToRole="tblCandidate" />
+          <NavigationProperty Name="tblIndustry" Relationship="eVMSModel.FK_tblCandidateIndustries_tblIndustries" FromRole="tblCandidateIndustry" ToRole="tblIndustry" />
+        </EntityType>
+        <EntityType Name="tblCandidateSkill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="SkillsID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidate" Relationship="eVMSModel.FK_tblCandidateSkills_tblCandidates" FromRole="tblCandidateSkill" ToRole="tblCandidate" />
+          <NavigationProperty Name="tblIndustrySkill" Relationship="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills" FromRole="tblCandidateSkill" ToRole="tblIndustrySkill" />
+        </EntityType>
+        <EntityType Name="tblFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateFiles" Relationship="eVMSModel.FK_tblCandidateFiles_tblFiles" FromRole="tblFile" ToRole="tblCandidateFile" />
+        </EntityType>
+        <EntityType Name="tblFileType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSPID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateFiles" Relationship="eVMSModel.FK_tblCandidateFiles_tblFileTypes" FromRole="tblFileType" ToRole="tblCandidateFile" />
+          <NavigationProperty Name="tblMSPDetail" Relationship="eVMSModel.FK_tblFileTypes_tblMSPDetails" FromRole="tblFileType" ToRole="tblMSPDetail" />
+        </EntityType>
+        <Association Name="FK_tblCandidateFiles_tblCandidates">
+          <End Type="eVMSModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateFile" Role="tblCandidateFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFile">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateFiles_tblFiles">
+          <End Type="eVMSModel.tblFile" Role="tblFile" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateFile" Role="tblCandidateFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFile">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateFiles_tblFileTypes">
+          <End Type="eVMSModel.tblFileType" Role="tblFileType" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateFile" Role="tblCandidateFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFileType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateFile">
+              <PropertyRef Name="FileTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateIndustries_tblCandidates">
+          <End Type="eVMSModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateIndustry" Role="tblCandidateIndustry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateIndustry">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateIndustries_tblIndustries">
+          <End Type="eVMSModel.tblIndustry" Role="tblIndustry" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateIndustry" Role="tblCandidateIndustry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIndustry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateIndustry">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSkills_tblCandidates">
+          <End Type="eVMSModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSkill" Role="tblCandidateSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSkill">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSkills_tblIndustrySkills">
+          <End Type="eVMSModel.tblIndustrySkill" Role="tblIndustrySkill" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSkill" Role="tblCandidateSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIndustrySkill">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSkill">
+              <PropertyRef Name="SkillsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFileTypes_tblMSPDetails">
+          <End Type="eVMSModel.tblMSPDetail" Role="tblMSPDetail" Multiplicity="1" />
+          <End Type="eVMSModel.tblFileType" Role="tblFileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblFileType">
+              <PropertyRef Name="MSPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3306,6 +3730,82 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="tblCandidateFiles">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateFile">
+              <MappingFragment StoreEntitySet="tblCandidateFiles">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileTypeID" ColumnName="FileTypeID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateIndustries">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateIndustry">
+              <MappingFragment StoreEntitySet="tblCandidateIndustries">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSkills">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSkill">
+              <MappingFragment StoreEntitySet="tblCandidateSkills">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFiles">
+            <EntityTypeMapping TypeName="eVMSModel.tblFile">
+              <MappingFragment StoreEntitySet="tblFiles">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFileTypes">
+            <EntityTypeMapping TypeName="eVMSModel.tblFileType">
+              <MappingFragment StoreEntitySet="tblFileTypes">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,18 +12,11 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblIndustry
+    public partial class tblCandidateIndustry
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblIndustry()
-        {
-            this.tblIndustrySkills = new HashSet<tblIndustrySkill>();
-            this.tblCandidateIndustries = new HashSet<tblCandidateIndustry>();
-        }
-    
         public long ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public long CandidateID { get; set; }
+        public long IndustryID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -31,9 +24,7 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblIndustrySkill> tblIndustrySkills { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateIndustry> tblCandidateIndustries { get; set; }
+        public virtual tblCandidate tblCandidate { get; set; }
+        public virtual tblIndustry tblIndustry { get; set; }
     }
 }

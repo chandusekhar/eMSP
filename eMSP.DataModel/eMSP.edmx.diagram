@@ -87,6 +87,19 @@
         <AssociationConnector Association="eVMSModel.FK_tblVacancyLocations_tblVacancies" />
         <AssociationConnector Association="eVMSModel.FK_tblVacancySuppliers_tblVacancies" />
         <AssociationConnector Association="eVMSModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateFile" Width="1.5" PointX="16" PointY="16.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateIndustry" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSkill" Width="1.5" PointX="18.75" PointY="18.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblFile" Width="1.5" PointX="13.75" PointY="16.75" />
+        <EntityTypeShape EntityType="eVMSModel.tblFileType" Width="1.5" PointX="7.5" PointY="43" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblCandidates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblFiles" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblFileTypes" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateIndustries_tblCandidates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateIndustries_tblIndustries" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblCandidates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills" />
+        <AssociationConnector Association="eVMSModel.FK_tblFileTypes_tblMSPDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

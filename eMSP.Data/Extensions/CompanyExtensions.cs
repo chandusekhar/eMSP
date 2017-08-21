@@ -21,8 +21,8 @@ namespace eMSP.Data.Extensions
                 Address = data.companyAddress,
                 City = data.companyCity,
                 WebSite = data.companyWebsite,
-                CountryID = data.CountryID,
-                StateID = data.StateID,
+                CountryID = Convert.ToInt64(data.CountryID),
+                StateID = Convert.ToInt64(data.StateID),
                 CreatedUserID = "",
                 UpdatedUserID = "",
                 CreatedTimestamp = DateTime.Now,
@@ -43,15 +43,15 @@ namespace eMSP.Data.Extensions
                 companyAddress = data.Address,
                 companyCity = data.City,
                 companyWebsite = data.WebSite,
-                CountryID = data.CountryID,
-                companyCountry = data.tblCountry.Name,
-                StateID = data.StateID,
-                companyState = data.tblCountryState.Name,
+                CountryID = data.CountryID.ToString(),
+                companyCountry = data.tblCountry != null ? data.tblCountry.Name : "",
+                StateID = data.StateID.ToString(),
+                companyState = data.tblCountryState != null ? data.tblCountryState.Name : "",
                 companyType = "MSP",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                createdTimestamp = data.CreatedTimestamp.ToString(),
+                updatedTimestamp = data.UpdatedTimestamp.Value.ToString()
             };
 
         }
@@ -66,10 +66,10 @@ namespace eMSP.Data.Extensions
                 Address = data.companyAddress,
                 City = data.companyCity,
                 WebSite = data.companyWebsite,
-                CountryID = data.CountryID,
-                StateID = data.StateID,
-                CreatedUserID = "",
-                UpdatedUserID = "",
+                CountryID = Convert.ToInt64(data.CountryID),
+                StateID = Convert.ToInt64(data.StateID),
+                CreatedUserID = "Raja",
+                UpdatedUserID = "Raja",
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now,
 
@@ -88,15 +88,15 @@ namespace eMSP.Data.Extensions
                 companyAddress = data.Address,
                 companyCity = data.City,
                 companyWebsite = data.WebSite,
-                CountryID = data.CountryID,
-                companyCountry = data.tblCountry.Name,
-                StateID = data.StateID,
-                companyState = data.tblCountryState.Name,
+                CountryID = data.CountryID.ToString(),
+                companyCountry = data.tblCountry != null ? data.tblCountry.Name : "",
+                StateID = data.StateID.ToString(),
+                companyState = data.tblCountryState != null ? data.tblCountryState.Name:"",
                 companyType = "Customer",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                createdTimestamp = data.CreatedTimestamp.ToString(),
+                updatedTimestamp = data.UpdatedTimestamp.Value.ToString()
             };
 
         }
@@ -111,10 +111,10 @@ namespace eMSP.Data.Extensions
                 Address = data.companyAddress,
                 City = data.companyCity,
                 WebSite = data.companyWebsite,
-                CountryID = data.CountryID,
-                StateID = data.StateID,
-                CreatedUserID = "",
-                UpdatedUserID = "",
+                CountryID = Convert.ToInt64(data.CountryID),
+                StateID = Convert.ToInt64(data.StateID),
+                CreatedUserID = "Raja",
+                UpdatedUserID = "Raja",
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now,
 
@@ -133,15 +133,15 @@ namespace eMSP.Data.Extensions
                 companyAddress = data.Address,
                 companyCity = data.City,
                 companyWebsite = data.WebSite,
-                CountryID = data.CountryID,
-                companyCountry = data.tblCountry.Name,
-                StateID = data.StateID,
-                companyState = data.tblCountryState.Name,
+                CountryID = data.CountryID.ToString(),
+                companyCountry = data.tblCountry != null ? data.tblCountry.Name : "",
+                StateID = data.StateID.ToString(),
+                companyState = data.tblCountryState != null ? data.tblCountryState.Name : "",
                 companyType = "Supplier",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                createdTimestamp = data.CreatedTimestamp.ToString(),
+                updatedTimestamp = data.UpdatedTimestamp.ToString()
             };
 
         }

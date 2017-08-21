@@ -21,6 +21,7 @@ namespace eMSP.DataModel
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
             this.tblMSPVacancieTypes = new HashSet<tblMSPVacancieType>();
+            this.tblFileTypes = new HashSet<tblFileType>();
         }
     
         public long ID { get; set; }
@@ -48,5 +49,7 @@ namespace eMSP.DataModel
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblFileType> tblFileTypes { get; set; }
     }
 }

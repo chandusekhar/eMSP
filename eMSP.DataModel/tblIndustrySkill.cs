@@ -18,6 +18,7 @@ namespace eMSP.DataModel
         public tblIndustrySkill()
         {
             this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
+            this.tblCandidateSkills = new HashSet<tblCandidateSkill>();
         }
     
         public long ID { get; set; }
@@ -33,5 +34,7 @@ namespace eMSP.DataModel
         public virtual tblIndustry tblIndustry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancieSkill> tblVacancieSkills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSkill> tblCandidateSkills { get; set; }
     }
 }

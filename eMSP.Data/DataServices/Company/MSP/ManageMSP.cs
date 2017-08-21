@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace eMSP.Data.DataServices.Company
 {
@@ -13,11 +14,11 @@ namespace eMSP.Data.DataServices.Company
     {
         #region Initialization
 
-        internal static eMSPEntities mContext;
+        internal static eMSPEntities db;
 
         static ManageMSP()
         {
-            mContext = new eMSPEntities();
+           
         }
 
         #endregion
@@ -27,9 +28,13 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPDetails.Where(x => x.ID == Id).SingleOrDefault());
+                    
+                    return await Task.Run(() => db.tblMSPDetails
+                                                  .Include(a=>a.tblCountry)
+                                                  .Include(b=>b.tblCountryState)
+                                                  .Where(x => x.ID == Id).SingleOrDefault());
 
 
                 }
@@ -45,11 +50,9 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblMSPDetails.Where(x => x.CompanyName == model.companyName).ToList());
-
-
                 }
             }
             catch (Exception)
@@ -67,7 +70,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     model = db.tblMSPDetails.Add(model);
 
@@ -92,7 +95,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     db.Entry(model).State = EntityState.Modified;
 
@@ -117,7 +120,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     tblMSPDetail obj = await db.tblMSPDetails.FindAsync(Id);
                     db.tblMSPDetails.Remove(obj);

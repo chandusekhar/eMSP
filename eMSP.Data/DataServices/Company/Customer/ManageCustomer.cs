@@ -13,11 +13,11 @@ namespace eMSP.Data.DataServices.Company
     {
         #region Intialization
 
-        internal static eMSPEntities mContext;
+        internal static eMSPEntities db;
 
         static ManageCustomer()
         {
-            mContext = new eMSPEntities();
+
         }
 
         #endregion
@@ -27,9 +27,12 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCustomers.Where(x => x.ID == Id).SingleOrDefault());
+                    return await Task.Run(() => db.tblCustomers
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(b => b.tblCountryState)
+                                                  .Where(x => x.ID == Id).SingleOrDefault());
 
 
                 }
@@ -45,10 +48,18 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCustomers.Where(x => x.Name == model.companyName).ToList());
-
+                    if (model.companyName == "%")
+                    {
+                        return await Task.Run(() => db.tblCustomers.Include(a => a.tblCountry)
+                                                  .Include(b => b.tblCountryState).Select(x => x).ToList());
+                    }
+                    else
+                    {
+                        return await Task.Run(() => db.tblCustomers.Include(a => a.tblCountry)
+                                                  .Include(b => b.tblCountryState).Where(x => x.Name == model.companyName).ToList());
+                    }
 
                 }
             }
@@ -67,7 +78,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
                     model = db.tblCustomers.Add(model);
 
@@ -92,7 +103,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
                     db.Entry(model).State = EntityState.Modified;
 
@@ -117,7 +128,7 @@ namespace eMSP.Data.DataServices.Company
         {
             try
             {
-                using (var db = mContext)
+                using (db = new eMSPEntities())
                 {
                     tblCustomer obj = await db.tblCustomers.FindAsync(Id);
                     db.tblCustomers.Remove(obj);

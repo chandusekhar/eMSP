@@ -3,18 +3,36 @@
   "titleForm":"Search Customer",
   "searchUrl":"/api/customerdetails/getcustomers",
   "createUrl":"company.createCustomer",
+  "editUrl":"company.editCustomer",
+  "companyType":"Customer",
   "gridElements":[
   {
   "lable":"ID",
   "id":"id"
   },
   {
-  "lable":"First Name",
-  "id":"firstName"
+  "lable":"Company Type",
+  "id":"companyType"
   },
   {
-  "lable":"Last Name",
-  "id":"lastName"
+  "lable":"Company Name",
+  "id":"companyName"
+  },
+  {
+  "lable":"Company Website",
+  "id":"companyWebsite"
+  },
+  {
+  "lable":"Company Email",
+  "id":"companyEmail"
+  },
+  {
+  "lable":"Company Contact Number",
+  "id":"companyPhoneNumber"
+  },
+  {
+  "lable":"Company Address",
+  "id":"companyAddress"
   }
   ]
 }

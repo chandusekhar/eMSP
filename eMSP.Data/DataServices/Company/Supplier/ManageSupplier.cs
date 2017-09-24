@@ -32,7 +32,7 @@ namespace eMSP.Data.DataServices.Company
                 {
                     return await Task.Run(() => db.tblSuppliers
                                                   .Include(a => a.tblCountry)
-                                                  .Include(b => b.tblCountryState)
+                                                  .Include(b => b.tblCountryState)                                                  
                                                   .Where(x => x.ID == Id).SingleOrDefault());
 
 

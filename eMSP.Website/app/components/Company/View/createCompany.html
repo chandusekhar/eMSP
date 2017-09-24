@@ -87,7 +87,7 @@
                                            name="state" placeholder="State" required="">-->
                                     <select ng-model="dataJSON.StateID" class="form-control">
                                         <option value="">State</option>
-                                        <option ng-repeat=" res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
+                                        <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
                                     </select>
                                     <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
                                         state is required

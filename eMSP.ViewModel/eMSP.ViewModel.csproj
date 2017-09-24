@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\App.cs" />
     <Compile Include="Company\CommonModel.cs" />
     <Compile Include="MSP\MSPDetailsUIModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\CountryModel.cs" />
+    <Compile Include="Shared\StateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eMSP.DataModel\eMSP.DataModel.csproj">

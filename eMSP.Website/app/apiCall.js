@@ -7,17 +7,14 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
     var apicall = function (type, url, param) {
         var apiUrl = apiBaseURL + url;
 
-        
        return $http({            
             url: apiUrl,
             method: type,
-            data: param
-        }).success(function (result) {
-
+            data: param            
+        }).success(function (result) {        
             return result;
-
         })
-        .error(function (error, status) {
+        .error(function (error, status) {            
             console.log('errror status: ', status);
             console.log('error object: ', error);
         });
@@ -25,7 +22,7 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
             
     }
     return {
-        get: function (url, param) {
+        get: function (url, param) {            
             return apicall('GET', url, param).then(function (data) { return data.data });
         },
         post: function (url, param) {

@@ -110,7 +110,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\apiCall.js" />
+    <Content Include="app\appConstants.js" />
     <Content Include="app\components\accounts\services\mspRegistrationService.js" />
+    <Content Include="app\components\Company\Controller\manageMSPBranchController.js" />
+    <Content Include="app\components\Company\Controller\manageMSPLocationController.js" />
+    <Content Include="app\components\Company\service\companyService.js" />
+    <Content Include="app\components\Company\View\ManageMSPLocation.html" />
+    <Content Include="app\components\Company\View\ManageMSPBranch.html" />
     <Content Include="app\components\location-branch\controller\branch.js" />
     <Content Include="app\components\location-branch\controller\location.js" />
     <Content Include="app\components\location-branch\service\location-branch-service.js" />
@@ -121,7 +128,8 @@
     <Content Include="app\components\users-roles\service\user-role-service.js" />
     <Content Include="app\components\users-roles\view\roles.html" />
     <Content Include="app\components\users-roles\view\users.html" />
-    <Content Include="app\HtmlPage1.html" />
+    <Content Include="app\route.js" />
+    <Content Include="app\shared\applicationSettingsService.js" />
     <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
     <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
@@ -2497,6 +2505,8 @@
     <Content Include="app\components\Company\Config\SearchCustomers.json" />
     <Content Include="app\components\Company\Config\SearchMSP.json" />
     <Content Include="app\components\Company\Config\SearchSuppliers.json" />
+    <Content Include="app\components\Company\Config\ManageBranch.json" />
+    <Content Include="app\components\Company\Config\ManageLocation.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1812,6 +1812,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 },
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    debugger;
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
                     .then(function (data) {
                         return data;
@@ -1838,6 +1839,60 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state("company.locations", {
+            url: '/locations',
+            templateUrl: 'app/components/Company/View/ManageMSPLocation.html',
+            controller: 'manageMSPLocationController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Company/Config/ManageLocation.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([                                                
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state("company.branches", {
+            url: '/branches',
+            templateUrl: 'app/components/Company/View/ManageMSPBranch.html',
+            controller: 'manageMSPBranchController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Company/Config/ManageBranch.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                    .then(function (data) {
+                        return data;
+                    });
+
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([                        
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
 
         //company Routes end
         .state('off_canvas', {
@@ -1855,22 +1910,6 @@ angular
     });
 
 
-var serviceBase = 'http://localhost:50001/';
-//var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
-angular
-    .module('eMSPApp').constant('ngAuthSettings', {
-        apiServiceBaseUri: serviceBase,
-        clientId: 'ngAuthApp'
-    });
 
-angular
-    .module('eMSPApp').config(function ($httpProvider) {
-        $httpProvider.interceptors.push('authInterceptorService');
-    });
-
-angular
-    .module('eMSPApp').run(['authService', function (authService) {
-        authService.fillAuthData();
-    }]);
 
 

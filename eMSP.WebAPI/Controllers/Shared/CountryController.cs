@@ -26,39 +26,39 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         #endregion
 
-        #region Get
+        //#region Get
 
-        [Route("getCountry")]
-        [HttpGet]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> GetCountry(CountryModel data)
-        {
-            try
-            {
-                return Ok(await CountryService.GetCountry(data));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("getCountry")]
+        //[HttpGet]
+        //[ResponseType(typeof(CountryCreateModel))]
+        //public async Task<IHttpActionResult> GetCountry(CountryModel data)
+        //{
+        //    try
+        //    {
+        //        return Ok(await CountryService.GetCountry(data));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("GetAllCountrys")]
-        [HttpGet]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> GetAllCountrys(CountrySearchModel data)
-        {
-            try
-            {
-                return Ok(await CountryService.GetAllCountry(data));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("GetAllCountrys")]
+        //[HttpGet]
+        //[ResponseType(typeof(CountryCreateModel))]
+        //public async Task<IHttpActionResult> GetAllCountrys(CountrySearchModel data)
+        //{
+        //    try
+        //    {
+        //        return Ok(await CountryService.GetAllCountry(data));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
-        #endregion
+        //#endregion
     }
 }

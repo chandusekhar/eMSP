@@ -37,6 +37,7 @@ namespace eMSP.WebAPI.Controllers.Company
         {
             try
             {
+                
                 return Ok(await CompanyService.GetCompany(data));
             }
             catch (Exception)

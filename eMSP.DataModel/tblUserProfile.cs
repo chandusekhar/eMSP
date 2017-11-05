@@ -22,6 +22,7 @@ namespace eMSP.DataModel
             this.tblMSPUsers = new HashSet<tblMSPUser>();
             this.tblSupplierUsers = new HashSet<tblSupplierUser>();
             this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
+            this.tblCandidateSubmissionAppointmentUsers = new HashSet<tblCandidateSubmissionAppointmentUser>();
         }
     
         public string UserID { get; set; }
@@ -52,5 +53,7 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierUser> tblSupplierUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
     }
 }

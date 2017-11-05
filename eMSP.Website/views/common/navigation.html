@@ -27,13 +27,13 @@
             </li>
             <li ng-class="{active: $state.includes('dashboards')}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'DASHBOARD' | translate }}</span> <span class="fa arrow"></span></a>
-                <!--<ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_1">{{ 'DASHBOARD' | translate }} v.1</a></li>
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_2">{{ 'DASHBOARD' | translate }} v.2</a></li>
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_3">{{ 'DASHBOARD' | translate }} v.3</a></li>
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_4_1">{{ 'DASHBOARD' | translate }} v.4</a></li>
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_5">{{ 'DASHBOARD' | translate }} v.5 </a></li>
-                </ul>-->
+                </ul>
             </li>
             <li ng-class="{active: $state.includes('company')}">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">{{'Company'|translate}}</span> <span class="fa arrow"></span></a>
@@ -45,9 +45,11 @@
                     <li ui-sref-active="active"><a ui-sref="company.createCustomer">{{'Create Customer'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="company.locations">{{'Manage Location'|translate}}</a></li>
                     <li ui-sref-active="active"><a ui-sref="company.branches">{{'Manage Branches'|translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
                 </ul>
             </li>
-            <!--<li ui-sref-active="active">
+            <li ui-sref-active="active">
                 <a ui-sref="layouts"><i class="fa fa-diamond"></i> <span class="nav-label">{{ 'LAYOUTS' | translate }}</span> </a>
             </li>
 
@@ -243,7 +245,7 @@
             </li>
             <li class="landing_link">
                 <a ui-sref="landing"><i class="fa fa-star"></i> <span class="nav-label">{{ 'LANDING' | translate }}</span> <span class="label label-warning pull-right">NEW</span></a>
-            </li>-->
+            </li>
         </ul>
 
     </div>

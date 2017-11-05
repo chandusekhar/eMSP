@@ -45,6 +45,8 @@
     <Compile Include="MSP\MSPDetailsUIModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\CountryModel.cs" />
+    <Compile Include="Shared\IndustryModel.cs" />
+    <Compile Include="Shared\IndustrySkillsModel.cs" />
     <Compile Include="Shared\StateModel.cs" />
   </ItemGroup>
   <ItemGroup>

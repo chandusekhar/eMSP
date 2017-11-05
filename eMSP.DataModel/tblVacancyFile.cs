@@ -23,7 +23,10 @@ namespace eMSP.DataModel
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
+        public long FileID { get; set; }
+        public short FileVersionNumber { get; set; }
     
         public virtual tblVacancy tblVacancy { get; set; }
+        public virtual tblFile tblFile { get; set; }
     }
 }

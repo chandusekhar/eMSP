@@ -1,0 +1,22 @@
+{
+  "title": "Manage Industry",
+  "titleFormCreate": "Add a Industry",
+  "titleFormEdit": "Edit Industry",
+  "urlCreate": "/api/locationdetails/create",
+  "urlUpdate": "/api/locationdetails/update",
+  "gridElements": [
+    {
+      "lable": "ID",
+      "id": "id"
+    },
+    {
+      "lable": "First Name",
+      "id": "firstName"
+    },
+    {
+      "lable": "Last Name",
+      "id": "lastName"
+    }
+  ]
+
+}

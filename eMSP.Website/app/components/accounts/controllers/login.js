@@ -13,12 +13,12 @@ angular.module('eMSPApp').controller("loginController", ['$scope', '$location', 
         console.log($scope.loginData);
 
         authService.login($scope.loginData).then(function (response) {
-            debugger;
+            
             console.log(response);
             $location.path('/dashboard');
         },
          function (err) {
-             debugger;
+             
              $scope.message = err.error_description;
          });
     };

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="eVMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="eVMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -81,6 +81,34 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblAppointmentStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblAppointmentTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="tblBranches">
           <Key>
             <PropertyRef Name="ID" />
@@ -95,6 +123,21 @@
           <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="StateID" Type="int" />
           <Property Name="CountryID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateContacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="ContactID" Type="bigint" Nullable="false" />
+          <Property Name="IsPrimary" Type="bit" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -162,6 +205,111 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="tblCandidateStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VacancyID" Type="bigint" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="StatusID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="AppintmentTypeID" Type="bigint" Nullable="false" />
+          <Property Name="CandidateSubmissionID" Type="bigint" Nullable="false" />
+          <Property Name="AppointmentStatusID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentSlots">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppintmentID" Type="bigint" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsFinalised" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentUserComments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="CommentID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentID" Type="bigint" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionComments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobSubmissionID" Type="bigint" Nullable="false" />
+          <Property Name="CommentID" Type="bigint" Nullable="false" />
+          <Property Name="JobSubmissionStatusID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="tblComments">
           <Key>
             <PropertyRef Name="ID" />
@@ -185,6 +333,27 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="IsRead" Type="bit" />
           <Property Name="ReadBy" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblContacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StreetAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="500" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CountyID" Type="bigint" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -276,6 +445,7 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileVersionNumber" Type="smallint" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -564,6 +734,8 @@
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="VacancyID" Type="bigint" Nullable="false" />
+          <Property Name="FileID" Type="bigint" Nullable="false" />
+          <Property Name="FileVersionNumber" Type="smallint" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
@@ -669,6 +841,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateContacts_tblCandidates">
+          <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
+          <End Role="tblCandidateContacts" Type="Self.tblCandidateContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateContacts">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateContacts_tblContacts">
+          <End Role="tblContacts" Type="Self.tblContacts" Multiplicity="1" />
+          <End Role="tblCandidateContacts" Type="Self.tblCandidateContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContacts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateContacts">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateFiles_tblCandidates">
           <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
           <End Role="tblCandidateFiles" Type="Self.tblCandidateFiles" Multiplicity="*" />
@@ -750,6 +946,174 @@
             </Principal>
             <Dependent Role="tblCandidateSkills">
               <PropertyRef Name="SkillsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblCandidates">
+          <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblCandidateStatus">
+          <End Role="tblCandidateStatus" Type="Self.tblCandidateStatus" Multiplicity="1" />
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblVacancies">
+          <End Role="tblVacancies" Type="Self.tblVacancies" Multiplicity="1" />
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVacancies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="VacancyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblAppointmentStatus">
+          <End Role="tblAppointmentStatus" Type="Self.tblAppointmentStatus" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointmentStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointments">
+              <PropertyRef Name="AppointmentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblAppointmentTypes">
+          <End Role="tblAppointmentTypes" Type="Self.tblAppointmentTypes" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointmentTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointments">
+              <PropertyRef Name="AppintmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblCandidateSubmission">
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointments">
+              <PropertyRef Name="CandidateSubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments">
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointmentSlots" Type="Self.tblCandidateSubmissionAppointmentSlots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentSlots">
+              <PropertyRef Name="AppintmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
+          <End Role="tblCandidateSubmissionAppointmentUsers" Type="Self.tblCandidateSubmissionAppointmentUsers" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointmentUserComments" Type="Self.tblCandidateSubmissionAppointmentUserComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointmentUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUserComments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
+          <End Role="tblComments" Type="Self.tblComments" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointmentUserComments" Type="Self.tblCandidateSubmissionAppointmentUserComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUserComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointmentUsers" Type="Self.tblCandidateSubmissionAppointmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUsers">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile">
+          <End Role="tblUserProfile" Type="Self.tblUserProfile" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionAppointmentUsers" Type="Self.tblCandidateSubmissionAppointmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserProfile">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUsers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblCandidateStatus">
+          <End Role="tblCandidateStatus" Type="Self.tblCandidateStatus" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionComments" Type="Self.tblCandidateSubmissionComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComments">
+              <PropertyRef Name="JobSubmissionStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblCandidateSubmission">
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionComments" Type="Self.tblCandidateSubmissionComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComments">
+              <PropertyRef Name="JobSubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblComments">
+          <End Role="tblComments" Type="Self.tblComments" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionComments" Type="Self.tblCandidateSubmissionComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComments">
+              <PropertyRef Name="CommentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1221,6 +1585,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblVacancyFiles_tblFiles">
+          <End Role="tblFiles" Type="Self.tblFiles" Multiplicity="1" />
+          <End Role="tblVacancyFiles" Type="Self.tblVacancyFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblVacancyFiles">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblVacancyFiles_tblVacancies">
           <End Role="tblVacancies" Type="Self.tblVacancies" Multiplicity="1" />
           <End Role="tblVacancyFiles" Type="Self.tblVacancyFiles" Multiplicity="*" />
@@ -1290,13 +1666,24 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAppointmentStatus" EntityType="Self.tblAppointmentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAppointmentTypes" EntityType="Self.tblAppointmentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBranches" EntityType="Self.tblBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateContacts" EntityType="Self.tblCandidateContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateFiles" EntityType="Self.tblCandidateFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateIndustries" EntityType="Self.tblCandidateIndustries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidates" EntityType="Self.tblCandidates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateSkills" EntityType="Self.tblCandidateSkills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateStatus" EntityType="Self.tblCandidateStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmission" EntityType="Self.tblCandidateSubmission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionAppointments" EntityType="Self.tblCandidateSubmissionAppointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentSlots" EntityType="Self.tblCandidateSubmissionAppointmentSlots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentUserComments" EntityType="Self.tblCandidateSubmissionAppointmentUserComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentUsers" EntityType="Self.tblCandidateSubmissionAppointmentUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionComments" EntityType="Self.tblCandidateSubmissionComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblComments" EntityType="Self.tblComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCommentUsers" EntityType="Self.tblCommentUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContacts" EntityType="Self.tblContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCountries" EntityType="Self.tblCountries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCountryStates" EntityType="Self.tblCountryStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCustomerLocationBranches" EntityType="Self.tblCustomerLocationBranches" Schema="dbo" store:Type="Tables" />
@@ -1343,6 +1730,14 @@
             <End Role="tblLocations" EntitySet="tblLocations" />
             <End Role="tblBranches" EntitySet="tblBranches" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateContacts_tblCandidates" Association="Self.FK_tblCandidateContacts_tblCandidates">
+            <End Role="tblCandidates" EntitySet="tblCandidates" />
+            <End Role="tblCandidateContacts" EntitySet="tblCandidateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateContacts_tblContacts" Association="Self.FK_tblCandidateContacts_tblContacts">
+            <End Role="tblContacts" EntitySet="tblContacts" />
+            <End Role="tblCandidateContacts" EntitySet="tblCandidateContacts" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateFiles_tblCandidates" Association="Self.FK_tblCandidateFiles_tblCandidates">
             <End Role="tblCandidates" EntitySet="tblCandidates" />
             <End Role="tblCandidateFiles" EntitySet="tblCandidateFiles" />
@@ -1370,6 +1765,62 @@
           <AssociationSet Name="FK_tblCandidateSkills_tblIndustrySkills" Association="Self.FK_tblCandidateSkills_tblIndustrySkills">
             <End Role="tblIndustrySkills" EntitySet="tblIndustrySkills" />
             <End Role="tblCandidateSkills" EntitySet="tblCandidateSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblCandidates" Association="Self.FK_tblCandidateSubmission_tblCandidates">
+            <End Role="tblCandidates" EntitySet="tblCandidates" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblCandidateStatus" Association="Self.FK_tblCandidateSubmission_tblCandidateStatus">
+            <End Role="tblCandidateStatus" EntitySet="tblCandidateStatus" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblVacancies" Association="Self.FK_tblCandidateSubmission_tblVacancies">
+            <End Role="tblVacancies" EntitySet="tblVacancies" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" Association="Self.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus">
+            <End Role="tblAppointmentStatus" EntitySet="tblAppointmentStatus" />
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" Association="Self.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes">
+            <End Role="tblAppointmentTypes" EntitySet="tblAppointmentTypes" />
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" Association="Self.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" Association="Self.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
+            <End Role="tblCandidateSubmissionAppointmentSlots" EntitySet="tblCandidateSubmissionAppointmentSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" Association="Self.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
+            <End Role="tblCandidateSubmissionAppointmentUsers" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+            <End Role="tblCandidateSubmissionAppointmentUserComments" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments" Association="Self.FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
+            <End Role="tblComments" EntitySet="tblComments" />
+            <End Role="tblCandidateSubmissionAppointmentUserComments" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" Association="Self.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
+            <End Role="tblCandidateSubmissionAppointmentUsers" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" Association="Self.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile">
+            <End Role="tblUserProfile" EntitySet="tblUserProfile" />
+            <End Role="tblCandidateSubmissionAppointmentUsers" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblCandidateStatus" Association="Self.FK_tblCandidateSubmissionComments_tblCandidateStatus">
+            <End Role="tblCandidateStatus" EntitySet="tblCandidateStatus" />
+            <End Role="tblCandidateSubmissionComments" EntitySet="tblCandidateSubmissionComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblCandidateSubmission" Association="Self.FK_tblCandidateSubmissionComments_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+            <End Role="tblCandidateSubmissionComments" EntitySet="tblCandidateSubmissionComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblComments" Association="Self.FK_tblCandidateSubmissionComments_tblComments">
+            <End Role="tblComments" EntitySet="tblComments" />
+            <End Role="tblCandidateSubmissionComments" EntitySet="tblCandidateSubmissionComments" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCommentUsers_tblComments" Association="Self.FK_tblCommentUsers_tblComments">
             <End Role="tblComments" EntitySet="tblComments" />
@@ -1526,6 +1977,10 @@
           <AssociationSet Name="FK_tblVacancyComments_tblVacancies" Association="Self.FK_tblVacancyComments_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
             <End Role="tblVacancyComments" EntitySet="tblVacancyComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblVacancyFiles_tblFiles" Association="Self.FK_tblVacancyFiles_tblFiles">
+            <End Role="tblFiles" EntitySet="tblFiles" />
+            <End Role="tblVacancyFiles" EntitySet="tblVacancyFiles" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVacancyFiles_tblVacancies" Association="Self.FK_tblVacancyFiles_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
@@ -1813,6 +2268,85 @@
             <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
             <End Role="tblFileType" EntitySet="tblFileTypes" />
           </AssociationSet>
+          <EntitySet Name="tblAppointmentStatus" EntityType="eVMSModel.tblAppointmentStatu" />
+          <EntitySet Name="tblAppointmentTypes" EntityType="eVMSModel.tblAppointmentType" />
+          <EntitySet Name="tblCandidateContacts" EntityType="eVMSModel.tblCandidateContact" />
+          <EntitySet Name="tblCandidateStatus" EntityType="eVMSModel.tblCandidateStatu" />
+          <EntitySet Name="tblCandidateSubmissions" EntityType="eVMSModel.tblCandidateSubmission" />
+          <EntitySet Name="tblCandidateSubmissionAppointments" EntityType="eVMSModel.tblCandidateSubmissionAppointment" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentSlots" EntityType="eVMSModel.tblCandidateSubmissionAppointmentSlot" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentUserComments" EntityType="eVMSModel.tblCandidateSubmissionAppointmentUserComment" />
+          <EntitySet Name="tblCandidateSubmissionAppointmentUsers" EntityType="eVMSModel.tblCandidateSubmissionAppointmentUser" />
+          <EntitySet Name="tblCandidateSubmissionComments" EntityType="eVMSModel.tblCandidateSubmissionComment" />
+          <EntitySet Name="tblContacts" EntityType="eVMSModel.tblContact" />
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus">
+            <End Role="tblAppointmentStatu" EntitySet="tblAppointmentStatus" />
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes">
+            <End Role="tblAppointmentType" EntitySet="tblAppointmentTypes" />
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateContacts_tblCandidates" Association="eVMSModel.FK_tblCandidateContacts_tblCandidates">
+            <End Role="tblCandidate" EntitySet="tblCandidates" />
+            <End Role="tblCandidateContact" EntitySet="tblCandidateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateContacts_tblContacts" Association="eVMSModel.FK_tblCandidateContacts_tblContacts">
+            <End Role="tblContact" EntitySet="tblContacts" />
+            <End Role="tblCandidateContact" EntitySet="tblCandidateContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblCandidates" Association="eVMSModel.FK_tblCandidateSubmission_tblCandidates">
+            <End Role="tblCandidate" EntitySet="tblCandidates" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblCandidateStatus" Association="eVMSModel.FK_tblCandidateSubmission_tblCandidateStatus">
+            <End Role="tblCandidateStatu" EntitySet="tblCandidateStatus" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblCandidateStatus" Association="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateStatus">
+            <End Role="tblCandidateStatu" EntitySet="tblCandidateStatus" />
+            <End Role="tblCandidateSubmissionComment" EntitySet="tblCandidateSubmissionComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmission_tblVacancies" Association="eVMSModel.FK_tblCandidateSubmission_tblVacancies">
+            <End Role="tblVacancy" EntitySet="tblVacancies" />
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblCandidateSubmission" Association="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+            <End Role="tblCandidateSubmissionComment" EntitySet="tblCandidateSubmissionComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" Association="eVMSModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+            <End Role="tblCandidateSubmissionAppointmentSlot" EntitySet="tblCandidateSubmissionAppointmentSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+            <End Role="tblCandidateSubmissionAppointmentUser" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
+            <End Role="tblCandidateSubmissionAppointmentUser" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+            <End Role="tblCandidateSubmissionAppointmentUserComment" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments" Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
+            <End Role="tblComment" EntitySet="tblComments" />
+            <End Role="tblCandidateSubmissionAppointmentUserComment" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile">
+            <End Role="tblUserProfile" EntitySet="tblUserProfiles" />
+            <End Role="tblCandidateSubmissionAppointmentUser" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionComments_tblComments" Association="eVMSModel.FK_tblCandidateSubmissionComments_tblComments">
+            <End Role="tblComment" EntitySet="tblComments" />
+            <End Role="tblCandidateSubmissionComment" EntitySet="tblCandidateSubmissionComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblVacancyFiles_tblFiles" Association="eVMSModel.FK_tblVacancyFiles_tblFiles">
+            <End Role="tblFile" EntitySet="tblFiles" />
+            <End Role="tblVacancyFile" EntitySet="tblVacancyFiles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1934,6 +2468,8 @@
           <NavigationProperty Name="tblCandidateFiles" Relationship="eVMSModel.FK_tblCandidateFiles_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateFile" />
           <NavigationProperty Name="tblCandidateIndustries" Relationship="eVMSModel.FK_tblCandidateIndustries_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateIndustry" />
           <NavigationProperty Name="tblCandidateSkills" Relationship="eVMSModel.FK_tblCandidateSkills_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateSkill" />
+          <NavigationProperty Name="tblCandidateContacts" Relationship="eVMSModel.FK_tblCandidateContacts_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateContact" />
+          <NavigationProperty Name="tblCandidateSubmissions" Relationship="eVMSModel.FK_tblCandidateSubmission_tblCandidates" FromRole="tblCandidate" ToRole="tblCandidateSubmission" />
         </EntityType>
         <EntityType Name="tblComment">
           <Key>
@@ -1950,6 +2486,8 @@
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCommentUsers" Relationship="eVMSModel.FK_tblCommentUsers_tblComments" FromRole="tblComment" ToRole="tblCommentUser" />
           <NavigationProperty Name="tblVacancyComments" Relationship="eVMSModel.FK_tblVacancyComments_tblComments" FromRole="tblComment" ToRole="tblVacancyComment" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUserComments" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" FromRole="tblComment" ToRole="tblCandidateSubmissionAppointmentUserComment" />
+          <NavigationProperty Name="tblCandidateSubmissionComments" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblComments" FromRole="tblComment" ToRole="tblCandidateSubmissionComment" />
         </EntityType>
         <EntityType Name="tblCommentUser">
           <Key>
@@ -2316,6 +2854,7 @@
           <NavigationProperty Name="tblMSPUsers" Relationship="eVMSModel.FK_tblMSPUsers_tblUserProfile" FromRole="tblUserProfile" ToRole="tblMSPUser" />
           <NavigationProperty Name="tblSupplierUsers" Relationship="eVMSModel.FK_tblSupplierUsers_tblUserProfile" FromRole="tblUserProfile" ToRole="tblSupplierUser" />
           <NavigationProperty Name="tblUserLocationBranches" Relationship="eVMSModel.FK_tblUserLocationBranches_tblUserProfile" FromRole="tblUserProfile" ToRole="tblUserLocationBranch" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUsers" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" FromRole="tblUserProfile" ToRole="tblCandidateSubmissionAppointmentUser" />
         </EntityType>
         <EntityType Name="tblVacancy">
           <Key>
@@ -2350,6 +2889,7 @@
           <NavigationProperty Name="tblVacancyFiles" Relationship="eVMSModel.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancy" ToRole="tblVacancyFile" />
           <NavigationProperty Name="tblVacancyLocations" Relationship="eVMSModel.FK_tblVacancyLocations_tblVacancies" FromRole="tblVacancy" ToRole="tblVacancyLocation" />
           <NavigationProperty Name="tblVacancySuppliers" Relationship="eVMSModel.FK_tblVacancySuppliers_tblVacancies" FromRole="tblVacancy" ToRole="tblVacancySupplier" />
+          <NavigationProperty Name="tblCandidateSubmissions" Relationship="eVMSModel.FK_tblCandidateSubmission_tblVacancies" FromRole="tblVacancy" ToRole="tblCandidateSubmission" />
         </EntityType>
         <EntityType Name="tblVacancieSkill">
           <Key>
@@ -2397,6 +2937,9 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblVacancy" Relationship="eVMSModel.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancyFile" ToRole="tblVacancy" />
+          <Property Name="FileID" Type="Int64" Nullable="false" />
+          <Property Name="FileVersionNumber" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblFile" Relationship="eVMSModel.FK_tblVacancyFiles_tblFiles" FromRole="tblVacancyFile" ToRole="tblFile" />
         </EntityType>
         <EntityType Name="tblVacancyLocation">
           <Key>
@@ -3055,6 +3598,8 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidateFiles" Relationship="eVMSModel.FK_tblCandidateFiles_tblFiles" FromRole="tblFile" ToRole="tblCandidateFile" />
+          <Property Name="FileVersionNumber" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblVacancyFiles" Relationship="eVMSModel.FK_tblVacancyFiles_tblFiles" FromRole="tblFile" ToRole="tblVacancyFile" />
         </EntityType>
         <EntityType Name="tblFileType">
           <Key>
@@ -3165,6 +3710,405 @@
             </Principal>
             <Dependent Role="tblFileType">
               <PropertyRef Name="MSPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAppointmentStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointments" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" FromRole="tblAppointmentStatu" ToRole="tblCandidateSubmissionAppointment" />
+        </EntityType>
+        <EntityType Name="tblAppointmentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointments" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" FromRole="tblAppointmentType" ToRole="tblCandidateSubmissionAppointment" />
+        </EntityType>
+        <EntityType Name="tblCandidateContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="ContactID" Type="Int64" Nullable="false" />
+          <Property Name="IsPrimary" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidate" Relationship="eVMSModel.FK_tblCandidateContacts_tblCandidates" FromRole="tblCandidateContact" ToRole="tblCandidate" />
+          <NavigationProperty Name="tblContact" Relationship="eVMSModel.FK_tblCandidateContacts_tblContacts" FromRole="tblCandidateContact" ToRole="tblContact" />
+        </EntityType>
+        <EntityType Name="tblCandidateStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissions" Relationship="eVMSModel.FK_tblCandidateSubmission_tblCandidateStatus" FromRole="tblCandidateStatu" ToRole="tblCandidateSubmission" />
+          <NavigationProperty Name="tblCandidateSubmissionComments" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateStatus" FromRole="tblCandidateStatu" ToRole="tblCandidateSubmissionComment" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VacancyID" Type="Int64" Nullable="false" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="StatusID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidate" Relationship="eVMSModel.FK_tblCandidateSubmission_tblCandidates" FromRole="tblCandidateSubmission" ToRole="tblCandidate" />
+          <NavigationProperty Name="tblCandidateStatu" Relationship="eVMSModel.FK_tblCandidateSubmission_tblCandidateStatus" FromRole="tblCandidateSubmission" ToRole="tblCandidateStatu" />
+          <NavigationProperty Name="tblVacancy" Relationship="eVMSModel.FK_tblCandidateSubmission_tblVacancies" FromRole="tblCandidateSubmission" ToRole="tblVacancy" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointments" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" FromRole="tblCandidateSubmission" ToRole="tblCandidateSubmissionAppointment" />
+          <NavigationProperty Name="tblCandidateSubmissionComments" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateSubmission" FromRole="tblCandidateSubmission" ToRole="tblCandidateSubmissionComment" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="AppintmentTypeID" Type="Int64" Nullable="false" />
+          <Property Name="CandidateSubmissionID" Type="Int64" Nullable="false" />
+          <Property Name="AppointmentStatusID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAppointmentStatu" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" FromRole="tblCandidateSubmissionAppointment" ToRole="tblAppointmentStatu" />
+          <NavigationProperty Name="tblAppointmentType" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" FromRole="tblCandidateSubmissionAppointment" ToRole="tblAppointmentType" />
+          <NavigationProperty Name="tblCandidateSubmission" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmission" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentSlots" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmissionAppointmentSlot" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUsers" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmissionAppointmentUser" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentSlot">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppintmentID" Type="Int64" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFinalised" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointment" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointmentSlot" ToRole="tblCandidateSubmissionAppointment" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentUserComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="CommentID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUser" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" FromRole="tblCandidateSubmissionAppointmentUserComment" ToRole="tblCandidateSubmissionAppointmentUser" />
+          <NavigationProperty Name="tblComment" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" FromRole="tblCandidateSubmissionAppointmentUserComment" ToRole="tblComment" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionAppointmentUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentID" Type="Int64" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointment" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblCandidateSubmissionAppointment" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUserComments" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblCandidateSubmissionAppointmentUserComment" />
+          <NavigationProperty Name="tblUserProfile" Relationship="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblUserProfile" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobSubmissionID" Type="Int64" Nullable="false" />
+          <Property Name="CommentID" Type="Int64" Nullable="false" />
+          <Property Name="JobSubmissionStatusID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateStatu" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateStatus" FromRole="tblCandidateSubmissionComment" ToRole="tblCandidateStatu" />
+          <NavigationProperty Name="tblCandidateSubmission" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateSubmission" FromRole="tblCandidateSubmissionComment" ToRole="tblCandidateSubmission" />
+          <NavigationProperty Name="tblComment" Relationship="eVMSModel.FK_tblCandidateSubmissionComments_tblComments" FromRole="tblCandidateSubmissionComment" ToRole="tblComment" />
+        </EntityType>
+        <EntityType Name="tblContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CountyID" Type="Int64" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateContacts" Relationship="eVMSModel.FK_tblCandidateContacts_tblContacts" FromRole="tblContact" ToRole="tblCandidateContact" />
+        </EntityType>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblAppointmentStatus">
+          <End Type="eVMSModel.tblAppointmentStatu" Role="tblAppointmentStatu" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointmentStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="AppointmentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblAppointmentTypes">
+          <End Type="eVMSModel.tblAppointmentType" Role="tblAppointmentType" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAppointmentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="AppintmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateContacts_tblCandidates">
+          <End Type="eVMSModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateContact" Role="tblCandidateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateContact">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateContacts_tblContacts">
+          <End Type="eVMSModel.tblContact" Role="tblContact" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateContact" Role="tblCandidateContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateContact">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblCandidates">
+          <End Type="eVMSModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblCandidateStatus">
+          <End Type="eVMSModel.tblCandidateStatu" Role="tblCandidateStatu" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblCandidateStatus">
+          <End Type="eVMSModel.tblCandidateStatu" Role="tblCandidateStatu" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionComment" Role="tblCandidateSubmissionComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComment">
+              <PropertyRef Name="JobSubmissionStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmission_tblVacancies">
+          <End Type="eVMSModel.tblVacancy" Role="tblVacancy" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVacancy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmission">
+              <PropertyRef Name="VacancyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointments_tblCandidateSubmission">
+          <End Type="eVMSModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="CandidateSubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblCandidateSubmission">
+          <End Type="eVMSModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionComment" Role="tblCandidateSubmissionComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComment">
+              <PropertyRef Name="JobSubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments">
+          <End Type="eVMSModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentSlot" Role="tblCandidateSubmissionAppointmentSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentSlot">
+              <PropertyRef Name="AppintmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
+          <End Type="eVMSModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentUser" Role="tblCandidateSubmissionAppointmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUser">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentUser" Role="tblCandidateSubmissionAppointmentUser" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentUserComment" Role="tblCandidateSubmissionAppointmentUserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointmentUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUserComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
+          <End Type="eVMSModel.tblComment" Role="tblComment" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentUserComment" Role="tblCandidateSubmissionAppointmentUserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUserComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile">
+          <End Type="eVMSModel.tblUserProfile" Role="tblUserProfile" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionAppointmentUser" Role="tblCandidateSubmissionAppointmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserProfile">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionComments_tblComments">
+          <End Type="eVMSModel.tblComment" Role="tblComment" Multiplicity="1" />
+          <End Type="eVMSModel.tblCandidateSubmissionComment" Role="tblCandidateSubmissionComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblComment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblVacancyFiles_tblFiles">
+          <End Type="eVMSModel.tblFile" Role="tblFile" Multiplicity="1" />
+          <End Type="eVMSModel.tblVacancyFile" Role="tblVacancyFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblVacancyFile">
+              <PropertyRef Name="FileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3679,6 +4623,8 @@
           <EntitySetMapping Name="tblVacancyFiles">
             <EntityTypeMapping TypeName="eVMSModel.tblVacancyFile">
               <MappingFragment StoreEntitySet="tblVacancyFiles">
+                <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
                 <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
                 <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
                 <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
@@ -3779,6 +4725,7 @@
           <EntitySetMapping Name="tblFiles">
             <EntityTypeMapping TypeName="eVMSModel.tblFile">
               <MappingFragment StoreEntitySet="tblFiles">
+                <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
                 <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
                 <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
                 <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
@@ -3802,6 +4749,186 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAppointmentStatus">
+            <EntityTypeMapping TypeName="eVMSModel.tblAppointmentStatu">
+              <MappingFragment StoreEntitySet="tblAppointmentStatus">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAppointmentTypes">
+            <EntityTypeMapping TypeName="eVMSModel.tblAppointmentType">
+              <MappingFragment StoreEntitySet="tblAppointmentTypes">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateContacts">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateContact">
+              <MappingFragment StoreEntitySet="tblCandidateContacts">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateStatus">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateStatu">
+              <MappingFragment StoreEntitySet="tblCandidateStatus">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissions">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmission">
+              <MappingFragment StoreEntitySet="tblCandidateSubmission">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionAppointments">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointment">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointments">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AppointmentStatusID" ColumnName="AppointmentStatusID" />
+                <ScalarProperty Name="CandidateSubmissionID" ColumnName="CandidateSubmissionID" />
+                <ScalarProperty Name="AppintmentTypeID" ColumnName="AppintmentTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionAppointmentSlots">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentSlot">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentSlots">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsFinalised" ColumnName="IsFinalised" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="AppintmentID" ColumnName="AppintmentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionAppointmentUserComments">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentUserComment">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentUserComments">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionAppointmentUsers">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentUser">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentUsers">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionComments">
+            <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionComment">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionComments">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="JobSubmissionStatusID" ColumnName="JobSubmissionStatusID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="JobSubmissionID" ColumnName="JobSubmissionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContacts">
+            <EntityTypeMapping TypeName="eVMSModel.tblContact">
+              <MappingFragment StoreEntitySet="tblContacts">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="CountyID" ColumnName="CountyID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

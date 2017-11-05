@@ -24,16 +24,14 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Get
 
-        public async Task<CountryCreateModel> GetCountry(CountryModel data)
+        public async Task<CountryCreateModel> GetCountry(long Id)
         {
             try
             {
-                CountryCreateModel model = null;
-                long Id = Convert.ToInt64(data.id);
-                tblCountry dataCountry = await Task.Run(() => ManageCountry.GetCountrys(Id));
-                model = dataCountry.ConvertToCountry();
+                
+                tblCountry dataCountry = await Task.Run(() => ManageCountry.GetCountry(Id));
+                return dataCountry.ConvertToCountry();
 
-                return model;
             }
             catch (Exception)
             {
@@ -41,16 +39,15 @@ namespace eMSP.Data.DataServices.Shared
             }
         }
 
-        public async Task<List<CountryCreateModel>> GetAllCountry(CountrySearchModel Model)
+        public async Task<List<CountryCreateModel>> GetAllCountries()
         {
             try
             {
-                List<CountryCreateModel> res = null;
+               
 
-                List<tblCountry> dataCountry = await Task.Run(() => ManageCountry.GetAllCountrys(Model));
-                res = dataCountry.Select(a => a.ConvertToCountry()).ToList();
+                List<tblCountry> dataCountry = await Task.Run(() => ManageCountry.GetAllCountries());
+                return dataCountry.Select(a => a.ConvertToCountry()).ToList();
 
-                return res;
             }
             catch (Exception)
             {
@@ -67,12 +64,10 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-                CountryCreateModel model = null;
 
                 tblCountry dataCountry = await Task.Run(() => ManageCountry.InsertCountry(data.ConvertTotblCountry()));
-                model = dataCountry.ConvertToCountry();
+                return dataCountry.ConvertToCountry();
 
-                return model;
             }
             catch (Exception)
             {
@@ -89,12 +84,10 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-                CountryCreateModel model = null;
 
                 tblCountry dataCountry = await Task.Run(() => ManageCountry.UpdateCountry(data.ConvertTotblCountry()));
-                model = dataCountry.ConvertToCountry();
+                return dataCountry.ConvertToCountry();
 
-                return model;
             }
             catch (Exception)
             {
@@ -106,11 +99,10 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Delete
 
-        public async Task DeleteCountry(CountryModel data)
+        public async Task DeleteCountry(long Id)
         {
             try
             {
-                long Id = Convert.ToInt64(data.id);
                 await Task.Run(() => ManageCountry.DeleteCountry(Id));
 
             }
@@ -124,26 +116,26 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Dispose
 
-        protected virtual void Dispose(bool dispose)
-        {
-            if (!IsDisposed)
-            {
-                this.Dispose();
-            }
+        //protected virtual void Dispose(bool dispose)
+        //{
+        //    if (!IsDisposed)
+        //    {
+        //        this.Dispose();
+        //    }
 
-            IsDisposed = true;
-        }
+        //    IsDisposed = true;
+        //}
 
-        ~CountryManager()
-        {
-            Dispose(false);
-        }
+        //~CountryManager()
+        //{
+        //    Dispose(false);
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
         #endregion
     }
 }

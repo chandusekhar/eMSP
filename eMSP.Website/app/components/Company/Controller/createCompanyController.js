@@ -29,7 +29,7 @@ function createCompanyController($scope,$state, localStorageService, configJSON,
   
     $scope.submit = function (form) {
         if (form.$valid) {
-
+            
             if ($scope.formAction == "Update") {
                 var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.UPDATEURL, $scope.dataJSON);
                 res.then(function (data) {

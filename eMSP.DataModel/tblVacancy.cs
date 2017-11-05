@@ -22,6 +22,7 @@ namespace eMSP.DataModel
             this.tblVacancyFiles = new HashSet<tblVacancyFile>();
             this.tblVacancyLocations = new HashSet<tblVacancyLocation>();
             this.tblVacancySuppliers = new HashSet<tblVacancySupplier>();
+            this.tblCandidateSubmissions = new HashSet<tblCandidateSubmission>();
         }
     
         public long ID { get; set; }
@@ -59,5 +60,7 @@ namespace eMSP.DataModel
         public virtual ICollection<tblVacancyLocation> tblVacancyLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancySupplier> tblVacancySuppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmission> tblCandidateSubmissions { get; set; }
     }
 }

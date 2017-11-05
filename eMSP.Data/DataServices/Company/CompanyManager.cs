@@ -196,10 +196,14 @@ namespace eMSP.Data.DataServices.Company
         {
             if (!IsDisposed)
             {
-                this.Dispose();
+                if (dispose)
+                {
+                    this.Dispose();
+                }
+                IsDisposed = true;
             }
 
-            IsDisposed = true;
+           
         }
 
         ~CompanyManager()

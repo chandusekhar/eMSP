@@ -100,6 +100,34 @@
         <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblCandidates" />
         <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills" />
         <AssociationConnector Association="eVMSModel.FK_tblFileTypes_tblMSPDetails" />
+        <EntityTypeShape EntityType="eVMSModel.tblAppointmentStatu" Width="1.5" PointX="18.75" PointY="9.25" />
+        <EntityTypeShape EntityType="eVMSModel.tblAppointmentType" Width="1.5" PointX="18.75" PointY="4.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateContact" Width="1.5" PointX="10" PointY="4.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateStatu" Width="1.5" PointX="16.5" PointY="12" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmission" Width="1.5" PointX="18.75" PointY="13.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmissionAppointment" Width="1.5" PointX="21" PointY="13.375" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmissionAppointmentSlot" Width="1.5" PointX="23.25" PointY="17.875" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmissionAppointmentUserComment" Width="1.5" PointX="25.5" PointY="25.25" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmissionAppointmentUser" Width="1.5" PointX="23.25" PointY="10.625" />
+        <EntityTypeShape EntityType="eVMSModel.tblCandidateSubmissionComment" Width="1.5" PointX="21" PointY="26.5" />
+        <EntityTypeShape EntityType="eVMSModel.tblContact" Width="1.5" PointX="7.75" PointY="47.375" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateContacts_tblCandidates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateContacts_tblContacts" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmission_tblCandidates" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmission_tblCandidateStatus" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateStatus" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmission_tblVacancies" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionComments_tblCandidateSubmission" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" />
+        <AssociationConnector Association="eVMSModel.FK_tblCandidateSubmissionComments_tblComments" />
+        <AssociationConnector Association="eVMSModel.FK_tblVacancyFiles_tblFiles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

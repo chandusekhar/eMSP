@@ -8,11 +8,11 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.dataJSON.companyType = $scope.configJSON.companyType;
     $scope.IsMSP = false;
     if ($scope.configJSON.companyType === "MSP") {
-        debugger;
+        //debugger;
         $scope.dataJSON.companyName = "";
         $scope.dataJSON.id = 0;
         $scope.IsMSP = true;
-        debugger;
+       // debugger;
         var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
         apires.then(function (data) {
             $scope.res = data;

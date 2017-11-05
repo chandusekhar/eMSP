@@ -20,7 +20,7 @@ namespace eMSP.Data.Extensions
                 Code = data.stateCode,
                 Name = data.stateName,
                 IsActive=data.isActive,
-                IsDeleted=data.isDeleted,
+                IsDeleted= data.isDeleted ?? false,
                 CreatedUserID = "",
                 UpdatedUserID = "",
                 CreatedTimestamp = DateTime.Now,

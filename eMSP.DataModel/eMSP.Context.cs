@@ -65,5 +65,16 @@ namespace eMSP.DataModel
         public virtual DbSet<tblCandidateSkill> tblCandidateSkills { get; set; }
         public virtual DbSet<tblFile> tblFiles { get; set; }
         public virtual DbSet<tblFileType> tblFileTypes { get; set; }
+        public virtual DbSet<tblAppointmentStatu> tblAppointmentStatus { get; set; }
+        public virtual DbSet<tblAppointmentType> tblAppointmentTypes { get; set; }
+        public virtual DbSet<tblCandidateContact> tblCandidateContacts { get; set; }
+        public virtual DbSet<tblCandidateStatu> tblCandidateStatus { get; set; }
+        public virtual DbSet<tblCandidateSubmission> tblCandidateSubmissions { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointment> tblCandidateSubmissionAppointments { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentSlot> tblCandidateSubmissionAppointmentSlots { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentUserComment> tblCandidateSubmissionAppointmentUserComments { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
+        public virtual DbSet<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
+        public virtual DbSet<tblContact> tblContacts { get; set; }
     }
 }

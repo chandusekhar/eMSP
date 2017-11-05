@@ -118,6 +118,14 @@
     <Content Include="app\components\Company\service\companyService.js" />
     <Content Include="app\components\Company\View\ManageMSPLocation.html" />
     <Content Include="app\components\Company\View\ManageMSPBranch.html" />
+    <Content Include="app\components\country-state\view\manageState.html" />
+    <Content Include="app\components\industry\controller\industrySkillsController.js" />
+    <Content Include="app\components\industry\service\industrySkillsService.js" />
+    <Content Include="app\components\industry\view\manageIndustry.html" />
+    <Content Include="app\components\country-state\controller\countryStateController.js" />
+    <Content Include="app\components\country-state\service\countryStateService.js" />
+    <Content Include="app\components\country-state\view\manageCountry.html" />
+    <Content Include="app\components\industry\view\manageSkill.html" />
     <Content Include="app\components\location-branch\controller\branch.js" />
     <Content Include="app\components\location-branch\controller\location.js" />
     <Content Include="app\components\location-branch\service\location-branch-service.js" />
@@ -2507,6 +2515,8 @@
     <Content Include="app\components\Company\Config\SearchSuppliers.json" />
     <Content Include="app\components\Company\Config\ManageBranch.json" />
     <Content Include="app\components\Company\Config\ManageLocation.json" />
+    <Content Include="app\components\country-state\config\ManageCountryState.json" />
+    <Content Include="app\components\industry\config\ManageIndustrySkills.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

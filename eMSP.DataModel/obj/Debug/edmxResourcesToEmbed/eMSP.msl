@@ -1,0 +1,820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eVMSModelStoreContainer" CdmEntityContainer="eMSPEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="eVMSModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoleGroupRoles">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetRoleGroupRole">
+        <MappingFragment StoreEntitySet="AspNetRoleGroupRoles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleGroupId" ColumnName="RoleGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoleGroups">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetRoleGroup">
+        <MappingFragment StoreEntitySet="AspNetRoleGroups">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="eVMSModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBranches">
+      <EntityTypeMapping TypeName="eVMSModel.tblBranch">
+        <MappingFragment StoreEntitySet="tblBranches">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StreetLine2" ColumnName="StreetLine2" />
+          <ScalarProperty Name="StreetLine1" ColumnName="StreetLine1" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidates">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidate">
+        <MappingFragment StoreEntitySet="tblCandidates">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UniqueSocialID" ColumnName="UniqueSocialID" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblComments">
+      <EntityTypeMapping TypeName="eVMSModel.tblComment">
+        <MappingFragment StoreEntitySet="tblComments">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ShowToAll" ColumnName="ShowToAll" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCommentUsers">
+      <EntityTypeMapping TypeName="eVMSModel.tblCommentUser">
+        <MappingFragment StoreEntitySet="tblCommentUsers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReadBy" ColumnName="ReadBy" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCountries">
+      <EntityTypeMapping TypeName="eVMSModel.tblCountry">
+        <MappingFragment StoreEntitySet="tblCountries">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCountryStates">
+      <EntityTypeMapping TypeName="eVMSModel.tblCountryState">
+        <MappingFragment StoreEntitySet="tblCountryStates">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomerLocationBranches">
+      <EntityTypeMapping TypeName="eVMSModel.tblCustomerLocationBranch">
+        <MappingFragment StoreEntitySet="tblCustomerLocationBranches">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomers">
+      <EntityTypeMapping TypeName="eVMSModel.tblCustomer">
+        <MappingFragment StoreEntitySet="tblCustomers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomerUsers">
+      <EntityTypeMapping TypeName="eVMSModel.tblCustomerUser">
+        <MappingFragment StoreEntitySet="tblCustomerUsers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblIndustries">
+      <EntityTypeMapping TypeName="eVMSModel.tblIndustry">
+        <MappingFragment StoreEntitySet="tblIndustries">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblIndustrySkills">
+      <EntityTypeMapping TypeName="eVMSModel.tblIndustrySkill">
+        <MappingFragment StoreEntitySet="tblIndustrySkills">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLocations">
+      <EntityTypeMapping TypeName="eVMSModel.tblLocation">
+        <MappingFragment StoreEntitySet="tblLocations">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StreetLine2" ColumnName="StreetLine2" />
+          <ScalarProperty Name="StreetLine1" ColumnName="StreetLine1" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMSPCustomers">
+      <EntityTypeMapping TypeName="eVMSModel.tblMSPCustomer">
+        <MappingFragment StoreEntitySet="tblMSPCustomers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMSPDetails">
+      <EntityTypeMapping TypeName="eVMSModel.tblMSPDetail">
+        <MappingFragment StoreEntitySet="tblMSPDetails">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMSPLocationBranches">
+      <EntityTypeMapping TypeName="eVMSModel.tblMSPLocationBranch">
+        <MappingFragment StoreEntitySet="tblMSPLocationBranches">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMSPUsers">
+      <EntityTypeMapping TypeName="eVMSModel.tblMSPUser">
+        <MappingFragment StoreEntitySet="tblMSPUsers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMSPVacancieTypes">
+      <EntityTypeMapping TypeName="eVMSModel.tblMSPVacancieType">
+        <MappingFragment StoreEntitySet="tblMSPVacancieTypes">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSuppliers">
+      <EntityTypeMapping TypeName="eVMSModel.tblSupplier">
+        <MappingFragment StoreEntitySet="tblSupplier">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupplierLocationBranches">
+      <EntityTypeMapping TypeName="eVMSModel.tblSupplierLocationBranch">
+        <MappingFragment StoreEntitySet="tblSupplierLocationBranches">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupplierUsers">
+      <EntityTypeMapping TypeName="eVMSModel.tblSupplierUser">
+        <MappingFragment StoreEntitySet="tblSupplierUsers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserLocationBranches">
+      <EntityTypeMapping TypeName="eVMSModel.tblUserLocationBranch">
+        <MappingFragment StoreEntitySet="tblUserLocationBranches">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserProfiles">
+      <EntityTypeMapping TypeName="eVMSModel.tblUserProfile">
+        <MappingFragment StoreEntitySet="tblUserProfile">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="TimezoneID" ColumnName="TimezoneID" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="RoleGroupId" ColumnName="RoleGroupId" />
+          <ScalarProperty Name="UserProfilePhotoPath" ColumnName="UserProfilePhotoPath" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancies">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancy">
+        <MappingFragment StoreEntitySet="tblVacancies">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PayRateMarkUp" ColumnName="PayRateMarkUp" />
+          <ScalarProperty Name="TargetPayRate" ColumnName="TargetPayRate" />
+          <ScalarProperty Name="MaxPayRate" ColumnName="MaxPayRate" />
+          <ScalarProperty Name="MinPayRate" ColumnName="MinPayRate" />
+          <ScalarProperty Name="ShowCustomerDetailsToSupplier" ColumnName="ShowCustomerDetailsToSupplier" />
+          <ScalarProperty Name="YearOfExperience" ColumnName="YearOfExperience" />
+          <ScalarProperty Name="VacancyDescription" ColumnName="VacancyDescription" />
+          <ScalarProperty Name="PositionTitle" ColumnName="PositionTitle" />
+          <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+          <ScalarProperty Name="HiringManager" ColumnName="HiringManager" />
+          <ScalarProperty Name="SubmissionDueDate" ColumnName="SubmissionDueDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="VacancyType" ColumnName="VacancyType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancieSkills">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancieSkill">
+        <MappingFragment StoreEntitySet="tblVacancieSkills">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancyComments">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancyComment">
+        <MappingFragment StoreEntitySet="tblVacancyComments">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancyFiles">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancyFile">
+        <MappingFragment StoreEntitySet="tblVacancyFiles">
+          <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancyLocations">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancyLocation">
+        <MappingFragment StoreEntitySet="tblVacancyLocations">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVacancySuppliers">
+      <EntityTypeMapping TypeName="eVMSModel.tblVacancySupplier">
+        <MappingFragment StoreEntitySet="tblVacancySuppliers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsReleased" ColumnName="IsReleased" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="eVMSModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="tblCandidateFiles">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateFile">
+        <MappingFragment StoreEntitySet="tblCandidateFiles">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FileTypeID" ColumnName="FileTypeID" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateIndustries">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateIndustry">
+        <MappingFragment StoreEntitySet="tblCandidateIndustries">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSkills">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSkill">
+        <MappingFragment StoreEntitySet="tblCandidateSkills">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SkillsID" ColumnName="SkillsID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFiles">
+      <EntityTypeMapping TypeName="eVMSModel.tblFile">
+        <MappingFragment StoreEntitySet="tblFiles">
+          <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFileTypes">
+      <EntityTypeMapping TypeName="eVMSModel.tblFileType">
+        <MappingFragment StoreEntitySet="tblFileTypes">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAppointmentStatus">
+      <EntityTypeMapping TypeName="eVMSModel.tblAppointmentStatu">
+        <MappingFragment StoreEntitySet="tblAppointmentStatus">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAppointmentTypes">
+      <EntityTypeMapping TypeName="eVMSModel.tblAppointmentType">
+        <MappingFragment StoreEntitySet="tblAppointmentTypes">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateContacts">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateContact">
+        <MappingFragment StoreEntitySet="tblCandidateContacts">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateStatus">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateStatu">
+        <MappingFragment StoreEntitySet="tblCandidateStatus">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissions">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmission">
+        <MappingFragment StoreEntitySet="tblCandidateSubmission">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissionAppointments">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointment">
+        <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointments">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AppointmentStatusID" ColumnName="AppointmentStatusID" />
+          <ScalarProperty Name="CandidateSubmissionID" ColumnName="CandidateSubmissionID" />
+          <ScalarProperty Name="AppintmentTypeID" ColumnName="AppintmentTypeID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissionAppointmentSlots">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentSlot">
+        <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentSlots">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsFinalised" ColumnName="IsFinalised" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="AppintmentID" ColumnName="AppintmentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissionAppointmentUserComments">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentUserComment">
+        <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentUserComments">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissionAppointmentUsers">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionAppointmentUser">
+        <MappingFragment StoreEntitySet="tblCandidateSubmissionAppointmentUsers">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCandidateSubmissionComments">
+      <EntityTypeMapping TypeName="eVMSModel.tblCandidateSubmissionComment">
+        <MappingFragment StoreEntitySet="tblCandidateSubmissionComments">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="JobSubmissionStatusID" ColumnName="JobSubmissionStatusID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="JobSubmissionID" ColumnName="JobSubmissionID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContacts">
+      <EntityTypeMapping TypeName="eVMSModel.tblContact">
+        <MappingFragment StoreEntitySet="tblContacts">
+          <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+          <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="CountyID" ColumnName="CountyID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,10 @@
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\eMSP.ViewModel.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\eMSP.ViewModel.pdb
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\eMSP.DataModel.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\EntityFramework.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\eMSP.DataModel.pdb
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\eMSP.DataModel.dll.config
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\bin\Debug\EntityFramework.xml
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\obj\Debug\eMSP.ViewModel.csprojResolveAssemblyReference.cache
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\obj\Debug\eMSP.ViewModel.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.ViewModel\obj\Debug\eMSP.ViewModel.pdb

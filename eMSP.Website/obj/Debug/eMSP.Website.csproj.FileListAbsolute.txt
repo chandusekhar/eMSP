@@ -1,0 +1,11 @@
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\ApplicationInsights.config
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\eMSP.Website.dll.config
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\eMSP.Website.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\eMSP.Website.pdb
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\System.Diagnostics.DiagnosticSource.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\bin\System.Diagnostics.DiagnosticSource.xml
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\obj\Debug\eMSP.Website.csprojResolveAssemblyReference.cache
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\obj\Debug\eMSP.Website.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Website\obj\Debug\eMSP.Website.pdb

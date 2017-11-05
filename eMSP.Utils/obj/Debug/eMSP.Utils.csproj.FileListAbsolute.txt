@@ -1,0 +1,5 @@
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Utils\bin\Debug\eMSP.Utils.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Utils\bin\Debug\eMSP.Utils.pdb
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Utils\obj\Debug\eMSP.Utils.csprojResolveAssemblyReference.cache
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Utils\obj\Debug\eMSP.Utils.dll
+D:\Workshop\GitHub\CodeRev\Emsp\UI\eMSP.Utils\obj\Debug\eMSP.Utils.pdb

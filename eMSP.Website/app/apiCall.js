@@ -5,16 +5,16 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
 
     }
     var apicall = function (type, url, param) {
-        var apiUrl = apiBaseURL + url;
+        var apiUrl = ngAuthSettings.apiServiceBaseUri + url;
 
        return $http({            
             url: apiUrl,
             method: type,
             data: param            
-        }).success(function (result) {        
+       }).success(function (result) {
             return result;
         })
-        .error(function (error, status) {            
+        .error(function (error, status, x, y, z) {
             console.log('errror status: ', status);
             console.log('error object: ', error);
         });

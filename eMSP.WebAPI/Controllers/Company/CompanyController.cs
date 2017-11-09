@@ -32,11 +32,13 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("getCompany")]
         [HttpPost]
+        [Authorize]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> GetCompany(CompanyModel data)
         {
             try
             {
+                
                 return Ok(await CompanyService.GetCompany(data));
             }
             catch (Exception)
@@ -49,6 +51,7 @@ namespace eMSP.WebAPI.Controllers.Company
         
         [Route("getAllCompanies")]
         [HttpPost]
+        [Authorize]
         [ResponseType(typeof(List<CompanyCreateModel>))]
         public async Task<IHttpActionResult> GetCompanies(CompanySearchModel data)
         {
@@ -70,6 +73,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("creatCompany")]
         [HttpPost]
+        [Authorize]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> CreateCompany(CompanyCreateModel data)
         {
@@ -90,6 +94,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("updateCompany")]
         [HttpPost]
+        [Authorize]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> UpdateCompany(CompanyCreateModel data)
         {
@@ -110,6 +115,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("deleteCompany")]
         [HttpPost]
+        [Authorize]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> DeleteCompany(CompanyModel data)
         {

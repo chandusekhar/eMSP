@@ -10,16 +10,11 @@ namespace eMSP.ViewModel.Shared
     {
         public CountryModel() { }
         public string countryName { get; set; }
+        public string countryCode { get; set; }
         public long id { get; set; }
     }
-    public class CountrySearchModel : CountryModel
-    {
-        public CountrySearchModel() { }
-
-        public string countryCode { get; set; }
-
-    }
-    public class CountryCreateModel : CountrySearchModel
+   
+    public class CountryCreateModel : CountryModel
     {
         public CountryCreateModel() { }
         public bool? isActive { get; set; }

@@ -1,0 +1,22 @@
+{
+  "title": "Manage Country",
+  "titleFormCreate": "Add a Country",
+  "titleFormEdit": "Edit Country",
+  "urlCreate": "/api/locationdetails/create",
+  "urlUpdate": "/api/locationdetails/update",
+  "gridElements": [
+    {
+      "lable": "ID",
+      "id": "id"
+    },
+    {
+      "lable": "First Name",
+      "id": "firstName"
+    },
+    {
+      "lable": "Last Name",
+      "id": "lastName"
+    }
+  ]
+
+}

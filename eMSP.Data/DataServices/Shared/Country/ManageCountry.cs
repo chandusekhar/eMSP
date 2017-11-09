@@ -1,12 +1,9 @@
-﻿using eMSP.ViewModel.Shared;
-using eMSP.Data.Extensions;
-using eMSP.DataModel;
+﻿using eMSP.DataModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace eMSP.Data.DataServices.Shared
 {
@@ -14,21 +11,21 @@ namespace eMSP.Data.DataServices.Shared
     {
         #region Initialization
 
-        internal static eMSPEntities mContext;
+        internal static eMSPEntities db;
 
         static ManageCountry()
         {
-            mContext = new eMSPEntities();
+             
         }
 
         #endregion
 
         #region Get
-        internal static async Task<tblCountry> GetCountrys(long Id)
+        internal static async Task<tblCountry> GetCountry(long Id)
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCountries.Where(x => x.ID == Id).SingleOrDefault());
                 }
@@ -40,13 +37,13 @@ namespace eMSP.Data.DataServices.Shared
             }
         }
 
-        internal static async Task<List<tblCountry>> GetAllCountrys(CountrySearchModel model)
+        internal static async Task<List<tblCountry>> GetAllCountries()
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCountries.Where(x => x.IsActive == true && x.IsDeleted == false).ToList());
+                    return await Task.Run(() => db.tblCountries.Where(x => x.IsDeleted == false).ToList());
                 }
             }
             catch (Exception)
@@ -64,7 +61,7 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     model = db.tblCountries.Add(model);
 
@@ -89,7 +86,7 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     db.Entry(model).State = EntityState.Modified;
 
@@ -114,7 +111,7 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-                using (var db = mContext)
+                using ( db = new eMSPEntities())
                 {
                     tblCountry obj = await db.tblCountries.FindAsync(Id);
                     db.tblCountries.Remove(obj);

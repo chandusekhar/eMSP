@@ -24,16 +24,14 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Get
 
-        public async Task<StateCreateModel> GetCompany(StateModel data)
+        public async Task<StateCreateModel> GetState(long Id)
         {
             try
             {
-                StateCreateModel model = null;
-                long Id = Convert.ToInt64(data.id);
-                tblCountryState dataState = await Task.Run(() => ManageState.GetStates(Id));
-                model = dataState.ConvertToCountryState();
+                
+                tblCountryState dataState = await Task.Run(() => ManageState.GetState(Id));
+                return dataState.ConvertToCountryState();
 
-                return model;
             }
             catch (Exception)
             {
@@ -41,16 +39,14 @@ namespace eMSP.Data.DataServices.Shared
             }
         }
 
-        public async Task<List<StateCreateModel>> GetAllCompanies(StateSearchModel Model)
+        public async Task<List<StateCreateModel>> GetAllStates(long countryId)
         {
             try
             {
-                List<StateCreateModel> res = null;
 
-                List<tblCountryState> dataState = await Task.Run(() => ManageState.GetAllStates(Model));
-                res = dataState.Select(a => a.ConvertToCountryState()).ToList();
+                List<tblCountryState> dataState = await Task.Run(() => ManageState.GetAllStates(countryId));
+                return dataState.Select(a => a.ConvertToCountryState()).ToList();
 
-                return res;
             }
             catch (Exception)
             {
@@ -63,7 +59,7 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Insert
 
-        public async Task<StateCreateModel> CreateCompany(StateCreateModel data)
+        public async Task<StateCreateModel> CreateState(StateCreateModel data)
         {
             try
             {
@@ -85,7 +81,7 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Update
 
-        public async Task<StateCreateModel> UpdateCompany(StateCreateModel data)
+        public async Task<StateCreateModel> UpdateState(StateCreateModel data)
         {
             try
             {
@@ -106,7 +102,7 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Delete
 
-        public async Task DeleteCompany(CountryModel data)
+        public async Task DeleteState(CountryModel data)
         {
             try
             {
@@ -124,26 +120,26 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Dispose
 
-        protected virtual void Dispose(bool dispose)
-        {
-            if (!IsDisposed)
-            {
-                this.Dispose();
-            }
+        //protected virtual void Dispose(bool dispose)
+        //{
+        //    if (!IsDisposed)
+        //    {
+        //        this.Dispose();
+        //    }
 
-            IsDisposed = true;
-        }
+        //    IsDisposed = true;
+        //}
 
-        ~StateManager()
-        {
-            Dispose(false);
-        }
+        //~StateManager()
+        //{
+        //    Dispose(false);
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
         #endregion
     }
 }

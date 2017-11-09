@@ -10,20 +10,12 @@ namespace eMSP.ViewModel.Shared
     {
         public StateModel() { }
         public string stateName { get; set; }
-        public long id { get; set; }
-    }
-
-    public class StateSearchModel : StateModel
-    {
-        public StateSearchModel()
-        {
-
-        }
-        public long countryId { get; set; }
         public string stateCode { get; set; }
+        public long id { get; set; }
+        public long countryId { get; set; }
     }
 
-    public class StateCreateModel : StateSearchModel
+    public class StateCreateModel : StateModel
     {
         public StateCreateModel()
         {

@@ -54,6 +54,7 @@ namespace eMSP.Data.DataServices.Common
         #endregion
 
         #region Insert
+
         #endregion
 
         #region Update              
@@ -66,12 +67,15 @@ namespace eMSP.Data.DataServices.Common
 
         protected virtual void Dispose(bool dispose)
         {
-            if (!IsDisposed)
-            {
-                this.Dispose();
+             if (dispose)
+                {
+                if (dispose)
+                {
+                    this.Dispose();
+                }
+                IsDisposed = true;
             }
-
-            IsDisposed = true;
+                
         }
 
         ~AppManager()

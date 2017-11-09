@@ -75,7 +75,7 @@
                                            name="country" placeholder="Country" required="">-->
                                     <select ng-model="dataJSON.CountryID" class="form-control" ng-change="getStateList()">
                                         <option value="">Country</option>
-                                        <option ng-repeat=" res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
+                                        <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
                                     </select>
                                     <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
                                         country is required

@@ -1,0 +1,7 @@
+{
+  "title": "Manage Location",
+  "titleFormCreate": "Add a Location",
+  "titleFormEdit": "Edit Location",
+  "urlCreate": "/api/location/create",
+  "urlUpdate": "/api/location/update"
+}

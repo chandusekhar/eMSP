@@ -10,15 +10,10 @@ angular.module('eMSPApp').controller("loginController", ['$scope', '$location', 
     $scope.message = "";
 
     $scope.login = function () {
-        console.log($scope.loginData);
-
         authService.login($scope.loginData).then(function (response) {
-            debugger;
-            console.log(response);
             $location.path('/dashboard');
         },
          function (err) {
-             debugger;
              $scope.message = err.error_description;
          });
     };

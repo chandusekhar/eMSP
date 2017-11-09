@@ -36,7 +36,8 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
-    $scope.loadAllBranches = function (compId) {        
+    $scope.loadAllBranches = function (compId) {
+        debugger;
         var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHESURL, { companyType: $scope.dataJSON.companyType, companyId: compId });
         apires.then(function (data) {
             console.log(data);
@@ -67,6 +68,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
             $scope.loadLocations($scope.res.id);
+            $scope.loadAllBranches($scope.res.id);
         }
 
     }

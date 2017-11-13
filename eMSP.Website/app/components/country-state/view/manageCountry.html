@@ -27,28 +27,30 @@
                     <div class="ibox-content">
                         <div class="row">
 
+
                             <div ng-repeat="con in countryList">
                                 <div class="col-lg-3">
-                                    <div class="panel panel-primary">
+                                    <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <a class="text-white" ng-show="!test" ng-click="loadStates(con,test)"> <i class="fa fa-plus-square"></i></a> <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
-                                            {{con.countryCode}} - <span class="small">{{con.countryName}}</span>
-                                            <div class="btn-group-xs pull-right">
-                                                <a ng-click="update(con)" class="text-white">
-                                                    <span class="fa fa-pencil"></span>
-                                                </a>
-                                                <a class="btn btn-danger">
-                                                    <span class="fa fa-trash"></span>
-                                                </a>
-                                            </div>
-                                        </div>
+                                                {{con.countryCode}} - <span class="small">{{con.countryName}}</span>
+                                                <div class="btn-group-xs pull-right">
+                                                    <a ng-click="update(con)" class="text-white">
+                                                        <span class="fa fa-pencil"></span>
+                                                    </a>
+                                                    <a class="btn btn-danger">
+                                                        <span class="fa fa-trash"></span>
+                                                    </a>
+                                                </div>
+
+</div>
                                         <div class="panel-body" ng-show="test">
                                             <div class="ibox-heading white-bg">
                                                 <b>States:</b><a class="text-navy" ng-click="modal(con)"> <i class="fa fa-plus-circle"></i></a>
                                             </div>
-
-                                            <div ng-repeat="state in con.stateList">
-
+                                          
+                                            <div  ng-repeat="state in con.stateList">
+                                                
                                                 <div class="ibox-tools pull-left small">
                                                     <i class="fa fa fa-dot-circle-o"></i> {{state.stateCode}} - {{state.stateName}}<a ng-click="modal(state)"> <i class="fa fa-pencil"></i></a> <a ng-click=""> <i class="fa fa-trash"></i></a>
                                                     <span class="small" ng-if="state.isActive">Active</span>
@@ -57,20 +59,23 @@
                                                 </div>
                                                 <br />
                                             </div>
-
-
+                                           
+                                           
                                         </div>
                                         <div align="center" class="form-control inline">
                                             <p class="small inline" ng-if="con.isActive">Active</p><p class="small inline" ng-if="!con.isActive">Deactive</p> <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)" ng-model="con.isActive" />
                                         </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <button type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-12" ng-hide="search">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -80,6 +85,8 @@
                     </div>
                     <div class="ibox-content">
                         <form class="m-t" name="form" novalidate>
+
+
 
                             <div class="form-group" ng-class="{ 'has-error': form.countryName.$dirty && form.countryName.$error.required }">
                                 <input type="text" class="form-control" name="countryName"
@@ -104,16 +111,21 @@
                                         <i></i> Is Active
                                     </label>
                                 </div>
+
                             </div>
+
                             <h5>
                                 <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>
                                 <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
+
                             </h5>
+
 
                         </form>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

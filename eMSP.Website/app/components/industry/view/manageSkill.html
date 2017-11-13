@@ -1,0 +1,52 @@
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+   
+    <div class="wrapper wrapper-content animated fadeInRight" >
+        <div class="row">
+            
+
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ng-if="editform">Edit Skill</h5>
+                        <h5 ng-if="!editform">Create Skill</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="m-t" name="form" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error': form.skillName.$dirty && form.skillName.$error.required }">
+                                <input type="text" class="form-control" name="skillName"
+                                       ng-model="sdataJSON.skillName"
+                                       placeholder="Skill Name" required="">
+                                <span ng-show="form.skillName.$dirty && form.skillName.$error.required" class="help-block">
+                                    Skill Name is required
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input type="checkbox" name="IsActive" ng-model="sdataJSON.isActive">
+                                        <i></i> Is Active
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <h5>
+                                <button type="submit" ng-if="!editform" ng-click="submit(form)" class="btn btn-primary m-b">Create</button>
+                                <button type="submit" ng-if="editform" ng-click="submit(form)" class="btn btn-primary m-b">Update</button>
+                                <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
+
+                            </h5>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

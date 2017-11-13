@@ -1,0 +1,7 @@
+{
+  "title": "Manage Branch",
+  "titleFormCreate": "Add a Branch",
+  "titleFormEdit": "Edit Branch",
+  "urlCreate": "/api/branch/create",
+  "urlUpdate": "/api/branch/update"
+}

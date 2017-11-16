@@ -68,11 +68,14 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPLocationBranches                    
-                                                  .Include(a => a.tblLocation)                                                  
+                    return await Task.Run(() => db.tblMSPLocationBranches
+                                                  .Include(a => a.tblLocation)
                                                   .Where(x => x.MSPID == mspId && x.BranchID == null)
-                                                  .Select(x => x.tblLocation)                                                  
-                                                  .ToList());
+                                                  .Select(x => x.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
+                                                  .ToList());                    
+
                 }
             }
             catch (Exception ex)
@@ -88,12 +91,14 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPLocationBranches
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblMSPLocationBranches                                                  
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.MSPID == mspId)
                                                   .Where(x => x.LocationID == locationId)
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
                                                   .ToList());
 
 
@@ -112,11 +117,13 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPLocationBranches
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblMSPLocationBranches                                                  
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.MSPID == mspId && x.BranchID != null)
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
                                                   .ToList());
 
 

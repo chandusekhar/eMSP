@@ -105,12 +105,12 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblSupplierLocationBranches
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblSupplierLocationBranches                                                  
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.SupplierID == supplierId)
                                                   .Where(x => x.LocationID == locationId)
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
                                                   .ToList());
@@ -131,11 +131,11 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblSupplierLocationBranches
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblSupplierLocationBranches                                                  
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.SupplierID == supplierId && x.BranchID != null)                                                  
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
                                                   .ToList());
@@ -143,7 +143,7 @@ namespace eMSP.Data.DataServices.Company
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
 

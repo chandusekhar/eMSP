@@ -49,6 +49,14 @@ angular.module('eMSPApp')
                          UPDATEBRANCHURL: "api/Branch/updateBranch",
                          DELETEBRANCHURL: "api/Branch/deleteBranch"
                      },
+                     USER: {
+                         GETALLUSERSURL: "api/user/getUsers" ,
+                         GETUSERURL: "api/user/getUser",
+                         CREATEUSRURL: "api/user/creatUser",
+                         UPDATEUSERURL: "api/user/updateUser",
+                         UPDATECOMPANYUSER:"api/user/updateCompanyUser",
+                         DELETEUSERURL:"api/user/deleteUser",
+                     },
                      APP: {
                          GETCOUNTRYURL: "api/App/getCountries",
                          GETSTATEURL: "api/App/getStates?Id="

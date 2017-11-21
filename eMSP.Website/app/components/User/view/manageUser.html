@@ -1,0 +1,115 @@
+﻿<!-- Wrapper-->
+<div style="border:1px solid grey;margin:3px; width:99%;overflow-x:hidden">
+
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
+                        <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="m-t" name="form" novalidate>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+                                <input type="text" class="form-control" name="firstName"
+                                       ng-model="udataJSON.firstName"
+                                       placeholder="First Name"
+                                       required="">
+                                <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">
+                                    First Name is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+                                <input type="text" class="form-control" name="lastName"
+                                       ng-model="udataJSON.lastName"
+                                       placeholder="Last Name"
+                                       required="">
+                                <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">
+                                    Last Name is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.emailAddress.$dirty && form.emailAddress.$error.required }">
+                                <input type="email" class="form-control" name="emailAddress"
+                                       ng-model="udataJSON.emailAddress"
+                                       placeholder="Email Address" required="">
+                                <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.required" class="help-block">
+                                    Email Address is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="udataJSON.address"
+                                       name="address" placeholder="Address" required="">
+                                <span ng-show="form.address.$dirty && form.address.$error.required" class="help-block">
+                                    Address is required
+                                </span>
+                            </div>
+                            
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
+                                
+                                <select ng-model="udataJSON.countryId" class="form-control" ng-change="getStateList()" to-number>
+                                    <option value="country">Country</option>
+                                    <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
+                                </select>
+                                <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
+                                    country is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
+                                
+                                <select ng-model="udataJSON.stateId" class="form-control" to-number>
+                                    <option value="state">State</option>
+                                    <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
+                                </select>
+                                <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
+                                    state is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="udataJSON.city"
+                                       name="city" placeholder="City" required="">
+                                <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                                    City is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.zipCode.$dirty && form.zipCode.$error.required }">
+                                <input type="text" class="form-control"
+                                       ng-model="udataJSON.zipCode"
+                                       name="zipCode" placeholder="Zip Code" required="">
+
+                                <span ng-show="form.zipCode.$dirty && form.zipCode.$error.required" class="help-block">
+                                    Zip Code is required
+                                </span>
+                            </div>
+
+
+                            <div><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close();">Cancel</a></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- End wrapper-->

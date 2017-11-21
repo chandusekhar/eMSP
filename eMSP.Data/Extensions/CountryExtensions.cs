@@ -21,7 +21,7 @@ namespace eMSP.Data.Extensions
                 IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = "",
                 UpdatedUserID = "",
-                CreatedTimestamp = DateTime.Now,
+                CreatedTimestamp = data.createdTimestamp == null || data.createdTimestamp == DateTime.MinValue  ? DateTime.Now : data.createdTimestamp,
                 UpdatedTimestamp = DateTime.Now
             };
         }

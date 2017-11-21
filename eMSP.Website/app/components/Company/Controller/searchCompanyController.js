@@ -20,7 +20,8 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             localStorageService.set('editCompanyData', data);
             console.log(data);
             $scope.loadLocations($scope.res.id);
-            $scope.loadAllBranches($scope.res.id);            
+            $scope.loadAllBranches($scope.res.id);   
+            $scope.loadUsers($scope.res.id);
         });
     } else {
         $scope.dataJSON.companyName = "%";
@@ -53,6 +54,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.resBranches = data;
         });
     }
+    $scope.loadUsers = function (compId) {
+    
+        var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.dataJSON.companyType, id: compId });
+        apires.then(function (data) {
+            $scope.resUsers = data;
+        });
+    }
 
     $scope.edit = function (data) {
         debugger;
@@ -72,6 +80,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             localStorageService.set('editCompanyData', data);
             $scope.loadLocations($scope.res.id);
             $scope.loadAllBranches($scope.res.id);
+            $scope.loadUsers($scope.res.id);
         }
 
     }
@@ -83,6 +92,30 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, dataJSON);
         }
 
+    }
+
+    $scope.modelU = function (model) {
+
+        $scope.udataJSON = {};
+        if (model) {
+            $scope.editform = true;
+            $scope.udataJSON = model.user;
+            $scope.formAction = "Update"; 
+        }
+        else {
+            $scope.formAction = "Create"; 
+            $scope.editform = false;
+            $scope.udataJSON.companyId = $scope.res.id;
+            $scope.udataJSON.companyType = $scope.res.companyType;
+            $scope.udataJSON.companyName = $scope.res.companyName;
+        }
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'app/components/user/view/manageUser.html',
+            scope: $scope,
+            controller: 'userController',
+            windowClass: 'animated slideInRight'
+        });
     }
 
     $scope.modelL = function (model) {
@@ -126,6 +159,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
+    $scope.updateUser = function (model) {
+        model.companyId = $scope.res.id;
+        model.companyType = $scope.res.companyType;
+        model.companyName = $scope.res.companyName;
+        $scope.modelU(model);
+    }   
+
     $scope.updateLocation = function (model) {
         model.companyId = $scope.res.id;
         model.companyType = $scope.res.companyType;
@@ -133,7 +173,18 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         $scope.modelL(model);
     }    
 
-    
+    $scope.ctoggleActive = function (model, isDelete) {
+
+        if (isDelete) {
+            model.isDeleted = isDelete;
+        }
+        model.companyType = $scope.res.companyType;
+        var res = apiCall.post(APP_CONSTANTS.URL.USER.UPDATECOMPANYUSER, model);
+        res.then(function (data) {
+            alert("Completed Successfully");
+            $state.reload();
+        });
+    }
 
     $scope.deleteLocation = function (model) {
         model.companyId = $scope.res.id;

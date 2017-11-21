@@ -1,7 +1,7 @@
-﻿/// <reference path="components/accounts/view/login.html" />
-/// <reference path="config.js" />
-/// <reference path="app.js" />
-/// <reference path="app.js" />
+﻿//<reference path="components/accounts/view/login.html" />
+//<reference path="config.js" />
+//<reference path="app.js" />
+//<reference path="app.js" />
 /**
  * INSPINIA - Responsive Admin Theme
  *
@@ -18,7 +18,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     IdleProvider.timeout(120); // in seconds
 
     //$urlRouterProvider.otherwise("/dashboards/dashboard_1");
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise("/dashboard");
 
     //$locationProvider.html5Mode(true);
 

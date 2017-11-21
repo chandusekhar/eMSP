@@ -9,7 +9,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
     $scope.dataJSON.companyType = $scope.configJSON.companyType;
     $scope.edit = false;
     $scope.formAction = formAction;
-    debugger;
+    
     $scope.getStateList = function () {
         if ($scope.dataJSON.CountryID) {
 

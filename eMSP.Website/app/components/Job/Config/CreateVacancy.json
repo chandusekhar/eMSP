@@ -1,0 +1,6 @@
+{
+  "title": "Create Vacancy",
+  "titleFormCreate": "Add a Job Vacancy",
+  "titleFormEdit": "Edit Job Vacancy",
+  "successURL": "job.searchVacancies"
+}

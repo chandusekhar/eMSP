@@ -1,0 +1,6 @@
+{
+  "title": "Manage Job Vacancie",
+  "titleForm": "Search Job Vacancie",
+  "createUrl": "job.createVacancy",
+  "editUrl": "job.editVacancy"
+}

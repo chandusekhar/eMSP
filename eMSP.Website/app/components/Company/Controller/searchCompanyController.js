@@ -18,6 +18,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         apires.then(function (data) {            
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
+            console.log(data);
             $scope.loadLocations($scope.res.id);
             $scope.loadAllBranches($scope.res.id);   
             $scope.loadUsers($scope.res.id);
@@ -62,15 +63,17 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.edit = function (data) {
+        debugger;
         if (data) {
 
             localStorageService.set('editCompanyData', data);
-
+            debugger;
             $state.go($scope.configJSON.editUrl);
         }
 
     }
     $scope.view = function (data) {
+        debugger;
         if (data) {
             $scope.IsMSP = true;
             $scope.res = data;

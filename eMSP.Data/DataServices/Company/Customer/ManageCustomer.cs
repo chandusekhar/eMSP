@@ -80,6 +80,8 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Where(x => x.CustomerID == customerId && x.BranchID == null)
                                                   .Select(x => x.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
                                                   .ToList());
                 }
             }
@@ -96,12 +98,14 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCustomerLocationBranches                                                  
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblCustomerLocationBranches                                                                                                    
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.CustomerID == customerId)
                                                   .Where(x => x.LocationID == locationId)
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
                                                   .ToList());
 
 
@@ -120,11 +124,13 @@ namespace eMSP.Data.DataServices.Company
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCustomerLocationBranches
-                                                  .Include(a => a.tblLocation)
+                    return await Task.Run(() => db.tblCustomerLocationBranches                                                  
                                                   .Include(a => a.tblBranch)
                                                   .Where(x => x.CustomerID == customerId && x.BranchID != null)
                                                   .Select(x => x.tblBranch)
+                                                  .Include(a => a.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
                                                   .ToList());
 
 

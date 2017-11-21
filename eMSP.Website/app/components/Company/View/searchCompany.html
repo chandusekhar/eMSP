@@ -244,8 +244,8 @@
                                                                                 <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine1}}</p>
                                                                                 <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine2}}</p>
                                                                                 <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.stateId}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.countryId}}</p>
+                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.stateName}}</p>
+                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.countryName}}</p>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="ibox-heading white-bg">
@@ -270,8 +270,7 @@
                                             <uib-tab heading="Branches">
                                                 <div class="ibox float-e-margins">
                                                     <div class="ibox-title">
-                                                        <h5><strong>Branches:</strong></h5>
-                                                        <button type="submit" ng-click="model()" class="btn btn-primary m-b pull-right">Create</button>
+                                                        <h5><strong>Branches:</strong></h5>                                                        
                                                     </div>
                                                     <div class="ibox-content">
                                                         <div class="row">
@@ -280,8 +279,7 @@
                                                                 <div class="col-lg-4">
                                                                     <div class="panel panel-primary">
                                                                         <div class="panel-heading">
-                                                                            <a class="text-white" ng-show="!test" ng-click=""> <i class="fa fa-plus-square"></i></a>
-                                                                             <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
+                                                                            <a class="text-white"> <i class="fa fa-plus-square"></i></a>
                                                                             {{brn.branchName}} <div class="btn-group-xs pull-right">
                                                                                 <a ng-click="" class="text-white">
                                                                                     <span class="fa fa-pencil"></span>
@@ -292,15 +290,15 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="panel-body">
-                                                                            <div class="ibox-heading white-bg">                                                                                
-                                                                                <p class="small"><b>Location Id:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationId}}</p>
+                                                                            <div class="ibox-heading white-bg">
+                                                                                <p class="small"><b>Location Id:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationName}}</p>
                                                                                 <p class="small"><b>Phone Number:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
                                                                                 <p class="small"><b>Email Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
                                                                                 <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
                                                                                 <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine2}}</p>
                                                                                 <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateId}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryId}}</p>
+                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateName}}</p>
+                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryName}}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div align="center" class="form-control inline">

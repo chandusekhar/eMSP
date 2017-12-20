@@ -3,15 +3,21 @@
 
         <ul class="nav nav-tabs navs-3">
 
-            <li ng-class="{active: tab1}"><a ng-click="tab1 = true; tab2 = false; tab3 = false" ng-init="tab1 = true">
-                Notes
-            </a></li>
-            <li ng-class="{active: tab2}"><a ng-click="tab2 = true; tab1 = false; tab3 = false">
-                Projects
-            </a></li>
-            <li ng-class="{active: tab3}"><a ng-click="tab3 = true; tab1 = false; tab2 = false">
-                <i class="fa fa-gear"></i>
-            </a></li>
+            <li ng-class="{active: tab1}">
+                <a ng-click="tab1 = true; tab2 = false; tab3 = false" ng-init="tab1 = true">
+                    Notes
+                </a>
+            </li>
+            <li ng-class="{active: tab2}">
+                <a ng-click="tab2 = true; tab1 = false; tab3 = false">
+                    Projects
+                </a>
+            </li>
+            <li ng-class="{active: tab3}">
+                <a ng-click="tab3 = true; tab1 = false; tab2 = false">
+                    <i class="fa fa-gear"></i>
+                </a>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -20,7 +26,7 @@
                     <h3> <i class="fa fa-comments-o"></i> Latest Notes</h3>
                     <small><i class="fa fa-tim"></i> You have 10 new message.</small>
                 </div>
-                <div>
+                <!--<div>
                     <div class="sidebar-message">
                         <a href="#">
                             <div class="pull-left text-center">
@@ -137,7 +143,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div>-->
 
             </div>
 
@@ -246,7 +252,7 @@
 
             </div>
 
-            <div  class="tab-pane" ng-class="{active: tab3}">
+            <div class="tab-pane" ng-class="{active: tab3}">
 
                 <div class="sidebar-title">
                     <h3><i class="fa fa-gears"></i> Settings</h3>

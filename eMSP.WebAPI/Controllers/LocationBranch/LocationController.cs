@@ -8,6 +8,7 @@ using eMSP.Data.DataServices.LocationBranch;
 using eMSP.ViewModel.LocationBranch;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using eMSP.ViewModel.MSP;
 
 namespace eMSP.WebAPI.Controllers.LocationBranch
 {
@@ -55,6 +56,24 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
             {
 
                 return Ok(await LocationService.GetLocations(data));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Route("getCustomerLocationBranch")]
+        [HttpPost]
+        [Authorize]
+        [ResponseType(typeof(LocationCreateModel))]
+        public async Task<IHttpActionResult> GetCustomerLocationBranch(LocationCreateModel data)
+        {
+            try
+            {
+
+                return Ok(await LocationService.GetCustomerLocationBranches(data));
             }
             catch (Exception)
             {

@@ -39,6 +39,14 @@
                     <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
                 </ul>
             </li>
+            <li ng-class="{active: $state.includes('job')}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">{{'Job'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('job')}">
+                    <li ui-sref-active="active"><a ui-sref="job.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="job.searchVacancies">{{'Manage Vacancies'|translate}} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="job.createVacancy">{{'Create Vacancy'|translate}} </a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>

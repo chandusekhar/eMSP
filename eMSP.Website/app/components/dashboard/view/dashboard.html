@@ -8,9 +8,9 @@
         <!-- Page wrapper -->
         <div ng-include="'views/common/topnavbar.html'"></div>
         <!-- Main view  -->
-        <div class="row  border-bottom white-bg dashboard-header">
+        <div class="row  border-bottom white-bg dashboard-header" ng-controller="dashboardController">
             <div class="col-sm-3">
-                <h2>{{ 'WELCOME' | translate }}</h2>
+                <h2>{{ 'WELCOME' | translate }} {{userName}}</h2>
                 <!--<small>{{ 'MESSAGEINFO' | translate }}</small>-->
             </div>
         </div>

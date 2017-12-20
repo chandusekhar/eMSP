@@ -1,0 +1,189 @@
+﻿<style type="text/css">
+    .dl-horizontal dt {
+        text-align: left;
+    }
+</style>
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><strong>{{vacancyData.vacancyTypeName}}:</strong></h5>
+                        <a ui-sref="{{configJSON.editUrl}}" class="btn btn-white btn-xs pull-right">Edit Vacancy</a>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <dl class="dl-horizontal">
+                                    <dt>Status:</dt>
+                                    <dd>
+                                        <p class="small inline" ng-if="vacancyData.isActive">Active</p>
+                                        <p class="small inline" ng-if="!vacancyData.isActive">Deactive</p>
+                                        <input type="checkbox" class="switchery small"
+                                               ui-switch="{color:'#1AB394', size:'small'}" ng-model="vacancyData.isActive" />
+                                    </dd>
+                                </dl>
+
+
+                                <dl class="dl-horizontal">
+
+                                    <dt>Vacancy Type:</dt>
+                                    <dd>{{vacancyData.vacancyTypeName}}</dd>
+
+                                    <dt>Customer Name:</dt>
+                                    <dd>{{vacancyData.customerName}}</dd>
+
+                                    <dt>Date:</dt>
+                                    <dd>{{vacancyData.startDate |date: "dd-MMM-yyyy"}} to {{vacancyData.endDate |date: "dd-MMM-yyyy"}}</dd>
+
+                                    <dt>EndDate:</dt>
+                                    <dd>{{vacancyData.endDate |date: "dd-MMM-yyyy"}}</dd>
+
+                                    <dt>Submission Date:</dt>
+                                    <dd>{{vacancyData.submissionDueDate |date: "dd-MMM-yyyy"}}</dd>
+
+                                    <dt>HiringManager:</dt>
+                                    <dd>{{vacancyData.hiringManager}}</dd>
+
+                                    <dt>ReportingManager:</dt>
+                                    <dd>{{vacancyData.reportingManager}}</dd>
+
+                                    <dt>PositionTitle:</dt>
+                                    <dd>{{vacancyData.positionTitle}}</dd>
+
+                                    <dt>Vacancy Description:</dt>
+                                    <dd>{{vacancyData.vacancyDescription}}</dd>
+
+                                    <dt>YearOfExperience:</dt>
+                                    <dd>{{vacancyData.yearOfExperience}}</dd>
+
+
+                                    <dt>ShowCustomerDetailsToSupplier:</dt>
+                                    <dd>{{vacancyData.showCustomerDetailsToSupplier}}</dd>
+
+                                    <dt>MinPayRate:</dt>
+                                    <dd>{{vacancyData.minPayRate}}</dd>
+
+                                    <dt>MaxPayRate:</dt>
+                                    <dd>{{vacancyData.maxPayRate}}</dd>
+
+                                    <dt>TargetPayRate:</dt>
+                                    <dd>{{vacancyData.targetPayRate}}</dd>
+
+                                    <dt>PayRateMarkUp:</dt>
+                                    <dd>{{vacancyData.payRateMarkUp}}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="ibox-heading white-bg">
+                                    <b> Skills:</b>
+                                    <a class="text-navy" ng-click="addSkillsModal(vacancyData)"> <i class="fa fa-plus-circle"></i></a>
+                                </div>
+                                <div ng-repeat="s in vacancyData.skillList" ng-if="!s.isDeleted">
+                                    <div class="ibox-tools pull-left small">
+
+                                        <i class="fa fa fa-dot-circle-o"></i> {{s.skill}}
+                                        &nbsp;&nbsp;
+                                        <a ng-click="removeSkill(s)"> <i class="fa fa-trash"></i></a>
+                                        &nbsp;
+                                        <span class="small" ng-if="s.isActive">Active</span>
+                                        <span class="small" ng-if="!s.isActive">De-Active</span>
+                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleVSActive(s)" ng-model="s.isActive" />
+
+                                    </div>
+                                    <br />
+                                </div>
+
+                                <div class="ibox-heading white-bg">
+                                    <b>Locations:</b>
+                                    <a class="text-navy" ng-click="openAddLocation(toggleAddLocation,vacancyData)">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </a>
+                                </div>
+                                <div ng-show="toggleAddLocation">
+                                    <div class="col-md-6">
+                                        <select ng-model="refData.locationId" class="form-control" required>
+                                            <option value="">-- Select Location --</option>
+                                            <option ng-repeat="res in refData.locationList" value="{{res.id}}">{{res.locationName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" ng-click="addVacancyLocation(vacancyData)" class="btn btn-primary m-b">Add</button>
+                                    </div>
+                                </div>
+                                <div ng-repeat="l in vacancyData.locationList" ng-if="!l.isDeleted">
+                                    <div class="ibox-tools pull-left small">
+
+                                        <i class="fa fa fa-dot-circle-o"></i> {{l.locationName}}
+                                        &nbsp;&nbsp;
+                                        <a ng-click="removeLocation(l)"> <i class="fa fa-trash"></i></a>
+                                        &nbsp;
+                                        <span class="small" ng-if="l.isActive">Active</span>
+                                        <span class="small" ng-if="!l.isActive">De-Active</span>
+                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleVLActive(l)" ng-model="l.isActive" />
+
+                                    </div>
+                                    <br />
+                                </div>
+
+                                <div class="ibox-heading white-bg">
+                                    <b>Suppliers:</b><a class="text-navy" ng-click="openAddSupplier(toggleAddSupplier)">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </a>
+                                </div>
+                                <div ng-show="toggleAddSupplier">
+                                    <div class="col-md-6">
+                                        <select ng-model="refData.supplierId" class="form-control" required>
+                                            <option value="">-- Select Supplier --</option>
+                                            <option ng-repeat="res in refData.supplierList" value="{{res.id}}">{{res.companyName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" ng-click="addVacancySupplier(vacancyData)" class="btn btn-primary m-b">Add</button>
+                                    </div>
+                                </div>
+                                <div ng-repeat="s in vacancyData.supplierList" ng-if="!s.isDeleted">
+                                    <div class="ibox-tools pull-left small">
+
+                                        <i class="fa fa fa-dot-circle-o"></i> {{s.supplierName}}
+                                        &nbsp;&nbsp;
+                                        <a ng-click="removeSupplier(s)"> <i class="fa fa-trash"></i></a>
+                                        &nbsp;
+                                        <span class="small" ng-if="s.isActive">Active</span>
+                                        <span class="small" ng-if="!s.isActive">De-Active</span>
+                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleVSupActive(s)" ng-model="s.isActive" />
+
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Manage-->
+    <!-- End wrapper-->
+</div>

@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.JobVacancies
 {
-    public class VacancySupplierModel
+    public class MSPVacancieType
     {
-        public VacancySupplierModel() { }
-        public long id { get; set; }
-        public long vacancyId { get; set; }
+        public MSPVacancieType() { }
+        public short id { get; set; }        
+        public long mspId { get; set; }
     }
 
-    public class VacancySuppliersCreateModel : VacancySupplierModel
+    public class MSPVacancieTypeCreateModel: MSPVacancieType
     {
-        public VacancySuppliersCreateModel() { }
-        public long supplierId { get; set; }
-        public string supplierName { get; set; }
-        public bool isReleased { get; set; }
+        public MSPVacancieTypeCreateModel() { }
+        public string name { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<bool> isDeleted { get; set; }
         public System.DateTime createdTimestamp { get; set; }

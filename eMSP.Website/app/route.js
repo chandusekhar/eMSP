@@ -18,7 +18,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     IdleProvider.timeout(120); // in seconds
 
     //$urlRouterProvider.otherwise("/dashboards/dashboard_1");
-    $urlRouterProvider.otherwise("/dashboard");
+    $urlRouterProvider.otherwise("/login");
 
     //$locationProvider.html5Mode(true);
 
@@ -55,7 +55,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
                             serie: true,
                             name: 'angular-flot',
-                            files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
+                            files: ['js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js',]
                         },
                         {
                             name: 'angles',
@@ -88,9 +88,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -126,9 +126,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/SearchSuppliers.json").success(function (data) { return data; });
                 }, AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -146,6 +146,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             serie: true,
                             name: 'datatables.buttons',
                             files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
                         }
                     ]);
                 }
@@ -160,9 +164,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                     return $http.get("app/components/Company/Config/SearchCustomers.json").success(function (data) { return data; });
                 }, AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -180,6 +184,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             serie: true,
                             name: 'datatables.buttons',
                             files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
                         }
                     ]);
                 }
@@ -231,9 +239,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Create"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -267,9 +275,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Create"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -303,9 +311,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -340,9 +348,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -376,9 +384,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -414,9 +422,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -441,9 +449,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 formAction: function () { return "Update"; },
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
-                    .then(function (data) {
-                        return data;
-                    });
+                        .then(function (data) {
+                            return data;
+                        });
 
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -459,6 +467,231 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         })
 
         //company Routes end
+
+        //Vacancies Routes starts
+        .state('job', {
+            abstract: true,
+            url: "/job",
+            templateUrl: "views/common/content.html",
+        })
+        .state("job.manageVacancieType", {
+            url: '/manageVacancieType',
+            templateUrl: 'app/components/Job/View/manageVacancieType.html',
+            controller: 'manageVacancieTypeController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Job/Config/ManageVacancieType.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js', 'js/plugins/bootstrap-markdown/markdown.js', 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state("job.searchVacancies", {
+            url: '/searchVacancies',
+            templateUrl: 'app/components/Job/View/searchVacancies.html',
+            controller: 'searchVacanciesController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Job/Config/SearchVacancies.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }
+                        
+                    ]);
+                }
+            }
+        })
+        .state("job.createVacancy", {
+            url: '/createVacancy',
+            templateUrl: 'app/components/Job/View/createVacancy.html',
+            controller: 'createVacancieController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Job/Config/CreateVacancy.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js', 'js/plugins/bootstrap-markdown/markdown.js', 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state("job.editVacancy", {
+            url: '/editVacancy',
+            templateUrl: 'app/components/Job/View/createVacancy.html',
+            controller: 'createVacancieController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Job/Config/CreateVacancy.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Update"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js', 'js/plugins/bootstrap-markdown/markdown.js', 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state("job.manageVacancy", {
+            url: '/manageVacancy',
+            templateUrl: 'app/components/Job/View/manageVacancy.html',
+            controller: 'manageVacancyController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Job/Config/SearchVacancies.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }
+                    ]);
+                }
+            }
+        })
 
         //country Routes starts
         .state('country', {

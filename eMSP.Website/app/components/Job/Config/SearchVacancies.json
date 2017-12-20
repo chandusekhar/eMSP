@@ -1,6 +1,9 @@
 {
-  "title": "Manage Job Vacancie",
-  "titleForm": "Search Job Vacancie",
+  "title": "Manage Job Vacancy",
+  "titleForm": "Search Job Vacancy",
   "createUrl": "job.createVacancy",
-  "editUrl": "job.editVacancy"
+  "editUrl": "job.editVacancy",
+  "companyType": "Customer",
+  "companyName": "%",
+  "manageUrl": "job.manageVacancy"
 }

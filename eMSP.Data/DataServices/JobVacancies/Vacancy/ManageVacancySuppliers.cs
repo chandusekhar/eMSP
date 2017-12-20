@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using eMSP.DataModel;
 using System.Data.Entity;
 
-namespace eMSP.Data.DataServices.JobVacancies.Vacancy
+namespace eMSP.Data.DataServices.JobVacancies
 {
     class ManageVacancySuppliers
     {
@@ -15,22 +15,20 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
         internal static eMSPEntities db;
 
         static ManageVacancySuppliers()
-        {
-
-        }
+        { }
 
         #endregion
 
         #region Get
-        internal static async Task<tblVacancy> GetVacancyDetails(long Id)
+        internal static async Task<List<tblVacancySupplier>> GetVacancySuppliers(long Id)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblVacancies
-                                                  .Where(x => x.ID == Id).SingleOrDefault());
-
+                    return await Task.Run(() => db.tblVacancySuppliers
+                                                  .Include(x => x.tblSupplier)
+                                                  .Where(x => x.VacancyID == Id && (x.IsDeleted ?? false) == false).ToList());
 
                 }
             }
@@ -45,16 +43,16 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 
         #region Insert
 
-        internal static async Task<tblVacancy> InsertVacancy(tblVacancy model)
+        internal static async Task<tblVacancySupplier> InsertVacancySupplier(tblVacancySupplier model)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    model = db.tblVacancies.Add(model);
+                    model = db.tblVacancySuppliers.Add(model);
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
-                    ;
+                    
                     return model;
 
                 }
@@ -70,7 +68,7 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 
         #region Update
 
-        internal static async Task<tblVacancy> UpdateVacancy(tblVacancy model)
+        internal static async Task<tblVacancySupplier> UpdateVacancySupplier(tblVacancySupplier model)
         {
             try
             {
@@ -94,14 +92,14 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 
         #region Delete
 
-        internal static async Task DeleteVacancy(long Id)
+        internal static async Task DeleteVacancySupplier(long Id)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblVacancy obj = await db.tblVacancies.FindAsync(Id);
-                    db.tblVacancies.Remove(obj);
+                    tblVacancySupplier obj = await db.tblVacancySuppliers.FindAsync(Id);
+                    db.tblVacancySuppliers.Remove(obj);
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                 }

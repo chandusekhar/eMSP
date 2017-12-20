@@ -8,13 +8,13 @@ using System.Data.Entity;
 
 namespace eMSP.Data.DataServices.JobVacancies
 {
-    class ManageVacancyFiles
+    class ManageMSPVacancieType
     {
         #region Initialization
 
         internal static eMSPEntities db;
 
-        static ManageVacancyFiles()
+        static ManageMSPVacancieType()
         {
 
         }
@@ -22,15 +22,22 @@ namespace eMSP.Data.DataServices.JobVacancies
         #endregion
 
         #region Get
-        internal static async Task<tblVacancyFile> GetVacancyFiles(long VacancyId)
+        internal static async Task<List<tblMSPVacancieType>> GetMSPVacancieTypes(long mspId, bool isOnlyActive)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblVacancyFiles
-                                                  .Where(x => x.VacancyID == VacancyId).SingleOrDefault());
-
+                    if (isOnlyActive)
+                    {
+                        return await Task.Run(() => db.tblMSPVacancieTypes
+                                                   .Where(x => x.MSPID == mspId && x.IsActive == true).ToList());
+                    }
+                    else
+                    {
+                        return await Task.Run(() => db.tblMSPVacancieTypes
+                                                      .Where(x => x.MSPID == mspId).ToList());
+                    }
 
                 }
             }
@@ -45,13 +52,13 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
-        internal static async Task<tblVacancyFile> InsertVacancyFiles(tblVacancyFile model)
+        internal static async Task<tblMSPVacancieType> InsertMSPVacancieType(tblMSPVacancieType model)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    model = db.tblVacancyFiles.Add(model);
+                    model = db.tblMSPVacancieTypes.Add(model);
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
                     
@@ -70,7 +77,7 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        internal static async Task<tblVacancyFile> UpdateVacancyFile(tblVacancyFile model)
+        internal static async Task<tblMSPVacancieType> UpdateMSPVacancieType(tblMSPVacancieType model)
         {
             try
             {
@@ -94,14 +101,14 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Delete
 
-        internal static async Task DeleteVacancyFile(long Id)
+        internal static async Task DeleteMSPVacancieType(long Id)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblVacancyFile obj = await db.tblVacancyFiles.FindAsync(Id);
-                    db.tblVacancyFiles.Remove(obj);
+                    tblMSPVacancieType obj = await db.tblMSPVacancieTypes.FindAsync(Id);
+                    db.tblMSPVacancieTypes.Remove(obj);
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                 }

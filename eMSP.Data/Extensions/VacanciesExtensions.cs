@@ -16,7 +16,7 @@ namespace eMSP.Data.Extensions
             {
                 ID = Convert.ToInt64(data.id),
                 VacancyType = data.vacancyType,
-                CustomerID = data.customerID,
+                CustomerID = data.customerId,
                 StartDate = data.startDate,
                 EndDate = data.endDate,
                 SubmissionDueDate = data.submissionDueDate,
@@ -24,7 +24,7 @@ namespace eMSP.Data.Extensions
                 ReportingManager = data.reportingManager,
                 PositionTitle = data.positionTitle,
                 VacancyDescription = data.vacancyDescription,
-                YearOfExperience = data.yearOfExperience,
+                YearOfExperience = data.yearOfExperience.ToString(),
                 ShowCustomerDetailsToSupplier = data.showCustomerDetailsToSupplier,
                 MinPayRate = data.minPayRate,
                 MaxPayRate = data.maxPayRate,
@@ -46,7 +46,9 @@ namespace eMSP.Data.Extensions
             {
                 id = data.ID,
                 vacancyType = data.VacancyType,
-                customerID = data.CustomerID,
+                customerId = data.CustomerID,
+                customerName = data.tblCustomer.Name,
+                vacancyTypeName = data.tblMSPVacancieType.Name,
                 startDate = data.StartDate,
                 endDate = data.EndDate,
                 submissionDueDate = data.SubmissionDueDate,
@@ -54,7 +56,7 @@ namespace eMSP.Data.Extensions
                 reportingManager = data.ReportingManager,
                 positionTitle = data.PositionTitle,
                 vacancyDescription = data.VacancyDescription,
-                yearOfExperience = data.YearOfExperience,
+                yearOfExperience = Convert.ToDecimal(data.YearOfExperience),
                 showCustomerDetailsToSupplier = data.ShowCustomerDetailsToSupplier,
                 minPayRate = data.MinPayRate,
                 maxPayRate = data.MaxPayRate,
@@ -70,13 +72,14 @@ namespace eMSP.Data.Extensions
         }
 
 
-        public static tblVacancieSkill ConvertTotblVacancieSkill(this VacancySkillsCreateModel data)
+        public static tblVacancieSkill ConvertTotblVacancySkill(this VacancySkillsCreateModel data)
         {
             return new tblVacancieSkill()
             {
                 ID = Convert.ToInt64(data.id),
-                SkillID=data.skillId,
-                VacancyID=data.vacancyId,
+                SkillID = data.skillId,
+                IndustryID = data.industryId,
+                VacancyID = data.vacancyId,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
                 CreatedUserID = data.createdUserID,
@@ -91,8 +94,11 @@ namespace eMSP.Data.Extensions
             return new VacancySkillsCreateModel()
             {
                 id = data.ID,
-                vacancyId=data.VacancyID,
-                skillId=data.SkillID,                
+                vacancyId = data.VacancyID,
+                skillId = data.SkillID,
+                skill = data.tblIndustrySkill != null ? data.tblIndustrySkill.Name : "",
+                industryId = data.IndustryID,
+                industry = data.tblIndustry != null ? data.tblIndustry.Name : "",
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -125,7 +131,7 @@ namespace eMSP.Data.Extensions
             {
                 id = data.ID,
                 vacancyId = data.VacancyID,
-                commentId = data.CommentID,                
+                commentId = data.CommentID,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -158,6 +164,7 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 vacancyId = data.VacancyID,
                 locationId = data.LocationID,
+                locationName = data.tblCustomerLocationBranch != null ? data.tblCustomerLocationBranch.tblLocation.LocationName : "",
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -172,7 +179,7 @@ namespace eMSP.Data.Extensions
             return new tblVacancyFile()
             {
                 ID = Convert.ToInt64(data.id),
-                FilePath = data.filePath,                
+                FilePath = data.filePath,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
@@ -200,13 +207,13 @@ namespace eMSP.Data.Extensions
         }
 
 
-        public static tblVacancySupplier ConvertTotblVacancyFile(this VacancySuppliersCreateModel data)
+        public static tblVacancySupplier ConvertTotblVacancySupplier(this VacancySuppliersCreateModel data)
         {
             return new tblVacancySupplier()
             {
                 ID = Convert.ToInt64(data.id),
                 SupplierID = data.supplierId,
-                IsReleased=data.isReleased,
+                IsReleased = data.isReleased,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
@@ -224,7 +231,40 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 vacancyId = data.VacancyID,
                 supplierId = data.SupplierID,
-                isReleased=data.IsReleased,
+                supplierName = data.tblSupplier != null ? data.tblSupplier.Name : "",
+                isReleased = data.IsReleased,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+        public static tblMSPVacancieType ConvertTotblMSPVacancieType(this MSPVacancieTypeCreateModel data)
+        {
+            return new tblMSPVacancieType()
+            {
+                ID = Convert.ToInt16(data.id),
+                MSPID = data.mspId,
+                Name = data.name,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = DateTime.Now,
+                UpdatedTimestamp = DateTime.Now
+            };
+        }
+
+        public static MSPVacancieTypeCreateModel ConvertToMSPVacancieType(this tblMSPVacancieType data)
+        {
+            return new MSPVacancieTypeCreateModel()
+            {
+                id = data.ID,
+                name = data.Name,
+                mspId = data.MSPID,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,

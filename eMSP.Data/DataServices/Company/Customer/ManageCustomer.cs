@@ -92,6 +92,27 @@ namespace eMSP.Data.DataServices.Company
             }
         }
 
+        internal static async Task<List<tblCustomerLocationBranch>> GetCustomerLocationBranches(long customerId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCustomerLocationBranches
+                                                  .Include(a => a.tblLocation)
+                                                  .Where(x => x.CustomerID == customerId && x.BranchID == null)
+                                                  .ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+
+
         internal static async Task<List<tblBranch>> GetCustomerBranches(long customerId,long locationId)
         {
             try

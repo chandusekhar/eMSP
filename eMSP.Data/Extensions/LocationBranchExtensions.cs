@@ -197,6 +197,7 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 companyId = data.CustomerID,
                 locationId = data.LocationID,
+                locationName = data.tblLocation != null ? data.tblLocation.LocationName : "",
                 branchId = data.BranchID,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,

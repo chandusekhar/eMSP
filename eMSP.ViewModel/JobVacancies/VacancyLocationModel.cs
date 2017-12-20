@@ -17,6 +17,7 @@ namespace eMSP.ViewModel.JobVacancies
     {
         public VacancyLocationsCreateModel() { }
         public long locationId { get; set; }
+        public string locationName { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<bool> isDeleted { get; set; }
         public System.DateTime createdTimestamp { get; set; }

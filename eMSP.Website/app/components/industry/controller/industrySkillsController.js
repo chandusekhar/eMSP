@@ -11,9 +11,9 @@ function industrySkilsController($scope, $state, localStorageService, $uibModal,
     $scope.submit = function (form) {
         if (form.$valid) {
             var suc = false;
-            if ($scope.formAction == "Update") {
-                var res = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATEINDUSTRYURL, $scope.dataJSON);
-                res.then(function (data) {
+            if ($scope.formAction === "Update") {
+                var resUpdate = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATEINDUSTRYURL, $scope.dataJSON);
+                resUpdate.then(function (data) {
                     alert("Data Updated Successfully");
                     $state.reload();
                 });
@@ -25,13 +25,7 @@ function industrySkilsController($scope, $state, localStorageService, $uibModal,
                     $state.reload();
                 });
             }
-
-
-
-
-
         }
-
     }
     $scope.create = function () {
         $scope.edit = false;
@@ -54,8 +48,8 @@ function industrySkilsController($scope, $state, localStorageService, $uibModal,
     $scope.toggleActive = function (model) {
 
         if (!model.industryId) {
-            var res = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATEINDUSTRYURL, model);
-            res.then(function (data) {
+            var resUpdate = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATEINDUSTRYURL, model);
+            resUpdate.then(function (data) {
                 alert("Data Updated Successfully");
             });
         }
@@ -105,8 +99,8 @@ function skillController($scope, $state, $uibModalInstance, $filter, apiCall, AP
         if (form.$valid) {
             var suc = false;
             if ($scope.editform) {
-                var res = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATESKILLURL, $scope.sdataJSON);
-                res.then(function (data) {
+                var resUpdate = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.UPDATESKILLURL, $scope.sdataJSON);
+                resUpdate.then(function (data) {
                     $scope.sdataJSON = data;
                     alert("Data Updated Successfully");
                 });
@@ -117,7 +111,7 @@ function skillController($scope, $state, $uibModalInstance, $filter, apiCall, AP
                     $scope.sdataJSON = data;
                     alert("Data Created Successfully");
                     angular.forEach($scope.industryList, function (obj) {
-                        if (obj.id == data.industryId) {
+                        if (obj.id === data.industryId) {
                             obj.skillList.push(data);
                         }
                     });

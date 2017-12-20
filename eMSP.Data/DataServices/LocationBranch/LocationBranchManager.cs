@@ -58,6 +58,31 @@ namespace eMSP.Data.DataServices.LocationBranch
             }
         }
 
+        public async Task<List<LocationCreateModel>> GetCustomerLocationBranches(LocationCreateModel data)
+        {
+            try
+            {
+                List<LocationCreateModel> res = null;
+                List<tblCustomerLocationBranch> resData = null;
+                long Id = data != null ? Convert.ToInt64(data.companyId) : 0;
+
+                switch (data.companyType)
+                {                    
+                    case "Customer":
+                        resData = await Task.Run(() => ManageCustomer.GetCustomerLocationBranches(Id));
+                        break;
+                    
+                }
+                res = resData.Select(a => a.ConvertToCustomerLocationBranch()).ToList();
+
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<BranchCreateModel>> GetBranchs(LocationBranchModel data)
         {
             try

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using eMSP.DataModel;
 using System.Data.Entity;
 
-namespace eMSP.Data.DataServices.JobVacancies.Vacancy
+namespace eMSP.Data.DataServices.JobVacancies
 {
     class ManageVacancyComments
     {

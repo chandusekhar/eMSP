@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using eMSP.DataModel;
 using System.Data.Entity;
 
-namespace eMSP.Data.DataServices.JobVacancies.Vacancy
+namespace eMSP.Data.DataServices.JobVacancies
 {
     class ManageVacancyLocations
     {
@@ -22,14 +22,16 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
         #endregion
 
         #region Get
-        internal static async Task<tblVacancyLocation> GetVacancyLocations(long VacancyId)
+        internal static async Task<List<tblVacancyLocation>> GetVacancyLocations(long VacancyId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblVacancyLocations
-                                                  .Where(x => x.ID == VacancyId).SingleOrDefault());
+                                                  .Include(x => x.tblCustomerLocationBranch.tblLocation)
+                                                  .Where(x => x.VacancyID == VacancyId && (x.IsDeleted ?? false) == false)
+                                                  .ToList());
 
 
                 }
@@ -45,7 +47,7 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 
         #region Insert
 
-        internal static async Task<tblVacancyLocation> InsertVacancyLocation(tblVacancyLocation model)
+        internal static async Task<tblVacancyLocation> AddVacancyLocation(tblVacancyLocation model)
         {
             try
             {
@@ -70,7 +72,7 @@ namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 
         #region Update
 
-        internal static async Task<tblVacancy> UpdateVacancy(tblVacancy model)
+        internal static async Task<tblVacancyLocation> UpdateVacancyLocation(tblVacancyLocation model)
         {
             try
             {

@@ -29,37 +29,48 @@
                     </div>
                     <div class="ibox-content">
                         <form class="m-t" name="form">
-                            <div class="form-group col-md-4" ng-class="{ 'has-error': form.companyName.$dirty && form.companyName.$error.required }">
-                                <input type="text" class="form-control" name="companyName"
-                                       ng-model="dataJSON.companyName"
-                                       placeholder="Company Name"
-                                       required="">
-                                <span ng-show="form.companyName.$dirty && form.companyName.$error.required" class="help-block">
-                                    Company Name is required
-                                </span>
+                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.startSate.$dirty && form.startSate.$error.required }">
+                                <div class="input-group date">
+                                    <input type="datetime" class="form-control" name="startSate"
+                                           ng-model="dataJSON.startSate"
+                                           placeholder="Start Date"
+                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
+                                           required="" />
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+
                             </div>
-                            <div class="form-group col-md-4" ng-class="{ 'has-error': form.companyLocation.$dirty && form.companyLocation.$error.required }">
-                                <input type="text" class="form-control" name="companyLocation"
-                                       ng-model="dataJSON.companyLocation"
-                                       placeholder="Location" required="">
-                                <span ng-show="form.companyLocation.$dirty && form.companyLocation.$error.required" class="help-block">
-                                    Company Location is required
-                                </span>
+                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.endDate.$dirty && form.endDate.$error.required }">
+                                <div class="input-group date">
+                                    <input type="datetime" class="form-control" name="companyLocation"
+                                           ng-model="dataJSON.endDate"
+                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
+                                           placeholder="End Date" required="" />
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+
                             </div>
-                            <div class="form-group col-md-4" ng-class="{ 'has-error': form.companyBranch.$dirty && form.companyBranch.$error.required }">
-                                <input type="text" class="form-control"
-                                       ng-model="dataJSON.companyBranch"
-                                       placeholder="Branch" name="companyBranch" required="">
-                                <span ng-show="form.companyBranch.$dirty && form.companyBranch.$error.required" class="help-block">
-                                    Branch is required
-                                </span>
+                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.subbmissionDate.$dirty && form.subbmissionDate.$error.required }">
+                                <div class="input-group date">
+                                    <input type="datetime" class="form-control" name="companyLocation"
+                                           ng-model="dataJSON.subbmissionDate"
+                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
+                                           placeholder="Subbmit Due Date" required="" />
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-3" ng-class="{ 'has-error': form.customer.$dirty && form.customer.$error.required }">
+                                <select ng-model="dataJSON.customer" class="form-control" ng-change="getUserList()">
+                                    <option value="">-- Select Customer --</option>
+                                    <option ng-repeat="res in refData.customerList" value="{{res.id}}">{{res.companyName}}</option>
+                                </select>
+
                             </div>
                             <div>
                                 <button type="submit" ng-click="search()" class="btn btn-primary">Search</button>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-primary center" ui-sref="{{configJSON.createUrl}}">Add</a>
-                                &nbsp;&nbsp;
-                                <a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a>
+                                <a class="btn btn-primary btn-white center" ng-click="reset()">Clear</a>
                             </div>
 
                         </form>
@@ -72,198 +83,40 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5><strong>Search Results:</strong></h5>
-                        <div ibox-tools></div>
                     </div>
                     <div class="ibox-content">
-                        <table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>Actions</th>
-                                    <th ng-repeat="header in configJSON.gridElements">
-                                        {{header.lable}}
-                                    </th>
+                        <div class="row">
+                            <div ng-repeat="vac in resVacancie">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="res in searchResults">
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn-white btn btn-xs" ng-click="view(res)">View</button>
-                                            <button class="btn-white btn btn-xs" ng-click="edit(res)">Edit</button>
+                                            <a class="text-white">
+                                                <i class="fa fa-plus-square"></i>
+                                            </a>
+
+                                            {{vac.positionTitle}}
+                                            <div class="btn-group-xs pull-right">
+                                                <a ng-click="update(vac)" class="text-white">
+                                                    <span class="fa fa-pencil"></span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </td>
-                                    <td ng-repeat="header in configJSON.gridElements">{{ res[header.id] }}</td>
+                                        <div class="panel-body">
+                                            <div class="ibox-heading white-bg">
+                                                <b>Vacancy Type:</b> {{vac.vacancyTypeName}}    <br />
+                                                <b>Customer Name:</b> {{vac.customerName}}       <br />
+                                                <b>Date:</b> {{vac.startDate |date: "dd-MMM-yyyy"}} to {{vac.endDate |date: "dd-MMM-yyyy"}}       <br />
+                                                <b>Submission Date:</b> {{vac.submissionDueDate |date: "dd-MMM-yyyy"}}      <br />
+                                                <b>Vacancy Description:</b>{{vac.vacancyDescription}}      <br />
+                                                <br /> <br />
 
-                                </tr>
-                            </tbody>
-                        </table>
+                                            </div>
+                                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <!--serach Results start-->
-        </div>
-    </div>
-    <!--Manage-->
-    <div ng-if="IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
-
-        <div ng-if="res" class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="m-b-md">
-                                        <a ui-sref="{{configJSON.editUrl}}" class="btn btn-white btn-xs pull-right">Edit {{res.companyType}}</a>
-
-                                        <h2>{{res.companyName}}</h2>
-                                    </div>
-                                    <dl class="dl-horizontal">
-                                        <dt>Status:</dt>
-                                        <dd><span class="label label-primary">Active</span></dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <dl class="dl-horizontal">
-
-                                        <dt>Email:</dt>
-                                        <dd>{{res.companyEmail}}</dd>
-                                        <dt>Website:</dt>
-                                        <dd> {{res.companyWebsite}}</dd>
-                                        <dt>Address:</dt>
-                                        <dd>{{res.companyAddress}}</dd>
-                                        <dt>City:</dt>
-                                        <dd>{{res.companyCity}}</dd>
-                                        <dt>State:</dt>
-                                        <dd>{{res.companyState}}</dd>
-                                        <dt>Country:</dt>
-                                        <dd>{{res.companyCountry}}</dd>
-                                        <dt>Contact:</dt>
-                                        <dd> {{res.companyPhoneNumber}}</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <dl class="dl-horizontal">
-                                        <dt>Created by:</dt>
-                                        <dd>{{res.createdUserID}}</dd>
-                                        <dt>Messages:</dt>
-                                        <dd> 162</dd>
-                                        <dt>Client:</dt>
-                                        <dd><a href="" class="text-navy"> Code Rev</a></dd>
-                                        <dt>Version:</dt>
-                                        <dd> v1.0</dd>
-                                    </dl>
-                                </div>
-
-                            </div>
-
-                            <div class="row m-t-sm">
-                                <div class="col-lg-12">
-                                    <div class="panel ui-tab">
-                                        <uib-tabset>
-                                            <uib-tab heading="Locations" active="tab.active" class="dsads">
-                                                <div class="ibox float-e-margins">
-                                                    <div class="ibox-title">
-                                                        <h5><strong>Locations:</strong></h5>
-                                                        <button type="submit" ng-click="modelL()" class="btn btn-primary m-b pull-right">Create</button>
-                                                    </div>
-                                                    <div class="ibox-content">
-                                                        <div class="row">
-                                                            <!--repeater-->
-                                                            <div ng-repeat="loc in resLocations">
-                                                                <div class="col-lg-4">
-                                                                    <div class="panel panel-primary">
-                                                                        <div class="panel-heading">
-                                                                            <a class="text-white" ng-show="!test" ng-click=""> <i class="fa fa-plus-square"></i></a>
-                                                                            <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
-                                                                            {{loc.locationName}} <div class="btn-group-xs pull-right">
-                                                                                <a ng-click="updateLocation(loc)" class="text-white">
-                                                                                    <span class="fa fa-pencil"></span>
-                                                                                </a>
-                                                                                <a ng-click="deleteLocation(loc)" class="btn btn-danger">
-                                                                                    <span class="fa fa-trash"></span>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel-body">
-                                                                            <div class="ibox-heading white-bg">
-                                                                                <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine2}}</p>
-                                                                                <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.stateName}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.countryName}}</p>
-                                                                            </div>
-                                                                            <div>
-                                                                                <div class="ibox-heading white-bg">
-                                                                                    <b>Branches:</b><a class="text-navy" ng-click="modalB(loc)"> <i class="fa fa-plus-circle"></i></a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div align="center" class="form-control inline">
-                                                                            <p class="small inline" ng-if="loc.isActive">Active</p>
-                                                                            <p class="small inline" ng-if="!loc.isActive">Deactive</p>
-                                                                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                                                   ng-change="toggleActive(con)" ng-model="loc.isActive" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </uib-tab>
-                                            <uib-tab heading="Branches">
-                                                <div class="ibox float-e-margins">
-                                                    <div class="ibox-title">
-                                                        <h5><strong>Branches:</strong></h5>                                                        
-                                                    </div>
-                                                    <div class="ibox-content">
-                                                        <div class="row">
-                                                            <!--repeater-->
-                                                            <div ng-repeat="brn in resBranches">
-                                                                <div class="col-lg-4">
-                                                                    <div class="panel panel-primary">
-                                                                        <div class="panel-heading">
-                                                                            <a class="text-white"> <i class="fa fa-plus-square"></i></a>
-                                                                            {{brn.branchName}} <div class="btn-group-xs pull-right">
-                                                                                <a ng-click="" class="text-white">
-                                                                                    <span class="fa fa-pencil"></span>
-                                                                                </a>
-                                                                                <a ng-click="" class="btn btn-danger">
-                                                                                    <span class="fa fa-trash"></span>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel-body">
-                                                                            <div class="ibox-heading white-bg">
-                                                                                <p class="small"><b>Location Id:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationName}}</p>
-                                                                                <p class="small"><b>Phone Number:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>Email Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine2}}</p>
-                                                                                <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateName}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryName}}</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div align="center" class="form-control inline">
-                                                                            <p class="small inline" ng-if="brn.isActive">Active</p><p class="small inline" ng-if="!brn.isActive">Deactive</p> <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)" ng-model="brn.isActive" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </uib-tab>
-                                        </uib-tabset>
+                                        <div align="center" class="form-control inline">
+                                            <button class="btn-primary btn btn-xs" ng-click="view(vac)">Manage</button>                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -271,6 +124,9 @@
                     </div>
                 </div>
             </div>
+            <!--serach Results start-->
         </div>
     </div>
+    <!--Manage-->
     <!-- End wrapper-->
+</div>

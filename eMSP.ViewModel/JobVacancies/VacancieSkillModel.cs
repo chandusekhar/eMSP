@@ -16,6 +16,9 @@ namespace eMSP.ViewModel.JobVacancies
     {
         public VacancySkillsCreateModel() { }
         public long skillId { get; set; }
+        public string skill { get; set; }
+        public long industryId { get; set; }
+        public string industry { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<bool> isDeleted { get; set; }
         public System.DateTime createdTimestamp { get; set; }

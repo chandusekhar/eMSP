@@ -28,13 +28,23 @@
                     <div class="ibox-content">
                         <form class="m-t" name="form" novalidate>
 
-                            <div class="form-group col-md-12" ng-class="{ 'has-error': form.vacancyType.$dirty && form.vacancyType.$error.required }">
-                                <input type="text" class="form-control" name="vacancyType"
-                                       ng-model="dataJSON.vacancyType"
-                                       placeholder="Vacancy Type"
-                                       required="">
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.vacancyType.$dirty && form.vacancyType.$error.required }">                                
+                                <select ng-model="dataJSON.vacancyType" class="form-control">
+                                    <option value="">-- Select Vacancy Type --</option>
+                                    <option ng-repeat="res in refData.vacancyTypes" value="{{res.id}}">{{res.name}}</option>
+                                </select>
                                 <span ng-show="form.vacancyType.$dirty && form.vacancyType.$error.required" class="help-block">
                                     Vacancy Type is required
+                                </span>
+                            </div>
+                                
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.customerId.$dirty && form.customerId.$error.required }">
+                                <select ng-model="dataJSON.customerId" class="form-control" ng-change="getUserList()">
+                                    <option value="">-- Select Customer --</option>
+                                    <option ng-repeat="res in refData.customerList" value="{{res.id}}">{{res.companyName}}</option>
+                                </select>
+                                <span ng-show="form.customerId.$dirty && form.customerId.$error.required" class="help-block">
+                                    Customer is required
                                 </span>
                             </div>
 
@@ -43,7 +53,7 @@
                                     <input type="datetime" class="form-control" name="startDate"
                                            ng-model="dataJSON.startDate"
                                            auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                           placeholder="Start Date"
+                                           placeholder="Start Date" 
                                            required="" />
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
@@ -58,7 +68,7 @@
                                            ng-model="dataJSON.endDate"
                                            auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
                                            placeholder="End Date"
-                                           required="">
+                                           required="" />
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
 
@@ -73,7 +83,7 @@
                                            ng-model="dataJSON.submissionDueDate"
                                            auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
                                            placeholder="Submission Due Date"
-                                           required="">
+                                           required="" />
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
 
@@ -86,8 +96,8 @@
                                 <input type="text" class="form-control" name="hiringManager"
                                        ng-model="dataJSON.hiringManager"
                                        placeholder="Hiring Manager"
-                                       uib-typeahead="state.key for state in refData.stateList | filter:$viewValue | limitTo:8"
-                                       required="">
+                                       uib-typeahead="(u.user.firstName +' '+ u.user.lastName) for u in refData.usersList | filter:$viewValue | limitTo:8"
+                                       required="" />
                                 <span ng-show="form.hiringManager.$dirty && form.hiringManager.$error.required" class="help-block">
                                     Hiring Manager is required
                                 </span>
@@ -95,13 +105,12 @@
 
 
 
-
-
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.reportingManager.$dirty && form.reportingManager.$error.required }">
                                 <input type="text" class="form-control" name="reportingManager"
                                        ng-model="dataJSON.reportingManager"
                                        placeholder="Reporting Manager"
-                                       required="">
+                                       uib-typeahead="(u.user.firstName +' '+ u.user.lastName) for u in refData.usersList | filter:$viewValue | limitTo:8"
+                                       required="" />
                                 <span ng-show="form.reportingManager.$dirty && form.reportingManager.$error.required" class="help-block">
                                     Reporting Manager is required
                                 </span>
@@ -120,7 +129,7 @@
 
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.yearOfExperience.$dirty && form.yearOfExperience.$error.required }">
-                                <input type="text" class="form-control" name="yearOfExperience"
+                                <input type="number" class="form-control" name="yearOfExperience"
                                        ng-model="dataJSON.yearOfExperience"
                                        placeholder="Year Of Experience"
                                        required="">
@@ -130,7 +139,7 @@
                             </div>
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.minPayRate.$dirty && form.minPayRate.$error.required }">
-                                <input type="text" class="form-control" name="minPayRate"
+                                <input type="number" class="form-control" name="minPayRate"
                                        ng-model="dataJSON.minPayRate"
                                        placeholder="Min Pay Rate"
                                        required="">
@@ -140,7 +149,7 @@
                             </div>
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.maxPayRate.$dirty && form.maxPayRate.$error.required }">
-                                <input type="text" class="form-control" name="maxPayRate"
+                                <input type="number" class="form-control" name="maxPayRate"
                                        ng-model="dataJSON.maxPayRate"
                                        placeholder="Max Pay Rate"
                                        required="">
@@ -150,7 +159,7 @@
                             </div>
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.targetPayRate.$dirty && form.targetPayRate.$error.required }">
-                                <input type="text" class="form-control" name="targetPayRate"
+                                <input type="number" class="form-control" name="targetPayRate"
                                        ng-model="dataJSON.targetPayRate"
                                        placeholder="Target Pay Rate"
                                        required="">
@@ -160,7 +169,7 @@
                             </div>
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.payRateMarkUp.$dirty && form.payRateMarkUp.$error.required }">
-                                <input type="text" class="form-control" name="payRateMarkUp"
+                                <input type="number" class="form-control" name="payRateMarkUp"
                                        ng-model="dataJSON.payRateMarkUp"
                                        placeholder="Pay Rate MarkUp"
                                        required="">

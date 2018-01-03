@@ -44,7 +44,7 @@ angular.module('eMSPApp')
             },
             BRANCH: {
                 GETALLBRANCHESURL: "api/Branch/getAllBranches",
-                GETALLBRANCHEBYLOCATIONSURL: "api/Branch/getBranches",
+                GETALLBRANCHEBYLOCATIONSURL: "api/Branch/getBranchesByLocation",
                 GETBRANCHURL: "api/Branch/getBranch",
                 CREATEBRANCHURL: "api/Branch/creatBranch",
                 UPDATEBRANCHURL: "api/Branch/updateBranch",

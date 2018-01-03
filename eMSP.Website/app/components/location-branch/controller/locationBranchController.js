@@ -6,15 +6,14 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.formAction = function () { return "Create"; };
-    $scope.edit = $scope.formAction == "Update" ? true : false;
+    $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
 
     $http.get("app/components/location-branch/config/manageLocation.json").success(function (data) {
         $scope.configJSON = data;
     });
 
-    $scope.getStateList = function () {
-        debugger;
+    $scope.getStateList = function () {        
         if ($scope.ldataJSON.countryId) {
             var param = { "Id": $scope.ldataJSON.countryId }
             var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId, {});
@@ -25,7 +24,6 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     }
 
     if ($scope.editform) {
-        debugger;
         $scope.getStateList();
     }
 
@@ -62,12 +60,12 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
 }
 
 function branchController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
-    debugger;
+    
     //var rawValue = angular.copy($scope.bdataJSON);
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.formAction = function () { return "Create"; };
-    $scope.edit = $scope.formAction == "Update" ? true : false;
+    $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
 
     $http.get("app/components/location-branch/config/manageBranch.json").success(function (data) {
@@ -75,8 +73,7 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
     });
 
     $scope.getStateList = function () {
-        debugger;
-        console.log($scope.bdataJSON);
+   
         if ($scope.bdataJSON.countryId) {
             var param = { "Id": $scope.bdataJSON.countryId }
             var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.bdataJSON.countryId, {});
@@ -87,7 +84,6 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
     }
 
     if ($scope.editform) {
-        debugger;
         $scope.getStateList();
     }
 
@@ -110,7 +106,6 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
                     alert("Branch Created Successfully");
                 });
             }
-
             $uibModalInstance.close();
         }
     }

@@ -67,11 +67,11 @@ namespace eMSP.Data.DataServices.LocationBranch
                 long Id = data != null ? Convert.ToInt64(data.companyId) : 0;
 
                 switch (data.companyType)
-                {                    
+                {
                     case "Customer":
                         resData = await Task.Run(() => ManageCustomer.GetCustomerLocationBranches(Id));
                         break;
-                    
+
                 }
                 res = resData.Select(a => a.ConvertToCustomerLocationBranch()).ToList();
 
@@ -137,6 +137,26 @@ namespace eMSP.Data.DataServices.LocationBranch
                         resModel = await Task.Run(() => ManageSupplier.GetSupplierAllBranches(Id));
                         break;
                 }
+                model = resModel.Select(a => a.ConvertToBranch()).ToList();
+
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<BranchCreateModel>> GetBranchesByLocation(LocationBranchModel data)
+        {
+            try
+            {
+                List<BranchCreateModel> model = null;
+                List<tblBranch> resModel = null;
+                long Id = data != null ? Convert.ToInt64(data.locationId) : 0;
+
+                resModel = await Task.Run(() => ManageBranch.GetBranchsByLocation(Id));
+
                 model = resModel.Select(a => a.ConvertToBranch()).ToList();
 
                 return model;

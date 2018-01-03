@@ -60,7 +60,6 @@ function createVacancieController($scope, $state, localStorageService, configJSO
                 res.then(function (data) {
                     $scope.dataJSON = data;
                     alert("Data Created Successfully");
-                    //$scope.dataJSON = {};
                 });
             }
             $state.go($scope.configJSON.successURL);            

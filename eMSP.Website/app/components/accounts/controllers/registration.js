@@ -16,7 +16,6 @@ angular.module('eMSPApp').controller("registrationController", ['$scope', '$http
     };
 
     $scope.login = function () {
-        console.log($scope.regData);
 
         mspRegistrationService.saveRegistration($scope.regData).then(function (response) {
             $location.path('/dashboard');

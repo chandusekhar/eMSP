@@ -39,13 +39,13 @@
  */
 function pageTitle($rootScope, $timeout) {
     return {
-        link: function(scope, element) {
-            var listener = function(event, toState, toParams, fromState, fromParams) {
+        link: function (scope, element) {
+            var listener = function (event, toState, toParams, fromState, fromParams) {
                 // Default title - load on Dashboard 1
                 var title = 'eMSP';
                 // Create your own title pattern
                 if (toState.data && toState.data.pageTitle) title = 'eMSP | ' + toState.data.pageTitle;
-                $timeout(function() {
+                $timeout(function () {
                     element.text(title);
                 });
             };
@@ -60,16 +60,16 @@ function pageTitle($rootScope, $timeout) {
 function sideNavigation($timeout) {
     return {
         restrict: 'A',
-        link: function(scope, element) {
+        link: function (scope, element) {
             // Call the metsiMenu plugin and plug it to sidebar navigation
-            $timeout(function(){
+            $timeout(function () {
                 element.metisMenu();
 
             });
 
             // Colapse menu in mobile mode after click on element
             var menuElement = $('#side-menu a:not([href$="\\#"])');
-            menuElement.click(function(){
+            menuElement.click(function () {
                 if ($(window).width() < 769) {
                     $("body").toggleClass("mini-navbar");
                 }
@@ -93,7 +93,7 @@ function sideNavigation($timeout) {
 function responsiveVideo() {
     return {
         restrict: 'A',
-        link:  function(scope, element) {
+        link: function (scope, element) {
             var figure = element;
             var video = element.children();
             video
@@ -102,7 +102,7 @@ function responsiveVideo() {
                 .removeAttr('width')
 
             //We can use $watch on $window.innerWidth also.
-            $(window).resize(function() {
+            $(window).resize(function () {
                 var newWidth = figure.width();
                 video
                     .width(newWidth)
@@ -135,11 +135,11 @@ function iboxTools($timeout) {
                     ibox.find('[id^=map-]').resize();
                 }, 50);
             };
-                // Function for close ibox
-                $scope.closebox = function () {
-                    var ibox = $element.closest('div.ibox');
-                    ibox.remove();
-                }
+            // Function for close ibox
+            $scope.closebox = function () {
+                var ibox = $element.closest('div.ibox');
+                ibox.remove();
+            }
         }
     };
 }
@@ -179,7 +179,7 @@ function iboxToolsFullScreen($timeout) {
                 $('body').toggleClass('fullscreen-ibox-mode');
                 button.toggleClass('fa-expand').toggleClass('fa-compress');
                 ibox.toggleClass('fullscreen');
-                setTimeout(function() {
+                setTimeout(function () {
                     $(window).trigger('resize');
                 }, 100);
             }
@@ -205,7 +205,7 @@ function minimalizaSidebar($timeout) {
                         function () {
                             $('#side-menu').fadeIn(400);
                         }, 200);
-                } else if ($('body').hasClass('fixed-sidebar')){
+                } else if ($('body').hasClass('fixed-sidebar')) {
                     $('#side-menu').hide();
                     setTimeout(
                         function () {
@@ -265,10 +265,10 @@ function vectorMap() {
                     ]
                 },
             });
-            var destroyMap = function(){
+            var destroyMap = function () {
                 element.remove();
             };
-            scope.$on('$destroy', function() {
+            scope.$on('$destroy', function () {
                 destroyMap();
             });
         }
@@ -290,7 +290,7 @@ function sparkline() {
             scope.$watch(scope.sparkData, function () {
                 render();
             });
-            scope.$watch(scope.sparkOptions, function(){
+            scope.$watch(scope.sparkOptions, function () {
                 render();
             });
             var render = function () {
@@ -307,12 +307,12 @@ function icheck($timeout) {
     return {
         restrict: 'A',
         require: 'ngModel',
-        link: function($scope, element, $attrs, ngModel) {
-            return $timeout(function() {
+        link: function ($scope, element, $attrs, ngModel) {
+            return $timeout(function () {
                 var value;
                 value = $attrs['value'];
 
-                $scope.$watch($attrs['ngModel'], function(newValue){
+                $scope.$watch($attrs['ngModel'], function (newValue) {
                     $(element).iCheck('update');
                 })
 
@@ -320,18 +320,18 @@ function icheck($timeout) {
                     checkboxClass: 'icheckbox_square-green',
                     radioClass: 'iradio_square-green'
 
-                }).on('ifChanged', function(event) {
-                        if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
-                            $scope.$apply(function() {
-                                return ngModel.$setViewValue(event.target.checked);
-                            });
-                        }
-                        if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
-                            return $scope.$apply(function() {
-                                return ngModel.$setViewValue(value);
-                            });
-                        }
-                    });
+                }).on('ifChanged', function (event) {
+                    if ($(element).attr('type') === 'checkbox' && $attrs['ngModel']) {
+                        $scope.$apply(function () {
+                            return ngModel.$setViewValue(event.target.checked);
+                        });
+                    }
+                    if ($(element).attr('type') === 'radio' && $attrs['ngModel']) {
+                        return $scope.$apply(function () {
+                            return ngModel.$setViewValue(value);
+                        });
+                    }
+                });
             });
         }
     };
@@ -358,7 +358,7 @@ function ionRangeSlider() {
 function dropZone() {
     return {
         restrict: 'C',
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
 
             var config = {
                 url: 'http://localhost:8080/upload',
@@ -370,12 +370,12 @@ function dropZone() {
             };
 
             var eventHandlers = {
-                'addedfile': function(file) {
+                'addedfile': function (file) {
                     scope.file = file;
-                    if (this.files[1]!=null) {
+                    if (this.files[1] != null) {
                         this.removeFile(this.files[0]);
                     }
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         scope.fileAdded = true;
                     });
                 },
@@ -387,15 +387,15 @@ function dropZone() {
 
             dropzone = new Dropzone(element[0], config);
 
-            angular.forEach(eventHandlers, function(handler, event) {
+            angular.forEach(eventHandlers, function (handler, event) {
                 dropzone.on(event, handler);
             });
 
-            scope.processDropzone = function() {
+            scope.processDropzone = function () {
                 dropzone.processQueue();
             };
 
-            scope.resetDropzone = function() {
+            scope.resetDropzone = function () {
                 dropzone.removeAllFiles();
             }
         }
@@ -408,8 +408,8 @@ function dropZone() {
 function chatSlimScroll($timeout) {
     return {
         restrict: 'A',
-        link: function(scope, element) {
-            $timeout(function(){
+        link: function (scope, element) {
+            $timeout(function () {
                 element.slimscroll({
                     height: '234px',
                     railOpacity: 0.4
@@ -423,18 +423,18 @@ function chatSlimScroll($timeout) {
 /**
  * customValid - Directive for custom validation example
  */
-function customValid(){
+function customValid() {
     return {
         require: 'ngModel',
-        link: function(scope, ele, attrs, c) {
-            scope.$watch(attrs.ngModel, function() {
+        link: function (scope, ele, attrs, c) {
+            scope.$watch(attrs.ngModel, function () {
 
                 // You can call a $http method here
                 // Or create custom validation
 
                 var validText = "Inspinia";
 
-                if(scope.extras == validText) {
+                if (scope.extras == validText) {
                     c.$setValidity('cvalid', true);
                 } else {
                     c.$setValidity('cvalid', false);
@@ -449,11 +449,11 @@ function customValid(){
 /**
  * fullScroll - Directive for slimScroll with 100%
  */
-function fullScroll($timeout){
+function fullScroll($timeout) {
     return {
         restrict: 'A',
-        link: function(scope, element) {
-            $timeout(function(){
+        link: function (scope, element) {
+            $timeout(function () {
                 element.slimscroll({
                     height: '100%',
                     railOpacity: 0.9
@@ -467,14 +467,14 @@ function fullScroll($timeout){
 /**
  * slimScroll - Directive for slimScroll with custom height
  */
-function slimScroll($timeout){
+function slimScroll($timeout) {
     return {
         restrict: 'A',
         scope: {
             boxHeight: '@'
         },
-        link: function(scope, element) {
-            $timeout(function(){
+        link: function (scope, element) {
+            $timeout(function () {
                 element.slimscroll({
                     height: scope.boxHeight,
                     railOpacity: 0.9
@@ -491,8 +491,8 @@ function slimScroll($timeout){
 function clockPicker() {
     return {
         restrict: 'A',
-        link: function(scope, element) {
-                element.clockpicker();
+        link: function (scope, element) {
+            element.clockpicker();
         }
     };
 };
@@ -501,7 +501,7 @@ function clockPicker() {
 /**
  * landingScrollspy - Directive for scrollspy in landing page
  */
-function landingScrollspy(){
+function landingScrollspy() {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
@@ -516,10 +516,10 @@ function landingScrollspy(){
 /**
  * fitHeight - Directive for set height fit to window height
  */
-function fitHeight(){
+function fitHeight() {
     return {
         restrict: 'A',
-        link: function(scope, element) {
+        link: function (scope, element) {
             element.css("height", $(window).height() + "px");
             element.css("min-height", $(window).height() + "px");
         }
@@ -529,14 +529,14 @@ function fitHeight(){
 /**
  * truncate - Directive for truncate string
  */
-function truncate($timeout){
+function truncate($timeout) {
     return {
         restrict: 'A',
         scope: {
             truncateOptions: '='
         },
-        link: function(scope, element) {
-            $timeout(function(){
+        link: function (scope, element) {
+            $timeout(function () {
                 element.dotdotdot(scope.truncateOptions);
 
             });
@@ -555,7 +555,7 @@ function touchSpin() {
             spinOptions: '='
         },
         link: function (scope, element, attrs) {
-            scope.$watch(scope.spinOptions, function(){
+            scope.$watch(scope.spinOptions, function () {
                 render();
             });
             var render = function () {
@@ -571,11 +571,11 @@ function touchSpin() {
 function markdownEditor() {
     return {
         restrict: "A",
-        require:  'ngModel',
-        link:     function (scope, element, attrs, ngModel) {
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
             $(element).markdown({
-                savable:false,
-                onChange: function(e){
+                savable: false,
+                onChange: function (e) {
                     ngModel.$setViewValue(e.getContent());
                 }
             });
@@ -594,7 +594,7 @@ function passwordMeter() {
             pwOptions: '='
         },
         link: function (scope, element, attrs) {
-            scope.$watch(scope.pwOptions, function(){
+            scope.$watch(scope.pwOptions, function () {
                 render();
             });
             var render = function () {

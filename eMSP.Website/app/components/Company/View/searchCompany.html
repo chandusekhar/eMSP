@@ -74,7 +74,7 @@
                         <h5><strong>Search Results:</strong></h5>
                         <div ibox-tools></div>
                     </div>
-                   
+
                     <div class="ibox-content">
                         <div class="row">
                             <!--repeater-->
@@ -82,15 +82,15 @@
                                 <div class="col-lg-4">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
-                                            {{res.companyName}} 
+                                            {{res.companyName}}
                                         </div>
                                         <div class="panel-body">
                                             <div class="ibox-heading white-bg">
                                                 <p class="small"><b>Website:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{res.companyWebsite}}</p>
                                                 <p class="small"><b>Email:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{res.companyEmail}}</p>
                                                 <p class="small"><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{res.companyAddress}}</p>
-                                                <p class="small"><b>Contact Number:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{res.companyPhoneNumber}}</p>                                              
-                                            </div>                                            
+                                                <p class="small"><b>Contact Number:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{res.companyPhoneNumber}}</p>
+                                            </div>
                                         </div>
                                         <div align="center" class="form-control inline">
                                             <button class="btn-primary btn btn-xs" ng-click="view(res)">Manage</button>
@@ -181,7 +181,7 @@
                                                                 <div class="col-lg-4">
                                                                     <div class="panel panel-primary">
                                                                         <div class="panel-heading">
-                                                                            
+
                                                                             {{loc.user.firstName + " " +loc.user.lastName}} <div class="btn-group-xs pull-right">
                                                                                 <a ng-click="updateUser(loc)" class="text-white">
                                                                                     <span class="fa fa-pencil"></span>
@@ -199,7 +199,7 @@
                                                                                 <p class="small"><b>state:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.user.state}}</p>
                                                                                 <p class="small"><b>country:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.user.country}}</p>
                                                                                 <p class="small"><b>Zipe:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.user.zipCode}}</p>
-                                                                            </div>                                                                            
+                                                                            </div>
                                                                         </div>
                                                                         <div align="center" class="form-control inline">
                                                                             <p class="small inline" ng-if="loc.isActive">Active</p>
@@ -215,13 +215,18 @@
                                                     </div>
                                                 </div>
                                             </uib-tab>
-                                            <uib-tab heading="Locations" class="dsads">
+                                            <uib-tab heading="Locations/Branch" class="dsads">
                                                 <div class="ibox float-e-margins">
-                                                    <div class="ibox-title">
+                                                    <div class="ibox-title" ng-show="!toggleBranches">
                                                         <h5><strong>Locations:</strong></h5>
-                                                        <button type="submit" ng-click="modelL()" class="btn btn-primary m-b pull-right">Create</button>
+                                                        <button type="submit" ng-click="modelL()" class="btn btn-primary m-b pull-right">Add Location</button>
                                                     </div>
-                                                    <div class="ibox-content">
+                                                    <div class="ibox-title" ng-show="toggleBranches">
+                                                        <h5><strong>Branches:</strong></h5>
+                                                        <button type="submit" ng-click="swithLocation()" class="btn btn-default m-b pull-right float-e-margins">Close</button>
+                                                        <button type="submit" ng-click="modalB(refData.locationData)" class="btn btn-primary m-b m-r pull-right">Add Branch</button>
+                                                    </div>
+                                                    <div class="ibox-content" ng-show="!toggleBranches">
                                                         <div class="row">
                                                             <!--repeater-->
                                                             <div ng-repeat="loc in resLocations">
@@ -241,15 +246,17 @@
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="ibox-heading white-bg">
-                                                                                <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine2}}</p>
-                                                                                <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.stateName}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.countryName}}</p>
+                                                                                <p class="small"><b>Stree Line1 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine1}}</p>
+                                                                                <p class="small"><b>Stree Line2 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.streetLine2}}</p>
+                                                                                <p class="small"><b>Sity :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.city}}</p>
+                                                                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.stateName}}</p>
+                                                                                <p class="small"><b>Sountry :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.countryName}}</p>
                                                                             </div>
                                                                             <div>
                                                                                 <div class="ibox-heading white-bg">
-                                                                                    <b>Branches:</b><a class="text-navy" ng-click="modalB(loc)"> <i class="fa fa-plus-circle"></i></a>
+                                                                                    <b>Branches:</b>
+                                                                                    <!--<a class="text-navy" ng-click="modalB(loc)"> <i class="fa fa-plus-circle"></i></a>-->
+                                                                                    <button class="btn-primary btn btn-xs" ng-click="loadBranches(loc,toggleBranches)">Manage</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -265,14 +272,7 @@
                                                         </div>
 
                                                     </div>
-                                                </div>
-                                            </uib-tab>
-                                            <uib-tab heading="Branches">
-                                                <div class="ibox float-e-margins">
-                                                    <div class="ibox-title">
-                                                        <h5><strong>Branches:</strong></h5>                                                        
-                                                    </div>
-                                                    <div class="ibox-content">
+                                                    <div class="ibox-content" ng-show="toggleBranches">
                                                         <div class="row">
                                                             <!--repeater-->
                                                             <div ng-repeat="brn in resBranches">
@@ -291,18 +291,20 @@
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="ibox-heading white-bg">
-                                                                                <p class="small"><b>Location Id:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationName}}</p>
-                                                                                <p class="small"><b>Phone Number:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>Email Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine1:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
-                                                                                <p class="small"><b>streeLine2:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine2}}</p>
-                                                                                <p class="small"><b>city:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.city}}</p>
-                                                                                <p class="small"><b>stateId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateName}}</p>
-                                                                                <p class="small"><b>countryId:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryName}}</p>
+                                                                                <p class="small"><b>Location Name :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationName}}</p>
+                                                                                <p class="small"><b>Phone Number :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>Email Address :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>Stree Line1 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>StreeLine2 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine2}}</p>
+                                                                                <p class="small"><b>City :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.city}}</p>
+                                                                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateName}}</p>
+                                                                                <p class="small"><b>Country :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryName}}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div align="center" class="form-control inline">
-                                                                            <p class="small inline" ng-if="brn.isActive">Active</p><p class="small inline" ng-if="!brn.isActive">Deactive</p> <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)" ng-model="brn.isActive" />
+                                                                            <p class="small inline" ng-if="brn.isActive">Active</p><p class="small inline" ng-if="!brn.isActive">Deactive</p>
+                                                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                                                   ng-change="toggleActive(con)" ng-model="brn.isActive" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -322,4 +324,4 @@
         </div>
     </div>
     <!-- End wrapper-->
-    </div>
+</div>

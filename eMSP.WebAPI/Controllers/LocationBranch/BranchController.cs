@@ -45,16 +45,33 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
             }
         }
 
-        [Route("getBranch")]
+        [Route("getBranchs")]
         [HttpPost]
         [Authorize]
         [ResponseType(typeof(LocationBranchModel))]
-        public async Task<IHttpActionResult> GetBranch(LocationBranchModel data)
+        public async Task<IHttpActionResult> GetBranchs(LocationBranchModel data)
         {
             try
             {
 
                 return Ok(await BranchService.GetBranchs(data));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Route("getBranchesByLocation")]
+        [HttpPost]
+        [Authorize]
+        [ResponseType(typeof(LocationBranchModel))]
+        public async Task<IHttpActionResult> GetBranchesByLocation(LocationBranchModel data)
+        {
+            try
+            {
+                return Ok(await BranchService.GetBranchesByLocation(data));
             }
             catch (Exception)
             {

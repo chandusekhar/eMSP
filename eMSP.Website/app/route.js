@@ -687,6 +687,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['css/plugins/dropzone/basic.css', 'css/plugins/dropzone/dropzone.css', 'js/plugins/dropzone/dropzone.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                         }
                     ]);
                 }

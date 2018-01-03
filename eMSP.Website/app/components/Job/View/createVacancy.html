@@ -28,7 +28,7 @@
                     <div class="ibox-content">
                         <form class="m-t" name="form" novalidate>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.vacancyType.$dirty && form.vacancyType.$error.required }">                                
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.vacancyType.$dirty && form.vacancyType.$error.required }">
                                 <select ng-model="dataJSON.vacancyType" class="form-control">
                                     <option value="">-- Select Vacancy Type --</option>
                                     <option ng-repeat="res in refData.vacancyTypes" value="{{res.id}}">{{res.name}}</option>
@@ -37,7 +37,7 @@
                                     Vacancy Type is required
                                 </span>
                             </div>
-                                
+
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.customerId.$dirty && form.customerId.$error.required }">
                                 <select ng-model="dataJSON.customerId" class="form-control" ng-change="getUserList()">
                                     <option value="">-- Select Customer --</option>
@@ -53,7 +53,7 @@
                                     <input type="datetime" class="form-control" name="startDate"
                                            ng-model="dataJSON.startDate"
                                            auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                           placeholder="Start Date" 
+                                           placeholder="Start Date"
                                            required="" />
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
@@ -71,26 +71,37 @@
                                            required="" />
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
-
                                 <span ng-show="form.endDate.$dirty && form.endDate.$error.required" class="help-block">
                                     End Date is required
                                 </span>
                             </div>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.submissionDueDate.$dirty && form.submissionDueDate.$error.required }">
-                                <div class="input-group date">
-                                    <input type="datetime" class="form-control" name="submissionDueDate"
-                                           ng-model="dataJSON.submissionDueDate"
-                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                           placeholder="Submission Due Date"
-                                           required="" />
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <div class="col-md-12 no-padding">
+                                <div class="form-group col-md-6 col-xs-12 col-sm-12" ng-class="{ 'has-error': form.submissionDueDate.$dirty && form.submissionDueDate.$error.required }">
+                                    <div class="input-group date">
+                                        <input type="datetime" class="form-control" name="submissionDueDate"
+                                               ng-model="dataJSON.submissionDueDate"
+                                               auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
+                                               placeholder="Submission Due Date"
+                                               required="" />
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    <span ng-show="form.submissionDueDate.$dirty && form.submissionDueDate.$error.required" class="help-block">
+                                        Submission Due Date is required
+                                    </span>
                                 </div>
-
-                                <span ng-show="form.submissionDueDate.$dirty && form.submissionDueDate.$error.required" class="help-block">
-                                    Submission Due Date is required
-                                </span>
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.positionTitle.$dirty && form.positionTitle.$error.required }">
+                                    <input type="text" class="form-control" name="positionTitle"
+                                           ng-model="dataJSON.positionTitle"
+                                           placeholder="Position Title"
+                                           required="">
+                                    <span ng-show="form.positionTitle.$dirty && form.positionTitle.$error.required" class="help-block">
+                                        Position Title is required
+                                    </span>
+                                </div>
                             </div>
+
+                            
+
 
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.hiringManager.$dirty && form.hiringManager.$error.required }">
                                 <input type="text" class="form-control" name="hiringManager"
@@ -116,15 +127,7 @@
                                 </span>
                             </div>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.positionTitle.$dirty && form.positionTitle.$error.required }">
-                                <input type="text" class="form-control" name="positionTitle"
-                                       ng-model="dataJSON.positionTitle"
-                                       placeholder="Position Title"
-                                       required="">
-                                <span ng-show="form.positionTitle.$dirty && form.positionTitle.$error.required" class="help-block">
-                                    Position Title is required
-                                </span>
-                            </div>
+
 
 
 

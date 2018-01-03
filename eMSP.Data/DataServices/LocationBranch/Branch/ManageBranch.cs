@@ -39,7 +39,29 @@ namespace eMSP.Data.DataServices.LocationBranch
                 throw;
 
             }
-        }        
+        }
+
+        internal static async Task<List<tblBranch>> GetBranchsByLocation(long Id)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblBranches
+                                                  .Include(a => a.tblLocation)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
+                                                  .Where(x => x.LocationID == Id).ToList());
+
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
 
         #endregion
 

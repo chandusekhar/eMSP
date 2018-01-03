@@ -113,11 +113,14 @@
                                     </div>
                                     <br />
                                 </div>
-
+                                <br />
                                 <div class="ibox-heading white-bg">
                                     <b>Locations:</b>
-                                    <a class="text-navy" ng-click="openAddLocation(toggleAddLocation,vacancyData)">
+                                    <a class="text-navy" ng-show="!toggleAddLocation" ng-click="toggleAddLocationFun(toggleAddLocation,vacancyData)">
                                         <i class="fa fa-plus-circle"></i>
+                                    </a>
+                                    <a class="text-navy" ng-show="toggleAddLocation" ng-click="toggleAddLocationFun(toggleAddLocation,vacancyData)">
+                                        <i class="fa fa-minus-circle"></i>
                                     </a>
                                 </div>
                                 <div ng-show="toggleAddLocation">
@@ -145,10 +148,14 @@
                                     </div>
                                     <br />
                                 </div>
-
+                                <br />
                                 <div class="ibox-heading white-bg">
-                                    <b>Suppliers:</b><a class="text-navy" ng-click="openAddSupplier(toggleAddSupplier)">
+                                    <b>Suppliers:</b>
+                                    <a class="text-navy" ng-show="!toggleAddSupplier" ng-click="toggleAddSupplierFun(toggleAddSupplier)">
                                         <i class="fa fa-plus-circle"></i>
+                                    </a>
+                                    <a class="text-navy" ng-show="toggleAddSupplier" ng-click="toggleAddSupplierFun(toggleAddSupplier)">
+                                        <i class="fa fa-minus-circle"></i>
                                     </a>
                                 </div>
                                 <div ng-show="toggleAddSupplier">
@@ -172,6 +179,51 @@
                                         <span class="small" ng-if="s.isActive">Active</span>
                                         <span class="small" ng-if="!s.isActive">De-Active</span>
                                         <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleVSupActive(s)" ng-model="s.isActive" />
+
+                                    </div>
+                                    <br />
+                                </div>
+                                <br />
+                                <div class="ibox-heading white-bg">
+                                    <b>Files:</b><a class="text-navy" ng-click="openAddFiles(toggleAddFiles)">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </a>
+                                </div>
+                                <div ng-show="toggleAddFiles">
+                                    <!--<div class="col-md-6">
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                            <div class="form-control" data-trigger="fileinput">
+                                                <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                                <span class="fileinput-filename"></span>
+                                            </div>
+                                            <span class="input-group-addon btn btn-default btn-file">
+                                                <span class="fileinput-new">Select file</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input type="file" name="myFile" file-model = "myFile" />
+                                            </span>
+                                            <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                               data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                    </div>-->
+                                    <div class="col-md-6">
+                                        <input type="file" name="myFile" file-model="myFile" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" ng-click="addVacancyFiles(vacancyData)" class="btn btn-primary m-b">Add</button>
+                                    </div>
+                                </div>
+                                <div ng-repeat="s in vacancyData.filesList" ng-if="!s.isDeleted">
+                                    <div class="ibox-tools pull-left small">
+
+                                        <i class="fa fa fa-dot-circle-o"></i> {{s.supplierName}}
+                                        &nbsp;&nbsp;
+                                        <a ng-click="removeFile(s)"> <i class="fa fa-trash"></i></a>
+                                        &nbsp;
+                                        <span class="small" ng-if="s.isActive">Active</span>
+                                        <span class="small" ng-if="!s.isActive">De-Active</span>
+                                        <input type="checkbox" class=" switchery small"
+                                               ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleVFileActive(s)"
+                                               ng-model="s.isActive" />
 
                                     </div>
                                     <br />

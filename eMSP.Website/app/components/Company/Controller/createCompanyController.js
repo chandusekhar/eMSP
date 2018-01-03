@@ -22,7 +22,6 @@ function createCompanyController($scope, $state, localStorageService, configJSON
 
     }
     if ($scope.formAction == "Update") {
-        debugger;
         $scope.edit = true;
         $scope.dataJSON = localStorageService.get('editCompanyData');
         $scope.getStateList();

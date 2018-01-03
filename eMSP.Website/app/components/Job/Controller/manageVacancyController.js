@@ -9,6 +9,14 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
     $scope.vacancyData = localStorageService.get('vacancyData') ? localStorageService.get('vacancyData') : undefined;
     $scope.dataJSON.companyType = $scope.configJSON.companyType;
     $scope.dataJSON.companyName = $scope.configJSON.companyName;
+    $scope.myFile;
+
+    //Apply methods for dropzone
+    //Visit http://www.dropzonejs.com/#dropzone-methods for more methods
+    $scope.dzMethods = {};
+    $scope.removeNewFile = function () {
+        $scope.dzMethods.removeFile($scope.newFile); //We got $scope.newFile from 'addedfile' event callback
+    }
 
     var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
     apires.then(function (data) {
@@ -19,7 +27,7 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
     apiCL.then(function (data) {
         $scope.refData.customerList = data;
     });
-    
+
     if (!$scope.vacancyData.skillList) {
         var apiSL = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCYSKILLS + $scope.vacancyData.id, { "id": $scope.vacancyData.id });
         apiSL.then(function (data) {
@@ -37,17 +45,20 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
         var apiSL = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCYSUPPLIER + $scope.vacancyData.id, { "id": $scope.vacancyData.id });
         apiSL.then(function (data) {
             $scope.vacancyData.supplierList = data;
-            console.log(data);
         });
     }
 
-    $scope.openAddLocation = function (toggleAddLocation, vacancy) {
-        this.toggleAddLocation = true;
+    $scope.toggleAddLocationFun = function (toggleAddLocation, vacancy) {
+        if (this.toggleAddLocation) {
+            this.toggleAddLocation = false;
+        } else {
+            this.toggleAddLocation = true;
 
-        var apiSL = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETCUSTOMERLOCATIONBRANCHURL, { companyType: "Customer", companyId: vacancy.customerId, isActive: true });
-        apiSL.then(function (data) {
-            $scope.refData.locationList = data;
-        });
+            var apiSL = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETCUSTOMERLOCATIONBRANCHURL, { companyType: "Customer", companyId: vacancy.customerId, isActive: true });
+            apiSL.then(function (data) {
+                $scope.refData.locationList = data;
+            });
+        }
     }
 
     $scope.addVacancyLocation = function (vacancy) {
@@ -61,6 +72,7 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
 
         var apiSL = apiCall.post(APP_CONSTANTS.URL.VACANCY.ADDVACANCYLOCATIONS, $scope.data);
         apiSL.then(function (data) {
+            this.toggleAddLocation = false;
             alert("Location added Successfully");
         });
 
@@ -118,20 +130,28 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
     }
 
 
-    $scope.openAddSupplier = function (toggleAddSupplier) {
-        this.toggleAddSupplier = true;
-        var data = {
-            companyType: "Supplier",
-            companyName: "%"
+    $scope.toggleAddSupplierFun = function (toggleAddSupplier) {
+        var obj = "123" + 3 + 4;
+        var ss = 3 + 4 + "123";
+        var dd = "125" - 12;
+        var hhh = -"124" + 10;
+
+        if (this.toggleAddSupplier) {
+            this.toggleAddSupplier = false;
+        } else {
+            this.toggleAddSupplier = true;
+            var data = {
+                companyType: "Supplier",
+                companyName: "%"
+            }
+            var apiSL = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, data);
+            apiSL.then(function (data) {
+                $scope.refData.supplierList = data;
+            });
         }
-        var apiSL = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, data);
-        apiSL.then(function (data) {
-            $scope.refData.supplierList = data;
-        });
     }
 
     $scope.addVacancySupplier = function (vacancy) {
-        debugger;
         $scope.data = {
             createdUserID: "afcf8230-7878-4e1d-a550-532fd10769ae",
             updatedUserID: "afcf8230-7878-4e1d-a550-532fd10769ae",
@@ -142,6 +162,7 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
 
         var apiSL = apiCall.post(APP_CONSTANTS.URL.VACANCY.ADDVACANCYSUPPLIER, $scope.data);
         apiSL.then(function (data) {
+            this.toggleAddSupplier = false;
             alert("Supplier added Successfully");
         });
     }
@@ -161,6 +182,33 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
             alert("Data Updated Successfully");
         });
     }
+
+
+    $scope.openAddFiles = function (toggleAddFiles) {
+        this.toggleAddFiles = true;
+        
+
+    }
+
+    $scope.addVacancyFiles = function (vacancy) {
+        var file = $scope.myFile;
+
+        console.log('file is ');
+        console.dir(file);
+
+        var uploadUrl = "/fileUpload";
+        //fileUpload.uploadFileToUrl(file, uploadUrl);
+    }
+
+    $scope.removeFile = function (file) {
+
+    }
+
+    $scope.toggleVFileActive = function (file) {
+    }
+
+
+
 }
 
 function addVacancySkillController($scope, $state, $uibModalInstance, $filter, apiCall, APP_CONSTANTS) {

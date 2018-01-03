@@ -17,10 +17,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
         apires.then(function (data) {            
             $scope.res = data;
-            localStorageService.set('editCompanyData', data);
-            console.log(data);
+            localStorageService.set('editCompanyData', data);            
             $scope.loadLocations($scope.res.id);
-            $scope.loadAllBranches($scope.res.id);   
+            $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
         });
     } else {
@@ -30,7 +29,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.searchResults = data;
         });
     }
-    
+
+
+    //Function to load Locations
     $scope.loadLocations = function (compId) {        
         var apires = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETALLLOCATIONSURL, { companyType: $scope.dataJSON.companyType, companyId: compId });
         apires.then(function (data) {
@@ -38,24 +39,22 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
-    $scope.loadAllBranches = function (compId) {
-        
-        var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHESURL, { companyType: $scope.dataJSON.companyType, companyId: compId });
+    //Function to load Branch by location
+    $scope.loadBranches = function (location) {
+        $scope.refData.locationData = location;
+        var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHEBYLOCATIONSURL, { locationId: $scope.refData.locationData.id });
         apires.then(function (data) {
-            console.log(data);
+            $scope.toggleBranches = true;
             $scope.resBranches = data;
         });
     }
 
-    $scope.loadBranchesByLocation = function (compId, locId) {
-        var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHEBYLOCATIONSURL, { companyType: $scope.dataJSON.companyType, companyId: compId, locationId: locId });
-        apires.then(function (data) {
-            console.log(data);
-            $scope.resBranches = data;
-        });
+    //Function to swith back to locations
+    $scope.swithLocation = function () {
+        $scope.toggleBranches = false;
     }
-    $scope.loadUsers = function (compId) {
     
+    $scope.loadUsers = function (compId) {    
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.dataJSON.companyType, id: compId });
         apires.then(function (data) {
             $scope.resUsers = data;
@@ -63,35 +62,27 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.edit = function (data) {
-        debugger;
         if (data) {
-
             localStorageService.set('editCompanyData', data);
-            debugger;
             $state.go($scope.configJSON.editUrl);
         }
 
     }
     $scope.view = function (data) {
-        debugger;
         if (data) {
             $scope.IsMSP = true;
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
             $scope.loadLocations($scope.res.id);
-            $scope.loadAllBranches($scope.res.id);
             $scope.loadUsers($scope.res.id);
         }
 
     }
     $scope.submit = function () {
         if ($scope.form.valid) {
-
             alert("Form submitted");
-
             var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, dataJSON);
         }
-
     }
 
     $scope.modelU = function (model) {
@@ -119,7 +110,6 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.modelL = function (model) {
-        
         $scope.ldataJSON = {};
         if (model) {
             $scope.editform = true;            

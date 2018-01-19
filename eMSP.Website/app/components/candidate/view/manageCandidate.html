@@ -1,0 +1,311 @@
+<style>
+    .one {
+        cursor: pointer;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 4px;
+        font: caption;
+        text-align: center;
+        border: 1px dotted green;
+        box-sizing: border-box;
+    }
+
+
+        .one span {
+            display: block;
+            font-size: 10px;
+        }
+
+        .one img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100px;
+        }
+
+        .one input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 9999px;
+            cursor: pointer;
+        }
+
+
+
+
+
+    .two {
+        display: block;
+        margin: 30px;
+    }
+
+
+    pre {
+        margin: 30px;
+        font-size: 10px;
+    }
+</style>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <form class="m-t" name="form" novalidate>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{configJSON.titleFormCreate}}</h5>
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="row">
+
+
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">First Name:</label>
+                                        <div ng-class="{ 'has-error': form.FirstName.$dirty && form.FirstName.$error.required }">
+                                            <input type="text" class="form-control" name="FirstName"
+                                                   ng-model="dataJSON.Candidate.FirstName"
+                                                   placeholder="First Name" required="">
+                                            <span ng-show="form.FirstName.$dirty && form.FirstName.$error.required" class="help-block">
+                                                First Name is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Last Name:</label>
+                                        <div ng-class="{ 'has-error': form.LastName.$dirty && form.LastName.$error.required }">
+                                            <input type="text" class="form-control" name="LastName"
+                                                   ng-model="dataJSON.Candidate.LastName"
+                                                   placeholder="Last Name" required="">
+                                            <span ng-show="form.LastName.$dirty && form.LastName.$error.required" class="help-block">
+                                                Last Name is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Date Of Birth:</label>
+
+                                        <div ng-class="{ 'has-error': form.DateOfBirth.$dirty && form.DateOfBirth.$error.required }" class="input-group date">
+                                            <input name="DateOfBirth" ng-model="dataJSON.Candidate.DateOfBirth" type="datetime" class="form-control" placeholder="MM/DD/YYYY" date-time view="date" auto-close="true" min-view="date" format="MM/DD/YYYY">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <span ng-show="form.DateOfBirth.$dirty && form.DateOfBirth.$error.required" class="help-block">
+                                                Date Of Birth is required
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Unique Social ID:</label>
+                                        <div ng-class="{ 'has-error': form.UniqueSocialID.$dirty && form.UniqueSocialID.$error.required }">
+                                            <input type="text" class="form-control" name="UniqueSocialID"
+                                                   ng-model="dataJSON.Candidate.UniqueSocialID"
+                                                   placeholder="Unique Social ID" required="">
+                                            <span ng-show="form.UniqueSocialID.$dirty && form.UniqueSocialID.$error.required" class="help-block">
+                                                Unique Social ID is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{configJSON.titleFormCreateAddress}}</h5>
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Email:</label>
+                                        <div ng-class="{ 'has-error': form.EmailAddress.$dirty && form.EmailAddress.$error.required }">
+                                            <input type="email" class="form-control"
+                                                   ng-model="dataJSON.Contact.EmailAddress"
+                                                   placeholder="Email" name="EmailAddress" required="">
+                                            <span ng-show="form.EmailAddress.$dirty && form.EmailAddress.$error.required" class="help-block">
+                                                Email is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Mobile Number:</label>
+                                        <div ng-class="{ 'has-error': form.MobileNumber.$dirty && form.MobileNumber.$error.required }">
+                                            <input type="text" class="form-control"
+                                                   ng-model="dataJSON.Contact.MobileNumber"
+                                                   name="MobileNumber" placeholder="Phone Number" required="">
+                                            <span ng-show="form.MobileNumber.$dirty && form.MobileNumber.$error.required" class="help-block">
+                                                Mobile Number is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Street Address:</label>
+                                        <div ng-class="{ 'has-error': form.StreetAddress.$dirty && form.StreetAddress.$error.required }">
+                                            <input type="text" class="form-control"
+                                                   ng-model="dataJSON.Contact.StreetAddress"
+                                                   name="StreetAddress" placeholder="Address" required="">
+                                            <span ng-show="form.StreetAddress.$dirty && form.StreetAddress.$error.required" class="help-block">
+                                                Street Address is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Country:</label>
+                                        <div ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
+                                            <select ng-model="dataJSON.Contact.CountyID" class="form-control" ng-change="getStateList()">
+                                                <option value="">Country</option>
+                                                <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
+                                            </select>
+                                            <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
+                                                country is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">State:</label>
+                                        <div ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
+                                            <select ng-model="dataJSON.Contact.StateID" class="form-control">
+                                                <option value="">State</option>
+                                                <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
+                                            </select>
+                                            <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
+                                                state is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">City:</label>
+                                        <div ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                                            <input type="text" class="form-control"
+                                                   ng-model="dataJSON.Contact.City"
+                                                   name="city" placeholder="City" required="">
+
+                                            <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                                                City is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Zip:</label>
+                                        <div ng-class="{ 'has-error': form.ZipCode.$dirty && form.ZipCode.$error.required }">
+                                            <input type="text" class="form-control" name="ZipCode"
+                                                   ng-model="dataJSON.Contact.ZipCode"
+                                                   placeholder="Zip" required="">
+                                            <span ng-show="form.ZipCode.$dirty && form.ZipCode.$error.required" class="help-block">
+                                                ZipCode is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="checkbox i-checks">
+                                            <label>
+                                                <input type="checkbox" name="IsActive" ng-model="dataJSON.Contact.IsPrimary">
+                                                <i></i> Is Primary
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{configJSON.titleFormCreateIndustry}}</h5>
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+
+
+                                <div class="form-group">
+                                    <label class="font-normal">Industries</label>
+                                    <div ng-class="{ 'has-error': form.industryName.$dirty && form.industryName.$error.required }">
+                                        <ui-select multiple ng-model="dataJSON.CandidateIndustries" ng-change="loadSkills()" theme="bootstrap" class="form-control" ng-disabled="disabled">
+                                            <ui-select-match placeholder="Select Industries...">{{$item.industryName}}</ui-select-match>
+                                            <ui-select-choices repeat="res.id as res in refData.industryList | filter:$select.search">
+                                                {{res.industryName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="font-normal">Skills</label>
+                                    <div ng-class="{ 'has-error': form.skills.$dirty && form.skills.$error.required }">
+                                        <ui-select multiple ng-model="dataJSON.CandidateSkills" theme="bootstrap" class="form-control" ng-disabled="disabled">
+                                            <ui-select-match placeholder="Select Skills...">{{$item.skillName}}</ui-select-match>
+                                            <ui-select-choices repeat="res.id as res in refData.industrySkillsList | filter:$select.search">
+                                                {{res.skillName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{configJSON.titleFormCreateFile}}</h5>
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row form-group">
+
+
+                                    <!--<input type="button" ng-click="uploadFiles()" value="Upload" />-->
+
+                                    <div drop-zone ng-model="dataJSON.CandidateFile" class="one btn btn-default">
+
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div ng-repeat="f in dzfiles track by $index" ng-if="dzfiles.length > 0" class="thumbnail col-sm-2" style=" margin:5px; float:left">
+
+                                            <img src="{{f.data}}" ng-if="f.type.includes('image')" class="img-circle" alt="{{f.name}}" style=" height:100px; width:100px">
+                                            <img src="/img/file.png" ng-if="!f.type.includes('image')" class="img-circle" alt="{{f.name}}" style=" height:100px; width:100px">
+                                            <div class="caption text-center">
+                                                <p style="word-wrap:break-word">{{f.name}}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="row form-group"><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

@@ -313,6 +313,99 @@
                                                     </div>
                                                 </div>
                                             </uib-tab>
+
+                                            <uib-tab heading="Candidate" class="dsads">
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title" >
+                                                        <h5><strong>Candidate:</strong></h5>
+                                                        <a class="btn btn-primary m-b pull-right" ui-sref="{{configJSON.createCandidateUrl}}">Add Candidate</a>
+                                                        <!--<button type="submit" ng-click="modelCandidate()" class="btn btn-primary m-b pull-right">Add Candidate</button>-->
+                                                    </div>
+                                                    
+                                                    <div class="ibox-content">
+                                                        <div class="row">
+                                                            <!--repeater-->
+                                                            <div ng-repeat="loc in resCandidates">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-primary">
+                                                                        <div class="panel-heading">
+                                                                            <a class="text-white" ng-show="!test" ng-click=""> <i class="fa fa-plus-square"></i></a>
+                                                                            <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
+                                                                            {{loc.Candidate.FirstName + " " + loc.Candidate.LastName}} <div class="btn-group-xs pull-right">
+                                                                                <a ng-click="editCanditate(loc)" class="text-white">
+                                                                                    <span class="fa fa-pencil"></span>
+                                                                                </a>
+                                                                                <a ng-click="deleteCandidate(loc)" class="btn btn-danger">
+                                                                                    <span class="fa fa-trash"></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="ibox-heading white-bg">
+                                                                                <p class="small"><b>DOB :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.DateOfBirth | date}}</p>
+                                                                                <p class="small"><b>Email :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.Email}}</p>
+                                                                                <p class="small"><b>Mobile :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].MobileNumber}}</p>
+                                                                                <p class="small"><b>Street Address :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].StreetAddress}}</p>
+                                                                                <p class="small"><b>City :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].City}}</p>
+                                                                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].State}}</p>
+                                                                                <p class="small"><b>Country :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].Country}}</p>
+                                                                                <p class="small"><b>Zip :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].ZipCode}}</p>
+                                                                            </div>
+                                                                           
+                                                                        </div>
+                                                                        <div align="center" class="form-control inline">
+                                                                            <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
+                                                                            <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
+                                                                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                                                   ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="ibox-content" ng-show="toggleBranches">
+                                                        <div class="row">
+                                                            <!--repeater-->
+                                                            <div ng-repeat="brn in resBranches">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-primary">
+                                                                        <div class="panel-heading">
+                                                                            <a class="text-white"> <i class="fa fa-plus-square"></i></a>
+                                                                            {{brn.branchName}} <div class="btn-group-xs pull-right">
+                                                                                <a ng-click="" class="text-white">
+                                                                                    <span class="fa fa-pencil"></span>
+                                                                                </a>
+                                                                                <a ng-click="" class="btn btn-danger">
+                                                                                    <span class="fa fa-trash"></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="ibox-heading white-bg">
+                                                                                <p class="small"><b>Location Name :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.locationName}}</p>
+                                                                                <p class="small"><b>Phone Number :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>Email Address :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>Stree Line1 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine1}}</p>
+                                                                                <p class="small"><b>StreeLine2 :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.streetLine2}}</p>
+                                                                                <p class="small"><b>City :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.city}}</p>
+                                                                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.stateName}}</p>
+                                                                                <p class="small"><b>Country :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{brn.countryName}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div align="center" class="form-control inline">
+                                                                            <p class="small inline" ng-if="brn.isActive">Active</p><p class="small inline" ng-if="!brn.isActive">Deactive</p>
+                                                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                                                   ng-change="toggleActive(con)" ng-model="brn.isActive" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </uib-tab>
                                         </uib-tabset>
                                     </div>
                                 </div>

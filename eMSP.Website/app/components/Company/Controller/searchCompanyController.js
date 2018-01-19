@@ -21,6 +21,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.loadLocations($scope.res.id);
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
+           
         });
     } else {
         $scope.dataJSON.companyName = "%";
@@ -49,6 +50,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
+    //Function to load candidates
+    $scope.loadCandidates = function (compId) {
+        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + compId, { 'SupplierId': compId });
+        apires.then(function (data) {
+            $scope.resCandidates = data;
+        });
+    }
     //Function to swith back to locations
     $scope.swithLocation = function () {
         $scope.toggleBranches = false;
@@ -75,6 +83,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             localStorageService.set('editCompanyData', data);
             $scope.loadLocations($scope.res.id);
             $scope.loadUsers($scope.res.id);
+            $scope.loadCandidates($scope.res.id);
         }
 
     }
@@ -149,6 +158,56 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
+    $scope.modelCandidate = function (model) {
+
+        $scope.editform = false;
+
+        $scope.bdataJSON = {};
+      
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'app/components/candidate/view/manageCandidate.html',
+            scope: $scope,
+            controller: 'candidateController',
+            windowClass: 'animated slideInRight',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/candidate/config/manageCandidate.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                AppIndustries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRIESURL, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                    return {};
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        }
+                    ]);
+                }
+            }
+        });
+    }
+
     $scope.updateUser = function (model) {
         model.companyId = $scope.res.id;
         model.companyType = $scope.res.companyType;
@@ -185,5 +244,10 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             alert("Location Removed Successfully");
             $state.reload();
         });
+    }
+
+    $scope.editCanditate = function (candidate) {
+        localStorageService.set('editCandidateData', candidate);
+        $state.go("candidate.edit");
     }
 }

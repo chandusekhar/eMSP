@@ -123,6 +123,7 @@ namespace eMSP.Data.Extensions
             {
                 userId = data.UserID,
                 companyId = data.MSPID,
+                companyType = "MSP",
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
@@ -132,8 +133,6 @@ namespace eMSP.Data.Extensions
                 isDeleted = data.IsDeleted,
                 user = data.tblUserProfile != null ? data.tblUserProfile.ConvertToUser() : null
             };
-
-
         }
 
         public static UserModel ConvertToUserModel(this tblCustomerUser data)
@@ -142,6 +141,7 @@ namespace eMSP.Data.Extensions
             {
                 userId = data.UserID,
                 companyId = data.CustomerID,
+                companyType= "Customer",
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
@@ -161,6 +161,7 @@ namespace eMSP.Data.Extensions
             {
                 userId = data.UserID,
                 companyId = data.SupplierID,
+                companyType = "Supplier",
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,

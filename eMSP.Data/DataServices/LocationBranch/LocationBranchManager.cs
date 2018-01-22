@@ -176,8 +176,8 @@ namespace eMSP.Data.DataServices.LocationBranch
             try
             {
                 LocationCreateModel model = null;
-                tblLocation dataLocation = await Task.Run(() => ManageLocation.InsertLocation(data.ConvertTotblLocation()));
-                model = dataLocation.ConvertToLocation();
+                tblLocation dataLocation = await Task.Run(() => ManageLocation.InsertLocation(data.ConvertTotblLocation()));                
+                model = (await Task.Run(()=> ManageLocation.GetLocationDetails(dataLocation.ID))).ConvertToLocation();
                 data.locationId = model.id;
                 
                 switch (data.companyType)
@@ -207,7 +207,7 @@ namespace eMSP.Data.DataServices.LocationBranch
             {
                 BranchCreateModel model = null;
                 tblBranch dataBranch = await Task.Run(() => ManageBranch.InsertBranch(data.ConvertTotblBranch()));
-                model = dataBranch.ConvertToBranch();
+                model = (await Task.Run(() => ManageBranch.GetBranchDetails(dataBranch.ID))).ConvertToBranch();                
                 data.branchId = model.id;
 
                 switch (data.companyType)
@@ -225,7 +225,7 @@ namespace eMSP.Data.DataServices.LocationBranch
 
                 return model;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

@@ -31,7 +31,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                     return await Task.Run(() => db.tblVacancyLocations
                                                   .Include(x => x.tblCustomerLocationBranch.tblLocation)
                                                   .Where(x => x.VacancyID == VacancyId && (x.IsDeleted ?? false) == false)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -47,24 +47,33 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
-        internal static async Task<tblVacancyLocation> AddVacancyLocation(tblVacancyLocation model)
+        internal static async Task<tblVacancyLocation> AddVacancyLocation(long a, tblVacancy vacancy)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    model = db.tblVacancyLocations.Add(model);
+                    tblVacancyLocation model = new tblVacancyLocation();
+                    model = db.tblVacancyLocations.Add(new tblVacancyLocation
+                    {
+                        VacancyID = vacancy.ID,
+                        LocationID = a,
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedTimestamp = vacancy.CreatedTimestamp,
+                        CreatedUserID = vacancy.CreatedUserID,
+                        UpdatedTimestamp = vacancy.UpdatedTimestamp,
+                        UpdatedUserID = vacancy.UpdatedUserID
+                    });
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
-                    
-                    return model;
 
+                    return model;
                 }
             }
             catch (Exception ex)
             {
                 throw;
-
             }
         }
 

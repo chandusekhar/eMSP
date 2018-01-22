@@ -56,13 +56,13 @@ namespace eMSP.Data.DataServices.Company
                         return await Task.Run(() => db.tblSuppliers
                                                       .Include(a => a.tblCountry)
                                                       .Include(b => b.tblCountryState)
-                                                      .Select(x => x).ToList());
+                                                      .Select(x => x).OrderByDescending(x => x.ID).ToList());
                     }
                     else {
                         return await Task.Run(() => db.tblSuppliers
                                                       .Include(a => a.tblCountry)
                                                       .Include(b => b.tblCountryState)
-                                                      .Where(x => x.Name == model.companyName).ToList());
+                                                      .Where(x => x.Name == model.companyName).OrderByDescending(x => x.ID).ToList());
 
                     }
                 }
@@ -87,7 +87,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Select(x => x.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -113,7 +113,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -138,7 +138,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }

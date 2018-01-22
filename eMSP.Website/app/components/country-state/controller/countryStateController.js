@@ -2,75 +2,75 @@
 angular.module('eMSPApp')
     .controller('countryStateController', countryStateController)
     .controller('stateController', stateController)
-function countryStateController($scope, $state, $uibModal, localStorageService, configJSON, AppCountries, apiCall, APP_CONSTANTS) {
+function countryStateController($scope, $state, $uibModal, localStorageService, configJSON, AppCountries, apiCall, APP_CONSTANTS, toaster, $filter) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
     $scope.countryList = AppCountries;
-    $scope.submit = function (form) {
+    $scope.refData.submitted = false;
+
+    $scope.submit = function (form) {        
+        $scope.refData.submitted = true;
         if (form.$valid) {
             var suc = false;
             if ($scope.formAction == "Update") {
                 var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATECOUNTRYURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    alert("Data Updated Successfully");
-                    $state.reload();
+                    toaster.success({ body: "Data Updated Successfully." });                   
+                    $scope.search = true;  
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.CREATECOUNTRYURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    alert("Data Created Successfully");
-                    $state.reload();
+                    toaster.success({ body: "Data Created Successfully." });
+                    $scope.countryList.unshift(data);
+                    $scope.search = true;      
                 });
             }
-
-
-
-
-
         }
-
     }
-    $scope.create = function () {
 
+    $scope.create = function () {
+        $scope.refData.submitted = false;
         $scope.edit = false;
         $scope.formAction = "Create";
         $scope.search = false;
         $scope.dataJSON = {};
     }
+
     $scope.reset = function () {
         $scope.edit = false;
         $scope.formAction = "Create";
         $scope.search = true;
 
     }
+
     $scope.update = function (model) {
         $scope.edit = true;
         $scope.formAction = "Update";
         $scope.search = false;
         $scope.dataJSON = model;
     }
-    $scope.toggleActive = function (model) {
 
+    $scope.toggleActive = function (model) {        
         if (model.countryId) {
             var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATESTATEURL, model);
             res.then(function (data) {
-                alert("Data Updated Successfully");
+                toaster.warning({ body: "Data Updated Successfully." });
             });
         }
         else {
             var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATECOUNTRYURL, model);
             res.then(function (data) {
-                alert("Data Updated Successfully");
-
+                toaster.warning({ body: "Data Updated Successfully." });
             });
         }
-
-
     }
+
+
     $scope.loadStates = function (country, test) {
         this.test = true;
         if (!country.stateList) {
@@ -90,7 +90,7 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
             $scope.sdataJSON = {};
             $scope.sdataJSON.countryId = model.id;
         }
-        
+
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/country-state/view/manageState.html',
             scope: $scope,
@@ -101,45 +101,40 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
 
 
 }
-function stateController($scope, $state, $uibModalInstance, $filter,apiCall, APP_CONSTANTS) {
+function stateController($scope, $state, $uibModalInstance, $filter, apiCall, APP_CONSTANTS, toaster) {
 
     var rawValue = angular.copy($scope.sdataJSON);
+    $scope.submitted = false;
 
     $scope.submit = function (form) {
+        $scope.submitted = true;
         if (form.$valid) {
             var suc = false;
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATESTATEURL, $scope.sdataJSON);
                 res.then(function (data) {
                     $scope.sdataJSON = data;
-                    alert("Data Updated Successfully");
-                    //$state.reload();
+                    toaster.warning({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.CREATESTATEURL, $scope.sdataJSON);
                 res.then(function (data) {
                     $scope.sdataJSON = data;
-                    alert("Data Created Successfully");
+                    toaster.success({ body: "Data Created Successfully." });
                     angular.forEach($scope.countryList, function (obj) {
                         if (obj.id == data.countryId) {
-                            obj.stateList.push(data);
+                            obj.stateList.unshift(data);
                         }
                     });
-                    //$scope.countryList[0].stateList.push(data);
-                    //$state.reload();
                 });
             }
-
             $uibModalInstance.close();
-
-
-
         }
+    }
 
-    }    
     $scope.reset = function () {
-        
-        $state.reload();
+        //$state.reload();
+        $uibModalInstance.close();
     }
 }

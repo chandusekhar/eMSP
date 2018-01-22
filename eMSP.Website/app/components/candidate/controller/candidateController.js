@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
    
-function createCandidateController($scope, $state, localStorageService, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON,) {
+function createCandidateController($scope, $state, localStorageService, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -51,7 +51,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
       
     }
     $scope.submit = function (form) {
-        alert("submit");
+        
         if (!$scope.editform) {
             $scope.dataJSON.SupplierId = 1;            
             $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
@@ -91,9 +91,8 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 }
 
 angular.module('eMSPApp')
-    .directive('dropZone', [
-        function () {
-
+    .directive('dropZone', ['ngAuthSettings',
+        function (ngAuthSettings) {
 
             var config = {
                 template: '<label class="drop-zone">' +
@@ -105,7 +104,7 @@ angular.module('eMSPApp')
                // transclude: true,
                 replace: true,                
                 require: '?ngModel',
-                link: function (scope, element, attributes, ngModel) {
+                link: function (scope, element, attributes, ngModel) {                    
                     var upload = element[0].querySelector('input');
                     upload.addEventListener('dragover', uploadDragOver, false);
                     upload.addEventListener('drop', uploadFileSelect, false);
@@ -173,9 +172,9 @@ angular.module('eMSPApp')
                 var objXhr = new XMLHttpRequest();
                 //objXhr.addEventListener("progress", updateProgress, false);
                 objXhr.addEventListener("load", transferComplete, false);
-
+                
                 // SEND FILE DETAILS TO THE API.
-                objXhr.open("POST", "http://localhost:50001/api/FileUpload/uploadFiles");
+                objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
                 objXhr.send(data);
             }
             

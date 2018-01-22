@@ -1,84 +1,88 @@
+<toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
     <!-- Main view  -->
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">             
+        <div class="col-lg-10">
             <h2 ng-if="!editform">{{configJSON.titleFormCreate}} - {{ldataJSON.companyType}}</h2>
-            <h2 ng-if="editform">{{configJSON.titleFormEdit}}</h2>       
+            <h2 ng-if="editform">{{configJSON.titleFormEdit}}</h2>
         </div>
         <div class="col-lg-2">
         </div>
     </div>
-    <div class="wrapper wrapper-content">
-        <div class="row">            
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
             <form class="m-t" name="form" novalidate>
-                <div class="form-group col-md-12" ng-class="{ 'has-error': form.locationName.$dirty && form.locationName.$error.required }">
+                <div class="form-group col-md-12" ng-class="{ 'has-error': form.locationName.$error.required && refData.submitted}">
+                    <label>Location Name * :</label>
                     <input type="text" class="form-control" name="locationName"
                            ng-model="ldataJSON.locationName"
-                           placeholder="Location Name" required="">
-                    <span ng-show="form.locationName.$dirty && form.locationName.$error.required" class="help-block">
-                        Location Name is required
+                           placeholder="Location Name" required>
+                    <span ng-show="form.locationName.$error.required && refData.submitted" class="text-danger">
+                        * Location Name is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine1.$dirty && form.streetLine1.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine1.$error.required && refData.submitted }">
+                    <label>Street Line 1 * :</label>
                     <input type="text" class="form-control" name="streetLine1"
                            ng-model="ldataJSON.streetLine1"
                            placeholder="Street Line 1" required="">
-                    <span ng-show="form.streetLine1.$dirty && form.streetLine1.$error.required" class="help-block">
-                        Street Line 1 is required
+                    <span ng-show="form.streetLine1.$error.required && refData.submitted" class="text-danger">
+                        * Street Line 1 is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine2.$dirty && form.streetLine2.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine2.$error.required && refData.submitted }">
+                    <label>Street Line 2 * :</label>
                     <input type="text" class="form-control"
                            ng-model="ldataJSON.streetLine2"
                            placeholder="Street Line 2" name="streetLine2" required="">
-                    <span ng-show="form.streetLine2.$dirty && form.streetLine2.$error.required" class="help-block">
-                        Street Line 2 is required
+                    <span ng-show="form.streetLine2.$error.required && refData.submitted" class="text-danger">
+                        * Street Line 2 is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$error.required && refData.submitted }">
+                    <label>City * :</label>
                     <input type="text" class="form-control"
                            ng-model="ldataJSON.city"
                            name="city" placeholder="city" required="">
-                    <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                    <span ng-show="form.city.$error.required && refData.submitted" class="text-danger">
                         City is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.Country.$dirty && form.Country.$error.required }">
-                    <select ng-model="ldataJSON.countryId" class="form-control" ng-change="getStateList()">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$error.required && refData.submitted }">
+                    <label>Country * :</label>
+                    <select ng-model="ldataJSON.countryId" class="form-control" ng-change="getStateList()" required name="country">
                         <option value="">Country</option>
                         <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
                     </select>
-                    <span ng-show="form.Country.$dirty && form.Country.$error.required" class="help-block">
-                        Country is required
+                    <span ng-show="form.country.$error.required && refData.submitted" class="text-danger">
+                        * Country is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.State.$dirty && form.State.$error.required }">
-                    <select ng-model="ldataJSON.stateId" class="form-control" required>
+                <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$error.required && refData.submitted }">
+                    <label>State * :</label>
+                    <select ng-model="ldataJSON.stateId" class="form-control" required name="state">
                         <option value="">State</option>
                         <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
                     </select>
-                    <span ng-show="form.State.$dirty && form.State.$error.required" class="help-block">
-                        State is required
+                    <span ng-show="form.state.$error.required && refData.submitted" class="text-danger">
+                        * State is required
                     </span>
                 </div>
 
 
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
-                    <div class="checkbox i-checks">
-                        <label>
-                            <input type="checkbox" name="IsActive" ng-model="ldataJSON.isActive">
-                            <i></i> Is Active
-                        </label>
-                    </div>
+                <div class="form-group col-md-12" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
+                    <label>
+                        <input icheck type="checkbox" name="IsActive" ng-model="ldataJSON.isActive">
+                        <i></i> Is Active
+                    </label>
                 </div>
                 <div class="form-group col-md-12">
                     <h5>
                         <button type="submit" ng-if="!editform" class="btn btn-primary m-b" ng-click="submit(form)">Create</button>
                         <button type="submit" ng-if="editform" class="btn btn-primary m-b" ng-click="submit(form)">Update</button>
                         <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
-                    </h5>                    
-                    
+                    </h5>
                 </div>
             </form>
         </div>

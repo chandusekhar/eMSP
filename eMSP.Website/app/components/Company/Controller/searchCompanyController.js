@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
 .controller('searchCompanyController', searchCompanyController)
-function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries) {// APP_CONSTANTS, apiCall
+function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster) {// APP_CONSTANTS, apiCall
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
@@ -9,6 +9,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.dataJSON.companyType = $scope.configJSON.companyType;
     $scope.IsMSP = false;
     $scope.refData.countryList = AppCoutries;
+    $scope.refData.userViewType = "Card";
 
     if ($scope.configJSON.companyType === "MSP") {
         $scope.dataJSON.companyName = "";
@@ -21,7 +22,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.loadLocations($scope.res.id);
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
-           
+            $scope.loadCandidates($scope.res.id);
         });
     } else {
         $scope.dataJSON.companyName = "%";
@@ -30,6 +31,12 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.searchResults = data;
         });
     }
+
+    $scope.toggleView = function () {
+        if ($scope.refData.userViewType === "Card") {
+            $scope.refData.userViewType = "List";
+        } else { $scope.refData.userViewType = "Card"; }
+    };
 
 
     //Function to load Locations
@@ -77,6 +84,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
     }
     $scope.view = function (data) {
+        debugger;
         if (data) {
             $scope.IsMSP = true;
             $scope.res = data;
@@ -222,19 +230,32 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         $scope.modelL(model);
     }    
 
-    $scope.ctoggleActive = function (model, isDelete) {
+    $scope.updateBranch = function (model) {
+        $scope.modalB(model);
+    }
 
-        if (isDelete) {
-            model.isDeleted = isDelete;
-        }
-        model.companyType = $scope.res.companyType;
+    $scope.ctoggleActive = function (model, isDelete) {
         var res = apiCall.post(APP_CONSTANTS.URL.USER.UPDATECOMPANYUSER, model);
         res.then(function (data) {
-            alert("Completed Successfully");
-            $state.reload();
+            toaster.warning({ body: "Completed Successfully." });
         });
     }
 
+    $scope.toggleActiveLocation = function (model) {
+        var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.UPDATELOCATIONURL, model);
+        res.then(function (data) {
+            toaster.warning({ body: "Completed Successfully." });
+        });
+    }
+
+    $scope.toggleActiveBranch = function (model) {
+        var res = apiCall.post(APP_CONSTANTS.URL.BRANCH.UPDATEBRANCHURL, model);
+        res.then(function (data) {
+            toaster.warning({ body: "Completed Successfully." });
+        });
+    }
+
+    //Not using this block. This block is use to delete Location
     $scope.deleteLocation = function (model) {
         model.companyId = $scope.res.id;
         model.companyType = $scope.res.companyType;

@@ -52,7 +52,7 @@ namespace eMSP.Data.DataServices.Company
             {
                 using ( db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPDetails.Where(x => x.CompanyName == model.companyName).ToList());
+                    return await Task.Run(() => db.tblMSPDetails.Where(x => x.CompanyName == model.companyName).OrderByDescending(x => x.ID).ToList());
                 }
             }
             catch (Exception)
@@ -74,7 +74,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Select(x => x.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());                    
+                                                  .OrderByDescending(x => x.ID).ToList());                    
 
                 }
             }
@@ -99,7 +99,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -124,7 +124,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }

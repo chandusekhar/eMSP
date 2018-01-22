@@ -45,7 +45,7 @@ namespace eMSP.Data.DataServices.Shared.Industry_Skills
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblIndustries.Where(x =>  x.IsDeleted == false).ToList());
+                    return await Task.Run(() => db.tblIndustries.Where(x =>  x.IsDeleted == false).OrderByDescending(x => x.ID).ToList());
                 }
             }
             catch (Exception)
@@ -77,7 +77,15 @@ namespace eMSP.Data.DataServices.Shared.Industry_Skills
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblIndustrySkills.Where(x => x.IsDeleted == false && x.IndustryID == Id).ToList());
+                    if (Id != 0)
+                    {
+                        return await Task.Run(() => db.tblIndustrySkills.Where(x => x.IsDeleted == false && x.IndustryID == Id).OrderByDescending(x => x.ID).ToList());
+                    }
+                    else
+                    {
+                        return await Task.Run(() => db.tblIndustrySkills.Where(x => x.IsDeleted == false).OrderByDescending(x => x.ID).ToList());
+                    }
+
                 }
             }
             catch (Exception)
@@ -93,7 +101,7 @@ namespace eMSP.Data.DataServices.Shared.Industry_Skills
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblIndustrySkills.Where(x => x.IsDeleted == false).ToList());
+                    return await Task.Run(() => db.tblIndustrySkills.Where(x => x.IsDeleted == false).OrderByDescending(x => x.ID).ToList());
                 }
             }
             catch (Exception)

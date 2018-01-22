@@ -53,7 +53,9 @@ namespace eMSP.Data.DataServices.Users
                                                   .Include(a => a.tblUserProfile.tblCountry)
                                                   .Include(a => a.tblUserProfile.tblCountryState)
                                                   .Where(x => x.MSPID == Id && x.IsDeleted == false)
-                                                  .Select(x => x).ToList());
+                                                  .Select(x => x)
+                                                  .OrderByDescending(x => x.ID)
+                                                  .ToList());
 
                 }
             }
@@ -80,7 +82,9 @@ namespace eMSP.Data.DataServices.Users
                                                   .Include(a => a.tblUserProfile.tblCountry)
                                                   .Include(a => a.tblUserProfile.tblCountryState)
                                                   .Where(x => x.CustomerID == Id && x.IsDeleted == false)
-                                                  .Select(x => x).ToList());
+                                                  .Select(x => x)
+                                                  .OrderByDescending(x => x.ID)
+                                                  .ToList());
 
                 }
             }
@@ -107,7 +111,9 @@ namespace eMSP.Data.DataServices.Users
                                                   .Include(a => a.tblUserProfile.tblCountry)
                                                   .Include(a => a.tblUserProfile.tblCountryState)
                                                   .Where(x => x.SupplierID == Id && x.IsDeleted == false)
-                                                  .Select(x => x).ToList());
+                                                  .Select(x => x)
+                                                  .OrderByDescending(x => x.ID)
+                                                  .ToList());
 
                 }
             }
@@ -134,21 +140,27 @@ namespace eMSP.Data.DataServices.Users
                                                           .Include(a => a.tblMSPUsers)
                                                           .Join(db.tblMSPUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
                                                           .Where(x => x.b.MSPID == Id && x.b.IsDeleted == false)
-                                                          .Select(x => x.a).ToList());
+                                                          .Select(x => x.a)
+                                                          .OrderByDescending(x => x.UserID)
+                                                          .ToList());
                             break;
                         case "Customer":
                             data = await Task.Run(() => db.tblUserProfiles
                                                           .Include(a => a.tblCustomerUsers)
                                                           .Join(db.tblCustomerUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
                                                           .Where(x => x.b.CustomerID == Id && x.b.IsDeleted == false)
-                                                          .Select(x => x.a).ToList());
+                                                          .Select(x => x.a)
+                                                          .OrderByDescending(x => x.UserID)
+                                                          .ToList());
                             break;
                         case "Supplier":
                             data = await Task.Run(() => db.tblUserProfiles
                                                           .Include(a => a.tblSupplierUsers)
                                                           .Join(db.tblSupplierUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
                                                           .Where(x => x.b.SupplierID == Id && x.b.IsDeleted == false)
-                                                          .Select(x => x.a).ToList());
+                                                          .Select(x => x.a)
+                                                          .OrderByDescending(x => x.UserID)
+                                                          .ToList());
                             break;
                     }
                 }

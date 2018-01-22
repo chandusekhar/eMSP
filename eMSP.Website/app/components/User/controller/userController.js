@@ -2,10 +2,10 @@
 angular.module('eMSPApp')
     .controller('userController', userController);
 
-function userController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
+function userController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
     $scope.refData = {};
-    
+    $scope.refData.submitted = false;
     $scope.edit = $scope.formAction == "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
 
@@ -29,7 +29,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
     }
 
     $scope.submit = function (form) {
-
+        $scope.refData.submitted = true;
         $scope.udataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
         $scope.udataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
@@ -40,15 +40,16 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                 var res = apiCall.post(APP_CONSTANTS.URL.USER.UPDATEUSERURL, $scope.udataJSON);
                 res.then(function (data) {
                     $scope.udataJSON = data;
-                    alert("Data Updated Successfully");
+                    toaster.warning({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.USER.CREATEUSRURL, $scope.udataJSON);
                 res.then(function (data) {
                     $scope.udataJSON = data;
-                    alert("Data Created Successfully");
-                    $state.reload();
+                    toaster.warning({ body: "Data Created Successfully." });
+                    $state.reload();                    
+                    //$scope.resUsers.push(data);
                 });
             }
             $uibModalInstance.close();

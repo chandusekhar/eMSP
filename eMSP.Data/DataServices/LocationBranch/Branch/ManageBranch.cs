@@ -29,7 +29,12 @@ namespace eMSP.Data.DataServices.LocationBranch
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblBranches
-                                                  .Where(x => x.ID == Id).SingleOrDefault());
+                                                  .Include(x => x.tblCountry)
+                                                  .Include(x => x.tblCountryState)
+                                                  .Include(x => x.tblLocation)
+                                                  .Where(x => x.ID == Id)
+                                                  .Select(x => x)
+                                                  .SingleOrDefault());
 
 
                 }
@@ -51,7 +56,7 @@ namespace eMSP.Data.DataServices.LocationBranch
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .Where(x => x.LocationID == Id).ToList());
+                                                  .Where(x => x.LocationID == Id).OrderByDescending(x => x.ID).ToList());
 
 
                 }

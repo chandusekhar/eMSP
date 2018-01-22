@@ -30,8 +30,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                 {
                     return await Task.Run(() => db.tblVacancieSkills
                                                   .Include(x => x.tblIndustrySkill)
-                                                  .Include(x => x.tblIndustry)
-                                                  .Where(x => x.VacancyID == Id && (x.IsDeleted ?? false) == false).ToList());
+                                                  .Where(x => x.VacancyID == Id && (x.IsDeleted ?? false) == false).OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -47,24 +46,33 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
-        internal static async Task<tblVacancieSkill> AddVacancySkills(tblVacancieSkill model)
+        internal static async Task<tblVacancieSkill> AddVacancySkills(long a, tblVacancy vacancy)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    model = db.tblVacancieSkills.Add(model);
+                    tblVacancieSkill model = new tblVacancieSkill();
+                    model = db.tblVacancieSkills.Add(new tblVacancieSkill
+                    {
+                        VacancyID = vacancy.ID,
+                        SkillID = a,
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedTimestamp = vacancy.CreatedTimestamp,
+                        CreatedUserID = vacancy.CreatedUserID,
+                        UpdatedTimestamp = vacancy.UpdatedTimestamp,
+                        UpdatedUserID = vacancy.UpdatedUserID
+                    });
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                     return model;
-
                 }
             }
             catch (Exception ex)
             {
                 throw;
-
             }
         }
 

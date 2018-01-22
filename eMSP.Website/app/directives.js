@@ -30,7 +30,8 @@
  *  - resizeable
  *  - bootstrapTagsinput
  *  - passwordMeter
- *
+ *  - numericbinding
+ *  - dropZone
  */
 
 
@@ -605,6 +606,47 @@ function passwordMeter() {
 };
 
 /**
+ * numericbinding  - Directive for Model Bind string to number
+ */
+function numericbinding() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            model: '=ngModel',
+        },
+        link: function (scope, element, attrs, ngModelCtrl) {
+            if (scope.model && typeof scope.model == 'string') {
+                scope.model = parseInt(scope.model);
+            }
+            scope.$watch('model', function (val, old) {
+                if (typeof val == 'string') {
+                    scope.model = parseInt(val);
+                }
+            });
+        }
+    };
+};
+
+/**
+ * openDatepicker  - Directive for trigger datepicker
+ */
+function openDatepicker() {
+    return {
+        restrict: 'A',
+        link: function (scope, el, attr) {
+            el.datepicker({});
+            var component = el.siblings('[data-toggle="datepicker"]');
+            if (component.length) {
+                component.on('click', function () {
+                    el.trigger('focus');
+                });
+            }
+        }
+    };
+};
+
+/**
  *
  * Pass all functions into module
  */
@@ -618,7 +660,7 @@ angular
     .directive('sparkline', sparkline)
     .directive('icheck', icheck)
     .directive('ionRangeSlider', ionRangeSlider)
-    .directive('dropZone', dropZone)
+    //.directive('dropZone', dropZone)
     .directive('responsiveVideo', responsiveVideo)
     .directive('chatSlimScroll', chatSlimScroll)
     .directive('customValid', customValid)
@@ -632,4 +674,6 @@ angular
     .directive('truncate', truncate)
     .directive('touchSpin', touchSpin)
     .directive('markdownEditor', markdownEditor)
-    .directive('passwordMeter', passwordMeter);
+    .directive('passwordMeter', passwordMeter)
+    .directive('numericbinding', numericbinding)
+    .directive('openDatepicker', openDatepicker);

@@ -1,8 +1,8 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-.controller('manageVacancieTypeController', manageVacancieTypeController)
-.controller('createVacancieTypeController', createVacancieTypeController);
-function manageVacancieTypeController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal) {// APP_CONSTANTS, apiCall    
+    .controller('manageVacancieTypeController', manageVacancieTypeController)
+    .controller('createVacancieTypeController', createVacancieTypeController);
+function manageVacancieTypeController($scope, $state, $uibModal, localStorageService, configJSON, APP_CONSTANTS, apiCall, toaster) {// APP_CONSTANTS, apiCall    
 
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -38,25 +38,34 @@ function manageVacancieTypeController($scope, $state, localStorageService, confi
         $scope.create(data);
     }
 
+    $scope.toggleActive = function (model) {
+        var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.UPDATEMSPVACANCYTYPEURL, model);
+        res.then(function (data) {
+            toaster.warning({ body: "Data Updated Successfully." });
+        });
+    }
+
     $scope.delete = function (data) {
         var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.DELETEMSPVACANCYTYPEURL, data);
         res.then(function (data) {
-            alert("Vacancie Type deleted Successfully");
-            $state.reload();
+            toaster.warning({ body: "Deleted Successfully." });
         });
     }
 }
 
-function createVacancieTypeController($scope, $state, localStorageService, apiCall, APP_CONSTANTS, $http) {
+function createVacancieTypeController($scope, apiCall, APP_CONSTANTS, $http, toaster) {
     $scope.configJSON = {};
     $scope.edit = false;
     $scope.formAction = $scope.editform ? "Update" : "Create";
+    $scope.submitted = false;
 
     $http.get("app/components/Job/Config/ManageVacancieType.json").success(function (data) {
         $scope.configJSON = data;
     });
 
     $scope.submit = function (form) {
+        $scope.submitted = true;
+
         $scope.ltdataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
         $scope.ltdataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
@@ -65,21 +74,22 @@ function createVacancieTypeController($scope, $state, localStorageService, apiCa
                 var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.UPDATEMSPVACANCYTYPEURL, $scope.ltdataJSON);
                 res.then(function (data) {
                     $scope.ltdataJSON = data;
-                    alert("Data Updated Successfully");
+                    toaster.warning({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.CREATWMSPVACANCYTYPEURL, $scope.ltdataJSON);
                 res.then(function (data) {
                     $scope.ltdataJSON = data;
-                    alert("Data Created Successfully");
-                    $state.reload();
+                    $scope.resMSPVacancieType.unshift(data);
+                    toaster.warning({ body: "Data Created Successfully." });
                 });
             }
+            //$uibModalInstance.close();
         }
     }
-
+    
     $scope.reset = function () {
-        $state.reload();
-    }
+        //$uibModalInstance.close();
+    }    
 }

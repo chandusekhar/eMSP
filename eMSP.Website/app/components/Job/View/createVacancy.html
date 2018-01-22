@@ -1,4 +1,64 @@
-﻿<!-- Wrapper-->
+﻿<style type="text/css">
+    textarea.form-control {
+        height: 75px;
+        overflow-x: hidden;
+    }
+
+    .one {
+        cursor: pointer;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 4px;
+        font: caption;
+        text-align: center;
+        border: 1px dotted green;
+        box-sizing: border-box;
+    }
+
+
+        .one span {
+            display: block;
+            font-size: 10px;
+        }
+
+        .one img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100px;
+        }
+
+        .one input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 9999px;
+            cursor: pointer;
+        }
+
+
+
+
+
+    .two {
+        display: block;
+        margin: 30px;
+    }
+
+
+    pre {
+        margin: 30px;
+        font-size: 10px;
+    }
+</style>
+<toaster-container></toaster-container>
+<!-- Wrapper-->
 <div id="wrapper">
 
     <!-- Main view  -->
@@ -19,202 +79,409 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
-                        <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <form class="m-t" name="form" novalidate>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.vacancyType.$dirty && form.vacancyType.$error.required }">
-                                <select ng-model="dataJSON.vacancyType" class="form-control">
-                                    <option value="">-- Select Vacancy Type --</option>
-                                    <option ng-repeat="res in refData.vacancyTypes" value="{{res.id}}">{{res.name}}</option>
-                                </select>
-                                <span ng-show="form.vacancyType.$dirty && form.vacancyType.$error.required" class="help-block">
-                                    Vacancy Type is required
-                                </span>
+            <form class="m-t" name="form" novalidate>
+                <!-- Left Panel -->
+                <div class="col-lg-6">
+                    <!-- Basic Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
+                            <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
                             </div>
+                        </div>
+                        <div class="ibox-content">
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.customerId.$dirty && form.customerId.$error.required }">
-                                <select ng-model="dataJSON.customerId" class="form-control" ng-change="getUserList()">
-                                    <option value="">-- Select Customer --</option>
-                                    <option ng-repeat="res in refData.customerList" value="{{res.id}}">{{res.companyName}}</option>
-                                </select>
-                                <span ng-show="form.customerId.$dirty && form.customerId.$error.required" class="help-block">
-                                    Customer is required
-                                </span>
-                            </div>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.startDate.$dirty && form.startDate.$error.required }">
-                                <div class="input-group date">
-                                    <input type="datetime" class="form-control" name="startDate"
-                                           ng-model="dataJSON.startDate"
-                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                           placeholder="Start Date"
-                                           required="" />
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <span ng-show="form.startDate.$dirty && form.startDate.$error.required" class="help-block">
-                                    Start Date is required
-                                </span>
-                            </div>
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.endDate.$dirty && form.endDate.$error.required }">
-                                <div class="input-group date">
-                                    <input type="datetime" class="form-control" name="endDate"
-                                           ng-model="dataJSON.endDate"
-                                           auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                           placeholder="End Date"
-                                           required="" />
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <span ng-show="form.endDate.$dirty && form.endDate.$error.required" class="help-block">
-                                    End Date is required
-                                </span>
-                            </div>
-                            <div class="col-md-12 no-padding">
-                                <div class="form-group col-md-6 col-xs-12 col-sm-12" ng-class="{ 'has-error': form.submissionDueDate.$dirty && form.submissionDueDate.$error.required }">
-                                    <div class="input-group date">
-                                        <input type="datetime" class="form-control" name="submissionDueDate"
-                                               ng-model="dataJSON.submissionDueDate"
-                                               auto-close="true" min-view="date" format="DD-MM-YYYY" date-time view="date"
-                                               placeholder="Submission Due Date"
-                                               required="" />
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                    <span ng-show="form.submissionDueDate.$dirty && form.submissionDueDate.$error.required" class="help-block">
-                                        Submission Due Date is required
-                                    </span>
-                                </div>
-                                <div class="form-group col-md-6" ng-class="{ 'has-error': form.positionTitle.$dirty && form.positionTitle.$error.required }">
+                            <div class="row">
+                                <!-- Job Title -->
+                                <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && form.positionTitle.$error.required }">
+                                    <label>Job Title * :</label>
                                     <input type="text" class="form-control" name="positionTitle"
-                                           ng-model="dataJSON.positionTitle"
-                                           placeholder="Position Title"
-                                           required="">
-                                    <span ng-show="form.positionTitle.$dirty && form.positionTitle.$error.required" class="help-block">
-                                        Position Title is required
+                                           ng-model="dataJSON.Vacancy.positionTitle"
+                                           placeholder="Job Title"
+                                           required />
+                                    <span ng-show="dataJSON.submitted && form.positionTitle.$error.required" class="text-danger">
+                                        * Job Title is required
+                                    </span>
+                                </div>
+                                <!-- Job Description -->
+                                <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && form.vacancyDescription.$error.required }">
+                                    <label>Job Description * :</label>
+                                    <textarea type="text" class="form-control summernote" name="vacancyDescription"
+                                              ng-model="dataJSON.Vacancy.vacancyDescription"
+                                              placeholder="Vacancy Description"
+                                              required height="200" summernote></textarea>
+                                    <span ng-show="dataJSON.submitted && form.vacancyDescription.$error.required" class="text-danger">
+                                        * Vacancy Description is required
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            
-
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.hiringManager.$dirty && form.hiringManager.$error.required }">
-                                <input type="text" class="form-control" name="hiringManager"
-                                       ng-model="dataJSON.hiringManager"
-                                       placeholder="Hiring Manager"
-                                       uib-typeahead="(u.user.firstName +' '+ u.user.lastName) for u in refData.usersList | filter:$viewValue | limitTo:8"
-                                       required="" />
-                                <span ng-show="form.hiringManager.$dirty && form.hiringManager.$error.required" class="help-block">
-                                    Hiring Manager is required
-                                </span>
+                    <!-- Job Related File Upload -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Job Relevent File *
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
                             </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <!-- Section to select Skills -->
+                                <div class="form-group">
 
 
+                                    <!-- File Upload -->
+                                    <div class="form-group col-md-12">
+                                        <div drop-zone ng-model="dataJSON.VacancyFiles" class="one btn btn-default"></div>
+                                        <div class="form-group">
+                                            <div ng-repeat="f in dzfiles track by $index" ng-if="dzfiles.length > 0" class="thumbnail col-sm-2" style=" margin:5px; float:left">
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.reportingManager.$dirty && form.reportingManager.$error.required }">
-                                <input type="text" class="form-control" name="reportingManager"
-                                       ng-model="dataJSON.reportingManager"
-                                       placeholder="Reporting Manager"
-                                       uib-typeahead="(u.user.firstName +' '+ u.user.lastName) for u in refData.usersList | filter:$viewValue | limitTo:8"
-                                       required="" />
-                                <span ng-show="form.reportingManager.$dirty && form.reportingManager.$error.required" class="help-block">
-                                    Reporting Manager is required
-                                </span>
+                                                <img src="{{f.data}}" ng-if="f.type.includes('image')" class="img-circle" alt="{{f.name}}" style=" height:100px; width:100px">
+                                                <img src="/img/file.png" ng-if="!f.type.includes('image')" class="img-circle" alt="{{f.name}}" style=" height:100px; width:100px">
+                                                <div class="caption text-center">
+                                                    <p style="word-wrap:break-word">{{f.name}}</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <span ng-show="dataJSON.submitted && isFilesEmpty" class="text-danger">
+                                        * Please select Job related documents
+                                    </span>
+
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
-
-
-
-
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.yearOfExperience.$dirty && form.yearOfExperience.$error.required }">
-                                <input type="number" class="form-control" name="yearOfExperience"
-                                       ng-model="dataJSON.yearOfExperience"
-                                       placeholder="Year Of Experience"
-                                       required="">
-                                <span ng-show="form.yearOfExperience.$dirty && form.yearOfExperience.$error.required" class="help-block">
-                                    Year Of Experience is required
-                                </span>
+                    <!-- Rate info panel -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Rate Information
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
                             </div>
+                        </div>
+                        <div class="ibox-content">
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.minPayRate.$dirty && form.minPayRate.$error.required }">
-                                <input type="number" class="form-control" name="minPayRate"
-                                       ng-model="dataJSON.minPayRate"
-                                       placeholder="Min Pay Rate"
-                                       required="">
-                                <span ng-show="form.minPayRate.$dirty && form.minPayRate.$error.required" class="help-block">
-                                    MinPay Rate is required
-                                </span>
-                            </div>
+                            <div class="row">
+                                <!-- Section to select Skills -->
+                                <div class="form-group">
+                                    <!-- Year Of experiance -->
+                                    <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && form.yearOfExperience.$error.required }">
+                                        <label>Year of Experiance * :</label>
+                                        <input type="number" class="form-control" name="yearOfExperience"
+                                               ng-model="dataJSON.Vacancy.yearOfExperience"
+                                               placeholder="Year Of Experience"
+                                               required />
+                                        <span ng-show="dataJSON.submitted && form.yearOfExperience.$error.required" class="text-danger">
+                                            * Year Of Experience is required
+                                        </span>
+                                    </div>
+                                    <!-- Min Pay rate -->
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.minPayRate.$error.required }">
+                                        <label> Minimum Pay rate * :</label>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.maxPayRate.$dirty && form.maxPayRate.$error.required }">
-                                <input type="number" class="form-control" name="maxPayRate"
-                                       ng-model="dataJSON.maxPayRate"
-                                       placeholder="Max Pay Rate"
-                                       required="">
-                                <span ng-show="form.maxPayRate.$dirty && form.maxPayRate.$error.required" class="help-block">
-                                    MaxPay Rate is required
-                                </span>
-                            </div>
+                                        <input type="number" class="form-control" name="minPayRate"
+                                               ng-model="dataJSON.Vacancy.minPayRate"
+                                               placeholder="Min Pay Rate"
+                                               required />
+                                        <span ng-show="dataJSON.submitted && form.minPayRate.$error.required" class="text-danger">
+                                            * MinPay Rate is required
+                                        </span>
+                                    </div>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.targetPayRate.$dirty && form.targetPayRate.$error.required }">
-                                <input type="number" class="form-control" name="targetPayRate"
-                                       ng-model="dataJSON.targetPayRate"
-                                       placeholder="Target Pay Rate"
-                                       required="">
-                                <span ng-show="form.targetPayRate.$dirty && form.targetPayRate.$error.required" class="help-block">
-                                    TargetPay Rate is required
-                                </span>
-                            </div>
+                                    <!-- Max Pay rate -->
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.maxPayRate.$error.required }">
+                                        <label>Maximum Pay rate * :</label>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.payRateMarkUp.$dirty && form.payRateMarkUp.$error.required }">
-                                <input type="number" class="form-control" name="payRateMarkUp"
-                                       ng-model="dataJSON.payRateMarkUp"
-                                       placeholder="Pay Rate MarkUp"
-                                       required="">
-                                <span ng-show="form.payRateMarkUp.$dirty && form.payRateMarkUp.$error.required" class="help-block">
-                                    PayRate MarkUp is required
-                                </span>
-                            </div>
+                                        <input type="number" class="form-control" name="maxPayRate"
+                                               ng-model="dataJSON.Vacancy.maxPayRate"
+                                               placeholder="Max Pay Rate"
+                                               required />
+                                        <span ng-show="dataJSON.submitted && form.maxPayRate.$error.required" class="text-danger">
+                                            * MaxPay Rate is required
+                                        </span>
+                                    </div>
 
-                            <div class="form-group col-md-12" ng-class="{ 'has-error': form.vacancyDescription.$dirty && form.vacancyDescription.$error.required }">
-                                <textarea type="text" class="form-control" name="vacancyDescription"
-                                          ng-model="dataJSON.vacancyDescription"
-                                          placeholder="Vacancy Description"
-                                          required=""></textarea>
-                                <span ng-show="form.vacancyDescription.$dirty && form.vacancyDescription.$error.required" class="help-block">
-                                    Vacancy Description is required
-                                </span>
-                            </div>
+                                    <!-- Target pay rate -->
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.targetPayRate.$error.required }">
+                                        <label>Trget Pay rate * :</label>
 
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.showCustomerDetailsToSupplier.$dirty && form.showCustomerDetailsToSupplier.$error.required }">
-                                <label>
-                                    <input icheck type="checkbox" name="showCustomerDetailsToSupplier" ng-model="dataJSON.showCustomerDetailsToSupplier">
-                                    <i></i> Show Customer Details To Supplier
-                                </label>
+                                        <input type="number" class="form-control" name="targetPayRate"
+                                               ng-model="dataJSON.Vacancy.targetPayRate"
+                                               placeholder="Target Pay Rate"
+                                               required />
+                                        <span ng-show="dataJSON.submitted && form.targetPayRate.$error.required" class="text-danger">
+                                            * TargetPay Rate is required
+                                        </span>
+                                    </div>
+
+                                    <!-- Pay rate markup -->
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.payRateMarkUp.$error.required }">
+                                        <label>Markup Pay rate * :</label>
+
+                                        <input type="number" class="form-control" name="payRateMarkUp"
+                                               ng-model="dataJSON.Vacancy.payRateMarkUp"
+                                               placeholder="Pay Rate MarkUp"
+                                               required />
+                                        <span ng-show="dataJSON.submitted && form.payRateMarkUp.$error.required" class="text-danger">
+                                            * PayRate MarkUp is required
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
-                                <label>
-                                    <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.isActive">
-                                    <i></i> Is Active
-                                </label>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Terms and Conditions
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
                             </div>
-                            <div>
-                                <h5>
-                                    <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>
-                                    &nbsp;&nbsp;
-                                    <button type="submit" ng-click="reset()" class="btn btn-white m-b">Cancel</button>
-                                </h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <!-- Section to select Skills -->
+                                <div class="form-group">
+
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.showCustomerDetailsToSupplier.$error.required }">
+                                        <label>
+                                            <input icheck type="checkbox" name="showCustomerDetailsToSupplier" ng-model="dataJSON.Vacancy.showCustomerDetailsToSupplier">
+                                            <i></i> Show Customer Details To Supplier
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.IsActive.$error.required }">
+                                        <label>
+                                            <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.Vacancy.isActive">
+                                            <i></i> Is Active
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group col-md-12 m-t-lg">
+                                        <h5>
+                                            <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>
+                                            &nbsp;&nbsp;
+                                            <button type="submit" ng-click="reset()" class="btn btn-white m-b">Cancel</button>
+                                        </h5>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Right Panel -->
+                <div class="col-lg-6">
+                    <!-- Vacancy Type and Hiring manager details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Vacancy Type / Hiring Details
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.vacancyType.$error.required }">
+                                    <label>Vacancy Type * :</label>
+                                    <select ng-model="dataJSON.Vacancy.vacancyType" class="form-control" required name="vacancyType">
+                                        <option value="">-- Select Vacancy Type --</option>
+                                        <option ng-repeat="res in refData.vacancyTypes" value="{{res.id}}">{{res.name}}</option>
+                                    </select>
+                                    <span ng-show="dataJSON.submitted && form.vacancyType.$error.required" class="text-danger">
+                                        * Vacancy Type is required
+                                    </span>
+                                </div>
+
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.customer.$error.required }">
+                                    <label>Customer * :</label>
+                                    <ui-select ng-model="dataJSON.Vacancy.customerId" theme="bootstrap" ng-change="getUserList()" required name="customer">
+                                        <ui-select-match placeholder="Select Customer">{{$select.selected.companyName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.id as res in refData.customerList | filter: $select.search">
+                                            <div ng-bind-html="res.companyName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="dataJSON.submitted && form.customer.$error.required" class="text-danger">
+                                        * Customer is required
+                                    </span>
+                                </div>
+
+                                <!-- Hiring Manager -->
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.hiringManager.$error.required }">
+                                    <label>Hiring Manager * :</label>
+                                    <ui-select ng-model="dataJSON.Vacancy.hiringManager" theme="bootstrap" required name="hiringManager">
+                                        <ui-select-match placeholder="Hiring Manager">{{$select.selected.user.firstName + ' ' + $select.selected.user.lastName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.user.firstName +' '+ res.user.lastName  as res in refData.usersList | filter: $select.search">
+
+                                            <div ng-bind-html="res.user.firstName +' '+ res.user.lastName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="dataJSON.submitted && form.hiringManager.$error.required" class="text-danger">
+                                        * Hiring Manager is required
+                                    </span>
+                                </div>
+
+                                <!-- Reporting manager -->
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.reportingManager.$error.required }">
+                                    <label>Reporting Manager * :</label>
+                                    <ui-select ng-model="dataJSON.Vacancy.reportingManager" theme="bootstrap" required name="reportingManager">
+                                        <ui-select-match placeholder="Reporting Manager">{{$select.selected.user.firstName + ' ' + $select.selected.user.lastName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.user.firstName +' '+ res.user.lastName  as res in refData.usersList | filter: $select.search">
+                                            <div ng-bind-html="res.user.firstName +' '+ res.user.lastName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="dataJSON.submitted && form.reportingManager.$error.required" class="text-danger">
+                                        * Reporting Manager is required
+                                    </span>
+                                </div>
+
+                                <!-- Date range Job Start and End Date -->
+                                <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && form.date.$error.required }">
+                                    <label>Select Start and End date * :</label>
+                                    <div class="input-group date">
+                                        <input type="hidden" ng-model="dataJSON.Vacancy.startDate" />
+                                        <input type="hidden" ng-model="dataJSON.Vacancy.endDate" />
+                                        <input type="hidden" ng-model="dataJSON.Vacancy.createdUserID" ng-value="refData.loginUserId" ng-init="dataJSON.Vacancy.createdUserID=refData.loginUserId"  />
+                                        <input type="hidden" ng-model="dataJSON.Vacancy.updatedUserID" ng-value="refData.loginUserId" ng-init="dataJSON.Vacancy.updatedUserID=refData.loginUserId" />
+                                        <input date-range-picker type="datetime" class="form-control date-picker" name="date"
+                                               ng-model="dataJSON.dateRange"
+                                               placeholder="Start Date"
+                                               open-datepicker
+                                               required />
+                                        <span class="input-group-addon" data-toggle="datepicker"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    <span ng-show="dataJSON.submitted && form.date.$error.required" class="text-danger">
+                                        * Start Date is required
+                                    </span>
+                                </div>
+
+                                <!-- Job Submission Date -->
+                                <div class="form-group col-md-12 no-padding">
+                                    <div class="form-group col-md-12 col-xs-12 col-sm-12">
+                                        <label>Submission Date :</label>
+                                        <div class="input-group date">
+                                            <!--<input type="datetime" class="form-control" name="submissionDueDate"
+                                            ng-model="dataJSON.Vacancy.submissionDueDate" date-range-picker
+                                            options="{singleDatePicker: true}"
+                                            placeholder="Submission Due Date"
+                                            open-datepicker />-->
+                                            <input name="DateOfBirth" ng-model="dataJSON.Vacancy.submissionDueDate" type="datetime" class="form-control" placeholder="MM/DD/YYYY" date-time view="date" auto-close="true" min-view="date" format="MM/DD/YYYY">
+
+                                            <span class="input-group-addon" data-toggle="datepicker"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills / Locations / Supplier -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Skills / Location / Supplier
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Add required Skills -->
+                                <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && isSkillsEmpty }">
+                                    <label>Select Skills * :</label>
+
+                                    <ui-select multiple ng-model="dataJSON.VacancySkills" theme="bootstrap" required name="VacancySkills">
+                                        <ui-select-match placeholder="Select Skills">{{$item.skillName}}</ui-select-match>
+                                        <ui-select-choices repeat="res as res in refData.skillsList | filter:$select.search">
+                                            {{res.skillName}}
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="dataJSON.submitted && isSkillsEmpty" class="text-danger">
+                                        * Select Skills
+                                    </span>
+                                </div>
+
+                                <!-- Section To add Locations -->
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && isLocationEmpty }">
+                                    <label>Select Location * :</label>
+
+                                    <ui-select multiple ng-model="dataJSON.VacancyLocations" theme="bootstrap" required name="VacancyLocations">
+                                        <ui-select-match placeholder="Select Location">{{$item.locationName}}</ui-select-match>
+                                        <ui-select-choices repeat="res as res in refData.locationList | filter:$select.search">
+                                            {{res.locationName}}
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="dataJSON.submitted && isLocationEmpty" class="text-danger">
+                                        * Select Location
+                                    </span>
+                                </div>
+
+                                <!-- Section to select Skills -->
+                                <div class="form-group">
+                                    <!-- Section to add Supplier -->
+                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && isSupplierEmpty }">
+                                        <label>Select Supplier * :</label>
+                                        <ui-select multiple ng-model="dataJSON.VacancySuppliers" theme="bootstrap" required name="VacancySuppliers">
+                                            <ui-select-match placeholder="Select Supplier">{{$item.companyName}}</ui-select-match>
+                                            <ui-select-choices repeat="res as res in refData.supplierList | filter:$select.search">
+                                                {{res.companyName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span ng-show="dataJSON.submitted && isSupplierEmpty" class="text-danger">
+                                            * Select Supplier required
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Comments
+                            </h5>
+                            <div class="ibox-tools dropdown">
+                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Comments -->
+                                <div class="form-group col-md-12">
+                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].createdUserID" ng-init="dataJSON.VacancyComment[0].createdUserID=refData.loginUserId" ng-value="refData.loginUserId" />
+                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].updatedUserID" ng-init="dataJSON.VacancyComment[0].updatedUserID=refData.loginUserId" ng-value="refData.loginUserId"/>
+                                    <textarea type="text" class="form-control summernote" name="VacancyComment"
+                                              ng-model="dataJSON.VacancyComment[0].comment"
+                                              placeholder="Comments" summernote
+                                              height="250"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+    <!-- End wrapper-->
 </div>
-<!-- End wrapper-->

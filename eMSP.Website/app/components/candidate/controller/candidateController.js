@@ -126,7 +126,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     }
     $scope.submit = function (form) {
         
-            $scope.dataJSON.SupplierId = 1;            
+        $scope.dataJSON.SupplierId = localStorageService.get('supplierId');            
             $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
             $scope.dataJSON.Contact.FirstName = $scope.dataJSON.Candidate.FirstName;
             $scope.dataJSON.Contact.LastName = $scope.dataJSON.Candidate.LastName;            

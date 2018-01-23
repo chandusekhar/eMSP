@@ -84,7 +84,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
     }
     $scope.view = function (data) {
-        debugger;
+       
         if (data) {
             $scope.IsMSP = true;
             $scope.res = data;

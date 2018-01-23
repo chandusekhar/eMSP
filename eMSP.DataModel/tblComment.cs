@@ -17,6 +17,8 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblComment()
         {
+            this.tblCandidateSubmissionAppointmentUserComments = new HashSet<tblCandidateSubmissionAppointmentUserComment>();
+            this.tblCandidateSubmissionComments = new HashSet<tblCandidateSubmissionComment>();
             this.tblCommentUsers = new HashSet<tblCommentUser>();
             this.tblVacancyComments = new HashSet<tblVacancyComment>();
         }
@@ -31,6 +33,10 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionAppointmentUserComment> tblCandidateSubmissionAppointmentUserComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCommentUser> tblCommentUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

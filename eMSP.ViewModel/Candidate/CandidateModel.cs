@@ -27,11 +27,11 @@ namespace eMSP.ViewModel.Candidate
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string City { get; set; }
-        public int CountyID { get; set; }
+        public string CountyID { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
         public int ID { get; set; }
-        public int StateID { get; set; }
+        public string StateID { get; set; }
         public string MobileNumber { get; set; }
         public string StreetAddress { get; set; }
         public string ZipCode { get; set; }
@@ -55,8 +55,8 @@ namespace eMSP.ViewModel.Candidate
         public CandidateModel Candidate{get;set;}
         public List<CandidateContactModel> CandidateContact { get; set; }
         public List<FileModel> CandidateFile { get; set; }
-        public List<int> CandidateIndustries { get; set; }
-        public List<int> CandidateSkills { get; set; }
+        public List<string> CandidateIndustries { get; set; }
+        public List<string> CandidateSkills { get; set; }
         public List<string> CandidateIndustryNames { get; set; }
         public List<string> CandidateSkillNames { get; set; }
     }

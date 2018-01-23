@@ -18,8 +18,12 @@ namespace eMSP.DataModel
         public tblCountryState()
         {
             this.tblCustomers = new HashSet<tblCustomer>();
+            this.tblLocations = new HashSet<tblLocation>();
             this.tblMSPDetails = new HashSet<tblMSPDetail>();
             this.tblSuppliers = new HashSet<tblSupplier>();
+            this.tblUserProfiles = new HashSet<tblUserProfile>();
+            this.tblBranches = new HashSet<tblBranch>();
+            this.tblContacts = new HashSet<tblContact>();
         }
     
         public long ID { get; set; }
@@ -37,8 +41,16 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomer> tblCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblLocation> tblLocations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPDetail> tblMSPDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserProfile> tblUserProfiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBranch> tblBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblContact> tblContacts { get; set; }
     }
 }

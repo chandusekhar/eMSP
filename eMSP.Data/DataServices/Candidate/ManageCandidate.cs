@@ -109,8 +109,8 @@ namespace eMSP.Data.DataServices.Candidate
                     x = await Task.Run(() => InsertCandidateFiles(candidate, file, Convert.ToInt64(a.FileTypeId)));
                 }
 
-                x = await Task.Run(() => InsertCandidateIndustries(model.CandidateIndustries, candidate));
-                x = await Task.Run(() => InsertCandidateSkills(model.CandidateSkills, candidate));
+                x = await Task.Run(() => InsertCandidateIndustries(model.CandidateIndustries.Select(a=>Convert.ToInt32(a)).ToList(), candidate));
+                x = await Task.Run(() => InsertCandidateSkills(model.CandidateSkills.Select(a => Convert.ToInt32(a)).ToList(), candidate));
 
                 candidate = await Task.Run(() => Get(candidate.ID));
 
@@ -377,8 +377,8 @@ namespace eMSP.Data.DataServices.Candidate
                 await UpdateCandidateFiles(model.CandidateFile, model.Candidate.ConvertTotblCandidate());
                     
                 
-                await UpdateCandidateIndustries(model.CandidateIndustries, model.Candidate.ConvertTotblCandidate());
-                await UpdateCandidateSkills(model.CandidateSkills, model.Candidate.ConvertTotblCandidate());
+                await UpdateCandidateIndustries(model.CandidateIndustries.Select(a => Convert.ToInt32(a)).ToList(), model.Candidate.ConvertTotblCandidate());
+                await UpdateCandidateSkills(model.CandidateSkills.Select(a => Convert.ToInt32(a)).ToList(), model.Candidate.ConvertTotblCandidate());
 
                 tblCandidate t = await Task.Run(() => Get(Convert.ToInt64(model.Candidate.id)));
 
@@ -530,11 +530,10 @@ namespace eMSP.Data.DataServices.Candidate
                 tblFile fi = null;
                 using (db = new eMSPEntities())
                 {
-                    foreach(FileModel file in model)
-                    {
-                        await db.tblFiles.Where(a => a.ID == file.ID).ForEachAsync(a => { a.IsActive = false; a.IsDeleted = true; });
+                    
+                    await db.tblCandidateFiles.Where(a => a.CandidateID == Candidate.ID).ForEachAsync(a => { a.IsActive = false; a.IsDeleted = true; });
 
-                    }
+                   
                     await Task.Run(() => db.SaveChangesAsync());
 
                     foreach (FileModel a in model)

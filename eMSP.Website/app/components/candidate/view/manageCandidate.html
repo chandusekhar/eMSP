@@ -242,7 +242,12 @@
                                                 {{res.industryName}}
                                             </ui-select-choices>
                                         </ui-select>
-
+                                        <!--<ui-select multiple ng-model="selected.industries" ng-change="loadSkills()" theme="bootstrap" class="form-control" ng-disabled="disabled">
+                                            <ui-select-match placeholder="Select Industries...">{{$item.industryName}}</ui-select-match>
+                                            <ui-select-choices repeat="res.id as res in refData.industryList | filter:$select.search">
+                                                {{res.industryName}}
+                                            </ui-select-choices>
+                                        </ui-select>-->
                                     </div>
                                 </div>
 
@@ -278,7 +283,7 @@
 
                                     </div>
 
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <div ng-repeat="f in dzfiles track by $index" ng-if="dzfiles.length > 0" class="thumbnail col-sm-2" style=" margin:5px; float:left">
 
                                             <img src="{{f.data}}" ng-if="f.type.includes('image')" class="img-circle" alt="{{f.name}}" style=" height:100px; width:100px">
@@ -288,14 +293,20 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div>-->
+                                    <div ng-repeat="file in dataJSON.CandidateFile track by $index">
 
+                                        <div class="ibox-tools pull-left small">
+                                            <i class="fa fa fa-dot-circle-o"></i> {{file.FileName}} <a ng-click="removeFile($index)"> <i class="fa fa-trash"></i></a>
+                                            </div>
+                                        <br />
+                                    </div>
 
 
 
                                 </div>
 
-                                <div class="row form-group"><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="dashboards.dashboard_1">Cancel</a></div>
+                                <div class="row form-group"><button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ui-sref="{{configJSON.successURL}}">Cancel</a></div>
                             </div>
 
 

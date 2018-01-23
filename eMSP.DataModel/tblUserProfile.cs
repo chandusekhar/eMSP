@@ -17,6 +17,7 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblUserProfile()
         {
+            this.tblCandidateSubmissionAppointmentUsers = new HashSet<tblCandidateSubmissionAppointmentUser>();
             this.tblCommentUsers = new HashSet<tblCommentUser>();
             this.tblCustomerUsers = new HashSet<tblCustomerUser>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
@@ -32,8 +33,8 @@ namespace eMSP.DataModel
         public string RoleGroupId { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public Nullable<int> StateID { get; set; }
-        public Nullable<int> CountryID { get; set; }
+        public Nullable<long> StateID { get; set; }
+        public Nullable<long> CountryID { get; set; }
         public string ZipCode { get; set; }
         public Nullable<int> TimezoneID { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -43,7 +44,11 @@ namespace eMSP.DataModel
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCommentUser> tblCommentUsers { get; set; }
+        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblCountryState tblCountryState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomerUser> tblCustomerUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

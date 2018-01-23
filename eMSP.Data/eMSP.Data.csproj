@@ -54,20 +54,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataServices\Candidate\CandidateManager.cs" />
+    <Compile Include="DataServices\Candidate\ManageCandidate.cs" />
+    <Compile Include="DataServices\Comments\CommentsManager.cs" />
+    <Compile Include="DataServices\Comments\ManageComments.cs" />
     <Compile Include="DataServices\Common\AppManager.cs" />
     <Compile Include="DataServices\Common\ManageAppGet.cs" />
     <Compile Include="DataServices\Company\CompanyManager.cs" />
     <Compile Include="DataServices\Company\Customer\ManageCustomer.cs" />
     <Compile Include="DataServices\Company\MSP\ManageMSP.cs" />
     <Compile Include="DataServices\Company\Supplier\ManageSupplier.cs" />
+    <Compile Include="DataServices\JobVacancies\VacanciesManager.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageMSPVacancieType.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancy.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancyComments.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancyFiles.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancyLocations.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancySkills.cs" />
+    <Compile Include="DataServices\JobVacancies\Vacancy\ManageVacancySuppliers.cs" />
+    <Compile Include="DataServices\LocationBranch\Branch\ManageBranch.cs" />
+    <Compile Include="DataServices\LocationBranch\LocationBranchManager.cs" />
+    <Compile Include="DataServices\LocationBranch\Location\ManageLocation.cs" />
     <Compile Include="DataServices\MSP\ManageMSP.cs" />
     <Compile Include="DataServices\Shared\CountryManager.cs" />
     <Compile Include="DataServices\Shared\Country\ManageCountry.cs" />
+    <Compile Include="DataServices\Shared\Industry_SkillsManager.cs" />
+    <Compile Include="DataServices\Shared\Industry_Skills\ManageIndustry_Skills.cs" />
     <Compile Include="DataServices\Shared\StateManager.cs" />
     <Compile Include="DataServices\Shared\State\ManageState.cs" />
+    <Compile Include="DataServices\Users\UserManger.cs" />
+    <Compile Include="DataServices\Users\Operations\UserOperations.cs" />
+    <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\Commentsextensions.cs" />
     <Compile Include="Extensions\CompanyExtensions.cs" />
     <Compile Include="Extensions\CountryExtensions.cs" />
+    <Compile Include="Extensions\Industry_SkillsExtentions.cs" />
+    <Compile Include="Extensions\LocationBranchExtensions.cs" />
     <Compile Include="Extensions\StateExtensions.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
+    <Compile Include="Extensions\VacanciesExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

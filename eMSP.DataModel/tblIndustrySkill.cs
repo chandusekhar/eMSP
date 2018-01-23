@@ -17,8 +17,8 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblIndustrySkill()
         {
-            this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
             this.tblCandidateSkills = new HashSet<tblCandidateSkill>();
+            this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
         }
     
         public long ID { get; set; }
@@ -31,10 +31,10 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSkill> tblCandidateSkills { get; set; }
         public virtual tblIndustry tblIndustry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancieSkill> tblVacancieSkills { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateSkill> tblCandidateSkills { get; set; }
     }
 }

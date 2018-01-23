@@ -70,10 +70,7 @@
                                     </span>
                                 </div>
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
-                                    <!--<input type="text" class="form-control"
-                                           ng-model="dataJSON.companyCountry"
-                                           name="country" placeholder="Country" required="">-->
-                                    <select ng-model="dataJSON.CountryID" class="form-control" ng-change="getStateList()">
+                                   <select ng-model="dataJSON.CountryID" class="form-control" ng-change="getStateList()">
                                         <option value="">Country</option>
                                         <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
                                     </select>
@@ -82,9 +79,6 @@
                                     </span>
                                 </div>
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
-                                    <!--<input type="text" class="form-control"
-                                           ng-model="dataJSON.companyState"
-                                           name="state" placeholder="State" required="">-->
                                     <select ng-model="dataJSON.StateID" class="form-control">
                                         <option value="">State</option>
                                         <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>

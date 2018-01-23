@@ -25,8 +25,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblBranch tblBranch { get; set; }
         public virtual tblLocation tblLocation { get; set; }
         public virtual tblMSPDetail tblMSPDetail { get; set; }
+        public virtual tblBranch tblBranch { get; set; }
     }
 }

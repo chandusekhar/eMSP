@@ -81,6 +81,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.IsMSP = true;
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
+            if ($scope.configJSON.companyType == 'Supplier') {
+                localStorageService.set('supplierId', $scope.res.id);
+            }
             $scope.loadLocations($scope.res.id);
             $scope.loadUsers($scope.res.id);
             $scope.loadCandidates($scope.res.id);
@@ -246,7 +249,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
-    $scope.editCanditate = function (candidate) {
+    $scope.editCanditate = function (candidate) {        
         localStorageService.set('editCandidateData', candidate);
         $state.go("candidate.edit");
     }

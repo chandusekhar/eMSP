@@ -17,9 +17,12 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCandidate()
         {
+            this.tblCandidateContacts = new HashSet<tblCandidateContact>();
             this.tblCandidateFiles = new HashSet<tblCandidateFile>();
             this.tblCandidateIndustries = new HashSet<tblCandidateIndustry>();
             this.tblCandidateSkills = new HashSet<tblCandidateSkill>();
+            this.tblCandidateSubmissions = new HashSet<tblCandidateSubmission>();
+            this.tblSupplierCandidates = new HashSet<tblSupplierCandidate>();
         }
     
         public long ID { get; set; }
@@ -36,10 +39,16 @@ namespace eMSP.DataModel
         public string UpdatedUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateContact> tblCandidateContacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateFile> tblCandidateFiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateIndustry> tblCandidateIndustries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateSkill> tblCandidateSkills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmission> tblCandidateSubmissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSupplierCandidate> tblSupplierCandidates { get; set; }
     }
 }

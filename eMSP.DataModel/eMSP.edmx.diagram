@@ -4,102 +4,142 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bbc09aaffbdb47b98109f6920a821809" Name="Diagram1">
-        <EntityTypeShape EntityType="eVMSModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroupRole" Width="1.5" PointX="0.75" PointY="4.375" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRoleGroup" Width="1.5" PointX="7.75" PointY="1.375" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.625" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.25" />
-        <EntityTypeShape EntityType="eVMSModel.AspNetUser" Width="1.5" PointX="3" PointY="7.375" />
-        <EntityTypeShape EntityType="eVMSModel.tblBranch" Width="1.5" PointX="8.25" PointY="13" />
-        <EntityTypeShape EntityType="eVMSModel.tblCandidate" Width="1.5" PointX="7.75" PointY="4.375" />
-        <EntityTypeShape EntityType="eVMSModel.tblComment" Width="1.5" PointX="13.5" PointY="39.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblCommentUser" Width="1.5" PointX="18.75" PointY="23" />
-        <EntityTypeShape EntityType="eVMSModel.tblCountry" Width="1.5" PointX="0.75" PointY="25.75" />
-        <EntityTypeShape EntityType="eVMSModel.tblCountryState" Width="1.5" PointX="3" PointY="25.625" />
-        <EntityTypeShape EntityType="eVMSModel.tblCustomerLocationBranch" Width="1.5" PointX="13.5" PointY="20.625" />
-        <EntityTypeShape EntityType="eVMSModel.tblCustomer" Width="1.5" PointX="8.25" PointY="25" />
-        <EntityTypeShape EntityType="eVMSModel.tblCustomerUser" Width="1.5" PointX="13.5" PointY="25.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblIndustry" Width="1.5" PointX="8.25" PointY="38.625" />
-        <EntityTypeShape EntityType="eVMSModel.tblIndustrySkill" Width="1.5" PointX="10.5" PointY="38.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblLocation" Width="1.5" PointX="6" PointY="13.25" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPCustomer" Width="1.5" PointX="10.5" PointY="25.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPDetail" Width="1.5" PointX="5.25" PointY="25" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPLocationBranch" Width="1.5" PointX="13.5" PointY="30.75" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPUser" Width="1.5" PointX="16.5" PointY="25.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblMSPVacancieType" Width="1.5" PointX="7.5" PointY="34" />
-        <EntityTypeShape EntityType="eVMSModel.tblSupplier" Width="1.5" PointX="5.25" PointY="19.125" />
-        <EntityTypeShape EntityType="eVMSModel.tblSupplierLocationBranch" Width="1.5" PointX="10.5" PointY="19.75" />
-        <EntityTypeShape EntityType="eVMSModel.tblSupplierUser" Width="1.5" PointX="7.5" PointY="19.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblUserLocationBranch" Width="1.5" PointX="10.5" PointY="10.625" />
-        <EntityTypeShape EntityType="eVMSModel.tblUserProfile" Width="1.5" PointX="5.25" PointY="6.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancy" Width="1.5" PointX="10.5" PointY="29.875" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancieSkill" Width="1.5" PointX="12.75" PointY="35.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancyComment" Width="1.5" PointX="15.75" PointY="34.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancyFile" Width="1.5" PointX="12.75" PointY="43.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancyLocation" Width="1.5" PointX="15.75" PointY="30" />
-        <EntityTypeShape EntityType="eVMSModel.tblVacancySupplier" Width="1.5" PointX="15.75" PointY="21.125" />
-        <AssociationConnector Association="eVMSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="eVMSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="eVMSModel.FK_tblUserProfile_AspNetUsers" />
-        <AssociationConnector Association="eVMSModel.FK_tblBranches_tblLocations" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblBranches" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblBranches" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblBranches" />
-        <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblBranches" />
-        <AssociationConnector Association="eVMSModel.FK_tblCommentUsers_tblComments" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancyComments_tblComments" />
-        <AssociationConnector Association="eVMSModel.FK_tblCommentUsers_tblUserProfile" />
-        <AssociationConnector Association="eVMSModel.FK_tblCountryStates_tblCountries" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomers_tblCountries" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPDetails_tblCountries" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplier_tblCountries" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomers_tblCountryStates" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPDetails_tblCountryStates" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplier_tblCountryStates" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblCustomers" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomerLocationBranches_tblLocations" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancyLocations_tblCustomerLocationBranches" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomerUsers_tblCustomers" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPCustomers_tblCustomers" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancies_tblCustomers" />
-        <AssociationConnector Association="eVMSModel.FK_tblCustomerUsers_tblUserProfile" />
-        <AssociationConnector Association="eVMSModel.FK_tblIndustrySkills_tblIndustries" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancieSkills_tblIndustrySkills" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblLocations" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblLocations" />
-        <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblLocations" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPCustomers_tblMSPDetails" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPLocationBranches_tblMSPDetails" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPUsers_tblMSPDetails" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPVacancieTypes_tblMSPDetails" />
-        <AssociationConnector Association="eVMSModel.FK_tblMSPUsers_tblUserProfile" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancies_tblMSPVacancieTypes" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplierLocationBranches_tblSupplier" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplierUsers_tblSupplier" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancySuppliers_tblSupplier" />
-        <AssociationConnector Association="eVMSModel.FK_tblSupplierUsers_tblUserProfile" />
-        <AssociationConnector Association="eVMSModel.FK_tblUserLocationBranches_tblUserProfile" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancieSkills_tblVacancies" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancyComments_tblVacancies" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancyFiles_tblVacancies" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancyLocations_tblVacancies" />
-        <AssociationConnector Association="eVMSModel.FK_tblVacancySuppliers_tblVacancies" />
-        <AssociationConnector Association="eVMSModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="eVMSModel.tblCandidateFile" Width="1.5" PointX="16" PointY="16.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblCandidateIndustry" Width="1.5" PointX="10.5" PointY="15.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblCandidateSkill" Width="1.5" PointX="18.75" PointY="18.5" />
-        <EntityTypeShape EntityType="eVMSModel.tblFile" Width="1.5" PointX="13.75" PointY="16.75" />
-        <EntityTypeShape EntityType="eVMSModel.tblFileType" Width="1.5" PointX="7.5" PointY="43" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblCandidates" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblFiles" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateFiles_tblFileTypes" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateIndustries_tblCandidates" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateIndustries_tblIndustries" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblCandidates" />
-        <AssociationConnector Association="eVMSModel.FK_tblCandidateSkills_tblIndustrySkills" />
-        <AssociationConnector Association="eVMSModel.FK_tblFileTypes_tblMSPDetails" />
+      <Diagram DiagramId="86b7a2a2a7e745d880f07e527ac83171" Name="Diagram1">
+        <EntityTypeShape EntityType="eMSPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroupRole" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroup" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRole" Width="1.5" PointX="6.75" PointY="55.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUserClaim" Width="1.5" PointX="11.25" PointY="63.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUserLogin" Width="1.5" PointX="11.25" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUser" Width="1.5" PointX="9" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.sysdiagram" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblAppointmentStatu" Width="1.5" PointX="21" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblAppointmentType" Width="1.5" PointX="21" PointY="65.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateContact" Width="1.5" PointX="9.75" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateFile" Width="1.5" PointX="9.75" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateIndustry" Width="1.5" PointX="18.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidate" Width="1.5" PointX="7.5" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSkill" Width="1.5" PointX="21" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateStatu" Width="1.5" PointX="15.75" PointY="59.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmission" Width="1.5" PointX="18" PointY="54.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointment" Width="1.5" PointX="23.25" PointY="53.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentSlot" Width="1.5" PointX="25.5" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUserComment" Width="1.5" PointX="27.75" PointY="47.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUser" Width="1.5" PointX="25.5" PointY="47.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionComment" Width="1.5" PointX="23.25" PointY="49.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblComment" Width="1.5" PointX="18.75" PointY="59.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCommentUser" Width="1.5" PointX="16.5" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblContact" Width="1.5" PointX="7.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCountry" Width="1.5" PointX="0.75" PointY="41.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCountryState" Width="1.5" PointX="3" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomerLocationBranch" Width="1.5" PointX="13.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomer" Width="1.5" PointX="5.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomerUser" Width="1.5" PointX="16.5" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblFile" Width="1.5" PointX="7.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblFileType" Width="1.5" PointX="7.5" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblIndustry" Width="1.5" PointX="10.5" PointY="59.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblIndustrySkill" Width="1.5" PointX="12.75" PointY="59.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblLocation" Width="1.5" PointX="8.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPCustomer" Width="1.5" PointX="12.5" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPDetail" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPLocationBranch" Width="1.5" PointX="16.75" PointY="45.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPUser" Width="1.5" PointX="13.5" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPVacancieType" Width="1.5" PointX="7.5" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplier" Width="1.5" PointX="5.25" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierLocationBranch" Width="1.5" PointX="15.75" PointY="50.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierUser" Width="1.5" PointX="18.5" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblUserLocationBranch" Width="1.5" PointX="19.5" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblUserProfile" Width="1.5" PointX="11.25" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancy" Width="1.5" PointX="12.75" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancieSkill" Width="1.5" PointX="15" PointY="55.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyComment" Width="1.5" PointX="21" PointY="53.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyFile" Width="1.5" PointX="22" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyLocation" Width="1.5" PointX="21" PointY="49" IsExpanded="true" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancySupplier" Width="1.5" PointX="21" PointY="57.5" IsExpanded="true" />
+        <AssociationConnector Association="eMSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserProfile_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointments_tblAppointmentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateContacts_tblCandidates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateContacts_tblContacts" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblCandidates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblFileTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateIndustries_tblCandidates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateIndustries_tblIndustries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSkills_tblCandidates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmission_tblCandidates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSkills_tblIndustrySkills" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmission_tblCandidateStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionComments_tblCandidateStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmission_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionComments_tblCandidateSubmission" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionComments_tblComments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCommentUsers_tblComments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyComments_tblComments" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCommentUsers_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCountryStates_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomers_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblLocations_tblCountryStates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPDetails_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplier_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserProfile_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomers_tblCountryStates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblLocations_tblCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPDetails_tblCountryStates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplier_tblCountryStates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserProfile_tblCountryStates" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomerLocationBranches_tblCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomerLocationBranches_tblLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyLocations_tblCustomerLocationBranches" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomerUsers_tblCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPCustomers_tblCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancies_tblCustomers" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomerUsers_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyFiles_tblFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblFileTypes_tblMSPDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblIndustrySkills_tblIndustries" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancieSkills_tblIndustrySkills" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPLocationBranches_tblLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierLocationBranches_tblLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserLocationBranches_tblLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPCustomers_tblMSPDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPLocationBranches_tblMSPDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPUsers_tblMSPDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPVacancieTypes_tblMSPDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPUsers_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancies_tblMSPVacancieTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierLocationBranches_tblSupplier" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierUsers_tblSupplier" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancySuppliers_tblSupplier" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierUsers_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserLocationBranches_tblUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancieSkills_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyComments_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyFiles_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyLocations_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancySuppliers_tblVacancies" ManuallyRouted="false" />
+        <AssociationConnector Association="eMSPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierCandidate" Width="1.5" PointX="14.75" PointY="32.25" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierCandidates_tblCandidates" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierCandidates_tblSupplier" />
+        <EntityTypeShape EntityType="eMSPModel.tblBranch" Width="1.5" PointX="10.5" PointY="47.5" />
+        <AssociationConnector Association="eMSPModel.FK_tblBranches_tblLocations" />
+        <AssociationConnector Association="eMSPModel.FK_tblCustomerLocationBranches_tblBranches" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPLocationBranches_tblBranches" />
+        <AssociationConnector Association="eMSPModel.FK_tblSupplierLocationBranches_tblBranches" />
+        <AssociationConnector Association="eMSPModel.FK_tblUserLocationBranches_tblBranches" />
+        <AssociationConnector Association="eMSPModel.FK_tblBranches_tblCountries" />
+        <AssociationConnector Association="eMSPModel.FK_tblBranches_tblCountryStates" />
+        <AssociationConnector Association="eMSPModel.FK_tblContacts_tblCountries" />
+        <AssociationConnector Association="eMSPModel.FK_tblContacts_tblCountryStates" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,6 +17,7 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblVacancy()
         {
+            this.tblCandidateSubmissions = new HashSet<tblCandidateSubmission>();
             this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
             this.tblVacancyComments = new HashSet<tblVacancyComment>();
             this.tblVacancyFiles = new HashSet<tblVacancyFile>();
@@ -47,6 +48,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmission> tblCandidateSubmissions { get; set; }
         public virtual tblCustomer tblCustomer { get; set; }
         public virtual tblMSPVacancieType tblMSPVacancieType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

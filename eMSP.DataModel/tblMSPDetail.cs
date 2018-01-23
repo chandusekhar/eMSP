@@ -17,11 +17,11 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblMSPDetail()
         {
+            this.tblFileTypes = new HashSet<tblFileType>();
             this.tblMSPCustomers = new HashSet<tblMSPCustomer>();
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
             this.tblMSPVacancieTypes = new HashSet<tblMSPVacancieType>();
-            this.tblFileTypes = new HashSet<tblFileType>();
         }
     
         public long ID { get; set; }
@@ -42,6 +42,8 @@ namespace eMSP.DataModel
         public virtual tblCountry tblCountry { get; set; }
         public virtual tblCountryState tblCountryState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblFileType> tblFileTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPCustomer> tblMSPCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
@@ -49,7 +51,5 @@ namespace eMSP.DataModel
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblFileType> tblFileTypes { get; set; }
     }
 }

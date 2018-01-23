@@ -23,8 +23,8 @@ namespace eMSP.Data.Extensions
                 WebSite = data.companyWebsite,
                 CountryID = Convert.ToInt64(data.CountryID),
                 StateID = Convert.ToInt64(data.StateID),
-                CreatedUserID = "",
-                UpdatedUserID = "",
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now,
 

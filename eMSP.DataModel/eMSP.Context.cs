@@ -12,6 +12,8 @@ namespace eMSP.DataModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class eMSPEntities : DbContext
     {
@@ -32,15 +34,31 @@ namespace eMSP.DataModel
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<tblBranch> tblBranches { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<tblAppointmentStatu> tblAppointmentStatus { get; set; }
+        public virtual DbSet<tblAppointmentType> tblAppointmentTypes { get; set; }
+        public virtual DbSet<tblCandidateContact> tblCandidateContacts { get; set; }
+        public virtual DbSet<tblCandidateFile> tblCandidateFiles { get; set; }
+        public virtual DbSet<tblCandidateIndustry> tblCandidateIndustries { get; set; }
         public virtual DbSet<tblCandidate> tblCandidates { get; set; }
+        public virtual DbSet<tblCandidateSkill> tblCandidateSkills { get; set; }
+        public virtual DbSet<tblCandidateStatu> tblCandidateStatus { get; set; }
+        public virtual DbSet<tblCandidateSubmission> tblCandidateSubmissions { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointment> tblCandidateSubmissionAppointments { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentSlot> tblCandidateSubmissionAppointmentSlots { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentUserComment> tblCandidateSubmissionAppointmentUserComments { get; set; }
+        public virtual DbSet<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
+        public virtual DbSet<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
         public virtual DbSet<tblComment> tblComments { get; set; }
         public virtual DbSet<tblCommentUser> tblCommentUsers { get; set; }
+        public virtual DbSet<tblContact> tblContacts { get; set; }
         public virtual DbSet<tblCountry> tblCountries { get; set; }
         public virtual DbSet<tblCountryState> tblCountryStates { get; set; }
         public virtual DbSet<tblCustomerLocationBranch> tblCustomerLocationBranches { get; set; }
         public virtual DbSet<tblCustomer> tblCustomers { get; set; }
         public virtual DbSet<tblCustomerUser> tblCustomerUsers { get; set; }
+        public virtual DbSet<tblFile> tblFiles { get; set; }
+        public virtual DbSet<tblFileType> tblFileTypes { get; set; }
         public virtual DbSet<tblIndustry> tblIndustries { get; set; }
         public virtual DbSet<tblIndustrySkill> tblIndustrySkills { get; set; }
         public virtual DbSet<tblLocation> tblLocations { get; set; }
@@ -60,10 +78,110 @@ namespace eMSP.DataModel
         public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
         public virtual DbSet<tblVacancyLocation> tblVacancyLocations { get; set; }
         public virtual DbSet<tblVacancySupplier> tblVacancySuppliers { get; set; }
-        public virtual DbSet<tblCandidateFile> tblCandidateFiles { get; set; }
-        public virtual DbSet<tblCandidateIndustry> tblCandidateIndustries { get; set; }
-        public virtual DbSet<tblCandidateSkill> tblCandidateSkills { get; set; }
-        public virtual DbSet<tblFile> tblFiles { get; set; }
-        public virtual DbSet<tblFileType> tblFileTypes { get; set; }
+        public virtual DbSet<tblSupplierCandidate> tblSupplierCandidates { get; set; }
+        public virtual DbSet<tblBranch> tblBranches { get; set; }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
     }
 }

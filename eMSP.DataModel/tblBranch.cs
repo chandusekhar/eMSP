@@ -31,8 +31,8 @@ namespace eMSP.DataModel
         public string StreetLine1 { get; set; }
         public string StreetLine2 { get; set; }
         public string City { get; set; }
-        public Nullable<int> StateID { get; set; }
-        public Nullable<int> CountryID { get; set; }
+        public Nullable<long> StateID { get; set; }
+        public Nullable<long> CountryID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -49,5 +49,7 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
+        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblCountryState tblCountryState { get; set; }
     }
 }

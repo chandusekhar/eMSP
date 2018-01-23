@@ -88,10 +88,28 @@
       <DependentUpon>eMSP.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblAppointmentStatu.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblAppointmentType.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCandidate.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateContact.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCandidateFile.cs">
@@ -103,10 +121,34 @@
     <Compile Include="tblCandidateSkill.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidateStatu.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmission.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionAppointment.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionAppointmentSlot.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionAppointmentUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionAppointmentUserComment.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionComment.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblComment.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCommentUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblContact.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCountry.cs">
@@ -157,6 +199,9 @@
     <Compile Include="tblSupplier.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblSupplierCandidate.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblSupplierLocationBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -189,17 +234,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="eMSP.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>eMSP.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="eMSP.edmx.diagram">
       <DependentUpon>eMSP.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="eMSP.Context.tt">
@@ -212,9 +258,6 @@
       <DependentUpon>eMSP.edmx</DependentUpon>
       <LastGenOutput>eMSP.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

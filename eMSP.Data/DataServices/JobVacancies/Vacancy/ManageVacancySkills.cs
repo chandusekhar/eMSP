@@ -30,7 +30,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                 {
                     return await Task.Run(() => db.tblVacancieSkills
                                                   .Include(x => x.tblIndustrySkill)
-                                                  .Include(x => x.tblIndustry)
+                                                  //.Include(x => x.tblIndustry)
                                                   .Where(x => x.VacancyID == Id && (x.IsDeleted ?? false) == false).ToList());
 
 

@@ -14,10 +14,21 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     $scope.dataJSON.CandidateFile = [];
     $scope.dataJSON.Candidate = {};
     $scope.dataJSON.Contact = {};
-
+    $scope.selected = {};
+    $scope.selected.industries = [];
+    $scope.selected.industryskills = [];
     
+    //$scope.LoadIndustriesData = function () {
 
+    //    angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+    //        angular.forEach($scope.refData.industryList, function (value, key) {
+    //            if (value.id == v) {
+    //                this.push(value);
+    //            }
+    //        }, $scope.selected.industries);
+    //    });
 
+    //}
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
             var param = { "Id": $scope.dataJSON.Contact.CountyID }
@@ -27,22 +38,99 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             });
         }
     }
-    $scope.loadSkills = function () {
-        var len = $scope.dataJSON.CandidateIndustries.length;
-        var industryId = $scope.dataJSON.CandidateIndustries[len - 1];
+    $scope.loadIndustrySkills = function (industryId) {
+        
         if (industryId && !industryId.skillList) {
             var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
             apires.then(function (data) {
                 angular.extend($scope.refData.industrySkillsList, data);
+                $scope.LoadIndustrySkillsData();
             });
         }
     }
+    $scope.loadSkills = function () {
+        var len = $scope.dataJSON.CandidateIndustries.length;
+        var industryId = $scope.dataJSON.CandidateIndustries[len - 1];
+        if (industryId && !industryId.skillList) {
+            $scope.loadIndustrySkills(industryId);
+        }
+    }
+
+
+    $scope.LoadIndustriesData = function () {
+
+        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+            angular.forEach($scope.refData.industryList, function (value, key) {
+                if (value.id == v) {
+                    $scope.dataJSON.CandidateIndustries[k] = value;
+                }
+            });
+        });
+
+    }
+
+    $scope.CreateIndustriesData = function () {
+
+        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+
+            if (v.id) {
+                $scope.dataJSON.CandidateIndustries[k] = v.id;
+            }
+
+
+        });
+
+    }
+
+    $scope.LoadIndustrySkillsData = function () {
+
+        angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
+            angular.forEach($scope.refData.industrySkillsList, function (value, key) {
+                if (value.id == v) {
+                    $scope.dataJSON.CandidateSkills[k] = value;
+                }
+            });
+        });
+
+    }
+
+    $scope.CreateIndustrySkillsData = function () {
+
+        angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
+
+            if (v.id) {
+                $scope.dataJSON.CandidateSkills[k] = v.id;
+            }
+
+
+        });
+
+    }
+
 
     if ($scope.edit) {
         $scope.dataJSON = localStorageService.get('editCandidateData');
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {}; 
         $scope.getStateList();
-        $scope.loadSkills();
+        $scope.LoadIndustriesData();
+       angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+
+            var Id = 0;
+            if (v.id) {
+                Id = v.id;
+            }
+            else {
+                Id = v;
+            }
+
+            $scope.loadIndustrySkills(Id);
+
+        });
+
+       
+         
+               
+       
     }
     
     $scope.test = function (index) {
@@ -52,14 +140,16 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     }
     $scope.submit = function (form) {
         alert("submit");
-        if (!$scope.editform) {
-            $scope.dataJSON.SupplierId = 1;            
+        
+            $scope.dataJSON.SupplierId = localStorageService.get('supplierId');            
             $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
             $scope.dataJSON.Contact.FirstName = $scope.dataJSON.Candidate.FirstName;
             $scope.dataJSON.Contact.LastName = $scope.dataJSON.Candidate.LastName;            
             $scope.dataJSON.CandidateContact = [];
             $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
-        }
+            $scope.CreateIndustriesData();
+            $scope.CreateIndustrySkillsData();
+            console.log($scope.dataJSON);
         if (form.$valid) {
             var suc = false;
             if ($scope.edit) {
@@ -67,6 +157,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
                 res.then(function (data) {
                     $scope.dataJSON = data;
                     alert("Data Updated Successfully");
+                    $state.go($scope.configJSON.successURL);
                 });
             }
             else {
@@ -81,9 +172,8 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
         }
     }
 
-    $scope.reset = function () {
-        $state.ldataJSON = {};
-        //$uibModalInstance.close();
+    $scope.removeFile = function (index) {
+        $scope.dataJSON.CandidateFile.splice(index, 1);
     }
 
     

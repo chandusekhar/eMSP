@@ -22,6 +22,6 @@ namespace eMSP.ViewModel.Files
         public System.DateTime createdTimestamp { get; set; }
         public string createdUserId { get; set; }
         public Nullable<System.DateTime> updatedTimestamp { get; set; }
-        public string updatedUserId { get; set; }
+        public string ipdatedUserId { get; set; }
     }
 }

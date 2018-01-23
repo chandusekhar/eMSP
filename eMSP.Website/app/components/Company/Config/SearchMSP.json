@@ -1,38 +1,39 @@
 {
   "title": "Manage MSP",
-  "titleForm":"Search MSP",
-  "searchUrl":"/api/mspdetails/getmspdetails",
-  "createUrl":"company.createMSP",
-  "editUrl":"company.editMSP",
-  "companyType":"MSP",
-  "gridElements":[
-  {
-  "lable":"ID",
-  "id":"id"
-  },
-  {
-  "lable":"Company Type",
-  "id":"companyType"
-  },
-  {
-  "lable":"Company Name",
-  "id":"companyName"
-  },
-  {
-  "lable":"Company Website",
-  "id":"companyWebsite"
-  },
-  {
-  "lable":"Company Email",
-  "id":"companyEmail"
-  },
-  {
-  "lable":"Company Contact Number",
-  "id":"companyPhoneNumber"
-  },
-  {
-  "lable":"Company Address",
-  "id":"companyAddress"
-  }
+  "titleForm": "Search MSP",
+  "searchUrl": "/api/mspdetails/getmspdetails",
+  "createUrl": "company.createMSP",
+  "editUrl": "company.editMSP",
+  "createCandidateUrl": "candidate.create",
+  "companyType": "MSP",
+  "gridElements": [
+    {
+      "lable": "ID",
+      "id": "id"
+    },
+    {
+      "lable": "Company Type",
+      "id": "companyType"
+    },
+    {
+      "lable": "Company Name",
+      "id": "companyName"
+    },
+    {
+      "lable": "Company Website",
+      "id": "companyWebsite"
+    },
+    {
+      "lable": "Company Email",
+      "id": "companyEmail"
+    },
+    {
+      "lable": "Company Contact Number",
+      "id": "companyPhoneNumber"
+    },
+    {
+      "lable": "Company Address",
+      "id": "companyAddress"
+    }
   ]
 }

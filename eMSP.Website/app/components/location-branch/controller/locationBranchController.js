@@ -2,18 +2,19 @@
 angular.module('eMSPApp')
     .controller('locationController', locationController)
     .controller('branchController', branchController);
-function locationController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
+function locationController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.formAction = function () { return "Create"; };
     $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
+    $scope.refData.submitted = false;
 
     $http.get("app/components/location-branch/config/manageLocation.json").success(function (data) {
         $scope.configJSON = data;
     });
 
-    $scope.getStateList = function () {        
+    $scope.getStateList = function () {
         if ($scope.ldataJSON.countryId) {
             var param = { "Id": $scope.ldataJSON.countryId }
             var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId, {});
@@ -28,25 +29,25 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     }
 
     $scope.submit = function (form) {
-
+        $scope.refData.submitted = true;
         $scope.ldataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
         $scope.ldataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
-        if (form.$valid) {
+        if (form.$valid) {            
             var suc = false;
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.UPDATELOCATIONURL, $scope.ldataJSON);
                 res.then(function (data) {
                     $scope.ldataJSON = data;
-                    alert("Data Updated Successfully");
+                    toaster.warning({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.CREATELOCATIONURL, $scope.ldataJSON);
                 res.then(function (data) {
                     $scope.ldataJSON = data;
-                    alert("Data Created Successfully");
-                    $state.reload();
+                    toaster.success({ body: "Data Created Successfully." });
+                    $scope.resLocations.unshift(data);
                 });
             }
             $uibModalInstance.close();
@@ -59,21 +60,22 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     }
 }
 
-function branchController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
-    
+function branchController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
+
     //var rawValue = angular.copy($scope.bdataJSON);
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.formAction = function () { return "Create"; };
     $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
+    $scope.refData.submitted = false;
 
     $http.get("app/components/location-branch/config/manageBranch.json").success(function (data) {
         $scope.configJSON = data;
     });
 
     $scope.getStateList = function () {
-   
+
         if ($scope.bdataJSON.countryId) {
             var param = { "Id": $scope.bdataJSON.countryId }
             var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.bdataJSON.countryId, {});
@@ -87,7 +89,8 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
         $scope.getStateList();
     }
 
-    $scope.submit = function (form) {        
+    $scope.submit = function (form) {
+        $scope.refData.submitted = true;
         $scope.bdataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
         $scope.bdataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
         if (form.$valid) {
@@ -96,21 +99,22 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
                 var res = apiCall.post(APP_CONSTANTS.URL.BRANCH.UPDATEBRANCHURL, $scope.bdataJSON);
                 res.then(function (data) {
                     $scope.bdataJSON = data;
-                    alert("Branch Updated Successfully");
+                    toaster.warning({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.BRANCH.CREATEBRANCHURL, $scope.bdataJSON);
                 res.then(function (data) {
                     $scope.bdataJSON = data;
-                    alert("Branch Created Successfully");
+                    toaster.success({ body: "Data Created Successfully." });
+                    $scope.resBranches.unshift(data);
                 });
             }
             $uibModalInstance.close();
         }
     }
 
-    
+
 
     $scope.reset = function () {
         $state.bdataJSON = {};

@@ -9,8 +9,10 @@
         'ui.bootstrap',                 // Ui Bootstrap
         'pascalprecht.translate',       // Angular Translate
         'ngIdle',                       // Idle timer
-        'ngSanitize',                    // ngSanitize
-        'LocalStorageModule'
+        'ngSanitize',                   // ngSanitize
+        'LocalStorageModule',
+        'ngLetterAvatar'                // Letter Avathar
+        //'daterangepicker'
     ])
 })();
 

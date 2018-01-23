@@ -28,7 +28,7 @@ namespace eMSP.Data.DataServices.Common
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCountries.Select(a=>a).ToList());
+                    return await Task.Run(() => db.tblCountries.Select(a => a).OrderBy(x => x.Name).ToList());
                 }
             }
             catch (Exception)
@@ -45,7 +45,7 @@ namespace eMSP.Data.DataServices.Common
 
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCountryStates.Where(a => a.CountryID == Id).ToList());
+                    return await Task.Run(() => db.tblCountryStates.Where(a => a.CountryID == Id).OrderBy(x => x.Name).ToList());
                 }
             }
             catch (Exception)

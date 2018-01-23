@@ -111,6 +111,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -149,6 +157,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -187,6 +203,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -432,6 +456,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             serie: true,
                             name: 'datatables.buttons',
                             files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -459,13 +488,18 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             serie: true,
                             name: 'datatables.buttons',
                             files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
             }
         })
 
-        
+
 
         //company Routes end
 
@@ -512,11 +546,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
                         },
                         {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
-                        {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -554,13 +590,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
                         },
                         {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
-                        {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
                         }
-                        
+
                     ]);
                 }
             }
@@ -600,9 +633,26 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
                         },
                         {
-                            files: ['js/plugins/moment/moment.min.js']
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            name: 'summernote',
+                            files: ['css/plugins/summernote/summernote.css', 'css/plugins/summernote/summernote-bs3.css', 'js/plugins/summernote/summernote.min.js', 'js/plugins/summernote/angular-summernote.min.js']
                         }
                     ]);
                 }
@@ -637,15 +687,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
                         },
                         {
+                            files: ['css/plugins/dropzone/basic.css', 'css/plugins/dropzone/dropzone.css', 'js/plugins/dropzone/dropzone.js']
+                        },
+                        {
                             serie: true,
                             files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js', 'js/plugins/bootstrap-markdown/markdown.js', 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
                         },
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                        },
+                        }
+                        ,
                         {
-                            files: ['js/plugins/moment/moment.min.js']
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -683,9 +739,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
                         },
                         {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
-                        {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
                         },
@@ -694,6 +747,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         },
                         {
                             files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -740,6 +798,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
                         }
                     ]);
                 }
@@ -761,7 +827,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/candidate/config/ManageCandidate.json").success(function (data) { return data; });
                 },
-                
+
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
                         .then(function (data) {
@@ -779,9 +845,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
+
                         {
                             serie: true,
                             files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
@@ -848,9 +912,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/moment/moment.min.js']
-                        },
+
                         {
                             serie: true,
                             files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
@@ -933,6 +995,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'ui.switchery',
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -952,7 +1022,6 @@ angular
     .run(function ($rootScope, $state) {
         $rootScope.$state = $state;
     });
-
 
 
 

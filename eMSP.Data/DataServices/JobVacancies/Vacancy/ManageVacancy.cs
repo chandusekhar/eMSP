@@ -5,6 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using eMSP.DataModel;
 using System.Data.Entity;
+using eMSP.ViewModel.JobVacancies;
+using eMSP.Data.Extensions;
+using eMSP.Data.DataServices.Comments;
+using eMSP.ViewModel.Comments;
+using eMSP.ViewModel.Shared;
+using eMSP.ViewModel.MSP;
+using eMSP.ViewModel.LocationBranch;
 
 namespace eMSP.Data.DataServices.JobVacancies
 {
@@ -55,17 +62,28 @@ namespace eMSP.Data.DataServices.JobVacancies
                         return await Task.Run(() => db.tblVacancies
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
+                                                      .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
+                                                      .Include(a => a.tblVacancyFiles)
+                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier))
+                                                      .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
                                                       .Where(x => x.CustomerID == customerId)
-                                                      .ToList());
+                                                      .OrderByDescending(x => x.ID).ToList());
                     }
                     else
                     {
                         return await Task.Run(() => db.tblVacancies
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
-                                                      .ToList());
+                                                      .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
+                                                      .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
+                                                      .Include(a => a.tblVacancyFiles)
+                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier))
+                                                      .OrderByDescending(x => x.ID).ToList());
                     }
-
                 }
             }
             catch (Exception)
@@ -79,6 +97,55 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
+        internal static async Task<VacancyCreateModel> Insert(VacancyCreateModel model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    tblVacancy vacancy = await Task.Run(() => InsertVacancy(model.Vacancy.ConvertTotblVacancy()));
+
+                    foreach (IndustrySkillsCreateModel a in model.VacancySkills)
+                    {
+                        tblVacancieSkill vacancySkill = await Task.Run(() => ManageVacancySkills.AddVacancySkills(a.id, vacancy));
+                    }
+
+                    foreach (CompanyCreateModel a in model.VacancySuppliers)
+                    {
+                        tblVacancySupplier vacancySupplier = await Task.Run(() => ManageVacancySuppliers.InsertVacancySupplier(a.id, vacancy));
+                    }
+
+                    foreach (LocationCreateModel a in model.VacancyLocations)
+                    {
+                        tblVacancyLocation vacancyLocation = await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.id, vacancy));
+                    }
+
+                    foreach (VacancyFileModel a in model.VacancyFiles)
+                    {
+                        tblVacancyFile vacancyFile = await Task.Run(() => ManageVacancyFiles.InsertVacancyFiles(a.ConvertTotblVacancyFile(), vacancy));
+                    }
+
+                    //Comments
+                    foreach (CommentModel c in model.VacancyComment)
+                    {
+                        if (!string.IsNullOrEmpty(c.comment))
+                        {
+                            tblComment comment = await Task.Run(() => ManageComments.InsertComment(c.ConvertTotblComment()));
+                            tblVacancyComment vacancyComment = await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
+                        }
+                    }
+
+                    return model;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         internal static async Task<tblVacancy> InsertVacancy(tblVacancy model)
         {
             try
@@ -88,9 +155,8 @@ namespace eMSP.Data.DataServices.JobVacancies
                     model = db.tblVacancies.Add(model);
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
-                    
-                    return model;
 
+                    return model;
                 }
             }
             catch (Exception ex)
@@ -99,6 +165,8 @@ namespace eMSP.Data.DataServices.JobVacancies
 
             }
         }
+
+
 
         #endregion
 

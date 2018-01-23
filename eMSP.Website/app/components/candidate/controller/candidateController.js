@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
    
-function createCandidateController($scope, $state, localStorageService, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON,) {
+function createCandidateController($scope, $state, localStorageService, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -14,21 +14,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     $scope.dataJSON.CandidateFile = [];
     $scope.dataJSON.Candidate = {};
     $scope.dataJSON.Contact = {};
-    $scope.selected = {};
-    $scope.selected.industries = [];
-    $scope.selected.industryskills = [];
     
-    //$scope.LoadIndustriesData = function () {
-
-    //    angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
-    //        angular.forEach($scope.refData.industryList, function (value, key) {
-    //            if (value.id == v) {
-    //                this.push(value);
-    //            }
-    //        }, $scope.selected.industries);
-    //    });
-
-    //}
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
             var param = { "Id": $scope.dataJSON.Contact.CountyID }
@@ -139,9 +125,8 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
       
     }
     $scope.submit = function (form) {
-        alert("submit");
         
-            $scope.dataJSON.SupplierId = localStorageService.get('supplierId');            
+            $scope.dataJSON.SupplierId = 1;            
             $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
             $scope.dataJSON.Contact.FirstName = $scope.dataJSON.Candidate.FirstName;
             $scope.dataJSON.Contact.LastName = $scope.dataJSON.Candidate.LastName;            
@@ -149,14 +134,13 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
             $scope.CreateIndustriesData();
             $scope.CreateIndustrySkillsData();
-            console.log($scope.dataJSON);
+            
         if (form.$valid) {
             var suc = false;
             if ($scope.edit) {
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.UPDATEURL, $scope.dataJSON);
                 res.then(function (data) {
-                    $scope.dataJSON = data;
-                    alert("Data Updated Successfully");
+                    $scope.dataJSON = data;                  
                     $state.go($scope.configJSON.successURL);
                 });
             }
@@ -164,11 +148,10 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.CREATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    alert("Data Created Successfully");
                     $state.go($scope.configJSON.successURL);
                 });
             }
-            //$uibModalInstance.close();
+           
         }
     }
 
@@ -181,9 +164,8 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 }
 
 angular.module('eMSPApp')
-    .directive('dropZone', [
-        function () {
-
+    .directive('dropZone', ['ngAuthSettings',
+        function (ngAuthSettings) {
 
             var config = {
                 template: '<label class="drop-zone">' +
@@ -195,7 +177,7 @@ angular.module('eMSPApp')
                // transclude: true,
                 replace: true,                
                 require: '?ngModel',
-                link: function (scope, element, attributes, ngModel) {
+                link: function (scope, element, attributes, ngModel) {                    
                     var upload = element[0].querySelector('input');
                     upload.addEventListener('dragover', uploadDragOver, false);
                     upload.addEventListener('drop', uploadFileSelect, false);
@@ -263,9 +245,9 @@ angular.module('eMSPApp')
                 var objXhr = new XMLHttpRequest();
                 //objXhr.addEventListener("progress", updateProgress, false);
                 objXhr.addEventListener("load", transferComplete, false);
-
+                
                 // SEND FILE DETAILS TO THE API.
-                objXhr.open("POST", "http://localhost:50001/api/FileUpload/uploadFiles");
+                objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
                 objXhr.send(data);
             }
             

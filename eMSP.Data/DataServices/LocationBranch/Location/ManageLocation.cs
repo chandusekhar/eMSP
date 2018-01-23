@@ -29,6 +29,8 @@ namespace eMSP.Data.DataServices.LocationBranch
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblLocations
+                                                  .Include(x=>x.tblCountry)
+                                                  .Include(x => x.tblCountryState)
                                                   .Where(x => x.ID == Id).SingleOrDefault());
 
 

@@ -31,12 +31,12 @@ namespace eMSP.Data.DataServices.JobVacancies
                     if (isOnlyActive)
                     {
                         return await Task.Run(() => db.tblMSPVacancieTypes
-                                                   .Where(x => x.MSPID == mspId && x.IsActive == true).ToList());
+                                                   .Where(x => x.MSPID == mspId && x.IsActive == true).OrderByDescending(x => x.ID).ToList());
                     }
                     else
                     {
                         return await Task.Run(() => db.tblMSPVacancieTypes
-                                                      .Where(x => x.MSPID == mspId).ToList());
+                                                      .Where(x => x.MSPID == mspId).OrderByDescending(x => x.ID).ToList());
                     }
 
                 }

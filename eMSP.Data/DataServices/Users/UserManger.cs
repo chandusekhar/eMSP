@@ -94,7 +94,6 @@ namespace eMSP.Data.DataServices.Users
         {
             try
             {
-
                 tblUserProfile data = await Task.Run(() => UserOperations.InsertUser(model.ConvertTotblUser(), model.companyType, model.companyId));
                 return data.ConvertToUser();
 

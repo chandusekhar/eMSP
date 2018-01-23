@@ -5342,10 +5342,10 @@ dd.project-people {
   position: relative;
   height: 620px;
 }
-.clients-list table tr td {
-  height: 46px;
-  vertical-align: middle;
-  border: none;
+.clients-list table tr td, .table-striped tr td {
+    height: 46px;
+    vertical-align: middle !important;
+    border: none;
 }
 .client-link {
   font-weight: 600;

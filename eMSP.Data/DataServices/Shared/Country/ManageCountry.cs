@@ -43,7 +43,7 @@ namespace eMSP.Data.DataServices.Shared
             {
                 using ( db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCountries.Where(x => x.IsDeleted == false).ToList());
+                    return await Task.Run(() => db.tblCountries.Where(x => x.IsDeleted == false).OrderBy(x => x.Name).ToList());
                 }
             }
             catch (Exception)

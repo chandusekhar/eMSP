@@ -10,7 +10,7 @@ namespace eMSP.Data.Extensions
 {
     public static class Commentsextensions
     {
-        public static tblComment ConvertTotblComment(this CommentCreateModel data)
+        public static tblComment ConvertTotblComment(this CommentModel data)
         {
             return new tblComment()
             {
@@ -19,24 +19,24 @@ namespace eMSP.Data.Extensions
                 ShowToAll = data.showToAll,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
-                CreatedUserID = data.createdUserId,
-                UpdatedUserID = data.updatedUserId,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now
             };
         }
 
-        public static CommentCreateModel ConvertToComment(this tblComment data)
+        public static CommentModel ConvertToComment(this tblComment data)
         {
-            return new CommentCreateModel()
+            return new CommentModel()
             {
                 id = data.ID,
                 comment = data.Comment,
                 showToAll = data.ShowToAll,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
-                createdUserId = data.CreatedUserID,
-                updatedUserId = data.UpdatedUserID,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp
             };

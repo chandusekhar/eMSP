@@ -45,16 +45,27 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
-        internal static async Task<tblVacancyFile> InsertVacancyFiles(tblVacancyFile model)
+        internal static async Task<tblVacancyFile> InsertVacancyFiles(tblVacancyFile model, tblVacancy vacancy)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    model = db.tblVacancyFiles.Add(model);
+                    model = db.tblVacancyFiles.Add(new tblVacancyFile
+                    {
+                        VacancyID = vacancy.ID,
+                        FilePath = model.FilePath,
+                        FileName = model.FileName,
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedTimestamp = vacancy.CreatedTimestamp,
+                        CreatedUserID = vacancy.CreatedUserID,
+                        UpdatedTimestamp = vacancy.UpdatedTimestamp,
+                        UpdatedUserID = vacancy.UpdatedUserID
+                    });
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
-                    
+
                     return model;
 
                 }

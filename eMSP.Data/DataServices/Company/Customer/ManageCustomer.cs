@@ -53,12 +53,12 @@ namespace eMSP.Data.DataServices.Company
                     if (model.companyName == "%")
                     {
                         return await Task.Run(() => db.tblCustomers.Include(a => a.tblCountry)
-                                                  .Include(b => b.tblCountryState).Select(x => x).ToList());
+                                                  .Include(b => b.tblCountryState).Select(x => x).OrderByDescending(x => x.ID).ToList());
                     }
                     else
                     {
                         return await Task.Run(() => db.tblCustomers.Include(a => a.tblCountry)
-                                                  .Include(b => b.tblCountryState).Where(x => x.Name == model.companyName).ToList());
+                                                  .Include(b => b.tblCountryState).Where(x => x.Name == model.companyName).OrderByDescending(x => x.ID).ToList());
                     }
 
                 }
@@ -82,7 +82,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Select(x => x.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
                 }
             }
             catch (Exception)
@@ -101,7 +101,7 @@ namespace eMSP.Data.DataServices.Company
                     return await Task.Run(() => db.tblCustomerLocationBranches
                                                   .Include(a => a.tblLocation)
                                                   .Where(x => x.CustomerID == customerId && x.BranchID == null)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
                 }
             }
             catch (Exception)
@@ -127,7 +127,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }
@@ -152,7 +152,7 @@ namespace eMSP.Data.DataServices.Company
                                                   .Include(a => a.tblLocation)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .ToList());
+                                                  .OrderByDescending(x => x.ID).ToList());
 
 
                 }

@@ -268,7 +268,7 @@ namespace eMSP.Data.DataServices.Candidate
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
 

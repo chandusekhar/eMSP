@@ -1,3 +1,4 @@
+<toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
     <!-- Main view  -->
@@ -12,86 +13,93 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <form class="m-t" name="form" novalidate>
-                <div class="form-group col-md-12" ng-class="{ 'has-error': form.branchName.$dirty && form.branchName.$error.required }">
+                <div class="form-group col-md-12" ng-class="{ 'has-error': form.branchName.$error.required && refData.submitted }">
+                    <label>Branch Name * :</label>
                     <input type="text" class="form-control" name="branchName"
                            ng-model="bdataJSON.branchName"
-                           placeholder="Branch Name" required="">
-                    <span ng-show="form.branchName.$dirty && form.branchName.$error.required" class="help-block">
-                        Branch Name is required
+                           placeholder="Branch Name" required>
+                    <span ng-show="refData.submitted && form.branchName.$error.required" class="text-danger">
+                        * Branch Name is required
                     </span>
                 </div>
 
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.emailAddress.$dirty && form.emailAddress.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.emailAddress.$error.required }">
+                    <label>Branch Address * :</label>
                     <input type="email" class="form-control" name="emailAddress"
                            ng-model="bdataJSON.emailAddress"
                            ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
-                           placeholder="Email Address" required="">
-                    <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.required" class="help-block">
-                        Email Address is required
+                           placeholder="Email Address" required />
+                    <span ng-show="refData.submitted && (form.emailAddress.$error.required || form.emailAddress.$error.email)" class="text-danger">
+                        <span ng-show="form.emailAddress.$error.required">* Email Address is required</span>
+                        <span ng-show="form.emailAddress.$error.email">* Not a valid Email</span>
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.phoneNumber.$dirty && form.phoneNumber.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.phoneNumber.$error.required }">
+                    <label>Phone Number * :</label>
                     <input type="number" class="form-control"
-                           ng-model="bdataJSON.phoneNumber"
+                           ng-model="bdataJSON.phoneNumber"                           
                            ng-pattern="/^[0-9]{1,10}$/"
-                           ng-minlength="10"
-                           placeholder="Phone Number" name="phoneNumber" required="">
-                    <span ng-show="form.phoneNumber.$dirty && form.phoneNumber.$error.required" class="help-block">
-                        Phone Number is required
+                           numericbinding 
+                           placeholder="Phone Number" name="phoneNumber" required />
+                    <span ng-show="refData.submitted && form.phoneNumber.$error.required" class="text-danger">
+                        * Phone Number is required
                     </span>
                 </div>
 
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine1.$dirty && form.streetLine1.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.streetLine1.$error.required }">
+                    <label>Street Line 1 * :</label>
                     <input type="text" class="form-control" name="streetLine1"
                            ng-model="bdataJSON.streetLine1"
-                           placeholder="Street Line 1" required="">
-                    <span ng-show="form.streetLine1.$dirty && form.streetLine1.$error.required" class="help-block">
-                        Street Line 1 is required
+                           placeholder="Street Line 1" required>
+                    <span ng-show="refData.submitted && form.streetLine1.$error.required" class="text-danger">
+                        * Street Line 1 is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.streetLine2.$dirty && form.streetLine2.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.streetLine2.$error.required }">
+                    <label>Street Line 2 * :</label>
                     <input type="text" class="form-control"
                            ng-model="bdataJSON.streetLine2"
-                           placeholder="Street Line 2" name="streetLine2" required="">
-                    <span ng-show="form.streetLine2.$dirty && form.streetLine2.$error.required" class="help-block">
-                        Street Line 2 is required
+                           placeholder="Street Line 2" name="streetLine2" required>
+                    <span ng-show="refData.submitted && form.streetLine2.$error.required" class="text-danger">
+                        * Street Line 2 is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.city.$error.required }">
+                    <label>City * :</label>
                     <input type="text" class="form-control"
                            ng-model="bdataJSON.city"
-                           name="city" placeholder="city" required="">
-                    <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
-                        City is required
+                           name="city" placeholder="city" required>
+                    <span ng-show="refData.submitted && form.city.$error.required" class="text-danger">
+                        * City is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.Country.$dirty && form.Country.$error.required }">
-                    <select ng-model="bdataJSON.countryId" class="form-control" ng-change="getStateList()">
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.country.$error.required }">
+                    <label>Country * :</label>
+                    <select ng-model="bdataJSON.countryId" class="form-control" ng-change="getStateList()" name="country" required>
                         <option value="">Country</option>
                         <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
                     </select>
-                    <span ng-show="form.Country.$dirty && form.Country.$error.required" class="help-block">
+                    <span ng-show="refData.submitted && form.country.$error.required" class="text-danger">
                         Country is required
                     </span>
                 </div>
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.State.$dirty && form.State.$error.required }">
-                    <select ng-model="bdataJSON.stateId" class="form-control" required>
+                <div class="form-group col-md-6" ng-class="{ 'has-error': refData.submitted && form.state.$error.required }">
+                    <label>State * :</label>
+                    <select ng-model="bdataJSON.stateId" class="form-control" required name="state">
                         <option value="">State</option>
                         <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
                     </select>
-                    <span ng-show="form.State.$dirty && form.State.$error.required" class="help-block">
-                        State is required
+                    <span ng-show="refData.submitted && form.state.$error.required" class="text-danger">
+                        * State is required
                     </span>
                 </div>
 
 
-                <div class="form-group col-md-6" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
-                    <div class="checkbox i-checks">
-                        <label>
-                            <input type="checkbox" name="IsActive" ng-model="bdataJSON.isActive">
-                            <i></i> Is Active
-                        </label>
-                    </div>
+                <div class="form-group col-md-12" ng-class="{ 'has-error': form.IsActive.$dirty && form.IsActive.$error.required }">
+                    <label>
+                        <input icheck type="checkbox" name="IsActive" ng-model="bdataJSON.isActive">
+                        <i></i> Is Active
+                    </label>
                 </div>
                 <div class="form-group col-md-12">
                     <h5>

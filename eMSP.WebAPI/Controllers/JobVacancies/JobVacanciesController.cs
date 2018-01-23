@@ -60,53 +60,53 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
-        [Route("getVacancySkills")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySkillsCreateModel))]
-        public async Task<IHttpActionResult> GetVacancySkills(int id)
-        {
-            try
-            {
-                long Id = Convert.ToInt64(id);
-                return Ok(await VacanciesService.GetVacancySkills(Id));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("getVacancySkills")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancySkillsCreateModel))]
+        //public async Task<IHttpActionResult> GetVacancySkills(int id)
+        //{
+        //    try
+        //    {
+        //        long Id = Convert.ToInt64(id);
+        //        return Ok(await VacanciesService.GetVacancySkills(Id));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("getVacancyLocations")]
-        [HttpPost]
-        [ResponseType(typeof(VacancyLocationsCreateModel))]
-        public async Task<IHttpActionResult> GetVacancyLocations(int id)
-        {
-            try
-            {
-                long Id = Convert.ToInt64(id);
-                return Ok(await VacanciesService.GetVacancyLocations(Id));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("getVacancyLocations")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancyLocationsCreateModel))]
+        //public async Task<IHttpActionResult> GetVacancyLocations(int id)
+        //{
+        //    try
+        //    {
+        //        long Id = Convert.ToInt64(id);
+        //        return Ok(await VacanciesService.GetVacancyLocations(Id));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("getVacancySupplier")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySuppliersCreateModel))]
-        public async Task<IHttpActionResult> GetVacancySupplier(int id)
-        {
-            try
-            {
-                long Id = Convert.ToInt64(id);
-                return Ok(await VacanciesService.GetVacancySupplier(Id));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("getVacancySupplier")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancySuppliersCreateModel))]
+        //public async Task<IHttpActionResult> GetVacancySupplier(int id)
+        //{
+        //    try
+        //    {
+        //        long Id = Convert.ToInt64(id);
+        //        return Ok(await VacanciesService.GetVacancySupplier(Id));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         [Route("getMSPVacancyType")]
         [HttpPost]
@@ -157,50 +157,9 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
-        [Route("addVacancySkill")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySkillsCreateModel))]
-        public async Task<IHttpActionResult> AddVacancySkill(VacancySkillsCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.AddVacancySkills(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
 
-        [Route("addVacancyLocation")]
-        [HttpPost]
-        [ResponseType(typeof(VacancyLocationsCreateModel))]
-        public async Task<IHttpActionResult> AddVacancyLocation(VacancyLocationsCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.AddVacancyLocation(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [Route("addVacancySupplier")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySuppliersCreateModel))]
-        public async Task<IHttpActionResult> AddVacancySupplier(VacancySuppliersCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.AddVacancySupplier(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
 
         [Route("createMSPVacancieType")]
         [HttpPost]
@@ -227,7 +186,8 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         {
             try
             {
-                return Ok(await VacanciesService.UpdateVacancy(model));
+                //return Ok(await VacanciesService.UpdateVacancy(model));
+                return Ok();
             }
             catch (Exception)
             {
@@ -235,50 +195,50 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
-        [Route("updateVacancySkill")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySkillsCreateModel))]
-        public async Task<IHttpActionResult> UpdateVacancySkill(VacancySkillsCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.UpdateVacancySkill(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("updateVacancySkill")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancySkillsCreateModel))]
+        //public async Task<IHttpActionResult> UpdateVacancySkill(VacancySkillsCreateModel model)
+        //{
+        //    try
+        //    {
+        //        return Ok(await VacanciesService.UpdateVacancySkill(model));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("updateVacancyLocation")]
-        [HttpPost]
-        [ResponseType(typeof(VacancyLocationsCreateModel))]
-        public async Task<IHttpActionResult> UpdateVacancyLocation(VacancyLocationsCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.UpdateVacancyLocation(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("updateVacancyLocation")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancyLocationsCreateModel))]
+        //public async Task<IHttpActionResult> UpdateVacancyLocation(VacancyLocationsCreateModel model)
+        //{
+        //    try
+        //    {
+        //        return Ok(await VacanciesService.UpdateVacancyLocation(model));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("updateVacancySupplier")]
-        [HttpPost]
-        [ResponseType(typeof(VacancySuppliersCreateModel))]
-        public async Task<IHttpActionResult> UpdateVacancySupplier(VacancySuppliersCreateModel model)
-        {
-            try
-            {
-                return Ok(await VacanciesService.UpdateVacancySupplier(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("updateVacancySupplier")]
+        //[HttpPost]
+        //[ResponseType(typeof(VacancySuppliersCreateModel))]
+        //public async Task<IHttpActionResult> UpdateVacancySupplier(VacancySuppliersCreateModel model)
+        //{
+        //    try
+        //    {
+        //        return Ok(await VacanciesService.UpdateVacancySupplier(model));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         [Route("updateMSPVacancieType")]
         [HttpPost]

@@ -33,7 +33,7 @@ namespace eMSP.Data.DataServices.JobVacancies
             {
                 VacancyCreateModel model = null;
                 tblVacancy data = await Task.Run(() => ManageVacancy.GetVacancyDetails(Id));
-                model = data.ConvertToVacancy();
+                model = data.ConvertToVacancyCreateModel();
 
                 return model;
             }
@@ -51,61 +51,7 @@ namespace eMSP.Data.DataServices.JobVacancies
 
                 List<tblVacancy> res = await Task.Run(() => ManageVacancy.GetAllVacancies(model.customerId));
 
-                data = res.Select(x => x.ConvertToVacancy()).ToList();
-
-                return data;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<List<VacancySkillsCreateModel>> GetVacancySkills(long Id)
-        {
-            try
-            {
-                List<VacancySkillsCreateModel> data = null;
-
-                List<tblVacancieSkill> res = await Task.Run(() => ManageVacancySkills.GetVacancySkills(Id));
-
-                data = res.Select(x => x.ConvertToVacancySkill()).ToList();
-
-                return data;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<List<VacancyLocationsCreateModel>> GetVacancyLocations(long Id)
-        {
-            try
-            {
-                List<VacancyLocationsCreateModel> data = null;
-
-                List<tblVacancyLocation> res = await Task.Run(() => ManageVacancyLocations.GetVacancyLocations(Id));
-
-                data = res.Select(x => x.ConvertToVacancyLocation()).ToList();
-
-                return data;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<List<VacancySuppliersCreateModel>> GetVacancySupplier(long Id)
-        {
-            try
-            {
-                List<VacancySuppliersCreateModel> data = null;
-
-                List<tblVacancySupplier> res = await Task.Run(() => ManageVacancySuppliers.GetVacancySuppliers(Id));
-
-                data = res.Select(x => x.ConvertToVacancySupplier()).ToList();
+                data = res.Select(x => x.ConvertToVacancyCreateModel()).ToList();
 
                 return data;
             }
@@ -114,6 +60,60 @@ namespace eMSP.Data.DataServices.JobVacancies
                 throw;
             }
         }
+
+        //public async Task<List<VacancySkillsCreateModel>> GetVacancySkills(long Id)
+        //{
+        //    try
+        //    {
+        //        List<VacancySkillsCreateModel> data = null;
+
+        //        List<tblVacancieSkill> res = await Task.Run(() => ManageVacancySkills.GetVacancySkills(Id));
+
+        //        data = res.Select(x => x.ConvertToVacancySkill()).ToList();
+
+        //        return data;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        //public async Task<List<VacancyLocationsCreateModel>> GetVacancyLocations(long Id)
+        //{
+        //    try
+        //    {
+        //        List<VacancyLocationsCreateModel> data = null;
+
+        //        List<tblVacancyLocation> res = await Task.Run(() => ManageVacancyLocations.GetVacancyLocations(Id));
+
+        //        data = res.Select(x => x.ConvertToVacancyLocation()).ToList();
+
+        //        return data;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        //public async Task<List<VacancySuppliersCreateModel>> GetVacancySupplier(long Id)
+        //{
+        //    try
+        //    {
+        //        List<VacancySuppliersCreateModel> data = null;
+
+        //        List<tblVacancySupplier> res = await Task.Run(() => ManageVacancySuppliers.GetVacancySuppliers(Id));
+
+        //        data = res.Select(x => x.ConvertToVacancySupplier()).ToList();
+
+        //        return data;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         public async Task<List<MSPVacancieTypeCreateModel>> GetMSPVacancieType(MSPVacancieType data, bool isOnlyActive)
         {
@@ -150,9 +150,10 @@ namespace eMSP.Data.DataServices.JobVacancies
         {
             try
             {
-                tblVacancy dataVacancy = await Task.Run(() => ManageVacancy.InsertVacancy(data.ConvertTotblVacancy()));
+                VacancyCreateModel model = null;
+                VacancyCreateModel res = await Task.Run(() => ManageVacancy.Insert(data));
 
-                return dataVacancy.ConvertToVacancy();
+                return model;
             }
             catch (Exception)
             {
@@ -164,6 +165,8 @@ namespace eMSP.Data.DataServices.JobVacancies
         {
             try
             {
+                long mspId = Convert.ToInt64(ConfigurationManager.AppSettings["MSP_ID"]);
+                data.mspId = data.mspId != 0 ? data.mspId : mspId;
                 tblMSPVacancieType dataMSPVacancieType = await Task.Run(() => ManageMSPVacancieType.InsertMSPVacancieType(data.ConvertTotblMSPVacancieType()));
 
                 return dataMSPVacancieType.ConvertToMSPVacancieType();
@@ -173,82 +176,12 @@ namespace eMSP.Data.DataServices.JobVacancies
                 throw;
             }
         }
-
-
-        public async Task<VacancyCommentsCreateModel> CreateVacancyComments(VacancyCommentsCreateModel data)
-        {
-            try
-            {
-                tblVacancyComment dataVacancyComment = await Task.Run(() => ManageVacancyComments.InsertComment(data.ConvertTotblVacancyComment()));
-
-                return dataVacancyComment.ConvertToVacancyComment();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<VacancyFilesCreateModel> CreateVacancyFiles(VacancyFilesCreateModel data)
-        {
-            try
-            {
-                tblVacancyFile dataVacancyFile = await Task.Run(() => ManageVacancyFiles.InsertVacancyFiles(data.ConvertTotblVacancyFile()));
-
-                return dataVacancyFile.ConvertToVacancyFile();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<VacancyLocationsCreateModel> AddVacancyLocation(VacancyLocationsCreateModel data)
-        {
-            try
-            {
-                tblVacancyLocation dataVacancyLocation = await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(data.ConvertTotblVacancyLocation()));
-
-                return dataVacancyLocation.ConvertToVacancyLocation();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<VacancySkillsCreateModel> AddVacancySkills(VacancySkillsCreateModel data)
-        {
-            try
-            {
-                tblVacancieSkill dataVacancySkills = await Task.Run(() => ManageVacancySkills.AddVacancySkills(data.ConvertTotblVacancySkill()));
-
-                return dataVacancySkills.ConvertToVacancySkill();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task<VacancySuppliersCreateModel> AddVacancySupplier(VacancySuppliersCreateModel data)
-        {
-            try
-            {
-                tblVacancySupplier dataVacancySupplier = await Task.Run(() => ManageVacancySuppliers.InsertVacancySupplier(data.ConvertTotblVacancySupplier()));
-
-                return dataVacancySupplier.ConvertToVacancySupplier();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
         #endregion
 
         #region Update
 
-        public async Task<VacancyCreateModel> UpdateVacancy(VacancyCreateModel model)
+        public async Task<VacancyModel> UpdateVacancy(VacancyModel model)
         {
             try
             {
@@ -262,45 +195,45 @@ namespace eMSP.Data.DataServices.JobVacancies
             }
         }
 
-        public async Task<VacancySkillsCreateModel> UpdateVacancySkill(VacancySkillsCreateModel model)
-        {
-            try
-            {
-                tblVacancieSkill data = await Task.Run(() => ManageVacancySkills.UpdateVacancySkills(model.ConvertTotblVacancySkill()));
-                return data.ConvertToVacancySkill();
+        //public async Task<VacancySkillsCreateModel> UpdateVacancySkill(VacancySkillsCreateModel model)
+        //{
+        //    try
+        //    {
+        //        tblVacancieSkill data = await Task.Run(() => ManageVacancySkills.UpdateVacancySkills(model.ConvertTotblVacancySkill()));
+        //        return data.ConvertToVacancySkill();
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        public async Task<VacancyLocationsCreateModel> UpdateVacancyLocation(VacancyLocationsCreateModel model)
-        {
-            try
-            {
-                tblVacancyLocation data = await Task.Run(() => ManageVacancyLocations.UpdateVacancyLocation(model.ConvertTotblVacancyLocation()));
-                return data.ConvertToVacancyLocation();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public async Task<VacancyLocationsCreateModel> UpdateVacancyLocation(VacancyLocationsCreateModel model)
+        //{
+        //    try
+        //    {
+        //        tblVacancyLocation data = await Task.Run(() => ManageVacancyLocations.UpdateVacancyLocation(model.ConvertTotblVacancyLocation()));
+        //        return data.ConvertToVacancyLocation();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        public async Task<VacancySuppliersCreateModel> UpdateVacancySupplier(VacancySuppliersCreateModel model)
-        {
-            try
-            {
-                tblVacancySupplier data = await Task.Run(() => ManageVacancySuppliers.UpdateVacancySupplier(model.ConvertTotblVacancySupplier()));
-                return data.ConvertToVacancySupplier();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public async Task<VacancySuppliersCreateModel> UpdateVacancySupplier(VacancySuppliersCreateModel model)
+        //{
+        //    try
+        //    {
+        //        tblVacancySupplier data = await Task.Run(() => ManageVacancySuppliers.UpdateVacancySupplier(model.ConvertTotblVacancySupplier()));
+        //        return data.ConvertToVacancySupplier();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
         public async Task<MSPVacancieTypeCreateModel> UpdateMSPVacancieType(MSPVacancieTypeCreateModel model)

@@ -24,17 +24,5 @@ function searchVacanciesController($scope, $state, localStorageService, configJS
         localStorageService.set('vacancyData', data);
         $state.go($scope.configJSON.manageUrl);
     }
-    
-    $scope.reset = function () {
-
-    }
-
-    $scope.update = function (data) {
-
-    }
-
-    $scope.delete = function (data) {
-
-    }
 }
 

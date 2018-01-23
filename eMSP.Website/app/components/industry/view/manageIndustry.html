@@ -1,3 +1,4 @@
+<toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
     <!-- Main view  -->
@@ -22,7 +23,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5><strong>Industries:</strong></h5>
-                        <div ibox-tools></div>
+
                     </div>
                     <div class="ibox-content">
                         <div class="row">
@@ -30,20 +31,26 @@
 
                             <div ng-repeat="con in industryList">
                                 <div class="col-lg-4">
+                                    <!--ng-show="!con.isDeleted"-->
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
-                                            <a class="text-white" ng-show="!test" ng-click="loadSkills(con,test)"> <i class="fa fa-plus-square"></i></a> <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
+                                            <a class="text-white" ng-show="!test" ng-click="loadSkills(con,test)">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="text-white" ng-show="test" ng-click="test=false;alert(false);">
+                                                <i class="fa fa-chevron-down"></i>
+                                            </a>
                                             {{con.industryName}} <div class="btn-group-xs pull-right">
                                                 <a ng-click="update(con)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
-                                                <a class="btn btn-danger">
+                                                <!--<a class="btn btn-danger">
                                                     <span class="fa fa-trash"></span>
-                                                </a>
+                                                </a>-->
                                             </div>
 
                                         </div>
-                                        <div class="panel-body" >
+                                        <div class="panel-body">
                                             <div class="ibox-heading white-bg">
                                                 <b>Description:</b><p class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{con.industryDescription}}</p>
                                             </div>
@@ -54,22 +61,43 @@
                                                 </div>
 
                                                 <div ng-repeat="s in con.skillList">
+                                                    <!-- ng-show="!s.isDeleted" -->
 
                                                     <div class="ibox-tools pull-left small">
-                                                        <i class="fa fa fa-dot-circle-o"></i> {{s.skillName}}<a ng-click="modal(s)"> <i class="fa fa-pencil"></i></a> <a ng-click=""> <i class="fa fa-trash"></i></a>
-                                                        <!--<span class="small" ng-if="s.isActive">Active</span>
+                                                        <i class="fa fa fa-dot-circle-o"></i> {{s.skillName}}
+                                                        <a ng-click="modal(s)"> <i class="fa fa-pencil"></i></a>
+                                                        <a ng-click=""> <i class="fa fa-trash"></i></a>
+                                                        <!-- Skills Active/Deavtive toggle -->
+                                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                               ng-change="toggleActive(s)" ng-model="s.isActive" />
+                                                        <span class="small" ng-if="s.isActive">Active</span>
                                                         <span class="small" ng-if="!s.isActive">Deactive</span>
-                                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}" ng-change="toggleActive(s)" ng-model="s.isActive" />-->
+                                                        <!-- Skills Deleted toggle -->
+                                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                               ng-change="toggleActive(s)" ng-model="s.isDeleted" />
+                                                        <span class="small" ng-if="s.isDeleted">Deleted</span>
+                                                        <span class="small" ng-if="!s.isDeleted">Deleted</span>
                                                     </div>
                                                     <br />
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div align="center" class="form-control inline">
-                                            <p class="small inline" ng-if="con.isActive">Active</p><p class="small inline" ng-if="!con.isActive">Deactive</p> <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)" ng-model="con.isActive" />
-                                        </div>
+                                        <div class="form-control inline">
+                                            <!-- Industry Active/Deactive toggle -->
+                                            <p class="small inline left" ng-if="con.isActive">Active</p>
+                                            <p class="small inline left" ng-if="!con.isActive">Deactive</p>
+                                            <input type="checkbox" class=" switchery small left" ui-switch="{color:'#1AB394', size:'small'}"
+                                                   ng-change="toggleActive(con)" ng-model="con.isActive" />
 
+                                            <!-- Industry Deleted toggle -->
+                                            <div class="pull-right">
+                                                <p class="small inline" ng-if="con.isDeleted">Deleted</p>
+                                                <p class="small inline" ng-if="!con.isDeleted">Deleted</p>
+                                                <input type="checkbox" class=" switchery small media-right" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                       ng-change="toggleActive(con)" ng-model="con.isDeleted" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -85,36 +113,33 @@
                     <div class="ibox-title">
                         <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
                         <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
-                        <div ibox-tools></div>
+
                     </div>
                     <div class="ibox-content">
                         <form class="m-t" name="form" novalidate>
-
-
-
-                            <div class="form-group" ng-class="{ 'has-error': form.industryName.$dirty && form.industryName.$error.required }">
+                            <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.industryName.$error.required }">
+                                <label>Industary Name * :</label>
                                 <input type="text" class="form-control" name="industryName"
                                        ng-model="dataJSON.industryName"
-                                       placeholder="Industry Name" required="">
-                                <span ng-show="form.industryName.$dirty && form.industryName.$error.required" class="help-block">
-                                    Industry Name is required
+                                       placeholder="Industry Name" required />
+                                <span ng-show="refData.submitted && form.industryName.$error.required" class="text-danger">
+                                    * Industry Name is required
                                 </span>
                             </div>
-                            <div class="form-group " ng-class="{ 'has-error': form.industryDescription.$dirty && form.industryDescription.$error.required }">
+                            <div class="form-group " ng-class="{ 'has-error': refData.submitted && form.industryDescription.$error.required }">
+                                <label>Industary Description * :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.industryDescription"
-                                       placeholder="Industry Description" name="industryDescription" required="">
-                                <span ng-show="form.industryDescription.$dirty && form.industryDescription.$error.required" class="help-block">
-                                    Indutry Description is required
+                                       placeholder="Industry Description" name="industryDescription" required />
+                                <span ng-show="refData.submitted && form.industryDescription.$error.required" class="text-danger">
+                                    * Indutry Description is required
                                 </span>
                             </div>
                             <div class="form-group">
-                                <div class="checkbox i-checks">
-                                    <label>
-                                        <input type="checkbox" name="IsActive" ng-model="dataJSON.isActive">
-                                        <i></i> Is Active
-                                    </label>
-                                </div>
+                                <label>
+                                    <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.isActive">
+                                    <i></i> Is Active
+                                </label>
 
                             </div>
 

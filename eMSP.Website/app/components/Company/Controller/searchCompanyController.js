@@ -72,6 +72,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.loadUsers = function (compId) {    
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.dataJSON.companyType, id: compId });
         apires.then(function (data) {
+            console.log(data);
             $scope.resUsers = data;
         });
     }

@@ -80,23 +80,30 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        internal static async Task<tblVacancieSkill> UpdateVacancySkills(tblVacancieSkill model)
+        internal static async Task<tblVacancieSkill> UpdateVacancySkills(long a, tblVacancy vacancy)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    db.Entry(model).State = EntityState.Modified;
+                    tblVacancieSkill model = await Task.Run(() => db.tblVacancieSkills.Where(b => b.VacancyID == vacancy.ID && b.SkillID == a).FirstOrDefaultAsync());
 
-                    int x = await Task.Run(() => db.SaveChangesAsync());
+                    if (model != null)
+                    {
+                        db.Entry(model).State = EntityState.Modified;
 
+                        int x = await Task.Run(() => db.SaveChangesAsync());
+                    }
+                    else
+                    {
+                        model = await Task.Run(() => AddVacancySkills(a, vacancy));
+                    }
                     return model;
                 }
             }
             catch (Exception)
             {
                 throw;
-
             }
         }
 

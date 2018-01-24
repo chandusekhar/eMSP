@@ -181,12 +181,12 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        public async Task<VacancyModel> UpdateVacancy(VacancyModel model)
+        public async Task<VacancyCreateModel> UpdateVacancy(VacancyCreateModel model)
         {
             try
             {
-                tblVacancy data = await Task.Run(() => ManageVacancy.UpdateVacancy(model.ConvertTotblVacancy()));
-                return data.ConvertToVacancy();
+                VacancyCreateModel data = await Task.Run(() => ManageVacancy.Update(model));
+                return model;
 
             }
             catch (Exception)

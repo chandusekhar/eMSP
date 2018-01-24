@@ -24,5 +24,10 @@ function searchVacanciesController($scope, $state, localStorageService, configJS
         localStorageService.set('vacancyData', data);
         $state.go($scope.configJSON.manageUrl);
     }
+
+    $scope.edit = function (data) {
+        localStorageService.set('vacancyData', data);
+        $state.go($scope.configJSON.editUrl);
+    }
 }
 

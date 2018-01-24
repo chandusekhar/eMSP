@@ -87,9 +87,9 @@
                         <div class="ibox-title">
                             <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
                             <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
 
@@ -99,7 +99,7 @@
                                     <label>Job Title * :</label>
                                     <input type="text" class="form-control" name="positionTitle"
                                            ng-model="dataJSON.Vacancy.positionTitle"
-                                           placeholder="Job Title"
+                                           placeholder="Job Title"                                           
                                            required />
                                     <span ng-show="dataJSON.submitted && form.positionTitle.$error.required" class="text-danger">
                                         * Job Title is required
@@ -110,7 +110,8 @@
                                     <label>Job Description * :</label>
                                     <textarea type="text" class="form-control summernote" name="vacancyDescription"
                                               ng-model="dataJSON.Vacancy.vacancyDescription"
-                                              placeholder="Vacancy Description"
+                                              placeholder="Vacancy Description" 
+                                              ng-disabled="formAction === 'Update'"
                                               required height="200" summernote></textarea>
                                     <span ng-show="dataJSON.submitted && form.vacancyDescription.$error.required" class="text-danger">
                                         * Vacancy Description is required
@@ -126,16 +127,15 @@
                             <h5>
                                 Job Relevent File *
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
 
                             <div class="row">
                                 <!-- Section to select Skills -->
                                 <div class="form-group">
-
 
                                     <!-- File Upload -->
                                     <div class="form-group col-md-12">
@@ -149,7 +149,12 @@
                                                     <p style="word-wrap:break-word">{{f.name}}</p>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        
+                                        <div ng-show="formAction === 'Update'">
+                                            <ul class="list-unstyled project-files">
+                                                <li ng-repeat="files in dataJSON.VacancyFiles"><a href="files.filePath" target="_blank"><i class="fa fa-file"></i> {{files.fileName}}</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                     <span ng-show="dataJSON.submitted && isFilesEmpty" class="text-danger">
@@ -167,9 +172,9 @@
                             <h5>
                                 Rate Information
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
 
@@ -249,9 +254,9 @@
                             <h5>
                                 Terms and Conditions
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
 
@@ -293,9 +298,9 @@
                             <h5>
                                 Vacancy Type / Hiring Details
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
 
@@ -313,7 +318,7 @@
 
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.customer.$error.required }">
                                     <label>Customer * :</label>
-                                    <ui-select ng-model="dataJSON.Vacancy.customerId" theme="bootstrap" ng-change="getUserList()" required name="customer">
+                                    <ui-select ng-model="dataJSON.Vacancy.customerId" theme="bootstrap" required name="customer">
                                         <ui-select-match placeholder="Select Customer">{{$select.selected.companyName}}</ui-select-match>
                                         <ui-select-choices repeat="res.id as res in refData.customerList | filter: $select.search">
                                             <div ng-bind-html="res.companyName | highlight: $select.search"></div>
@@ -399,9 +404,9 @@
                             <h5>
                                 Skills / Location / Supplier
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -461,9 +466,9 @@
                             <h5>
                                 Comments
                             </h5>
-                            <div class="ibox-tools dropdown">
+                            <!--<div class="ibox-tools dropdown">
                                 <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="ibox-content">
                             <div class="row">

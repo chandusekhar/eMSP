@@ -78,15 +78,24 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        internal static async Task<tblVacancySupplier> UpdateVacancySupplier(tblVacancySupplier model)
+        internal static async Task<tblVacancySupplier> UpdateVacancySupplier(string a, tblVacancy vacancy)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    db.Entry(model).State = EntityState.Modified;
+                    long supplierId = Convert.ToInt64(a);
+                    tblVacancySupplier model = await Task.Run(() => db.tblVacancySuppliers.Where(b => b.VacancyID == vacancy.ID && b.SupplierID == supplierId).FirstOrDefaultAsync());
+                    if (model != null)
+                    {
+                        db.Entry(model).State = EntityState.Modified;
 
-                    int x = await Task.Run(() => db.SaveChangesAsync());
+                        int x = await Task.Run(() => db.SaveChangesAsync());
+                    }
+                    else
+                    {
+                        model = await Task.Run(() => InsertVacancySupplier(a, vacancy));
+                    }
 
                     return model;
                 }
@@ -94,7 +103,6 @@ namespace eMSP.Data.DataServices.JobVacancies
             catch (Exception)
             {
                 throw;
-
             }
         }
 

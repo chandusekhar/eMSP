@@ -37,7 +37,7 @@ angular.module('eMSPApp')
             LOCATION: {
                 GETALLLOCATIONSURL: "api/Location/getAllLocations",
                 GETLOCATIONURL: "api/Location/getLocation",
-                GETCUSTOMERLOCATIONBRANCHURL: "api/Location/getCustomerLocationBranch",                
+                GETCUSTOMERLOCATIONBRANCHURL: "api/Location/getCustomerLocationBranch",
                 CREATELOCATIONURL: "api/Location/creatLocation",
                 UPDATELOCATIONURL: "api/Location/updateLocation",
                 DELETELOCATIONURL: "api/Location/deleteLocation",
@@ -82,6 +82,13 @@ angular.module('eMSPApp')
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",
                 GETSTATEURL: "api/App/getStates?Id="
+            },
+            CANDIDATEURL: {
+                SEARCHURL: "api/candidate/getAllCandidates",
+                GETURL: "api/candidate/getCandidate",
+                CREATEURL: "api/candidate/creatCandidate",
+                UPDATEURL: "api/candidate/updateCandidate",
+                DELETEURL: "api/candidate/deleteCandidate"
             }
         }
     });

@@ -21,10 +21,11 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     $scope.dataJSON.VacancySuppliers = [];
     $scope.dataJSON.VacancyFiles = [];
     $scope.dataJSON.VacancyComment = [];
-
+    
     if ($scope.formAction === "Update") {
         $scope.edit = true;
         $scope.dataJSON = localStorageService.get('vacancyData');
+        $scope.dataJSON.dateRange = { startDate: $scope.dataJSON.Vacancy.startDate, endDate: $scope.dataJSON.Vacancy.endDate };
     }
 
     $scope.refData.sdataJSON = {
@@ -39,12 +40,11 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.cdataJSON);
     apires.then(function (data) {
         $scope.refData.customerList = data;
-
+        
         if ($scope.formAction === "Update") {
-            $scope.dataJSON.customerId = $scope.dataJSON.customerId.toString();
+            $scope.dataJSON.Vacancy.customerId = $scope.dataJSON.Vacancy.customerId.toString();
         }
-    });
-   
+    });   
 
     var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + 0, { "industryId": 0 });
     apires.then(function (data) {
@@ -54,19 +54,22 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     var apivacancyType = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETACTIVEMSPVACANCYTYPEURL, $scope.dataJSON);
     apivacancyType.then(function (data) {
         $scope.refData.vacancyTypes = data;
-
+        
         if ($scope.formAction === "Update") {
-            $scope.dataJSON.vacancyType = $scope.dataJSON.vacancyType.toString();
+            $scope.dataJSON.Vacancy.vacancyType = $scope.dataJSON.Vacancy.vacancyType.toString();
         }
+    });
+
+    $scope.$watch("dataJSON.Vacancy.customerId", function () {
+        $scope.getUserList();
     });
     
 
-    $scope.getUserList = function () {
+    $scope.getUserList = function () {        
         
         $scope.cdataJSON.id = $scope.dataJSON.Vacancy.customerId;
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, $scope.cdataJSON);
-        apires.then(function (data) {
-            console.log(data);
+        apires.then(function (data) {            
             $scope.refData.usersList = data;
         });
 
@@ -77,7 +80,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     }
 
     $scope.submit = function (form) {
-        debugger;
+        
         var isFormValid = false;
         if ($scope.dataJSON.VacancySkills.length == 0) {
             $scope.isSkillsEmpty = true;
@@ -106,7 +109,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
                 resUpdate.then(function (data) {
                     $scope.dataJSON = data;
                     toaster.warning({ body: "Data Updated Successfully." });
-
+                    $state.go($scope.configJSON.successURL);
                 });
             }
             else {
@@ -114,9 +117,9 @@ function createVacancieController($scope, $state, localStorageService, configJSO
                 res.then(function (data) {
                     $scope.dataJSON = data;
                     toaster.warning({ body: "Data Created Successfully." });
+                    $state.go($scope.configJSON.successURL);
                 });
-            }
-            $state.go($scope.configJSON.successURL);
+            }            
         }
     }
 }

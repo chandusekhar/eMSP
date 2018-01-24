@@ -81,7 +81,7 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        internal static async Task<tblVacancyFile> UpdateVacancyFile(tblVacancyFile model)
+        internal static async Task<tblVacancyFile> UpdateVacancyFile(tblVacancyFile model, tblVacancy vacancy)
         {
             try
             {

@@ -186,8 +186,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         {
             try
             {
-                //return Ok(await VacanciesService.UpdateVacancy(model));
-                return Ok();
+                return Ok(await VacanciesService.UpdateVacancy(model));                
             }
             catch (Exception)
             {

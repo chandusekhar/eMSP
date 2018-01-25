@@ -51,13 +51,13 @@ namespace eMSP.Data.DataServices.JobVacancies
         }
 
 
-        internal static async Task<List<tblVacancy>> GetAllVacancies(long customerId)
+        internal static async Task<List<tblVacancy>> GetAllVacancies(long supplierId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    if (customerId != 0)
+                    if (supplierId != 0)
                     {
                         return await Task.Run(() => db.tblVacancies
                                                       .Include(a => a.tblCustomer)
@@ -69,7 +69,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
-                                                      .Where(x => x.CustomerID == customerId)
+                                                      .Where(x => x.tblVacancySuppliers.Any(r => r.SupplierID == supplierId))
                                                       .OrderByDescending(x => x.ID).ToList());
                     }
                     else

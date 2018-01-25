@@ -8,6 +8,7 @@ using eMSP.Data.DataServices.JobVacancies;
 using eMSP.ViewModel.JobVacancies;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using eMSP.ViewModel.MSP;
 
 namespace eMSP.WebAPI.Controllers.JobVacancies
 {
@@ -48,7 +49,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         [Route("getAllVacancy")]
         [HttpPost]
         [ResponseType(typeof(VacancyCreateModel))]
-        public async Task<IHttpActionResult> GetAllVacancy(VacancyModel model)
+        public async Task<IHttpActionResult> GetAllVacancy(CompanyModel model)
         {
             try
             {

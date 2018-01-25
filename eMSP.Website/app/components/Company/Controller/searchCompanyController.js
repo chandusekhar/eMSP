@@ -16,18 +16,22 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         $scope.dataJSON.id = 0;
         $scope.IsMSP = true;
         var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
-        apires.then(function (data) {            
+        apires.then(function (data) {
             $scope.res = data;
             localStorageService.set('editCompanyData', data);            
             $scope.loadLocations($scope.res.id);
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
-            $scope.loadCandidates($scope.res.id);
+            
+            if ($scope.configJSON.companyType == 'Supplier') {
+                $scope.loadCandidates($scope.res.id);
+                $scope.loadJobs();
+            }
         });
     } else {
         $scope.dataJSON.companyName = "%";
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.dataJSON);
-        res.then(function (data) {
+        res.then(function (data) {            
             $scope.searchResults = data;
         });
     }
@@ -64,6 +68,15 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.resCandidates = data;
         });
     }
+
+    //Function to load supplier jobs
+    $scope.loadJobs = function () {        
+        var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
+        apires.then(function (data) {            
+            $scope.resVacancie = data;
+        });
+    }
+
     //Function to swith back to locations
     $scope.swithLocation = function () {
         $scope.toggleBranches = false;
@@ -71,8 +84,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     
     $scope.loadUsers = function (compId) {    
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.dataJSON.companyType, id: compId });
-        apires.then(function (data) {
-            console.log(data);
+        apires.then(function (data) {            
             $scope.resUsers = data;
         });
     }
@@ -90,12 +102,16 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.IsMSP = true;
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
+            
+            $scope.loadLocations(data.id);
+            $scope.loadUsers(data.id);
+            
+            $scope.dataJSON.id = data.id;
             if ($scope.configJSON.companyType == 'Supplier') {
-                localStorageService.set('supplierId', $scope.res.id);
+                localStorageService.set('supplierId', data.id);
+                $scope.loadCandidates(data.id);
+                $scope.loadJobs();
             }
-            $scope.loadLocations($scope.res.id);
-            $scope.loadUsers($scope.res.id);
-            $scope.loadCandidates($scope.res.id);
         }
 
     }

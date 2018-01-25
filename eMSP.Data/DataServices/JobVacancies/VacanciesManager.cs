@@ -9,6 +9,7 @@ using eMSP.Data.Extensions;
 using eMSP.DataModel;
 using eMSP.ViewModel.JobVacancies;
 using System.Configuration;
+using eMSP.ViewModel.MSP;
 
 namespace eMSP.Data.DataServices.JobVacancies
 {
@@ -43,13 +44,13 @@ namespace eMSP.Data.DataServices.JobVacancies
             }
         }
 
-        public async Task<List<VacancyCreateModel>> GetAllVacancies(VacancyModel model)
+        public async Task<List<VacancyCreateModel>> GetAllVacancies(CompanyModel model)
         {
             try
             {
                 List<VacancyCreateModel> data = null;
 
-                List<tblVacancy> res = await Task.Run(() => ManageVacancy.GetAllVacancies(model.customerId));
+                List<tblVacancy> res = await Task.Run(() => ManageVacancy.GetAllVacancies(Convert.ToInt64(model.id)));
 
                 data = res.Select(x => x.ConvertToVacancyCreateModel()).ToList();
 

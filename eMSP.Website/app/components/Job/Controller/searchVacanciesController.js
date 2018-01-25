@@ -5,11 +5,8 @@ function searchVacanciesController($scope, $state, localStorageService, configJS
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
-    $scope.refData = {};
-    $scope.dataJSON.mspId = localStorageService.get('editCompanyData') ? localStorageService.get('editCompanyData').id : 0;
-    $scope.dataJSON.companyType = $scope.configJSON.companyType;
-    $scope.dataJSON.companyName = $scope.configJSON.companyName;
-
+    $scope.refData = {};    
+    
     var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
     apires.then(function (data) {
         $scope.resVacancie = data;

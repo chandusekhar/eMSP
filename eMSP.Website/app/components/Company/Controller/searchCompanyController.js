@@ -186,29 +186,31 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
-    $scope.modelCandidate = function (model) {
+    $scope.AddCandidate = function (model) {
 
-        $scope.editform = false;
+       
 
-        $scope.bdataJSON = {};
+        $scope.csdataJSON = {};
+
+        if (model.VacancyId) {
+            $scope.editform = true;
+            $scope.csdataJSON = model;
+        }
+        else {
+            $scope.editform = false;
+            $scope.csdataJSON.VacancyId = model.id;
+            
+        }    
       
 
         var modalInstance = $uibModal.open({
-            templateUrl: 'app/components/candidate/view/manageCandidate.html',
+            templateUrl: 'app/components/candidate/view/candidateSubmission.html',
             scope: $scope,
-            controller: 'candidateController',
+            controller: 'candidateSubmissionController',
             windowClass: 'animated slideInRight',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("app/components/candidate/config/manageCandidate.json").success(function (data) { return data; });
-                },
-                formAction: function () { return "Create"; },
-                AppIndustries: function (apiCall, APP_CONSTANTS) {
-                    return apiCall.get(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRIESURL, {})
-                        .then(function (data) {
-                            return data;
-                        });
-                    return {};
+                    return $http.get("app/components/candidate/config/manageCandidateSubmission.json").success(function (data) { return data; });
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

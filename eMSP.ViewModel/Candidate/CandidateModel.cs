@@ -37,6 +37,7 @@ namespace eMSP.ViewModel.Candidate
         public string ZipCode { get; set; }
         public bool IsPrimary { get; set; }
     }
+
     public class FileModel: BaseModel
     {
         public FileModel() { }
@@ -59,5 +60,23 @@ namespace eMSP.ViewModel.Candidate
         public List<string> CandidateSkills { get; set; }
         public List<string> CandidateIndustryNames { get; set; }
         public List<string> CandidateSkillNames { get; set; }
+    }
+
+    public class CandidateStatusModel : BaseModel{
+        public CandidateStatusModel() { }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class CandidateSubmissionModel : BaseModel
+    {
+        public CandidateSubmissionModel() { }
+
+        public int ID { get; set; }
+        public int CandidateId { get; set; }
+        public int VacancyId { get; set; }
+        public int StatusId { get; set; }
+        public CandidateStatusModel CandidateStatus { get; set; }
     }
 }

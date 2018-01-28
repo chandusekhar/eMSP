@@ -26,16 +26,16 @@ namespace eMSP.Data.DataServices.Candidate
 
         #region Get
 
-        public async Task<CandidateCreateModel> GetCandidate(int candidateId)
+        public async Task<List<CandidateSubmissionModel>> GetCandidateSubmission(int vacancyId)
         {
             try
             {
-                CandidateCreateModel model = null;
+                List<CandidateSubmissionModel> model = null;
                 
 
                 
-                        tblCandidate res = await Task.Run(() => ManageCandidate.Get(Convert.ToInt64(candidateId)));
-                        model = res.ConvertToCandidateCreateModel();
+                       List< tblCandidateSubmission> res = await Task.Run(() => ManageCandidate.GetCandidateSubmission(Convert.ToInt64(vacancyId)));
+                        model = res.Select(a=>a.ConvertToCandidateSubmissionModel()).ToList();
                        
 
                 return model;
@@ -87,7 +87,24 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<CandidateSubmissionModel> CreateCandidateSubmission(CandidateSubmissionModel data)
+        {
+            try
+            {
+                CandidateSubmissionModel model = null;
 
+
+                CandidateSubmissionModel res = await Task.Run(() => ManageCandidate.InsertCandidateSubmissions(data));
+                // model = res.ConvertToCandidateCreateModel();
+
+
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Update
@@ -103,7 +120,17 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
-
+        public async Task<CandidateSubmissionModel> UpdateCandidateSubmission(CandidateSubmissionModel data)
+        {
+            try
+            {
+                return await Task.Run(() => ManageCandidate.UpdateCandidateSubmissions(data));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Delete

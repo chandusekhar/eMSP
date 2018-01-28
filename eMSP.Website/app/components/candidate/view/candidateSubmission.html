@@ -1,0 +1,65 @@
+<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2 ng-if="editform">Edit Candidate Submission</h2>
+            <h2 ng-if="!editform">Create Candidate Submission</h2>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <form class="m-t" name="form" novalidate>
+                <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.candidate.$error.required }">
+                    <label>Candidate * :</label>
+                    <input type="text" class="form-control" name="candidate"
+                           ng-model="csdataJSON.CandidateId"
+                           placeholder="Choose Candidate" required />
+                    <select ng-model="csdataJSON.CandidateId" class="form-control" required name="country">
+                        <option value="">Choose Candidate</option>
+                        <option ng-repeat="res in refData.resCandidates" value="{{res.id}}">{{res.FirstName+" "+res.LastName}}</option>
+                    </select>
+                    <span ng-show="submitted && form.candidate.$error.required" class="text-danger">
+                        * Candidate is required
+                    </span>
+                </div>
+                <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.Name.$error.required }">
+                    <label>Name * :</label>
+                    <input type="text" class="form-control" name="Name"
+                           ng-model="csdataJSON.CandidateStatus.Name"
+                           placeholder="Name" required />
+                    <span ng-show="submitted && form.Name.$error.required" class="text-danger">
+                        * Name is required
+                    </span>
+                </div>
+                <div class="form-group  col-md-12" ng-class="{ 'has-error': submitted && form.Description.$error.required }">
+                    <label>Description * :</label>
+                    <input type="text" class="form-control"
+                           ng-model="csdataJSON.CandidateStatus.Description"
+                           placeholder="Description" name="Description" required />
+                    <span ng-show="submitted && form.Description.$error.required" class="text-danger">
+                        * Description is required
+                    </span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>
+                        <input icheck type="checkbox" name="IsActive" ng-model="csdataJSON.isActive">
+                        <i></i> Is Active
+                    </label>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <button type="submit" ng-if="!editform" ng-click="submit(form)" class="btn btn-primary m-b">Create</button>
+                    <button type="submit" ng-if="editform" ng-click="submit(form)" class="btn btn-primary m-b">Update</button>
+                    <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

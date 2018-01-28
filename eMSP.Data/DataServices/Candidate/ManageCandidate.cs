@@ -55,6 +55,28 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task<List<tblCandidateSubmission>> GetCandidateSubmission(long vacancyId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    return await Task.Run(() => db.tblCandidateSubmissions
+
+                    .Where(x => x.VacancyID == vacancyId && x.IsActive == true && x.IsDeleted == false)                    
+                    .Include(b => b.tblCandidateStatu)
+                    .ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<List<tblCandidate>> GetAll(long supplierId)
         {
             try
@@ -341,6 +363,57 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task<CandidateSubmissionModel> InsertCandidateSubmissions(CandidateSubmissionModel can)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    int x = 0;
+
+
+                    tblCandidateStatu ts = await Task.Run(() => InsertCandidateStatus(can.CandidateStatus.ConvertTotblCandidateStatus()));
+
+                    tblCandidateSubmission tcs = can.ConverToTblCandidateSubmission();
+
+                    tcs.StatusID = ts.ID;
+
+                    tblCandidateSubmission cs = db.tblCandidateSubmissions.Add(tcs);
+
+                    x = await Task.Run(() => db.SaveChangesAsync());
+
+                    return GetCandidateSubmission(can.VacancyId).Result.SingleOrDefault(a => a.ID == cs.ID).ConvertToCandidateSubmissionModel();
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        internal static async Task<tblCandidateStatu> InsertCandidateStatus(tblCandidateStatu cs)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                     var con = db.tblCandidateStatus.Add(cs);
+
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                    return con;
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         #endregion
 
         #region Update
@@ -582,6 +655,56 @@ namespace eMSP.Data.DataServices.Candidate
 
             }
         }
+
+        internal static async Task<CandidateSubmissionModel> UpdateCandidateSubmissions(CandidateSubmissionModel model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    int x = 0;
+
+                    await UpdateCandidateStatus(model.CandidateStatus.ConvertTotblCandidateStatus());
+
+                    db.Entry(model.ConverToTblCandidateSubmission()).State = EntityState.Modified;
+
+                    x = await Task.Run(() => db.SaveChangesAsync());
+
+                    return model;
+
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        internal static async Task UpdateCandidateStatus(tblCandidateStatu model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    db.Entry(model).State = EntityState.Modified;
+
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                    //return model;
+
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         #endregion
 
         #region Delete

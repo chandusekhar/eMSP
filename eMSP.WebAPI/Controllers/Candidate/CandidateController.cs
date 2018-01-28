@@ -55,7 +55,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
             try
             {
 
-                return Ok(await CandidateService.GetCandidate(candidateId));
+                return Ok(await CandidateService.GetCandidateSubmission(candidateId));
             }
             catch (Exception)
             {
@@ -64,7 +64,23 @@ namespace eMSP.WebAPI.Controllers.Candidate
             }
         }
 
-        
+        [Route("getCandidateSubmission")]
+        [HttpPost]
+        [Authorize]
+        [ResponseType(typeof(CandidateSubmissionModel))]
+        public async Task<IHttpActionResult> GetCandidateSubmission(int VacancyId)
+        {
+            try
+            {
+
+                return Ok(await CandidateService.GetCandidateSubmission(VacancyId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region Insert
@@ -83,6 +99,28 @@ namespace eMSP.WebAPI.Controllers.Candidate
                Helpers.Helpers.AddBaseProperties(data.CandidateContact[0], "create", userId);
 
                 return Ok(await CandidateService.CreateCandidate(data));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Route("creatCandidateSubmission")]
+        [HttpPost]
+        [Authorize]
+        [ResponseType(typeof(CandidateSubmissionModel))]
+        public async Task<IHttpActionResult> creatCandidateSubmission(CandidateSubmissionModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+                Helpers.Helpers.AddBaseProperties(data.CandidateStatus, "create", userId);
+
+                return Ok(await CandidateService.CreateCandidateSubmission(data));
             }
             catch (Exception)
             {
@@ -115,6 +153,26 @@ namespace eMSP.WebAPI.Controllers.Candidate
             }
         }
 
+
+        [Route("updateCandidateSubmission")]
+        [HttpPost]
+        [Authorize]
+        [ResponseType(typeof(CandidateSubmissionModel))]
+        public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
+                Helpers.Helpers.AddBaseProperties(data.CandidateStatus, "update", userId);
+                return Ok(await CandidateService.UpdateCandidateSubmission(data));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region Delete

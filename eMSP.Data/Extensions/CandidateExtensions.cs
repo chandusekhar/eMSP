@@ -150,6 +150,78 @@ namespace eMSP.Data.Extensions
 
         }
 
+        public static tblCandidateSubmission ConverToTblCandidateSubmission(this CandidateSubmissionModel data)
+        {
+            return new tblCandidateSubmission()
+            {
+                ID = Convert.ToInt64(data.ID),
+                VacancyID = data.VacancyId,
+                CandidateID = data.CandidateId,
+                StatusID = data.StatusId,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = DateTime.Now,
+                UpdatedTimestamp = DateTime.Now
 
+            };
+        }
+
+        public static CandidateSubmissionModel ConvertToCandidateSubmissionModel(this tblCandidateSubmission data)
+        {
+            return new CandidateSubmissionModel()
+            {
+                ID = Convert.ToInt32(data.ID),
+                VacancyId = Convert.ToInt32(data.VacancyID),
+                CandidateId = Convert.ToInt32(data.CandidateID),
+                StatusId = Convert.ToInt32(data.StatusID),
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = DateTime.Now,
+                updatedTimestamp = DateTime.Now,
+                CandidateStatus = data.tblCandidateStatu.ConvertToCandidateSubmissionModel()
+
+            };
+        }
+
+        public static tblCandidateStatu ConvertTotblCandidateStatus(this CandidateStatusModel data)
+        {
+            return new tblCandidateStatu()
+            {
+                ID = Convert.ToInt64(data.ID),
+                Name  = data.Name,
+                Description = data.Description,               
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = DateTime.Now,
+                UpdatedTimestamp = DateTime.Now
+                
+
+            };
+        }
+
+        public static CandidateStatusModel ConvertToCandidateSubmissionModel(this tblCandidateStatu data)
+        {
+            return new CandidateStatusModel()
+            {
+                ID = Convert.ToInt32(data.ID),
+                Name =  data.Name,
+                Description = data.Description,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = DateTime.Now,
+                updatedTimestamp = DateTime.Now 
+                
+                  
+
+            };
+        }
     }
 }

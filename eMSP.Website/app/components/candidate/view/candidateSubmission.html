@@ -16,12 +16,12 @@
             <form class="m-t" name="form" novalidate>
                 <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.candidate.$error.required }">
                     <label>Candidate * :</label>
-                    <input type="text" class="form-control" name="candidate"
+                    <!--<input type="text" class="form-control" name="candidate"
                            ng-model="csdataJSON.CandidateId"
-                           placeholder="Choose Candidate" required />
+                           placeholder="Choose Candidate" required />-->
                     <select ng-model="csdataJSON.CandidateId" class="form-control" required name="country">
                         <option value="">Choose Candidate</option>
-                        <option ng-repeat="res in refData.resCandidates" value="{{res.id}}">{{res.FirstName+" "+res.LastName}}</option>
+                        <option ng-repeat="res in resCandidates" value="{{res.Candidate.id}}">{{res.Candidate.FirstName+" "+res.Candidate.LastName}}</option>
                     </select>
                     <span ng-show="submitted && form.candidate.$error.required" class="text-danger">
                         * Candidate is required

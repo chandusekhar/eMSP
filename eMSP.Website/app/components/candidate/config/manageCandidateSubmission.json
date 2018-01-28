@@ -1,0 +1,14 @@
+{
+  "title": "Manage Candidate",
+  "titleFormCreate": "Add a Candidate",
+  "titleFormEdit": "Edit Candidate",
+  "titleFormCreateAddress": "Candidate Address",
+  "titleFormCreateIndustry": "Candidate Industries & Skills",
+  "titleFormCreateFile": "Candidate Files",
+  "searchUrl": "/api/supplierdetails/getSuppliers",
+  "createCandidateUrl": "candidate.create",
+  "editUrl": "company.editSupplier",
+  "successURL": "company.searchSuppliers"
+
+
+}

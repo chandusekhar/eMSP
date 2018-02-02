@@ -34,7 +34,7 @@ namespace eMSP.Data.Extensions
         {
             return new CandidateCreateModel()
             {
-                Candidate =new CandidateModel()
+                Candidate = new CandidateModel()
                 {
                     id = Convert.ToInt32(data.ID),
                     FirstName = data.FirstName,
@@ -49,13 +49,13 @@ namespace eMSP.Data.Extensions
                     createdTimestamp = data.CreatedTimestamp,
                     updatedTimestamp = data.UpdatedTimestamp
                 },
-                CandidateIndustries = data.tblCandidateIndustries != null ? data.tblCandidateIndustries.Where(a=>a.IsActive == true && a.IsDeleted == false).Select(a=>a.IndustryID.ToString()).ToList():null,
+                CandidateIndustries = data.tblCandidateIndustries != null ? data.tblCandidateIndustries.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.IndustryID.ToString()).ToList() : null,
                 CandidateSkills = data.tblCandidateSkills != null ? data.tblCandidateSkills.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.SkillsID.ToString()).ToList() : null,
                 CandidateIndustryNames = data.tblCandidateIndustries != null ? data.tblCandidateIndustries.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblIndustry.Name).ToList() : null,
                 CandidateSkillNames = data.tblCandidateSkills != null ? data.tblCandidateSkills.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblIndustrySkill.Name).ToList() : null,
                 CandidateContact = data.tblCandidateContacts != null ? data.tblCandidateContacts.Select(a => a.tblContact.ConvertToCandidateContactModel(Convert.ToBoolean(a.IsPrimary))).ToList() : null,
-                CandidateFile = data.tblCandidateFiles != null ? data.tblCandidateFiles.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a=> a.tblFile.ConvertToCandidateFileModel(Convert.ToInt32(a.FileTypeID))).ToList() : null,
-                 
+                CandidateFile = data.tblCandidateFiles != null ? data.tblCandidateFiles.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblFile.ConvertToCandidateFileModel(Convert.ToInt32(a.FileTypeID))).ToList() : null,
+
             };
 
         }
@@ -83,7 +83,7 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
-                IsPrimary= isPrimary
+                IsPrimary = isPrimary
 
             };
         }
@@ -108,15 +108,16 @@ namespace eMSP.Data.Extensions
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now
-                
-                 
+
+
             };
 
         }
 
         public static FileModel ConvertToCandidateFileModel(this tblFile data, int fileTypeId = 0)
         {
-            return new FileModel() {
+            return new FileModel()
+            {
                 ID = Convert.ToInt32(data.ID),
                 FileName = data.FileName,
                 FilePath = data.FilePath,
@@ -138,7 +139,7 @@ namespace eMSP.Data.Extensions
             {
                 ID = data.ID,
                 FileName = data.FileName,
-                FilePath = data.FilePath,                
+                FilePath = data.FilePath,
                 FileVersionNumber = Convert.ToInt16(data.FileVersionNumber),
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
@@ -157,6 +158,7 @@ namespace eMSP.Data.Extensions
                 ID = Convert.ToInt64(data.ID),
                 VacancyID = data.VacancyId,
                 CandidateID = data.CandidateId,
+                BillRate = data.BillRate,
                 StatusID = data.StatusId,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
@@ -176,13 +178,14 @@ namespace eMSP.Data.Extensions
                 VacancyId = Convert.ToInt32(data.VacancyID),
                 CandidateId = Convert.ToInt32(data.CandidateID),
                 StatusId = Convert.ToInt32(data.StatusID),
+                BillRate = data.BillRate,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = DateTime.Now,
                 updatedTimestamp = DateTime.Now,
-                CandidateStatus = data.tblCandidateStatu.ConvertToCandidateSubmissionModel()
+                CandidateStatus = data.tblCandidateStatu.ConvertToCandidateStatusModel()
 
             };
         }
@@ -192,34 +195,34 @@ namespace eMSP.Data.Extensions
             return new tblCandidateStatu()
             {
                 ID = Convert.ToInt64(data.ID),
-                Name  = data.Name,
-                Description = data.Description,               
+                Name = data.Name,
+                Description = data.Description,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = DateTime.Now,
                 UpdatedTimestamp = DateTime.Now
-                
+
 
             };
         }
 
-        public static CandidateStatusModel ConvertToCandidateSubmissionModel(this tblCandidateStatu data)
+        public static CandidateStatusModel ConvertToCandidateStatusModel(this tblCandidateStatu data)
         {
             return new CandidateStatusModel()
             {
                 ID = Convert.ToInt32(data.ID),
-                Name =  data.Name,
+                Name = data.Name,
                 Description = data.Description,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = DateTime.Now,
-                updatedTimestamp = DateTime.Now 
-                
-                  
+                updatedTimestamp = DateTime.Now
+
+
 
             };
         }

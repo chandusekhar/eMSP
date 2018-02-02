@@ -77,6 +77,7 @@ namespace eMSP.ViewModel.Candidate
         public int CandidateId { get; set; }
         public int VacancyId { get; set; }
         public int StatusId { get; set; }
+        public decimal BillRate { get; set; }
         public CandidateStatusModel CandidateStatus { get; set; }
     }
 }

@@ -91,7 +91,7 @@ angular.module('eMSPApp')
                 DELETEURL: "api/candidate/deleteCandidate"
             },
             CANDIDATESUBMISSIONURL: {
-                
+                GETCANDIDATESTATUS:"api/candidate/getAllCandidateStatus",
                 GETURL: "api/candidate/getCandidateSubmission",
                 CREATEURL: "api/candidate/creatCandidateSubmission",
                 UPDATEURL: "api/candidate/updateCandidateSubmission"

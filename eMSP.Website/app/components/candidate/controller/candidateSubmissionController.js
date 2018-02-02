@@ -2,8 +2,12 @@
 angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
-function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter) {
+function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList) {
     $scope.submitted = false;
+    $scope.refData.candidateStatusList = candidateStatusList;
+    $scope.edit = $scope.formAction == "Update" ? true : false;
+
+    
     $scope.submit = function (form) {
         $scope.submitted = true;
         if (form.$valid) {
@@ -20,11 +24,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 res.then(function (data) {
                     $scope.csdataJSON = data;
                     toaster.success({ body: "Data Created Successfully." });
-                    //angular.forEach($scope.industryList, function (obj) {
-                    //    if (obj.id === data.industryId) {
-                    //        obj.skillList.unshift(data);
-                    //    }
-                    //});
+                   
                 });
             }
             $uibModalInstance.close();

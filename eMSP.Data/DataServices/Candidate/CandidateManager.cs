@@ -46,6 +46,26 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<List<CandidateStatusModel>> GetCandidateStatus()
+        {
+            try
+            {
+                List<CandidateStatusModel> model = null;
+
+
+
+                List<tblCandidateStatu> res = await Task.Run(() => ManageCandidate.GetAllCandidateStatus());
+                model = res.Select(a => a.ConvertToCandidateStatusModel()).ToList();
+
+
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<CandidateCreateModel>> GetAllCandidates(int SupplierId)
         {
             try
@@ -94,7 +114,7 @@ namespace eMSP.Data.DataServices.Candidate
                 CandidateSubmissionModel model = null;
 
 
-                CandidateSubmissionModel res = await Task.Run(() => ManageCandidate.InsertCandidateSubmissions(data));
+                CandidateSubmissionModel res = await Task.Run(() => ManageCandidate.InsertCandidateSubmissions(data.ConverToTblCandidateSubmission()));
                 // model = res.ConvertToCandidateCreateModel();
 
 
@@ -124,7 +144,7 @@ namespace eMSP.Data.DataServices.Candidate
         {
             try
             {
-                return await Task.Run(() => ManageCandidate.UpdateCandidateSubmissions(data));
+                return await Task.Run(() => ManageCandidate.UpdateCandidateSubmissions(data.ConverToTblCandidateSubmission()));
             }
             catch (Exception)
             {

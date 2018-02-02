@@ -77,6 +77,27 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task<List<tblCandidateStatu>> GetAllCandidateStatus()
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    return await Task.Run(() => db.tblCandidateStatus
+
+                    .Where(x=> x.IsActive == true && x.IsDeleted == false)
+                    .ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<List<tblCandidate>> GetAll(long supplierId)
         {
             try
@@ -363,47 +384,17 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-        internal static async Task<CandidateSubmissionModel> InsertCandidateSubmissions(CandidateSubmissionModel can)
+        internal static async Task<CandidateSubmissionModel> InsertCandidateSubmissions(tblCandidateSubmission model)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    int x = 0;
-
-
-                    tblCandidateStatu ts = await Task.Run(() => InsertCandidateStatus(can.CandidateStatus.ConvertTotblCandidateStatus()));
-
-                    tblCandidateSubmission tcs = can.ConverToTblCandidateSubmission();
-
-                    tcs.StatusID = ts.ID;
-
-                    tblCandidateSubmission cs = db.tblCandidateSubmissions.Add(tcs);
-
-                    x = await Task.Run(() => db.SaveChangesAsync());
-
-                    return GetCandidateSubmission(can.VacancyId).Result.SingleOrDefault(a => a.ID == cs.ID).ConvertToCandidateSubmissionModel();
-
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-
-            }
-        }
-
-        internal static async Task<tblCandidateStatu> InsertCandidateStatus(tblCandidateStatu cs)
-        {
-            try
-            {
-                using (db = new eMSPEntities())
-                {
-                     var con = db.tblCandidateStatus.Add(cs);
+                    model = db.tblCandidateSubmissions.Add(model);
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
-                    return con;
+                    return GetCandidateSubmission(model.VacancyID).Result.SingleOrDefault(a => a.ID == model.ID).ConvertToCandidateSubmissionModel();
 
                 }
             }
@@ -413,6 +404,8 @@ namespace eMSP.Data.DataServices.Candidate
 
             }
         }
+
+       
 
         #endregion
 
@@ -656,45 +649,18 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-        internal static async Task<CandidateSubmissionModel> UpdateCandidateSubmissions(CandidateSubmissionModel model)
+        internal static async Task<CandidateSubmissionModel> UpdateCandidateSubmissions(tblCandidateSubmission model)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    int x = 0;
-
-                    await UpdateCandidateStatus(model.CandidateStatus.ConvertTotblCandidateStatus());
-
-                    db.Entry(model.ConverToTblCandidateSubmission()).State = EntityState.Modified;
-
-                    x = await Task.Run(() => db.SaveChangesAsync());
-
-                    return model;
-
-
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-
-            }
-        }
-
-        internal static async Task UpdateCandidateStatus(tblCandidateStatu model)
-        {
-            try
-            {
-                using (db = new eMSPEntities())
-                {
-
                     db.Entry(model).State = EntityState.Modified;
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
-                    //return model;
-
+                    return model.ConvertToCandidateSubmissionModel();
+                    
 
                 }
             }
@@ -704,6 +670,8 @@ namespace eMSP.Data.DataServices.Candidate
 
             }
         }
+
+        
 
         #endregion
 

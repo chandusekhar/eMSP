@@ -198,7 +198,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         }
         else {
             $scope.editform = false;
-            $scope.csdataJSON.VacancyId = model.id;
+            $scope.csdataJSON.VacancyId = model.Vacancy.id;
             
         }    
       
@@ -211,6 +211,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             resolve: {
                 configJSON: function ($http) {
                     return $http.get("app/components/candidate/config/manageCandidateSubmission.json").success(function (data) { return data; });
+                },
+                candidateStatusList: function ($http) {
+                    return apiCall.get(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETCANDIDATESTATUS).then(function (data) { return data; });
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

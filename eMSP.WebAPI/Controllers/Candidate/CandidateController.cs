@@ -81,6 +81,24 @@ namespace eMSP.WebAPI.Controllers.Candidate
                 throw;
             }
         }
+
+        [Route("getAllCandidateStatus")]
+        [HttpGet]
+        [Authorize]
+        [ResponseType(typeof(CandidateStatusModel))]
+        public async Task<IHttpActionResult> GetCandidateStatus()
+        {
+            try
+            {
+
+                return Ok(await CandidateService.GetCandidateStatus());
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region Insert
@@ -118,7 +136,6 @@ namespace eMSP.WebAPI.Controllers.Candidate
                 string userId = User.Identity.GetUserId();
 
                 Helpers.Helpers.AddBaseProperties(data, "create", userId);
-                Helpers.Helpers.AddBaseProperties(data.CandidateStatus, "create", userId);
 
                 return Ok(await CandidateService.CreateCandidateSubmission(data));
             }

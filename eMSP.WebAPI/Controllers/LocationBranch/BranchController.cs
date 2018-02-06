@@ -8,6 +8,7 @@ using eMSP.Data.DataServices.LocationBranch;
 using eMSP.ViewModel.LocationBranch;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace eMSP.WebAPI.Controllers.LocationBranch
 {
@@ -17,6 +18,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         #region Intialisation
 
         private LocationBranchManager BranchService;
+        string userId;
 
         public BranchController()
         {
@@ -94,6 +96,8 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
                 return Ok(await BranchService.CreateBranch(data));
             }
             catch (Exception)
@@ -115,6 +119,8 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
                 return Ok(await BranchService.UpdateBranch(data));
             }
             catch (Exception)

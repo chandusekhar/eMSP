@@ -12,7 +12,6 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     $scope.edit = false;
     $scope.formAction = formAction;
     $scope.dataJSON.submitted = false;
-    $scope.refData.loginUserId = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
     $scope.dataJSON.Vacancy = {};
     $scope.dataJSON.dateRange = { startDate: $scope.dataJSON.Vacancy.startDate, endDate: $scope.dataJSON.Vacancy.endDate };
@@ -46,12 +45,12 @@ function createVacancieController($scope, $state, localStorageService, configJSO
         }
     });   
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + 0, { "industryId": 0 });
+    var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + 0 + "&$filter=isDeleted eq false", { "industryId": 0 });
     apires.then(function (data) {
         $scope.refData.skillsList = data;
     });
 
-    var apivacancyType = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETACTIVEMSPVACANCYTYPEURL, $scope.dataJSON);
+    var apivacancyType = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETMSPVACANCYTYPEURL + "?$filter=isDeleted eq false", $scope.dataJSON);
     apivacancyType.then(function (data) {
         $scope.refData.vacancyTypes = data;
         
@@ -73,7 +72,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
             $scope.refData.usersList = data;
         });
 
-        var apiSL = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETCUSTOMERLOCATIONBRANCHURL, { companyType: "Customer", companyId: $scope.dataJSON.Vacancy.customerId, isActive: true });
+        var apiSL = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETCUSTOMERLOCATIONBRANCHURL + "?$filter=isDeleted eq false", { companyType: "Customer", companyId: $scope.dataJSON.Vacancy.customerId, isActive: true });
         apiSL.then(function (data) {
             $scope.refData.locationList = data;
         });

@@ -1,6 +1,7 @@
 ﻿using eMSP.Data.DataServices.Shared;
 using eMSP.ViewModel.Candidate;
 using eMSP.ViewModel.Shared;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,7 +48,7 @@ namespace eMSP.WebAPI.Controllers.Shared
                         var buffer = await file.ReadAsByteArrayAsync();
                         File.WriteAllBytes(filePath, buffer);
 
-                        FileModel fi = CreateFileModel(fileName, filePath, "");
+                        FileModel fi = CreateFileModel(fileName, filePath, User.Identity.GetUserId());
                         list.Add(fi);
                     }
 

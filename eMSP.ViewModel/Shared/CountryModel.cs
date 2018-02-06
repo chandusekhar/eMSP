@@ -5,24 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.Shared
-{
-    public class CountryModel
-    {
-        public CountryModel() { }
-        public string countryName { get; set; }
-        public string countryCode { get; set; }
-        public long id { get; set; }
-    }
-   
-    public class CountryCreateModel : CountryModel
+{        
+    public class CountryCreateModel : BaseModel
     {
         public CountryCreateModel() { }
-        public bool? isActive { get; set; }
-        public bool? isDeleted { get; set; }
-        public DateTime createdTimestamp { get; set; }
-        public string createdUserID { get; set; }
-        public Nullable<DateTime> updatedTimestamp { get; set; }
-        public string updatedUserID { get; set; }
+        public string countryName { get; set; }
+        public string countryCode { get; set; }
+        public long id { get; set; }        
     }
 }
 

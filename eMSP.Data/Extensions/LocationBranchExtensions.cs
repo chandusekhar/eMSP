@@ -22,11 +22,11 @@ namespace eMSP.Data.Extensions
                 StateID = Convert.ToInt16(data.stateId),
                 CountryID = Convert.ToInt16(data.countryId),
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -68,11 +68,11 @@ namespace eMSP.Data.Extensions
                 StateID = Convert.ToInt16(data.stateId),
                 CountryID = Convert.ToInt16(data.countryId),
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -110,13 +110,13 @@ namespace eMSP.Data.Extensions
                 ID = Convert.ToInt64(data.id),
                 MSPID = data.companyId,
                 LocationID = data.locationId,
-                BranchID = data.branchId,                
+                BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -129,11 +129,11 @@ namespace eMSP.Data.Extensions
                 LocationID = data.locationId,
                 BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -142,10 +142,10 @@ namespace eMSP.Data.Extensions
         {
             return new LocationCreateModel()
             {
-                id=data.ID,
-                companyId=data.MSPID,
-                locationId=data.LocationID,
-                branchId=data.BranchID,
+                id = data.ID,
+                companyId = data.MSPID,
+                locationId = data.LocationID,
+                branchId = data.BranchID,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -160,15 +160,15 @@ namespace eMSP.Data.Extensions
             return new tblCustomerLocationBranch()
             {
                 ID = Convert.ToInt64(data.id),
-                CustomerID  = data.companyId,
+                CustomerID = data.companyId,
                 LocationID = data.locationId,
                 BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -181,11 +181,11 @@ namespace eMSP.Data.Extensions
                 LocationID = data.locationId,
                 BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -217,11 +217,11 @@ namespace eMSP.Data.Extensions
                 LocationID = data.locationId,
                 BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -234,11 +234,11 @@ namespace eMSP.Data.Extensions
                 LocationID = data.locationId,
                 BranchID = data.branchId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 

@@ -22,22 +22,15 @@ namespace eMSP.Data.DataServices.JobVacancies
         #endregion
 
         #region Get
-        internal static async Task<List<tblMSPVacancieType>> GetMSPVacancieTypes(long mspId, bool isOnlyActive)
+        internal static async Task<List<tblMSPVacancieType>> GetMSPVacancieTypes(long mspId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    if (isOnlyActive)
-                    {
-                        return await Task.Run(() => db.tblMSPVacancieTypes
-                                                   .Where(x => x.MSPID == mspId && x.IsActive == true).OrderByDescending(x => x.ID).ToList());
-                    }
-                    else
-                    {
-                        return await Task.Run(() => db.tblMSPVacancieTypes
-                                                      .Where(x => x.MSPID == mspId).OrderByDescending(x => x.ID).ToList());
-                    }
+                    return await Task.Run(() => db.tblMSPVacancieTypes
+                                               .Where(x => x.MSPID == mspId).OrderByDescending(x => x.ID).ToList());
+
 
                 }
             }

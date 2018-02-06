@@ -18,11 +18,11 @@ namespace eMSP.Data.Extensions
                 Comment = data.comment,
                 ShowToAll = data.showToAll,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -52,11 +52,11 @@ namespace eMSP.Data.Extensions
                 IsRead = data.isRead,
                 ReadBy = data.readBy,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
-                CreatedUserID = data.createdUserId,
-                UpdatedUserID = data.updatedUserId,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -71,8 +71,8 @@ namespace eMSP.Data.Extensions
                 readBy = data.ReadBy,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
-                createdUserId = data.CreatedUserID,
-                updatedUserId = data.UpdatedUserID,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp
             };

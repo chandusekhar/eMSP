@@ -9,6 +9,7 @@ using eMSP.ViewModel.LocationBranch;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
 using eMSP.ViewModel.MSP;
+using Microsoft.AspNet.Identity;
 
 namespace eMSP.WebAPI.Controllers.LocationBranch
 {
@@ -18,6 +19,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         #region Intialisation
 
         private LocationBranchManager LocationService;
+        string userId;
 
         public LocationController()
         {
@@ -31,17 +33,16 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         [Route("getAllLocations")]
         [HttpPost]
         [Authorize]
+        [Queryable]
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> GetAllLocations(LocationCreateModel data)
         {
             try
             {
-
-                return Ok(await LocationService.GetLocations(data));
+                return Ok((await LocationService.GetLocations(data)).AsQueryable());
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -54,7 +55,6 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         {
             try
             {
-
                 return Ok(await LocationService.GetLocations(data));
             }
             catch (Exception)
@@ -96,6 +96,9 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+
                 return Ok(await LocationService.CreateLocation(data));
             }
             catch (Exception)
@@ -117,6 +120,9 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
         {
             try
             {
+                userId = User.Identity.GetUserId();                
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
+
                 return Ok(await LocationService.UpdateLocation(data));
             }
             catch (Exception)

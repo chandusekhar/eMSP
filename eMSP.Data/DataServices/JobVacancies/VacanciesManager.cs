@@ -50,7 +50,7 @@ namespace eMSP.Data.DataServices.JobVacancies
             {
                 List<VacancyCreateModel> data = null;
 
-                List<tblVacancy> res = await Task.Run(() => ManageVacancy.GetAllVacancies(Convert.ToInt64(model.id)));
+                List<tblVacancy> res = await Task.Run(() => ManageVacancy.GetAllVacancies(model));
 
                 data = res.Select(x => x.ConvertToVacancyCreateModel()).ToList();
 
@@ -116,7 +116,7 @@ namespace eMSP.Data.DataServices.JobVacancies
         //    }
         //}
 
-        public async Task<List<MSPVacancieTypeCreateModel>> GetMSPVacancieType(MSPVacancieType data, bool isOnlyActive)
+        public async Task<List<MSPVacancieTypeCreateModel>> GetMSPVacancieType(MSPVacancieTypeCreateModel data)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                 List<tblMSPVacancieType> dataVT = null;
 
 
-                dataVT = await Task.Run(() => ManageMSPVacancieType.GetMSPVacancieTypes(Id, isOnlyActive));
+                dataVT = await Task.Run(() => ManageMSPVacancieType.GetMSPVacancieTypes(Id));
 
 
                 model = dataVT.Select(a => a.ConvertToMSPVacancieType()).ToList();

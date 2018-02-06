@@ -19,10 +19,10 @@ namespace eMSP.Data.Extensions
                 Name = data.countryName,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false,
-                CreatedUserID = "",
-                UpdatedUserID = "",
-                CreatedTimestamp = data.createdTimestamp == null || data.createdTimestamp == DateTime.MinValue  ? DateTime.Now : data.createdTimestamp,
-                UpdatedTimestamp = DateTime.Now
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 

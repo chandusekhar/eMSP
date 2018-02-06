@@ -20,7 +20,7 @@ namespace eMSP.ViewModel
 
         public string companyType { get; set; }
         public string createdUserID { get; set; }
-        public DateTime createdTimestamp { get; set; }
+        public DateTime? createdTimestamp { get; set; }
         public string updateUserId { get; set; }
         public DateTime? updatedTimestamp { get; set; }
     }

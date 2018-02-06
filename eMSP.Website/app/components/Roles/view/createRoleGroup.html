@@ -1,0 +1,50 @@
+<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2 ng-if="!editform">{{configJSON.titleFormCreate}}</h2>
+            <h2 ng-if="editform">{{configJSON.titleFormEdit}}</h2>
+
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form class="m-t" name="form" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.roleGroupName.$error.required }">
+                        <label>Role Group Name * :</label>
+                        <input type="text" class="form-control" name="roleGroupName"
+                               ng-model="rgdataJSON.roleGroup.roleGroupName"
+                               placeholder="Group Name" required />
+                        <span ng-show="refData.submitted && form.roleGroupName.$error.required" class="text-danger">
+                            * Group Name is required
+                        </span>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': refData.submitted && isRolesEmpty}">
+                        <label>Roles * :</label>
+                        <select class="form-control" ng-model="rgdataJSON.roles"
+                                ng-options="res.Name for res in rolesList"
+                                multiple="" required
+                                name="roles"></select>
+
+                        <span ng-show="refData.submitted && isRolesEmpty" class="text-danger">
+                            * Select Roles
+                        </span>
+                    </div>
+
+                    <h5>
+                        <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>
+                        <button type="submit" ng-click="close()" class="btn btn-white m-b">Cancel</button>
+                    </h5>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

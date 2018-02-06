@@ -71,7 +71,7 @@ function industrySkilsController($scope, $state, localStorageService, $uibModal,
     $scope.loadSkills = function (industry, test) {
         this.test = true;
         if (!industry.skillList) {
-            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industry.id, { "industryId": industry.id });
+            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industry.id + "&$filter=isDeleted eq false", { "industryId": industry.id });
             apires.then(function (data) {
                 industry.skillList = data;
             });

@@ -19,10 +19,10 @@ namespace eMSP.Data.Extensions
                 Name = data.industryName,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false,
-                CreatedUserID = "",
-                UpdatedUserID = "",
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -47,14 +47,14 @@ namespace eMSP.Data.Extensions
             return new tblIndustrySkill()
             {
                 ID = Convert.ToInt64(data.id),
-                IndustryID = data.industryId,                
+                IndustryID = data.industryId,
                 Name = data.skillName,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false,
-                CreatedUserID = "",
-                UpdatedUserID = "",
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 

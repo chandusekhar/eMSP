@@ -27,11 +27,9 @@ namespace eMSP.Data.DataServices.Shared
         public async Task<CountryCreateModel> GetCountry(long Id)
         {
             try
-            {
-                
+            {                
                 tblCountry dataCountry = await Task.Run(() => ManageCountry.GetCountry(Id));
                 return dataCountry.ConvertToCountry();
-
             }
             catch (Exception)
             {
@@ -43,11 +41,8 @@ namespace eMSP.Data.DataServices.Shared
         {
             try
             {
-               
-
                 List<tblCountry> dataCountry = await Task.Run(() => ManageCountry.GetAllCountries());
                 return dataCountry.Select(a => a.ConvertToCountry()).ToList();
-
             }
             catch (Exception)
             {

@@ -25,13 +25,11 @@ namespace eMSP.Data.Extensions
                 StateID = Convert.ToInt64(data.StateID),
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now,
-
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
-
-
         }
+
         public static CompanyCreateModel ConvertTocompany(this tblMSPDetail data)
         {
             return new CompanyCreateModel()
@@ -50,11 +48,11 @@ namespace eMSP.Data.Extensions
                 companyType = "MSP",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp.ToString(),
-                updatedTimestamp = data.UpdatedTimestamp.Value.ToString()
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp.Value
             };
-
         }
+
         public static tblCustomer ConvertTotblCustomer(this CompanyCreateModel data)
         {
             return new tblCustomer()
@@ -68,15 +66,13 @@ namespace eMSP.Data.Extensions
                 WebSite = data.companyWebsite,
                 CountryID = Convert.ToInt64(data.CountryID),
                 StateID = Convert.ToInt64(data.StateID),
-                CreatedUserID = "Raja",
-                UpdatedUserID = "Raja",
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now,
-
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
-
-
         }
+
         public static CompanyCreateModel ConvertTocompany(this tblCustomer data)
         {
             return new CompanyCreateModel()
@@ -91,15 +87,15 @@ namespace eMSP.Data.Extensions
                 CountryID = data.CountryID.ToString(),
                 companyCountry = data.tblCountry != null ? data.tblCountry.Name : "",
                 StateID = data.StateID.ToString(),
-                companyState = data.tblCountryState != null ? data.tblCountryState.Name:"",
+                companyState = data.tblCountryState != null ? data.tblCountryState.Name : "",
                 companyType = "Customer",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp.ToString(),
-                updatedTimestamp = data.UpdatedTimestamp.Value.ToString()
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp.Value
             };
-
         }
+
         public static tblSupplier ConvertTotblSupplier(this CompanyCreateModel data)
         {
             return new tblSupplier()
@@ -113,15 +109,14 @@ namespace eMSP.Data.Extensions
                 WebSite = data.companyWebsite,
                 CountryID = Convert.ToInt64(data.CountryID),
                 StateID = Convert.ToInt64(data.StateID),
-                CreatedUserID = "Raja",
-                UpdatedUserID = "Raja",
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now,
-
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
-
-
         }
+
+
         public static CompanyCreateModel ConvertTocompany(this tblSupplier data)
         {
             return new CompanyCreateModel()
@@ -140,12 +135,9 @@ namespace eMSP.Data.Extensions
                 companyType = "Supplier",
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp.ToString(),
-                updatedTimestamp = data.UpdatedTimestamp.ToString()
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
             };
-
         }
-
-
     }
 }

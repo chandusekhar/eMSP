@@ -1,6 +1,8 @@
 ﻿using eMSP.Data.DataServices.Shared;
 using eMSP.ViewModel.Shared;
+using Microsoft.AspNet.Identity;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -8,17 +10,17 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.Shared
 {
     [RoutePrefix("api/Industry")]
+    [Queryable]
     public class IndustrySkillController : ApiController
     {
         #region Intialisation
 
         private Industry_SkillsManager IndustryService;
-       
+        string userId;
 
         public IndustrySkillController()
         {
-            IndustryService = new Industry_SkillsManager();
-            
+            IndustryService = new Industry_SkillsManager();            
         }
 
         #endregion
@@ -48,7 +50,7 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
-                return Ok(await IndustryService.GetAllIndustries());
+                return Ok((await IndustryService.GetAllIndustries()).AsQueryable());
             }
             catch (Exception)
             {
@@ -80,7 +82,7 @@ namespace eMSP.WebAPI.Controllers.Shared
             try
             {
                 long Id = Convert.ToInt64(industryId);
-                return Ok(await IndustryService.GetAllIndustrySkills(Id));
+                return Ok((await IndustryService.GetAllIndustrySkills(Id)).AsQueryable());
             }
             catch (Exception)
             {
@@ -99,6 +101,9 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "create", userId);
+
                 return Ok(await IndustryService.CreateIndustry(model));
             }
             catch (Exception)
@@ -114,6 +119,8 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "create", userId); 
 
                 return Ok(await IndustryService.CreateIndustrySkill(model));
             }
@@ -134,6 +141,9 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "update", userId);
+
                 return Ok(await IndustryService.UpdateIndustry(model));
             }
             catch (Exception)
@@ -149,6 +159,8 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "update", userId);
 
                 return Ok(await IndustryService.UpdateIndustrySkill(model));
             }

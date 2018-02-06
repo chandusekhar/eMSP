@@ -26,14 +26,11 @@ namespace eMSP.Data.Extensions
                 RoleGroupId = data.roleGroupId == null ? "5D99B481-600F-4015-A169-4D5E8D64633F" : data.roleGroupId,
                 UserProfilePhotoPath = data.userProfilePhotoPath == null ? "" : data.userProfilePhotoPath,
                 ZipCode = data.zipCode,
-                CreatedUserID = data.createdUserID == null ? "" : data.createdUserID,
-                CreatedTimestamp = data.createdTimestamp == null || data.createdTimestamp == DateTime.MinValue ? DateTime.Now : data.createdTimestamp,
-                UpdatedUserID = data.updateUserId == null ? "" : data.updateUserId,
-                UpdatedTimestamp = DateTime.Now
-
+                CreatedUserID = data.createdUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedUserID = data.updateUserId,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
-
-           
         }
 
         public static UserCreateModel ConvertToUser(this tblUserProfile data)
@@ -50,17 +47,15 @@ namespace eMSP.Data.Extensions
                 city = data.City,
                 countryId = data.CountryID,
                 country = data.tblCountry != null ? data.tblCountry.Name : "",
-                state= data.tblCountryState != null ? data.tblCountryState.Name : "",
+                state = data.tblCountryState != null ? data.tblCountryState.Name : "",
                 stateId = data.StateID,
                 userProfilePhotoPath = data.UserProfilePhotoPath,
                 zipCode = data.ZipCode,
                 createdUserID = data.CreatedUserID,
                 updatedTimestamp = data.UpdatedTimestamp,
                 createdTimestamp = data.CreatedTimestamp,
-                updateUserId = data.UpdatedUserID               
-
+                updateUserId = data.UpdatedUserID
             };
-            
         }
 
         public static tblMSPUser ConvertTotblMSPUser(this UserModel data)
@@ -69,16 +64,14 @@ namespace eMSP.Data.Extensions
             {
                 UserID = data.userId,
                 MSPID = data.companyId,
-                ID = data.companyUserId,                
-                CreatedUserID = data.createdUserID == null ? "" : data.createdUserID,
-                CreatedTimestamp = data.createdTimestamp == null ? DateTime.Now : data.createdTimestamp,
-                UpdatedUserID = data.updateUserId == null ? "" : data.updateUserId,
-                UpdatedTimestamp = data.updatedTimestamp == null ? DateTime.Now : data.updatedTimestamp,
+                ID = data.companyUserId,
+                CreatedUserID = data.createdUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedUserID = data.updateUserId,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
             };
-
-
         }
 
         public static tblCustomerUser ConvertTotblCustomerUser(this UserModel data)
@@ -88,15 +81,13 @@ namespace eMSP.Data.Extensions
                 UserID = data.userId,
                 CustomerID = data.companyId,
                 ID = data.companyUserId,
-                CreatedUserID = data.createdUserID == null ? "" : data.createdUserID,
-                CreatedTimestamp = data.createdTimestamp == null ? DateTime.Now : data.createdTimestamp,
-                UpdatedUserID = data.updateUserId == null ? "" : data.updateUserId,
-                UpdatedTimestamp = data.updatedTimestamp == null ? DateTime.Now : data.updatedTimestamp,
+                CreatedUserID = data.createdUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedUserID = data.updateUserId,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
             };
-
-
         }
 
         public static tblSupplierUser ConvertTotblSuppierUser(this UserModel data)
@@ -106,15 +97,13 @@ namespace eMSP.Data.Extensions
                 UserID = data.userId,
                 SupplierID = data.companyId,
                 ID = data.companyUserId,
-                CreatedUserID = data.createdUserID == null ? "" : data.createdUserID,
-                CreatedTimestamp = data.createdTimestamp == null ? DateTime.Now : data.createdTimestamp,
-                UpdatedUserID = data.updateUserId == null ? "" : data.updateUserId,
-                UpdatedTimestamp = data.updatedTimestamp == null ? DateTime.Now : data.updatedTimestamp,
+                CreatedUserID = data.createdUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedUserID = data.updateUserId,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
             };
-
-
         }
 
         public static UserModel ConvertToUserModel(this tblMSPUser data)
@@ -141,7 +130,7 @@ namespace eMSP.Data.Extensions
             {
                 userId = data.UserID,
                 companyId = data.CustomerID,
-                companyType= "Customer",
+                companyType = "Customer",
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
@@ -151,8 +140,6 @@ namespace eMSP.Data.Extensions
                 isDeleted = data.IsDeleted,
                 user = data.tblUserProfile != null ? data.tblUserProfile.ConvertToUser() : null
             };
-
-
         }
 
         public static UserModel ConvertToUserModel(this tblSupplierUser data)
@@ -171,8 +158,6 @@ namespace eMSP.Data.Extensions
                 isDeleted = data.IsDeleted,
                 user = data.tblUserProfile != null ? data.tblUserProfile.ConvertToUser() : null
             };
-
-
         }
     }
 }

@@ -23,7 +23,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
             
-            if ($scope.configJSON.companyType == 'Supplier') {
+            if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
                 $scope.loadCandidates($scope.res.id);
                 $scope.loadJobs();
             }
@@ -45,7 +45,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
     //Function to load Locations
     $scope.loadLocations = function (compId) {        
-        var apires = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETALLLOCATIONSURL, { companyType: $scope.dataJSON.companyType, companyId: compId });
+        var apires = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETALLLOCATIONSURL +"?$filter=isDeleted eq false", { companyType: $scope.dataJSON.companyType, companyId: compId });
         apires.then(function (data) {
             $scope.resLocations = data;
         });
@@ -107,7 +107,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.loadUsers(data.id);
             
             $scope.dataJSON.id = data.id;
-            if ($scope.configJSON.companyType == 'Supplier') {
+            if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
                 localStorageService.set('supplierId', data.id);
                 $scope.loadCandidates(data.id);
                 $scope.loadJobs();
@@ -239,6 +239,12 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
                 }
             }
         });
+    }
+
+    $scope.FixAppointment = function (model) {
+        debugger;
+        localStorageService.set('vacancyData', model);
+        $state.go($scope.configJSON.fixAppointment);
     }
 
     $scope.updateUser = function (model) {

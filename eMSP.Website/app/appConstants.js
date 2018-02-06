@@ -60,7 +60,6 @@ angular.module('eMSPApp')
             },
             VACANCY: {
                 GETMSPVACANCYTYPEURL: "api/JobVacancie/getMSPVacancyType",
-                GETACTIVEMSPVACANCYTYPEURL: "api/JobVacancie/getActiveMSPVacancyType",
                 CREATWMSPVACANCYTYPEURL: "api/JobVacancie/createMSPVacancieType",
                 UPDATEMSPVACANCYTYPEURL: "api/JobVacancie/updateMSPVacancieType",
                 DELETEMSPVACANCYTYPEURL: "api/JobVacancie/deleteMSPVacancieType",
@@ -83,6 +82,15 @@ angular.module('eMSPApp')
                 GETCOUNTRYURL: "api/App/getCountries",
                 GETSTATEURL: "api/App/getStates?Id="
             },
+            ROLE: {
+                GETROLESURL: "api/role/GetAllRoles",
+                GETROLEGROUPURL: "api/role/GetRoleGroup?id=",
+                GETALLROLEGROUPURL: "api/role/GetAllRoleGroup",
+                GETROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles?id=",
+                CREATEROLEURL: "api/role/create",
+                CREATEROLEGROUPURL: "api/role/createRoleGroup",
+                CREATEROLEGROUPROLESURL: "api/role/createRoleGroupRoles"
+            },
             CANDIDATEURL: {
                 SEARCHURL: "api/candidate/getAllCandidates",
                 GETURL: "api/candidate/getCandidate",
@@ -92,7 +100,7 @@ angular.module('eMSPApp')
             },
             CANDIDATESUBMISSIONURL: {
                 GETCANDIDATESTATUS:"api/candidate/getAllCandidateStatus",
-                GETURL: "api/candidate/getCandidateSubmission",
+                GETURL: "api/candidate/getCandidateSubmission?VacancyId=",
                 CREATEURL: "api/candidate/creatCandidateSubmission",
                 UPDATEURL: "api/candidate/updateCandidateSubmission"
             }

@@ -17,7 +17,7 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     $scope.getStateList = function () {
         if ($scope.ldataJSON.countryId) {
             var param = { "Id": $scope.ldataJSON.countryId }
-            var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId, {});
+            var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId , {});
             apires.then(function (data) {
                 $scope.refData.stateList = data;
             });
@@ -30,8 +30,6 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
 
     $scope.submit = function (form) {
         $scope.refData.submitted = true;
-        $scope.ldataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
-        $scope.ldataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
         if (form.$valid) {            
             var suc = false;
@@ -91,8 +89,7 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
 
     $scope.submit = function (form) {
         $scope.refData.submitted = true;
-        $scope.bdataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
-        $scope.bdataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
+
         if (form.$valid) {
             var suc = false;
             if ($scope.editform) {

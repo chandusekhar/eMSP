@@ -30,8 +30,6 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
 
     $scope.submit = function (form) {
         $scope.refData.submitted = true;
-        $scope.udataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
-        $scope.udataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
 
         var obj = localStorageService.get('authorizationData');
         if (form.$valid) {

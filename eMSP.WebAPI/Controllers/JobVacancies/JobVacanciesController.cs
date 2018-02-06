@@ -9,21 +9,22 @@ using eMSP.ViewModel.JobVacancies;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
 using eMSP.ViewModel.MSP;
+using Microsoft.AspNet.Identity;
 
 namespace eMSP.WebAPI.Controllers.JobVacancies
 {
     [RoutePrefix("api/JobVacancie")]
+    [Queryable]
     public class JobVacanciesController : ApiController
     {
         #region Intialisation
 
         private VacanciesManager VacanciesService;
-
+        string userId;
 
         public JobVacanciesController()
         {
             VacanciesService = new VacanciesManager();
-
         }
 
         #endregion
@@ -59,87 +60,24 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             {
                 throw;
             }
-        }
-
-        //[Route("getVacancySkills")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancySkillsCreateModel))]
-        //public async Task<IHttpActionResult> GetVacancySkills(int id)
-        //{
-        //    try
-        //    {
-        //        long Id = Convert.ToInt64(id);
-        //        return Ok(await VacanciesService.GetVacancySkills(Id));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //[Route("getVacancyLocations")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancyLocationsCreateModel))]
-        //public async Task<IHttpActionResult> GetVacancyLocations(int id)
-        //{
-        //    try
-        //    {
-        //        long Id = Convert.ToInt64(id);
-        //        return Ok(await VacanciesService.GetVacancyLocations(Id));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //[Route("getVacancySupplier")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancySuppliersCreateModel))]
-        //public async Task<IHttpActionResult> GetVacancySupplier(int id)
-        //{
-        //    try
-        //    {
-        //        long Id = Convert.ToInt64(id);
-        //        return Ok(await VacanciesService.GetVacancySupplier(Id));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        }        
 
         [Route("getMSPVacancyType")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetMSPVacancyType(MSPVacancieType data)
+        public async Task<IHttpActionResult> GetMSPVacancyType(MSPVacancieTypeCreateModel data)
         {
             try
             {
-                return Ok(await VacanciesService.GetMSPVacancieType(data, false));
+                return Ok((await VacanciesService.GetMSPVacancieType(data)).AsQueryable());
             }
             catch (Exception)
             {
                 throw;
             }
-        }
-
-        [Route("getActiveMSPVacancyType")]
-        [HttpPost]
-        public async Task<IHttpActionResult> GetActiveMSPVacancyType(MSPVacancieType data)
-        {
-            try
-            {
-                return Ok(await VacanciesService.GetMSPVacancieType(data, true));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-
+        }        
         #endregion
+
+
 
         #region Insert
 
@@ -150,6 +88,9 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model.Vacancy, "create", userId);
+
                 return Ok(await VacanciesService.CreateVacancy(model));
             }
             catch (Exception)
@@ -169,6 +110,9 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         {
             try
             {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "create", userId);
+
                 return Ok(await VacanciesService.CreateMSPVacancieType(model));
             }
             catch (Exception)
@@ -187,58 +131,17 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         {
             try
             {
-                return Ok(await VacanciesService.UpdateVacancy(model));                
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model.Vacancy, "update", userId);
+
+                return Ok(await VacanciesService.UpdateVacancy(model));
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-        //[Route("updateVacancySkill")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancySkillsCreateModel))]
-        //public async Task<IHttpActionResult> UpdateVacancySkill(VacancySkillsCreateModel model)
-        //{
-        //    try
-        //    {
-        //        return Ok(await VacanciesService.UpdateVacancySkill(model));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //[Route("updateVacancyLocation")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancyLocationsCreateModel))]
-        //public async Task<IHttpActionResult> UpdateVacancyLocation(VacancyLocationsCreateModel model)
-        //{
-        //    try
-        //    {
-        //        return Ok(await VacanciesService.UpdateVacancyLocation(model));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //[Route("updateVacancySupplier")]
-        //[HttpPost]
-        //[ResponseType(typeof(VacancySuppliersCreateModel))]
-        //public async Task<IHttpActionResult> UpdateVacancySupplier(VacancySuppliersCreateModel model)
-        //{
-        //    try
-        //    {
-        //        return Ok(await VacanciesService.UpdateVacancySupplier(model));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        
 
         [Route("updateMSPVacancieType")]
         [HttpPost]
@@ -246,7 +149,10 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         public async Task<IHttpActionResult> UpdateMSPVacancieType(MSPVacancieTypeCreateModel model)
         {
             try
-            {
+            {                
+                userId =User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model, "update", userId);
+
                 return Ok(await VacanciesService.UpdateMSPVacancieType(model));
             }
             catch (Exception)

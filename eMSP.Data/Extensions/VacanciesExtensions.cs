@@ -31,11 +31,11 @@ namespace eMSP.Data.Extensions
                 TargetPayRate = data.targetPayRate,
                 PayRateMarkUp = data.payRateMarkUp,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -119,11 +119,11 @@ namespace eMSP.Data.Extensions
                 SkillID = data.skillId,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -134,7 +134,7 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 vacancyId = data.VacancyID,
                 skillId = data.SkillID,
-                skill = data.tblIndustrySkill != null ? data.tblIndustrySkill.Name : "",                
+                skill = data.tblIndustrySkill != null ? data.tblIndustrySkill.Name : "",
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -153,11 +153,11 @@ namespace eMSP.Data.Extensions
                 CommentID = data.commentId,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -185,11 +185,11 @@ namespace eMSP.Data.Extensions
                 LocationID = data.locationId,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -219,11 +219,11 @@ namespace eMSP.Data.Extensions
                 FileName = data.fileName,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -254,11 +254,11 @@ namespace eMSP.Data.Extensions
                 IsReleased = data.isReleased,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -288,11 +288,11 @@ namespace eMSP.Data.Extensions
                 MSPID = data.mspId,
                 Name = data.name,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 

@@ -21,11 +21,11 @@ namespace eMSP.Data.Extensions
                 Email = data.Email,
                 UniqueSocialID = data.UniqueSocialID,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted??false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
 
             };
         }
@@ -103,11 +103,11 @@ namespace eMSP.Data.Extensions
                 StreetAddress = data.StreetAddress,
                 ZipCode = data.ZipCode,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
 
 
             };
@@ -142,11 +142,11 @@ namespace eMSP.Data.Extensions
                 FilePath = data.FilePath,
                 FileVersionNumber = Convert.ToInt16(data.FileVersionNumber),
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
 
         }
@@ -161,11 +161,11 @@ namespace eMSP.Data.Extensions
                 BillRate = data.BillRate,
                 StatusID = data.StatusId,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
 
             };
         }
@@ -183,8 +183,8 @@ namespace eMSP.Data.Extensions
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = DateTime.Now,
-                updatedTimestamp = DateTime.Now,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp,
                 CandidateStatus = data.tblCandidateStatu.ConvertToCandidateStatusModel()
 
             };
@@ -198,11 +198,11 @@ namespace eMSP.Data.Extensions
                 Name = data.Name,
                 Description = data.Description,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
 
 
             };
@@ -219,11 +219,8 @@ namespace eMSP.Data.Extensions
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
-                createdTimestamp = DateTime.Now,
-                updatedTimestamp = DateTime.Now
-
-
-
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
             };
         }
     }

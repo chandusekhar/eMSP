@@ -9,7 +9,7 @@ function manageVacancieTypeController($scope, $state, $uibModal, localStorageSer
     $scope.dataJSON.mspId = localStorageService.get('editCompanyData') ? localStorageService.get('editCompanyData').id : 0;
     $scope.edit = false;
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETMSPVACANCYTYPEURL, $scope.dataJSON);
+    var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETMSPVACANCYTYPEURL + "?$filter=isDeleted eq false", $scope.dataJSON);
     apires.then(function (data) {
         $scope.resMSPVacancieType = data;
     });
@@ -65,10 +65,7 @@ function createVacancieTypeController($scope, apiCall, APP_CONSTANTS, $http, toa
 
     $scope.submit = function (form) {
         $scope.submitted = true;
-
-        $scope.ltdataJSON.createdUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
-        $scope.ltdataJSON.updatedUserID = "afcf8230-7878-4e1d-a550-532fd10769ae";
-
+        
         if (form.$valid) {
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.UPDATEMSPVACANCYTYPEURL, $scope.ltdataJSON);

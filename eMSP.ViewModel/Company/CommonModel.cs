@@ -43,9 +43,9 @@ namespace eMSP.ViewModel.MSP
         public string companyState { get; set; }
         public string CountryID { get; set; }
         public string companyCountry { get; set; }
-        public string createdTimestamp { get; set; }
+        public Nullable< DateTime> createdTimestamp { get; set; }
         public string createdUserID { get; set; }
-        public string updatedTimestamp { get; set; }
+        public Nullable<DateTime> updatedTimestamp { get; set; }
         public string updatedUserID { get; set; }
     }
 }

@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 namespace eMSP.Data.Extensions
 {
     public static class StateExtensions
-    {        
+    {
 
         public static tblCountryState ConvertTotblCountryState(this StateCreateModel data)
         {
             return new tblCountryState()
             {
                 ID = Convert.ToInt64(data.id),
-                CountryID=data.countryId,
+                CountryID = data.countryId,
                 Code = data.stateCode,
                 Name = data.stateName,
-                IsActive=data.isActive,
-                IsDeleted= data.isDeleted ?? false,
-                CreatedUserID = "",
-                UpdatedUserID = "",
-                CreatedTimestamp = DateTime.Now,
-                UpdatedTimestamp = DateTime.Now
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
 
@@ -34,7 +34,7 @@ namespace eMSP.Data.Extensions
             {
                 id = data.ID,
                 countryId = data.CountryID,
-                stateCode=data.Code,
+                stateCode = data.Code,
                 stateName = data.Name,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,

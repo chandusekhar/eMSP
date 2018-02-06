@@ -102,7 +102,7 @@ namespace eMSP.Data.DataServices.Shared
 
         #region Delete
 
-        public async Task DeleteState(CountryModel data)
+        public async Task DeleteState(CountryCreateModel data)
         {
             try
             {

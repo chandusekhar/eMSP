@@ -35,7 +35,7 @@
                     <li ui-sref-active="active"><a ui-sref="company.createSupplier">{{'Create Supplier'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="company.createCustomer">{{'Create Customer'|translate}} </a></li>
                     <!--<li ui-sref-active="active"><a ui-sref="company.locations">{{'Manage Location'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="company.branches">{{'Manage Branches'|translate}}</a></li>-->
+            <li ui-sref-active="active"><a ui-sref="company.branches">{{'Manage Branches'|translate}}</a></li>-->
                     <li ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
                     <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
                 </ul>
@@ -46,6 +46,15 @@
                     <li ui-sref-active="active"><a ui-sref="job.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="job.searchVacancies">{{'Manage Vacancies'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="job.createVacancy">{{'Create Vacancy'|translate}} </a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('role')}">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">{{'Role'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('role')}">
+                    <li ui-sref-active="active"><a ui-sref="role.manageRole">{{'Manage Role'|translate}} </a></li>
+                    <!--<li ui-sref-active="active"><a ui-sref="job.manageRoleGroup">{{'Manage Role Group'|translate}} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="job.manageRoleGroupRoles">{{'Manage Role-Group Roles'|translate}} </a></li>-->
+                    <li ui-sref-active="active"><a ui-sref="role.manageUserRole">{{'Manage User Roles'|translate}} </a></li>
                 </ul>
             </li>
         </ul>

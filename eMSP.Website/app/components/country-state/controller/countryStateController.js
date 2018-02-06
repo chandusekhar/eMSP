@@ -70,16 +70,16 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
         }
     }
 
-
     $scope.loadStates = function (country, test) {
         this.test = true;
         if (!country.stateList) {
-            var apires = apiCall.post(APP_CONSTANTS.URL.COUNTRY.GETALLSTATESURL + country.id, { "countryId": country.id });
+            var apires = apiCall.post(APP_CONSTANTS.URL.COUNTRY.GETALLSTATESURL + country.id + "?$filter=isDeleted eq false", { "countryId": country.id });
             apires.then(function (data) {
                 country.stateList = data;
             });
         }
     }
+
     $scope.modal = function (model) {
         if (model.countryId) {
             $scope.editform = true;

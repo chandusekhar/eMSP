@@ -93,6 +93,16 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 
     }
 
+    //Function to load candidates
+    if ($scope.formAction == 'Manage') {
+        debugger;
+        //if()
+        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + compId, { 'SupplierId': compId });
+        apires.then(function (data) {
+            $scope.resCandidates = data;
+        });
+    }
+
 
     if ($scope.edit) {
         $scope.dataJSON = localStorageService.get('editCandidateData');

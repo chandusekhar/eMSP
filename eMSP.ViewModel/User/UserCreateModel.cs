@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using eMSP.DataModel;
 using eMSP.ViewModel.MSP;
+using eMSP.ViewModel.Role;
 
-namespace eMSP.ViewModel
+namespace eMSP.ViewModel.User
 {
     public class UserModel
     {
-        public UserModel(){}
+        public UserModel() { }
         public string userId { get; set; }
         public long companyId { get; set; }
         public long companyUserId { get; set; }
@@ -24,9 +25,9 @@ namespace eMSP.ViewModel
         public string updateUserId { get; set; }
         public DateTime? updatedTimestamp { get; set; }
     }
-    public class UserCreateModel: UserModel
+    public class UserCreateModel : UserModel
     {
-        public UserCreateModel() { }       
+        public UserCreateModel() { }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string address { get; set; }
@@ -39,7 +40,14 @@ namespace eMSP.ViewModel
         public int? timeZoneId { get; set; }
         public string roleGroupId { get; set; }
         public string userProfilePhotoPath { get; set; }
-        public string zipCode { get; set; }     
-       
+        public string zipCode { get; set; }
+
+    }
+
+    public class UserRoleModel
+    {
+        public UserRoleModel() { }
+        public UserCreateModel user { get; set; }
+        public RoleGroupModel roleGroup { get; set; }
     }
 }

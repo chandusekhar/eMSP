@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 'authService', '$location', function ($scope, $http, authService, $location) {
+angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 'authService', '$location', 'apiCall', 'APP_CONSTANTS', function ($scope, $http, authService, $location, apiCall, APP_CONSTANTS) {
 
 
     if (authService.authentication.isAuth) {
@@ -8,6 +8,19 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
         authService.logOut();
         $location.path('/login');
     }
+    
+    var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETUSERURL);
+    apires.then(function (data) {
+        console.log(data);
+        $scope.userRoles = data;
+    });
+    
+    //var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETUSERBYNAMEURL + authService.authentication.userName, { "name": authService.authentication.userName});
+    //apires.then(function (data) {
+    //    console.log(data);
+    //    $scope.userDate = data;
+    //});
+
 
     //setTimeout(function () {
     //    toastr.options = {

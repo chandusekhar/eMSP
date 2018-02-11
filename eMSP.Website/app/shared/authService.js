@@ -43,8 +43,9 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
             else {
                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
             }
+            
             _authentication.isAuth = true;
-            _authentication.userName = loginData.userName;
+            _authentication.userName = loginData.userName;            
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
             deferred.resolve(response);

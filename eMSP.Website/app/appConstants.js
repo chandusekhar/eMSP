@@ -89,7 +89,8 @@ angular.module('eMSPApp')
                 GETROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles?id=",
                 CREATEROLEURL: "api/role/create",
                 CREATEROLEGROUPURL: "api/role/createRoleGroup",
-                CREATEROLEGROUPROLESURL: "api/role/createRoleGroupRoles"
+                CREATEROLEGROUPROLESURL: "api/role/createRoleGroupRoles",
+                ASSIGNUSERROLEURL: "api/role/AssignUserRoles"
             },
             CANDIDATEURL: {
                 SEARCHURL: "api/candidate/getAllCandidates",

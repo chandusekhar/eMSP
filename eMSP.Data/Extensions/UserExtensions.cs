@@ -1,5 +1,5 @@
 ﻿using eMSP.DataModel;
-using eMSP.ViewModel;
+using eMSP.ViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

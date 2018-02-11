@@ -28,7 +28,12 @@ namespace eMSP.Data.DataServices.Users
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.UserID == Id).SingleOrDefault());
+                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.UserID == Id)
+                                                   .Include(a => a.tblCountry)
+                                                   .Include(a => a.tblCountryState)
+                                                   .Include(a => a.AspNetUser.AspNetRoles)
+                                                  .SingleOrDefault()
+                                                  );
                 }
             }
             catch (Exception)

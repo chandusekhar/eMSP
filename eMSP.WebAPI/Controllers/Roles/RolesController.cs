@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using eMSP.Data.DataServices.Roles;
+using eMSP.WebAPI.Controllers.Helpers;
+using eMSP.ViewModel.User;
+using eMSP.Data.DataServices.Users;
 
 namespace eMSP.WebAPI.Controllers.Roles
 {
@@ -20,10 +23,12 @@ namespace eMSP.WebAPI.Controllers.Roles
         private ApplicationRoleManager _AppRoleManager = null;
         private ApplicationUserManager _userManager;
         private RoleManager rm;
+        private UserManger um;
 
         public RolesController()
         {
             rm = new RoleManager();
+            um = new UserManger();
         }        
 
         protected ApplicationRoleManager AppRoleManager
@@ -86,6 +91,7 @@ namespace eMSP.WebAPI.Controllers.Roles
 
         [Route("GetRole")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.Administrator + "," + ApplicationRoles.User)]
         public async Task<IHttpActionResult> GetRole(string Id)
         {
             return Ok(await Task.Run(() => this.AppRoleManager.FindByIdAsync(Id)));
@@ -218,8 +224,22 @@ namespace eMSP.WebAPI.Controllers.Roles
         //    return Ok();
         //}
 
+        [Route("AssignUserRoles")]
+        [HttpPost]
+        public async Task<IHttpActionResult> UserRoles(UserRoleModel model)
+        {
+            UserCreateModel userModel = await Task.Run(() => um.UpdateUser(model.user));
+
+            List<RoleModel> roles = await Task.Run(() => rm.GetRoleGroupRoles(model.roleGroup.id));
+            string[] rolesList = roles.Select(x => x.Name).ToArray();
+
+            dynamic res = await Task.Run(() => AssignRolesToUser(model.user.userId, rolesList));
+
+            return Ok();
+        }
+
         //[Authorize(Roles = "Admin")]
-        [Route("user/{id:guid}")]
+        [Route("AssignRolesToUser/{id:guid}")]
         [HttpPut]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
         {

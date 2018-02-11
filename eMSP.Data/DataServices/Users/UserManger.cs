@@ -1,7 +1,7 @@
 ﻿using eMSP.Data.Extensions;
 using eMSP.DataModel;
-using eMSP.ViewModel;
 using eMSP.ViewModel.MSP;
+using eMSP.ViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace eMSP.Data.DataServices.Users
                 return data.ConvertToUser();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

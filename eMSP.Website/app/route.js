@@ -504,14 +504,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
 
         //company Routes end
-
-        //Vacancies Routes starts
-        .state('job', {
+        .state('vacancy', {
             abstract: true,
-            url: "/job",
+            url: "/vacancy",
             templateUrl: "views/common/content.html",
         })
-        .state("job.manageVacancieType", {
+        .state("vacancy.manageVacancieType", {
             url: '/manageVacancieType',
             templateUrl: 'app/components/Job/View/manageVacancieType.html',
             controller: 'manageVacancieTypeController',
@@ -560,6 +558,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        //Vacancies Routes starts
+        .state('job', {
+            abstract: true,
+            url: "/job",
+            templateUrl: "views/common/content.html",
+        })        
         .state("job.searchVacancies", {
             url: '/searchVacancies',
             templateUrl: 'app/components/Job/View/searchVacancies.html',
@@ -831,6 +835,73 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/candidate",
             templateUrl: "views/common/content.html",
         })
+        .state("candidate.manageCandidate", {
+            url: '/manageCandidate',
+            templateUrl: 'app/components/candidate/view/manageCandidate.html',
+            controller: 'createCandidateController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/candidate/config/ManageCandidate.json").success(function (data) { return data; });
+                },
+
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                        .then(function (data) {
+                            return data;
+                        });
+
+                },
+                formAction: function () { return "Create"; },
+                AppIndustries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRIESURL, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                    return {};
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            files: ['css/plugins/dropzone/basic.css', 'css/plugins/dropzone/dropzone.css', 'js/plugins/dropzone/dropzone.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                        },
+                        {
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }
+                    ]);
+                }
+            }
+        })
         .state("candidate.create", {
             url: '/create',
             templateUrl: 'app/components/candidate/view/manageCandidate.html',
@@ -898,6 +969,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        
         .state("candidate.edit", {
             url: '/edit',
             templateUrl: 'app/components/candidate/view/manageCandidate.html',

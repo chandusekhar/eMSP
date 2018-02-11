@@ -7,11 +7,11 @@ using System.Web.Http;
 using eMSP.Data.DataServices.Users;
 using System.Web.Http.Description;
 using eMSP.ViewModel.MSP;
-using eMSP.ViewModel;
 using System.Threading.Tasks;
 using eMSP.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using eMSP.ViewModel.User;
 
 namespace eMSP.WebAPI.Controllers.User
 {
@@ -76,10 +76,11 @@ namespace eMSP.WebAPI.Controllers.User
         [HttpPost]
         [Authorize]
         [ResponseType(typeof(UserCreateModel))]
-        public async Task<IHttpActionResult> GetUser(string UserID)
+        public async Task<IHttpActionResult> GetUser()
         {
             try
             {
+                string UserID = User.Identity.GetUserId();
 
                 return Ok(await dao.GetUser(UserID));
             }

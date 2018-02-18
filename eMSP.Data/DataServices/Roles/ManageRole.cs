@@ -1,4 +1,5 @@
 ﻿using eMSP.DataModel;
+using eMSP.ViewModel.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,30 @@ namespace eMSP.Data.DataServices.Roles
 
         #region Get
 
-        internal static async Task<List<AspNetRole>> GetAllRoles()
+        internal static async Task<List<UserAuthorization>> GetUserRoles(string UserID)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.AspNetRoles.ToList());
+
+                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
+                                                                  .Join(db.AspNetRoleGroups,
+                                                                  u => u.RoleGroupId,
+                                                                  rg => rg.Id, (u, rg) => new
+                                                                  {
+                                                                      RoleGroupId = rg.Id
+                                                                  }).Join(db.AspNetRoleGroupRoles,
+                                                                  r => r.RoleGroupId,
+                                                                  rgr => rgr.RoleGroupId, (r, rgr) => new
+                                                                  {
+                                                                      rolesId = rgr.RoleId
+                                                                  }).Join(db.AspNetRoles,
+                                                                  ro => ro.rolesId,
+                                                                  b => b.Id, (ro, b) => new UserAuthorization
+                                                                  {
+                                                                      Name = b.Name
+                                                                  }).ToList());
                 }
             }
             catch (Exception)

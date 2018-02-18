@@ -6,24 +6,19 @@ using System.Threading.Tasks;
 using eMSP.DataModel;
 using eMSP.ViewModel.MSP;
 using eMSP.ViewModel.Role;
+using eMSP.ViewModel.Shared;
 
 namespace eMSP.ViewModel.User
 {
-    public class UserModel
+    public class UserModel: BaseModel
     {
         public UserModel() { }
         public string userId { get; set; }
         public long companyId { get; set; }
         public long companyUserId { get; set; }
         public UserCreateModel user { get; set; }
-        public bool? isDeleted { get; set; }
-        public bool? isActive { get; set; }
 
         public string companyType { get; set; }
-        public string createdUserID { get; set; }
-        public DateTime? createdTimestamp { get; set; }
-        public string updateUserId { get; set; }
-        public DateTime? updatedTimestamp { get; set; }
     }
     public class UserCreateModel : UserModel
     {

@@ -17,4 +17,5 @@ angular
 angular
     .module('eMSPApp').run(['authService', function (authService) {
         authService.fillAuthData();
+        authService.setPermission();
     }]);

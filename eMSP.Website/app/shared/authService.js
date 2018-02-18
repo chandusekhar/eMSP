@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'apiCall', function ($http, $q, localStorageService, ngAuthSettings, apiCall) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
@@ -15,6 +15,8 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
         userName: "",
         externalAccessToken: ""
     };
+
+    var _permissionList=[];
 
     var _saveRegistration = function (registration) {
 
@@ -48,6 +50,8 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
             _authentication.userName = loginData.userName;            
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
+            _getPermissions();
+
             deferred.resolve(response);
 
         }).error(function (err, status) {
@@ -56,6 +60,18 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
         });
 
         return deferred.promise;
+
+    };
+
+    var _getPermissions = function () {
+        _permissionList = [];
+        var apires = apiCall.post('api/role/GetUserRoles');
+        apires.then(function (data) {
+
+            _permissionList = data;
+            
+            localStorageService.set('permissionList', _permissionList);
+        });
 
     };
 
@@ -78,6 +94,26 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
             _authentication.useRefreshTokens = authData.useRefreshTokens;
         }
 
+    };
+
+    var _setPermission = function () {
+        
+        _permissionList = localStorageService.get('permissionList');
+
+    };
+
+    var _hasPermission = function (permission) {
+        permission = permission.trim();
+        return _permissionList.some(item => {
+            if (typeof item.Name !== 'string') { // item.Name is only used because when I called setPermission, I had a Name property
+                return false;
+            }
+            if (permission.match('%')) {
+                return item.Name.match(permission.replace('%', ''));
+            } else {
+                return item.Name.trim() === permission;
+            }
+        });
     };
 
     var _refreshToken = function () {
@@ -157,8 +193,11 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
 
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
+    authServiceFactory.getPermissions = _getPermissions;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
+    authServiceFactory.setPermission = _setPermission;
+    authServiceFactory.hasPermission = _hasPermission;
     authServiceFactory.authentication = _authentication;
     authServiceFactory.refreshToken = _refreshToken;
 

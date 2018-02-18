@@ -12,10 +12,12 @@ using eMSP.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using eMSP.ViewModel.User;
+using eMSP.WebAPI.Controllers.Helpers;
 
 namespace eMSP.WebAPI.Controllers.User
 {
     [RoutePrefix("api/user")]
+    [AllowAnonymous]
     public class UserController : ApiController
     {
         #region Intialisation
@@ -74,7 +76,7 @@ namespace eMSP.WebAPI.Controllers.User
 
         [Route("getUser")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserView + "," + ApplicationRoles.CustomerUserView + "," + ApplicationRoles.MSPUserView)]
         [ResponseType(typeof(UserCreateModel))]
         public async Task<IHttpActionResult> GetUser()
         {
@@ -94,7 +96,7 @@ namespace eMSP.WebAPI.Controllers.User
 
         [Route("getUsers")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserView + "," + ApplicationRoles.CustomerUserView + "," + ApplicationRoles.MSPUserView)]
         [ResponseType(typeof(List<UserModel>))]
         public async Task<IHttpActionResult> GetUsers(CompanyModel data)
         {
@@ -116,7 +118,7 @@ namespace eMSP.WebAPI.Controllers.User
 
         [Route("creatUser")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserCreate + "," + ApplicationRoles.CustomerUserCreate + "," + ApplicationRoles.MSPUserCreate)]
         [ResponseType(typeof(UserCreateModel))]
         public async Task<IHttpActionResult> CreateUser(UserCreateModel data)
         {
@@ -132,6 +134,7 @@ namespace eMSP.WebAPI.Controllers.User
                 }
 
                 data.userId = user.Id;
+                Helpers.Helpers.AddBaseProperties(data, "create", data.userId);
                 return Ok(await dao.CreateUser(data));
             }
             catch (Exception)
@@ -147,7 +150,7 @@ namespace eMSP.WebAPI.Controllers.User
 
         [Route("updateUser")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserCreate + "," + ApplicationRoles.CustomerUserCreate + "," + ApplicationRoles.MSPUserCreate)]
         [ResponseType(typeof(UserCreateModel))]
         public async Task<IHttpActionResult> UpdateUser(UserCreateModel data)
         {
@@ -161,9 +164,10 @@ namespace eMSP.WebAPI.Controllers.User
                 throw;
             }
         }
+
         [Route("updateCompanyUser")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserCreate + "," + ApplicationRoles.CustomerUserCreate + "," + ApplicationRoles.MSPUserCreate)]
         [ResponseType(typeof(UserModel))]
         public async Task<IHttpActionResult> UpdateUser(UserModel data)
         {
@@ -183,7 +187,7 @@ namespace eMSP.WebAPI.Controllers.User
 
         [Route("deleteUser")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserCreate + "," + ApplicationRoles.CustomerUserCreate + "," + ApplicationRoles.MSPUserCreate)]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> DeleteCompany(UserCreateModel data)
         {

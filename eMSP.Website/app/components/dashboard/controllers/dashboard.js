@@ -9,11 +9,11 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
         $location.path('/login');
     }
     
-    var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETUSERURL);
-    apires.then(function (data) {
-        console.log(data);
-        $scope.userRoles = data;
-    });
+    //var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.GETUSERROLESURL);
+    //apires.then(function (data) {
+    //    console.log(data);
+    //    $scope.userRoles = data;
+    //});
     
     //var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETUSERBYNAMEURL + authService.authentication.userName, { "name": authService.authentication.userName});
     //apires.then(function (data) {

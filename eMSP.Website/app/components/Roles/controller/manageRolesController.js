@@ -26,7 +26,7 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
 
     $scope.AddRole = function () {
         $scope.refData.submitted = false;
-
+        $scope.rdataJSON.Name = "";
         var roleModalInstance = $uibModal.open({
             templateUrl: 'app/components/Roles/view/createRole.html',
             scope: $scope,
@@ -37,7 +37,7 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
 
     $scope.AddRoleGroup = function (model) {
         $scope.refData.submitted = false;
-        $scope.rgdataJSON = {};
+        
         $scope.editform = false;   
         if (model) {
             $scope.editform = true;   
@@ -77,7 +77,7 @@ function createRolesController($scope, $state, localStorageService, $uibModal, a
 
 //Controller to create Role Group
 function createRoleGroupController($scope, $state, localStorageService, $uibModal, apiCall, APP_CONSTANTS, toaster, $uibModalInstance) {
-    console.log($scope.rolesList);
+    
     $scope.rgdataJSON.roleGroup = {};
     $scope.rgdataJSON.roles = [];
     $scope.formAction = $scope.editform ? "Update" : "Create";

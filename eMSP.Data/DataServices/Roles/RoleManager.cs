@@ -22,12 +22,12 @@ namespace eMSP.Data.DataServices.Roles
 
         #region Get
 
-        public async Task<List<RoleModel>> GetAllRoles()
+        //Get User roles List
+        public async Task<List<UserAuthorization>> GetUserRoles(string UserID)
         {
             try
             {
-                List<AspNetRole> data = await Task.Run(() => ManageRole.GetAllRoles());
-                return data.Select(x => x.ConvertToRole()).ToList();
+                return await Task.Run(() => ManageRole.GetUserRoles(UserID));
             }
             catch (Exception)
             {

@@ -71,7 +71,7 @@ namespace eMSP.Data.DataServices.Shared
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
 

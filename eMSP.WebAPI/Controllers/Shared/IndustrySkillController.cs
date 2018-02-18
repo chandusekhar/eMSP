@@ -1,5 +1,6 @@
 ﻿using eMSP.Data.DataServices.Shared;
 using eMSP.ViewModel.Shared;
+using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace eMSP.WebAPI.Controllers.Shared
 {
     [RoutePrefix("api/Industry")]
     [Queryable]
+    [AllowAnonymous]
+    [Authorize(Roles = ApplicationRoles.IndustryFull)]
     public class IndustrySkillController : ApiController
     {
         #region Intialisation
@@ -29,6 +32,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getIndustry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(IndustryCreateModel))]
         public async Task<IHttpActionResult> GetIndustry(int id)
         {
@@ -45,6 +49,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getAllIndustries")]
         [HttpGet]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(IndustryCreateModel))]
         public async Task<IHttpActionResult> GetAllIndustries()
         {
@@ -60,6 +65,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getSkill")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(IndustrySkillsCreateModel))]
         public async Task<IHttpActionResult> GetSkill(int id)
         {
@@ -76,6 +82,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getAllSkills")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(IndustrySkillsCreateModel))]
         public async Task<IHttpActionResult> GetAllSkills(int industryId)
         {
@@ -96,6 +103,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("insertIndustry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(IndustryCreateModel))]
         public async Task<IHttpActionResult> InsertIndustry(IndustryCreateModel model)
         {
@@ -114,6 +122,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("insertIndustrySkill")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(IndustrySkillsCreateModel))]
         public async Task<IHttpActionResult> InsertIndustrySkill(IndustrySkillsCreateModel model)
         {
@@ -136,6 +145,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("updateIndustry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(IndustryCreateModel))]
         public async Task<IHttpActionResult> UpdateIndustry(IndustryCreateModel model)
         {
@@ -154,6 +164,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("updateIndustrySkill")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(IndustrySkillsCreateModel))]
         public async Task<IHttpActionResult> UpdateIndustrySkill(IndustrySkillsCreateModel model)
         {

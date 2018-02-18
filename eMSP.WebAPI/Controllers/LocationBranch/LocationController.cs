@@ -10,10 +10,13 @@ using System.Web.Http.Description;
 using System.Threading.Tasks;
 using eMSP.ViewModel.MSP;
 using Microsoft.AspNet.Identity;
+using eMSP.WebAPI.Controllers.Helpers;
 
 namespace eMSP.WebAPI.Controllers.LocationBranch
 {
     [RoutePrefix("api/Location")]
+    [Queryable]
+    [AllowAnonymous]
     public class LocationController : ApiController
     {
         #region Intialisation
@@ -32,8 +35,8 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("getAllLocations")]
         [HttpPost]
-        [Authorize]
-        [Queryable]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchView + "," + ApplicationRoles.CustomerLocationBranchView)]
+
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> GetAllLocations(LocationCreateModel data)
         {
@@ -49,7 +52,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("getLocation")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchView + "," + ApplicationRoles.CustomerLocationBranchView)]
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> GetLocation(LocationCreateModel data)
         {
@@ -66,7 +69,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("getCustomerLocationBranch")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchView + "," + ApplicationRoles.CustomerLocationBranchView)]
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> GetCustomerLocationBranch(LocationCreateModel data)
         {
@@ -90,7 +93,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("creatLocation")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchCreate + "," + ApplicationRoles.CustomerLocationBranchCreate)]
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> creatLocation(LocationCreateModel data)
         {
@@ -114,7 +117,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("updateLocation")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchCreate + "," + ApplicationRoles.CustomerLocationBranchCreate)]
         [ResponseType(typeof(LocationCreateModel))]
         public async Task<IHttpActionResult> UpdateLocation(LocationCreateModel data)
         {
@@ -138,7 +141,7 @@ namespace eMSP.WebAPI.Controllers.LocationBranch
 
         [Route("deleteLocation")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierLocationBranchFull + "," + ApplicationRoles.CustomerLocationBranchFull + "," + ApplicationRoles.SupplierLocationBranchCreate + "," + ApplicationRoles.CustomerLocationBranchCreate)]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> DeleteLocation(LocationCreateModel data)
         {

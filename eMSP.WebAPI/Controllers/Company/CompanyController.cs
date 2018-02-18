@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using eMSP.ViewModel.MSP;
+using eMSP.WebAPI.Controllers.Helpers;
 
 namespace eMSP.WebAPI.Controllers.Company
 {
 
 
     [RoutePrefix("api/company")]
+    [AllowAnonymous]
     public class CompanyController : ApiController
     {
 
@@ -32,7 +34,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("getCompany")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierFull+","+ ApplicationRoles.CustomerFull + "," + ApplicationRoles.MSPFull + "," + ApplicationRoles.SupplierView + "," + ApplicationRoles.CustomerView + "," + ApplicationRoles.MSPView)]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> GetCompany(CompanyModel data)
         {
@@ -51,7 +53,7 @@ namespace eMSP.WebAPI.Controllers.Company
         
         [Route("getAllCompanies")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierFull + "," + ApplicationRoles.CustomerFull + "," + ApplicationRoles.MSPFull + "," + ApplicationRoles.SupplierView + "," + ApplicationRoles.CustomerView + "," + ApplicationRoles.MSPView)]
         [ResponseType(typeof(List<CompanyCreateModel>))]
         public async Task<IHttpActionResult> GetCompanies(CompanySearchModel data)
         {
@@ -73,7 +75,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("creatCompany")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierFull + "," + ApplicationRoles.CustomerFull + "," + ApplicationRoles.MSPFull + "," + ApplicationRoles.SupplierCreate + "," + ApplicationRoles.CustomerCreate + "," + ApplicationRoles.MSPCreate)]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> CreateCompany(CompanyCreateModel data)
         {
@@ -94,7 +96,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("updateCompany")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierFull + "," + ApplicationRoles.CustomerFull + "," + ApplicationRoles.MSPFull + "," + ApplicationRoles.SupplierCreate + "," + ApplicationRoles.CustomerCreate + "," + ApplicationRoles.MSPCreate)]
         [ResponseType(typeof(CompanyCreateModel))]
         public async Task<IHttpActionResult> UpdateCompany(CompanyCreateModel data)
         {
@@ -115,7 +117,7 @@ namespace eMSP.WebAPI.Controllers.Company
 
         [Route("deleteCompany")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierFull + "," + ApplicationRoles.CustomerFull + "," + ApplicationRoles.MSPFull + "," + ApplicationRoles.SupplierCreate + "," + ApplicationRoles.CustomerCreate + "," + ApplicationRoles.MSPCreate)]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> DeleteCompany(CompanyModel data)
         {

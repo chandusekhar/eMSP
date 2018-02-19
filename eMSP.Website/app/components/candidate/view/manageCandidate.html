@@ -62,7 +62,93 @@
         <div class="col-lg-2">
         </div>
     </div>
-    <div class="wrapper wrapper-content animated fadeInRight">
+    <div ng-if="IsMangePage" class="ibox-content">
+        <div class="row">
+            <!--repeater-->
+            <div ng-repeat="loc in resCandidates">
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <a class="text-white" ng-show="!test" ng-click=""> <i class="fa fa-plus-square"></i></a>
+                            <a class="text-white" ng-show="test" ng-click="test=false;alert(false);"> <i class="fa fa-minus-square"></i></a>
+                            {{loc.Candidate.FirstName + " " + loc.Candidate.LastName}} <div class="btn-group-xs pull-right">
+                                <a ng-click="editCanditate(loc)" class="text-white">
+                                    <span class="fa fa-pencil"></span>
+                                </a>
+                                <a ng-click="deleteCandidate(loc)" class="btn btn-danger">
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="ibox-heading white-bg">
+                                <p class="small"><b>DOB :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.DateOfBirth | date}}</p>
+                                <p class="small"><b>Email :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.Email}}</p>
+                                <p class="small"><b>Mobile :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].MobileNumber}}</p>
+                                <p class="small"><b>Street Address :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].StreetAddress}}</p>
+                                <p class="small"><b>City :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].City}}</p>
+                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].State}}</p>
+                                <p class="small"><b>Country :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].Country}}</p>
+                                <p class="small"><b>Zip :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].ZipCode}}</p>
+                            </div>
+
+                        </div>
+                        <div align="center" class="form-control inline">
+                            <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
+                            <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
+                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                   ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--User repeater-->
+            <div class="full-height-scroll" full-scroll>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr ng-repeat="loc in resCandidates">
+                                <td class="client-avatar">
+                                    <!--<img ng-if="loc.user.userProfilePhotoPath!=''" alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">-->
+                                    <!-- User Avathar image or Letter avathar -->
+                                    <span>
+                                        <ng-letter-avatar charCount="2" height="28" width="28" fontsize="10"
+                                                          data="{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}" shape="round"></ng-letter-avatar>
+                                    </span>
+                                </td>
+                                <td><a ng-click="client = 1" class="client-link">{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}</a></td>
+                                <td>
+                                    <i class="fa fa-map-marker"></i> {{loc.CandidateContact[0].StreetAddress}},
+                                    {{loc.CandidateContact[0].City}}, {{loc.CandidateContact[0].State}},
+                                    {{loc.CandidateContact[0].Country}} - {{loc.CandidateContact[0].ZipCode}}.
+                                </td>
+                                <td><i class="fa fa-envelope"></i> {{loc.Candidate.Email}}</td>
+                                <td><i class="fa fa-calendar"></i> {{loc.Candidate.DateOfBirth | date}}</td>
+                                <td>
+                                    <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
+                                    <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
+                                    <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                           ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <p class="small inline" ng-if="loc.Candidate.isDeleted">Deleted</p>
+                                        <p class="small inline" ng-if="!loc.Candidate.isDeleted">Deleted</p>
+                                        <input type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                               ng-change="ctoggleActive(loc)" ng-model="loc.Candidate.isDeleted" />
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!IsMangePage" class="wrapper wrapper-content animated fadeInRight">
         <div class="row" ng-show="formAction=='Create' || formAction=='Update'">
             <div class="col-lg-12">
                 <div>

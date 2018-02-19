@@ -851,7 +851,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         });
 
                 },
-                formAction: function () { return "Create"; },
+                formAction: function () { return "Manage"; },
                 AppIndustries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRIESURL, {})
                         .then(function (data) {

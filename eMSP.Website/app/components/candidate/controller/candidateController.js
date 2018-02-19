@@ -14,7 +14,9 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     $scope.dataJSON.CandidateFile = [];
     $scope.dataJSON.Candidate = {};
     $scope.dataJSON.Contact = {};
-    
+    $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
+    $scope.compId = 1;
+
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
             var param = { "Id": $scope.dataJSON.Contact.CountyID }
@@ -24,6 +26,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             });
         }
     }
+
     $scope.loadIndustrySkills = function (industryId) {
         
         if (industryId && !industryId.skillList) {
@@ -34,6 +37,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             });
         }
     }
+
     $scope.loadSkills = function () {
         var len = $scope.dataJSON.CandidateIndustries.length;
         var industryId = $scope.dataJSON.CandidateIndustries[len - 1];
@@ -41,7 +45,6 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             $scope.loadIndustrySkills(industryId);
         }
     }
-
 
     $scope.LoadIndustriesData = function () {
 
@@ -94,10 +97,9 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     }
 
     //Function to load candidates
-    if ($scope.formAction == 'Manage') {
-        debugger;
+    if ($scope.IsMangePage) {        
         //if()
-        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + compId, { 'SupplierId': compId });
+        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.compId, { 'SupplierId': $scope.compId });
         apires.then(function (data) {
             $scope.resCandidates = data;
         });
@@ -121,14 +123,30 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 
             $scope.loadIndustrySkills(Id);
 
-        });
-
-       
-         
-               
+        });                      
        
     }
-    
+
+    $scope.editCanditate = function (candidate) {
+        $scope.dataJSON = candidate;
+        $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
+        $scope.getStateList();
+        $scope.LoadIndustriesData();
+        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+
+            var Id = 0;
+            if (v.id) {
+                Id = v.id;
+            }
+            else {
+                Id = v;
+            }
+
+            $scope.loadIndustrySkills(Id);
+
+        });
+        $scope.IsMangePage = false;
+    }
     $scope.test = function (index) {
         console.log(index);
 

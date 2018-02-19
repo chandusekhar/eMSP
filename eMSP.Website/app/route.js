@@ -88,7 +88,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 AppCoutries: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
                         .then(function (data) {
-                            console.log(data);
                             return data;
                         });
 
@@ -162,12 +161,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
                         }
-                        //,
-                        //{
-                        //    insertBefore: '#loadBefore',
-                        //    name: 'toaster',
-                        //    files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
-                        //}
+                        ,
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
                     ]);
                 }
             }

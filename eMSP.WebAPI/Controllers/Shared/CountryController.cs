@@ -1,5 +1,6 @@
 ﻿using eMSP.Data.DataServices.Shared;
 using eMSP.ViewModel.Shared;
+using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
@@ -10,7 +11,8 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.Shared
 {
     [RoutePrefix("api/Country")]
-    [Queryable]
+    [Queryable]    
+    [Authorize(Roles = ApplicationRoles.CountryFull)]
     public class CountryController : ApiController
     {
         #region Intialisation
@@ -31,6 +33,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getCountry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(CountryCreateModel))]
         public async Task<IHttpActionResult> GetCountry(int id)
         {
@@ -47,6 +50,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getAllCountries")]
         [HttpGet]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(CountryCreateModel))]
         public async Task<IHttpActionResult> GetAllCountries()
         {
@@ -62,6 +66,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getState")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(StateCreateModel))]
         public async Task<IHttpActionResult> GetState(int id)
         {
@@ -78,6 +83,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("getAllStates")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
         [ResponseType(typeof(StateCreateModel))]
         public async Task<IHttpActionResult> GetAllStates(int countryId)
         {
@@ -98,6 +104,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("insertCountry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(CountryCreateModel))]
         public async Task<IHttpActionResult> InsertCountry(CountryCreateModel model)
         {
@@ -116,6 +123,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("insertState")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(StateCreateModel))]
         public async Task<IHttpActionResult> InsertState(StateCreateModel model)
         {
@@ -137,6 +145,7 @@ namespace eMSP.WebAPI.Controllers.Shared
         #region update
         [Route("updateCountry")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(CountryCreateModel))]
         public async Task<IHttpActionResult> UpdateCountry(CountryCreateModel model)
         {
@@ -155,6 +164,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         [Route("updateState")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryCreate)]
         [ResponseType(typeof(StateCreateModel))]
         public async Task<IHttpActionResult> UpdateState(StateCreateModel model)
         {

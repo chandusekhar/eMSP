@@ -13,9 +13,9 @@ angular.module('eMSPApp').controller("loginController", ['$scope', '$location', 
         authService.login($scope.loginData).then(function (response) {
             $location.path('/dashboard');
         },
-         function (err) {
-             $scope.message = err.error_description;
-         });
+            function (err) {
+                $scope.message = err.error_description;
+            });
     };
 
     $(".small-chat-box,.footer,.navbar-default,.border-bottom").hide();

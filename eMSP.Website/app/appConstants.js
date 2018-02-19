@@ -84,6 +84,7 @@ angular.module('eMSPApp')
             },
             ROLE: {
                 GETROLESURL: "api/role/GetAllRoles",
+                GETUSERROLESURL: "api/role/GetUserRoles",
                 GETROLEGROUPURL: "api/role/GetRoleGroup?id=",
                 GETALLROLEGROUPURL: "api/role/GetAllRoleGroup",
                 GETROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles?id=",

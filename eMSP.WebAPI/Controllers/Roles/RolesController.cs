@@ -16,6 +16,8 @@ using eMSP.Data.DataServices.Users;
 namespace eMSP.WebAPI.Controllers.Roles
 {
     [RoutePrefix("api/role")]
+    [Authorize(Roles = ApplicationRoles.RoleAuthorizationFull)]
+    [AllowAnonymous]
     public class RolesController : ApiController
     {
         #region Intialisation
@@ -29,7 +31,7 @@ namespace eMSP.WebAPI.Controllers.Roles
         {
             rm = new RoleManager();
             um = new UserManger();
-        }        
+        }
 
         protected ApplicationRoleManager AppRoleManager
         {
@@ -88,38 +90,57 @@ namespace eMSP.WebAPI.Controllers.Roles
 
 
         #region Get
-
+        //Get Single role by ID
         [Route("GetRole")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.Administrator + "," + ApplicationRoles.User)]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetRole(string Id)
         {
             return Ok(await Task.Run(() => this.AppRoleManager.FindByIdAsync(Id)));
         }
 
+        //Get All roles List
         [Route("GetAllRoles")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetAllRoles()
         {
             return Ok(await Task.Run(() => this.AppRoleManager.Roles.ToList()));
         }
 
+        //Get User roles List
+        [Route("GetUserRoles")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
+        public async Task<IHttpActionResult> GetUserRoles()
+        {
+            string UserID = User.Identity.GetUserId();
+
+            return Ok(await Task.Run(() => rm.GetUserRoles(UserID)));
+        }
+
+        //Get Role Group by Role GroupID
         [Route("GetRoleGroup")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetRoleGroup(string id)
         {
             return Ok(await Task.Run(() => rm.GetRoleGroup(id)));
         }
 
+        //Get all role Groups List
         [Route("GetAllRoleGroup")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetAllRoleGroup()
         {
             return Ok(await Task.Run(() => rm.GetAllRoleGroup()));
         }
 
+        //Get all Roles List by Role role GroupID
         [Route("GetAllRoleGroupRoles")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetAllRoleGroupRoles(string id)
         {
             return Ok(await Task.Run(() => rm.GetRoleGroupRoles(id)));
@@ -128,8 +149,10 @@ namespace eMSP.WebAPI.Controllers.Roles
         #endregion
 
         #region Insert
-
+        //Create New role
         [Route("create")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
         public async Task<IHttpActionResult> CreateRole(RoleModel model)
         {
             var role = new IdentityRole { Name = model.Name };
@@ -144,7 +167,10 @@ namespace eMSP.WebAPI.Controllers.Roles
             return await Task.Run(() => this.GetRole(role.Id));
         }
 
+        //Create New role group
         [Route("createRoleGroup")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
         public async Task<IHttpActionResult> CreateRoleGroup(RoleGroupModel model)
         {
             var Id = Guid.NewGuid().ToString();
@@ -153,7 +179,10 @@ namespace eMSP.WebAPI.Controllers.Roles
             return Ok(await Task.Run(() => rm.CreateRoleGroup(model)));
         }
 
+        //Create/Assign Roles to Role Group
         [Route("createRoleGroupRoles")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
         public async Task<IHttpActionResult> CreateRoleGroupRoles(RoleGroupRolesModel model)
         {
             if (string.IsNullOrEmpty(model.roleGroup.id))
@@ -165,67 +194,10 @@ namespace eMSP.WebAPI.Controllers.Roles
             return Ok(await Task.Run(() => rm.CreateRoleGroupRoles(model)));
         }
 
-        //[Route("ManageUsersInRole")]
-        //public async Task<IHttpActionResult> ManageUsersInRole(UsersInRoleModel model)
-        //{
-        //    var role = await this.AppRoleManager.FindByIdAsync(model.Id);
-
-        //    if (role == null)
-        //    {
-        //        ModelState.AddModelError("", "Role does not exist");
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    foreach (string user in model.EnrolledUsers)
-        //    {
-        //        var appUser = await this.AppUserManager.FindByIdAsync(user);
-
-        //        if (appUser == null)
-        //        {
-        //            ModelState.AddModelError("", String.Format("User: {0} does not exists", user));
-        //            continue;
-        //        }
-
-        //        if (!this.AppUserManager.IsInRole(user, role.Name))
-        //        {
-        //            IdentityResult result = await this.AppUserManager.AddToRoleAsync(user, role.Name);
-
-        //            if (!result.Succeeded)
-        //            {
-        //                ModelState.AddModelError("", String.Format("User: {0} could not be added to role", user));
-        //            }
-
-        //        }
-        //    }
-
-        //    foreach (string user in model.RemovedUsers)
-        //    {
-        //        var appUser = await this.AppUserManager.FindByIdAsync(user);
-
-        //        if (appUser == null)
-        //        {
-        //            ModelState.AddModelError("", String.Format("User: {0} does not exists", user));
-        //            continue;
-        //        }
-
-        //        IdentityResult result = await this.AppUserManager.RemoveFromRoleAsync(user, role.Name);
-
-        //        if (!result.Succeeded)
-        //        {
-        //            ModelState.AddModelError("", String.Format("User: {0} could not be removed from role", user));
-        //        }
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    return Ok();
-        //}
-
+        //Update Role Group ID to User Profile and Assign Role Group - roles to User
         [Route("AssignUserRoles")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
         public async Task<IHttpActionResult> UserRoles(UserRoleModel model)
         {
             UserCreateModel userModel = await Task.Run(() => um.UpdateUser(model.user));
@@ -238,9 +210,10 @@ namespace eMSP.WebAPI.Controllers.Roles
             return Ok();
         }
 
-        //[Authorize(Roles = "Admin")]
+        //Assign Role Group - roles to User        
         [Route("AssignRolesToUser/{id:guid}")]
         [HttpPut]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
         {
 
@@ -291,6 +264,8 @@ namespace eMSP.WebAPI.Controllers.Roles
 
         #region Delete
         [Route("delete")]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationCreate)]
+        [HttpPost]
         public async Task<IHttpActionResult> DeleteRole(string Id)
         {
 
@@ -311,7 +286,6 @@ namespace eMSP.WebAPI.Controllers.Roles
             return NotFound();
 
         }
-
 
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using eMSP.ViewModel.User;
+﻿using eMSP.DataModel;
+using eMSP.ViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,5 +34,11 @@ namespace eMSP.ViewModel.Role
         public UserRolesModel() { }
         public UserModel user { get; set; }
         public List<RoleModel> roles { get; set; }
+    }
+
+    public class UserAuthorization
+    {
+        public UserAuthorization() { }
+        public string Name { get; set; }
     }
 }

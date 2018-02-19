@@ -23,12 +23,12 @@ namespace eMSP.Data.Extensions
                 CountryID = data.countryId,
                 StateID = data.stateId,
                 TimezoneID = data.timeZoneId,
-                RoleGroupId = data.roleGroupId == null ? "5D99B481-600F-4015-A169-4D5E8D64633F" : data.roleGroupId,
+                RoleGroupId = data.roleGroupId == null ? "6704ded9-bf44-4795-9768-e408627306c8" : data.roleGroupId,
                 UserProfilePhotoPath = data.userProfilePhotoPath == null ? "" : data.userProfilePhotoPath,
                 ZipCode = data.zipCode,
                 CreatedUserID = data.createdUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedUserID = data.updateUserId,
+                UpdatedUserID = data.updatedUserID,
                 UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
             };
         }
@@ -54,7 +54,7 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedTimestamp = data.UpdatedTimestamp,
                 createdTimestamp = data.CreatedTimestamp,
-                updateUserId = data.UpdatedUserID
+                updatedUserID = data.UpdatedUserID
             };
         }
 
@@ -67,7 +67,7 @@ namespace eMSP.Data.Extensions
                 ID = data.companyUserId,
                 CreatedUserID = data.createdUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedUserID = data.updateUserId,
+                UpdatedUserID = data.updatedUserID,
                 UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
@@ -83,7 +83,7 @@ namespace eMSP.Data.Extensions
                 ID = data.companyUserId,
                 CreatedUserID = data.createdUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedUserID = data.updateUserId,
+                UpdatedUserID = data.updatedUserID,
                 UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
@@ -99,7 +99,7 @@ namespace eMSP.Data.Extensions
                 ID = data.companyUserId,
                 CreatedUserID = data.createdUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedUserID = data.updateUserId,
+                UpdatedUserID = data.updatedUserID,
                 UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false
@@ -116,7 +116,7 @@ namespace eMSP.Data.Extensions
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updateUserId = data.UpdatedUserID,
+                updatedUserID = data.UpdatedUserID,
                 updatedTimestamp = data.UpdatedTimestamp,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
@@ -134,7 +134,7 @@ namespace eMSP.Data.Extensions
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updateUserId = data.UpdatedUserID,
+                updatedUserID = data.UpdatedUserID,
                 updatedTimestamp = data.UpdatedTimestamp,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
@@ -152,7 +152,7 @@ namespace eMSP.Data.Extensions
                 companyUserId = data.ID,
                 createdUserID = data.CreatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updateUserId = data.UpdatedUserID,
+                updatedUserID = data.UpdatedUserID,
                 updatedTimestamp = data.UpdatedTimestamp,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,

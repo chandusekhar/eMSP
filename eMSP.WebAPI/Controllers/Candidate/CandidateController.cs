@@ -11,6 +11,8 @@ using eMSP.WebAPI.Controllers.Helpers;
 namespace eMSP.WebAPI.Controllers.Candidate
 {
     [RoutePrefix("api/candidate")]
+    [Authorize(Roles = ApplicationRoles.SupplierCandidateFull)]
+    [AllowAnonymous]
     public class CandidateController : ApiController
     {
 
@@ -30,7 +32,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllCandidates")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> GetAllCandidates(int SupplierId)
         {
@@ -48,7 +50,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getCandidate")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> GetCandidate(int candidateId)
         {
@@ -66,7 +68,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getCandidateSubmission")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> GetCandidateSubmission(int VacancyId)
         {
@@ -84,7 +86,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllCandidateStatus")]
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
         [ResponseType(typeof(CandidateStatusModel))]
         public async Task<IHttpActionResult> GetCandidateStatus()
         {
@@ -105,7 +107,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("creatCandidate")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> creatCandidate(CandidateCreateModel data)
         {
@@ -115,7 +117,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
                
                Helpers.Helpers.AddBaseProperties(data.Candidate,"create", userId);
                Helpers.Helpers.AddBaseProperties(data.CandidateContact[0], "create", userId);
-
+                Helpers.Helpers.AddBaseProperties(data.CandidateFile[0], "create", userId);
                 return Ok(await CandidateService.CreateCandidate(data));
             }
             catch (Exception)
@@ -127,7 +129,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("creatCandidateSubmission")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> creatCandidateSubmission(CandidateSubmissionModel data)
         {
@@ -152,7 +154,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidate")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> UpdateCandidate(CandidateCreateModel data)
         {
@@ -173,7 +175,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidateSubmission")]
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionModel data)
         {
@@ -194,24 +196,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         #region Delete
 
-        //[Route("deleteCandidate")]
-        //[HttpPost]
-        //[Authorize]
-        //[ResponseType(typeof(string))]
-        //public async Task<IHttpActionResult> DeleteBranch(BranchCreateModel data)
-        //{
-        //    try
-        //    {
-        //        await BranchService.DeleteBranch(data);
-        //        return Ok("Success");
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
+        
         #endregion
 
 

@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
-function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList) {
+function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, $uibModalInstance) {
     $scope.submitted = false;
     $scope.refData.candidateStatusList = candidateStatusList;
     $scope.edit = $scope.formAction == "Update" ? true : false;
@@ -33,7 +33,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
 
     $scope.reset = function () {
         $scope.submitted = false;
-        $state.reload();
+        $uibModalInstance.close();
         
     }
 }

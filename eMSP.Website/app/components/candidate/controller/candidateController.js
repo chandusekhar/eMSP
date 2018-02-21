@@ -16,6 +16,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     $scope.dataJSON.Contact = {};
     $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
     $scope.compId = 1;
+    $scope.refData.userViewType = "Card";
 
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
@@ -96,6 +97,12 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 
     }
 
+    $scope.toggleView = function () {
+        if ($scope.refData.userViewType === "Card") {
+            $scope.refData.userViewType = "List";
+        } else { $scope.refData.userViewType = "Card"; }
+    };
+
     //Function to load candidates
     if ($scope.IsMangePage) {        
         //if()
@@ -146,6 +153,8 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 
         });
         $scope.IsMangePage = false;
+        $scope.edit = true;
+        $scope.formAction = "Update";
     }
     $scope.test = function (index) {
         console.log(index);
@@ -168,15 +177,17 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
             if ($scope.edit) {
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.UPDATEURL, $scope.dataJSON);
                 res.then(function (data) {
-                    $scope.dataJSON = data;                  
-                    $state.go($scope.configJSON.successURL);
+                    $scope.dataJSON = data;
+                    $scope.cancel();
+                    //$state.go($scope.configJSON.successURL);
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.CREATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    $state.go($scope.configJSON.successURL);
+                    $scope.cancel();
+                    //$state.go($scope.configJSON.successURL);
                 });
             }
            
@@ -187,6 +198,10 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
         $scope.dataJSON.CandidateFile.splice(index, 1);
     }
 
+    $scope.cancel = function () {
+        $scope.IsMangePage = true;
+        $scope.edit = false;
+    }
     
     
 }

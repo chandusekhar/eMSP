@@ -9,6 +9,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using eMSP.ViewModel.MSP;
 using eMSP.WebAPI.Controllers.Helpers;
+using Microsoft.AspNet.Identity;
+using eMSP.WebAPI.Controllers.Helpers;
 
 namespace eMSP.WebAPI.Controllers.Company
 {
@@ -40,7 +42,8 @@ namespace eMSP.WebAPI.Controllers.Company
         {
             try
             {
-                
+               
+
                 return Ok(await CompanyService.GetCompany(data));
             }
             catch (Exception)
@@ -81,6 +84,10 @@ namespace eMSP.WebAPI.Controllers.Company
         {
             try
             {
+                string userId = User.Identity.GetUserId();
+
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+
                 return Ok(await CompanyService.CreateCompany(data));
             }
             catch (Exception)
@@ -102,6 +109,10 @@ namespace eMSP.WebAPI.Controllers.Company
         {
             try
             {
+                string userId = User.Identity.GetUserId();
+
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
+
                 return Ok(await CompanyService.UpdateCompany(data));
             }
             catch (Exception)

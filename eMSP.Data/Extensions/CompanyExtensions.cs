@@ -26,7 +26,8 @@ namespace eMSP.Data.Extensions
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
+                 LogoPath = data.LogoPath
             };
         }
 
@@ -49,7 +50,9 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp.Value
+                updatedTimestamp = data.UpdatedTimestamp.Value,
+                 LogoPath = data.LogoPath
+                
             };
         }
 
@@ -69,7 +72,8 @@ namespace eMSP.Data.Extensions
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
+                 LogoPath = data.LogoPath
             };
         }
 
@@ -92,7 +96,8 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp.Value
+                updatedTimestamp = data.UpdatedTimestamp.Value,
+                LogoPath = data.LogoPath
             };
         }
 
@@ -112,7 +117,8 @@ namespace eMSP.Data.Extensions
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
+                LogoPath = data.LogoPath
             };
         }
 
@@ -136,7 +142,8 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                LogoPath = data.LogoPath
             };
         }
     }

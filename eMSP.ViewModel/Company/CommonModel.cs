@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eMSP.ViewModel.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace eMSP.ViewModel.MSP
 {
 
-    public class CompanyModel
+    public class CompanyModel: BaseModel
     {
         public CompanyModel() { }
         public string companyType { get; set; }
@@ -43,9 +44,6 @@ namespace eMSP.ViewModel.MSP
         public string companyState { get; set; }
         public string CountryID { get; set; }
         public string companyCountry { get; set; }
-        public Nullable< DateTime> createdTimestamp { get; set; }
-        public string createdUserID { get; set; }
-        public Nullable<DateTime> updatedTimestamp { get; set; }
-        public string updatedUserID { get; set; }
+        public string LogoPath { get; set; }
     }
 }

@@ -11,7 +11,8 @@
         'ngIdle',                       // Idle timer
         'ngSanitize',                   // ngSanitize
         'LocalStorageModule',
-        'ngLetterAvatar'                // Letter Avathar
+        'ngLetterAvatar',                 // Letter Avathar
+        'angularCroppie'
         //'daterangepicker'
     ])
 })();

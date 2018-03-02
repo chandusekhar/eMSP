@@ -105,6 +105,10 @@ angular.module('eMSPApp')
                 GETURL: "api/candidate/getCandidateSubmission?VacancyId=",
                 CREATEURL: "api/candidate/creatCandidateSubmission",
                 UPDATEURL: "api/candidate/updateCandidateSubmission"
+            },
+            ACCOUNT: {
+                CHANGEPASSWORD: "api/Account/ChangePassword",
+                RESETPASSWORD:"api/Account/SetPassword"
             }
         }
     });

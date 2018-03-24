@@ -22,6 +22,7 @@ namespace eMSP.Data.DataServices.Users
         #endregion
 
         #region Get
+
         internal static async Task<tblUserProfile> GetUser(string Id)
         {
             try
@@ -39,6 +40,65 @@ namespace eMSP.Data.DataServices.Users
                 throw;
 
             }
+        }
+
+        internal static async Task<tblUserProfile> GetUser(string Id, string companyType)
+        {
+
+
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    switch (companyType)
+                    {
+
+                        case "MSP":
+                        default:
+                            return await Task.Run(() => db.tblUserProfiles
+                                                          .Include(a => a.tblMSPUsers)
+                                                          .Include(a => a.tblCountry)
+                                                          .Include(a => a.tblCountryState)
+                                                          .Join(db.tblMSPUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
+                                                          .Where(x => x.a.UserID == Id && x.b.IsDeleted == false)
+                                                          .Select(x => x.a)
+                                                          .SingleOrDefault());
+
+                        case "Customer":
+                            return await Task.Run(() => db.tblUserProfiles
+                                                          .Include(a => a.tblCustomerUsers)
+                                                          .Include(a => a.tblCountry)
+                                                          .Include(a => a.tblCountryState)
+                                                          .Join(db.tblCustomerUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
+                                                          .Where(x => x.a.UserID == Id && x.b.IsDeleted == false)
+                                                          .Select(x => x.a)
+                                                          .SingleOrDefault());
+
+                        case "Supplier":
+                            return await Task.Run(() => db.tblUserProfiles
+                                                          .Include(a => a.tblSupplierUsers)
+                                                          .Include(a => a.tblCountry)
+                                                          .Include(a => a.tblCountryState)
+                                                          .Join(db.tblSupplierUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
+                                                          .Where(x => x.a.UserID == Id && x.b.IsDeleted == false)
+                                                          .Select(x => x.a)
+                                                          .SingleOrDefault());
+
+
+
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+
+
         }
 
         internal static async Task<List<tblMSPUser>> GetAllMSPUsers(long Id)
@@ -205,9 +265,10 @@ namespace eMSP.Data.DataServices.Users
                     }
                     x = await Task.Run(() => db.SaveChangesAsync());
 
-                    return model;
+                    return GetUser(model.UserID).Result;
 
                 }
+
             }
             catch (Exception e)
             {

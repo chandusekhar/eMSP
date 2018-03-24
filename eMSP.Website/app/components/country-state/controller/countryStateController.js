@@ -9,7 +9,7 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
     $scope.countryList = AppCountries;
     $scope.refData.submitted = false;
 
-    $scope.submit = function (form) {        
+    $scope.submit = function (form) {
         $scope.refData.submitted = true;
         if (form.$valid) {
             var suc = false;
@@ -17,8 +17,8 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
                 var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATECOUNTRYURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    toaster.success({ body: "Data Updated Successfully." });                   
-                    $scope.search = true;  
+                    toaster.warning({ body: "Data Updated Successfully." });
+                    $scope.search = true;
                 });
             }
             else {
@@ -27,7 +27,7 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
                     $scope.dataJSON = data;
                     toaster.success({ body: "Data Created Successfully." });
                     $scope.countryList.unshift(data);
-                    $scope.search = true;      
+                    $scope.search = true;
                 });
             }
         }
@@ -55,7 +55,7 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
         $scope.dataJSON = model;
     }
 
-    $scope.toggleActive = function (model) {        
+    $scope.toggleActive = function (model) {
         if (model.countryId) {
             var res = apiCall.post(APP_CONSTANTS.URL.COUNTRY.UPDATESTATEURL, model);
             res.then(function (data) {

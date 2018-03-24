@@ -15,6 +15,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 {
     [RoutePrefix("api/JobVacancie")]
     [Queryable]
+    [AllowAnonymous]
     public class JobVacanciesController : ApiController
     {
         #region Intialisation
@@ -60,7 +61,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             {
                 throw;
             }
-        }        
+        }
 
         [Route("getMSPVacancyType")]
         [HttpPost]
@@ -74,7 +75,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             {
                 throw;
             }
-        }        
+        }
         #endregion
 
 
@@ -99,9 +100,30 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
-        
+        [Route("commentVacancy")]
+        [HttpPost]
+        [ResponseType(typeof(VacancyCommentCreateModel))]
+        public async Task<IHttpActionResult> CommentVacancy(VacancyCommentCreateModel model)
+        {
+            try
+            {
+                userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(model.comment, "create", userId);
+                Helpers.Helpers.AddBaseProperties(model.vacancyComment, "create", userId);
+                Helpers.Helpers.AddBaseProperties(model.commentUser, "create", userId);
+                model.commentUser.userId = userId;
 
-        
+                return Ok(await VacanciesService.CommentVacancy(model));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+
 
         [Route("createMSPVacancieType")]
         [HttpPost]
@@ -141,7 +163,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
                 throw;
             }
         }
-        
+
 
         [Route("updateMSPVacancieType")]
         [HttpPost]
@@ -149,8 +171,8 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         public async Task<IHttpActionResult> UpdateMSPVacancieType(MSPVacancieTypeCreateModel model)
         {
             try
-            {                
-                userId =User.Identity.GetUserId();
+            {
+                userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "update", userId);
 
                 return Ok(await VacanciesService.UpdateMSPVacancieType(model));

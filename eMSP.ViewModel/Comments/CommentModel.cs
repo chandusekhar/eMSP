@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.Comments
 {
-    public class CommentModel: BaseModel
+    public class CommentModel : BaseModel
     {
         public CommentModel() { }
         public long id { get; set; }
         public string comment { get; set; }
         public Nullable<bool> showToAll { get; set; }
+        public IList<CommentUsersModel> commentUser { get; set; }
     }
 }

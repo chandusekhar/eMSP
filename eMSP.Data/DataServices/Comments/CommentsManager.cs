@@ -47,7 +47,6 @@ namespace eMSP.Data.DataServices.Comments
         {
             try
             {
-
                 tblComment res = await Task.Run(() => ManageComments.InsertComment(data.ConvertTotblComment()));
                 return res.ConvertToComment();
             }

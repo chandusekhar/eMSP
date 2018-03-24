@@ -33,7 +33,7 @@ namespace eMSP.WebAPI
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 SlidingExpiration = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(20)                
+                ExpireTimeSpan = TimeSpan.FromMinutes(20)
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -44,8 +44,8 @@ namespace eMSP.WebAPI
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(20),
-                
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(1440),
+
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };

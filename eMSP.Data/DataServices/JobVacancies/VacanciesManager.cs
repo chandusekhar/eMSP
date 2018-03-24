@@ -10,6 +10,8 @@ using eMSP.DataModel;
 using eMSP.ViewModel.JobVacancies;
 using System.Configuration;
 using eMSP.ViewModel.MSP;
+using eMSP.Data.DataServices.Comments;
+using eMSP.ViewModel.Comments;
 
 namespace eMSP.Data.DataServices.JobVacancies
 {
@@ -18,6 +20,7 @@ namespace eMSP.Data.DataServices.JobVacancies
         #region Initialization
 
         private bool IsDisposed = false;
+        CommentsManager _commentsManager = new CommentsManager();
 
         public VacanciesManager()
         {
@@ -157,6 +160,27 @@ namespace eMSP.Data.DataServices.JobVacancies
                 return model;
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CommentModel> CommentVacancy(VacancyCommentCreateModel data)
+        {
+            try
+            {
+                tblComment resComment = await Task.Run(() => ManageComments.InsertComment(data.comment.ConvertTotblComment()));
+                data.vacancyComment.commentId = resComment.ID;
+
+                tblVacancyComment res = await Task.Run(() => ManageVacancy.CommentVacancy(data.vacancyComment.ConvertTotblVacancyComment()));
+                data.vacancyComment.Id = res.ID;
+
+                data.commentUser.commentId = resComment.ID;                
+                tblCommentUser resCommentUser= await Task.Run(() => ManageComments.InsertCommentUser(data.commentUser.ConvertTotblCommentUser()));
+
+                return resComment.ConvertToComment();
+            }
+            catch (Exception ex)
             {
                 throw;
             }

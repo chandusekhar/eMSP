@@ -11,7 +11,8 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.Shared
 {
     [RoutePrefix("api/Country")]
-    [Queryable]    
+    [Queryable]
+    [AllowAnonymous]
     [Authorize(Roles = ApplicationRoles.CountryFull)]
     public class CountryController : ApiController
     {
@@ -99,7 +100,7 @@ namespace eMSP.WebAPI.Controllers.Shared
         }
 
         #endregion
-        
+
         #region Insert
 
         [Route("insertCountry")]
@@ -130,7 +131,7 @@ namespace eMSP.WebAPI.Controllers.Shared
             try
             {
                 userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "create", userId); 
+                Helpers.Helpers.AddBaseProperties(model, "create", userId);
 
                 return Ok(await StateService.CreateState(model));
             }
@@ -152,7 +153,7 @@ namespace eMSP.WebAPI.Controllers.Shared
             try
             {
                 userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "update", userId); 
+                Helpers.Helpers.AddBaseProperties(model, "update", userId);
 
                 return Ok(await CountryService.UpdateCountry(model));
             }

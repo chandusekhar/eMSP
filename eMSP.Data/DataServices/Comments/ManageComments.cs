@@ -62,6 +62,25 @@ namespace eMSP.Data.DataServices.Comments
             }
         }
 
+        internal static async Task<tblCommentUser> InsertCommentUser(tblCommentUser model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    model = db.tblCommentUsers.Add(model);
+
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Update

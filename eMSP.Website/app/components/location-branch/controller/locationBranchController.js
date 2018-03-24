@@ -5,8 +5,6 @@ angular.module('eMSPApp')
 function locationController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
     $scope.refData = {};
-    $scope.formAction = function () { return "Create"; };
-    $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
     $scope.refData.submitted = false;
 
@@ -17,7 +15,7 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     $scope.getStateList = function () {
         if ($scope.ldataJSON.countryId) {
             var param = { "Id": $scope.ldataJSON.countryId }
-            var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId , {});
+            var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId, {});
             apires.then(function (data) {
                 $scope.refData.stateList = data;
             });
@@ -31,7 +29,7 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
     $scope.submit = function (form) {
         $scope.refData.submitted = true;
 
-        if (form.$valid) {            
+        if (form.$valid) {
             var suc = false;
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.UPDATELOCATIONURL, $scope.ldataJSON);
@@ -59,12 +57,10 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
 }
 
 function branchController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
-
+    debugger;
     //var rawValue = angular.copy($scope.bdataJSON);
     $scope.configJSON = {};
     $scope.refData = {};
-    $scope.formAction = function () { return "Create"; };
-    $scope.edit = $scope.formAction === "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
     $scope.refData.submitted = false;
 

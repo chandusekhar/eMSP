@@ -54,7 +54,7 @@ namespace eMSP.WebAPI.Controllers.User
                 {
                     foreach (string error in result.Errors)
                     {
-                        ModelState.AddModelError("", error);
+                        ModelState.AddModelError("errors", error);
                     }
                 }
 
@@ -119,7 +119,7 @@ namespace eMSP.WebAPI.Controllers.User
         [Route("creatUser")]
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserCreate + "," + ApplicationRoles.CustomerUserCreate + "," + ApplicationRoles.MSPUserCreate)]
-        [ResponseType(typeof(UserCreateModel))]
+        [ResponseType(typeof(UserModel))]
         public async Task<IHttpActionResult> CreateUser(UserCreateModel data)
         {
             try

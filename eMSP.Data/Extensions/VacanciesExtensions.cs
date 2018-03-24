@@ -102,11 +102,11 @@ namespace eMSP.Data.Extensions
                     updatedTimestamp = data.UpdatedTimestamp,
                     updatedUserID = data.UpdatedUserID,
                 },
-                VacancyFiles = data.tblVacancyFiles != null ? data.tblVacancyFiles.Select(a => a.ConvertToVacancyFile()).ToList() : null,
-                VacancyComment = data.tblVacancyComments != null ? data.tblVacancyComments.Select(a => a.tblComment.ConvertToComment()).ToList() : null,
-                VacancySkills = data.tblVacancieSkills != null ? data.tblVacancieSkills.Select(a => a.tblIndustrySkill.ConvertToIndustrySkill()).ToList() : null,
-                VacancyLocations = data.tblVacancyLocations != null ? data.tblVacancyLocations.Select(a => a.tblCustomerLocationBranch.tblLocation.ConvertToLocation()).ToList() : null,
-                VacancySuppliers = data.tblVacancySuppliers != null ? data.tblVacancySuppliers.Select(a => a.tblSupplier.ConvertTocompany()).ToList() : null
+                VacancyFiles = data.tblVacancyFiles?.Select(a => a.ConvertToVacancyFile()).ToList(),
+                VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
+                VacancySkills = data.tblVacancieSkills?.Select(a => a.tblIndustrySkill?.ConvertToIndustrySkill()).ToList(),
+                VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblCustomerLocationBranch?.tblLocation.ConvertToLocation()).ToList(),
+                VacancySuppliers = data.tblVacancySuppliers?.Select(a => a.tblSupplier?.ConvertTocompany()).ToList()
             };
         }
 
@@ -145,11 +145,11 @@ namespace eMSP.Data.Extensions
         }
 
 
-        public static tblVacancyComment ConvertTotblVacancyComment(this VacancyCommentsCreateModel data)
+        public static tblVacancyComment ConvertTotblVacancyComment(this VacancyCommentModel data)
         {
             return new tblVacancyComment()
             {
-                ID = Convert.ToInt64(data.id),
+                ID = Convert.ToInt64(data.Id),
                 CommentID = data.commentId,
                 VacancyID = data.vacancyId,
                 IsActive = data.isActive,
@@ -161,11 +161,11 @@ namespace eMSP.Data.Extensions
             };
         }
 
-        public static VacancyCommentsCreateModel ConvertToVacancyComment(this tblVacancyComment data)
+        public static VacancyCommentModel ConvertToVacancyComment(this tblVacancyComment data)
         {
-            return new VacancyCommentsCreateModel()
+            return new VacancyCommentModel()
             {
-                id = data.ID,
+                Id = data.ID,
                 vacancyId = data.VacancyID,
                 commentId = data.CommentID,
                 isActive = data.IsActive,

@@ -77,16 +77,16 @@
                                     <dt>Markup Pay </dt>
                                     <dd>: {{vacancyData.Vacancy.payRateMarkUp}}</dd>
 
-                                    <dt>Created </dt>
+                                    <!--<dt>Created </dt>
                                     <dd>: {{vacancyData.Vacancy.createdTimestamp | date}}</dd>
                                     <dt>Updated </dt>
                                     <dd>: {{vacancyData.Vacancy.updatedTimestamp | date}}</dd>
-                                    <dt>Suppliers</dt>
-                                    <dd class="project-people">
-                                         <ng-letter-avatar ng-repeat="sup in vacancyData.VacancySuppliers" charCount="2" height="28" width="28" fontsize="10"
-                                                            data="sup.companyName" shape="round"></ng-letter-avatar>
+                                    <dt>Suppliers</dt>-->
+                                    <!--<dd class="project-people">
+                                        <ng-letter-avatar ng-repeat="sup in vacancyData.VacancySuppliers" charCount="2" height="28" width="28" fontsize="10"
+                                                          data="sup.companyName" shape="round"></ng-letter-avatar>
 
-                                    </dd>
+                                    </dd>-->
                                 </dl>
                             </div>
                         </div>
@@ -109,25 +109,43 @@
                                     <uib-tabset>
                                         <uib-tab heading="Users comments" active="tab.active" class="dsads">
                                             <div class="feed-activity-list">
-                                                <div class="feed-element">
+                                                <div class="feed-element" ng-repeat="comments in vacancyData.VacancyComment">
                                                     <a href="" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="img/a2.jpg">
+                                                        <!--<img alt="image" class="img-circle" src="img/a2.jpg">-->
+                                                        <ng-letter-avatar charCount="2" height="28" width="28" fontsize="10"
+                                                                          data="{{comments.createdUserID}}" shape="round"></ng-letter-avatar>
                                                     </a>
                                                     <div class="media-body ">
-                                                        <small class="pull-right">2h ago</small>
-                                                        <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
-                                                        <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                                        <!--<small class="pull-right">2h ago</small>-->
+                                                        <strong>Mark Johnson</strong><br>
+                                                        <small class="text-muted">{{comments.createdTimestamp | date:'MMMM dd, yyyy hh:mm:ss a'}}</small>
                                                         <div class="well">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                            Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                                            {{comments.comment}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </uib-tab>                                        
+                                            <div class="m-t m-b"></div>
+                                            <div class="col-lg-12 no-padding">
+                                                <div class="social-comment">
+                                                    <form class="m-t" name="form">
+                                                        <strong>Add Comments:</strong>
+                                                        <div class="media-body">
+                                                            <textarea ng-model="dataCommentJSON.comment.comment" class="form-control" placeholder="Write comment..."></textarea>
+                                                        </div>
+                                                        <br />
+                                                        <div class="col-lg-12 pull-right">
+                                                            <button type="submit" ng-click="submitComments()" class="btn btn-primary pull-right">Submit</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </uib-tab>
                                     </uib-tabset>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

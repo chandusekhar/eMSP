@@ -74,6 +74,22 @@ namespace eMSP.ViewModel.JobVacancies
         //public string industry { get; set; }
     }
 
+    public class VacancyCommentModel : BaseModel
+    {
+        public VacancyCommentModel() { }
+        public long Id { get; set; }
+        public long vacancyId { get; set; }
+        public long commentId { get; set; }
+    }
+
+    public class VacancyCommentCreateModel
+    {
+        public CommentModel comment { get; set; }
+        public VacancyCommentModel vacancyComment { get; set; }
+        public CommentUsersModel commentUser { get; set; }
+    }
+
+
     public class VacancyCreateModel
     {
         public VacancyCreateModel() { }

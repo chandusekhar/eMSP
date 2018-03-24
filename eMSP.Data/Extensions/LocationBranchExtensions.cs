@@ -36,6 +36,7 @@ namespace eMSP.Data.Extensions
             return new LocationCreateModel()
             {
                 id = data.ID,
+                locationId = data.ID,
                 locationName = data.LocationName,
                 streetLine1 = data.StreetLine1,
                 streetLine2 = data.StreetLine2,
@@ -82,6 +83,7 @@ namespace eMSP.Data.Extensions
             return new BranchCreateModel()
             {
                 id = data.ID,
+                branchId = data.ID,
                 branchName = data.BranchName,
                 locationId = data.LocationID,
                 locationName = data.tblLocation != null ? data.tblLocation.LocationName : "",

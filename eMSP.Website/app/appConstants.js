@@ -76,7 +76,8 @@ angular.module('eMSPApp')
                 UPDATEVACANCYLOCATIONS: "api/JobVacancie/updateVacancyLocation",
                 ADDVACANCYSUPPLIER: "api/JobVacancie/addVacancySupplier",
                 GETVACANCYSUPPLIER: "api/JobVacancie/getVacancySupplier?id=",
-                UPDATEVACANCYSUPPLIER: "api/JobVacancie/updateVacancySupplier"
+                UPDATEVACANCYSUPPLIER: "api/JobVacancie/updateVacancySupplier",
+                ADDVACANCYCOMMENT: "api/JobVacancie/commentVacancy"
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",
@@ -101,14 +102,14 @@ angular.module('eMSPApp')
                 DELETEURL: "api/candidate/deleteCandidate"
             },
             CANDIDATESUBMISSIONURL: {
-                GETCANDIDATESTATUS:"api/candidate/getAllCandidateStatus",
+                GETCANDIDATESTATUS: "api/candidate/getAllCandidateStatus",
                 GETURL: "api/candidate/getCandidateSubmission?VacancyId=",
                 CREATEURL: "api/candidate/creatCandidateSubmission",
                 UPDATEURL: "api/candidate/updateCandidateSubmission"
             },
             ACCOUNT: {
                 CHANGEPASSWORD: "api/Account/ChangePassword",
-                RESETPASSWORD:"api/Account/SetPassword"
+                RESETPASSWORD: "api/Account/SetPassword"
             }
         }
     });

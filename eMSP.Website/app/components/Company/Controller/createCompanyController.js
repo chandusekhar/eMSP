@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('createCompanyController', createCompanyController)
-function createCompanyController($scope, $state, localStorageService, configJSON, formAction, AppCoutries, apiCall, APP_CONSTANTS, $uibModal) {
+function createCompanyController($scope, $state, localStorageService, configJSON, formAction, AppCoutries, apiCall, APP_CONSTANTS, $uibModal, toaster) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
@@ -51,7 +51,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
             reader.readAsDataURL(input.files[0]);
             var fname = input.files[0].name;
             var ftype = 'img/' + fname.split('.')[1];
-            $scope.modelLogo(fname,ftype);
+            $scope.modelLogo(fname, ftype);
         }
     };
 
@@ -59,7 +59,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
         $("#upload").click();
     }
 
-    $scope.modelLogo = function (filename,ftype) {
+    $scope.modelLogo = function (filename, ftype) {
         var modalInstance = $uibModal.open({
             template: '<div class="modal-header">\
                        <h3 class="modal-title" > Upload Logo:</h3>\
@@ -90,7 +90,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
                         var file = new File([blob], filename);
 
                         data.append("uploadedFile", file);
-                        
+
 
 
                         // ADD LISTENERS.
@@ -99,7 +99,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
                         objXhr.addEventListener("load", transferComplete, false);
 
                         // SEND FILE DETAILS TO THE API.
-                        
+
                         objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
                         objXhr.send(data);
 
@@ -130,14 +130,14 @@ function createCompanyController($scope, $state, localStorageService, configJSON
                 var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.UPDATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    //toaster.warning({ body: "Data Updated Successfully." });
+                    toaster.success({ body: "Data Updated Successfully." });
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.CREATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    //toaster.warning({ body: "Data Created Successfully." });
+                    toaster.success({ body: "Data Created Successfully." });
                 });
             }
 

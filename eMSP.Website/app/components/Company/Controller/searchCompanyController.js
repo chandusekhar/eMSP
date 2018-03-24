@@ -1,6 +1,6 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-.controller('searchCompanyController', searchCompanyController)
+    .controller('searchCompanyController', searchCompanyController)
 function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster) {// APP_CONSTANTS, apiCall
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -18,11 +18,11 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, $scope.dataJSON);
         apires.then(function (data) {
             $scope.res = data;
-            localStorageService.set('editCompanyData', data);            
+            localStorageService.set('editCompanyData', data);
             $scope.loadLocations($scope.res.id);
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
-            
+
             if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
                 $scope.loadCandidates($scope.res.id);
                 $scope.loadJobs();
@@ -31,7 +31,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     } else {
         $scope.dataJSON.companyName = "%";
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.dataJSON);
-        res.then(function (data) {            
+        res.then(function (data) {
             $scope.searchResults = data;
         });
     }
@@ -44,8 +44,8 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
 
     //Function to load Locations
-    $scope.loadLocations = function (compId) {        
-        var apires = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETALLLOCATIONSURL +"?$filter=isDeleted eq false", { companyType: $scope.dataJSON.companyType, companyId: compId });
+    $scope.loadLocations = function (compId) {
+        var apires = apiCall.post(APP_CONSTANTS.URL.LOCATION.GETALLLOCATIONSURL + "?$filter=isDeleted eq false", { companyType: $scope.dataJSON.companyType, companyId: compId });
         apires.then(function (data) {
             $scope.resLocations = data;
         });
@@ -54,7 +54,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     //Function to load Branch by location
     $scope.loadBranches = function (location) {
         $scope.refData.locationData = location;
-        var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHEBYLOCATIONSURL, { locationId: $scope.refData.locationData.id });
+        var apires = apiCall.post(APP_CONSTANTS.URL.BRANCH.GETALLBRANCHEBYLOCATIONSURL, { locationId: $scope.refData.locationData.locationId });
         apires.then(function (data) {
             $scope.toggleBranches = true;
             $scope.resBranches = data;
@@ -70,9 +70,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     //Function to load supplier jobs
-    $scope.loadJobs = function () {        
+    $scope.loadJobs = function () {
         var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
-        apires.then(function (data) {            
+        apires.then(function (data) {
             $scope.resVacancie = data;
         });
     }
@@ -81,10 +81,10 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.swithLocation = function () {
         $scope.toggleBranches = false;
     }
-    
-    $scope.loadUsers = function (compId) {    
+
+    $scope.loadUsers = function (compId) {
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.dataJSON.companyType, id: compId });
-        apires.then(function (data) {            
+        apires.then(function (data) {
             $scope.resUsers = data;
         });
     }
@@ -97,15 +97,15 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
     }
     $scope.view = function (data) {
-       
+
         if (data) {
             $scope.IsMSP = true;
             $scope.res = data;
             localStorageService.set('editCompanyData', data);
-            
+
             $scope.loadLocations(data.id);
             $scope.loadUsers(data.id);
-            
+
             $scope.dataJSON.id = data.id;
             if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
                 localStorageService.set('supplierId', data.id);
@@ -128,10 +128,10 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         if (model) {
             $scope.editform = true;
             $scope.udataJSON = model.user;
-            $scope.formAction = "Update"; 
+            $scope.formAction = "Update";
         }
         else {
-            $scope.formAction = "Create"; 
+            $scope.formAction = "Create";
             $scope.editform = false;
             $scope.udataJSON.companyId = $scope.res.id;
             $scope.udataJSON.companyType = $scope.res.companyType;
@@ -149,15 +149,15 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.modelL = function (model) {
         $scope.ldataJSON = {};
         if (model) {
-            $scope.editform = true;            
-            $scope.ldataJSON = model;            
+            $scope.editform = true;
+            $scope.ldataJSON = model;
         }
         else {
-            $scope.editform = false;            
+            $scope.editform = false;
             $scope.ldataJSON.companyId = $scope.res.id;
             $scope.ldataJSON.companyType = $scope.res.companyType;
             $scope.ldataJSON.companyName = $scope.res.companyName;
-        }        
+        }
 
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/location-branch/view/manageLocation.html',
@@ -168,15 +168,19 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.modalB = function (model) {
-        
         $scope.editform = false;
-
         $scope.bdataJSON = {};
+        if (model.branchId == null) {
+            $scope.bdataJSON.locationId = model.id;
+            $scope.bdataJSON.locationName = model.locationName;
+        } else {
+            $scope.editform = true;
+            $scope.bdataJSON = model;
+        }
+
         $scope.bdataJSON.companyId = $scope.res.id;
         $scope.bdataJSON.companyType = $scope.res.companyType;
         $scope.bdataJSON.companyName = $scope.res.companyName;
-        $scope.bdataJSON.locationId = model.id;
-        $scope.bdataJSON.locationName = model.locationName;
 
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/location-branch/view/manageBranch.html',
@@ -188,8 +192,6 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
 
     $scope.AddCandidate = function (model) {
 
-       
-
         $scope.csdataJSON = {};
 
         if (model.VacancyId) {
@@ -199,9 +201,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         else {
             $scope.editform = false;
             $scope.csdataJSON.VacancyId = model.Vacancy.id;
-            
-        }    
-      
+        }
 
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/candidate/view/candidateSubmission.html',
@@ -242,7 +242,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.FixAppointment = function (model) {
-        debugger;
+
         localStorageService.set('vacancyData', model);
         $state.go($scope.configJSON.fixAppointment);
     }
@@ -252,20 +252,20 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         model.companyType = $scope.res.companyType;
         model.companyName = $scope.res.companyName;
         $scope.modelU(model);
-    }   
+    }
 
     $scope.updateLocation = function (model) {
         model.companyId = $scope.res.id;
         model.companyType = $scope.res.companyType;
         model.companyName = $scope.res.companyName;
         $scope.modelL(model);
-    }    
+    }
 
     $scope.updateBranch = function (model) {
         $scope.modalB(model);
     }
 
-    $scope.ctoggleActive = function (model, isDelete) {
+    $scope.ctoggleActive = function (model) {
         var res = apiCall.post(APP_CONSTANTS.URL.USER.UPDATECOMPANYUSER, model);
         res.then(function (data) {
             toaster.warning({ body: "Completed Successfully." });
@@ -292,13 +292,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         model.companyType = $scope.res.companyType;
         model.companyName = $scope.res.companyName;
         var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.DELETELOCATIONURL, model);
-        res.then(function (data) {            
+        res.then(function (data) {
             alert("Location Removed Successfully");
             $state.reload();
         });
     }
 
-    $scope.editCanditate = function (candidate) {        
+    $scope.editCanditate = function (candidate) {
         localStorageService.set('editCandidateData', candidate);
         $state.go("candidate.edit");
     }

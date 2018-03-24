@@ -18,7 +18,7 @@ namespace eMSP.Data.Extensions
                 Comment = data.comment,
                 ShowToAll = data.showToAll,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted ?? false,
+                IsDeleted = data.isDeleted,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
@@ -38,21 +38,22 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                commentUser = data.tblCommentUsers?.Select(x => x.ConvertToCommentUsers()).ToList()
             };
         }
 
-        public static tblCommentUser ConvertTotblCommentUser(this CommentUsersCreateModel data)
+        public static tblCommentUser ConvertTotblCommentUser(this CommentUsersModel data)
         {
             return new tblCommentUser()
             {
                 ID = Convert.ToInt64(data.id),
                 CommentID = data.commentId,
                 UserID = data.userId,
-                IsRead = data.isRead,
+                IsRead = data.isRead ?? false,
                 ReadBy = data.readBy,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted ?? false,
+                IsDeleted = data.isDeleted,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
@@ -60,13 +61,14 @@ namespace eMSP.Data.Extensions
             };
         }
 
-        public static CommentUsersCreateModel ConvertToCommentUsers(this tblCommentUser data)
+        public static CommentUsersModel ConvertToCommentUsers(this tblCommentUser data)
         {
-            return new CommentUsersCreateModel()
+            return new CommentUsersModel()
             {
                 id = data.ID,
                 commentId = data.CommentID,
                 userId = data.UserID,
+                //user = data.tblUserProfile?.ConvertToUser(),
                 isRead = data.IsRead,
                 readBy = data.ReadBy,
                 isActive = data.IsActive,

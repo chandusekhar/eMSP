@@ -109,7 +109,8 @@ angular.module('eMSPApp')
             },
             ACCOUNT: {
                 CHANGEPASSWORD: "api/Account/ChangePassword",
-                RESETPASSWORD: "api/Account/SetPassword"
+                RESETPASSWORD: "api/Account/SetPassword",
+                FORGOTPASSWORD: "api/Account/ForgotPassword?Email="
             }
         }
     });

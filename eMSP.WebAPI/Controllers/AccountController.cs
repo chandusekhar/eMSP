@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using eMSP.WebAPI.Models;
 using eMSP.WebAPI.Providers;
 using eMSP.WebAPI.Results;
+using System.Configuration;
+using eMSP.WebAPI.Utility;
 
 namespace eMSP.WebAPI.Controllers
 {
@@ -134,7 +136,45 @@ namespace eMSP.WebAPI.Controllers
             return Ok();
         }
 
+        // POST api/Account/Forgot Password
+        [AllowAnonymous]
+        [Route("ForgotPassword")]
+        public async Task<IHttpActionResult> ForgotPassword(string Email)
+        {
+            if (!String.IsNullOrEmpty(Email))
+            {
+                var user = await UserManager.FindByNameAsync(Email);
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return BadRequest("The email is not associated with any account.");
+                }
+
+
+                var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+                var encodedId = HttpUtility.HtmlEncode(user.Id);
+                var encodedCode = HttpUtility.HtmlEncode(code);
+                //IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, code, "Test@123");
+
+                //    var callbackUrl = String.Format(ConfigurationManager.AppSettings["Password_Reset_Link"], user.Id,code); 
+
+                //    await UserManager.SendEmailAsync(user.Id, "Reset Password",
+                //"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+
+                IMembershipService ams = new AccountMembershipService();
+
+                ams.SendVerification(encodedId, Email, encodedCode, SupportMailType.ResetPassword);
+
+                return Ok("Success");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest("The email is required."); ;
+        }
+
         // POST api/Account/SetPassword
+        [AllowAnonymous]
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
@@ -142,11 +182,21 @@ namespace eMSP.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            string code = model.code.Replace(" ", String.Empty);
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            var decodedCode = HttpUtility.HtmlDecode(code);
+            var decodedId = HttpUtility.HtmlDecode(model.UserId.Trim());
+
+            IdentityResult result = await UserManager.ResetPasswordAsync(decodedId, decodedCode, model.NewPassword);
 
             if (!result.Succeeded)
             {
+                //result = await UserManager.AddPasswordAsync(model.UserId, model.NewPassword);
+
+                //if (!result.Succeeded)
+                //{
+                //    return GetErrorResult(result);
+                //}
                 return GetErrorResult(result);
             }
 

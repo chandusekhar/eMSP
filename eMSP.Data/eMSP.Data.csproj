@@ -76,6 +76,8 @@
     <Compile Include="DataServices\LocationBranch\LocationBranchManager.cs" />
     <Compile Include="DataServices\LocationBranch\Location\ManageLocation.cs" />
     <Compile Include="DataServices\MSP\ManageMSP.cs" />
+    <Compile Include="DataServices\Roles\ManageRole.cs" />
+    <Compile Include="DataServices\Roles\RoleManager.cs" />
     <Compile Include="DataServices\Shared\CountryManager.cs" />
     <Compile Include="DataServices\Shared\Country\ManageCountry.cs" />
     <Compile Include="DataServices\Shared\Industry_SkillsManager.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Extensions\CountryExtensions.cs" />
     <Compile Include="Extensions\Industry_SkillsExtentions.cs" />
     <Compile Include="Extensions\LocationBranchExtensions.cs" />
+    <Compile Include="Extensions\RoleExtensions.cs" />
     <Compile Include="Extensions\StateExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Extensions\VacanciesExtensions.cs" />

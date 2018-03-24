@@ -31,6 +31,7 @@ namespace eMSP.DataModel
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
+        public decimal BillRate { get; set; }
     
         public virtual tblCandidate tblCandidate { get; set; }
         public virtual tblCandidateStatu tblCandidateStatu { get; set; }

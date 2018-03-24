@@ -47,14 +47,14 @@ namespace eMSP.Data.DataServices.Users
                 {
                     case "MSP":
 
-                        List<tblMSPUser> mdata = await Task.Run(() => UserOperations.GetAllMSPUsers(Convert.ToInt64(model.id))); 
-                            return mdata.Select(a => a.ConvertToUserModel()).ToList();
+                        List<tblMSPUser> mdata = await Task.Run(() => UserOperations.GetAllMSPUsers(Convert.ToInt64(model.id)));
+                        return mdata.Select(a => a.ConvertToUserModel()).ToList();
 
                     case "Customer":
 
-                        List<tblCustomerUser> cdata = await Task.Run(() => UserOperations.GetAllCustomerUsers(Convert.ToInt64(model.id))); 
-                            return cdata.Select(a => a.ConvertToUserModel()).ToList();
-                        
+                        List<tblCustomerUser> cdata = await Task.Run(() => UserOperations.GetAllCustomerUsers(Convert.ToInt64(model.id)));
+                        return cdata.Select(a => a.ConvertToUserModel()).ToList();
+
                     case "Supplier":
 
                         List<tblSupplierUser> sdata = await Task.Run(() => UserOperations.GetAllSupplierUsers(Convert.ToInt64(model.id)));
@@ -90,12 +90,33 @@ namespace eMSP.Data.DataServices.Users
 
         #region Insert
 
-        public async Task<UserCreateModel> CreateUser(UserCreateModel model)
+        public async Task<UserModel> CreateUser(UserCreateModel model)
         {
             try
             {
+                
                 tblUserProfile data = await Task.Run(() => UserOperations.InsertUser(model.ConvertTotblUser(), model.companyType, model.companyId));
-                return data.ConvertToUser();
+                switch (model.companyType)
+                {
+                    case "MSP":
+                    default:
+                        List<tblMSPUser> liMSP = await Task.Run(() => UserOperations.GetAllMSPUsers(model.companyId));
+                        return liMSP.SingleOrDefault(a => a.UserID == data.UserID).ConvertToUserModel();
+                         
+                        break;
+                    case "Customer":
+                        List<tblCustomerUser> licust = await Task.Run(() => UserOperations.GetAllCustomerUsers(model.companyId));
+                        return licust.SingleOrDefault(a => a.UserID == data.UserID).ConvertToUserModel();
+                        break;
+                    case "Supplier":
+                        List<tblSupplierUser> lisup = await Task.Run(() => UserOperations.GetAllSupplierUsers(model.companyId));
+                        return lisup.SingleOrDefault(a => a.UserID == data.UserID).ConvertToUserModel();
+                        break;
+
+
+                }
+
+                
 
             }
             catch (Exception)
@@ -173,7 +194,7 @@ namespace eMSP.Data.DataServices.Users
             }
         }
 
-     
+
 
         #endregion
 

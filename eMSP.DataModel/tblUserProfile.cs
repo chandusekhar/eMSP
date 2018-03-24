@@ -57,5 +57,6 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierUser> tblSupplierUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
+        public virtual AspNetRoleGroup AspNetRoleGroup { get; set; }
     }
 }

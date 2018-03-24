@@ -9,6 +9,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
     $scope.edit = $scope.formAction == "Update" ? true : false;
     $scope.refData.countryList = $scope.$parent.refData.countryList;
     $scope.dataJSON.userProfilePhotoPath = "";
+    $scope.error = "";
     $scope.cropped = {
         source: 'https://raw.githubusercontent.com/Foliotek/Croppie/master/demo/demo-1.jpg'
     };
@@ -43,6 +44,11 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                 res.then(function (data) {
                     $scope.udataJSON = data;
                     toaster.warning({ body: "Data Updated Successfully." });
+                    $uibModalInstance.close();
+
+                }).error(function (err) {
+                    $scope.error = err;
+                    toaster.error({ body: err });
                 });
             }
             else {
@@ -50,11 +56,14 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                 res.then(function (data) {
                     $scope.udataJSON = data;
                     toaster.warning({ body: "Data Created Successfully." });
-                    $state.reload();                    
-                    //$scope.resUsers.push(data);
+                    //$state.reload();                    
+                    $scope.$parent.resUsers.push(data);
+                    $uibModalInstance.close();
+                }).catch(function (err) {
+                    $scope.error = err.data;
+                    toaster.error({ body: "Some Error occured." });
                 });
             }
-            $uibModalInstance.close();
         }
     }
 

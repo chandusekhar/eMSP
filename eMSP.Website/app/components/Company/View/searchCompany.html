@@ -60,12 +60,10 @@
                                     Branch is required
                                 </span>
                             </div>
-                            <div>
-                                <button type="submit" ng-click="search()" class="btn btn-primary">Search</button>
-                                &nbsp;&nbsp;
+                            <div>                               
                                 <a class="btn btn-primary center" ui-sref="{{configJSON.createUrl}}">Add</a>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-primary btn-white center" ui-sref="dashboard">Cancel</a>
+                                <a class="btn btn-primary btn-white center" ui-sref="dashboard">clear</a>
                             </div>
 
                         </form>
@@ -174,7 +172,7 @@
                                                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="loc in resUsers">
                                                                 <div class="contact-box">
                                                                     <a ui-sref="profile">
-                                                                        <div class="col-sm-4">
+                                                                        <div class="col-sm-5">
                                                                             <div class="text-center">
                                                                                 <!--<img ng-if="loc.user.userProfilePhotoPath!=''" alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg">-->
                                                                                 <!--<div class="m-t-xs font-bold">Graphics designer</div>-->
@@ -186,8 +184,8 @@
                                                                                 <div class="m-t-xs font-bold">{{loc.user.firstName + " " +loc.user.lastName}}</div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-sm-8">
-                                                                            <h3><strong>{{loc.user.firstName + " " +loc.user.lastName}}</strong></h3>
+                                                                        <div class="col-sm-7">
+                                                                            
                                                                             <p><i class="fa fa-envelope"></i> {{loc.user.emailAddress}}</p>
                                                                             <address>
                                                                                 {{loc.user.address}}<br />
@@ -201,11 +199,15 @@
                                                                                 <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                                                        ng-change="ctoggleActive(loc)" ng-model="loc.isActive" />
                                                                             </div>
-                                                                            <div class="pull-right">
-                                                                                <p class="small inline" ng-if="loc.isDeleted">Deleted</p>
-                                                                                <p class="small inline" ng-if="!loc.isDeleted">Deleted</p>
-                                                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                                                       ng-change="ctoggleActive(loc)" ng-model="loc.isDeleted" />
+                                                                            <div class="btn-group-xs ">
+
+                                                                                <span style="margin-left:10px" ng-click="updateUser(loc)" class="text-navy">
+                                                                                    <span class="fa fa-pencil"></span>
+                                                                                </span>
+                                                                                <!--<span ng-click="deleteCandidate(loc)" class="btn btn-danger">
+                                                                                    <span class="fa fa-trash"></span>
+                                                                                </span>-->
+
                                                                             </div>
                                                                         </div>
                                                                         <div class="clearfix"></div>

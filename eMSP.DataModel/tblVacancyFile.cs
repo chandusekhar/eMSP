@@ -16,8 +16,7 @@ namespace eMSP.DataModel
     {
         public long ID { get; set; }
         public long VacancyID { get; set; }
-        public long FileID { get; set; }
-        public short FileVersionNumber { get; set; }
+        public string FileName { get; set; }
         public string FilePath { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
@@ -26,7 +25,6 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblFile tblFile { get; set; }
         public virtual tblVacancy tblVacancy { get; set; }
     }
 }

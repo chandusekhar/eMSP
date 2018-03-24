@@ -237,6 +237,7 @@
           <Property Name="VacancyID" Type="bigint" Nullable="false" />
           <Property Name="CandidateID" Type="bigint" Nullable="false" />
           <Property Name="StatusID" Type="bigint" Nullable="false" />
+          <Property Name="BillRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -756,10 +757,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VacancyID" Type="bigint" Nullable="false" />
-          <Property Name="FileID" Type="bigint" Nullable="false" />
-          <Property Name="FileVersionNumber" Type="smallint" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
@@ -1621,6 +1621,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUserProfile_AspNetRoleGroups">
+          <End Role="AspNetRoleGroups" Type="Self.AspNetRoleGroups" Multiplicity="1" />
+          <End Role="tblUserProfile" Type="Self.tblUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoleGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserProfile">
+              <PropertyRef Name="RoleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUserProfile_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="tblUserProfile" Type="Self.tblUserProfile" Multiplicity="0..1" />
@@ -1726,18 +1738,6 @@
             </Principal>
             <Dependent Role="tblVacancyComments">
               <PropertyRef Name="VacancyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblVacancyFiles_tblFiles">
-          <End Role="tblFiles" Type="Self.tblFiles" Multiplicity="1" />
-          <End Role="tblVacancyFiles" Type="Self.tblVacancyFiles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblFiles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblVacancyFiles">
-              <PropertyRef Name="FileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2159,6 +2159,10 @@
             <End Role="tblUserProfile" EntitySet="tblUserProfile" />
             <End Role="tblUserLocationBranches" EntitySet="tblUserLocationBranches" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblUserProfile_AspNetRoleGroups" Association="Self.FK_tblUserProfile_AspNetRoleGroups">
+            <End Role="AspNetRoleGroups" EntitySet="AspNetRoleGroups" />
+            <End Role="tblUserProfile" EntitySet="tblUserProfile" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblUserProfile_AspNetUsers" Association="Self.FK_tblUserProfile_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="tblUserProfile" EntitySet="tblUserProfile" />
@@ -2194,10 +2198,6 @@
           <AssociationSet Name="FK_tblVacancyComments_tblVacancies" Association="Self.FK_tblVacancyComments_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
             <End Role="tblVacancyComments" EntitySet="tblVacancyComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblVacancyFiles_tblFiles" Association="Self.FK_tblVacancyFiles_tblFiles">
-            <End Role="tblFiles" EntitySet="tblFiles" />
-            <End Role="tblVacancyFiles" EntitySet="tblVacancyFiles" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVacancyFiles_tblVacancies" Association="Self.FK_tblVacancyFiles_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
@@ -2248,6 +2248,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblUserProfiles" Relationship="eMSPModel.FK_tblUserProfile_AspNetRoleGroups" FromRole="AspNetRoleGroup" ToRole="tblUserProfile" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -2464,6 +2465,7 @@
           <NavigationProperty Name="tblVacancy" Relationship="Self.FK_tblCandidateSubmission_tblVacancies" FromRole="tblCandidateSubmission" ToRole="tblVacancies" />
           <NavigationProperty Name="tblCandidateSubmissionAppointments" Relationship="Self.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" FromRole="tblCandidateSubmission" ToRole="tblCandidateSubmissionAppointments" />
           <NavigationProperty Name="tblCandidateSubmissionComments" Relationship="Self.FK_tblCandidateSubmissionComments_tblCandidateSubmission" FromRole="tblCandidateSubmission" ToRole="tblCandidateSubmissionComments" />
+          <Property Name="BillRate" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionAppointment">
           <Key>
@@ -2735,7 +2737,6 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidateFiles" Relationship="Self.FK_tblCandidateFiles_tblFiles" FromRole="tblFiles" ToRole="tblCandidateFiles" />
-          <NavigationProperty Name="tblVacancyFiles" Relationship="Self.FK_tblVacancyFiles_tblFiles" FromRole="tblFiles" ToRole="tblVacancyFiles" />
         </EntityType>
         <EntityType Name="tblFileType">
           <Key>
@@ -3009,6 +3010,7 @@
           <NavigationProperty Name="tblMSPUsers" Relationship="Self.FK_tblMSPUsers_tblUserProfile" FromRole="tblUserProfile" ToRole="tblMSPUsers" />
           <NavigationProperty Name="tblSupplierUsers" Relationship="Self.FK_tblSupplierUsers_tblUserProfile" FromRole="tblUserProfile" ToRole="tblSupplierUsers" />
           <NavigationProperty Name="tblUserLocationBranches" Relationship="Self.FK_tblUserLocationBranches_tblUserProfile" FromRole="tblUserProfile" ToRole="tblUserLocationBranches" />
+          <NavigationProperty Name="AspNetRoleGroup" Relationship="eMSPModel.FK_tblUserProfile_AspNetRoleGroups" FromRole="tblUserProfile" ToRole="AspNetRoleGroup" />
         </EntityType>
         <EntityType Name="tblVacancy">
           <Key>
@@ -3041,9 +3043,9 @@
           <NavigationProperty Name="tblMSPVacancieType" Relationship="Self.FK_tblVacancies_tblMSPVacancieTypes" FromRole="tblVacancies" ToRole="tblMSPVacancieTypes" />
           <NavigationProperty Name="tblVacancieSkills" Relationship="Self.FK_tblVacancieSkills_tblVacancies" FromRole="tblVacancies" ToRole="tblVacancieSkills" />
           <NavigationProperty Name="tblVacancyComments" Relationship="Self.FK_tblVacancyComments_tblVacancies" FromRole="tblVacancies" ToRole="tblVacancyComments" />
-          <NavigationProperty Name="tblVacancyFiles" Relationship="Self.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancies" ToRole="tblVacancyFiles" />
           <NavigationProperty Name="tblVacancyLocations" Relationship="Self.FK_tblVacancyLocations_tblVacancies" FromRole="tblVacancies" ToRole="tblVacancyLocations" />
           <NavigationProperty Name="tblVacancySuppliers" Relationship="Self.FK_tblVacancySuppliers_tblVacancies" FromRole="tblVacancies" ToRole="tblVacancySuppliers" />
+          <NavigationProperty Name="tblVacancyFiles" Relationship="eMSPModel.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancy" ToRole="tblVacancyFile" />
         </EntityType>
         <EntityType Name="tblVacancieSkill">
           <Key>
@@ -3076,24 +3078,6 @@
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblComment" Relationship="Self.FK_tblVacancyComments_tblComments" FromRole="tblVacancyComments" ToRole="tblComments" />
           <NavigationProperty Name="tblVacancy" Relationship="Self.FK_tblVacancyComments_tblVacancies" FromRole="tblVacancyComments" ToRole="tblVacancies" />
-        </EntityType>
-        <EntityType Name="tblVacancyFile">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="VacancyID" Type="Int64" Nullable="false" />
-          <Property Name="FileID" Type="Int64" Nullable="false" />
-          <Property Name="FileVersionNumber" Type="Int16" Nullable="false" />
-          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblFile" Relationship="Self.FK_tblVacancyFiles_tblFiles" FromRole="tblVacancyFiles" ToRole="tblFiles" />
-          <NavigationProperty Name="tblVacancy" Relationship="Self.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancyFiles" ToRole="tblVacancies" />
         </EntityType>
         <EntityType Name="tblVacancyLocation">
           <Key>
@@ -3696,18 +3680,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblVacancyFiles_tblFiles">
-          <End Role="tblFiles" Type="Self.tblFile" Multiplicity="1" />
-          <End Role="tblVacancyFiles" Type="Self.tblVacancyFile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblFiles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblVacancyFiles">
-              <PropertyRef Name="FileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblFileTypes_tblMSPDetails">
           <End Role="tblMSPDetails" Type="Self.tblMSPDetail" Multiplicity="1" />
           <End Role="tblFileTypes" Type="Self.tblFileType" Multiplicity="*" />
@@ -3936,18 +3908,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblVacancyFiles_tblVacancies">
-          <End Role="tblVacancies" Type="Self.tblVacancy" Multiplicity="1" />
-          <End Role="tblVacancyFiles" Type="Self.tblVacancyFile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblVacancies">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblVacancyFiles">
-              <PropertyRef Name="VacancyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblVacancyLocations_tblVacancies">
           <End Role="tblVacancies" Type="Self.tblVacancy" Multiplicity="1" />
           <End Role="tblVacancyLocations" Type="Self.tblVacancyLocation" Multiplicity="*" />
@@ -4025,7 +3985,6 @@
           <EntitySet Name="tblVacancies" EntityType="Self.tblVacancy" />
           <EntitySet Name="tblVacancieSkills" EntityType="Self.tblVacancieSkill" />
           <EntitySet Name="tblVacancyComments" EntityType="Self.tblVacancyComment" />
-          <EntitySet Name="tblVacancyFiles" EntityType="Self.tblVacancyFile" />
           <EntitySet Name="tblVacancyLocations" EntityType="Self.tblVacancyLocation" />
           <EntitySet Name="tblVacancySuppliers" EntityType="Self.tblVacancySupplier" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -4216,10 +4175,6 @@
             <End Role="tblUserProfile" EntitySet="tblUserProfiles" />
             <End Role="tblCustomerUsers" EntitySet="tblCustomerUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblVacancyFiles_tblFiles" Association="Self.FK_tblVacancyFiles_tblFiles">
-            <End Role="tblFiles" EntitySet="tblFiles" />
-            <End Role="tblVacancyFiles" EntitySet="tblVacancyFiles" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblFileTypes_tblMSPDetails" Association="Self.FK_tblFileTypes_tblMSPDetails">
             <End Role="tblMSPDetails" EntitySet="tblMSPDetails" />
             <End Role="tblFileTypes" EntitySet="tblFileTypes" />
@@ -4295,10 +4250,6 @@
           <AssociationSet Name="FK_tblVacancyComments_tblVacancies" Association="Self.FK_tblVacancyComments_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
             <End Role="tblVacancyComments" EntitySet="tblVacancyComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblVacancyFiles_tblVacancies" Association="Self.FK_tblVacancyFiles_tblVacancies">
-            <End Role="tblVacancies" EntitySet="tblVacancies" />
-            <End Role="tblVacancyFiles" EntitySet="tblVacancyFiles" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVacancyLocations_tblVacancies" Association="Self.FK_tblVacancyLocations_tblVacancies">
             <End Role="tblVacancies" EntitySet="tblVacancies" />
@@ -4387,6 +4338,15 @@
           <AssociationSet Name="FK_tblContacts_tblCountryStates" Association="eMSPModel.FK_tblContacts_tblCountryStates">
             <End Role="tblCountryState" EntitySet="tblCountryStates" />
             <End Role="tblContact" EntitySet="tblContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserProfile_AspNetRoleGroups" Association="eMSPModel.FK_tblUserProfile_AspNetRoleGroups">
+            <End Role="AspNetRoleGroup" EntitySet="AspNetRoleGroups" />
+            <End Role="tblUserProfile" EntitySet="tblUserProfiles" />
+          </AssociationSet>
+          <EntitySet Name="tblVacancyFiles" EntityType="eMSPModel.tblVacancyFile" />
+          <AssociationSet Name="FK_tblVacancyFiles_tblVacancies" Association="eMSPModel.FK_tblVacancyFiles_tblVacancies">
+            <End Role="tblVacancy" EntitySet="tblVacancies" />
+            <End Role="tblVacancyFile" EntitySet="tblVacancyFiles" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -4573,6 +4533,46 @@
             </Principal>
             <Dependent Role="tblContact">
               <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserProfile_AspNetRoleGroups">
+          <End Type="eMSPModel.AspNetRoleGroup" Role="AspNetRoleGroup" Multiplicity="1" />
+          <End Type="eMSPModel.tblUserProfile" Role="tblUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoleGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserProfile">
+              <PropertyRef Name="RoleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblVacancyFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VacancyID" Type="Int64" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblVacancy" Relationship="eMSPModel.FK_tblVacancyFiles_tblVacancies" FromRole="tblVacancyFile" ToRole="tblVacancy" />
+        </EntityType>
+        <Association Name="FK_tblVacancyFiles_tblVacancies">
+          <End Type="eMSPModel.tblVacancy" Role="tblVacancy" Multiplicity="1" />
+          <End Type="eMSPModel.tblVacancyFile" Role="tblVacancyFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVacancy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblVacancyFile">
+              <PropertyRef Name="VacancyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4792,6 +4792,7 @@
           <EntitySetMapping Name="tblCandidateSubmissions">
             <EntityTypeMapping TypeName="eMSPModel.tblCandidateSubmission">
               <MappingFragment StoreEntitySet="tblCandidateSubmission">
+                <ScalarProperty Name="BillRate" ColumnName="BillRate" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
                 <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
@@ -5330,23 +5331,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblVacancyFiles">
-            <EntityTypeMapping TypeName="eMSPModel.tblVacancyFile">
-              <MappingFragment StoreEntitySet="tblVacancyFiles">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
-                <ScalarProperty Name="FileID" ColumnName="FileID" />
-                <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
-                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
-                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
-                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblVacancyLocations">
             <EntityTypeMapping TypeName="eMSPModel.tblVacancyLocation">
               <MappingFragment StoreEntitySet="tblVacancyLocations">
@@ -5443,6 +5427,22 @@
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="BranchName" ColumnName="BranchName" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVacancyFiles">
+            <EntityTypeMapping TypeName="eMSPModel.tblVacancyFile">
+              <MappingFragment StoreEntitySet="tblVacancyFiles">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="VacancyID" ColumnName="VacancyID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

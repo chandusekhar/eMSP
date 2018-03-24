@@ -75,11 +75,11 @@ namespace eMSP.DataModel
         public virtual DbSet<tblVacancy> tblVacancies { get; set; }
         public virtual DbSet<tblVacancieSkill> tblVacancieSkills { get; set; }
         public virtual DbSet<tblVacancyComment> tblVacancyComments { get; set; }
-        public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
         public virtual DbSet<tblVacancyLocation> tblVacancyLocations { get; set; }
         public virtual DbSet<tblVacancySupplier> tblVacancySuppliers { get; set; }
         public virtual DbSet<tblSupplierCandidate> tblSupplierCandidates { get; set; }
         public virtual DbSet<tblBranch> tblBranches { get; set; }
+        public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -48,18 +48,18 @@
     <Compile Include="Enum\CompanyType.cs" />
     <Compile Include="Files\FilesModel.cs" />
     <Compile Include="JobVacancies\MSPVacancieType.cs" />
-    <Compile Include="JobVacancies\VacancieSkillModel.cs" />
     <Compile Include="JobVacancies\VacancyCommentModel.cs" />
-    <Compile Include="JobVacancies\VacancyFileModel.cs" />
-    <Compile Include="JobVacancies\VacancyLocationModel.cs" />
     <Compile Include="JobVacancies\VacancyModel.cs" />
-    <Compile Include="JobVacancies\VacancySupplierModel.cs" />
     <Compile Include="LocationBranch\BranchModel.cs" />
     <Compile Include="LocationBranch\LocationBranchCommonModel.cs" />
     <Compile Include="LocationBranch\LocationBranchUIModel.cs" />
     <Compile Include="LocationBranch\LocationModel.cs" />
     <Compile Include="MSP\MSPDetailsUIModel.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\RoleModel.cs" />
     <Compile Include="Shared\BaseModel.cs" />
     <Compile Include="Shared\CountryModel.cs" />
     <Compile Include="Shared\IndustryModel.cs" />
@@ -72,6 +72,9 @@
       <Project>{a4420703-6080-4e1a-940c-668d33a69d44}</Project>
       <Name>eMSP.DataModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Release\CoreCompileInputs.cache" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

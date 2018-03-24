@@ -34,6 +34,13 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
         <div class="row">
+            <div ng-show="error != ''" class="text-danger">
+                {{error.Message}}
+                
+                <ul ng-if="error.ModelState && error.ModelState['errors']">
+                    <li ng-repeat='er in error.ModelState["errors"]'>{{er}}</li>
+                </ul>
+            </div>
             <form class="m-t" name="form" novalidate>
                 <div class="form-group col-md-12">
                     <label>Company Logo * :</label>

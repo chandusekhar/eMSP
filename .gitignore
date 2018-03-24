@@ -229,3 +229,5 @@ ModelManifest.xml
 /eMSP.DataModel/tblVacancyComment.cs
 /eMSP.DataModel/tblVacancyFile.cs
 /eMSP.DataModel/tblVacancyLocation.cs
+/eMSP.WebAPI/App_Data/Uploads
+/eMSP.Website/img/imageFileName.png

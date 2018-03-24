@@ -18,7 +18,6 @@ namespace eMSP.DataModel
         public tblFile()
         {
             this.tblCandidateFiles = new HashSet<tblCandidateFile>();
-            this.tblVacancyFiles = new HashSet<tblVacancyFile>();
         }
     
         public long ID { get; set; }
@@ -34,7 +33,5 @@ namespace eMSP.DataModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateFile> tblCandidateFiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblVacancyFile> tblVacancyFiles { get; set; }
     }
 }

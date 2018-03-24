@@ -20,9 +20,9 @@ namespace eMSP.DataModel
             this.tblCandidateSubmissions = new HashSet<tblCandidateSubmission>();
             this.tblVacancieSkills = new HashSet<tblVacancieSkill>();
             this.tblVacancyComments = new HashSet<tblVacancyComment>();
-            this.tblVacancyFiles = new HashSet<tblVacancyFile>();
             this.tblVacancyLocations = new HashSet<tblVacancyLocation>();
             this.tblVacancySuppliers = new HashSet<tblVacancySupplier>();
+            this.tblVacancyFiles = new HashSet<tblVacancyFile>();
         }
     
         public long ID { get; set; }
@@ -57,10 +57,10 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancyComment> tblVacancyComments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblVacancyFile> tblVacancyFiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancyLocation> tblVacancyLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancySupplier> tblVacancySuppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblVacancyFile> tblVacancyFiles { get; set; }
     }
 }

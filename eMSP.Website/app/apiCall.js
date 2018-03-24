@@ -17,6 +17,7 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
         .error(function (error, status, x, y, z) {
             console.log('errror status: ', status);
             console.log('error object: ', error);
+            //return error;
         });
 
             

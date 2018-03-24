@@ -1,5 +1,5 @@
 ﻿using eMSP.Data.DataServices.MSP;
-using eMSP.ViewModel;
+using eMSP.ViewModel.MSP;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,19 +12,19 @@ using System.Web.Http.Description;
 
 namespace eMSP.WebAPI.Controllers.MSP
 {
-    [RoutePrefix("api/MSPQuestions")]
+    [RoutePrefix("api/MSPRequiredDocument")]
     [Queryable]
     [AllowAnonymous]
-    public class MSPQuestionController : ApiController
+    public class MSPRequiredDocumentController : ApiController
     {
         #region Intialisation
 
-        private ManageMSPQuestions Service;
+        private ManageMSPRequiredDocuments Service;
         string userId;
 
-        public MSPQuestionController()
+        public MSPRequiredDocumentController()
         {
-            Service = new ManageMSPQuestions();
+            Service = new ManageMSPRequiredDocuments();
         }
 
         #endregion
@@ -33,7 +33,7 @@ namespace eMSP.WebAPI.Controllers.MSP
 
         [Route("get")]
         [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
+        [ResponseType(typeof(RequiredDocumentViewModel))]
         public async Task<IHttpActionResult> Get()
         {
             try
@@ -49,8 +49,8 @@ namespace eMSP.WebAPI.Controllers.MSP
 
         [Route("save")]
         [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
-        public async Task<IHttpActionResult> Save(QuestionViewModel model)
+        [ResponseType(typeof(RequiredDocumentViewModel))]
+        public async Task<IHttpActionResult> Save(RequiredDocumentViewModel model)
         {
             try
             {
@@ -67,14 +67,14 @@ namespace eMSP.WebAPI.Controllers.MSP
 
         [Route("update")]
         [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
-        public async Task<IHttpActionResult> Update(long ID,QuestionViewModel model)
+        [ResponseType(typeof(RequiredDocumentViewModel))]
+        public async Task<IHttpActionResult> Update(long ID, RequiredDocumentViewModel model)
         {
             try
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "update", userId);
-                return Ok(await Service.Update(ID,model));
+                return Ok(await Service.Update(ID, model));
 
             }
             catch (Exception)
@@ -85,13 +85,13 @@ namespace eMSP.WebAPI.Controllers.MSP
 
         [Route("changestatus")]
         [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
+        [ResponseType(typeof(RequiredDocumentViewModel))]
         public async Task<IHttpActionResult> ChangeStatus(long ID, bool status)
         {
             try
             {
                 userId = User.Identity.GetUserId();
-                return Ok(await Service.ChangeStatus(ID, status,userId));
+                return Ok(await Service.ChangeStatus(ID, status, userId));
             }
             catch (Exception)
             {

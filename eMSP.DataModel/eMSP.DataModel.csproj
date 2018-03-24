@@ -94,9 +94,6 @@
     <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>eMSP.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblAppointmentStatu.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -142,6 +139,12 @@
     <Compile Include="tblCandidateSubmissionComment.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidateSubmissionDocumentRespons.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionsQuestionsRespons.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblComment.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -178,6 +181,9 @@
     <Compile Include="tblIndustrySkill.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblJobVacanciesStatu.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblLocation.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -188,6 +194,12 @@
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPLocationBranch.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPQuestion.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPRequiredDocument.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPUser.cs">
@@ -215,6 +227,12 @@
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblVacancieSkill.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacanciesQuestion.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblVacanciesRequiredDocument.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblVacancy.cs">

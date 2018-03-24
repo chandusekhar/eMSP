@@ -31,10 +31,10 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        public virtual tblBranch tblBranch { get; set; }
         public virtual tblCustomer tblCustomer { get; set; }
         public virtual tblLocation tblLocation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancyLocation> tblVacancyLocations { get; set; }
-        public virtual tblBranch tblBranch { get; set; }
     }
 }

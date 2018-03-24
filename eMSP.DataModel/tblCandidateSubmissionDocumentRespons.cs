@@ -12,12 +12,13 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMSPLocationBranch
+    public partial class tblCandidateSubmissionDocumentRespons
     {
         public long ID { get; set; }
-        public long MSPID { get; set; }
-        public long LocationID { get; set; }
-        public Nullable<long> BranchID { get; set; }
+        public long CandidateSubmissionID { get; set; }
+        public long VacancyRequiredDocumentID { get; set; }
+        public long CandidateFileID { get; set; }
+        public Nullable<long> CommentID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -25,8 +26,9 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblBranch tblBranch { get; set; }
-        public virtual tblLocation tblLocation { get; set; }
-        public virtual tblMSPDetail tblMSPDetail { get; set; }
+        public virtual tblCandidateFile tblCandidateFile { get; set; }
+        public virtual tblCandidateSubmission tblCandidateSubmission { get; set; }
+        public virtual tblComment tblComment { get; set; }
+        public virtual tblVacanciesRequiredDocument tblVacanciesRequiredDocument { get; set; }
     }
 }

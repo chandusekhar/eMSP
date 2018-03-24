@@ -17,13 +17,13 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCountryState()
         {
+            this.tblBranches = new HashSet<tblBranch>();
+            this.tblContacts = new HashSet<tblContact>();
             this.tblCustomers = new HashSet<tblCustomer>();
             this.tblLocations = new HashSet<tblLocation>();
             this.tblMSPDetails = new HashSet<tblMSPDetail>();
             this.tblSuppliers = new HashSet<tblSupplier>();
             this.tblUserProfiles = new HashSet<tblUserProfile>();
-            this.tblBranches = new HashSet<tblBranch>();
-            this.tblContacts = new HashSet<tblContact>();
         }
     
         public long ID { get; set; }
@@ -37,6 +37,10 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBranch> tblBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblContact> tblContacts { get; set; }
         public virtual tblCountry tblCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomer> tblCustomers { get; set; }
@@ -48,9 +52,5 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplier> tblSuppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserProfile> tblUserProfiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblBranch> tblBranches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblContact> tblContacts { get; set; }
     }
 }

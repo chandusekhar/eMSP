@@ -12,12 +12,18 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMSPLocationBranch
+    public partial class tblJobVacanciesStatu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblJobVacanciesStatu()
+        {
+            this.tblVacancies = new HashSet<tblVacancy>();
+        }
+    
         public long ID { get; set; }
-        public long MSPID { get; set; }
-        public long LocationID { get; set; }
-        public Nullable<long> BranchID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> IsDefault { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -25,8 +31,7 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblBranch tblBranch { get; set; }
-        public virtual tblLocation tblLocation { get; set; }
-        public virtual tblMSPDetail tblMSPDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblVacancy> tblVacancies { get; set; }
     }
 }

@@ -251,6 +251,7 @@
     <Compile Include="Controllers\LocationBranch\BranchController.cs" />
     <Compile Include="Controllers\LocationBranch\LocationController.cs" />
     <Compile Include="Controllers\MSP\MSPController.cs" />
+    <Compile Include="Controllers\MSP\MSPQuestionController.cs" />
     <Compile Include="Controllers\Roles\RolesController.cs" />
     <Compile Include="Controllers\Shared\CountryController.cs" />
     <Compile Include="Controllers\Shared\FileUploadController.cs" />
@@ -388,6 +389,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\FileUpload\" />
+    <Folder Include="Views\MSPQuestions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

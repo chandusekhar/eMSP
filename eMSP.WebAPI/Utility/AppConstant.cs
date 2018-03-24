@@ -21,6 +21,12 @@ namespace eMSP.WebAPI.Utility
             get { return filename; }
 
         }
+
+        public static string FileUploadPath
+        {
+            get { return ConfigurationManager.AppSettings["baseUploadPath"]; }
+
+        }
     }
 
 }

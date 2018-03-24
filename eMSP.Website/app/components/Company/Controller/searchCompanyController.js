@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('searchCompanyController', searchCompanyController)
-function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster) {// APP_CONSTANTS, apiCall
+function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster, ngAuthSettings) {// APP_CONSTANTS, apiCall
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
@@ -10,6 +10,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.IsMSP = false;
     $scope.refData.countryList = AppCoutries;
     $scope.refData.userViewType = "Card";
+    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
 
     if ($scope.configJSON.companyType === "MSP") {
         $scope.dataJSON.companyName = "";

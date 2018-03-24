@@ -104,6 +104,7 @@ namespace eMSP.Data.DataServices.MSP
                         obj.IsActive = data.isActive;
                         obj.UpdatedTimestamp = DateTime.UtcNow;
                         obj.UpdatedUserID = data.updatedUserID;
+                        obj.IsDeleted = data.isDeleted;
                     }
                     else
                     {

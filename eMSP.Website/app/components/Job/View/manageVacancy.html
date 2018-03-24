@@ -34,13 +34,15 @@
                             <div class="col-lg-12">
                                 <div class="m-b-md">
                                     <a ui-sref="{{configJSON.editUrl}}" class="btn btn-white btn-xs pull-right">Edit Job</a>
-                                    <h2>{{vacancyData.Vacancy.positionTitle}}</h2>
+                                    
+                                    <h2>{{vacancyData.Vacancy.customerName | uppercase | limitTo : 2}}000{{vacancyData.Vacancy.id}} - {{vacancyData.Vacancy.positionTitle}}</h2>
                                 </div>
                                 <dl class="dl-horizontal">
-                                    <dt>Status:</dt>
-                                    <dd>
-                                        <span class="label label-primary" ng-if="vacancyData.Vacancy.isActive">Active</span>
-                                        <span class="label label-danger" ng-if="!vacancyData.Vacancy.isActive">In-Active</span>
+                                    <dt>Active Status:</dt>
+                                    <dd>                                        
+                                        <span class="label m-b-n-lg" ng-class="{'label-primary' : vacancyData.Vacancy.isActive,'label-warning':!vacancyData.Vacancy.isActive}">
+                                            {{vacancyData.Vacancy.isActive?'Open':'Closed'}}
+                                        </span>
                                     </dd>
                                 </dl>
                             </div>

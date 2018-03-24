@@ -77,7 +77,14 @@ angular.module('eMSPApp')
                 ADDVACANCYSUPPLIER: "api/JobVacancie/addVacancySupplier",
                 GETVACANCYSUPPLIER: "api/JobVacancie/getVacancySupplier?id=",
                 UPDATEVACANCYSUPPLIER: "api/JobVacancie/updateVacancySupplier",
-                ADDVACANCYCOMMENT: "api/JobVacancie/commentVacancy"
+                ADDVACANCYCOMMENT: "api/JobVacancie/commentVacancy",
+                GETVACANCYCOMMENT: "api/JobVacancie/getVacancyComments?id=",
+                GETVACANCYQUESTIONS: "api/MSPQuestions/get",
+                CREATEVACANCYQUESTIONS: "api/MSPQuestions/save",
+                UPDATECANCYQUESTIONS: "api/MSPQuestions/update",
+                GETVACANCYDOCUMENTS: "api/MSPRequiredDocument/get",
+                CREATEVACANCYDOCUMENTS: "api/MSPRequiredDocument/save",
+                UPDATECANCYDOCUMENTS: "api/MSPRequiredDocument/update"
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",

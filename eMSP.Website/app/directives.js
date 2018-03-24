@@ -665,10 +665,10 @@ function hasPermission(authService) {
             function toggleVisibilityBasedOnPermission() {                
                 var hasPermission = authService.hasPermission(value);
                 if (hasPermission && !notPermissionFlag || !hasPermission && notPermissionFlag) {
-                    element[0].style.display = 'block';
+                    element[0].style.visibility = 'visible';
                 }
                 else {
-                    element[0].style.display = 'none';
+                    element[0].style.visibility = 'hidden';
                 }
             }
 

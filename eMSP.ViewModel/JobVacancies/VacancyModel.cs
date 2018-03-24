@@ -31,6 +31,8 @@ namespace eMSP.ViewModel.JobVacancies
         public decimal maxPayRate { get; set; }
         public decimal targetPayRate { get; set; }
         public decimal payRateMarkUp { get; set; }
+        public Nullable<long> jobStatusId { get; set; }
+        public VacanciesStatus vacancyStatus { get; set; }
     }
 
     public class VacancyLocationModel : BaseModel
@@ -87,6 +89,15 @@ namespace eMSP.ViewModel.JobVacancies
         public CommentModel comment { get; set; }
         public VacancyCommentModel vacancyComment { get; set; }
         public CommentUsersModel commentUser { get; set; }
+    }
+
+    public class VacanciesStatus : BaseModel
+    {
+        public VacanciesStatus() { }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string description { get; set; }
+        public Nullable<bool> isDefault { get; set; }
     }
 
 

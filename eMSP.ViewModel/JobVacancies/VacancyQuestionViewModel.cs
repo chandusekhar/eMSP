@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.JobVacancies
 {
-   public partial class VacancyQuestionViewModel:BaseModel
+    public partial class VacancyQuestionViewModel : BaseModel
     {
-        
+
         public VacancyQuestionViewModel()
         {
             this.CandidateSubmissionsQuestionsResponse = new HashSet<CandidateSubmissionsQuestionsResponseViewModel>();
@@ -22,7 +22,7 @@ namespace eMSP.ViewModel.JobVacancies
         public string QuestionName { get; set; }
         public string QuestionDescription { get; set; }
         public Nullable<bool> IsMandatory { get; set; }
-                
+
         public virtual ICollection<CandidateSubmissionsQuestionsResponseViewModel> CandidateSubmissionsQuestionsResponse { get; set; }
         public virtual QuestionViewModel Question { get; set; }
         public virtual VacancyModel Vacancy { get; set; }

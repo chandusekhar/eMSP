@@ -47,13 +47,13 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<Boolean> Save(QuestionViewModel data)
+        public async Task<QuestionViewModel> Save(QuestionViewModel data)
         {
             try
             {
                 using (var db = mContext)
                 {
-                    db.tblMSPQuestions.Add(new tblMSPQuestion()
+                    var obj = new tblMSPQuestion()
                     {
                         QuestionName = data.QuestionName,
                         QuestionDescription = data.QuestionDescription,
@@ -63,9 +63,22 @@ namespace eMSP.Data.DataServices.MSP
                         IsDeleted = data.isDeleted,
                         CreatedTimestamp = DateTime.UtcNow,
                         CreatedUserID = data.createdUserID
-                    });
+                    };
+
+                    db.tblMSPQuestions.Add(obj);
                     await db.SaveChangesAsync();
-                    return true;
+
+                    return new QuestionViewModel
+                    {
+                        ID = obj.ID,
+                        QuestionName = obj.QuestionName,
+                        QuestionDescription = obj.QuestionDescription,
+                        IsDefault = obj.IsDefault,
+                        IsMandatory = obj.IsMandatory,
+                        isActive = obj.IsActive,
+                        isDeleted = obj.IsDeleted,
+                        createdTimestamp = obj.CreatedTimestamp
+                    };
                 }
             }
             catch (Exception)
@@ -74,7 +87,7 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<Boolean> Update(long id, QuestionViewModel data)
+        public async Task<QuestionViewModel> Update(long id, QuestionViewModel data)
         {
             try
             {
@@ -97,7 +110,18 @@ namespace eMSP.Data.DataServices.MSP
                         new Exception("Update Failed. Please verify data");
                     }
                     await db.SaveChangesAsync();
-                    return true;
+
+                    return new QuestionViewModel
+                    {
+                        ID = obj.ID,
+                        QuestionName = obj.QuestionName,
+                        QuestionDescription = obj.QuestionDescription,
+                        IsDefault = obj.IsDefault,
+                        IsMandatory = obj.IsMandatory,
+                        isActive = obj.IsActive,
+                        isDeleted = obj.IsDeleted,
+                        createdTimestamp = obj.CreatedTimestamp
+                    };
                 }
             }
             catch (Exception)

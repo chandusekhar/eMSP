@@ -46,13 +46,13 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<Boolean> Save(RequiredDocumentViewModel data)
+        public async Task<RequiredDocumentViewModel> Save(RequiredDocumentViewModel data)
         {
             try
             {
                 using (var db = mContext)
                 {
-                    db.tblMSPRequiredDocuments.Add(new tblMSPRequiredDocument ()
+                    var obj = new tblMSPRequiredDocument()
                     {
                         RequiredDocumentName = data.RequiredDocumentName,
                         RequiredDocumentDescription = data.RequiredDocumentDescription,
@@ -62,9 +62,22 @@ namespace eMSP.Data.DataServices.MSP
                         IsDeleted = data.isDeleted,
                         CreatedTimestamp = DateTime.UtcNow,
                         CreatedUserID = data.createdUserID
-                    });
+                    };
+
+                    db.tblMSPRequiredDocuments.Add(obj);
                     await db.SaveChangesAsync();
-                    return true;
+
+                    return new RequiredDocumentViewModel
+                    {
+                        ID = obj.ID,
+                        RequiredDocumentName = obj.RequiredDocumentName,
+                        RequiredDocumentDescription = obj.RequiredDocumentDescription,
+                        IsDefault = obj.IsDefault,
+                        IsMandatory = obj.IsMandatory,
+                        isActive = obj.IsActive,
+                        isDeleted = obj.IsDeleted,
+                        createdTimestamp = obj.CreatedTimestamp
+                    };
                 }
             }
             catch (Exception)
@@ -73,7 +86,7 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<Boolean> Update(long id, RequiredDocumentViewModel data)
+        public async Task<RequiredDocumentViewModel> Update(long id, RequiredDocumentViewModel data)
         {
             try
             {
@@ -96,7 +109,18 @@ namespace eMSP.Data.DataServices.MSP
                         new Exception("Update Failed. Please verify data");
                     }
                     await db.SaveChangesAsync();
-                    return true;
+
+                    return new RequiredDocumentViewModel
+                    {
+                        ID = obj.ID,
+                        RequiredDocumentName = obj.RequiredDocumentName,
+                        RequiredDocumentDescription = obj.RequiredDocumentDescription,
+                        IsDefault = obj.IsDefault,
+                        IsMandatory = obj.IsMandatory,
+                        isActive = obj.IsActive,
+                        isDeleted = obj.IsDeleted,
+                        createdTimestamp = obj.CreatedTimestamp
+                    };
                 }
             }
             catch (Exception)

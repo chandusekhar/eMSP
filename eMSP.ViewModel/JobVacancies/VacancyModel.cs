@@ -99,5 +99,7 @@ namespace eMSP.ViewModel.JobVacancies
         public List<CompanyCreateModel> VacancySuppliers { get; set; }
         public List<IndustrySkillsCreateModel> VacancySkills { get; set; }
         public List<CommentModel> VacancyComment { get; set; }
+        public List<VacancyQuestionViewModel> Questions { get; set; }
+        public List<VacancyRequiredDocumentViewModel> RequiredDocument { get; set; }
     }
 }

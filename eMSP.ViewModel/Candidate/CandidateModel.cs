@@ -80,4 +80,22 @@ namespace eMSP.ViewModel.Candidate
         public decimal BillRate { get; set; }
         public CandidateStatusModel CandidateStatus { get; set; }
     }
+
+    public partial class CandidateSubmissionDocumentResponseViewModel : BaseModel
+    {
+        public CandidateSubmissionDocumentResponseViewModel()
+        {
+
+        }
+
+
+    }
+
+    public partial class CandidateSubmissionsQuestionsResponseViewModel:BaseModel
+    {
+        public CandidateSubmissionsQuestionsResponseViewModel()
+        {
+
+        }
+    }
 }

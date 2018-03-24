@@ -12,22 +12,20 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCandidateSubmission
+    public partial class tblVacanciesRequiredDocument
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCandidateSubmission()
+        public tblVacanciesRequiredDocument()
         {
-            this.tblCandidateSubmissionAppointments = new HashSet<tblCandidateSubmissionAppointment>();
-            this.tblCandidateSubmissionComments = new HashSet<tblCandidateSubmissionComment>();
             this.tblCandidateSubmissionDocumentResponses = new HashSet<tblCandidateSubmissionDocumentRespons>();
-            this.tblCandidateSubmissionsQuestionsResponses = new HashSet<tblCandidateSubmissionsQuestionsRespons>();
         }
     
         public long ID { get; set; }
         public long VacancyID { get; set; }
-        public long CandidateID { get; set; }
-        public long StatusID { get; set; }
-        public decimal BillRate { get; set; }
+        public long RequiredDocumentID { get; set; }
+        public string RequiredDocumentName { get; set; }
+        public string RequiredDocumentDescription { get; set; }
+        public Nullable<bool> IsMandatory { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }
@@ -35,16 +33,9 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCandidate tblCandidate { get; set; }
-        public virtual tblCandidateStatu tblCandidateStatu { get; set; }
-        public virtual tblVacancy tblVacancy { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateSubmissionAppointment> tblCandidateSubmissionAppointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateSubmissionDocumentRespons> tblCandidateSubmissionDocumentResponses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCandidateSubmissionsQuestionsRespons> tblCandidateSubmissionsQuestionsResponses { get; set; }
+        public virtual tblMSPRequiredDocument tblMSPRequiredDocument { get; set; }
+        public virtual tblVacancy tblVacancy { get; set; }
     }
 }

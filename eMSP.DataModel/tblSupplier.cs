@@ -17,10 +17,10 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblSupplier()
         {
+            this.tblSupplierCandidates = new HashSet<tblSupplierCandidate>();
             this.tblSupplierLocationBranches = new HashSet<tblSupplierLocationBranch>();
             this.tblSupplierUsers = new HashSet<tblSupplierUser>();
             this.tblVacancySuppliers = new HashSet<tblVacancySupplier>();
-            this.tblSupplierCandidates = new HashSet<tblSupplierCandidate>();
         }
     
         public long ID { get; set; }
@@ -41,12 +41,12 @@ namespace eMSP.DataModel
         public virtual tblCountry tblCountry { get; set; }
         public virtual tblCountryState tblCountryState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSupplierCandidate> tblSupplierCandidates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblSupplierUser> tblSupplierUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblVacancySupplier> tblVacancySuppliers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblSupplierCandidate> tblSupplierCandidates { get; set; }
     }
 }

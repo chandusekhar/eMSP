@@ -40,6 +40,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        public virtual tblCountry tblCountry { get; set; }
+        public virtual tblCountryState tblCountryState { get; set; }
         public virtual tblLocation tblLocation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCustomerLocationBranch> tblCustomerLocationBranches { get; set; }
@@ -49,7 +51,5 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
-        public virtual tblCountry tblCountry { get; set; }
-        public virtual tblCountryState tblCountryState { get; set; }
     }
 }

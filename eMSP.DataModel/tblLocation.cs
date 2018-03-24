@@ -17,11 +17,11 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblLocation()
         {
+            this.tblBranches = new HashSet<tblBranch>();
             this.tblCustomerLocationBranches = new HashSet<tblCustomerLocationBranch>();
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblSupplierLocationBranches = new HashSet<tblSupplierLocationBranch>();
             this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
-            this.tblBranches = new HashSet<tblBranch>();
         }
     
         public long ID { get; set; }
@@ -38,6 +38,8 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblBranch> tblBranches { get; set; }
         public virtual tblCountry tblCountry { get; set; }
         public virtual tblCountryState tblCountryState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -48,7 +50,5 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblBranch> tblBranches { get; set; }
     }
 }

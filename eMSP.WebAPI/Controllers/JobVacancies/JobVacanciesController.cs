@@ -77,9 +77,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
         #endregion
-
-
-
+        
         #region Insert
 
         [Route("createVacancy")]

@@ -34,9 +34,9 @@ namespace eMSP.DataModel
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblAppointmentStatu> tblAppointmentStatus { get; set; }
         public virtual DbSet<tblAppointmentType> tblAppointmentTypes { get; set; }
+        public virtual DbSet<tblBranch> tblBranches { get; set; }
         public virtual DbSet<tblCandidateContact> tblCandidateContacts { get; set; }
         public virtual DbSet<tblCandidateFile> tblCandidateFiles { get; set; }
         public virtual DbSet<tblCandidateIndustry> tblCandidateIndustries { get; set; }
@@ -49,6 +49,8 @@ namespace eMSP.DataModel
         public virtual DbSet<tblCandidateSubmissionAppointmentUserComment> tblCandidateSubmissionAppointmentUserComments { get; set; }
         public virtual DbSet<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
         public virtual DbSet<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
+        public virtual DbSet<tblCandidateSubmissionDocumentRespons> tblCandidateSubmissionDocumentResponses { get; set; }
+        public virtual DbSet<tblCandidateSubmissionsQuestionsRespons> tblCandidateSubmissionsQuestionsResponses { get; set; }
         public virtual DbSet<tblComment> tblComments { get; set; }
         public virtual DbSet<tblCommentUser> tblCommentUsers { get; set; }
         public virtual DbSet<tblContact> tblContacts { get; set; }
@@ -61,25 +63,29 @@ namespace eMSP.DataModel
         public virtual DbSet<tblFileType> tblFileTypes { get; set; }
         public virtual DbSet<tblIndustry> tblIndustries { get; set; }
         public virtual DbSet<tblIndustrySkill> tblIndustrySkills { get; set; }
+        public virtual DbSet<tblJobVacanciesStatu> tblJobVacanciesStatus { get; set; }
         public virtual DbSet<tblLocation> tblLocations { get; set; }
         public virtual DbSet<tblMSPCustomer> tblMSPCustomers { get; set; }
         public virtual DbSet<tblMSPDetail> tblMSPDetails { get; set; }
         public virtual DbSet<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
+        public virtual DbSet<tblMSPQuestion> tblMSPQuestions { get; set; }
+        public virtual DbSet<tblMSPRequiredDocument> tblMSPRequiredDocuments { get; set; }
         public virtual DbSet<tblMSPUser> tblMSPUsers { get; set; }
         public virtual DbSet<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
         public virtual DbSet<tblSupplier> tblSuppliers { get; set; }
+        public virtual DbSet<tblSupplierCandidate> tblSupplierCandidates { get; set; }
         public virtual DbSet<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         public virtual DbSet<tblSupplierUser> tblSupplierUsers { get; set; }
         public virtual DbSet<tblUserLocationBranch> tblUserLocationBranches { get; set; }
         public virtual DbSet<tblUserProfile> tblUserProfiles { get; set; }
         public virtual DbSet<tblVacancy> tblVacancies { get; set; }
         public virtual DbSet<tblVacancieSkill> tblVacancieSkills { get; set; }
+        public virtual DbSet<tblVacanciesQuestion> tblVacanciesQuestions { get; set; }
+        public virtual DbSet<tblVacanciesRequiredDocument> tblVacanciesRequiredDocuments { get; set; }
         public virtual DbSet<tblVacancyComment> tblVacancyComments { get; set; }
+        public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
         public virtual DbSet<tblVacancyLocation> tblVacancyLocations { get; set; }
         public virtual DbSet<tblVacancySupplier> tblVacancySuppliers { get; set; }
-        public virtual DbSet<tblSupplierCandidate> tblSupplierCandidates { get; set; }
-        public virtual DbSet<tblBranch> tblBranches { get; set; }
-        public virtual DbSet<tblVacancyFile> tblVacancyFiles { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

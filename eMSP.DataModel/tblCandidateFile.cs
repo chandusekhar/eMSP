@@ -14,9 +14,16 @@ namespace eMSP.DataModel
     
     public partial class tblCandidateFile
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblCandidateFile()
+        {
+            this.tblCandidateSubmissionDocumentResponses = new HashSet<tblCandidateSubmissionDocumentRespons>();
+        }
+    
         public long ID { get; set; }
         public long CandidateID { get; set; }
         public long FileID { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
         public long FileTypeID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
@@ -28,5 +35,7 @@ namespace eMSP.DataModel
         public virtual tblCandidate tblCandidate { get; set; }
         public virtual tblFile tblFile { get; set; }
         public virtual tblFileType tblFileType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionDocumentRespons> tblCandidateSubmissionDocumentResponses { get; set; }
     }
 }

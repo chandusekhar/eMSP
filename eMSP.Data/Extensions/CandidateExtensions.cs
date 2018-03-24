@@ -135,20 +135,26 @@ namespace eMSP.Data.Extensions
 
         public static tblFile ConvertTotblFile(this FileModel data)
         {
-            return new tblFile()
+            if (data!=null)
             {
-                ID = data.ID,
-                FileName = data.FileName,
-                FilePath = data.FilePath,
-                FileVersionNumber = Convert.ToInt16(data.FileVersionNumber),
-                IsActive = data.isActive,
-                IsDeleted = data.isDeleted ?? false,
-                CreatedUserID = data.createdUserID,
-                UpdatedUserID = data.updatedUserID,
-                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
-            };
-
+                return new tblFile()
+                {
+                    ID = data.ID,
+                    FileName = data.FileName,
+                    FilePath = data.FilePath,
+                    FileVersionNumber = Convert.ToInt16(data.FileVersionNumber),
+                    IsActive = data.isActive,
+                    IsDeleted = data.isDeleted ?? false,
+                    CreatedUserID = data.createdUserID,
+                    UpdatedUserID = data.updatedUserID,
+                    CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                    UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+                };
+            }
+            else
+            {
+                return new tblFile();
+            }
         }
 
         public static tblCandidateSubmission ConverToTblCandidateSubmission(this CandidateSubmissionModel data)

@@ -76,6 +76,8 @@
     <Compile Include="DataServices\LocationBranch\LocationBranchManager.cs" />
     <Compile Include="DataServices\LocationBranch\Location\ManageLocation.cs" />
     <Compile Include="DataServices\MSP\ManageMSP.cs" />
+    <Compile Include="DataServices\MSP\ManageMSPQuestions.cs" />
+    <Compile Include="DataServices\MSP\ManageMSPRequiredDocuments.cs" />
     <Compile Include="DataServices\Roles\ManageRole.cs" />
     <Compile Include="DataServices\Roles\RoleManager.cs" />
     <Compile Include="DataServices\Shared\CountryManager.cs" />

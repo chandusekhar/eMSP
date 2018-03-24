@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using eMSP.WebAPI.Models;
-using System;
 
 namespace eMSP.WebAPI
 {
@@ -38,10 +37,7 @@ namespace eMSP.WebAPI
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"))
-                {
-                    TokenLifespan = TimeSpan.FromHours(24)
-                };
+                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }

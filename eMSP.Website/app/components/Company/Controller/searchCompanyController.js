@@ -242,7 +242,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.FixAppointment = function (model) {
-        
+        debugger;
         localStorageService.set('vacancyData', model);
         $state.go($scope.configJSON.fixAppointment);
     }
@@ -265,7 +265,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         $scope.modalB(model);
     }
 
-    $scope.ctoggleActive = function (model) {
+    $scope.ctoggleActive = function (model, isDelete) {
         var res = apiCall.post(APP_CONSTANTS.URL.USER.UPDATECOMPANYUSER, model);
         res.then(function (data) {
             toaster.warning({ body: "Completed Successfully." });

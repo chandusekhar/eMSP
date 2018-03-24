@@ -1,6 +1,7 @@
 ﻿using eMSP.Data.DataServices.Shared;
 using eMSP.ViewModel.Candidate;
 using eMSP.ViewModel.Shared;
+using eMSP.WebAPI.Utility;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,7 @@ namespace eMSP.WebAPI.Controllers.Shared
                 var provider = new MultipartMemoryStreamProvider();
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                var baseUploadPath = @"~\App_Data\Uploads\";// + Request.QueryString["someParameter"];
+                var baseUploadPath = AppConstant.FileUploadPath;// + Request.QueryString["someParameter"];
 
                 foreach (var file in provider.Contents)
                 {

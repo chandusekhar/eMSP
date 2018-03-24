@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
    
-function createCandidateController($scope, $state, localStorageService, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
+function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -17,6 +17,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
     $scope.compId = 1;
     $scope.refData.userViewType = "Card";
+    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
 
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
@@ -114,6 +115,7 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
 
 
     if ($scope.edit) {
+        $scope.SupplierState = true;
         $scope.dataJSON = localStorageService.get('editCandidateData');
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {}; 
         $scope.getStateList();
@@ -199,8 +201,15 @@ function createCandidateController($scope, $state, localStorageService, apiCall,
     }
 
     $scope.cancel = function () {
-        $scope.IsMangePage = true;
-        $scope.edit = false;
+
+        if (!$scope.SupplierState){
+            $scope.IsMangePage = true;
+            $scope.edit = false;
+        }
+        else {
+            $state.go("company.searchSuppliers");
+        }
+        
     }
     
     

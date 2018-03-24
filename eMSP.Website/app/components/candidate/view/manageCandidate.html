@@ -64,42 +64,7 @@
     </div>
     <div ng-if="IsMangePage" class="ibox-content">
         <div class="row">
-            <!--repeater
-            <div ng-repeat="loc in resCandidates">
-                <div class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            {{loc.Candidate.FirstName + " " + loc.Candidate.LastName}} <div class="btn-group-xs pull-right">
-                                <a ng-click="editCanditate(loc)" class="text-white">
-                                    <span class="fa fa-pencil"></span>
-                                </a>
-                                <a ng-click="deleteCandidate(loc)" class="btn btn-danger">
-                                    <span class="fa fa-trash"></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="ibox-heading white-bg">
-                                <p class="small"><b>DOB :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.DateOfBirth | date}}</p>
-                                <p class="small"><b>Email :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.Candidate.Email}}</p>
-                                <p class="small"><b>Mobile :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].MobileNumber}}</p>
-                                <p class="small"><b>Street Address :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].StreetAddress}}</p>
-                                <p class="small"><b>City :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].City}}</p>
-                                <p class="small"><b>State :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].State}}</p>
-                                <p class="small"><b>Country :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].Country}}</p>
-                                <p class="small"><b>Zip :</b>&nbsp;&nbsp;&nbsp;&nbsp;{{loc.CandidateContact[0].ZipCode}}</p>
-                            </div>
-
-                        </div>
-                        <div align="center" class="form-control inline">
-                            <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
-                            <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
-                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                   ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
-                        </div>
-                    </div>
-                </div>
-            </div>-->
+          
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -124,7 +89,7 @@
                                                 <ng-letter-avatar charCount="2" height="88" width="88" fontsize="32"
                                                                   data="{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}" shape="round"></ng-letter-avatar>
                                             </span>
-                                            <div class="m-t-xs font-bold">{{loc.Candidate.FirstName + " " +loc.Candidate.LastName}}</div>
+                                            <div ng-click="updateUser(loc)" class="m-t-xs font-bold">{{loc.Candidate.FirstName + " " +loc.Candidate.LastName}}</div>
 
                                         </div>
                                     </div>
@@ -150,12 +115,12 @@
                                         </div>
                                         <div class="btn-group-xs ">
 
-                                            <span ng-click="editCanditate(loc)" class="text-navy">
+                                            <span ng-click="editCanditate(loc)" style="margin-left:10px; font-size:15px" class="text-navy">
                                                 <span class="fa fa-pencil"></span>
                                             </span>
-                                            <span ng-click="deleteCandidate(loc)" class="btn btn-danger">
+                                            <!--<span ng-click="deleteCandidate(loc)" style="margin-left:5px;font-size:15px; color:red" class="text-error">
                                                 <span class="fa fa-trash"></span>
-                                            </span>
+                                            </span>-->
 
                                         </div>
                                     </div>
@@ -169,6 +134,16 @@
                         <div class="full-height-scroll" full-scroll>
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Candidate</th>
+                                            <th>Address</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr ng-repeat="loc in resCandidates">
                                             <td class="client-avatar">
@@ -179,30 +154,28 @@
                                                                       data="{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}" shape="round"></ng-letter-avatar>
                                                 </span>
                                             </td>
-                                            <td><a ng-click="client = 1" class="client-link">{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}</a></td>
-                                            <td>
+                                            <td style="width:30%"><a ng-click="editCanditate(loc)" class="client-link">{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}</a></td>
+                                            <td style="width:30%">
                                                 <i class="fa fa-map-marker"></i> {{loc.CandidateContact[0].StreetAddress}},
                                                 {{loc.CandidateContact[0].City}}, {{loc.CandidateContact[0].State}},
                                                 {{loc.CandidateContact[0].Country}} - {{loc.CandidateContact[0].ZipCode}}.
                                             </td>
-                                            <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                            <td> {{loc.Candidate.Email}}</td>
-                                            <td class="client-status"><span class="label label-primary">Active</span></td>
-                                            <td>
+                                            <td style="width:20%" class="contact-type"><i class="fa fa-envelope"> </i>{{loc.Candidate.Email}}</td>
+                                            
+                                            
+                                            <td style="width:10%">
                                                 <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
                                                 <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
                                                 <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                        ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
                                             </td>
-                                            <td>
-                                                <div class="btn-group-xs pull-right">
+                                            <td style="width:5%">
+                                                <div class="btn-group-xs">
 
                                                     <span ng-click="editCanditate(loc)" class="text-navy">
                                                         <span class="fa fa-pencil"></span>
                                                     </span>
-                                                    <span ng-click="deleteCandidate(loc)" class="btn btn-danger">
-                                                        <span class="fa fa-trash"></span>
-                                                    </span>
+                                                    
 
                                                 </div>
                                             </td>
@@ -458,10 +431,9 @@
                                         </div>-->
                                         <div ng-repeat="file in dataJSON.CandidateFile track by $index">
 
-                                            nd
-
+                                          
                                             <div class="ibox-tools pull-left small">
-                                                <i class="fa fa fa-dot-circle-o"></i> {{file.FileName}} <a ng-click="removeFile($index)"> <i class="fa fa-trash"></i></a>
+                                                <i class="fa fa fa-dot-circle-o"></i> <a target="_blank" style="text-decoration:underline; color:darkblue" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a> <a ng-click="removeFile($index)"> <i class="fa fa-trash"></i></a>
                                             </div>
                                             <br />
                                         </div>

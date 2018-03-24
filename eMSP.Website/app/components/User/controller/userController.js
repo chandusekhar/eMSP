@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('userController', userController);
 
-function userController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
+function userController($scope, $state, $uibModal, localStorageService, apiCall, ngAuthSettings, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.refData.submitted = false;
@@ -30,6 +30,9 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
     }
 
     if ($scope.editform) {
+        $scope.udataJSON.countryId = $scope.udataJSON.countryId.toString();
+        $scope.udataJSON.stateId = $scope.udataJSON.stateId.toString()
+        $scope.udataJSON.userProfilePhotoPathT = ngAuthSettings.apiServiceBaseUri + $scope.udataJSON.userProfilePhotoPath;
         $scope.getStateList();
     }
 
@@ -46,7 +49,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                     toaster.warning({ body: "Data Updated Successfully." });
                     $uibModalInstance.close();
 
-                }).error(function (err) {
+                }).catch(function (err) {
                     $scope.error = err;
                     toaster.error({ body: err });
                 });
@@ -86,23 +89,71 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
             }
 
             reader.readAsDataURL(input.files[0]);
-            var fname = input.files[0].name;
-            var ftype = 'img/' + fname.split('.')[1];
-            $scope.modelLogo(fname, ftype);
+            $scope.fname = input.files[0].name;
+            $scope.ftype = 'img/' + $scope.fname.split('.')[1];
+            //$scope.modelLogo(fname, ftype);
+            $scope.crop = true;
         }
     };
 
     $scope.selectFile = function () {
         $("#upload").click();
     }
+    $scope.ok = function () {
 
+        var data = new FormData();
+
+        if ($scope.udataJSON.userProfilePhotoPath) {
+
+            var image_data = atob($scope.udataJSON.userProfilePhotoPath.split(',')[1]);
+            // Use typed arrays to convert the binary data to a Blob
+            var arraybuffer = new ArrayBuffer(image_data.length);
+            var view = new Uint8Array(arraybuffer);
+            for (var i = 0; i < image_data.length; i++) {
+                view[i] = image_data.charCodeAt(i) & 0xff;
+            }
+
+            var blob = new Blob([arraybuffer], { type: $scope.ftype });
+            var file = new File([blob], $scope.fname);
+
+            data.append("uploadedFile", file);
+
+
+
+            // ADD LISTENERS.
+            var objXhr = new XMLHttpRequest();
+            //objXhr.addEventListener("progress", updateProgress, false);
+            objXhr.addEventListener("load", transferComplete, false);
+
+            // SEND FILE DETAILS TO THE API.
+
+            objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
+            objXhr.send(data);
+
+            $scope.crop = false;
+            $scope.udataJSON.userProfilePhotoPathT = $scope.udataJSON.userProfilePhotoPath;
+        }
+
+
+    };
+
+    $scope.cancel = function () {
+        $scope.crop = false;
+    };
+
+    function transferComplete(e) {
+        console.log(e);
+        var obj = angular.fromJson(e.srcElement.response);
+        $scope.udataJSON.userProfilePhotoPath = obj[0].FilePath;        
+        $scope.crop = false;
+    };
     $scope.modelLogo = function (filename, ftype) {
         var modalInstance = $uibModal.open({
-            template: '<div class="modal-header">\
+            template: '<div style="Z-index:10000000 !important" class="modal-header">\
                        <h3 class="modal-title" > Upload Logo:</h3>\
                        </div >\
                        <div class="modal-body">\
-                       <croppie ng-if="cropped.source" src="cropped.source" ng-model="dataJSON.companyLogo" options="{boundary:{width:300,height:350}}"></croppie></div>\
+                       <croppie ng-if="cropped.source" src="cropped.source" ng-model="udataJSON.userProfilePhotoPath" options="{boundary:{width:300,height:350}}"></croppie></div>\
                        <div class="modal-footer">\
                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>\
                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>\
@@ -113,9 +164,9 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
 
                     var data = new FormData();
 
-                    if ($scope.dataJSON.companyLogo) {
+                    if ($scope.udataJSON.userProfilePhotoPath) {
 
-                        var image_data = atob($scope.dataJSON.companyLogo.split(',')[1]);
+                        var image_data = atob($scope.udataJSON.userProfilePhotoPath.split(',')[1]);
                         // Use typed arrays to convert the binary data to a Blob
                         var arraybuffer = new ArrayBuffer(image_data.length);
                         var view = new Uint8Array(arraybuffer);
@@ -153,7 +204,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                 function transferComplete(e) {
                     console.log(e);
                     var obj = angular.fromJson(e.srcElement.response);
-                    $scope.dataJSON.userProfilePhotoPath = obj[0].FilePath;
+                    $scope.udataJSON.userProfilePhotoPath = obj[0].FilePath;
                     $uibModalInstance.close();
                 };
             },

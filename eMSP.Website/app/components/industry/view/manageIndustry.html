@@ -65,18 +65,18 @@
 
                                                     <div class="ibox-tools pull-left small">
                                                         <i class="fa fa fa-dot-circle-o"></i> {{s.skillName}}
-                                                        <a ng-click="modal(s)"> <i class="fa fa-pencil"></i></a>
-                                                        <a ng-click=""> <i class="fa fa-trash"></i></a>
+                                                        <a ng-click="modal(s)"> <i class="fa fa-pencil" style="font-size:small;color:green;margin-left:5px;"></i></a>
+                                                        <a ng-click=""> <i class="fa fa-trash delete" style="font-size:small;color:red;margin-left:5px;"></i></a>
                                                         <!-- Skills Active/Deavtive toggle -->
-                                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                               ng-change="toggleActive(s)" ng-model="s.isActive" />
+                                                        <!--<input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                               ng-change="toggleActive(s)" style="margin-left:5px;" ng-model="s.isActive" />
                                                         <span class="small" ng-if="s.isActive">Active</span>
-                                                        <span class="small" ng-if="!s.isActive">Deactive</span>
+                                                        <span class="small" ng-if="!s.isActive">Deactive</span>-->
                                                         <!-- Skills Deleted toggle -->
-                                                        <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                        <!--<input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
                                                                ng-change="toggleActive(s)" ng-model="s.isDeleted" />
                                                         <span class="small" ng-if="s.isDeleted">Deleted</span>
-                                                        <span class="small" ng-if="!s.isDeleted">Deleted</span>
+                                                        <span class="small" ng-if="!s.isDeleted">Deleted</span>-->
                                                     </div>
                                                     <br />
                                                 </div>

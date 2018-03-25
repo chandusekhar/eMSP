@@ -94,9 +94,6 @@
     <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>eMSP.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblAppointmentStatu.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>

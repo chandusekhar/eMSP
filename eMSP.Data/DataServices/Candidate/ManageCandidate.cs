@@ -149,7 +149,7 @@ namespace eMSP.Data.DataServices.Candidate
                 foreach (FileModel a in model.CandidateFile)
                 {
                     file = await Task.Run(() => InsertFiles(a.ConvertTotblFile()));
-                    x = await Task.Run(() => InsertCandidateFiles(candidate, file, Convert.ToInt64(a.FileTypeId),a.ExpiryDate));
+                    x = await Task.Run(() => InsertCandidateFiles(candidate, file, Convert.ToInt64(a.FileTypeId)));
                 }
 
                 x = await Task.Run(() => InsertCandidateIndustries(model.CandidateIndustries.Select(a=>Convert.ToInt32(a)).ToList(), candidate));
@@ -288,7 +288,7 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-        internal static async Task<int> InsertCandidateFiles(tblCandidate can, tblFile file, long fileTypeid, DateTime? exdate=null)
+        internal static async Task<int> InsertCandidateFiles(tblCandidate can, tblFile file, long fileTypeid)
         {
             try
             {
@@ -301,7 +301,6 @@ namespace eMSP.Data.DataServices.Candidate
                         CandidateID = can.ID,
                         IsActive = true,
                         IsDeleted = false,
-                         ExpiryDate = exdate,
                         CreatedTimestamp = can.CreatedTimestamp,
                         CreatedUserID = can.CreatedUserID,
                         UpdatedTimestamp = can.UpdatedTimestamp,

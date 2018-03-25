@@ -34,6 +34,7 @@ namespace eMSP.DataModel
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblAppointmentStatu> tblAppointmentStatus { get; set; }
         public virtual DbSet<tblAppointmentType> tblAppointmentTypes { get; set; }
         public virtual DbSet<tblBranch> tblBranches { get; set; }

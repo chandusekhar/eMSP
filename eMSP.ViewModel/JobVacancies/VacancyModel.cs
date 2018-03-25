@@ -104,7 +104,7 @@ namespace eMSP.ViewModel.JobVacancies
     public class VacancyCreateModel
     {
         public VacancyCreateModel() { }
-        public VacancyModel Vacancy { get; set; }
+        public VacancyModel Vacancy { get; set; }        
         public List<LocationCreateModel> VacancyLocations { get; set; }
         public List<VacancyFileModel> VacancyFiles { get; set; }
         public List<CompanyCreateModel> VacancySuppliers { get; set; }

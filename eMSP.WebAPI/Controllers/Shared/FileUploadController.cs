@@ -47,6 +47,7 @@ namespace eMSP.WebAPI.Controllers.Shared
                 throw new HttpResponseException(response);
             }
         }
+
         [Route("uploadFiles")]
         [HttpPost]
         [ResponseType(typeof(List<FileModel>))]
@@ -89,13 +90,9 @@ namespace eMSP.WebAPI.Controllers.Shared
 
                         list.Add(fi);
                     }
-
-
                 }
 
-
                 return Ok(list);
-
             }
             catch (Exception ex)
             {

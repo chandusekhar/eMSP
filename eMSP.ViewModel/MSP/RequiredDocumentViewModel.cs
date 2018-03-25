@@ -19,7 +19,8 @@ namespace eMSP.ViewModel.MSP
         public string RequiredDocumentName { get; set; }
         public string RequiredDocumentDescription { get; set; }
         public Nullable<bool> IsDefault { get; set; }
-        public Nullable<bool> IsMandatory { get; set; }                
+        public Nullable<bool> IsMandatory { get; set; }
+        public Nullable<bool> IsSelected { get; set; }
         public virtual ICollection<VacancyRequiredDocumentViewModel> VacancyRequiredDocument { get; set; }
     }
 }

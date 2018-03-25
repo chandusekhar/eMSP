@@ -24,4 +24,8 @@ function manageVacancyController($scope, $state, localStorageService, configJSON
             $scope.dataCommentJSON = {};
         });
     };
+
+    $scope.manageCandidates = function () {
+        $state.go($scope.configJSON.candidateAppointment);
+    }
 }

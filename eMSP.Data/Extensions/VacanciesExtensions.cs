@@ -35,7 +35,8 @@ namespace eMSP.Data.Extensions
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
+                JobStatusID=data.jobStatusId                
             };
         }
 
@@ -341,6 +342,84 @@ namespace eMSP.Data.Extensions
                 Name = data.Name,
                 description = data.Description,
                 isDefault = data.IsDeleted,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+        public static tblVacanciesQuestion ConvertTotblVacanciesQuestion(this VacancyQuestionViewModel data)
+        {
+            return new tblVacanciesQuestion()
+            {
+                ID = Convert.ToInt16(data.ID),
+                QuestionName=data.QuestionName,
+                QuestionDescription=data.QuestionDescription,
+                IsMandatory=data.IsMandatory,
+                QuestionID=data.QuestionID,
+                VacancyID=data.VacancyID,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static VacancyQuestionViewModel ConvertToVacancyQuestion(this tblVacanciesQuestion data)
+        {
+            return new VacancyQuestionViewModel()
+            {
+                ID = data.ID,
+                VacancyID=data.VacancyID,
+                QuestionID=data.QuestionID,
+                IsMandatory=data.IsMandatory,
+                QuestionName=data.QuestionName,
+                QuestionDescription=data.QuestionDescription,
+                IsSelected=false,                
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+        public static tblVacanciesRequiredDocument ConvertTotblVacanciesRequiredDocument(this VacancyRequiredDocumentViewModel data)
+        {
+            return new tblVacanciesRequiredDocument()
+            {
+                ID = Convert.ToInt16(data.ID),
+                RequiredDocumentName=data.RequiredDocumentName,
+                RequiredDocumentDescription=data.RequiredDocumentDescription,
+                RequiredDocumentID=data.RequiredDocumentID,                
+                IsMandatory = data.IsMandatory,
+                VacancyID = data.VacancyID,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static VacancyRequiredDocumentViewModel ConvertToVacancyRequiredDocument(this tblVacanciesRequiredDocument data)
+        {
+            return new VacancyRequiredDocumentViewModel()
+            {
+                ID = data.ID,
+                VacancyID = data.VacancyID,
+                RequiredDocumentID=data.RequiredDocumentID,
+                IsMandatory = data.IsMandatory,
+                RequiredDocumentName=data.RequiredDocumentName,
+                RequiredDocumentDescription=data.RequiredDocumentDescription,               
+                IsSelected = false,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,

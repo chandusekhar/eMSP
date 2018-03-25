@@ -90,8 +90,22 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
                 throw;
             }
         }
+
+        [Route("getVacancyStatus")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetVacancyStatus()
+        {
+            try
+            {
+                return Ok((await VacanciesService.GetVacancyStatus()).AsQueryable());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
-        
+
         #region Insert
 
         [Route("createVacancy")]

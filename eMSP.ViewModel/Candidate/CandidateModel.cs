@@ -47,7 +47,6 @@ namespace eMSP.ViewModel.Candidate
         public string FilePath { get; set; }
         public int FileVersionNumber { get; set; }
         public int FileTypeId { get; set; }
-        public DateTime? ExpiryDate { get; set; }
     }
 
     public class CandidateCreateModel 

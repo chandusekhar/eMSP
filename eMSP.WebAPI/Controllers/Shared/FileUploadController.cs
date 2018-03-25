@@ -79,13 +79,13 @@ namespace eMSP.WebAPI.Controllers.Shared
                             fileName = "Test.jpg";
                         }
 
-                        var filePath = Path.Combine(HttpContext.Current.Server.MapPath(@"~\"+baseUploadPath), fileName);
+                        var filePath = Path.Combine(HttpContext.Current.Server.MapPath(baseUploadPath), fileName);
 
                         var buffer = await file.ReadAsByteArrayAsync();
 
                         File.WriteAllBytes(filePath, buffer);
 
-                        FileModel fi = CreateFileModel(fileName, baseUploadPath + fileName, User.Identity.GetUserId());
+                        FileModel fi = CreateFileModel(fileName, baseUploadPath+fileName, User.Identity.GetUserId());
 
                         list.Add(fi);
                     }
@@ -118,7 +118,6 @@ namespace eMSP.WebAPI.Controllers.Shared
                 FileVersionNumber = 1,
                 updatedTimestamp = DateTime.Now,
                 updatedUserID = UserID,
-                ExpiryDate = null,
                 ID = 0
 
             };

@@ -1,5 +1,5 @@
 ﻿using eMSP.DataModel;
-using eMSP.ViewModel;
+using eMSP.ViewModel.JobVacancies;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,33 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eMSP.Data.DataServices.MSP
+namespace eMSP.Data.DataServices.JobVacancies.Vacancy
 {
-    public class ManageMSPQuestions : IDisposable
+   public class ManageVacanciesRequiredDocuments
     {
-
         private bool IsDisposed = false;
         internal eMSPEntities mContext;
 
-        public ManageMSPQuestions()
+        public ManageVacanciesRequiredDocuments()
         {
             mContext = new eMSPEntities();
         }
 
-        public async Task<List<QuestionViewModel>> Get()
+        public async Task<List<VacancyRequiredDocumentViewModel>> GetJobsQuestions(long VacancyId)
         {
             try
             {
                 using (var db = mContext)
                 {
-                    var data = await db.tblMSPQuestions.ToListAsync();
+                    var data = await db.tblVacanciesRequiredDocuments.Where(x => x.VacancyID == VacancyId).ToListAsync();
 
-                    return data.Select(x => new QuestionViewModel
+                    return data.Select(x => new VacancyRequiredDocumentViewModel
                     {
                         ID = x.ID,
-                        QuestionName = x.QuestionName,
-                        QuestionDescription = x.QuestionDescription,
-                        IsDefault = x.IsDefault,
+                        VacancyID = x.VacancyID,
+                        RequiredDocumentName = x.RequiredDocumentName,
+                        RequiredDocumentDescription = x.RequiredDocumentDescription,
                         IsMandatory = x.IsMandatory,
                         isActive = x.IsActive,
                         isDeleted = x.IsDeleted,
@@ -47,33 +46,20 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<QuestionViewModel> Save(QuestionViewModel data)
+        public async Task<VacancyRequiredDocumentViewModel> Get(long Id)
         {
             try
             {
                 using (var db = mContext)
                 {
-                    var obj = new tblMSPQuestion()
-                    {
-                        QuestionName = data.QuestionName,
-                        QuestionDescription = data.QuestionDescription,
-                        IsDefault = data.IsDefault,
-                        IsActive = data.isActive,
-                        IsMandatory = data.IsMandatory,
-                        IsDeleted = data.isDeleted,
-                        CreatedTimestamp = DateTime.UtcNow,
-                        CreatedUserID = data.createdUserID
-                    };
+                    var obj = await db.tblVacanciesRequiredDocuments.Where(x => x.ID == Id).FirstOrDefaultAsync();
 
-                    db.tblMSPQuestions.Add(obj);
-                    await db.SaveChangesAsync();
-
-                    return new QuestionViewModel
+                    return new VacancyRequiredDocumentViewModel
                     {
                         ID = obj.ID,
-                        QuestionName = obj.QuestionName,
-                        QuestionDescription = obj.QuestionDescription,
-                        IsDefault = obj.IsDefault,
+                        RequiredDocumentName = obj.RequiredDocumentName,
+                        RequiredDocumentDescription = obj.RequiredDocumentDescription,
+                        VacancyID = obj.VacancyID,
                         IsMandatory = obj.IsMandatory,
                         isActive = obj.IsActive,
                         isDeleted = obj.IsDeleted,
@@ -87,24 +73,63 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        public async Task<QuestionViewModel> Update(long id, QuestionViewModel data)
+        public async Task<VacancyRequiredDocumentViewModel> Save(VacancyRequiredDocumentViewModel data)
         {
             try
             {
                 using (var db = mContext)
                 {
-                    var obj = await db.tblMSPQuestions.Where(x => x.ID == id).FirstOrDefaultAsync();
+                    var obj = new tblVacanciesRequiredDocument()
+                    {
+                        RequiredDocumentName = data.RequiredDocumentName,
+                        RequiredDocumentDescription = data.RequiredDocumentDescription,
+                        VacancyID = data.VacancyID,
+                        IsActive = data.isActive,
+                        IsMandatory = data.IsMandatory,
+                        IsDeleted = data.isDeleted,
+                        CreatedTimestamp = DateTime.UtcNow,
+                        CreatedUserID = data.createdUserID
+                    };
+
+                    db.tblVacanciesRequiredDocuments.Add(obj);
+                    await db.SaveChangesAsync();
+
+                    return new VacancyRequiredDocumentViewModel
+                    {
+                        ID = obj.ID,
+                        RequiredDocumentName = obj.RequiredDocumentName,
+                        RequiredDocumentDescription = obj.RequiredDocumentDescription,
+                        VacancyID = obj.VacancyID,
+                        IsMandatory = obj.IsMandatory,
+                        isActive = obj.IsActive,
+                        isDeleted = obj.IsDeleted,
+                        createdTimestamp = obj.CreatedTimestamp
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<VacancyRequiredDocumentViewModel> Update(long id, VacancyRequiredDocumentViewModel data)
+        {
+            try
+            {
+                using (var db = mContext)
+                {
+                    var obj = await db.tblVacanciesRequiredDocuments.Where(x => x.ID == id).FirstOrDefaultAsync();
 
                     if (obj != null)
                     {
-                        obj.QuestionName = data.QuestionName;
-                        obj.QuestionDescription = data.QuestionDescription;
-                        obj.IsDefault = data.IsDefault;
+                        obj.RequiredDocumentName = data.RequiredDocumentName;
+                        obj.RequiredDocumentDescription = data.RequiredDocumentDescription;
+                        obj.VacancyID = data.VacancyID;
                         obj.IsMandatory = data.IsMandatory;
                         obj.IsActive = data.isActive;
                         obj.UpdatedTimestamp = DateTime.UtcNow;
                         obj.UpdatedUserID = data.updatedUserID;
-                        obj.IsDeleted = data.isDeleted;
                     }
                     else
                     {
@@ -112,12 +137,12 @@ namespace eMSP.Data.DataServices.MSP
                     }
                     await db.SaveChangesAsync();
 
-                    return new QuestionViewModel
+                    return new VacancyRequiredDocumentViewModel
                     {
                         ID = obj.ID,
-                        QuestionName = obj.QuestionName,
-                        QuestionDescription = obj.QuestionDescription,
-                        IsDefault = obj.IsDefault,
+                        RequiredDocumentName = obj.RequiredDocumentName,
+                        RequiredDocumentDescription = obj.RequiredDocumentDescription,
+                        VacancyID = obj.VacancyID,
                         IsMandatory = obj.IsMandatory,
                         isActive = obj.IsActive,
                         isDeleted = obj.IsDeleted,
@@ -137,7 +162,7 @@ namespace eMSP.Data.DataServices.MSP
             {
                 using (var db = mContext)
                 {
-                    var obj = await db.tblMSPQuestions.Where(x => x.ID == id).FirstOrDefaultAsync();
+                    var obj = await db.tblVacanciesRequiredDocuments.Where(x => x.ID == id).FirstOrDefaultAsync();
 
                     if (obj != null)
                     {
@@ -171,7 +196,7 @@ namespace eMSP.Data.DataServices.MSP
             IsDisposed = true;
         }
 
-        ~ManageMSPQuestions()
+        ~ManageVacanciesRequiredDocuments()
         {
             Dispose(false);
         }

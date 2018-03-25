@@ -68,13 +68,13 @@ namespace eMSP.WebAPI.Controllers.MSP
         [Route("update")]
         [HttpPost]
         [ResponseType(typeof(RequiredDocumentViewModel))]
-        public async Task<IHttpActionResult> Update(long ID, RequiredDocumentViewModel model)
+        public async Task<IHttpActionResult> Update(RequiredDocumentViewModel model)
         {
             try
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "update", userId);
-                return Ok(await Service.Update(ID, model));
+                return Ok(await Service.Update(model.ID, model));
 
             }
             catch (Exception)

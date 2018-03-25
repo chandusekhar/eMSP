@@ -65,6 +65,25 @@ namespace eMSP.Data.DataServices.JobVacancies
             }
         }
 
+
+        public async Task<List<CommentModel>> GetVacancyComments(long id)
+        {
+            try
+            {
+                List<CommentModel> data = null;
+
+                tblVacancy res = await Task.Run(() => ManageVacancy.GetVacancyComments(id));
+
+                data = res.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList();
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         //public async Task<List<VacancySkillsCreateModel>> GetVacancySkills(long Id)
         //{
         //    try

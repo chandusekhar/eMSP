@@ -67,7 +67,9 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                jobStatusId = data.tblJobVacanciesStatu.ID,
+                vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
             };
         }
 
@@ -100,10 +102,11 @@ namespace eMSP.Data.Extensions
                     createdTimestamp = data.CreatedTimestamp,
                     createdUserID = data.CreatedUserID,
                     updatedTimestamp = data.UpdatedTimestamp,
-                    updatedUserID = data.UpdatedUserID,
+                    updatedUserID = data.UpdatedUserID,                    
+                    vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
                 },
                 VacancyFiles = data.tblVacancyFiles?.Select(a => a.ConvertToVacancyFile()).ToList(),
-                VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
+                //VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
                 VacancySkills = data.tblVacancieSkills?.Select(a => a.tblIndustrySkill?.ConvertToIndustrySkill()).ToList(),
                 VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblCustomerLocationBranch?.tblLocation.ConvertToLocation()).ToList(),
                 VacancySuppliers = data.tblVacancySuppliers?.Select(a => a.tblSupplier?.ConvertTocompany()).ToList()
@@ -303,6 +306,41 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 name = data.Name,
                 mspId = data.MSPID,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+
+        public static tblJobVacanciesStatu ConvertTotblJobVacanciesStatus(this VacanciesStatus data)
+        {
+            return new tblJobVacanciesStatu()
+            {
+                ID = Convert.ToInt16(data.Id),
+                Description = data.description,
+                IsDefault = data.isDefault,
+                Name = data.Name,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static VacanciesStatus ConvertToVacanciesStatus(this tblJobVacanciesStatu data)
+        {
+            return new VacanciesStatus()
+            {
+                Id = data.ID,
+                Name = data.Name,
+                description = data.Description,
+                isDefault = data.IsDeleted,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,

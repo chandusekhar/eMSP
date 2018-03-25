@@ -63,6 +63,20 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
+        [Route("getVacancyComments")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetVacancyComments(long id)
+        {
+            try
+            {
+                return Ok(await VacanciesService.GetVacancyComments(id));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Route("getMSPVacancyType")]
         [HttpPost]
         public async Task<IHttpActionResult> GetMSPVacancyType(MSPVacancieTypeCreateModel data)

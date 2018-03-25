@@ -1,0 +1,146 @@
+﻿<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#/dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <div class="col-lg-12" ng-show="search">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><strong>{{configJSON.title}}:</strong></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div ng-repeat="doc in documentsList">
+                                <div class="col-lg-4">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <span class="small">D000{{doc.ID}}</span>
+
+                                            <div class="btn-group-xs pull-right">
+                                                <a ng-click="update(doc)" class="text-white">
+                                                    <span class="fa fa-pencil"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="ibox-heading white-bg">
+                                                <b>Question:</b>
+                                                <p class="small">{{doc.RequiredDocumentName}}</p>
+                                            </div>
+                                            <div class="ibox-heading white-bg">
+                                                <b>Description:</b>
+                                                <p class="small">{{doc.RequiredDocumentDescription}}</p>
+                                            </div>
+
+                                            <div class="ibox-heading white-bg">
+                                                <!-- Is default Question -->
+                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                       ng-change="toggleActive(doc)" ng-model="doc.IsDefault" />
+                                                <span class="small">Is Default</span>
+                                            </div>
+                                            <div class="ibox-heading white-bg">
+                                                <!-- Is mandatory Question -->
+                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                       ng-change="toggleActive(doc)" ng-model="doc.IsMandatory" />
+                                                <span class="small">Is Mandatory</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-control inline">
+                                            <!-- Country Active/Deactive toggle -->
+                                            <p class="small inline" ng-if="doc.isActive">Active</p>
+                                            <p class="small inline" ng-if="!doc.isActive">Deactive</p>
+                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                   ng-change="toggleActive(doc)"
+                                                   ng-model="doc.isActive" />
+
+                                            <!-- Country Deleted toggle -->
+                                            <div class="pull-right">
+                                                <p class="small inline" ng-if="doc.isDeleted">Deleted</p>
+                                                <p class="small inline" ng-if="!doc.isDeleted">Deleted</p>
+                                                <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                       ng-change="toggleActive(doc)"
+                                                       ng-model="doc.isDeleted" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" ng-hide="search">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
+                        <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="m-t" name="form" novalidate>
+
+                            <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.RequiredDocumentName.$error.required }">
+                                <label>Document* :</label>
+                                <input type="text" class="form-control" name="RequiredDocumentName"
+                                       ng-model="dataJSON.RequiredDocumentName"
+                                       placeholder="Document" required />
+                                <span ng-show="refData.submitted && form.RequiredDocumentName.$error.required" class="help-block">
+                                    * Document is required
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Document Description :</label>
+                                <textarea type="text" class="form-control"
+                                          ng-model="dataJSON.RequiredDocumentDescription"
+                                          placeholder="Document Description" name="RequiredDocumentDescription" />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group col-md-3 no-padding">
+                                    <label>
+                                        <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.IsDefault">
+                                        <i></i> Is Default
+                                    </label>
+                                </div>
+
+                                <div class="form-group  col-md-3">
+                                    <label>
+                                        <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.IsMandatory">
+                                        <i></i> Is Mandatory
+                                    </label>
+                                </div>
+
+
+                            </div>
+                            <h5>
+                                <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>
+                                <button type="submit" ng-click="reset()" class="btn btn-white m-b">Cancel</button>
+                            </h5>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

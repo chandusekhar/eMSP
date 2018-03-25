@@ -23,7 +23,8 @@ namespace eMSP.ViewModel.JobVacancies
         public string RequiredDocumentName { get; set; }
         public string RequiredDocumentDescription { get; set; }
         public Nullable<bool> IsMandatory { get; set; }
-                
+        public Nullable<bool> IsSelected { get; set; }
+
         public virtual ICollection<CandidateSubmissionDocumentResponseViewModel> CandidateSubmissionDocumentResponse { get; set; }
         public virtual RequiredDocumentViewModel RequiredDocument { get; set; }
         public virtual VacancyModel Vacancy { get; set; }

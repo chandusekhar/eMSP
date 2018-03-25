@@ -164,7 +164,7 @@
                                         </td>
                                         <td class="project-people">
                                             <ng-letter-avatar ng-repeat="sup in v.VacancySuppliers" charCount="2" height="28" width="28" fontsize="10"
-                                                              data="sup.companyName" shape="round"></ng-letter-avatar>
+                                                              data="{{sup.companyName}}" shape="round"></ng-letter-avatar>
                                         </td>
 
                                         <td class="project-actions" width="15%">
@@ -176,8 +176,8 @@
                                         <td class="project-completion">
                                             <small>{{v.Vacancy.vacancyStatus.Name}}</small>
                                             <!--<div class="progress progress-mini">
-            <div style="width: 48%;" class="progress-bar"></div>
-        </div>-->
+                                                <div style="width: 48%;" class="progress-bar"></div>
+                                            </div>-->
                                         </td>
                                         <td class="project-status center">
                                             <span class="label m-b-n-lg" ng-class="{'label-primary' : v.Vacancy.isActive,'label-warning':!v.Vacancy.isActive}">
@@ -185,7 +185,8 @@
                                             </span>
                                         </td>
                                         <td class="project-actions">
-                                            <a ng-click="view(v)" has-permission='Customer View' class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                            <!--has-permission='Customer View'-->
+                                            <a ng-click="view(v)" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
                                             <a ng-click="edit(v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
                                         </td>
 

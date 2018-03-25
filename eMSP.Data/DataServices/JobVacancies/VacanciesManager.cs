@@ -163,6 +163,20 @@ namespace eMSP.Data.DataServices.JobVacancies
             }
         }
 
+        public async Task<List<VacanciesStatus>> GetVacancyStatus()
+        {
+            try
+            {
+                List<tblJobVacanciesStatu> model = await Task.Run(() => ManageJobVacanciesStatus.GetJobVacanciesStatuses());
+
+                return model.Select(x => x.ConvertToVacanciesStatus()).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
 
         #endregion

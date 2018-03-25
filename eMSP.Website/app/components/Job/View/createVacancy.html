@@ -99,7 +99,7 @@
                                     <label>Job Title * :</label>
                                     <input type="text" class="form-control" name="positionTitle"
                                            ng-model="dataJSON.Vacancy.positionTitle"
-                                           placeholder="Job Title"                                           
+                                           placeholder="Job Title"
                                            required />
                                     <span ng-show="dataJSON.submitted && form.positionTitle.$error.required" class="text-danger">
                                         * Job Title is required
@@ -110,7 +110,7 @@
                                     <label>Job Description * :</label>
                                     <textarea type="text" class="form-control summernote" name="vacancyDescription"
                                               ng-model="dataJSON.Vacancy.vacancyDescription"
-                                              placeholder="Vacancy Description" 
+                                              placeholder="Vacancy Description"
                                               ng-disabled="formAction === 'Update'"
                                               required height="200" summernote></textarea>
                                     <span ng-show="dataJSON.submitted && form.vacancyDescription.$error.required" class="text-danger">
@@ -150,7 +150,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div ng-show="formAction === 'Update'">
                                             <ul class="list-unstyled project-files">
                                                 <li ng-repeat="files in dataJSON.VacancyFiles"><a href="files.filePath" target="_blank"><i class="fa fa-file"></i> {{files.fileName}}</a></li>
@@ -193,55 +193,88 @@
                                         </span>
                                     </div>
                                     <!-- Min Pay rate -->
-                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.minPayRate.$error.required }">
-                                        <label> Minimum Pay rate * :</label>
-
-                                        <input type="number" class="form-control" name="minPayRate"
-                                               ng-model="dataJSON.Vacancy.minPayRate"
-                                               placeholder="Min Pay Rate"
-                                               required />
-                                        <span ng-show="dataJSON.submitted && form.minPayRate.$error.required" class="text-danger">
-                                            * MinPay Rate is required
-                                        </span>
+                                    <div class="form-group col-md-6">
+                                        <label>Pay rate * :</label>
+                                        <div class="row">
+                                            <div class="col-md-5" ng-class="{ 'has-error': dataJSON.submitted && form.minPayRate.$error.required }">
+                                                <input type="number" class="form-control" name="minPayRate"
+                                                       ng-model="dataJSON.Vacancy.minPayRate"
+                                                       placeholder="Min" ng-init="0"
+                                                       required />
+                                                <span ng-show="dataJSON.submitted && form.minPayRate.$error.required" class="text-danger">
+                                                    * MinPay Rate is required
+                                                </span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>To</label>
+                                            </div>
+                                            <div class="col-md-5" ng-class="{ 'has-error': dataJSON.submitted && form.maxPayRate.$error.required }">
+                                                <input type="number" class="form-control" name="maxPayRate"
+                                                       ng-model="dataJSON.Vacancy.maxPayRate"
+                                                       placeholder="Max" ng-init="0"
+                                                       required />
+                                                <span ng-show="dataJSON.submitted && form.maxPayRate.$error.required" class="text-danger">
+                                                    * MaxPay Rate is required
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <!-- Max Pay rate -->
-                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.maxPayRate.$error.required }">
-                                        <label>Maximum Pay rate * :</label>
-
-                                        <input type="number" class="form-control" name="maxPayRate"
-                                               ng-model="dataJSON.Vacancy.maxPayRate"
-                                               placeholder="Max Pay Rate"
-                                               required />
-                                        <span ng-show="dataJSON.submitted && form.maxPayRate.$error.required" class="text-danger">
-                                            * MaxPay Rate is required
-                                        </span>
-                                    </div>
-
+                                    
+                                    
                                     <!-- Target pay rate -->
-                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.targetPayRate.$error.required }">
-                                        <label>Trget Pay rate * :</label>
+                                    <div class="form-group col-md-3" ng-class="{ 'has-error': dataJSON.submitted && form.targetPayRate.$error.required }">
+                                        <label>Target Pay * :</label>
 
                                         <input type="number" class="form-control" name="targetPayRate"
                                                ng-model="dataJSON.Vacancy.targetPayRate"
-                                               placeholder="Target Pay Rate"
+                                               placeholder="Target Pay Rate" ng-init="0"
                                                required />
                                         <span ng-show="dataJSON.submitted && form.targetPayRate.$error.required" class="text-danger">
-                                            * TargetPay Rate is required
+                                            * Target Pay is required
                                         </span>
                                     </div>
 
                                     <!-- Pay rate markup -->
-                                    <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.payRateMarkUp.$error.required }">
-                                        <label>Markup Pay rate * :</label>
+                                    <div class="form-group col-md-3" ng-class="{ 'has-error': dataJSON.submitted && form.payRateMarkUp.$error.required }">
+                                        <label>Markup (%) * :</label>
 
                                         <input type="number" class="form-control" name="payRateMarkUp"
                                                ng-model="dataJSON.Vacancy.payRateMarkUp"
-                                               placeholder="Pay Rate MarkUp"
+                                               placeholder="Pay Rate MarkUp" ng-init="0"
                                                required />
                                         <span ng-show="dataJSON.submitted && form.payRateMarkUp.$error.required" class="text-danger">
                                             * PayRate MarkUp is required
                                         </span>
+                                    </div>
+                                    <div class="col-md-12 no-padding" ng-show="dataJSON.Vacancy.payRateMarkUp !== undefined">
+                                        <div class="col-md-12">
+                                            <label>Bill rate :</label>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span class="text-center">
+                                                        {{dataJSON.Vacancy.minPayRate+(dataJSON.Vacancy.minPayRate*(dataJSON.Vacancy.payRateMarkUp/100))}}
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span class="text-center">
+                                                        &nbsp;
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span class="text-center">
+                                                        {{dataJSON.Vacancy.maxPayRate+(dataJSON.Vacancy.maxPayRate*(dataJSON.Vacancy.payRateMarkUp/100))}}
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1 no-padding">
+
+                                                    <span class="text-center">
+                                                        {{dataJSON.Vacancy.targetPayRate+(dataJSON.Vacancy.targetPayRate*(dataJSON.Vacancy.payRateMarkUp/100))}}
+                                                        
+                                                    </span>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +397,7 @@
                                     <div class="input-group date">
                                         <input type="hidden" ng-model="dataJSON.Vacancy.startDate" />
                                         <input type="hidden" ng-model="dataJSON.Vacancy.endDate" />
-                                        
+
                                         <input date-range-picker type="datetime" class="form-control date-picker" name="date"
                                                ng-model="dataJSON.dateRange"
                                                placeholder="Start Date"
@@ -379,7 +412,7 @@
 
                                 <!-- Job Submission Date -->
                                 <div class="form-group col-md-12 no-padding">
-                                    <div class="form-group col-md-12 col-xs-12 col-sm-12">
+                                    <div class="form-group col-md-6 col-xs-6 col-sm-6">
                                         <label>Submission Date :</label>
                                         <div class="input-group date">
                                             <!--<input type="datetime" class="form-control" name="submissionDueDate"
@@ -391,6 +424,14 @@
 
                                             <span class="input-group-addon" data-toggle="datepicker"><i class="fa fa-calendar"></i></span>
                                         </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Vacancy Status :</label>
+                                        <select ng-model="dataJSON.Vacancy.jobStatusId" class="form-control" name="jobStatusId">
+                                            <option value="">-- Select Vacancy Status --</option>
+                                            <option ng-repeat="res in refData.jobStatusList" value="{{res.Id}}">{{res.Name}}</option>
+                                        </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -459,22 +500,69 @@
                         </div>
                     </div>
 
+                    <!-- Document Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Required Documents
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Document List -->
+                                <div class="form-group col-md-12">
+                                    <div ng-repeat="doc in dataJSON.RequiredDocument">
+                                        <label class="col-lg-12 no-padding" for="chkDocuments_{{doc.ID}}">
+                                            <input type="checkbox" icheck
+                                                   id="chkDocuments_{{doc.ID}}"
+                                                   name="RequiredDocument"
+                                                   ng-model="doc.IsSelected" />
+                                            {{doc.RequiredDocumentName}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Questions Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Required Questions
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Questions List -->
+                                <div class="form-group col-md-12">
+                                    <div ng-repeat="qus in dataJSON.Questions">
+                                        <label class="col-lg-12 no-padding" for="chkQuestions_{{qus.ID}}">
+                                            <input type="checkbox" icheck
+                                                   id="chkQuestions_{{qus.ID}}"
+                                                   name="Questions"
+                                                   ng-model="qus.IsSelected" />
+                                            {{qus.QuestionName}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Comments Details -->
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>
                                 Comments
                             </h5>
-                            <!--<div class="ibox-tools dropdown">
-                                <a ng-click="showhide()"> <i class="fa fa-pencil"></i></a>
-                            </div>-->
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <!-- Comments -->
                                 <div class="form-group col-md-12">
                                     <input type="hidden" ng-model="dataJSON.VacancyComment[0].createdUserID" ng-init="dataJSON.VacancyComment[0].createdUserID=refData.loginUserId" ng-value="refData.loginUserId" />
-                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].updatedUserID" ng-init="dataJSON.VacancyComment[0].updatedUserID=refData.loginUserId" ng-value="refData.loginUserId"/>
+                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].updatedUserID" ng-init="dataJSON.VacancyComment[0].updatedUserID=refData.loginUserId" ng-value="refData.loginUserId" />
                                     <textarea type="text" class="form-control summernote" name="VacancyComment"
                                               ng-model="dataJSON.VacancyComment[0].comment"
                                               placeholder="Comments" summernote

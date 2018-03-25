@@ -20,7 +20,7 @@ namespace eMSP.ViewModel
         public string QuestionDescription { get; set; }
         public Nullable<bool> IsDefault { get; set; }
         public Nullable<bool> IsMandatory { get; set; }
-                
+        public Nullable<bool> IsSelected { get; set; }
         public virtual ICollection<VacancyQuestionViewModel> VacancyQuestion { get; set; }
     }
 }

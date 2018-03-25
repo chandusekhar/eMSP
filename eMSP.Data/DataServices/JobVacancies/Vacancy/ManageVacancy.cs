@@ -159,22 +159,32 @@ namespace eMSP.Data.DataServices.JobVacancies
 
                     foreach (IndustrySkillsCreateModel a in model.VacancySkills)
                     {
-                        tblVacancieSkill vacancySkill = await Task.Run(() => ManageVacancySkills.AddVacancySkills(a.id, vacancy));
+                        await Task.Run(() => ManageVacancySkills.AddVacancySkills(a.id, vacancy));
                     }
 
                     foreach (CompanyCreateModel a in model.VacancySuppliers)
                     {
-                        tblVacancySupplier vacancySupplier = await Task.Run(() => ManageVacancySuppliers.InsertVacancySupplier(a.id, vacancy));
+                        await Task.Run(() => ManageVacancySuppliers.InsertVacancySupplier(a.id, vacancy));
                     }
 
                     foreach (LocationCreateModel a in model.VacancyLocations)
                     {
-                        tblVacancyLocation vacancyLocation = await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.id, vacancy));
+                        await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.id, vacancy));
                     }
 
                     foreach (VacancyFileModel a in model.VacancyFiles)
                     {
-                        tblVacancyFile vacancyFile = await Task.Run(() => ManageVacancyFiles.InsertVacancyFiles(a.ConvertTotblVacancyFile(), vacancy));
+                        await Task.Run(() => ManageVacancyFiles.InsertVacancyFiles(a.ConvertTotblVacancyFile(), vacancy));
+                    }
+
+                    foreach (VacancyRequiredDocumentViewModel a in model.RequiredDocument.Where(x => x.IsSelected ?? false))
+                    {
+                        await Task.Run(() => ManageVacancyRequiredDocuments.AddVacanciesRequiredDocument(a.ConvertTotblVacanciesRequiredDocument(), vacancy));
+                    }
+
+                    foreach (VacancyQuestionViewModel a in model.Questions.Where(x => x.IsSelected ?? false))
+                    {
+                        await Task.Run(() => ManageVacancyQuestions.AddVacanciesQuestions(a.ConvertTotblVacanciesQuestion(), vacancy));
                     }
 
                     //Comments
@@ -182,8 +192,12 @@ namespace eMSP.Data.DataServices.JobVacancies
                     {
                         if (!string.IsNullOrEmpty(c.comment))
                         {
+                            c.createdUserID = vacancy.CreatedUserID;
+                            c.createdTimestamp = vacancy.CreatedTimestamp;
+                            c.updatedUserID = vacancy.UpdatedUserID;
+                            c.updatedTimestamp = vacancy.UpdatedTimestamp;
                             tblComment comment = await Task.Run(() => ManageComments.InsertComment(c.ConvertTotblComment()));
-                            tblVacancyComment vacancyComment = await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
+                            await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
                         }
                     }
 

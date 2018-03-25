@@ -84,7 +84,8 @@ angular.module('eMSPApp')
                 UPDATECANCYQUESTIONS: "api/MSPQuestions/update",
                 GETVACANCYDOCUMENTS: "api/MSPRequiredDocument/get",
                 CREATEVACANCYDOCUMENTS: "api/MSPRequiredDocument/save",
-                UPDATECANCYDOCUMENTS: "api/MSPRequiredDocument/update"
+                UPDATECANCYDOCUMENTS: "api/MSPRequiredDocument/update",
+                GETJOBVACANCIESSTATUS:"api/JobVacancie/getVacancyStatus"
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",

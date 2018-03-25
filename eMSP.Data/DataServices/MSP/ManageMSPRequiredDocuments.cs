@@ -36,7 +36,8 @@ namespace eMSP.Data.DataServices.MSP
                         IsMandatory = x.IsMandatory,
                         isActive = x.IsActive,
                         isDeleted = x.IsDeleted,
-                        createdTimestamp = x.CreatedTimestamp
+                        createdTimestamp = x.CreatedTimestamp,
+                        IsSelected = false
                     }).ToList();
                 }
             }
@@ -76,7 +77,8 @@ namespace eMSP.Data.DataServices.MSP
                         IsMandatory = obj.IsMandatory,
                         isActive = obj.IsActive,
                         isDeleted = obj.IsDeleted,
-                        createdTimestamp = obj.CreatedTimestamp
+                        createdTimestamp = obj.CreatedTimestamp,
+                        IsSelected = false
                     };
                 }
             }

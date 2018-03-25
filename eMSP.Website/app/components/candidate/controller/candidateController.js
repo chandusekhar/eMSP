@@ -317,10 +317,9 @@ angular.module('eMSPApp')
         function (ngAuthSettings) {
 
             var config = {
-                template: function (element, attributes) {
-                    var id = element[0].attributes['id'].value;
+                template: function (element, attributes) {                   
                     var temp = '<label class="drop-zone">' +
-                        '<input id="' + id + '" type="file" multiple />' +
+                        '<input type="file" multiple />' +
                         ' <p style="position:relative">Drop files here <span>(or click to upload)</span></p>' +
                         //'<div ng-transclude></div>' +       // <= transcluded stuff
                         '</label>'

@@ -23,8 +23,7 @@ namespace eMSP.DataModel
         public long ID { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
-        public int FileVersionNumber { get; set; }
-        public int FileTypeId { get; set; }
+        public short FileVersionNumber { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public System.DateTime CreatedTimestamp { get; set; }

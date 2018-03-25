@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('createCompanyController', createCompanyController)
-function createCompanyController($scope, $state, localStorageService, configJSON, formAction, AppCoutries, apiCall, APP_CONSTANTS, $uibModal, toaster) {
+function createCompanyController($scope, $state, localStorageService, configJSON, ngAuthSettings, formAction, AppCoutries, apiCall, APP_CONSTANTS, $uibModal, toaster) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
@@ -11,6 +11,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
     $scope.edit = false;
     $scope.formAction = formAction;
     $scope.refData.submitted = false;
+    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
     $scope.cropped = {
         source: 'https://raw.githubusercontent.com/Foliotek/Croppie/master/demo/demo-1.jpg'
     };
@@ -29,6 +30,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
         $scope.edit = true;
         $scope.dataJSON = localStorageService.get('editCompanyData');
         $scope.getStateList();
+        $scope.dataJSON.companyLogoT = $scope.baseUrl + $scope.dataJSON.LogoPath;
     }
 
 
@@ -65,7 +67,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
                        <h3 class="modal-title" > Upload Logo:</h3>\
                        </div >\
                        <div class="modal-body">\
-                       <croppie ng-if="cropped.source" src="cropped.source" ng-model="dataJSON.companyLogo" options="{boundary:{width:300,height:350}}"></croppie></div>\
+                       <croppie ng-if="cropped.source" src="cropped.source" ng-model="dataJSON.LogoPath" options="{boundary:{width:300,height:350}}"></croppie></div>\
                        <div class="modal-footer">\
                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>\
                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>\
@@ -76,9 +78,9 @@ function createCompanyController($scope, $state, localStorageService, configJSON
 
                     var data = new FormData();
 
-                    if ($scope.dataJSON.companyLogo) {
+                    if ($scope.dataJSON.LogoPath) {
 
-                        var image_data = atob($scope.dataJSON.companyLogo.split(',')[1]);
+                        var image_data = atob($scope.dataJSON.LogoPath.split(',')[1]);
                         // Use typed arrays to convert the binary data to a Blob
                         var arraybuffer = new ArrayBuffer(image_data.length);
                         var view = new Uint8Array(arraybuffer);
@@ -102,7 +104,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
 
                         objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
                         objXhr.send(data);
-
+                        $scope.dataJSON.companyLogoT = $scope.dataJSON.LogoPath;
                         $uibModalInstance.close();
                     }
 

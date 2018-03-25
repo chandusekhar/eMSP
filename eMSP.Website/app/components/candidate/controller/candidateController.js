@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
-   
+
 function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
@@ -18,6 +18,16 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.compId = 1;
     $scope.refData.userViewType = "Card";
     $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
+    $scope.contact = false;
+    $scope.resumeUpload = false;
+    $scope.docUpload = false;
+    $scope.contactEdit = false;
+    $scope.CandidateResume = [];
+    $scope.CandidateDocs = [];
+    $scope.CandidateDocument = {};
+    $scope.CandidateDocument.docExpiryDate = null;
+    $scope.CandidateDocument.docFileName = "";
+    $scope.dataJSON.CandidateContact = [];
 
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
@@ -30,7 +40,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     }
 
     $scope.loadIndustrySkills = function (industryId) {
-        
+
         if (industryId && !industryId.skillList) {
             var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
             apires.then(function (data) {
@@ -105,7 +115,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     };
 
     //Function to load candidates
-    if ($scope.IsMangePage) {        
+    if ($scope.IsMangePage) {
         //if()
         var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.compId, { 'SupplierId': $scope.compId });
         apires.then(function (data) {
@@ -117,10 +127,10 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     if ($scope.edit) {
         $scope.SupplierState = true;
         $scope.dataJSON = localStorageService.get('editCandidateData');
-        $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {}; 
+        $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
         $scope.getStateList();
         $scope.LoadIndustriesData();
-       angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
+        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
 
             var Id = 0;
             if (v.id) {
@@ -132,8 +142,8 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
             $scope.loadIndustrySkills(Id);
 
-        });                      
-       
+        });
+
     }
 
     $scope.editCanditate = function (candidate) {
@@ -161,19 +171,21 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.test = function (index) {
         console.log(index);
 
-      
+
     }
     $scope.submit = function (form) {
+
+        $scope.dataJSON.SupplierId = 1;//localStorageService.get('supplierId');
+
+        angular.forEach($scope.dataJSON.CandidateContact, function (con) {
+            con.FirstName = $scope.dataJSON.Candidate.FirstName;
+            con.LastName = $scope.dataJSON.Candidate.LastName;
+        });  
         
-        $scope.dataJSON.SupplierId = localStorageService.get('supplierId');            
-            $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
-            $scope.dataJSON.Contact.FirstName = $scope.dataJSON.Candidate.FirstName;
-            $scope.dataJSON.Contact.LastName = $scope.dataJSON.Candidate.LastName;            
-            $scope.dataJSON.CandidateContact = [];
-            $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
-            $scope.CreateIndustriesData();
-            $scope.CreateIndustrySkillsData();
-            
+
+        $scope.CreateIndustriesData();
+        $scope.CreateIndustrySkillsData();
+
         if (form.$valid) {
             var suc = false;
             if ($scope.edit) {
@@ -192,27 +204,112 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                     //$state.go($scope.configJSON.successURL);
                 });
             }
-           
+
         }
     }
 
-    $scope.removeFile = function (index) {
-        $scope.dataJSON.CandidateFile.splice(index, 1);
+    $scope.removeFile = function (list, index) {
+        //$scope.dataJSON.CandidateFile.splice(index, 1);
+        list.splice(index, 1);
     }
 
     $scope.cancel = function () {
 
-        if (!$scope.SupplierState){
+        if (!$scope.SupplierState) {
             $scope.IsMangePage = true;
             $scope.edit = false;
         }
         else {
             $state.go("company.searchSuppliers");
         }
-        
+
     }
-    
-    
+
+    $scope.fnAddContact = function (flag) {
+        if (!flag) {
+
+            $scope.contact = true;
+        }
+        else {
+
+            if ($scope.dataJSON.Contact.IsPrimary == true) {
+                $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
+                angular.forEach($scope.dataJSON.CandidateContact, function (con) {
+                    con.IsPrimary = false;
+                });
+            }
+            $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
+
+            $scope.dataJSON.Contact = [];
+            console.log($scope.dataJSON.CandidateFile);
+            $scope.contact = false;
+        }
+    }
+
+    $scope.fneditContact = function (flag, index) {
+        if (!flag) {
+            $scope.contact = true;
+            $scope.contactEdit = true;
+            $scope.dataJSON.Contact = angular.copy($scope.dataJSON.CandidateContact[index]);
+            $scope.dataJSON.Contact.index = index;
+        }
+        else {
+
+            if ($scope.dataJSON.Contact.IsPrimary == true) {
+                $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
+                angular.forEach($scope.dataJSON.CandidateContact, function (con) {
+                    con.IsPrimary = false;
+                });
+            }
+            $scope.dataJSON.CandidateContact[$scope.dataJSON.Contact.index] = $scope.dataJSON.Contact;
+
+            $scope.dataJSON.Contact = {};
+            $scope.contactEdit = false;
+            $scope.contact = false;
+        }
+    }
+
+    $scope.fnDocUpload = function (flag) {
+
+
+        if (!flag) {
+
+            $scope.docUpload = true;
+        }
+        else {
+            angular.forEach($scope.CandidateDocs, function (file) {
+                file.FileName = $scope.CandidateDocument.docFileName;
+                file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
+                file.FileTypeId = 10007;
+                $scope.dataJSON.CandidateFile.push(file);
+            });
+            $scope.CandidateDocs = [];
+            $scope.CandidateDocument.docFileName = "";
+            $scope.CandidateDocument.docExpiryDate = null;
+            console.log($scope.dataJSON.CandidateFile);
+            $scope.docUpload = false;
+        }
+    }
+
+    $scope.fnResumeUpload = function (flag) {
+        if (!flag) {
+
+            $scope.resumeUpload = true;
+        }
+        else {
+            angular.forEach($scope.CandidateResume, function (file) {
+
+                file.FileTypeId = 2;
+                $scope.dataJSON.CandidateFile.push(file);
+            });
+            $scope.CandidateResume = [];
+            console.log($scope.dataJSON.CandidateFile);
+            $scope.resumeUpload = false;
+        }
+
+    }
+
+
 }
 
 angular.module('eMSPApp')
@@ -220,16 +317,20 @@ angular.module('eMSPApp')
         function (ngAuthSettings) {
 
             var config = {
-                template: '<label class="drop-zone">' +
-                '<input type="file" multiple />' +
-                ' <p style="position:relative">Drop files here <span>(or click to upload)</span></p>'+
-                //'<div ng-transclude></div>' +       // <= transcluded stuff
-                         '</label>'       
+                template: function (element, attributes) {
+                    var id = element[0].attributes['id'].value;
+                    var temp = '<label class="drop-zone">' +
+                        '<input id="' + id + '" type="file" multiple />' +
+                        ' <p style="position:relative">Drop files here <span>(or click to upload)</span></p>' +
+                        //'<div ng-transclude></div>' +       // <= transcluded stuff
+                        '</label>'
+                    return temp;
+                }
                 ,
-               // transclude: true,
-                replace: true,                
+                // transclude: true,
+                replace: true,
                 require: '?ngModel',
-                link: function (scope, element, attributes, ngModel) {                    
+                link: function (scope, element, attributes, ngModel) {
                     var upload = element[0].querySelector('input');
                     upload.addEventListener('dragover', uploadDragOver, false);
                     upload.addEventListener('drop', uploadFileSelect, false);
@@ -237,21 +338,22 @@ angular.module('eMSPApp')
                     config.scope = scope;
                     config.model = ngModel;
                     config.scope.dzfiles = [];
+
                 }
             }
             return config;
 
-            
+
             // Helper functions
             function uploadDragOver(e) { e.stopPropagation(); e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; }
 
             function uploadFileSelect(e) {
-                console.log(this)
+
                 e.stopPropagation();
                 e.preventDefault();
                 var files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
                 for (var i = 0, file; file = files[i]; ++i) {
-                    console.log(file);
+
                     //config.scope.$apply(function () { config.model.$viewValue.push(file) });
                     uploadFiles(file);
                     var reader = new FileReader();
@@ -268,18 +370,19 @@ angular.module('eMSPApp')
                             };
                             for (var p in file) { data[p] = file[p] }
 
-                            
+
                             config.scope.$apply(function () { config.scope.dzfiles.push(data) })
-                           
+
                         }
                     })(file);
-                    
+
                     reader.readAsDataURL(file);
                 }
             }
 
             // NOW UPLOAD THE FILES.
-            function uploadFiles(files) {
+            function uploadFiles(files, type) {
+
                 //alert("upload");
                 //FILL FormData WITH FILE DETAILS.
                 var data = new FormData();
@@ -292,24 +395,32 @@ angular.module('eMSPApp')
                 else {
                     data.append("uploadedFile", files);
                 }
-
+                //data.append("fileType",type)
                 // ADD LISTENERS.
                 var objXhr = new XMLHttpRequest();
                 //objXhr.addEventListener("progress", updateProgress, false);
                 objXhr.addEventListener("load", transferComplete, false);
-                
+
                 // SEND FILE DETAILS TO THE API.
                 objXhr.open("POST", ngAuthSettings.apiServiceBaseUri + "api/FileUpload/uploadFiles");
                 objXhr.send(data);
             }
-            
+
 
             // CONFIRMATION.
             function transferComplete(e) {
+                //console.log(this)
+                //console.log(type);
                 //alert("Files uploaded successfully.");
                 console.log(e);
                 var obj = angular.fromJson(e.srcElement.response);
+
+                // obj[0].FileTypeId = type == 'Resume' ? 2 : 10007;
+
+
                 config.scope.$apply(function () { config.model.$viewValue.push(obj[0]) });
+
+
             }
         }
     ])

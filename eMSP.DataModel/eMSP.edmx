@@ -81,6 +81,16 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tblAppointmentStatus">
           <Key>
             <PropertyRef Name="ID" />
@@ -478,8 +488,7 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="FileVersionNumber" Type="int" Nullable="false" />
-          <Property Name="FileTypeId" Type="int" Nullable="false" />
+          <Property Name="FileVersionNumber" Type="smallint" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -774,7 +783,6 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VacancyType" Type="smallint" Nullable="false" />
-          <Property Name="JobStatusID" Type="bigint" />
           <Property Name="CustomerID" Type="bigint" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" />
@@ -795,6 +803,7 @@
           <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="JobStatusID" Type="bigint" />
         </EntityType>
         <EntityType Name="tblVacancieSkills">
           <Key>
@@ -1511,18 +1520,6 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblLocations_tblCountries">
-          <End Role="tblCountries" Type="Self.tblCountries" Multiplicity="0..1" />
-          <End Role="tblLocations" Type="Self.tblLocations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCountries">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblLocations">
-              <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblLocations_tblCountryStates">
           <End Role="tblCountryStates" Type="Self.tblCountryStates" Multiplicity="0..1" />
           <End Role="tblLocations" Type="Self.tblLocations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1531,6 +1528,18 @@
             </Principal>
             <Dependent Role="tblLocations">
               <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLocations_tblCountryStates">
+          <End Role="tblCountries" Type="Self.tblCountries" Multiplicity="0..1" />
+          <End Role="tblLocations" Type="Self.tblLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCountries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblLocations">
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2047,6 +2056,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAppointmentStatus" EntityType="Self.tblAppointmentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAppointmentTypes" EntityType="Self.tblAppointmentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBranches" EntityType="Self.tblBranches" Schema="dbo" store:Type="Tables" />
@@ -2300,11 +2310,11 @@
             <End Role="tblIndustrySkills" EntitySet="tblIndustrySkills" />
           </AssociationSet>
           <AssociationSet Name="FK_tblLocations_tblCountries" Association="Self.FK_tblLocations_tblCountries">
-            <End Role="tblCountries" EntitySet="tblCountries" />
+            <End Role="tblCountryStates" EntitySet="tblCountryStates" />
             <End Role="tblLocations" EntitySet="tblLocations" />
           </AssociationSet>
           <AssociationSet Name="FK_tblLocations_tblCountryStates" Association="Self.FK_tblLocations_tblCountryStates">
-            <End Role="tblCountryStates" EntitySet="tblCountryStates" />
+            <End Role="tblCountries" EntitySet="tblCountries" />
             <End Role="tblLocations" EntitySet="tblLocations" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMSPCustomers_tblCustomers" Association="Self.FK_tblMSPCustomers_tblCustomers">
@@ -2518,6 +2528,7 @@
           <EntitySet Name="AspNetUserClaims" EntityType="eMSPModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="eMSPModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="eMSPModel.AspNetUser" />
+          <EntitySet Name="sysdiagrams" EntityType="eMSPModel.sysdiagram" />
           <EntitySet Name="tblAppointmentStatus" EntityType="eMSPModel.tblAppointmentStatu" />
           <EntitySet Name="tblAppointmentTypes" EntityType="eMSPModel.tblAppointmentType" />
           <EntitySet Name="tblBranches" EntityType="eMSPModel.tblBranch" />
@@ -2762,7 +2773,7 @@
             <End Role="tblCountry" EntitySet="tblCountries" />
             <End Role="tblCustomer" EntitySet="tblCustomers" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblLocations_tblCountries" Association="eMSPModel.FK_tblLocations_tblCountries">
+          <AssociationSet Name="FK_tblLocations_tblCountryStates" Association="eMSPModel.FK_tblLocations_tblCountryStates">
             <End Role="tblCountry" EntitySet="tblCountries" />
             <End Role="tblLocation" EntitySet="tblLocations" />
           </AssociationSet>
@@ -2782,7 +2793,7 @@
             <End Role="tblCountryState" EntitySet="tblCountryStates" />
             <End Role="tblCustomer" EntitySet="tblCustomers" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblLocations_tblCountryStates" Association="eMSPModel.FK_tblLocations_tblCountryStates">
+          <AssociationSet Name="FK_tblLocations_tblCountries" Association="eMSPModel.FK_tblLocations_tblCountries">
             <End Role="tblCountryState" EntitySet="tblCountryStates" />
             <End Role="tblLocation" EntitySet="tblLocations" />
           </AssociationSet>
@@ -3029,6 +3040,16 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="eMSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="tblUserProfile" Relationship="eMSPModel.FK_tblUserProfile_AspNetUsers" FromRole="AspNetUser" ToRole="tblUserProfile" />
           <NavigationProperty Name="AspNetRoles" Relationship="eMSPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblAppointmentStatu">
           <Key>
@@ -3424,7 +3445,7 @@
           <NavigationProperty Name="tblContacts" Relationship="eMSPModel.FK_tblContacts_tblCountries" FromRole="tblCountry" ToRole="tblContact" />
           <NavigationProperty Name="tblCountryStates" Relationship="eMSPModel.FK_tblCountryStates_tblCountries" FromRole="tblCountry" ToRole="tblCountryState" />
           <NavigationProperty Name="tblCustomers" Relationship="eMSPModel.FK_tblCustomers_tblCountries" FromRole="tblCountry" ToRole="tblCustomer" />
-          <NavigationProperty Name="tblLocations" Relationship="eMSPModel.FK_tblLocations_tblCountries" FromRole="tblCountry" ToRole="tblLocation" />
+          <NavigationProperty Name="tblLocations" Relationship="eMSPModel.FK_tblLocations_tblCountryStates" FromRole="tblCountry" ToRole="tblLocation" />
           <NavigationProperty Name="tblMSPDetails" Relationship="eMSPModel.FK_tblMSPDetails_tblCountries" FromRole="tblCountry" ToRole="tblMSPDetail" />
           <NavigationProperty Name="tblSuppliers" Relationship="eMSPModel.FK_tblSupplier_tblCountries" FromRole="tblCountry" ToRole="tblSupplier" />
           <NavigationProperty Name="tblUserProfiles" Relationship="eMSPModel.FK_tblUserProfile_tblCountries" FromRole="tblCountry" ToRole="tblUserProfile" />
@@ -3447,7 +3468,7 @@
           <NavigationProperty Name="tblContacts" Relationship="eMSPModel.FK_tblContacts_tblCountryStates" FromRole="tblCountryState" ToRole="tblContact" />
           <NavigationProperty Name="tblCountry" Relationship="eMSPModel.FK_tblCountryStates_tblCountries" FromRole="tblCountryState" ToRole="tblCountry" />
           <NavigationProperty Name="tblCustomers" Relationship="eMSPModel.FK_tblCustomers_tblCountryStates" FromRole="tblCountryState" ToRole="tblCustomer" />
-          <NavigationProperty Name="tblLocations" Relationship="eMSPModel.FK_tblLocations_tblCountryStates" FromRole="tblCountryState" ToRole="tblLocation" />
+          <NavigationProperty Name="tblLocations" Relationship="eMSPModel.FK_tblLocations_tblCountries" FromRole="tblCountryState" ToRole="tblLocation" />
           <NavigationProperty Name="tblMSPDetails" Relationship="eMSPModel.FK_tblMSPDetails_tblCountryStates" FromRole="tblCountryState" ToRole="tblMSPDetail" />
           <NavigationProperty Name="tblSuppliers" Relationship="eMSPModel.FK_tblSupplier_tblCountryStates" FromRole="tblCountryState" ToRole="tblSupplier" />
           <NavigationProperty Name="tblUserProfiles" Relationship="eMSPModel.FK_tblUserProfile_tblCountryStates" FromRole="tblCountryState" ToRole="tblUserProfile" />
@@ -3519,8 +3540,7 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FileVersionNumber" Type="Int32" Nullable="false" />
-          <Property Name="FileTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FileVersionNumber" Type="Int16" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
@@ -3612,8 +3632,8 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblBranches" Relationship="eMSPModel.FK_tblBranches_tblLocations" FromRole="tblLocation" ToRole="tblBranch" />
-          <NavigationProperty Name="tblCountry" Relationship="eMSPModel.FK_tblLocations_tblCountries" FromRole="tblLocation" ToRole="tblCountry" />
-          <NavigationProperty Name="tblCountryState" Relationship="eMSPModel.FK_tblLocations_tblCountryStates" FromRole="tblLocation" ToRole="tblCountryState" />
+          <NavigationProperty Name="tblCountry" Relationship="eMSPModel.FK_tblLocations_tblCountryStates" FromRole="tblLocation" ToRole="tblCountry" />
+          <NavigationProperty Name="tblCountryState" Relationship="eMSPModel.FK_tblLocations_tblCountries" FromRole="tblLocation" ToRole="tblCountryState" />
           <NavigationProperty Name="tblCustomerLocationBranches" Relationship="eMSPModel.FK_tblCustomerLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblCustomerLocationBranch" />
           <NavigationProperty Name="tblMSPLocationBranches" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblMSPLocationBranch" />
           <NavigationProperty Name="tblSupplierLocationBranches" Relationship="eMSPModel.FK_tblSupplierLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblSupplierLocationBranch" />
@@ -3875,7 +3895,6 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VacancyType" Type="Int16" Nullable="false" />
-          <Property Name="JobStatusID" Type="Int64" />
           <Property Name="CustomerID" Type="Int64" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
@@ -3896,6 +3915,7 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JobStatusID" Type="Int64" />
           <NavigationProperty Name="tblCandidateSubmissions" Relationship="eMSPModel.FK_tblCandidateSubmission_tblVacancies" FromRole="tblVacancy" ToRole="tblCandidateSubmission" />
           <NavigationProperty Name="tblCustomer" Relationship="eMSPModel.FK_tblVacancies_tblCustomers" FromRole="tblVacancy" ToRole="tblCustomer" />
           <NavigationProperty Name="tblJobVacanciesStatu" Relationship="eMSPModel.FK_tblVacancies_tblJobVacanciesStatus" FromRole="tblVacancy" ToRole="tblJobVacanciesStatu" />
@@ -4609,7 +4629,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblLocations_tblCountries">
+        <Association Name="FK_tblLocations_tblCountryStates">
           <End Type="eMSPModel.tblCountry" Role="tblCountry" Multiplicity="0..1" />
           <End Type="eMSPModel.tblLocation" Role="tblLocation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -4669,7 +4689,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblLocations_tblCountryStates">
+        <Association Name="FK_tblLocations_tblCountries">
           <End Type="eMSPModel.tblCountryState" Role="tblCountryState" Multiplicity="0..1" />
           <End Type="eMSPModel.tblLocation" Role="tblLocation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5218,6 +5238,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="eMSPModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblAppointmentStatus">
             <EntityTypeMapping TypeName="eMSPModel.tblAppointmentStatu">
               <MappingFragment StoreEntitySet="tblAppointmentStatus">
@@ -5642,7 +5673,6 @@
                 <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="FileTypeId" ColumnName="FileTypeId" />
                 <ScalarProperty Name="FileVersionNumber" ColumnName="FileVersionNumber" />
                 <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -5952,6 +5982,7 @@
           <EntitySetMapping Name="tblVacancies">
             <EntityTypeMapping TypeName="eMSPModel.tblVacancy">
               <MappingFragment StoreEntitySet="tblVacancies">
+                <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
                 <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
                 <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
                 <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
@@ -5972,7 +6003,6 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
                 <ScalarProperty Name="VacancyType" ColumnName="VacancyType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

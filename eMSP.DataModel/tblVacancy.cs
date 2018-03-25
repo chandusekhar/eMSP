@@ -29,6 +29,7 @@ namespace eMSP.DataModel
     
         public long ID { get; set; }
         public short VacancyType { get; set; }
+        public Nullable<long> JobStatusID { get; set; }
         public long CustomerID { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
@@ -49,7 +50,6 @@ namespace eMSP.DataModel
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
-        public Nullable<long> JobStatusID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateSubmission> tblCandidateSubmissions { get; set; }

@@ -47,8 +47,18 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
         var rgModalInstance = $uibModal.open({
             templateUrl: 'app/components/Roles/view/createRoleGroup.html',
             scope: $scope,
+            size: $scope.configJSON.modelSizeLarge,
             controller: 'createRoleGroupController',
-            windowClass: 'animated slideInRight'
+            windowClass: 'animated slideInRight',
+            resolve: {                
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
         });
     }
 

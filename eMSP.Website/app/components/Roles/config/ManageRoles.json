@@ -4,5 +4,7 @@
   "titleFormEdit": "Edit Role",
   "titleRG": "Manage Roles",
   "titleRGFormCreate": "Add Role",
-  "titleRGFormEdit": "Edit Role"
+  "titleRGFormEdit": "Edit Role",
+  "modelSizeSmall": "sm",
+  "modelSizeLarge": "lg"
 }

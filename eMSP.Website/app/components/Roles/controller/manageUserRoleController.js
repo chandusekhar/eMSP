@@ -10,13 +10,15 @@ function manageUserRoleController($scope, $state, localStorageService, configJSO
     $scope.refData.submitted = false;
     $scope.formAction = formAction;
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.configJSON.companyType, id: 1 });
+    $scope.CUser = localStorageService.get('CurrentUser');
+
+    var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.CUser.companyType, id: $scope.CUser.companyId });
     apires.then(function (data) {
         $scope.userList = data;
     });
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPURL);
-    apires.then(function (data) {
+    var apiresroles = apiCall.post(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPURL);
+    apiresroles.then(function (data) {
         $scope.roleGroupsList = data;
     });
 

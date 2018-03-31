@@ -652,6 +652,7 @@ function openDatepicker() {
  */
 function hasPermission(authService) {
     return {
+        restrict: 'A',
         link: function (scope, element, attrs) {
             if (!_.isString(attrs.hasPermission)) {
                 throw 'hasPermission value must be a string'

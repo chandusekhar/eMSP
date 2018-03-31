@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'apiCall', function ($http, $q, localStorageService, ngAuthSettings, apiCall) {
 
-    var serviceBase = ngAuthSettings.apiServiceBaseUri;
+    var serviceBase = ngAuthSettings.apiServiceBaseUri;//Welcome@1
     var authServiceFactory = {};
 
     var _authentication = {
@@ -68,8 +68,8 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
         var apires = apiCall.post('api/role/GetUserRoles');
         apires.then(function (data) {
 
-            _permissionList = data;
-            
+            _permissionList = data.roles;
+            localStorageService.set('CurrentUser', data.user);
             localStorageService.set('permissionList', _permissionList);
         });
 

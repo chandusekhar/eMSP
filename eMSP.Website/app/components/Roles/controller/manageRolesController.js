@@ -104,5 +104,19 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
         $state.rgdataJSON = {};
         $uibModalInstance.close();
     }
+
+    $scope.toggleSelection = function toggleSelection(Role) {
+        var idx = $scope.rgdataJSON.roles.indexOf(Role);
+
+        // is currently selected
+        if (idx > -1) {
+            $scope.rgdataJSON.roles.splice(idx, 1);
+        }
+
+        // is newly selected
+        else {
+            $scope.rgdataJSON.roles.push(Role);
+        }
+    };
 }
 

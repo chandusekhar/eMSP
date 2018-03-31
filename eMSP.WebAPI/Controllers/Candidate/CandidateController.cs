@@ -116,8 +116,17 @@ namespace eMSP.WebAPI.Controllers.Candidate
                 string userId = User.Identity.GetUserId();
                
                Helpers.Helpers.AddBaseProperties(data.Candidate,"create", userId);
-               Helpers.Helpers.AddBaseProperties(data.CandidateContact[0], "create", userId);
-                Helpers.Helpers.AddBaseProperties(data.CandidateFile[0], "create", userId);
+                foreach(var con in data.CandidateContact)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
+                foreach (var con in data.CandidateFile)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
+                
                 return Ok(await CandidateService.CreateCandidate(data));
             }
             catch (Exception)
@@ -162,7 +171,16 @@ namespace eMSP.WebAPI.Controllers.Candidate
             {
                 string userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(data.Candidate, "update", userId);
-                Helpers.Helpers.AddBaseProperties(data.CandidateContact[0], "update", userId);                
+                foreach (var con in data.CandidateContact)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
+                foreach (var con in data.CandidateFile)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+                               
                 return Ok(await CandidateService.UpdateCandidate(data));
             }
             catch (Exception)

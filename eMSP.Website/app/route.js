@@ -1130,6 +1130,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -1380,6 +1385,47 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/role",
             templateUrl: "views/common/content.html",
+        })
+        .state("role.manageRoleGroup", {
+            url: '/manageRoleGroup',
+            templateUrl: 'app/components/Roles/view/manageRoleGroups.html',
+            controller: 'manageRolesController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Roles/Config/ManageRoles.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
         })
         .state("role.manageRole", {
             url: '/manageRole',

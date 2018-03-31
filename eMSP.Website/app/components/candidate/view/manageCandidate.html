@@ -52,6 +52,7 @@
         font-size: 10px;
     }
 </style>
+<toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
     <!-- Main view  -->
@@ -393,7 +394,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group">
-                                                <button ng-if="contactEdit" ng-click="fneditContact(true,dataJSON.Contact.index);" class="btn btn-primary">Update</button><button ng-if="!contactEdit" ng-click="fnAddContact(true);" class="btn btn-primary">Add</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="cancel()">Cancel</a></div>
+                                                <button ng-if="contactEdit" ng-click="fneditContact(true,dataJSON.Contact.index);" class="btn btn-primary">Update</button><button ng-if="!contactEdit" ng-click="fnAddContact(true);" class="btn btn-primary">Add</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('contact')">Cancel</a></div>
 
                                         </div>
                                     </div>
@@ -466,7 +467,7 @@
                                                 </div>
                                                 <br />
                                             </div>
-                                            <div class="form-group"><button ng-disabled="CandidateResume.length == 0" ng-click="fnResumeUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="cancel()">Cancel</a></div>
+                                            <div class="form-group"><button ng-disabled="CandidateResume.length == 0" ng-click="fnResumeUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('resumeUpload')">Cancel</a></div>
                                         </div>
 
 
@@ -555,7 +556,7 @@
                                                 </div>
 
                                             </div><br />
-                                            <div class="form-group"><button ng-disabled="CandidateDocs.length == 0" ng-click="fnDocUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="cancel()">Cancel</a></div>
+                                            <div class="form-group"><button ng-disabled="CandidateDocs.length == 0" ng-click="fnDocUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('docUpload')">Cancel</a></div>
                                         </div>
 
                                         <div ng-if="docUpload != true">

@@ -9,7 +9,7 @@
   "searchUrl": "/api/supplierdetails/getSuppliers",
   "createCandidateUrl": "candidate.create",
   "editUrl": "company.editSupplier",
-  "successURL": "company.searchSuppliers"
+  "successURL": "candidate.manageCandidate"
 
 
 }

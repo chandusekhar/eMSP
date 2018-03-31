@@ -1,10 +1,13 @@
 ﻿using eMSP.DataModel;
 using eMSP.ViewModel.Role;
+using eMSP.ViewModel.User;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eMSP.Data.Extensions;
 
 namespace eMSP.Data.DataServices.Roles
 {
@@ -47,6 +50,72 @@ namespace eMSP.Data.DataServices.Roles
                                                                   {
                                                                       Name = b.Name
                                                                   }).ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal static async Task<UserRolesModel> GetUserRolesn(string UserID)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    UserRolesModel user = new UserRolesModel();
+
+                    user.roles = await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
+                                                                  .Join(db.AspNetRoleGroups,
+                                                                  u => u.RoleGroupId,
+                                                                  rg => rg.Id, (u, rg) => new
+                                                                  {
+                                                                      RoleGroupId = rg.Id
+                                                                  }).Join(db.AspNetRoleGroupRoles,
+                                                                  r => r.RoleGroupId,
+                                                                  rgr => rgr.RoleGroupId, (r, rgr) => new
+                                                                  {
+                                                                      rolesId = rgr.RoleId
+                                                                  }).Join(db.AspNetRoles,
+                                                                  ro => ro.rolesId,
+                                                                  b => b.Id, (ro, b) => new RoleModel
+                                                                  {
+                                                                      id = b.Id,
+
+                                                                      Name = b.Name
+                                                                  }).ToList());
+
+                    tblUserProfile up = db.tblUserProfiles.Where(a => a.UserID == UserID)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
+                                                  .SingleOrDefault();
+                    user.user = new UserModel();
+
+                    user.user.user = up.ConvertToUser();
+                    user.user.userId = UserID;
+
+                    long mspId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblMSPUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.MSPID).FirstOrDefault();
+                    long supId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblSupplierUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.SupplierID).FirstOrDefault();
+                    long cutId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblCustomerUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.CustomerID).FirstOrDefault();
+
+                    if (mspId != 0)
+                    {
+                        user.user.companyId = mspId;
+                        user.user.companyType = "MSP";
+                    }
+                    else if(supId != 0)
+                    {
+                        user.user.companyId = supId;
+                        user.user.companyType = "Supplier";
+                    }
+                    else if (supId != 0)
+                    {
+                        user.user.companyId = cutId;
+                        user.user.companyType = "Customer";
+                    }
+
+                    return user;
                 }
             }
             catch (Exception)

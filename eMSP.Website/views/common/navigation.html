@@ -36,14 +36,14 @@
                         <ul class="nav nav-third-level collapse" ng-class="{active: $state.includes('company')}">
                             <li ui-sref-active="active"><a ui-sref="company.searchSuppliers">{{'Manage Suppliers'|translate}} </a></li>
                             <li ui-sref-active="active"><a ui-sref="company.searchCustomers">{{'Manage Customers'|translate}} </a></li>
-                            <li ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
+                            <li has-permission="MSP User Full" ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
                         </ul>
                     </li>
                     <!-- Role Sub Menu -->
                     <li ng-class="{active: $state.includes('role')}">
                         <a href="#"><i class="fa fa-user-circle-o"></i> <span class="nav-label">{{'Authorization'|translate}}</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('role')}">
-                            <li ui-sref-active="active"><a ui-sref="role.manageRole">{{'Application Roles'|translate}} </a></li>
+                            <li ui-sref-active="active"><a ui-sref="role.manageRoleGroup">{{'Application Roles'|translate}} </a></li>
                             <li ui-sref-active="active"><a ui-sref="role.manageUserRole">{{'Manage User Roles'|translate}} </a></li>
                         </ul>
                     </li>

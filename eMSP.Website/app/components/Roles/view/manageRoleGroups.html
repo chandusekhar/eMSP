@@ -19,20 +19,22 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
+          
+
             <div class="col-lg-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><strong>Roles:</strong></h5>
+                        <h5><strong>Role-Group:</strong></h5>
                         <div class="ibox-tools">
-                            <a ng-click="AddRole()" class="btn btn-white btn-sm" style="color:#1dda23;"><i class="fa fa-plus"></i> Role </a>
+                            <a ng-click="AddRoleGroup()" class="btn btn-white btn-sm" style="color:#1dda23;"><i class="fa fa-plus"></i> Role Group </a>
                         </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-lg-12">
                                 <ul class="list-group clear-list m-t">
-                                    <li class="list-group-item" ng-class="{'fist-item':$index==0}" ng-repeat="r in rolesList">
-                                        <span class="label label-success">{{$index+1}}</span> {{r.Name}}
+                                    <li class="list-group-item" ng-class="{'fist-item':$index==0}" ng-repeat="rg in roleGroupsList">
+                                        <span class="label label-success">{{$index+1}}</span> {{rg.roleGroupName}}
                                     </li>
                                 </ul>
                             </div>
@@ -40,8 +42,6 @@
                     </div>
                 </div>
             </div>
-
-         
 
         </div>
     </div>

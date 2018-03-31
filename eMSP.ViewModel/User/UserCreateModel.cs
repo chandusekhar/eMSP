@@ -10,17 +10,21 @@ using eMSP.ViewModel.Shared;
 
 namespace eMSP.ViewModel.User
 {
-    public class UserModel: BaseModel
+    public class UserBaseModel : BaseModel
     {
-        public UserModel() { }
+        public UserBaseModel() { }
+        public long companyId { get; set; } 
+        public string companyType { get; set; }
         public string userId { get; set; }
-        public long companyId { get; set; }
+    }
+    public class UserModel: UserBaseModel
+    {
+        public UserModel() { }       
         public long companyUserId { get; set; }
         public UserCreateModel user { get; set; }
-
-        public string companyType { get; set; }
+       
     }
-    public class UserCreateModel : UserModel
+    public class UserCreateModel : UserBaseModel
     {
         public UserCreateModel() { }
         public string firstName { get; set; }

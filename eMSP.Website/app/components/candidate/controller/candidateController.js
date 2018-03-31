@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
 
-function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON) {
+function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -192,16 +192,18 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.UPDATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    $scope.cancel();
-                    //$state.go($scope.configJSON.successURL);
+                    //$scope.cancel();
+                     toaster.warning({ body: "Data Updated Successfully." });
+                    $state.go($scope.configJSON.successURL);
                 });
             }
             else {
                 var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.CREATEURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    $scope.cancel();
-                    //$state.go($scope.configJSON.successURL);
+                    toaster.warning({ body: "Data Created Successfully." });
+                    //$scope.cancel();
+                    $state.reload();
                 });
             }
 
@@ -227,7 +229,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
     $scope.fnAddContact = function (flag) {
         if (!flag) {
-
+            $scope.dataJSON.Contact = {};
             $scope.contact = true;
         }
         else {
@@ -240,7 +242,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
             }
             $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
 
-            $scope.dataJSON.Contact = [];
+           
             console.log($scope.dataJSON.CandidateFile);
             $scope.contact = false;
         }
@@ -309,7 +311,14 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
     }
 
+    $scope.close = function (flag) {
+        if (flag) {
 
+            $scope[flag] = false;
+        }
+        
+
+    }
 }
 
 angular.module('eMSPApp')

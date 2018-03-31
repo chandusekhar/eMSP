@@ -35,6 +35,18 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
+        public async Task<UserRolesModel> GetUserRolesn(string UserID)
+        {
+            try
+            {
+                return await Task.Run(() => ManageRole.GetUserRolesn(UserID));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<RoleGroupModel> GetRoleGroup(string id)
         {
             try

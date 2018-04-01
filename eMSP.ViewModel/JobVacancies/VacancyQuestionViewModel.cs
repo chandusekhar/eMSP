@@ -13,7 +13,7 @@ namespace eMSP.ViewModel.JobVacancies
 
         public VacancyQuestionViewModel()
         {
-            this.CandidateSubmissionsQuestionsResponse = new HashSet<CandidateSubmissionsQuestionsResponseViewModel>();
+            this.CandidateSubmissionsQuestionsResponse = new HashSet<CandidateSubmissionsQuestionsResponseModel>();
         }
 
         public long ID { get; set; }
@@ -24,7 +24,7 @@ namespace eMSP.ViewModel.JobVacancies
         public Nullable<bool> IsMandatory { get; set; }
         public Nullable<bool> IsSelected { get; set; }
 
-        public virtual ICollection<CandidateSubmissionsQuestionsResponseViewModel> CandidateSubmissionsQuestionsResponse { get; set; }
+        public virtual ICollection<CandidateSubmissionsQuestionsResponseModel> CandidateSubmissionsQuestionsResponse { get; set; }
         public virtual QuestionViewModel Question { get; set; }
         public virtual VacancyModel Vacancy { get; set; }
     }

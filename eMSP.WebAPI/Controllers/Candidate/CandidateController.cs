@@ -56,8 +56,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
         {
             try
             {
-
-                return Ok(await CandidateService.GetCandidateSubmission(candidateId));
+                return Ok(await CandidateService.GetCandidate(candidateId));
             }
             catch (Exception)
             {

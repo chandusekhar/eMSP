@@ -23,6 +23,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5><strong>{{configJSON.title}}:</strong></h5>
+                        <div class="ibox-tools">
+                            <a ng-click="create()" class="btn btn-primary">Create</a>
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
@@ -128,8 +131,6 @@
                                         <i></i> Is Mandatory
                                     </label>
                                 </div>
-
-
                             </div>
                             <h5>
                                 <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>

@@ -21,7 +21,7 @@ namespace eMSP.Data.Extensions
                 Email = data.Email,
                 UniqueSocialID = data.UniqueSocialID,
                 IsActive = data.isActive,
-                IsDeleted = data.isDeleted??false,
+                IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
@@ -135,7 +135,7 @@ namespace eMSP.Data.Extensions
 
         public static tblFile ConvertTotblFile(this FileModel data)
         {
-            if (data!=null)
+            if (data != null)
             {
                 return new tblFile()
                 {
@@ -221,6 +221,77 @@ namespace eMSP.Data.Extensions
                 ID = Convert.ToInt32(data.ID),
                 Name = data.Name,
                 Description = data.Description,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+
+        public static tblCandidateSubmissionDocumentRespons ConvertTotblCandidateSubmissionsQuestionsResponses(this CandidateSubmissionDocumentResponseModel data)
+        {
+            return new tblCandidateSubmissionDocumentRespons()
+            {
+                ID = Convert.ToInt64(data.id),
+                CandidateSubmissionID = data.candidateSubmissionId,
+                CandidateFileID = data.candidateFileId,
+                VacancyRequiredDocumentID = data.vacancyRequiredDocumentId,
+                CommentID = data.commentId,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static CandidateSubmissionDocumentResponseModel ConvertToCandidateSubmissionDocumentResponseModel(this tblCandidateSubmissionDocumentRespons data)
+        {
+            return new CandidateSubmissionDocumentResponseModel()
+            {
+                id = Convert.ToInt32(data.ID),
+                candidateSubmissionId = data.CandidateSubmissionID,
+                candidateFileId = data.CandidateFileID,
+                vacancyRequiredDocumentId = data.VacancyRequiredDocumentID,
+                commentId = data.CommentID,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
+
+        public static tblCandidateSubmissionsQuestionsRespons ConvertTotblCandidateSubmissionsQuestionsRespons(this CandidateSubmissionsQuestionsResponseModel data)
+        {
+            return new tblCandidateSubmissionsQuestionsRespons()
+            {
+                ID = Convert.ToInt64(data.id),
+                SubmissionID = data.submissionId,
+                VacancyQuestionID = data.vacancyQuestionId,
+                Responses = data.responses,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static CandidateSubmissionsQuestionsResponseModel ConvertToCandidateSubmissionsQuestionsResponseModel(this tblCandidateSubmissionsQuestionsRespons data)
+        {
+            return new CandidateSubmissionsQuestionsResponseModel()
+            {
+                id = Convert.ToInt32(data.ID),
+                submissionId = data.SubmissionID,
+                vacancyQuestionId = data.VacancyQuestionID,
+                responses = data.Responses,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,

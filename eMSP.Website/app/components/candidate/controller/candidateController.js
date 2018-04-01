@@ -3,7 +3,6 @@ angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
 
 function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {
-    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -424,7 +423,7 @@ angular.module('eMSPApp')
                 console.log(e);
                 var obj = angular.fromJson(e.srcElement.response);
 
-                // obj[0].FileTypeId = type == 'Resume' ? 2 : 10007;
+                // obj[0].FileTypeId = type == 'Resume' ? 2 : 6;
 
 
                 config.scope.$apply(function () { config.model.$viewValue.push(obj[0]) });

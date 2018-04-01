@@ -1,3 +1,53 @@
+<style>
+    .one {
+        cursor: pointer;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 4px;
+        font: caption;
+        text-align: center;
+        border: 1px dotted green;
+        box-sizing: border-box;
+    }
+
+
+        .one span {
+            display: block;
+            font-size: 10px;
+        }
+
+        .one img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100px;
+        }
+
+        .one input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 9999px;
+            cursor: pointer;
+        }
+
+    .two {
+        display: block;
+        margin: 30px;
+    }
+
+
+    pre {
+        margin: 30px;
+        font-size: 10px;
+    }
+</style>
 <toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
@@ -14,11 +64,561 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <form class="m-t" name="form" novalidate>
-                <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.candidate.$error.required }">
+                <div class="col-md-7">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Candidate</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ui-select ng-model="dataJSON.searchCandidate" theme="bootstrap" name="searchCandidate" ng-change="getCandidate($select.selected.Candidate)">
+                                        <ui-select-match placeholder="Search Candidate">{{$select.selected.Candidate.FirstName + ' ' + $select.selected.Candidate.LastName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.Candidate.FirstName +' '+ res.Candidate.LastName  as res in refData.customerList | filter: $select.search">
+
+                                            <div ng-bind-html="res.Candidate.FirstName +' '+ res.Candidate.LastName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <label style="padding-top: 5px;">(or)</label>
+
+                                </div>
+                                <div class="col-md-5">
+                                    <button type="submit" ng-if="!editform" ng-click="newCustomer()" class="btn btn-primary m-b">Create New Customer</button>
+                                </div>
+                            </div>
+                            
+
+                            <div class="row m-t-md">
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': submitted && form.BillRate.$error.required }">
+                                    <label>Bill Rate * :</label>
+                                    <input type="text" class="form-control" name="BillRate"
+                                           ng-model="csdataJSON.BillRate"
+                                           placeholder="Bill Rate" required />
+                                    <span ng-show="submitted && form.BillRate.$error.required" class="text-danger">
+                                        * Bill Rate is required
+                                    </span>
+                                </div>
+                                <div class="form-group  col-md-6" ng-class="{ 'has-error': submitted && form.StatusId.$error.required }">
+                                    <label>Status * :</label>
+                                    <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId">
+                                        <option value="">Choose Status</option>
+                                        <option ng-repeat="res in refData.candidateStatusList" value="{{res.ID}}">{{res.Name}}</option>
+                                    </select>
+
+                                    <span ng-show="submitted && form.StatusId.$error.required" class="text-danger">
+                                        * Status is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{configJSON.titleFormCreate}}</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">First Name:</label>
+                                    <div ng-class="{ 'has-error': form.FirstName.$dirty && form.FirstName.$error.required }">
+                                        <input type="text" class="form-control" name="FirstName" ng-disabled="!refData.isNewCustomer"
+                                               ng-model="dataJSON.Candidate.FirstName"
+                                               placeholder="First Name" required="">
+                                        <span ng-show="form.FirstName.$dirty && form.FirstName.$error.required" class="help-block">
+                                            First Name is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Last Name:</label>
+                                    <div ng-class="{ 'has-error': form.LastName.$dirty && form.LastName.$error.required }">
+                                        <input type="text" class="form-control" name="LastName" ng-disabled="!refData.isNewCustomer"
+                                               ng-model="dataJSON.Candidate.LastName"
+                                               placeholder="Last Name" required="">
+                                        <span ng-show="form.LastName.$dirty && form.LastName.$error.required" class="help-block">
+                                            Last Name is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Date Of Birth:</label>
+
+                                    <div ng-class="{ 'has-error': form.DateOfBirth.$dirty && form.DateOfBirth.$error.required }" class="input-group date">
+                                        <input name="DateOfBirth" ng-model="dataJSON.Candidate.DateOfBirth" type="datetime" 
+                                               class="form-control" placeholder="MM/DD/YYYY" date-time view="date"  ng-disabled="!refData.isNewCustomer"
+                                               auto-close="true" min-view="date" format="MM/DD/YYYY">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <span ng-show="form.DateOfBirth.$dirty && form.DateOfBirth.$error.required" class="help-block">
+                                            Date Of Birth is required
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Unique Social ID:</label>
+                                    <div ng-class="{ 'has-error': form.UniqueSocialID.$dirty && form.UniqueSocialID.$error.required }">
+                                        <input type="text" class="form-control" name="UniqueSocialID"
+                                               ng-model="dataJSON.Candidate.UniqueSocialID" ng-disabled="!refData.isNewCustomer"
+                                               placeholder="Unique Social ID" required="">
+                                        <span ng-show="form.UniqueSocialID.$dirty && form.UniqueSocialID.$error.required" class="help-block">
+                                            Unique Social ID is required
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{configJSON.titleFormCreateAddress}}</h5>
+                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnAddContact(false)" ng-hide="!refData.isNewCustomer">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>                            
+                        </div>
+                        <div class="ibox-content">
+                            <div ng-if="contact==false" class="row">
+                                <div class="col-lg-12 ibox-tools pull-left ">
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Address</th>
+                                                <th>Primary</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="con in dataJSON.CandidateContact track by $index">
+                                                <td style="width:80%">
+                                                    <span style="float:left">{{con.StreetAddress}}</span>
+                                                </td>
+                                                <td style="width:10%">
+                                                    <span ng-if="con.IsPrimary">Yes</span><span ng-if="!con.IsPrimary">No</span>
+                                                </td>
+                                                <td style="width:10%">
+                                                    <span ng-click="fneditContact(false,$index)" class="text-navy">
+                                                        <span class="fa fa-pencil"></span>
+                                                    </span><a ng-click="removeFile(dataJSON.CandidateContact,$index)"> <i class="fa fa-trash"></i> </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-if="contact != false" class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Email:</label>
+                                    <div ng-class="{ 'has-error': form.EmailAddress.$dirty && form.EmailAddress.$error.required }">
+                                        <input type="email" class="form-control"
+                                               ng-model="dataJSON.Contact.EmailAddress"
+                                               placeholder="Email" name="EmailAddress" required="">
+                                        <span ng-show="form.EmailAddress.$dirty && form.EmailAddress.$error.required" class="help-block">
+                                            Email is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Mobile Number:</label>
+                                    <div ng-class="{ 'has-error': form.MobileNumber.$dirty && form.MobileNumber.$error.required }">
+                                        <input type="text" class="form-control"
+                                               ng-model="dataJSON.Contact.MobileNumber"
+                                               name="MobileNumber" placeholder="Phone Number" required="">
+                                        <span ng-show="form.MobileNumber.$dirty && form.MobileNumber.$error.required" class="help-block">
+                                            Mobile Number is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Street Address:</label>
+                                    <div ng-class="{ 'has-error': form.StreetAddress.$dirty && form.StreetAddress.$error.required }">
+                                        <input type="text" class="form-control"
+                                               ng-model="dataJSON.Contact.StreetAddress"
+                                               name="StreetAddress" placeholder="Address" required="">
+                                        <span ng-show="form.StreetAddress.$dirty && form.StreetAddress.$error.required" class="help-block">
+                                            Street Address is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Country:</label>
+                                    <div ng-class="{ 'has-error': form.country.$dirty && form.country.$error.required }">
+                                        <select ng-model="dataJSON.Contact.CountyID" class="form-control" ng-change="getStateList()">
+                                            <option value="">Country</option>
+                                            <option ng-repeat="res in refData.countryList" value="{{res.value}}">{{res.key}}</option>
+                                        </select>
+                                        <span ng-show="form.country.$dirty && form.country.$error.required" class="help-block">
+                                            country is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">State:</label>
+                                    <div ng-class="{ 'has-error': form.state.$dirty && form.state.$error.required }">
+                                        <select ng-model="dataJSON.Contact.StateID" class="form-control">
+                                            <option value="">State</option>
+                                            <option ng-repeat="res in refData.stateList" value="{{res.value}}">{{res.key}}</option>
+                                        </select>
+                                        <span ng-show="form.state.$dirty && form.state.$error.required" class="help-block">
+                                            state is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">City:</label>
+                                    <div ng-class="{ 'has-error': form.city.$dirty && form.city.$error.required }">
+                                        <input type="text" class="form-control"
+                                               ng-model="dataJSON.Contact.City"
+                                               name="city" placeholder="City" required="">
+
+                                        <span ng-show="form.city.$dirty && form.city.$error.required" class="help-block">
+                                            City is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">Zip:</label>
+                                    <div ng-class="{ 'has-error': form.ZipCode.$dirty && form.ZipCode.$error.required }">
+                                        <input type="text" class="form-control" name="ZipCode"
+                                               ng-model="dataJSON.Contact.ZipCode"
+                                               placeholder="Zip" required="">
+                                        <span ng-show="form.ZipCode.$dirty && form.ZipCode.$error.required" class="help-block">
+                                            ZipCode is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-normal">&nbsp;</label>
+                                    <div class="checkbox i-checks">
+                                        <label>
+                                            <input type="checkbox" icheck name="IsActive" ng-model="dataJSON.Contact.IsPrimary">
+                                            <i></i> Is Primary
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <button ng-if="contactEdit" ng-click="fneditContact(true,dataJSON.Contact.index);" class="btn btn-primary">Update</button><button ng-if="!contactEdit" ng-click="fnAddContact(true);" class="btn btn-primary">Add</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('contact')">Cancel</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{configJSON.titleFormCreateIndustry}}</h5>
+                            
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label class="font-normal">Industries</label>
+                                <div ng-class="{ 'has-error': form.industryName.$dirty && form.industryName.$error.required }">
+                                    <ui-select multiple ng-model="dataJSON.CandidateIndustries" ng-change="loadSkills()" 
+                                               theme="bootstrap" class="form-control" ng-disabled="!refData.isNewCustomer">
+                                        <ui-select-match placeholder="Select Industries...">{{$item.industryName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.id as res in refData.industryList | filter:$select.search">
+                                            {{res.industryName}}
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-normal">Skills</label>
+                                <div ng-class="{ 'has-error': form.skills.$dirty && form.skills.$error.required }">
+                                    <ui-select multiple ng-model="dataJSON.CandidateSkills" theme="bootstrap" 
+                                               class="form-control" ng-disabled="!refData.isNewCustomer">
+                                        <ui-select-match placeholder="Select Skills...">{{$item.skillName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.id as res in refData.industrySkillsList | filter:$select.search">
+                                            {{res.skillName}}
+                                        </ui-select-choices>
+                                    </ui-select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{configJSON.titleFormResume}}</h5>
+                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnResumeUpload(false);" ng-hide="!refData.isNewCustomer"> 
+                            <i class="fa fa-plus-circle"></i></a>
+                            
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row form-group">
+                                <div ng-if="resumeUpload == true">
+                                    <div drop-zone custom="true" id="Resume" ng-model="CandidateResume" class="one btn btn-default"></div>
+                                    <div ng-repeat="file in CandidateResume track by $index">
+
+
+                                        <div class="ibox-tools pull-left small">
+                                            <i class="fa fa fa-dot-circle-o"></i> <a target="_blank" style="text-decoration:underline; color:darkblue" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a> <a ng-click="removeFile(CandidateResume,$index)"> <i class="fa fa-trash"></i></a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="form-group"><button ng-disabled="CandidateResume.length == 0" ng-click="fnResumeUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('resumeUpload')">Cancel</a></div>
+                                </div>
+
+                                <div ng-if="resumeUpload != true">
+                                    <div class="col-lg-12 ibox-tools pull-left ">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>File Name</th>
+                                                    <th>Type</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="file.FileTypeId == 2" ng-repeat="file in dataJSON.CandidateFile track by $index">
+
+                                                    <td style="width:80%; float:left">
+                                                        <a target="_blank" style="text-decoration:underline; color:darkblue;float:left" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        Resume
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <a ng-click="removeFile(dataJSON.CandidateFile,$index)"> <i class="fa fa-trash"></i> </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{configJSON.titleFormCreateFile}}</h5>
+                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnDocUpload(false)" ng-hide="!refData.isNewCustomer"> 
+                            <i class="fa fa-plus-circle"></i></a>
+                            
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row form-group">
+                                <!--<input type="button" ng-click="uploadFiles()" value="Upload" />-->
+                                <div ng-if="docUpload == true">
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Document Name:</label>
+                                        <div ng-class="{ 'has-error': form.docFileName.$dirty && form.docFileName.$error.required }">
+                                            <input type="text" class="form-control" name="docFileName"
+                                                   ng-model="CandidateDocument.docFileName"
+                                                   placeholder="Document Name" required="">
+                                            <span ng-show="form.docFileName.$dirty && form.docFileName.$error.required" class="help-block">
+                                                Document Name is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="font-normal">Expiry Date:</label>
+
+                                        <div ng-class="{ 'has-error': form.DateOfBirth.$dirty && form.DateOfBirth.$error.required }" class="input-group date">
+                                            <input name="ExpiryDate" ng-model="CandidateDocument.docExpiryDate" type="datetime" class="form-control" placeholder="MM/DD/YYYY" date-time view="date" auto-close="true" min-view="date" format="MM/DD/YYYY">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <span ng-show="form.ExpiryDate.$dirty && form.ExpiryDate.$error.required" class="help-block">
+                                                Expiry Date is required
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div drop-zone custom="true" id="Others" ng-model="CandidateDocs" class="one btn btn-default"></div>
+                                    <div ng-repeat="file in CandidateDocs track by $index">
+                                        <div class="ibox-tools pull-left small">
+                                            <i class="fa fa fa-dot-circle-o"></i> <a target="_blank" style="text-decoration:underline; color:darkblue" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a> <a ng-click="removeFile(CandidateDocs,$index)"> <i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                    </div><br />
+                                    <div class="form-group"><button ng-disabled="CandidateDocs.length == 0" ng-click="fnDocUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('docUpload')">Cancel</a></div>
+                                </div>
+
+                                <div ng-if="docUpload != true">
+
+                                    <div class="col-lg-12 ibox-tools pull-left ">
+
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Document Name</th>
+                                                    <th>Type</th>
+                                                    <th>ExpiryDate</th>
+                                                    <th>Actions</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="file.FileTypeId != 2" ng-repeat="file in dataJSON.CandidateFile track by $index">
+
+                                                    <td style="width:65%; float:left">
+                                                        <a target="_blank" style="text-decoration:underline; color:darkblue;float:left" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a>
+                                                    </td>
+
+                                                    <td style="width:10%">
+                                                        Documents
+                                                    </td>
+                                                    <td style="width:15%">
+                                                        {{file.ExpiryDate | date:'MM-dd-y'}}
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <a ng-click="removeFile(dataJSON.CandidateFile,$index)"> <i class="fa fa-trash"></i> </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Job Details</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="m-b-md">
+                                        <h2>{{refData.vacancyData.Vacancy.positionTitle}} ({{refData.vacancyData.Vacancy.customerName | uppercase | limitTo : 2}}000{{refData.vacancyData.Vacancy.id}})</h2>
+                                    </div>
+                                    <p ng-bind-html="refData.vacancyData.Vacancy.vacancyDescription">
+                                    </p>
+                                    <br />
+                                </div>
+                                <div class="col-md-12 full-height-scroll">
+                                    <ul class="list-group clear-list">
+                                        <li class="list-group-item fist-item">
+                                            <span class="pull-right"> <span class="label label-primary">Active</span> </span>
+                                            Status
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.vacancyTypeName}} </span>
+                                            Vacancy Type
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.hiringManager}} </span>
+                                            Hiring Manager
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.reportingManager}} </span>
+                                            Reporting Manager
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.startDate | date}} </span>
+                                            Start Date
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.endDate | date}} </span>
+                                            End Date
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.submissionDueDate | date}} </span>
+                                            Submission Date
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="pull-right"> {{refData.vacancyData.Vacancy.maxPayRate | currency}}  </span>
+                                            Bill Rate
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Questions</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="form-group col-md-12" ng-repeat="qus in refData.vacancyData.Questions">
+                                    <label class="font-normal">{{qus.QuestionName}}</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="response_{{qus.ID}}"
+                                               ng-model="response_qus.ID"
+                                               placeholder="Answer.." />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Required Documents</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="form-group col-md-12" ng-repeat="doc in refData.vacancyData.RequiredDocument">
+                                    <label class="font-normal">{{doc.RequiredDocumentName}}</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="response_{{doc.ID}}"
+                                               ng-model="response_doc.ID"
+                                               placeholder="Answer.." />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <!-- Comments Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Comments
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Comments -->
+                                <div class="form-group col-md-12">
+                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].createdUserID" ng-init="dataJSON.VacancyComment[0].createdUserID=refData.loginUserId" ng-value="refData.loginUserId" />
+                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].updatedUserID" ng-init="dataJSON.VacancyComment[0].updatedUserID=refData.loginUserId" ng-value="refData.loginUserId" />
+                                    <textarea type="text" class="form-control summernote" name="VacancyComment"
+                                              ng-model="dataJSON.VacancyComment[0].comment"
+                                              placeholder="Comments" summernote
+                                              height="250"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row form-group">
+                                        <button type="submit" ng-click="submit(form)" class="btn btn-primary">
+                                            {{formAction}}
+                                        </button>
+                                        &nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="cancel()">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.candidate.$error.required }">
                     <label>Candidate * :</label>
-                    <!--<input type="text" class="form-control" name="candidate"
-                           ng-model="csdataJSON.CandidateId"
-                           placeholder="Choose Candidate" required />-->
                     <select ng-model="csdataJSON.CandidateId" class="form-control" required name="country">
                         <option value="">Choose Candidate</option>
                         <option ng-repeat="res in resCandidates" value="{{res.Candidate.id}}">{{res.Candidate.FirstName+" "+res.Candidate.LastName}}</option>
@@ -38,11 +638,11 @@
                 </div>
                 <div class="form-group  col-md-12" ng-class="{ 'has-error': submitted && form.StatusId.$error.required }">
                     <label>Status * :</label>
-                    <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId" >
+                    <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId">
                         <option value="">Choose Status</option>
                         <option ng-repeat="res in refData.candidateStatusList" value="{{res.ID}}">{{res.Name}}</option>
                     </select>
-                   
+
                     <span ng-show="submitted && form.StatusId.$error.required" class="text-danger">
                         * Status is required
                     </span>
@@ -58,7 +658,7 @@
                     <button type="submit" ng-if="!editform" ng-click="submit(form)" class="btn btn-primary m-b">Create</button>
                     <button type="submit" ng-if="editform" ng-click="submit(form)" class="btn btn-primary m-b">Update</button>
                     <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
-                </div>
+                </div>-->
             </form>
 
         </div>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.Candidate
 {
-    public class CandidateModel:BaseModel
+    public class CandidateModel : BaseModel
     {
-        public int id;        
+        public int id;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -18,8 +18,8 @@ namespace eMSP.ViewModel.Candidate
 
         public CandidateModel() { }
     }
-    
-    public class CandidateContactModel: BaseModel
+
+    public class CandidateContactModel : BaseModel
     {
         public CandidateContactModel() { }
 
@@ -38,7 +38,7 @@ namespace eMSP.ViewModel.Candidate
         public bool IsPrimary { get; set; }
     }
 
-    public class FileModel: BaseModel
+    public class FileModel : BaseModel
     {
         public FileModel() { }
 
@@ -50,11 +50,11 @@ namespace eMSP.ViewModel.Candidate
         public DateTime? ExpiryDate { get; set; }
     }
 
-    public class CandidateCreateModel 
+    public class CandidateCreateModel
     {
         public CandidateCreateModel() { }
         public int SupplierId { get; set; }
-        public CandidateModel Candidate{get;set;}
+        public CandidateModel Candidate { get; set; }
         public List<CandidateContactModel> CandidateContact { get; set; }
         public List<FileModel> CandidateFile { get; set; }
         public List<string> CandidateIndustries { get; set; }
@@ -63,7 +63,8 @@ namespace eMSP.ViewModel.Candidate
         public List<string> CandidateSkillNames { get; set; }
     }
 
-    public class CandidateStatusModel : BaseModel{
+    public class CandidateStatusModel : BaseModel
+    {
         public CandidateStatusModel() { }
         public int ID { get; set; }
         public string Name { get; set; }
@@ -82,21 +83,34 @@ namespace eMSP.ViewModel.Candidate
         public CandidateStatusModel CandidateStatus { get; set; }
     }
 
-    public partial class CandidateSubmissionDocumentResponseViewModel : BaseModel
+    public class CandidateSubmissionCreateModel
     {
-        public CandidateSubmissionDocumentResponseViewModel()
-        {
+        public CandidateSubmissionCreateModel() { }
 
-        }
-
-
+        public CandidateSubmissionModel candidateSubmission { get; set; }
+        public CandidateCreateModel candidate { get; set; }
+        public CandidateSubmissionDocumentResponseModel canSubmissionDocResponse { get; set; }
+        public CandidateSubmissionsQuestionsResponseModel canSubmissionQuesResponse { get; set; }
+        public bool isNewCustomer { get; set; }
+        public bool isCustomerEdited { get; set; }
     }
 
-    public partial class CandidateSubmissionsQuestionsResponseViewModel:BaseModel
+    public partial class CandidateSubmissionDocumentResponseModel : BaseModel
     {
-        public CandidateSubmissionsQuestionsResponseViewModel()
-        {
+        public CandidateSubmissionDocumentResponseModel() { }
+        public long id { get; set; }
+        public long candidateSubmissionId { get; set; }
+        public long vacancyRequiredDocumentId { get; set; }
+        public long candidateFileId { get; set; }
+        public Nullable<long> commentId { get; set; }
+    }
 
-        }
+    public partial class CandidateSubmissionsQuestionsResponseModel : BaseModel
+    {
+        public CandidateSubmissionsQuestionsResponseModel() { }
+        public long id { get; set; }
+        public long submissionId { get; set; }
+        public long vacancyQuestionId { get; set; }
+        public string responses { get; set; }
     }
 }

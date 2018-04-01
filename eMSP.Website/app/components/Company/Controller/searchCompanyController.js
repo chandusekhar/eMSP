@@ -2,6 +2,7 @@
 angular.module('eMSPApp')
     .controller('searchCompanyController', searchCompanyController)
 function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster, ngAuthSettings) {// APP_CONSTANTS, apiCall
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];

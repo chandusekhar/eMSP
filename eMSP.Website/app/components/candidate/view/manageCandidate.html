@@ -90,7 +90,7 @@
                                                 <ng-letter-avatar charCount="2" height="88" width="88" fontsize="32"
                                                                   data="{{loc.Candidate.FirstName}} {{loc.Candidate.LastName}}" shape="round"></ng-letter-avatar>
                                             </span>
-                                            <div ng-click="updateUser(loc)" class="m-t-xs font-bold">{{loc.Candidate.FirstName + " " +loc.Candidate.LastName}}</div>
+                                            <div  class="m-t-xs font-bold">{{loc.Candidate.FirstName + " " +loc.Candidate.LastName}}</div>
 
                                         </div>
                                     </div>
@@ -111,12 +111,12 @@
                                         <div class="pull-left">
                                             <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
                                             <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
-                                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                            <input ng-disabled="config.CandidateEdit != true" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                    ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
                                         </div>
                                         <div class="btn-group-xs ">
 
-                                            <span ng-click="editCanditate(loc)" style="margin-left:10px; font-size:15px" class="text-navy">
+                                            <span ng-if="config.CandidateEdit == true" ng-click="editCanditate(loc)" style="margin-left:10px; font-size:15px" class="text-navy">
                                                 <span class="fa fa-pencil"></span>
                                             </span>
                                             <!--<span ng-click="deleteCandidate(loc)" style="margin-left:5px;font-size:15px; color:red" class="text-error">
@@ -167,13 +167,13 @@
                                             <td style="width:10%">
                                                 <p class="small inline" ng-if="loc.Candidate.isActive">Active</p>
                                                 <p class="small inline" ng-if="!loc.Candidate.isActive">Deactive</p>
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                <input ng-disabled="config.CandidateEdit != true"  type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                        ng-change="toggleActive(loc)" ng-model="loc.Candidate.isActive" />
                                             </td>
                                             <td style="width:5%">
                                                 <div class="btn-group-xs">
 
-                                                    <span ng-click="editCanditate(loc)" class="text-navy">
+                                                    <span ng-if="config.CandidateEdit == true" ng-click="editCanditate(loc)" class="text-navy">
                                                         <span class="fa fa-pencil"></span>
                                                     </span>
 

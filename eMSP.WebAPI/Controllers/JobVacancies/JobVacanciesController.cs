@@ -10,10 +10,12 @@ using System.Web.Http.Description;
 using System.Threading.Tasks;
 using eMSP.ViewModel.MSP;
 using Microsoft.AspNet.Identity;
+using eMSP.WebAPI.Controllers.Helpers;
 
 namespace eMSP.WebAPI.Controllers.JobVacancies
 {
     [RoutePrefix("api/JobVacancie")]
+    [Authorize(Roles = ApplicationRoles.VacancyFull)]
     [Queryable]
     [AllowAnonymous]
     public class JobVacanciesController : ApiController
@@ -34,6 +36,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
         [Route("getVacancy")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.VacancyView+","+ ApplicationRoles.VacancyCreate)]
         [ResponseType(typeof(VacancyCreateModel))]
         public async Task<IHttpActionResult> GetVacancy(long id)
         {
@@ -50,6 +53,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
         [Route("getAllVacancy")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.VacancyView + "," + ApplicationRoles.VacancyCreate)]
         [ResponseType(typeof(VacancyCreateModel))]
         public async Task<IHttpActionResult> GetAllVacancy(CompanyModel model)
         {
@@ -65,6 +69,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
         [Route("getVacancyComments")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.VacancyView + "," + ApplicationRoles.VacancyCreate)]
         public async Task<IHttpActionResult> GetVacancyComments(long id)
         {
             try
@@ -79,6 +84,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
         [Route("getMSPVacancyType")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.VacancyTypeView + "," + ApplicationRoles.VacancyTypeCreate)]
         public async Task<IHttpActionResult> GetMSPVacancyType(MSPVacancieTypeCreateModel data)
         {
             try
@@ -93,6 +99,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
         [Route("getVacancyStatus")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.VacancyView + "," + ApplicationRoles.VacancyCreate)]
         public async Task<IHttpActionResult> GetVacancyStatus()
         {
             try
@@ -111,6 +118,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         [Route("createVacancy")]
         [HttpPost]
         [ResponseType(typeof(VacancyCreateModel))]
+        [Authorize(Roles =ApplicationRoles.VacancyCreate)]
         public async Task<IHttpActionResult> InsertVacancy(VacancyCreateModel model)
         {
             try
@@ -129,6 +137,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         [Route("commentVacancy")]
         [HttpPost]
         [ResponseType(typeof(VacancyCommentCreateModel))]
+        [Authorize(Roles = ApplicationRoles.VacancyView + "," + ApplicationRoles.VacancyCreate)]
         public async Task<IHttpActionResult> CommentVacancy(VacancyCommentCreateModel model)
         {
             try
@@ -147,13 +156,10 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             }
         }
 
-
-
-
-
         [Route("createMSPVacancieType")]
         [HttpPost]
         [ResponseType(typeof(MSPVacancieTypeCreateModel))]
+        [Authorize(Roles = ApplicationRoles.VacancyTypeCreate)]
         public async Task<IHttpActionResult> InsertMSPVacancieType(MSPVacancieTypeCreateModel model)
         {
             try

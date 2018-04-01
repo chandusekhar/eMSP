@@ -27,6 +27,12 @@
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': refData.submitted && isRolesEmpty}">
                         <label>Roles * :</label> <br />
+
+                        <label for="All">
+                            <input id="All" type="checkbox" icheck value="All" ng-checked="rgdataJSON.roles.length == rolesList.length"
+                                   ng-change="toggleSelection('All')" ng-model="rolesAll" />
+                            All
+                        </label>
                         <!--<select class="form-control" ng-model="rgdataJSON.roles"
                         ng-options="res.Name for res in rolesList"
                         multiple="" required
@@ -182,7 +188,109 @@
 
                         </div>
 
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Job Vacancy Roles</label>
 
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Vacancy ') == 0" class="action-checkbox">
+
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesVacancy" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Question Roles</label>
+
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Vacancy ') == 0" class="action-checkbox">
+
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesQuestion" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Document Roles</label>
+
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Vacancy ') == 0" class="action-checkbox">
+
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesDocument" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Document Roles</label>
+
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Vacancy ') == 0" class="action-checkbox">
+
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesDocument" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
 
                         <div class="col-lg-6">
                             <div>

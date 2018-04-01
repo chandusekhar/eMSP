@@ -39,7 +39,7 @@
                                             {{con.countryCode}} - <span class="small">{{con.countryName}}</span>
 
                                             <div class="btn-group-xs pull-right">
-                                                <a ng-click="update(con)" class="text-white">
+                                                <a ng-if="config.CountryEdit" ng-click="update(con)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
                                             </div>
@@ -47,23 +47,23 @@
 
                                         <div class="panel-body" ng-show="test">
                                             <div class="ibox-heading white-bg">
-                                                <b>States:</b><a class="text-navy" ng-click="modal(con)"> <i class="fa fa-plus-circle"></i></a>
+                                                <b>States:</b><a class="text-navy" ng-if="config.CountryCreate == true" ng-click="modal(con)"> <i class="fa fa-plus-circle"></i></a>
                                             </div>
                                             <div ng-repeat="state in con.stateList">
                                                 <div class="ibox-tools pull-left small">
                                                     <i class="fa fa fa-dot-circle-o"></i> {{state.stateCode}} - {{state.stateName}}
-                                                    <a ng-click="modal(state)"> <i class="fa fa-pencil"></i></a> 
+                                                    <a ng-if="config.CountryCreate" ng-click="modal(state)"> <i class="fa fa-pencil"></i></a> 
                                                     
                                                     <!-- State Active/Deactive toggle -->
-                                                    <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                    <input ng-disabled="!(config.CountryEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                            ng-change="toggleActive(state)" ng-model="state.isActive" />
                                                     <span class="small" ng-if="state.isActive">Active</span>
                                                     <span class="small" ng-if="!state.isActive">Deactive</span>
                                                     <!-- State Deleted toggle -->
-                                                    <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                    <!--<input ng-disabled="!(config.CountryEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
                                                            ng-change="toggleActive(state)" ng-model="state.isDeleted" />
                                                     <span class="small" ng-if="state.isDeleted">Deleted</span>
-                                                    <span class="small" ng-if="!state.isDeleted">Deleted</span>
+                                                    <span class="small" ng-if="!state.isDeleted">Deleted</span>-->
                                                 </div>
                                                 <br />
                                             </div>
@@ -73,22 +73,22 @@
                                             <!-- Country Active/Deactive toggle -->
                                             <p class="small inline" ng-if="con.isActive">Active</p>
                                             <p class="small inline" ng-if="!con.isActive">Deactive</p>
-                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)"
+                                            <input ng-disabled="!(config.CountryEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}" ng-change="toggleActive(con)"
                                                    ng-model="con.isActive" />
 
                                             <!-- Country Deleted toggle -->
-                                            <div class="pull-right">
+                                            <!--<div class="pull-right">
                                                 <p class="small inline" ng-if="con.isDeleted">Deleted</p>
                                                 <p class="small inline" ng-if="!con.isDeleted">Deleted</p>
-                                                <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}" ng-change="toggleActive(con)"
+                                                <input ng-disabled="!(config.CountryEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}" ng-change="toggleActive(con)"
                                                        ng-model="con.isDeleted" />
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                        <button ng-if="config.CountryCreate == true" type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
                     </div>
                 </div>
             </div>

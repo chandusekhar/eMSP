@@ -15,7 +15,7 @@ namespace eMSP.Data.DataServices.Roles
     {
         #region Initialization
 
-        internal static eMSPEntities db;
+        private static eMSPEntities db;
 
         static ManageRole()
         {
@@ -33,23 +33,36 @@ namespace eMSP.Data.DataServices.Roles
                 using (db = new eMSPEntities())
                 {
 
-                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
-                                                                  .Join(db.AspNetRoleGroups,
-                                                                  u => u.RoleGroupId,
-                                                                  rg => rg.Id, (u, rg) => new
-                                                                  {
-                                                                      RoleGroupId = rg.Id
-                                                                  }).Join(db.AspNetRoleGroupRoles,
-                                                                  r => r.RoleGroupId,
-                                                                  rgr => rgr.RoleGroupId, (r, rgr) => new
-                                                                  {
-                                                                      rolesId = rgr.RoleId
-                                                                  }).Join(db.AspNetRoles,
-                                                                  ro => ro.rolesId,
-                                                                  b => b.Id, (ro, b) => new UserAuthorization
-                                                                  {
-                                                                      Name = b.Name
-                                                                  }).ToList());
+                    //return await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
+                    //                                              .Join(db.AspNetRoleGroups,
+                    //                                              u => u.RoleGroupId,
+                    //                                              rg => rg.Id, (u, rg) => new
+                    //                                              {
+                    //                                                  RoleGroupId = rg.Id
+                    //                                              }).Join(db.AspNetRoleGroupRoles,
+                    //                                              r => r.RoleGroupId,
+                    //                                              rgr => rgr.RoleGroupId, (r, rgr) => new
+                    //                                              {
+                    //                                                  rolesId = rgr.RoleId
+                    //                                              }).Join(db.AspNetRoles,
+                    //                                              ro => ro.rolesId,
+                    //                                              b => b.Id, (ro, b) => new UserAuthorization
+                    //                                              {
+                    //                                                  Name = b.Name
+                    //                                              }).ToList());
+
+
+                   var objlist = db.AspNetUsers.Where(x => x.Id == UserID).SingleOrDefault();
+
+                   return objlist.AspNetRoles.Select(X => new UserAuthorization() { Name=X.Name }).ToList();
+
+                    //return objlist.Select(x=> new UserAuthorization() { Name=})
+
+                    //return await (from profile in db.tblUserProfiles
+                    //              join rolegrp in db.AspNetRoleGroups on profile.RoleGroupId equals rolegrp.Id
+                    //              join grpRoles in db.AspNetRoleGroupRoles on rolegrp.Id equals grpRoles.RoleGroupId
+                    //              join role in db.AspNetRoles on grpRoles.RoleId equals role.Id
+                    //              select new UserAuthorization { Name = role.Name }).ToListAsync();
                 }
             }
             catch (Exception)
@@ -66,25 +79,38 @@ namespace eMSP.Data.DataServices.Roles
                 {
                     UserRolesModel user = new UserRolesModel();
 
-                    user.roles = await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
-                                                                  .Join(db.AspNetRoleGroups,
-                                                                  u => u.RoleGroupId,
-                                                                  rg => rg.Id, (u, rg) => new
-                                                                  {
-                                                                      RoleGroupId = rg.Id
-                                                                  }).Join(db.AspNetRoleGroupRoles,
-                                                                  r => r.RoleGroupId,
-                                                                  rgr => rgr.RoleGroupId, (r, rgr) => new
-                                                                  {
-                                                                      rolesId = rgr.RoleId
-                                                                  }).Join(db.AspNetRoles,
-                                                                  ro => ro.rolesId,
-                                                                  b => b.Id, (ro, b) => new RoleModel
-                                                                  {
-                                                                      id = b.Id,
+                    //user.roles = await Task.Run(() => db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID)
+                    //                                              .Join(db.AspNetRoleGroups,
+                    //                                              u => u.RoleGroupId,
+                    //                                              rg => rg.Id, (u, rg) => new
+                    //                                              {
+                    //                                                  RoleGroupId = rg.Id
+                    //                                              }).Join(db.AspNetRoleGroupRoles,
+                    //                                              r => r.RoleGroupId,
+                    //                                              rgr => rgr.RoleGroupId, (r, rgr) => new
+                    //                                              {
+                    //                                                  rolesId = rgr.RoleId
+                    //                                              }).Join(db.AspNetRoles,
+                    //                                              ro => ro.rolesId,
+                    //                                              b => b.Id, (ro, b) => new RoleModel
+                    //                                              {
+                    //                                                  id = b.Id,
 
-                                                                      Name = b.Name
-                                                                  }).ToList());
+                    //                                                  Name = b.Name
+                    //                                              }).ToList());
+
+                    var objlist = db.AspNetUsers.Where(x => x.Id == UserID).SingleOrDefault();
+
+                    user.roles= objlist.AspNetRoles.Select(X => new RoleModel() { Name = X.Name,id=X.Id }).ToList();
+
+
+                    //user.roles = await (from profile in db.tblUserProfiles
+                    //                    join rolegrp in db.AspNetRoleGroups on profile.RoleGroupId equals rolegrp.Id
+                    //                    join grpRoles in db.AspNetRoleGroupRoles on rolegrp.Id equals grpRoles.RoleGroupId
+                    //                    join role in db.AspNetRoles on grpRoles.RoleId equals role.Id
+                    //                    select new RoleModel { id = role.Id, Name = role.Name }).ToListAsync();
+
+                    //db.AspNetRoleGroupRoles.Where(x=>x.RoleGroupId==)
 
                     tblUserProfile up = db.tblUserProfiles.Where(a => a.UserID == UserID)
                                                   .Include(a => a.tblCountry)
@@ -104,7 +130,7 @@ namespace eMSP.Data.DataServices.Roles
                         user.user.companyId = mspId;
                         user.user.companyType = "MSP";
                     }
-                    else if(supId != 0)
+                    else if (supId != 0)
                     {
                         user.user.companyId = supId;
                         user.user.companyType = "Supplier";
@@ -118,9 +144,9 @@ namespace eMSP.Data.DataServices.Roles
                     return user;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -161,7 +187,7 @@ namespace eMSP.Data.DataServices.Roles
             try
             {
                 using (db = new eMSPEntities())
-                {                    
+                {
                     return await Task.Run(() => db.AspNetRoles.Where(y => db.AspNetRoleGroupRoles.Where(x => x.RoleGroupId == groupId)
                                                               .Any(x => x.RoleId == y.Id)).ToList());
                 }

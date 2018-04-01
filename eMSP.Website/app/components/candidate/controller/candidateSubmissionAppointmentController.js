@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('candidateSubmissionAppointmentController', candidateSubmissionAppointmentController)
 function candidateSubmissionAppointmentController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster) {
-
+    $scope.config = localStorageService.get('pageSettings');
     $scope.vacancyData = localStorageService.get('vacancyData') ? localStorageService.get('vacancyData') : undefined;
 
 

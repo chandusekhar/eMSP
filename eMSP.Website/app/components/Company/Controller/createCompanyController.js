@@ -2,6 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCompanyController', createCompanyController)
 function createCompanyController($scope, $state, localStorageService, configJSON, ngAuthSettings, formAction, AppCoutries, apiCall, APP_CONSTANTS, $uibModal, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};

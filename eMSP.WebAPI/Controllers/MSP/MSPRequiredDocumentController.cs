@@ -1,5 +1,6 @@
 ﻿using eMSP.Data.DataServices.MSP;
 using eMSP.ViewModel.MSP;
+using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace eMSP.WebAPI.Controllers.MSP
     [RoutePrefix("api/MSPRequiredDocument")]
     [Queryable]
     [AllowAnonymous]
+    [Authorize(Roles = ApplicationRoles.DocumentFull)]
     public class MSPRequiredDocumentController : ApiController
     {
         #region Intialisation
@@ -34,6 +36,7 @@ namespace eMSP.WebAPI.Controllers.MSP
         [Route("get")]
         [HttpPost]
         [ResponseType(typeof(RequiredDocumentViewModel))]
+        [Authorize(Roles = ApplicationRoles.DocumentCreate + "," + ApplicationRoles.DocumentView)]
         public async Task<IHttpActionResult> Get()
         {
             try
@@ -50,6 +53,7 @@ namespace eMSP.WebAPI.Controllers.MSP
         [Route("save")]
         [HttpPost]
         [ResponseType(typeof(RequiredDocumentViewModel))]
+        [Authorize(Roles = ApplicationRoles.DocumentCreate)]
         public async Task<IHttpActionResult> Save(RequiredDocumentViewModel model)
         {
             try

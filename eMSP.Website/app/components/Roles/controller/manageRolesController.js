@@ -4,6 +4,7 @@ angular.module('eMSPApp')
     .controller("createRolesController", createRolesController)
     .controller("createRoleGroupController", createRoleGroupController)
 function manageRolesController($scope, $state, localStorageService, $uibModal, configJSON, apiCall, APP_CONSTANTS, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.rdataJSON = {};
@@ -66,7 +67,7 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
 
 //Controller to create Role
 function createRolesController($scope, $state, localStorageService, $uibModal, apiCall, APP_CONSTANTS, toaster, $uibModalInstance) {
-    
+    $scope.config = localStorageService.get('pageSettings');
     $scope.submit = function (form) {
         $scope.refData.submitted = true;
         if (form.$valid) {
@@ -87,7 +88,7 @@ function createRolesController($scope, $state, localStorageService, $uibModal, a
 
 //Controller to create Role Group
 function createRoleGroupController($scope, $state, localStorageService, $uibModal, apiCall, APP_CONSTANTS, toaster, $uibModalInstance) {
-    
+    $scope.config = localStorageService.get('pageSettings');
     $scope.rgdataJSON.roleGroup = {};
     $scope.rgdataJSON.roles = [];
     $scope.formAction = $scope.editform ? "Update" : "Create";
@@ -116,17 +117,33 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
     }
 
     $scope.toggleSelection = function toggleSelection(Role) {
-        var idx = $scope.rgdataJSON.roles.indexOf(Role);
 
-        // is currently selected
-        if (idx > -1) {
-            $scope.rgdataJSON.roles.splice(idx, 1);
+        if (Role != 'All') {
+
+            var idx = $scope.rgdataJSON.roles.indexOf(Role);
+
+            // is currently selected
+            if (idx > -1) {
+                $scope.rgdataJSON.roles.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                $scope.rgdataJSON.roles.push(Role);
+            }
+
         }
-
-        // is newly selected
         else {
-            $scope.rgdataJSON.roles.push(Role);
+
+            if ($scope.rgdataJSON.roles.length == $scope.rolesList.length) {
+                $scope.rgdataJSON.roles = [];
+            }
+            else {
+                $scope.rgdataJSON.roles = $scope.rolesList;
+            }
+
         }
+        
     };
 }
 

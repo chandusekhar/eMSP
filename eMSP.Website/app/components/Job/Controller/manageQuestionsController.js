@@ -2,6 +2,7 @@
 angular.module('eMSPApp')
     .controller('manageQuestionsController', manageQuestionsController)
 function manageQuestionsController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $filter, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};

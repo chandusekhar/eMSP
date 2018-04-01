@@ -11,7 +11,7 @@ using eMSP.WebAPI.Controllers.Helpers;
 namespace eMSP.WebAPI.Controllers.Candidate
 {
     [RoutePrefix("api/candidate")]
-    [Authorize(Roles = ApplicationRoles.SupplierCandidateFull)]
+    [Authorize(Roles = ApplicationRoles.CandidateFull)]
     [AllowAnonymous]
     public class CandidateController : ApiController
     {
@@ -32,7 +32,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllCandidates")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> GetAllCandidates(int SupplierId)
         {
@@ -50,7 +50,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getCandidate")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> GetCandidate(int candidateId)
         {
@@ -68,7 +68,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getCandidateSubmission")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> GetCandidateSubmission(int VacancyId)
         {
@@ -86,7 +86,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllCandidateStatus")]
         [HttpGet]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateView)]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]
         [ResponseType(typeof(CandidateStatusModel))]
         public async Task<IHttpActionResult> GetCandidateStatus()
         {
@@ -107,7 +107,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("creatCandidate")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
+        [Authorize(Roles = ApplicationRoles.CandidateCreate)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> creatCandidate(CandidateCreateModel data)
         {
@@ -138,7 +138,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("creatCandidateSubmission")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
+        [Authorize(Roles = ApplicationRoles.CandidateCreate)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> creatCandidateSubmission(CandidateSubmissionModel data)
         {
@@ -163,7 +163,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidate")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
+        [Authorize(Roles = ApplicationRoles.CandidateCreate)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> UpdateCandidate(CandidateCreateModel data)
         {
@@ -193,7 +193,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidateSubmission")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.SupplierCandidateCreate)]
+        [Authorize(Roles = ApplicationRoles.CandidateCreate)]
         [ResponseType(typeof(CandidateSubmissionModel))]
         public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionModel data)
         {

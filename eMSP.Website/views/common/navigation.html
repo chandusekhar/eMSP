@@ -25,52 +25,52 @@
                 <div class="logo-element">
                     IN+
                 </div>
-            </li>
+            </li>            
             <!-- Administration Menu -->
             <li ng-class="{active: $state.includes('company') || $state.includes('country') || $state.includes('industry') || $state.includes('vacancy') || $state.includes('role')}">
-                <a href="#"><i class="fa fa-th-list"></i> <span class="nav-label">{{'Administration'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navAdmistration == true" href="#"><i class="fa fa-th-list"></i> <span class="nav-label">{{'Administration'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('company')}">
                     <!-- Company Sub menu -->
                     <li ng-class="{active: $state.includes('company')}">
-                        <a href="#"><i class="fa fa-child"></i> <span class="nav-label">{{'Company'|translate}}</span> <span class="fa arrow"></span></a>
+                        <a ng-if="config.navCompany" href="#"><i class="fa fa-child"></i> <span class="nav-label">{{'Company'|translate}}</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{active: $state.includes('company')}">
-                            <li ui-sref-active="active"><a ui-sref="company.searchSuppliers">{{'Manage Suppliers'|translate}} </a></li>
-                            <li ui-sref-active="active"><a ui-sref="company.searchCustomers">{{'Manage Customers'|translate}} </a></li>
-                            <li has-permission="MSP User Full" ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
+                            <li ng-if="config.navManageSuppliers" ui-sref-active="active"><a ui-sref="company.searchSuppliers">{{'Manage Suppliers'|translate}} </a></li>
+                            <li ng-if="config.navManageCustomers" ui-sref-active="active"><a ui-sref="company.searchCustomers">{{'Manage Customers'|translate}} </a></li>
+                            <li ng-if="config.navManageMSP" ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
                         </ul>
                     </li>
                     <!-- Role Sub Menu -->
                     <li ng-class="{active: $state.includes('role')}">
-                        <a href="#"><i class="fa fa-user-circle-o"></i> <span class="nav-label">{{'Authorization'|translate}}</span> <span class="fa arrow"></span></a>
+                        <a ng-if="config.navAuthorization" href="#"><i class="fa fa-user-circle-o"></i> <span class="nav-label">{{'Authorization'|translate}}</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('role')}">
-                            <li ui-sref-active="active"><a ui-sref="role.manageRoleGroup">{{'Application Roles'|translate}} </a></li>
-                            <li ui-sref-active="active"><a ui-sref="role.manageUserRole">{{'Manage User Roles'|translate}} </a></li>
+                            <li ng-if="config.navManageRoleGroups" ui-sref-active="active"><a ui-sref="role.manageRoleGroup">{{'Application Roles'|translate}} </a></li>
+                            <li ng-if="config.navManageUserRoles" ui-sref-active="active"><a ui-sref="role.manageUserRole">{{'Manage User Roles'|translate}} </a></li>
                         </ul>
                     </li>
 
-                    <li ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="vacancy.manageDocuments">{{'Manage Documents'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="vacancy.manageQuestions">{{'Manage Questions'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="vacancy.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>
+                    <li ng-if="config.navManageCountry" ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
+                    <li ng-if="config.navManageIndustry" ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
+                    <li ng-if="config.navManageDocuments" ui-sref-active="active"><a ui-sref="vacancy.manageDocuments">{{'Manage Documents'|translate}}</a></li>
+                    <li ng-if="config.navManageQuestions" ui-sref-active="active"><a ui-sref="vacancy.manageQuestions">{{'Manage Questions'|translate}}</a></li>
+                    <li ng-if="config.navManageVacancyTypes" ui-sref-active="active"><a ui-sref="vacancy.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>
                 </ul>
             </li>
             <!-- Job Menu -->
             <li ng-class="{active: $state.includes('job')}">
-                <a href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Job'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Job'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('job')}">
-                    <li ui-sref-active="active"><a ui-sref="job.searchVacancies">{{'Manage Vacancies'|translate}} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="job.createVacancy">{{'Create Vacancy'|translate}} </a></li>
+                    <li ng-if="config.navManageVacancies" ui-sref-active="active"><a ui-sref="job.searchVacancies">{{'Manage Vacancies'|translate}} </a></li>
+                    <li ng-if="config.navCreateVacancy" ui-sref-active="active"><a ui-sref="job.createVacancy">{{'Create Vacancy'|translate}} </a></li>
 
                 </ul>
             </li>
             <!-- Candidate Menu -->
             <li ng-class="{active: $state.includes('candidate')}">
-                <a href="#"><i class="fa fa-user-o"></i> <span class="nav-label">{{'Candidate'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navCandidate" href="#"><i class="fa fa-user-o"></i> <span class="nav-label">{{'Candidate'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('candidate')}">
-                    <li ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="candidate.appointment">{{'Manage Candidate Submission'|translate}} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
+                    <li ng-if="config.navManageCandidates" ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
+                    <li ng-if="config.navManageCandidateSubmission" ui-sref-active="active"><a ui-sref="candidate.appointment">{{'Manage Candidate Submission'|translate}} </a></li>
+                    <li ng-if="config.navCreateCandidate" ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
                 </ul>
             </li>
         </ul>

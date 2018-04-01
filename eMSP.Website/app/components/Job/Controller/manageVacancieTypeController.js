@@ -3,7 +3,7 @@ angular.module('eMSPApp')
     .controller('manageVacancieTypeController', manageVacancieTypeController)
     .controller('createVacancieTypeController', createVacancieTypeController);
 function manageVacancieTypeController($scope, $state, $uibModal, localStorageService, configJSON, APP_CONSTANTS, apiCall, toaster) {// APP_CONSTANTS, apiCall    
-
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.dataJSON.mspId = localStorageService.get('editCompanyData') ? localStorageService.get('editCompanyData').id : 0;

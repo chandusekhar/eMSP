@@ -35,7 +35,7 @@
                                         <div class="panel-heading">                                            
                                             {{vt.name}} 
                                             <div class="btn-group-xs pull-right">
-                                                <a ng-click="update(vt)" class="text-white">
+                                                <a ng-if="config.VacancyTypeEdit == true" ng-click="update(vt)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
                                                 <!--<a class="btn btn-danger" ng-click="delete(vt)">
@@ -46,12 +46,12 @@
                                         <div class="form-control inline">
                                             <p class="small inline" ng-if="vt.isActive">Active</p>
                                             <p class="small inline" ng-if="!vt.isActive">Deactive</p>
-                                            <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                            <input ng-disabled="!(config.VacancyTypeEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                    ng-model="vt.isActive" ng-change="toggleActive(vt)"  />
                                             <div class="pull-right">
                                                 <p class="small inline" ng-if="vt.isDeleted">Deleted</p>
                                                 <p class="small inline" ng-if="!vt.isDeleted">Deleted</p>
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                <input ng-disabled="!(config.VacancyTypeEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
                                                        ng-model="vt.isDeleted" ng-change="toggleActive(vt)"  />
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
 
                             </div>
                         </div>
-                        <button type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                        <button type="submit" ng-if="config.VacancyTypeCreate == true" ng-click="create()" class="btn btn-primary m-b">Create</button>
                     </div>
                 </div>
             </div>

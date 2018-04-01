@@ -3,6 +3,7 @@ angular.module('eMSPApp')
     .controller('countryStateController', countryStateController)
     .controller('stateController', stateController)
 function countryStateController($scope, $state, $uibModal, localStorageService, configJSON, AppCountries, apiCall, APP_CONSTANTS, toaster, $filter) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
@@ -101,8 +102,9 @@ function countryStateController($scope, $state, $uibModal, localStorageService, 
 
 
 }
-function stateController($scope, $state, $uibModalInstance, $filter, apiCall, APP_CONSTANTS, toaster) {
+function stateController($scope, $state, localStorageService,$uibModalInstance, $filter, apiCall, APP_CONSTANTS, toaster) {
 
+    $scope.config = localStorageService.get('pageSettings');
     var rawValue = angular.copy($scope.sdataJSON);
     $scope.submitted = false;
 

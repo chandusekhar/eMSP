@@ -1,5 +1,6 @@
 ﻿using eMSP.Data.DataServices.MSP;
 using eMSP.ViewModel;
+using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace eMSP.WebAPI.Controllers.MSP
 {
     [RoutePrefix("api/MSPQuestions")]
     [Queryable]
+    [Authorize(Roles = ApplicationRoles.QuestionFull)]
     [AllowAnonymous]
     public class MSPQuestionController : ApiController
     {
@@ -33,6 +35,7 @@ namespace eMSP.WebAPI.Controllers.MSP
 
         [Route("get")]
         [HttpPost]
+        [Authorize(Roles = ApplicationRoles.QuestionCreate+","+ApplicationRoles.QuestionView)]
         [ResponseType(typeof(QuestionViewModel))]
         public async Task<IHttpActionResult> Get()
         {
@@ -50,6 +53,7 @@ namespace eMSP.WebAPI.Controllers.MSP
         [Route("save")]
         [HttpPost]
         [ResponseType(typeof(QuestionViewModel))]
+        [Authorize(Roles = ApplicationRoles.QuestionCreate)]
         public async Task<IHttpActionResult> Save(QuestionViewModel model)
         {
             try

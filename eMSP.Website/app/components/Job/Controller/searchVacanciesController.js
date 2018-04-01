@@ -2,6 +2,7 @@
 angular.module('eMSPApp')
     .controller('searchVacanciesController', searchVacanciesController)
 function searchVacanciesController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal) {// APP_CONSTANTS, apiCall
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
@@ -9,7 +10,7 @@ function searchVacanciesController($scope, $state, localStorageService, configJS
     
     var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
     apires.then(function (data) {
-        debugger;
+        
         $scope.resVacancie = data;
     });
 

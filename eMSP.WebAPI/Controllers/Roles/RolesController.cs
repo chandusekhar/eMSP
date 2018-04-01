@@ -115,7 +115,7 @@ namespace eMSP.WebAPI.Controllers.Roles
         public async Task<IHttpActionResult> GetUserRoles()
         {
             string UserID = User.Identity.GetUserId();
-
+            
             return Ok(await Task.Run(() => rm.GetUserRolesn(UserID)));
         }
 

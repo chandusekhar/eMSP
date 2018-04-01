@@ -2,20 +2,22 @@
 angular.module('eMSPApp')
     .controller("manageUserRoleController", manageUserRoleController)
 function manageUserRoleController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
     $scope.userList = [];
+    $scope.companyTypeList = ["Customer", "Supplier", "MSP"];
+    $scope.companyList = [];
     $scope.roleGroupsList = [];
     $scope.refData.submitted = false;
     $scope.formAction = formAction;
 
     $scope.CUser = localStorageService.get('CurrentUser');
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: $scope.CUser.companyType, id: $scope.CUser.companyId });
-    apires.then(function (data) {
-        $scope.userList = data;
-    });
+    
+
+    
 
     var apiresroles = apiCall.post(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPURL);
     apiresroles.then(function (data) {
@@ -24,6 +26,32 @@ function manageUserRoleController($scope, $state, localStorageService, configJSO
 
     $scope.changeUser = function (model) {
         $scope.dataJSON.user = model.user;        
+    }
+
+    $scope.changeCompanyType = function (model) {
+
+        if (model != "MSP") {
+            var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { companyType: model, companyName: "%" });
+            res.then(function (data) {
+                $scope.companyList = data;
+            });
+        }
+        else {
+            var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, { companyType: model, companyName: "" });
+            res.then(function (data) {
+                $scope.companyList.push(data);  
+            });
+        }
+
+    }
+
+    $scope.changeCompany = function (model) {
+
+        var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: model.companyType, id: model.id });
+        apires.then(function (data) {
+            $scope.userList = data;
+        });
+
     }
 
     //Function to assign Role to user

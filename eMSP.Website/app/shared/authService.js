@@ -51,6 +51,7 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
             _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
             _getPermissions();
+                      
 
             deferred.resolve(response);
 
@@ -71,6 +72,17 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
             _permissionList = data.roles;
             localStorageService.set('CurrentUser', data.user);
             localStorageService.set('permissionList', _permissionList);
+
+            _getPageSettings();
+        });
+
+    };
+
+    var _getPageSettings = function () {
+        _permissionList = [];
+        var apires = apiCall.post('api/PageSettings/GetPageSettings');
+        apires.then(function (data) {           
+            localStorageService.set('pageSettings', data);            
         });
 
     };

@@ -3,6 +3,7 @@ angular.module('eMSPApp')
     .controller('industrySkilsController', industrySkilsController)
     .controller('skillController', skillController)
 function industrySkilsController($scope, $state, localStorageService, $uibModal, configJSON, AppIndustries, apiCall, APP_CONSTANTS, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
@@ -99,8 +100,8 @@ function industrySkilsController($scope, $state, localStorageService, $uibModal,
     $scope.reset();
 }
 
-function skillController($scope, $state, $uibModalInstance, $filter, apiCall, APP_CONSTANTS, toaster) {
-
+function skillController($scope, $state, $uibModalInstance, localStorageService, $filter, apiCall, APP_CONSTANTS, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.submitted = false;
     $scope.submit = function (form) {
         $scope.submitted = true;

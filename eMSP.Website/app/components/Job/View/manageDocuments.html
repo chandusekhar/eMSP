@@ -33,7 +33,7 @@
                                             <span class="small">D000{{doc.ID}}</span>
 
                                             <div class="btn-group-xs pull-right">
-                                                <a ng-click="update(doc)" class="text-white">
+                                                <a ng-if="config.DocumentEdit == true" ng-click="update(doc)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
                                             </div>
@@ -51,13 +51,13 @@
 
                                             <div class="ibox-heading white-bg">
                                                 <!-- Is default Question -->
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                <input ng-disabled="!(config.DocumentEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                        ng-change="toggleActive(doc)" ng-model="doc.IsDefault" />
                                                 <span class="small">Is Default</span>
                                             </div>
                                             <div class="ibox-heading white-bg">
                                                 <!-- Is mandatory Question -->
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                <input ng-disabled="!(config.DocumentEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                        ng-change="toggleActive(doc)" ng-model="doc.IsMandatory" />
                                                 <span class="small">Is Mandatory</span>
                                             </div>
@@ -67,7 +67,7 @@
                                             <!-- Country Active/Deactive toggle -->
                                             <p class="small inline" ng-if="doc.isActive">Active</p>
                                             <p class="small inline" ng-if="!doc.isActive">Deactive</p>
-                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                            <input ng-disabled="!(config.DocumentEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                    ng-change="toggleActive(doc)"
                                                    ng-model="doc.isActive" />
 
@@ -75,7 +75,7 @@
                                             <div class="pull-right">
                                                 <p class="small inline" ng-if="doc.isDeleted">Deleted</p>
                                                 <p class="small inline" ng-if="!doc.isDeleted">Deleted</p>
-                                                <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                <input ng-disabled="!(config.DocumentEdit == true)" type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
                                                        ng-change="toggleActive(doc)"
                                                        ng-model="doc.isDeleted" />
                                             </div>
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                        <button type="submit" ng-if="config.DocumentCreate == true" ng-click="create()" class="btn btn-primary m-b">Create</button>
                     </div>
                 </div>
             </div>

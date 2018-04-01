@@ -134,6 +134,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'angular-peity',
                             files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js', 'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js']
+                        },
+                        {
+                            name: 'ui.checkbox',
+                            files: ['js/bootstrap/angular-bootstrap-checkbox.js']
+                        },
+                        {
+                            files: ['js/plugins/chartJs/Chart.min.js']
                         }
                     ]);
                 }
@@ -144,6 +159,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/account",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
+            
         })
         .state("account.changePassword", {
             url: '/changePassword',
@@ -189,6 +206,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/company",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("company.searchMSP", {
             url: '/searchMSP',
@@ -645,6 +663,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/vacancy",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("vacancy.manageVacancieType", {
             url: '/manageVacancieType',
@@ -796,6 +815,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/job",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("job.searchVacancies", {
             url: '/searchVacancies',
@@ -1013,6 +1033,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/country",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("country.manageCountry", {
             url: '/manageCountry',
@@ -1067,6 +1088,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/candidate",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("candidate.manageCandidate", {
             url: '/manageCandidate',
@@ -1326,6 +1348,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/industry",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
+
         })
         .state("industry.manageIndustry", {
             url: '/manageIndustry',
@@ -1385,6 +1409,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             abstract: true,
             url: "/role",
             templateUrl: "views/common/content.html",
+            controller: "dashboardController",
         })
         .state("role.manageRoleGroup", {
             url: '/manageRoleGroup',

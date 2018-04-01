@@ -50,7 +50,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
 
     var resJobStatus = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETJOBVACANCIESSTATUS);
     resJobStatus.then(function (data) {
-        debugger;
+        
         $scope.refData.jobStatusList = data;
         console.log(data);
     });

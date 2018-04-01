@@ -2,6 +2,7 @@
 angular.module('eMSPApp')
     .controller('manageVacancyController', manageVacancyController)
 function manageVacancyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, $filter, toaster) {// APP_CONSTANTS, apiCall
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataCommentJSON = {};
     $scope.vacancyData = localStorageService.get('vacancyData') ? localStorageService.get('vacancyData') : undefined;

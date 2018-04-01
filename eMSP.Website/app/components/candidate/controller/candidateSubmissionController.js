@@ -3,6 +3,7 @@ angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
 function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, $uibModalInstance) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.submitted = false;
     $scope.refData.candidateStatusList = candidateStatusList;
     $scope.edit = $scope.formAction == "Update" ? true : false;

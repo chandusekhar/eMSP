@@ -791,6 +791,54 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state("vacancy.manageAppointmentType", {
+            url: '/manageAppointmentType',
+            templateUrl: 'app/components/Appointment/View/manageAppointmentType.html',
+            controller: 'manageAppointmentTypeController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Appointment/Config/ManageAppointmentType.json").success(function (data) { return data; });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/bootstrap-markdown/bootstrap-markdown.js', 'js/plugins/bootstrap-markdown/markdown.js', 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
         //Vacancies Routes starts
         .state('job', {
             abstract: true,
@@ -1130,11 +1178,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                        },
-                        {
-                            insertBefore: '#loadBefore',
-                            name: 'toaster',
-                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -1202,6 +1245,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },{
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -1271,6 +1318,120 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
                         }
+                    ]);
+                }
+            }
+        })
+        .state("candidate.manageSubmission", {
+            url: '/manageSubmission',
+            templateUrl: 'app/components/candidate/view/manageCandidateSubmission.html',
+            controller: 'manageCandidateSubmissionController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/candidate/config/manageCandidateSubmission.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state("candidate.candidateSubmission", {
+            url: '/candidateSubmission',
+            templateUrl: 'app/components/candidate/view/candidateSubmission.html',
+            controller: 'candidateSubmissionController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/candidate/config/manageCandidateSubmission.json").success(function (data) { return data; });
+                },
+                candidateStatusList: function (apiCall, APP_CONSTANTS) {                    
+                    return apiCall.get(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETCANDIDATESTATUS).then(function (data) { return data; });
+                },
+                AppIndustries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRIESURL + "?$filter=isDeleted eq false", {})
+                        .then(function (data) {
+                            return data;
+                        });
+                    return {};
+                },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            files: ['css/plugins/dropzone/basic.css', 'css/plugins/dropzone/dropzone.css', 'js/plugins/dropzone/dropzone.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                        }
+
                     ]);
                 }
             }

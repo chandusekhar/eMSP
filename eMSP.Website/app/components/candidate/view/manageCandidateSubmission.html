@@ -1,0 +1,97 @@
+﻿<style>
+    .project-people, .project-actions {
+        text-align: left;
+    }
+</style>
+<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <!--Search-->
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <!--serach Results start-->
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>All Jobs</h5>
+                    </div>
+                    <div class="ibox-content">                        
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Title</th>
+                                        <th>Customer</th>
+                                        <th>Suppliers</th>
+                                        <th>Skills</th>
+                                        <th>Pay Rate</th>
+                                        <th>Status</th>
+                                        <th>Open/Close</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="v in resVacancie" id="row_{{v.Vacancy.id}}">
+                                        <td class="project-actions">
+                                            <a ng-click="showCandidates(v)">
+                                                {{v.Vacancy.customerName | uppercase | limitTo : 2}}000{{v.Vacancy.id}}
+                                            </a>
+                                        </td>
+                                        <td class="project-title">
+                                            <a>{{v.Vacancy.positionTitle}}</a>
+                                            <br />
+                                            <small>Duration : {{v.Vacancy.startDate | date}} - {{v.Vacancy.endDate | date}}</small>
+                                        </td>
+
+                                        <td class="project-people">
+                                            <ng-letter-avatar charCount="2" height="28" width="28" fontsize="10"
+                                                              data="{{v.Vacancy.customerName}}" shape="round"></ng-letter-avatar>
+                                        </td>
+                                        <td class="project-people">
+                                            <ng-letter-avatar ng-repeat="sup in v.VacancySuppliers" charCount="2" height="28" width="28" fontsize="10"
+                                                              data="{{sup.companyName}}" shape="round"></ng-letter-avatar>
+                                        </td>
+
+                                        <td class="project-actions" width="15%">
+                                            <a ng-repeat="skill in v.VacancySkills">#{{skill.skillName}} </a>
+                                        </td>
+                                        <td class="project-actions">
+                                            <small>{{v.Vacancy.targetPayRate}}</small>
+                                        </td>
+                                        <td class="project-completion">
+                                            <small>{{v.Vacancy.vacancyStatus.Name}}</small>
+                                        </td>
+                                        <td class="project-status center">
+                                            <span class="label m-b-n-lg" ng-class="{'label-primary' : v.Vacancy.isActive,'label-warning':!v.Vacancy.isActive}">
+                                                {{v.Vacancy.isActive?'Open':'Closed'}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--serach Results start-->
+        </div>
+    </div>
+    <!--Manage-->
+    <!-- End wrapper-->
+</div>

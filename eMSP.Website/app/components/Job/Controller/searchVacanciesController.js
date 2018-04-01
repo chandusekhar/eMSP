@@ -9,7 +9,6 @@ function searchVacanciesController($scope, $state, localStorageService, configJS
     
     var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
     apires.then(function (data) {
-        debugger;
         $scope.resVacancie = data;
     });
 

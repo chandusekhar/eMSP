@@ -83,6 +83,20 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<CandidateCreateModel> GetCandidate(int CandidateId)
+        {
+            try
+            {
+                tblCandidate res = await Task.Run(() => ManageCandidate.GetCandidate(CandidateId));
+
+                return res.ConvertToCandidateCreateModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         #endregion
 

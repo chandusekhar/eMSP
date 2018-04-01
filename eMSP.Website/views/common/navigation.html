@@ -36,7 +36,7 @@
                         <ul class="nav nav-third-level collapse" ng-class="{active: $state.includes('company')}">
                             <li ui-sref-active="active"><a ui-sref="company.searchSuppliers">{{'Manage Suppliers'|translate}} </a></li>
                             <li ui-sref-active="active"><a ui-sref="company.searchCustomers">{{'Manage Customers'|translate}} </a></li>
-                            <li has-permission="MSP User Full" ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
+                            <li ui-sref-active="active"><a ui-sref="company.searchMSP">{{'Manage MSP'|translate}} </a></li>
                         </ul>
                     </li>
                     <!-- Role Sub Menu -->
@@ -49,7 +49,8 @@
                     </li>
 
                     <li ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>                    
+                    <li ui-sref-active="active"><a ui-sref="vacancy.manageAppointmentType">{{'Manage Appointment Types'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="vacancy.manageDocuments">{{'Manage Documents'|translate}}</a></li>
                     <li ui-sref-active="active"><a ui-sref="vacancy.manageQuestions">{{'Manage Questions'|translate}}</a></li>
                     <li ui-sref-active="active"><a ui-sref="vacancy.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>
@@ -69,7 +70,7 @@
                 <a href="#"><i class="fa fa-user-o"></i> <span class="nav-label">{{'Candidate'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('candidate')}">
                     <li ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="candidate.appointment">{{'Manage Candidate Submission'|translate}} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="candidate.manageSubmission">{{'Manage Candidate Submission'|translate}} </a></li>
                     <li ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
                 </ul>
             </li>

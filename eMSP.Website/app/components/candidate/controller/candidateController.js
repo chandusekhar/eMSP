@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
 
-function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {
+function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {    
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;
@@ -282,7 +282,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
             angular.forEach($scope.CandidateDocs, function (file) {
                 file.FileName = $scope.CandidateDocument.docFileName;
                 file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
-                file.FileTypeId = 10007;
+                file.FileTypeId = 6;
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateDocs = [];
@@ -423,7 +423,7 @@ angular.module('eMSPApp')
                 console.log(e);
                 var obj = angular.fromJson(e.srcElement.response);
 
-                // obj[0].FileTypeId = type == 'Resume' ? 2 : 10007;
+                // obj[0].FileTypeId = type == 'Resume' ? 2 : 6;
 
 
                 config.scope.$apply(function () { config.model.$viewValue.push(obj[0]) });

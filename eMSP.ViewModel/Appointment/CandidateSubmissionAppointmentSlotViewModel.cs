@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.Appointment
 {
-  public partial class CandidateSubmissionAppointmentSlotViewModel:BaseModel
+    public partial class CandidateSubmissionAppointmentSlotViewModel : BaseModel
     {
         public long ID { get; set; }
         public long AppintmentID { get; set; }
@@ -17,5 +17,4 @@ namespace eMSP.ViewModel.Appointment
 
         public virtual CandidateSubmissionAppointmentViewModel Appointment { get; set; }
     }
-}
 }

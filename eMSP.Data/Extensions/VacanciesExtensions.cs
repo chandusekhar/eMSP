@@ -103,14 +103,16 @@ namespace eMSP.Data.Extensions
                     createdTimestamp = data.CreatedTimestamp,
                     createdUserID = data.CreatedUserID,
                     updatedTimestamp = data.UpdatedTimestamp,
-                    updatedUserID = data.UpdatedUserID,                    
+                    updatedUserID = data.UpdatedUserID,
                     vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
                 },
                 VacancyFiles = data.tblVacancyFiles?.Select(a => a.ConvertToVacancyFile()).ToList(),
                 //VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
                 VacancySkills = data.tblVacancieSkills?.Select(a => a.tblIndustrySkill?.ConvertToIndustrySkill()).ToList(),
                 VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblCustomerLocationBranch?.tblLocation.ConvertToLocation()).ToList(),
-                VacancySuppliers = data.tblVacancySuppliers?.Select(a => a.tblSupplier?.ConvertTocompany()).ToList()
+                VacancySuppliers = data.tblVacancySuppliers?.Select(a => a.tblSupplier?.ConvertTocompany()).ToList(),
+                Questions = data.tblVacanciesQuestions?.Select(a => a.ConvertToVacancyQuestion()).ToList(),
+                RequiredDocument = data.tblVacanciesRequiredDocuments?.Select(a => a.ConvertToVacancyRequiredDocument()).ToList()
             };
         }
 

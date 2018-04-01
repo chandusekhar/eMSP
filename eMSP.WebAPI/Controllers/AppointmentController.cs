@@ -72,7 +72,7 @@ namespace eMSP.WebAPI.Controllers
             try
             {
                 string userId = User.Identity.GetUserId();
-                data.createdUserID = userId;
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
                 return Ok((await _service.SaveType(data)));
             }
             catch (Exception)
@@ -88,8 +88,8 @@ namespace eMSP.WebAPI.Controllers
         {
             try
             {
-                string userId = User.Identity.GetUserId();
-                data.createdUserID = userId;
+                string userId = User.Identity.GetUserId();                
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
                 return Ok((await _service.UpdateType(data)));
             }
             catch (Exception)

@@ -87,6 +87,12 @@ angular.module('eMSPApp')
                 UPDATECANCYDOCUMENTS: "api/MSPRequiredDocument/update",
                 GETJOBVACANCIESSTATUS:"api/JobVacancie/getVacancyStatus"
             },
+            APPOINTMENT: {
+                GETALLAPPOINTMENTTYPEURL: "api/Appointment/type/getlist",
+                GETAPPOINTMENTTYPEURL: "api/Appointment/type/get?id=",
+                CREATEAPPOINTMENTTYPEURL: "api/Appointment/type/save",
+                UPDATEAPPOINTMENTTYPEURL:"api/Appointment/type/update"
+            },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",
                 GETSTATEURL: "api/App/getStates?Id="
@@ -103,8 +109,8 @@ angular.module('eMSPApp')
                 ASSIGNUSERROLEURL: "api/role/AssignUserRoles"
             },
             CANDIDATEURL: {
-                SEARCHURL: "api/candidate/getAllCandidates",
-                GETURL: "api/candidate/getCandidate",
+                SEARCHURL: "api/candidate/getAllCandidates",                
+                GETURL: "api/candidate/getCandidate?candidateId=",
                 CREATEURL: "api/candidate/creatCandidate",
                 UPDATEURL: "api/candidate/updateCandidate",
                 DELETEURL: "api/candidate/deleteCandidate"

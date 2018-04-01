@@ -25,7 +25,7 @@ namespace eMSP.WebAPI.Controllers.Shared
     {
         [Route("getProfilePic")]
         [HttpGet]
-        public async Task<HttpResponseMessage> getProfilePic(string path)
+        public async Task<HttpResponseMessage> GetProfilePic(string path)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace eMSP.WebAPI.Controllers.Shared
                             fileName = "Test.jpg";
                         }
 
-                        var filePath = Path.Combine(HttpContext.Current.Server.MapPath(@"~\"+baseUploadPath), fileName);
+                        var filePath = Path.Combine(HttpContext.Current.Server.MapPath(@"~\" + baseUploadPath), fileName);
 
                         var buffer = await file.ReadAsByteArrayAsync();
 
@@ -96,8 +96,9 @@ namespace eMSP.WebAPI.Controllers.Shared
             }
             catch (Exception ex)
             {
-                var response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-                throw new HttpResponseException(response);
+                //var response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                //throw new HttpResponseException(response);
+                return Ok(ex.StackTrace);
             }
         }
 

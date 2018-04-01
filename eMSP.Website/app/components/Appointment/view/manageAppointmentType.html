@@ -29,14 +29,14 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div ng-repeat="qus in questionsList">
+                            <div ng-repeat="atl in appointmentTypeList">
                                 <div class="col-lg-4">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
-                                            <span class="small">Q000{{qus.ID}}</span>
+                                            <span class="small">AT000{{atl.ID}}</span>
 
                                             <div class="btn-group-xs pull-right">
-                                                <a ng-click="update(qus)" class="text-white">
+                                                <a ng-click="update(atl)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
                                             </div>
@@ -45,48 +45,36 @@
                                         <div class="panel-body">
                                             <div class="ibox-heading white-bg">
                                                 <b>Question:</b>
-                                                <p class="small">{{qus.QuestionName}}</p>
+                                                <p class="small">{{atl.Name}}</p>
                                             </div>
                                             <div class="ibox-heading white-bg">
                                                 <b>Description:</b>
-                                                <p class="small">{{qus.QuestionDescription}}</p>
-                                            </div>
-
-                                            <div class="ibox-heading white-bg">
-                                                <!-- Is default Question -->
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                       ng-change="toggleActive(qus)" ng-model="qus.IsDefault" />
-                                                <span class="small">Is Default</span>
-                                            </div>
-                                            <div class="ibox-heading white-bg">
-                                                <!-- Is mandatory Question -->
-                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                       ng-change="toggleActive(qus)" ng-model="qus.IsMandatory" />
-                                                <span class="small">Is Mandatory</span>
-                                            </div>
+                                                <p class="small">{{atl.Description}}</p>
+                                            </div>                                            
                                         </div>
 
                                             <div class="form-control inline">
                                                 <!-- Country Active/Deactive toggle -->
-                                                <p class="small inline" ng-if="qus.isActive">Active</p>
-                                                <p class="small inline" ng-if="!qus.isActive">Deactive</p>
+                                                <p class="small inline" ng-if="atl.isActive">Active</p>
+                                                <p class="small inline" ng-if="!atl.isActive">Deactive</p>
                                                 <input type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                       ng-change="toggleActive(qus)"
-                                                       ng-model="qus.isActive" />
+                                                       ng-change="toggleActive(atl)"
+                                                       ng-model="atl.isActive" />
 
                                                 <!-- Country Deleted toggle -->
                                                 <div class="pull-right">
-                                                    <p class="small inline" ng-if="qus.isDeleted">Deleted</p>
-                                                    <p class="small inline" ng-if="!qus.isDeleted">Deleted</p>
+                                                    <p class="small inline" ng-if="atl.isDeleted">Deleted</p>
+                                                    <p class="small inline" ng-if="!atl.isDeleted">Deleted</p>
                                                     <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                           ng-change="toggleActive(qus)"
-                                                           ng-model="qus.isDeleted" />
+                                                           ng-change="toggleActive(atl)"
+                                                           ng-model="atl.isDeleted" />
                                                 </div>
                                             </div>
                                         </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -100,36 +88,21 @@
                     <div class="ibox-content">
                         <form class="m-t" name="form" novalidate>
 
-                            <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.questionName.$error.required }">
-                                <label>Question* :</label>
-                                <input type="text" class="form-control" name="questionName"
-                                       ng-model="dataJSON.QuestionName"
-                                       placeholder="Question" required />
-                                <span ng-show="refData.submitted && form.questionName.$error.required" class="help-block">
-                                    * Question is required
+                            <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.Name.$error.required }">
+                                <label>Appointment Type* :</label>
+                                <input type="text" class="form-control" name="Name"
+                                       ng-model="dataJSON.Name"
+                                       placeholder="Appointment Type" required />
+                                <span ng-show="refData.submitted && form.Name.$error.required" class="help-block">
+                                    * Appointment Type is required
                                 </span>
                             </div>
 
                             <div class="form-group">
-                                <label>Question Description :</label>
+                                <label>Appointment Type Description :</label>
                                 <textarea type="text" class="form-control"
-                                          ng-model="dataJSON.QuestionDescription"
-                                          placeholder="Question Description" name="questionDescription" />
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group col-md-3 no-padding">
-                                    <label>
-                                        <input icheck type="checkbox" name="IsDefault" ng-model="dataJSON.IsDefault">
-                                        <i></i> Is Default
-                                    </label>
-                                </div>
-
-                                <div class="form-group  col-md-3">
-                                    <label>
-                                        <input icheck type="checkbox" name="IsMandatory" ng-model="dataJSON.IsMandatory">
-                                        <i></i> Is Mandatory
-                                    </label>
-                                </div>
+                                          ng-model="dataJSON.Description"
+                                          placeholder="Appointment Type Description" name="Description" />
                             </div>
                             <h5>
                                 <button type="submit" ng-click="submit(form)" class="btn btn-primary m-b">{{formAction}}</button>

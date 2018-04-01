@@ -1,0 +1,78 @@
+﻿<style>
+    .project-people, .project-actions {
+        text-align: left;
+    }
+    #submittedCandidates .ibox {
+        margin-bottom: 0px;
+    }
+</style>
+<!-- Wrapper-->
+<div id="wrapper" ng-controller="submitedCandidateListController">    
+    <!--Search-->
+    <div class="table-bordered" ng-controller="datatablesCtrl">
+        <div class="row">
+            <!--serach Results start-->
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Submited Candidates:</h5>
+                        <div class="ibox-tools">
+                            <a ng-click="submitCandidate()" class="btn btn-primary">{{configJSON.candidateSubmission}}</a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="project-list">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Candidate</th>
+                                        <th>Rate</th>
+                                        <th>Suppliers</th>
+                                        <th>Skills</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="jsl in submitedCandidateList">
+                                        <td class="project-actions">
+                                            <a ui-sref="project_detail">
+                                                SC000{{jsl.ID}}                                                
+                                            </a>
+                                        </td>
+                                        <td class="project-title">
+                                            {{jsl.CandidateId}}
+                                        </td>
+                                        <td class="project-people">
+                                            {{jsl.BillRate | currency }}
+                                        </td>
+                                        <td class="project-people">
+                                            Supplier Name
+                                        </td>
+
+                                        <td class="project-actions" width="15%">
+                                            #ASP.NET #Angular
+                                        </td>
+                                        <td class="project-status center">
+                                            <span class="label m-b-n-lg" ng-class="{'label-primary' : true,'label-warning':!true}">
+                                                Open
+                                            </span>
+                                        </td>
+                                        <td class="project-actions">
+                                            <a ng-click="submitCandidate(jsl)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                            <a ng-click="createAppointment(jsl)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Appointment </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--serach Results start-->
+        </div>
+    </div>
+    <!--Manage-->
+    <!-- End wrapper-->
+</div>

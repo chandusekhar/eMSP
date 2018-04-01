@@ -3,6 +3,7 @@ angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
 
 function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
     $scope.formAction = formAction;

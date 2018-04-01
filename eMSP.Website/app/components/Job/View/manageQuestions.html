@@ -23,7 +23,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5><strong>{{configJSON.title}}:</strong></h5>
-                        <div class="ibox-tools">
+                        <div class="ibox-tools" ng-if="config.DocumentCreate == true">
                             <a ng-click="create()" class="btn btn-primary">Create</a>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" ng-if="config.QuestionCreate == true" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                        
                     </div>
                 </div>
             </div>

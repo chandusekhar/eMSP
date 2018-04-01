@@ -3,6 +3,7 @@ angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
 function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, $uibModalInstance) {
+    $scope.config = localStorageService.get('pageSettings');
     $scope.submitted = false;
     $scope.refData = {};
     $scope.refData.candidateStatusList = candidateStatusList;
@@ -166,7 +167,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
             angular.forEach($scope.CandidateDocs, function (file) {
                 file.FileName = $scope.CandidateDocument.docFileName;
                 file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
-                file.FileTypeId = 6;
+                file.FileTypeId = 10007;
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateDocs = [];

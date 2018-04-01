@@ -35,7 +35,7 @@
                                         <div class="panel-heading">
                                             <span class="small">D000{{doc.ID}}</span>
 
-                                            <div class="btn-group-xs pull-right">
+                                            <div class="btn-group-xs pull-right" ng-if="config.DocumentCreate == true">
                                                 <a ng-if="config.DocumentEdit == true" ng-click="update(doc)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" ng-if="config.DocumentCreate == true" ng-click="create()" class="btn btn-primary m-b">Create</button>
+                        
                     </div>
                 </div>
             </div>

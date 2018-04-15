@@ -85,13 +85,13 @@ angular.module('eMSPApp')
                 GETVACANCYDOCUMENTS: "api/MSPRequiredDocument/get",
                 CREATEVACANCYDOCUMENTS: "api/MSPRequiredDocument/save",
                 UPDATECANCYDOCUMENTS: "api/MSPRequiredDocument/update",
-                GETJOBVACANCIESSTATUS:"api/JobVacancie/getVacancyStatus"
+                GETJOBVACANCIESSTATUS: "api/JobVacancie/getVacancyStatus"
             },
             APPOINTMENT: {
                 GETALLAPPOINTMENTTYPEURL: "api/Appointment/type/getlist",
                 GETAPPOINTMENTTYPEURL: "api/Appointment/type/get?id=",
                 CREATEAPPOINTMENTTYPEURL: "api/Appointment/type/save",
-                UPDATEAPPOINTMENTTYPEURL:"api/Appointment/type/update"
+                UPDATEAPPOINTMENTTYPEURL: "api/Appointment/type/update"
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",
@@ -109,7 +109,7 @@ angular.module('eMSPApp')
                 ASSIGNUSERROLEURL: "api/role/AssignUserRoles"
             },
             CANDIDATEURL: {
-                SEARCHURL: "api/candidate/getAllCandidates",                
+                SEARCHURL: "api/candidate/getAllCandidates",
                 GETURL: "api/candidate/getCandidate?candidateId=",
                 CREATEURL: "api/candidate/creatCandidate",
                 UPDATEURL: "api/candidate/updateCandidate",
@@ -125,6 +125,10 @@ angular.module('eMSPApp')
                 CHANGEPASSWORD: "api/Account/ChangePassword",
                 RESETPASSWORD: "api/Account/SetPassword",
                 FORGOTPASSWORD: "api/Account/ForgotPassword?Email="
+            },
+            DASHBOARD: {
+                GETDETAILS: "api/dashboard/msp"
             }
+
         }
     });

@@ -11,7 +11,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.IsMSP = false;
     $scope.refData.countryList = AppCoutries;
     $scope.refData.userViewType = "Card";
-    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
+    $scope.baseUrl = ngAuthSettings.contentURL;
 
     if ($scope.configJSON.companyType === "MSP") {
         $scope.dataJSON.companyName = "";

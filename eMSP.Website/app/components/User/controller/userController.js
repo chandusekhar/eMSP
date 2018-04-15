@@ -32,7 +32,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
     if ($scope.editform) {
         $scope.udataJSON.countryId = $scope.udataJSON.countryId.toString();
         $scope.udataJSON.stateId = $scope.udataJSON.stateId.toString()
-        $scope.udataJSON.userProfilePhotoPathT = ngAuthSettings.apiServiceBaseUri + $scope.udataJSON.userProfilePhotoPath;
+        $scope.udataJSON.userProfilePhotoPathT = ngAuthSettings.contentURL + $scope.udataJSON.userProfilePhotoPath;
         $scope.getStateList();
     }
 

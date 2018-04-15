@@ -1,7 +1,8 @@
-﻿<!-- Wrapper-->
+﻿<div ng-controller="dashboardController as chart">
+<!-- Wrapper-->
 <div id="wrapper">
     <!-- Navigation -->
-    <div ng-include="'views/common/navigation.html'" ng-controller="dashboardController"></div>
+    <div ng-include="'views/common/navigation.html'" ></div>
 </div>
 <!-- Page wraper -->
 <!-- ng-class with current state name give you the ability to extended customization your view -->
@@ -9,14 +10,14 @@
     <!-- Page wrapper -->
     <div ng-include="'views/common/topnavbar.html'"></div>
     <!-- Main view  -->
-    <div class="row  border-bottom white-bg dashboard-header" ng-controller="dashboardController as chart">
+    <div class="row  border-bottom white-bg dashboard-header" >
         <div class="col-sm-3">
             <h2>{{ 'WELCOME' | translate }} {{userName}}</h2>
             <!--<small>{{ 'MESSAGEINFO' | translate }}</small>-->
 
         </div>
     </div>
-    <div class="wrapper wrapper-content" ng-controller="dashboardController as chart">
+    <div class="wrapper wrapper-content" >
         <div class="row">
             <div class="col-lg-4">
                 <div class="ibox float-e-margins">
@@ -26,7 +27,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas doughnutchart options="chart.doughnutOptions" data="chart.doughnutData2" height="140" responsive=true></canvas>
+                            <canvas doughnutchart options="chart.doughnutOptions" data="JobActiveList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas doughnutchart options="chart.doughnutOptions" data="chart.doughnutData" height="140" responsive=true></canvas>
+                            <canvas doughnutchart options="chart.doughnutOptions" data="CustomerJobsList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>
@@ -52,7 +53,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas barchart options="chart.barOptions" data="chart.barData" height="140" responsive=true></canvas>
+                            <canvas barchart options="chart.barOptions" data="JobsMonthList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>
@@ -180,7 +181,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas doughnutchart options="chart.doughnutOptions" data="chart.doughnutData3" height="140" responsive=true></canvas>
+                            <canvas doughnutchart options="chart.doughnutOptions" data="SupplierJobsList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>
@@ -193,7 +194,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas barchart options="chart.barOptions" data="chart.barData3" height="140" responsive=true></canvas>
+                            <canvas barchart options="chart.barOptions" data="SubmissionMonthlyList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>
@@ -206,7 +207,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas barchart options="chart.barOptions" data="chart.barData2" height="140" responsive=true></canvas>
+                            <canvas barchart options="chart.barOptions" data="SubmissionMonthlyList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>

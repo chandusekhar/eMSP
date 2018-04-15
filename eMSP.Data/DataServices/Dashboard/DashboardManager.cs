@@ -35,7 +35,7 @@ namespace eMSP.Data.DataServices.Dashboard
 
                 var listOfJobs = await dbContext.tblVacancies.ToListAsync();
 
-                ddata.JobActiveList = listOfJobs.Select(x => new { Active = x.IsActive == true ? "Yes" : "No",ID=x.ID }).ToList().GroupBy(x => x.Active).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
+                ddata.JobActiveList = listOfJobs.Select(x => new { Active = x.IsActive == true ? "Active" : "In-Active",ID=x.ID }).ToList().GroupBy(x => x.Active).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
 
                 ddata.JobStatusList = listOfJobs.GroupBy(x => x.tblJobVacanciesStatu.Name).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
 

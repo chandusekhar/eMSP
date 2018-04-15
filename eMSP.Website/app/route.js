@@ -119,6 +119,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "app/components/dashboard/view/dashboard.html",
             data: { pageTitle: 'Dashboard' },
             resolve: {
+                dataJSON: function (apiCall, APP_CONSTANTS, localStorageService) {
+                    return apiCall.post(APP_CONSTANTS.URL.DASHBOARD.GETDETAILS, {}).
+                        then(function (data) {
+                            if (data) {
+                                localStorageService.set("DashBoardData", data);
+                            }
+                            return data;
+                        });
+                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -160,7 +169,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/account",
             templateUrl: "views/common/content.html",
             controller: "dashboardController",
-            
+
         })
         .state("account.changePassword", {
             url: '/changePassword',
@@ -1267,7 +1276,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
-                        },{
+                        }, {
                             insertBefore: '#loadBefore',
                             name: 'toaster',
                             files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
@@ -1396,7 +1405,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/candidate/config/manageCandidateSubmission.json").success(function (data) { return data; });
                 },
-                candidateStatusList: function (apiCall, APP_CONSTANTS) {                    
+                candidateStatusList: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETCANDIDATESTATUS).then(function (data) { return data; });
                 },
                 AppIndustries: function (apiCall, APP_CONSTANTS) {

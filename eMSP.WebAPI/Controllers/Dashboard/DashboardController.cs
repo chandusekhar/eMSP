@@ -1,4 +1,5 @@
 ﻿using eMSP.Data.DataServices.Dashboard;
+using eMSP.ViewModel.Dashboard;
 using eMSP.ViewModel.JobVacancies;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace eMSP.WebAPI.Controllers.Dashboard
 
         [Route("msp")]
         [HttpPost]
-        [ResponseType(typeof(bool))]
+        [ResponseType(typeof(DashboardViewModel))]
         public async Task<IHttpActionResult> GetMSPDashboard()
         {
             try

@@ -1,14 +1,78 @@
 ﻿'use strict';
-angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 'authService', 'localStorageService', '$location', 'apiCall', 'APP_CONSTANTS', function ($scope, $http, authService, localStorageService,$location, apiCall, APP_CONSTANTS) {
+angular.module('eMSPApp').controller("dashboardController", function ($scope, $filter, $http, authService, localStorageService, $location, apiCall, APP_CONSTANTS) {
 
+    $scope.dataJSON = localStorageService.get('DashBoardData');
     $scope.config = localStorageService.get('pageSettings');
-
+    $scope.CustomerJobsList =[];
+    $scope.JobActiveList = [];
+    $scope.SupplierJobsList = [];
+    $scope.SubmissionMonthlyDataSet = [];
+    $scope.JobsMonthDataSet = [];
+    $scope.MonthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     if (authService.authentication.isAuth) {
         $scope.userName = authService.authentication.userName;
     } else {
         authService.logOut();
         $location.path('/login');
     }
+    $scope.colorInspirationClasses = [
+        'grapefruit', 'bittersweet', 'sunflower', 'grass',
+        'mint', 'aqua', 'bluejeans', 'lavender',
+        'pinkrose', 'lightgray', 'mediumgray', 'darkgray', 'red'
+    ];
+
+
+    angular.forEach($scope.dataJSON.ChartData.CustomerJobsList, function (val, key) {
+        var i = $scope.dataJSON.ChartData.CustomerJobsList.indexOf(val);
+     this.push( {
+            value: val.Count,
+            label: val.Name,
+            color: 'rgba(120,' + i +',46,21)'
+        });
+    }, $scope.CustomerJobsList);
+
+    angular.forEach($scope.dataJSON.ChartData.JobActiveList, function (val, key) {
+        var i = $scope.dataJSON.ChartData.JobActiveList.indexOf(val);
+        this.push({
+            value: val.Count,
+            label: val.Name,
+            color: 'rgba(30,' + i+100 + ',200,12)'
+        });
+    }, $scope.JobActiveList);
+
+    angular.forEach($scope.dataJSON.ChartData.SupplierJobsList, function (val, key) {
+        var i = $scope.dataJSON.ChartData.JobActiveList.indexOf(val);
+        this.push({
+            value: val.Count,
+            label: val.Name,
+            color: 'rgba(310,' + i + 100 + ',120,35)'
+        });
+    }, $scope.SupplierJobsList);
+
+    angular.forEach($scope.MonthList, function (val, key) {
+        var smvl = $filter('filter')($scope.dataJSON.ChartData.SubmissionMonthlyList, function (item) { return item.Name == val; }, true);
+        var jmvl = $filter('filter')($scope.dataJSON.ChartData.JobsMonthList, function (item) { return item.Name == val; }, true);
+        var smv = smvl[0] ? smvl[0].Count : '';
+        var jml = jmvl[0] ? jmvl[0].Count : '';
+        $scope.SubmissionMonthlyDataSet.push(smv);
+        $scope.JobsMonthDataSet.push(jml);
+    });
+    
+    
+    /**
+     * Options for Doughnut chart
+     */
+    this.doughnutOptions = {
+        segmentShowStroke: true,
+        segmentStrokeColor: "#fff",
+        segmentStrokeWidth: 2,
+        percentageInnerCutout: 45, // This is 0 for Pie charts
+        animationSteps: 100,
+        animationEasing: "easeOutBounce",
+        animateRotate: true,
+        animateScale: false
+    };
+
     var data1 = [
         [gd(2012, 1, 1), 7],
         [gd(2012, 1, 2), 6],
@@ -185,8 +249,9 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
     /**
      * Data for Bar chart
      */
-    this.barData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+    $scope.SubmissionMonthlyList = [];
+    $scope.SubmissionMonthlyList = {
+        labels: $scope.MonthList ,
         datasets: [
             {
                 label: "My First dataset",
@@ -194,12 +259,12 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: $scope.SubmissionMonthlyDataSet
             }
         ]
     };
-    this.barData3 = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+    $scope.JobsMonthList = {
+        labels: $scope.MonthList,
         datasets: [
             {
                 label: "My First dataset",
@@ -207,12 +272,12 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
                 strokeColor: "rgba(20,220,20,0.8)",
                 highlightFill: "rgba(20,220,20,0.75)",
                 highlightStroke: "rgba(20,220,20,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: $scope.JobsMonthDataSet
             }
         ]
     };
     this.barData2 = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: $scope.MonthList,
         datasets: [
             {
                 label: "My First dataset",
@@ -225,77 +290,7 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
         ]
     };
 
-    this.doughnutData = [
-        {
-            value: 300,
-            color: "#a3e1d4",
-            highlight: "#1ab394",
-            label: "Customer1"
-        },
-        {
-            value: 300,
-            color: "orange",
-            highlight: "#1ab394",
-            label: "Customer2"
-        },{
-            value: 50,
-            color: "#dedede",
-            highlight: "#1ab394",
-            label: "Customer3"
-        }
-    ];
-    this.doughnutData2 = [
-        {
-            value: 300,
-            color: "red",
-            highlight: "#1ab394",
-            label: "Active"
-        },
-        {
-            value: 50,
-            color: "#dedede",
-            highlight: "#1ab394",
-            label: "InActive"
-        }
-    ];
-    this.doughnutData3 = [
-        {
-            value: 300,
-            color: "yellow",
-            highlight: "#1ab394",
-            label: "Supplier1"
-        },
-        {
-            value: 50,
-            color: "brown",
-            highlight: "#1ab394",
-            label: "supplier2"
-        }, {
-            value: 300,
-            color: "green",
-            highlight: "#1ab394",
-            label: "Supplier3"
-        },
-        {
-            value: 50,
-            color: "red",
-            highlight: "#1ab394",
-            label: "supplier4"
-        }
-    ];
-    /**
-     * Options for Doughnut chart
-     */
-    this.doughnutOptions = {
-        segmentShowStroke: true,
-        segmentStrokeColor: "#fff",
-        segmentStrokeWidth: 2,
-        percentageInnerCutout: 45, // This is 0 for Pie charts
-        animationSteps: 100,
-        animationEasing: "easeOutBounce",
-        animateRotate: true,
-        animateScale: false
-    };
+
 
     /**
      * Definition of variables
@@ -308,7 +303,7 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
     //    console.log(data);
     //    $scope.userRoles = data;
     //});
-    
+
     //var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETUSERBYNAMEURL + authService.authentication.userName, { "name": authService.authentication.userName});
     //apires.then(function (data) {
     //    console.log(data);
@@ -438,4 +433,4 @@ angular.module('eMSPApp').controller("dashboardController", ['$scope', '$http', 
     //    negBarColor: '#c6c6c6'
     //});
 
-}]);
+});

@@ -12,7 +12,7 @@ function createCompanyController($scope, $state, localStorageService, configJSON
     $scope.edit = false;
     $scope.formAction = formAction;
     $scope.refData.submitted = false;
-    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
+    $scope.baseUrl = ngAuthSettings.contentURL;
     $scope.cropped = {
         source: 'https://raw.githubusercontent.com/Foliotek/Croppie/master/demo/demo-1.jpg'
     };

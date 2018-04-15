@@ -2,10 +2,13 @@ var apiBaseURL = 'http://localhost:50001/';
 
 
 var serviceBase = 'http://localhost:50001/';
+
+var contentBase = 'http://localhost:50001/';
 //var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
 angular
     .module('eMSPApp').constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
+        contentURL: contentBase,
         clientId: 'ngAuthApp'
     });
 

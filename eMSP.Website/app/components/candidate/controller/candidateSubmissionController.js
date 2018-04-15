@@ -38,7 +38,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
 
     console.log($scope.refData.vacancyData);
     console.log($scope.refData.submittedCandidate);
-    debugger;
+    
 
     var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + 1, { 'SupplierId': 1 });
     apires.then(function (data) {

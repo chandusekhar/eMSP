@@ -18,7 +18,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
     $scope.compId = 1;
     $scope.refData.userViewType = "Card";
-    $scope.baseUrl = ngAuthSettings.apiServiceBaseUri;
+    $scope.baseUrl = ngAuthSettings.contentURL;
     $scope.contact = false;
     $scope.resumeUpload = false;
     $scope.docUpload = false;

@@ -135,6 +135,21 @@ namespace eMSP.WebAPI.Controllers
             }
         }
 
+        [Route("getlist")]
+        [HttpPost]
+        [ResponseType(typeof(List<CandidateSubmissionAppointmentViewModel>))]
+        public async Task<IHttpActionResult> GetList(long id)
+        {
+            try
+            {
+                return Ok((await _service.Get(id)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Route("save")]
         [HttpPost]
         [ResponseType(typeof(CandidateSubmissionAppointmentViewModel))]

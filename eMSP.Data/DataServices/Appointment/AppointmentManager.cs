@@ -353,7 +353,78 @@ namespace eMSP.Data.DataServices.Appointment
                 throw ex;
             }
         }
-        
+
+        public async Task<List<CandidateSubmissionAppointmentViewModel>> GetList(long SubmissionID)
+        {
+            try
+            {
+                var appointmentlist = await db.tblCandidateSubmissionAppointments.Where(x => x.CandidateSubmissionID == SubmissionID).ToListAsync();
+
+               List<CandidateSubmissionAppointmentViewModel> objList = null;
+
+                if (appointmentlist != null)
+                {
+                    objList = appointmentlist.Select(appointment=> new CandidateSubmissionAppointmentViewModel()
+                    {
+                        ID = appointment.ID,
+                        AppintmentTypeID = appointment.AppintmentTypeID,
+                        AppointmentStatusID = appointment.AppointmentStatusID,
+                        CandidateSubmissionID = appointment.CandidateSubmissionID,
+                        Name = appointment.Name,
+                        Details = appointment.Details,
+                        isActive = appointment.IsActive,
+                        createdTimestamp = appointment.CreatedTimestamp,
+                        Status = new AppointmentStatusViewModel()
+                        {
+                            ID = appointment.tblAppointmentStatu.ID,
+                            Name = appointment.tblAppointmentStatu.Name
+                        },
+                        Type = new AppointmentTypeViewModel()
+                        {
+                            ID = appointment.tblAppointmentType.ID,
+                            Name = appointment.tblAppointmentType.Name
+                        },
+                        Slots = appointment.tblCandidateSubmissionAppointmentSlots.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
+                        {
+                            ID = x.ID,
+                            AppintmentID = x.AppintmentID,
+                            StartDate = x.StartDate,
+                            EndDate = x.EndDate,
+                            isActive = x.IsActive,
+                            IsFinalised = x.IsFinalised
+                        }).ToList(),
+                        Users = appointment.tblCandidateSubmissionAppointmentUsers.Select(x => new CandidateSubmissionAppointmentUserViewModel()
+                        {
+                            ID = x.ID,
+                            AppointmentID = x.AppointmentID,
+                            UserID = x.UserID,
+                            isActive = x.IsActive,
+                            isDeleted = x.IsDeleted
+                        }).ToList(),
+                        UserComments = appointment.tblCandidateSubmissionAppointmentUserComments.Select(x => new CandidateSubmissionAppointmentUserCommentViewModel()
+                        {
+                            ID = x.ID,
+                            AppointmentID = x.AppointmentID,
+                            Comment = new CommentModel()
+                            {
+                                comment = x.tblComment.Comment,
+                                isActive = x.tblComment.IsActive,
+                                isDeleted = x.tblComment.IsDeleted,
+                                showToAll = x.tblComment.ShowToAll,
+                                id = x.CommentID,
+                                createdTimestamp = x.CreatedTimestamp
+                            }
+                        }).ToList()
+                    }).ToList();
+                }
+                return objList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<CandidateSubmissionAppointmentViewModel> Update(long id, CandidateSubmissionAppointmentViewModel data, string loggedInUserID)
         {
             try

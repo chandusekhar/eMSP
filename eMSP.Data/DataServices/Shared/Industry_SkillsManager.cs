@@ -81,8 +81,25 @@ namespace eMSP.Data.DataServices.Shared
             {
                 List<IndustrySkillsCreateModel> res = null;
 
-                List<tblIndustrySkill> dataCountry = await Task.Run(() => ManageIndustry_Skills.GetAllIndustrySkills(IndustryId));
-                res = dataCountry.Select(a => a.ConvertToIndustrySkill()).ToList();
+                List<tblIndustrySkill> data = await Task.Run(() => ManageIndustry_Skills.GetAllIndustrySkills(IndustryId));
+                res = data.Select(a => a.ConvertToIndustrySkill()).ToList();
+
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<IndustrySkillsCreateModel>> GetAllIndustrySkills( long[] IndustryId)
+        {
+            try
+            {
+                List<IndustrySkillsCreateModel> res = null;
+
+                List<tblIndustrySkill> data = await Task.Run(() => ManageIndustry_Skills.GetAllIndustrySkills(IndustryId));
+                res = data.Select(a => a.ConvertToIndustrySkill()).ToList();
 
                 return res;
             }

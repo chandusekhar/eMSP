@@ -253,6 +253,17 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="font-normal">Candidate Email:</label>
+                                            <div ng-class="{ 'has-error': form.CEmailAddress.$dirty && form.CEmailAddress.$error.required }">
+                                                <input type="email" class="form-control"
+                                                       ng-model="dataJSON.Candidate.Email"
+                                                       placeholder="Email" name="CEmailAddress" required="">
+                                                <span ng-show="form.CEmailAddress.$dirty && form.CEmailAddress.$error.required" class="help-block">
+                                                    Candidate Email is required
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -304,13 +315,13 @@
                                     </div>
                                     <div ng-if="contact != false" class="row">
                                         <div class="form-group col-md-6">
-                                            <label class="font-normal">Email:</label>
+                                            <label class="font-normal">Contact Email:</label>
                                             <div ng-class="{ 'has-error': form.EmailAddress.$dirty && form.EmailAddress.$error.required }">
                                                 <input type="email" class="form-control"
                                                        ng-model="dataJSON.Contact.EmailAddress"
                                                        placeholder="Email" name="EmailAddress" required="">
                                                 <span ng-show="form.EmailAddress.$dirty && form.EmailAddress.$error.required" class="help-block">
-                                                    Email is required
+                                                    Contact Email is required
                                                 </span>
                                             </div>
                                         </div>

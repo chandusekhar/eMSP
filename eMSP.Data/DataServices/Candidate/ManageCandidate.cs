@@ -168,20 +168,36 @@ namespace eMSP.Data.DataServices.Candidate
                 tblCandidate candidate = await Task.Run(() => InsertCandidate(model.Candidate.ConvertTotblCandidate()));
                 x = await Task.Run(() => InsertSupplierCandidate(candidate, model.SupplierId));
 
-                foreach (CandidateContactModel a in model.CandidateContact)
+                if(model.CandidateContact.Count > 0)
                 {
-                    contact = await Task.Run(() => InsertContacts(a.ConvertTotblContact()));
-                    x = await Task.Run(() => InsertCandidateContacts(candidate, contact, a.IsPrimary));
+                    foreach (CandidateContactModel a in model.CandidateContact)
+                    {
+                        contact = await Task.Run(() => InsertContacts(a.ConvertTotblContact()));
+                        x = await Task.Run(() => InsertCandidateContacts(candidate, contact, a.IsPrimary));
+                    }
                 }
 
-                foreach (FileModel a in model.CandidateFile)
+                if (model.CandidateFile.Count > 0)
                 {
-                    file = await Task.Run(() => InsertFiles(a.ConvertTotblFile()));
-                    x = await Task.Run(() => InsertCandidateFiles(candidate, file, Convert.ToInt64(a.FileTypeId),a.ExpiryDate));
+                    foreach (FileModel a in model.CandidateFile)
+                    {
+                        file = await Task.Run(() => InsertFiles(a.ConvertTotblFile()));
+                        x = await Task.Run(() => InsertCandidateFiles(candidate, file, Convert.ToInt64(a.FileTypeId), a.ExpiryDate));
+                    }
                 }
 
-                x = await Task.Run(() => InsertCandidateIndustries(model.CandidateIndustries.Select(a=>Convert.ToInt32(a)).ToList(), candidate));
-                x = await Task.Run(() => InsertCandidateSkills(model.CandidateSkills.Select(a => Convert.ToInt32(a)).ToList(), candidate));
+                if(model.CandidateIndustries != null)
+                {
+                    x = await Task.Run(() => InsertCandidateIndustries(model.CandidateIndustries.Select(a => Convert.ToInt32(a)).ToList(), candidate));
+
+                }
+
+                if (model.CandidateSkills != null)
+                {
+                    x = await Task.Run(() => InsertCandidateSkills(model.CandidateSkills.Select(a => Convert.ToInt32(a)).ToList(), candidate));
+
+                }
+
 
                 candidate = await Task.Run(() => Get(candidate.ID));
 
@@ -445,30 +461,13 @@ namespace eMSP.Data.DataServices.Candidate
         {
             try
             {
-                int x = 0;
-                tblContact contact = null;
+                
                 tblFile file = null;
+
 
                 await UpdateCandidate(model.Candidate.ConvertTotblCandidate());
 
-                if (model.CandidateContact.Count > 0)
-                {
-                    foreach (CandidateContactModel c in model.CandidateContact)
-                    {
-                        if(c.ID > 0)
-                        {
-                            await UpdateContacts(c.ConvertTotblContact());
-                        }
-                        else
-                        {
-                            contact = await Task.Run(() => InsertContacts(c.ConvertTotblContact()));
-                            x = await Task.Run(() => InsertCandidateContacts(model.Candidate.ConvertTotblCandidate(), contact, c.IsPrimary));
-
-                        }
-
-                    }
-                }              
-
+                await UpdateContacts(model.CandidateContact, model.Candidate.ConvertTotblCandidate());
                 
                 await UpdateCandidateFiles(model.CandidateFile, model.Candidate.ConvertTotblCandidate());
                     
@@ -528,6 +527,40 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
 
             }
+        }
+
+        private static async Task UpdateContacts(List<CandidateContactModel> candidateContact ,  tblCandidate Candidate)
+        {
+            int x = 0;
+            tblContact contact = null;
+            using (db = new eMSPEntities())
+            {
+
+                await db.tblCandidateContacts.Where(a => a.CandidateID == Candidate.ID).ForEachAsync(a => { a.IsActive = false; a.IsDeleted = true; });
+
+
+                await Task.Run(() => db.SaveChangesAsync());
+
+
+                if (candidateContact.Count > 0)
+                {
+                    foreach (CandidateContactModel c in candidateContact)
+                    {
+                       
+                            contact = await Task.Run(() => InsertContacts(c.ConvertTotblContact()));
+                            x = await Task.Run(() => InsertCandidateContacts(Candidate, contact, c.IsPrimary));
+
+                        
+
+                    }
+                }
+                //return model;
+
+
+            }
+
+            
+
         }
 
         internal static async Task UpdateContacts(tblContact model)

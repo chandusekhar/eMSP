@@ -38,6 +38,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "app/components/accounts/view/registration.html",
             data: { pageTitle: 'Registration', specialClass: 'gray-bg' }
         })
+        
         .state('forgot-password', {
             url: "/forgot-password",
             templateUrl: "app/components/accounts/view/forgotPassword.html",
@@ -170,6 +171,57 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/common/content.html",
             controller: "dashboardController",
 
+        })
+        .state('account.profile', {
+            url: "/profile",
+            templateUrl: "app/components/User/view/userProfile.html",
+            controller: 'userProfileController',
+            resolve: {
+                dataJSON: function (apiCall, APP_CONSTANTS, localStorageService) {
+                    return apiCall.post(APP_CONSTANTS.URL.USER.GETUSERURL, {}).
+                        then(function (data) {
+
+                            return data;
+                        });
+                },
+                AppCoutries: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.APP.GETCOUNTRYURL, {})
+                        .then(function (data) {
+                            return data;
+                        });
+
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
         })
         .state("account.changePassword", {
             url: '/changePassword',
@@ -1209,6 +1261,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         {
                             name: 'datePicker',
                             files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                         }
                     ]);
                 }
@@ -1708,6 +1764,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+
+
         //country Routes Ends
         .state('off_canvas', {
             url: "/off_canvas",

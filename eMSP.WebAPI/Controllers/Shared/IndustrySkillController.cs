@@ -3,6 +3,7 @@ using eMSP.ViewModel.Shared;
 using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -23,7 +24,7 @@ namespace eMSP.WebAPI.Controllers.Shared
 
         public IndustrySkillController()
         {
-            IndustryService = new Industry_SkillsManager();            
+            IndustryService = new Industry_SkillsManager();
         }
 
         #endregion
@@ -38,7 +39,7 @@ namespace eMSP.WebAPI.Controllers.Shared
         {
             try
             {
-             
+
                 return Ok(await IndustryService.GetIndustry(id));
             }
             catch (Exception)
@@ -97,6 +98,24 @@ namespace eMSP.WebAPI.Controllers.Shared
             }
         }
 
+        [Route("getAllSkills")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CountryView)]
+        [ResponseType(typeof(IndustrySkillsCreateModel))]
+        public async Task<IHttpActionResult> GetAllSkills(Industries model)
+        {
+            try
+            {
+                long[] a = model.industryIds.Select(b => Convert.ToInt64(b)).ToArray();
+
+                return Ok((await IndustryService.GetAllIndustrySkills(a)).AsQueryable());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Insert
@@ -129,7 +148,7 @@ namespace eMSP.WebAPI.Controllers.Shared
             try
             {
                 userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "create", userId); 
+                Helpers.Helpers.AddBaseProperties(model, "create", userId);
 
                 return Ok(await IndustryService.CreateIndustrySkill(model));
             }
@@ -182,5 +201,10 @@ namespace eMSP.WebAPI.Controllers.Shared
         }
 
         #endregion
+    }
+
+    public class Industries
+    {
+        public List<string> industryIds;
     }
 }

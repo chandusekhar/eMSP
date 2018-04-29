@@ -26,6 +26,7 @@ angular.module('eMSPApp')
                 GETALLINDUSTRIESURL: "api/Industry/getAllIndustries",
                 GETINDUSTRYURL: "api/Industry/getIndustry",
                 GETALLSKILLSURL: "api/Industry/getAllSkills?industryId=",
+                GETALLINDUSTRYSKILLSURL: "api/Industry/getAllSkills",
                 GETSKILLURL: "api/Industry/getSkill",
                 CREATEINDUSTRYURL: "api/Industry/insertIndustry",
                 UPDATEINDUSTRYURL: "api/Industry/updateIndustry",

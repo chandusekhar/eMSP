@@ -1,0 +1,66 @@
+﻿<toaster-container></toaster-container>
+<div id="wrapper">
+
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Profile</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Profile</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+
+        <div ng-if="res" class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <a  ng-click="updateUser()" class="btn btn-white btn-xs pull-right">Edit</a>
+
+                                        <h2>{{res.firstName + ' '+ res.lastName}}</h2>
+                                    </div>
+                                   
+                                        
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3"><img src="{{res.userProfilePhotoPathT}}" /></div>
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt>
+                                        <dd><span class="label label-primary">Active</span></dd>
+                                        <dt>Email:</dt>
+                                        <dd>{{res.emailAddress}}</dd>                                        
+                                        <dt>Address:</dt>
+                                        <dd>{{res.address}}</dd>
+                                        <dt>City:</dt>
+                                        <dd>{{res.city}}</dd>
+                                        <dt>State:</dt>
+                                        <dd>{{res.state}}</dd>
+                                        <dt>Country:</dt>
+                                        <dd>{{res.country}}</dd>
+                                        <dt>Zip:</dt>
+                                        <dd> {{res.zipCode}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

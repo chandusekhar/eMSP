@@ -53,7 +53,7 @@ namespace eMSP.Data.Extensions
                 CandidateSkills = data.tblCandidateSkills != null ? data.tblCandidateSkills.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.SkillsID.ToString()).ToList() : null,
                 CandidateIndustryNames = data.tblCandidateIndustries != null ? data.tblCandidateIndustries.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblIndustry.Name).ToList() : null,
                 CandidateSkillNames = data.tblCandidateSkills != null ? data.tblCandidateSkills.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblIndustrySkill.Name).ToList() : null,
-                CandidateContact = data.tblCandidateContacts != null ? data.tblCandidateContacts.Select(a => a.tblContact.ConvertToCandidateContactModel(Convert.ToBoolean(a.IsPrimary))).ToList() : null,
+                CandidateContact = data.tblCandidateContacts != null ? data.tblCandidateContacts.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblContact.ConvertToCandidateContactModel(Convert.ToBoolean(a.IsPrimary))).ToList() : null,
                 CandidateFile = data.tblCandidateFiles != null ? data.tblCandidateFiles.Where(a => a.IsActive == true && a.IsDeleted == false).Select(a => a.tblFile.ConvertToCandidateFileModel(Convert.ToInt32(a.FileTypeID))).ToList() : null,
 
             };

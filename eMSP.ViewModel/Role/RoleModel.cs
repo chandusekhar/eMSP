@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace eMSP.ViewModel.Role
 {
     public class RoleModel
@@ -34,8 +35,8 @@ namespace eMSP.ViewModel.Role
         public UserRolesModel() { }
         public UserModel user { get; set; }
         public List<RoleModel> roles { get; set; }
+        
     }
-
     public class UserAuthorization
     {
         public UserAuthorization() { }

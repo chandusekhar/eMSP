@@ -95,6 +95,30 @@ namespace eMSP.Data.DataServices.Shared.Industry_Skills
             }
         }
 
+        internal static async Task<List<tblIndustrySkill>> GetAllIndustrySkills(long[] Ids)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    if (Ids.Count() > 0)
+                    {
+                        return await Task.Run(() => db.tblIndustrySkills.Where(x => Ids.Contains(x.IndustryID)).OrderByDescending(x => x.ID).ToList());
+                    }
+                    else
+                    {
+                        return await Task.Run(() => db.tblIndustrySkills.OrderByDescending(x => x.ID).ToList());
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<List<tblIndustrySkill>> GetAllIndustrySkills()
         {
             try

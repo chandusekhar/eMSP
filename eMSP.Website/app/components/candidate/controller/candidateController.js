@@ -42,13 +42,23 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
     $scope.loadIndustrySkills = function (industryId) {
 
-        if (industryId && !industryId.skillList) {
-            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
+        if (industryId && industryId.length && industryId.length >0 ) {
+            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRYSKILLSURL, { "industryIds": industryId });
             apires.then(function (data) {
                 angular.extend($scope.refData.industrySkillsList, data);
                 $scope.LoadIndustrySkillsData();
             });
         }
+        else if (industryId && !industryId.skillList) {
+            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
+            apires.then(function (data) {
+                angular.extend($scope.refData.industrySkillsList, data);
+                $scope.LoadIndustrySkillsData();
+            });
+
+
+        }
+
     }
 
     $scope.loadSkills = function () {
@@ -130,20 +140,10 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         $scope.dataJSON = localStorageService.get('editCandidateData');
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
         $scope.getStateList();
+        $scope.dataJSON.CandidateIndustryIds = angular.copy($scope.dataJSON.CandidateIndustries);
         $scope.LoadIndustriesData();
-        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
-
-            var Id = 0;
-            if (v.id) {
-                Id = v.id;
-            }
-            else {
-                Id = v;
-            }
-
-            $scope.loadIndustrySkills(Id);
-
-        });
+        $scope.loadIndustrySkills($scope.dataJSON.CandidateIndustryIds);
+        
 
     }
 
@@ -151,20 +151,9 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         $scope.dataJSON = candidate;
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
         $scope.getStateList();
+        $scope.dataJSON.CandidateIndustryIds = angular.copy($scope.dataJSON.CandidateIndustries);
         $scope.LoadIndustriesData();
-        angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
-
-            var Id = 0;
-            if (v.id) {
-                Id = v.id;
-            }
-            else {
-                Id = v;
-            }
-
-            $scope.loadIndustrySkills(Id);
-
-        });
+        $scope.loadIndustrySkills($scope.dataJSON.CandidateIndustryIds);
         $scope.IsMangePage = false;
         $scope.edit = true;
         $scope.formAction = "Update";
@@ -194,8 +183,16 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                 res.then(function (data) {
                     $scope.dataJSON = data;
                     //$scope.cancel();
-                     toaster.warning({ body: "Data Updated Successfully." });
-                    $state.go($scope.configJSON.successURL);
+                    toaster.warning({ body: "Data Updated Successfully." });
+
+                    if ($scope.configJSON.successURL == "candidate.manageCandidate") {
+                        $state.reload();
+                    }
+                    else {
+                        $state.go($scope.configJSON.successURL);
+
+                    }
+                    
                 });
             }
             else {
@@ -235,8 +232,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {
-                $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
+            if ($scope.dataJSON.Contact.IsPrimary == true) {                
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
                 });
@@ -258,8 +254,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {
-                $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
+            if ($scope.dataJSON.Contact.IsPrimary == true) {                
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
                 });

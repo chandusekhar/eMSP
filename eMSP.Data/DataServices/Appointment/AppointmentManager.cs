@@ -199,7 +199,7 @@ namespace eMSP.Data.DataServices.Appointment
 
         #region Appointment
 
-        public async Task<CandidateSubmissionAppointmentViewModel> Save(CandidateSubmissionAppointmentViewModel data, string userID)
+        public async Task<CandidateSubmissionAppointmentViewModel> Save(CandidateSubmissionAppointmentViewModel data)
         {
             try
             {
@@ -211,7 +211,7 @@ namespace eMSP.Data.DataServices.Appointment
                     Details = data.Details,
                     IsActive = data.isActive,
                     IsDeleted = data.isDeleted,
-                    CreatedUserID = userID,
+                    CreatedUserID = data.createdUserID,
                     CreatedTimestamp = DateTime.UtcNow,
                     CandidateSubmissionID = data.CandidateSubmissionID,
                     tblCandidateSubmissionAppointmentSlots = data.Slots.Select(x => new tblCandidateSubmissionAppointmentSlot()
@@ -220,7 +220,7 @@ namespace eMSP.Data.DataServices.Appointment
                         EndDate = x.EndDate,
                         IsActive = x.isActive,
                         IsDeleted = x.isDeleted,
-                        CreatedUserID = userID,
+                        CreatedUserID = data.createdUserID,
                         CreatedTimestamp = DateTime.UtcNow,
                         IsFinalised = x.IsFinalised
                     }).ToList(),
@@ -230,7 +230,7 @@ namespace eMSP.Data.DataServices.Appointment
                         IsActive = x.isActive,
                         IsDeleted = x.isDeleted,
                         CreatedTimestamp = DateTime.UtcNow,
-                        CreatedUserID = userID
+                        CreatedUserID = data.createdUserID
                     }).ToList()
                 };
 
@@ -353,57 +353,7 @@ namespace eMSP.Data.DataServices.Appointment
                 throw ex;
             }
         }
-
-        public async Task<bool> RemoveAppointmentuser(string userID, long appointmentID, string loggedInUserID)
-        {
-            try
-            {
-                var obj = await db.tblCandidateSubmissionAppointmentUsers.Where(x => x.AppointmentID == appointmentID && x.UserID == userID).FirstOrDefaultAsync();
-
-                if (obj != null)
-                {
-                    db.tblCandidateSubmissionAppointmentUsers.Remove(obj);
-                    await db.SaveChangesAsync();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
-        public async Task<bool> SetFinalizeAppointmentSlots(long slotID, long appointmentID, string loggedInUserID)
-        {
-            try
-            {
-                var obj = await db.tblCandidateSubmissionAppointmentSlots.Where(x => x.AppintmentID == appointmentID).ToListAsync();
-
-                if (obj != null && obj.Count != 0)
-                {
-                    obj.All(x => { x.IsFinalised = false; x.UpdatedUserID = loggedInUserID; x.UpdatedTimestamp = DateTime.UtcNow; return true; });
-                    await db.SaveChangesAsync();
-
-                    var objj = await db.tblCandidateSubmissionAppointmentSlots.Where(x => x.AppintmentID == appointmentID && x.ID == slotID).FirstOrDefaultAsync();
-                    if (objj != null)
-                    {
-                        objj.IsFinalised = !objj.IsFinalised;
-                        objj.UpdatedTimestamp = DateTime.UtcNow;
-                        objj.UpdatedUserID = loggedInUserID;
-                    }
-                    await db.SaveChangesAsync();
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+        
         public async Task<CandidateSubmissionAppointmentViewModel> Update(long id, CandidateSubmissionAppointmentViewModel data, string loggedInUserID)
         {
             try
@@ -466,6 +416,104 @@ namespace eMSP.Data.DataServices.Appointment
                 throw;
             }
         }
+        
+        public async Task<CandidateSubmissionAppointmentUserViewModel> AddAppointmentuser(string userID, long appointmentID, string loggedInUserID)
+        {
+            try
+            {
+                var obj = await db.tblCandidateSubmissionAppointmentUsers.Where(x => x.AppointmentID == appointmentID && x.UserID == userID).FirstOrDefaultAsync();
+
+                if (obj == null)
+                {
+                    var data = new tblCandidateSubmissionAppointmentUser()
+                    {
+                        AppointmentID = appointmentID,
+                        UserID = userID,
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedTimestamp = DateTime.UtcNow,
+                        CreatedUserID = loggedInUserID
+                    };
+                    db.tblCandidateSubmissionAppointmentUsers.Add(data);
+                    await db.SaveChangesAsync();
+
+                    return new CandidateSubmissionAppointmentUserViewModel()
+                    {
+                        ID = data.ID,
+                        AppointmentID = data.AppointmentID,
+                        UserID = data.UserID,
+                        isActive = data.IsActive,
+                        isDeleted = data.IsDeleted,
+                        createdTimestamp = data.CreatedTimestamp,
+                        createdUserID = data.CreatedUserID
+                    };
+                }
+                else
+                {
+                    throw new Exception("User already added to this appointment");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<bool> RemoveAppointmentuser(long id,string userID)
+        {
+            try
+            {
+                var obj = await db.tblCandidateSubmissionAppointmentUsers.Where(x => x.ID==id).FirstOrDefaultAsync();
+
+                if (obj != null)
+                {
+                    db.tblCandidateSubmissionAppointmentUsers.Remove(obj);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("User isn't found in this appointment");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<bool> SetFinalizeAppointmentSlots(long slotID, long appointmentID, string loggedInUserID)
+        {
+            try
+            {
+                var obj = await db.tblCandidateSubmissionAppointmentSlots.Where(x => x.AppintmentID == appointmentID).ToListAsync();
+
+                if (obj != null && obj.Count != 0)
+                {
+                    obj.All(x => { x.IsFinalised = false; x.UpdatedUserID = loggedInUserID; x.UpdatedTimestamp = DateTime.UtcNow; return true; });
+                    await db.SaveChangesAsync();
+
+                    var objj = await db.tblCandidateSubmissionAppointmentSlots.Where(x => x.AppintmentID == appointmentID && x.ID == slotID).FirstOrDefaultAsync();
+                    if (objj != null)
+                    {
+                        objj.IsFinalised = !objj.IsFinalised;
+                        objj.UpdatedTimestamp = DateTime.UtcNow;
+                        objj.UpdatedUserID = loggedInUserID;
+                    }
+                    await db.SaveChangesAsync();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public async Task<CandidateSubmissionAppointmentSlotViewModel> UpdateSlots(long slotID, long appointnmentID, CandidateSubmissionAppointmentSlotViewModel data)
         {
@@ -501,7 +549,54 @@ namespace eMSP.Data.DataServices.Appointment
                 throw ex;
             }
         }
-                 
+
+        public async Task<CandidateSubmissionAppointmentSlotViewModel> AddSlots(long appointnmentID, CandidateSubmissionAppointmentSlotViewModel data)
+        {
+            try
+            {
+                var obj = await db.tblCandidateSubmissionAppointmentSlots.Where(x => x.AppintmentID == appointnmentID && x.StartDate == data.StartDate && x.EndDate == data.EndDate).FirstOrDefaultAsync();
+
+                CandidateSubmissionAppointmentSlotViewModel returnDate = null;
+                if (obj == null)
+                {
+                    var xdata = new tblCandidateSubmissionAppointmentSlot()
+                    {
+                        StartDate = data.StartDate,
+                        EndDate = data.EndDate,
+                        IsActive = data.isActive,
+                        IsDeleted = data.isDeleted,
+                        CreatedUserID = data.createdUserID,
+                        CreatedTimestamp = DateTime.UtcNow,
+                        IsFinalised = data.IsFinalised
+                    };
+
+                    db.tblCandidateSubmissionAppointmentSlots.Add(xdata);
+                    await db.SaveChangesAsync();
+
+                    returnDate = new CandidateSubmissionAppointmentSlotViewModel()
+                    {
+                        ID = xdata.ID,
+                        AppintmentID = xdata.AppintmentID,
+                        StartDate = xdata.StartDate,
+                        EndDate = xdata.EndDate,
+                        isActive = xdata.IsActive,
+                        isDeleted = xdata.IsDeleted,
+                        IsFinalised = xdata.IsFinalised,
+                        createdTimestamp = xdata.CreatedTimestamp
+                    };
+                }
+                else
+                {
+                    throw new Exception("Already An Appointment added with same date");
+                }
+                return returnDate;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region Dispose

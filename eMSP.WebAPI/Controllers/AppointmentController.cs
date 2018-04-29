@@ -31,7 +31,6 @@ namespace eMSP.WebAPI.Controllers
 
         #endregion
 
-
         #region Appointment Type
 
         [Route("type/getlist")]
@@ -88,7 +87,7 @@ namespace eMSP.WebAPI.Controllers
         {
             try
             {
-                string userId = User.Identity.GetUserId();                
+                string userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(data, "update", userId);
                 return Ok((await _service.UpdateType(data)));
             }
@@ -119,5 +118,138 @@ namespace eMSP.WebAPI.Controllers
 
         #endregion
 
+        #region Appointment
+
+        [Route("get")]
+        [HttpPost]
+        [ResponseType(typeof(CandidateSubmissionAppointmentViewModel))]
+        public async Task<IHttpActionResult> Get(long id)
+        {
+            try
+            {
+                return Ok((await _service.Get(id)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("save")]
+        [HttpPost]
+        [ResponseType(typeof(CandidateSubmissionAppointmentViewModel))]
+        public async Task<IHttpActionResult> Save(CandidateSubmissionAppointmentViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+                return Ok((await _service.Save(data)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("update")]
+        [HttpPost]
+        [ResponseType(typeof(CandidateSubmissionAppointmentViewModel))]
+        public async Task<IHttpActionResult> Update(long id, CandidateSubmissionAppointmentViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                Helpers.Helpers.AddBaseProperties(data, "update", userId);
+                return Ok((await _service.Update(id, data, userId)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("user/add")]
+        [HttpPost]
+        [ResponseType(typeof(CandidateSubmissionAppointmentUserViewModel))]
+        public async Task<IHttpActionResult> AddAppointmentuser(CandidateSubmissionAppointmentUserViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                return Ok((await _service.AddAppointmentuser(data.UserID, data.AppointmentID, userId)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("user/remove")]
+        [HttpPost]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> RemoveAppointmentuser(long id)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                return Ok((await _service.RemoveAppointmentuser(id, userId)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("slot/finalize")]
+        [HttpPost]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> FinalizeSlot(CandidateSubmissionAppointmentSlotViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();                
+                return Ok((await _service.SetFinalizeAppointmentSlots(data.ID, data.AppintmentID, userId)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("slot/update")]
+        [HttpPost]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> UpdateSlots(long id,CandidateSubmissionAppointmentSlotViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                return Ok((await _service.UpdateSlots(id, data.AppintmentID, data)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("slot/update")]
+        [HttpPost]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> AddSlots(CandidateSubmissionAppointmentSlotViewModel data)
+        {
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                return Ok((await _service.AddSlots(data.AppintmentID, data)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        #endregion
     }
 }

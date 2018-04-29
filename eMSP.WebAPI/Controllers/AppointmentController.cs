@@ -223,7 +223,7 @@ namespace eMSP.WebAPI.Controllers
         {
             try
             {
-                string userId = User.Identity.GetUserId();                
+                string userId = User.Identity.GetUserId();
                 return Ok((await _service.SetFinalizeAppointmentSlots(data.ID, data.AppintmentID, userId)));
             }
             catch (Exception)
@@ -235,7 +235,7 @@ namespace eMSP.WebAPI.Controllers
         [Route("slot/update")]
         [HttpPost]
         [ResponseType(typeof(bool))]
-        public async Task<IHttpActionResult> UpdateSlots(long id,CandidateSubmissionAppointmentSlotViewModel data)
+        public async Task<IHttpActionResult> UpdateSlots(long id, CandidateSubmissionAppointmentSlotViewModel data)
         {
             try
             {
@@ -248,7 +248,7 @@ namespace eMSP.WebAPI.Controllers
             }
         }
 
-        [Route("slot/update")]
+        [Route("slot/add")]
         [HttpPost]
         [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> AddSlots(CandidateSubmissionAppointmentSlotViewModel data)
@@ -263,6 +263,42 @@ namespace eMSP.WebAPI.Controllers
                 throw;
             }
         }
+
+
+        #endregion
+
+        #region Appointment Comments
+
+        [Route("comment/getlist")]
+        [HttpPost]
+        [ResponseType(typeof(List<CandidateSubmissionAppointmentUserCommentViewModel>))]
+        public async Task<IHttpActionResult> GetComments(long appointmentID)
+        {
+            try
+            {
+                return Ok((await _service.GetComments(appointmentID)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("comment/add")]
+        [HttpPost]
+        [ResponseType(typeof(CandidateSubmissionAppointmentUserCommentViewModel))]
+        public async Task<IHttpActionResult> AddComments(CandidateSubmissionAppointmentUserCommentViewModel data)
+        {
+            try
+            {
+                return Ok((await _service.AddComments(data)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
 
         #endregion

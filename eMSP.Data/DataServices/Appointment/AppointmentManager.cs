@@ -360,11 +360,11 @@ namespace eMSP.Data.DataServices.Appointment
             {
                 var appointmentlist = await db.tblCandidateSubmissionAppointments.Where(x => x.CandidateSubmissionID == SubmissionID).ToListAsync();
 
-               List<CandidateSubmissionAppointmentViewModel> objList = null;
+                List<CandidateSubmissionAppointmentViewModel> objList = null;
 
                 if (appointmentlist != null)
                 {
-                    objList = appointmentlist.Select(appointment=> new CandidateSubmissionAppointmentViewModel()
+                    objList = appointmentlist.Select(appointment => new CandidateSubmissionAppointmentViewModel()
                     {
                         ID = appointment.ID,
                         AppintmentTypeID = appointment.AppintmentTypeID,
@@ -487,7 +487,7 @@ namespace eMSP.Data.DataServices.Appointment
                 throw;
             }
         }
-        
+
         public async Task<CandidateSubmissionAppointmentUserViewModel> AddAppointmentuser(string userID, long appointmentID, string loggedInUserID)
         {
             try
@@ -531,11 +531,11 @@ namespace eMSP.Data.DataServices.Appointment
             }
         }
 
-        public async Task<bool> RemoveAppointmentuser(long id,string userID)
+        public async Task<bool> RemoveAppointmentuser(long id, string userID)
         {
             try
             {
-                var obj = await db.tblCandidateSubmissionAppointmentUsers.Where(x => x.ID==id).FirstOrDefaultAsync();
+                var obj = await db.tblCandidateSubmissionAppointmentUsers.Where(x => x.ID == id).FirstOrDefaultAsync();
 
                 if (obj != null)
                 {
@@ -547,7 +547,7 @@ namespace eMSP.Data.DataServices.Appointment
                 {
                     throw new Exception("User isn't found in this appointment");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -661,6 +661,70 @@ namespace eMSP.Data.DataServices.Appointment
                     throw new Exception("Already An Appointment added with same date");
                 }
                 return returnDate;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Appointment Comments
+
+        public async Task<CandidateSubmissionAppointmentUserCommentViewModel> AddComments(CandidateSubmissionAppointmentUserCommentViewModel data)
+        {
+            try
+            {
+                var xdata = new tblCandidateSubmissionAppointmentUserComment()
+                {
+                    AppointmentID=data.AppointmentID,
+                    CommentID=data.CommentID,                    
+                    IsActive = data.isActive,
+                    IsDeleted = data.isDeleted,
+                    CreatedUserID = data.createdUserID,
+                    CreatedTimestamp = DateTime.UtcNow
+                };
+
+                db.tblCandidateSubmissionAppointmentUserComments.Add(xdata);
+                await db.SaveChangesAsync();
+
+                return new CandidateSubmissionAppointmentUserCommentViewModel()
+                {
+                    ID = xdata.ID,
+                    AppointmentID=xdata.AppointmentID,
+                    CommentID=xdata.CommentID,
+                    isActive=xdata.IsActive,
+                    isDeleted=xdata.IsDeleted,
+                    createdTimestamp=xdata.CreatedTimestamp,
+                    createdUserID=xdata.CreatedUserID
+                };
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<CandidateSubmissionAppointmentUserCommentViewModel>> GetComments(long appointmentID)
+        {
+            try
+            {
+
+                var list = await db.tblCandidateSubmissionAppointmentUserComments.Where(x => x.AppointmentID == appointmentID).ToListAsync();
+                
+                return list.Select(xdata=> new CandidateSubmissionAppointmentUserCommentViewModel()
+                {
+                    ID = xdata.ID,
+                    AppointmentID = xdata.AppointmentID,
+                    CommentID = xdata.CommentID,
+                    isActive = xdata.IsActive,
+                    isDeleted = xdata.IsDeleted,
+                    createdTimestamp = xdata.CreatedTimestamp,
+                    createdUserID = xdata.CreatedUserID
+                }).ToList();
+
             }
             catch (Exception ex)
             {

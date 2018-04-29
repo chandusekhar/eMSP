@@ -65,13 +65,13 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
                                                       .Include(a => a.tblJobVacanciesStatu)
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment))
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers))
+                                                       .Include(a => a.tblVacancyComments)
+                                                      .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                       .Include(a => a.tblVacancyFiles)
                                                       .Include(a => a.tblVacanciesQuestions)
                                                       .Include(a => a.tblVacanciesRequiredDocuments)
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(e => e.tblCountry))
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
@@ -84,13 +84,13 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
                                                       .Include(a => a.tblJobVacanciesStatu)
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment))
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers))
+                                                      .Include(a => a.tblVacancyComments)
+                                                      .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                       .Include(a => a.tblVacancyFiles)
                                                       .Include(a => a.tblVacanciesQuestions)
                                                       .Include(a => a.tblVacanciesRequiredDocuments)
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(e => e.tblCountry))
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
@@ -102,19 +102,17 @@ namespace eMSP.Data.DataServices.JobVacancies
                         return await Task.Run(() => db.tblVacancies
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
-                                                      .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
                                                       .Include(a => a.tblJobVacanciesStatu)
-                                                      //.Include(a => a.tblVacancyComments)
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment))
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers))
-                                                      //.Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile)))
+                                                      .Include(a => a.tblVacancyComments)
+                                                      .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                       .Include(a => a.tblVacancyFiles)
                                                       .Include(a => a.tblVacanciesQuestions)
                                                       .Include(a => a.tblVacanciesRequiredDocuments)
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(e => e.tblCountry))
-                                                      .Include(a => a.tblVacancyLocations.Select(b => b.tblCustomerLocationBranch).Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                      .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
+                                                      .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
                                                       .OrderByDescending(x => x.ID).ToList());
                     }
                 }
@@ -175,7 +173,7 @@ namespace eMSP.Data.DataServices.JobVacancies
 
                     foreach (LocationCreateModel a in model.VacancyLocations)
                     {
-                        await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.id, vacancy));
+                        await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.locationId, vacancy));
                     }
 
                     foreach (VacancyFileModel a in model.VacancyFiles)
@@ -206,9 +204,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                             await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
                         }
                     }
-
                     return model;
-
                 }
             }
             catch (Exception ex)
@@ -223,27 +219,42 @@ namespace eMSP.Data.DataServices.JobVacancies
             {
                 using (db = new eMSPEntities())
                 {
-
                     tblVacancy vacancy = await Task.Run(() => UpdateVacancy(model.Vacancy.ConvertTotblVacancy()));
 
+                    await Task.Run(() => ManageVacancySkills.DeleteVacancySkills(vacancy.ID));
                     foreach (IndustrySkillsCreateModel a in model.VacancySkills)
                     {
-                        tblVacancieSkill vacancySkill = await Task.Run(() => ManageVacancySkills.UpdateVacancySkills(a.id, vacancy));
+                        tblVacancieSkill vacancySkill = await Task.Run(() => ManageVacancySkills.AddVacancySkills(a.id, vacancy));
                     }
 
+                    await Task.Run(() => ManageVacancySuppliers.UpdateVacancySupplier(vacancy.ID));
                     foreach (CompanyCreateModel a in model.VacancySuppliers)
                     {
-                        tblVacancySupplier vacancySupplier = await Task.Run(() => ManageVacancySuppliers.UpdateVacancySupplier(a.id, vacancy));
+                        tblVacancySupplier vacancySupplier = await Task.Run(() => ManageVacancySuppliers.InsertVacancySupplier(a.id, vacancy));
                     }
 
+                    await Task.Run(() => ManageVacancyLocations.DeleteVacancyLocation(vacancy.ID));
                     foreach (LocationCreateModel a in model.VacancyLocations)
                     {
-                        tblVacancyLocation vacancyLocation = await Task.Run(() => ManageVacancyLocations.UpdateVacancyLocation(a.id, vacancy));
+                        tblVacancyLocation vacancyLocation = await Task.Run(() => ManageVacancyLocations.AddVacancyLocation(a.locationId, vacancy));
                     }
 
+                    await Task.Run(() => ManageVacancyFiles.DeleteVacancyFile(vacancy.ID));
                     foreach (VacancyFileModel a in model.VacancyFiles)
                     {
-                        tblVacancyFile vacancyFile = await Task.Run(() => ManageVacancyFiles.UpdateVacancyFile(a.ConvertTotblVacancyFile(), vacancy));
+                        tblVacancyFile vacancyFile = await Task.Run(() => ManageVacancyFiles.InsertVacancyFiles(a.ConvertTotblVacancyFile(), vacancy));
+                    }
+
+                    await Task.Run(() => ManageVacancyRequiredDocuments.DeleteVacanciesRequiredDocument(vacancy.ID));
+                    foreach (VacancyRequiredDocumentViewModel a in model.RequiredDocument.Where(x => x.IsSelected ?? false))
+                    {
+                        await Task.Run(() => ManageVacancyRequiredDocuments.AddVacanciesRequiredDocument(a.ConvertTotblVacanciesRequiredDocument(), vacancy));
+                    }
+
+                    await Task.Run(() => ManageVacancyQuestions.DeleteVacancySkills(vacancy.ID));
+                    foreach (VacancyQuestionViewModel a in model.Questions.Where(x => x.IsSelected ?? false))
+                    {
+                        await Task.Run(() => ManageVacancyQuestions.AddVacanciesQuestions(a.ConvertTotblVacanciesQuestion(), vacancy));
                     }
 
                     //Comments
@@ -251,13 +262,12 @@ namespace eMSP.Data.DataServices.JobVacancies
                     {
                         if (!string.IsNullOrEmpty(c.comment))
                         {
-                            tblComment comment = await Task.Run(() => ManageComments.InsertComment(c.ConvertTotblComment()));
-                            tblVacancyComment vacancyComment = await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
+                            c.updatedUserID = vacancy.UpdatedUserID;
+                            c.updatedTimestamp = vacancy.UpdatedTimestamp;
+                            tblComment comment = await Task.Run(() => ManageComments.UpdateComment(c.ConvertTotblComment()));
                         }
                     }
-
                     return model;
-
                 }
             }
             catch (Exception ex)

@@ -29,7 +29,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblVacancyLocations
-                                                  .Include(x => x.tblCustomerLocationBranch.tblLocation)
+                                                  .Include(x => x.tblLocation)
                                                   .Where(x => x.VacancyID == VacancyId && (x.IsDeleted ?? false) == false)
                                                   .OrderByDescending(x => x.ID).ToList());
 
@@ -112,14 +112,15 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Delete
 
-        internal static async Task DeleteVacancy(long Id)
+        internal static async Task DeleteVacancyLocation(long VacancyId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblVacancy obj = await db.tblVacancies.FindAsync(Id);
-                    db.tblVacancies.Remove(obj);
+                    List<tblVacancyLocation> vacancyLocation = db.tblVacancyLocations.Where(q => q.VacancyID == VacancyId)
+                                                                        .ToList();
+                    db.tblVacancyLocations.RemoveRange(vacancyLocation);
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                 }

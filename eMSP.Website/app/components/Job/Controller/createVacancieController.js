@@ -22,7 +22,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     $scope.dataJSON.VacancyComment = [];
     $scope.dataJSON.Questions = [];
     $scope.dataJSON.RequiredDocument = [];
-
+    
     if ($scope.formAction === "Update") {
         $scope.edit = true;
         $scope.dataJSON = localStorageService.get('vacancyData');
@@ -39,26 +39,39 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     });
 
     var resDocuments = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCYDOCUMENTS);
-    resDocuments.then(function (data) {
-        $scope.dataJSON.RequiredDocument = data;
+    resDocuments.then(function (data) {        
+        var Documents = [];
+        data.forEach(function (doc) {
+            $scope.dataJSON.RequiredDocument.forEach(function (rd) {                
+                if (doc.ID === rd.RequiredDocumentID)
+                    doc.IsSelected = true;                
+            });
+            Documents.push(doc);
+        });
+        $scope.dataJSON.RequiredDocument = Documents;
     });
 
     var resQuestions = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCYQUESTIONS);
     resQuestions.then(function (data) {
-        $scope.dataJSON.Questions = data;
+        var Questions = [];
+        data.forEach(function (ques) {
+            $scope.dataJSON.Questions.forEach(function (q) {
+                if (ques.ID === q.QuestionID)
+                    ques.IsSelected = true;
+            });
+            Questions.push(ques);
+        }); 
+        $scope.dataJSON.Questions = Questions;
     });
 
     var resJobStatus = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETJOBVACANCIESSTATUS);
-    resJobStatus.then(function (data) {
-        
+    resJobStatus.then(function (data) {        
         $scope.refData.jobStatusList = data;
-        console.log(data);
     });
 
     var apires = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.cdataJSON);
     apires.then(function (data) {
         $scope.refData.customerList = data;
-
         if ($scope.formAction === "Update") {
             $scope.dataJSON.Vacancy.customerId = $scope.dataJSON.Vacancy.customerId.toString();
         }
@@ -98,7 +111,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
     };
 
     $scope.submit = function (form) {
-        debugger;
+        
         var isFormValid = false;
         if ($scope.dataJSON.VacancySkills.length == 0) {
             $scope.isSkillsEmpty = true;
@@ -119,7 +132,7 @@ function createVacancieController($scope, $state, localStorageService, configJSO
         $scope.dataJSON.submitted = true;
 
         $scope.dataJSON.Vacancy.startDate = $scope.dataJSON.dateRange.startDate;
-        $scope.dataJSON.Vacancy.endDate = $scope.dataJSON.dateRange.endDate;
+        $scope.dataJSON.Vacancy.endDate = $scope.dataJSON.dateRange.endDate;              
 
         if (form.$valid && !isFormValid) {
             if ($scope.formAction === "Update") {

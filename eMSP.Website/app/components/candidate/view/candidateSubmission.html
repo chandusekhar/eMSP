@@ -89,21 +89,11 @@
                                     <button type="submit" ng-if="!editform" ng-click="newCustomer()" class="btn btn-primary m-b">Create New Customer</button>
                                 </div>
                             </div>
-                            
 
                             <div class="row m-t-md">
-                                <div class="form-group col-md-6" ng-class="{ 'has-error': submitted && form.BillRate.$error.required }">
-                                    <label>Bill Rate * :</label>
-                                    <input type="text" class="form-control" name="BillRate"
-                                           ng-model="csdataJSON.BillRate"
-                                           placeholder="Bill Rate" required />
-                                    <span ng-show="submitted && form.BillRate.$error.required" class="text-danger">
-                                        * Bill Rate is required
-                                    </span>
-                                </div>
                                 <div class="form-group  col-md-6" ng-class="{ 'has-error': submitted && form.StatusId.$error.required }">
                                     <label>Status * :</label>
-                                    <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId">
+                                    <select ng-model="dataJSON.StatusId" class="form-control" required name="StatusId">
                                         <option value="">Choose Status</option>
                                         <option ng-repeat="res in refData.candidateStatusList" value="{{res.ID}}">{{res.Name}}</option>
                                     </select>
@@ -149,8 +139,8 @@
                                     <label class="font-normal">Date Of Birth:</label>
 
                                     <div ng-class="{ 'has-error': form.DateOfBirth.$dirty && form.DateOfBirth.$error.required }" class="input-group date">
-                                        <input name="DateOfBirth" ng-model="dataJSON.Candidate.DateOfBirth" type="datetime" 
-                                               class="form-control" placeholder="MM/DD/YYYY" date-time view="date"  ng-disabled="!refData.isNewCustomer"
+                                        <input name="DateOfBirth" ng-model="dataJSON.Candidate.DateOfBirth" type="datetime"
+                                               class="form-control" placeholder="MM/DD/YYYY" date-time view="date" ng-disabled="!refData.isNewCustomer"
                                                auto-close="true" min-view="date" format="MM/DD/YYYY">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         <span ng-show="form.DateOfBirth.$dirty && form.DateOfBirth.$error.required" class="help-block">
@@ -179,7 +169,7 @@
                             <h5>{{configJSON.titleFormCreateAddress}}</h5>
                             <a class="text-navy" style="margin-left: 5px;" ng-click="fnAddContact(false)" ng-hide="!refData.isNewCustomer">
                                 <i class="fa fa-plus-circle"></i>
-                            </a>                            
+                            </a>
                         </div>
                         <div class="ibox-content">
                             <div ng-if="contact==false" class="row">
@@ -315,13 +305,13 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>{{configJSON.titleFormCreateIndustry}}</h5>
-                            
+
                         </div>
                         <div class="ibox-content">
                             <div class="form-group">
                                 <label class="font-normal">Industries</label>
                                 <div ng-class="{ 'has-error': form.industryName.$dirty && form.industryName.$error.required }">
-                                    <ui-select multiple ng-model="dataJSON.CandidateIndustries" ng-change="loadSkills()" 
+                                    <ui-select multiple ng-model="dataJSON.CandidateIndustries" ng-change="loadSkills()"
                                                theme="bootstrap" class="form-control" ng-disabled="!refData.isNewCustomer">
                                         <ui-select-match placeholder="Select Industries...">{{$item.industryName}}</ui-select-match>
                                         <ui-select-choices repeat="res.id as res in refData.industryList | filter:$select.search">
@@ -334,7 +324,7 @@
                             <div class="form-group">
                                 <label class="font-normal">Skills</label>
                                 <div ng-class="{ 'has-error': form.skills.$dirty && form.skills.$error.required }">
-                                    <ui-select multiple ng-model="dataJSON.CandidateSkills" theme="bootstrap" 
+                                    <ui-select multiple ng-model="dataJSON.CandidateSkills" theme="bootstrap"
                                                class="form-control" ng-disabled="!refData.isNewCustomer">
                                         <ui-select-match placeholder="Select Skills...">{{$item.skillName}}</ui-select-match>
                                         <ui-select-choices repeat="res.id as res in refData.industrySkillsList | filter:$select.search">
@@ -351,9 +341,10 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>{{configJSON.titleFormResume}}</h5>
-                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnResumeUpload(false);" ng-hide="!refData.isNewCustomer"> 
-                            <i class="fa fa-plus-circle"></i></a>
-                            
+                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnResumeUpload(false);" ng-hide="!refData.isNewCustomer">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+
                         </div>
                         <div class="ibox-content">
                             <div class="row form-group">
@@ -405,9 +396,10 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>{{configJSON.titleFormCreateFile}}</h5>
-                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnDocUpload(false)" ng-hide="!refData.isNewCustomer"> 
-                            <i class="fa fa-plus-circle"></i></a>
-                            
+                            <a class="text-navy" style="margin-left: 5px;" ng-click="fnDocUpload(false)" ng-hide="!refData.isNewCustomer">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+
                         </div>
                         <div class="ibox-content">
                             <div class="row form-group">
@@ -482,8 +474,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
@@ -551,7 +543,7 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="form-group col-md-12" ng-repeat="qus in refData.vacancyData.Questions">
-                                    <label class="font-normal">{{qus.QuestionName}}</label>
+                                    <label class="font-normal">{{qus.QuestionNa me}}</label>
                                     <div>
                                         <input type="text" class="form-control" name="response_{{qus.ID}}"
                                                ng-model="response_qus.ID"
@@ -579,6 +571,39 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <!-- Rate information Details -->
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>
+                                Rate Information
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <!-- Rate Information -->
+                                <div class="form-group col-md-6" ng-class="{ 'has-error': submitted && form.PayRate.$error.required }">
+                                    <label>Pay Rate * :</label>
+                                    <input type="text" class="form-control" name="PayRate"
+                                           ng-model="dataJSON.PayRate"
+                                           ng-init="0"
+                                           placeholder="Pay Rate" required />
+                                    <span ng-show="submitted && form.PayRate.$error.required" class="text-danger">
+                                        * Pay Rate is required
+                                    </span>
+                                </div>
+                                <div class="form-group col-md-6" ng-show="dataJSON.PayRate !== undefined">
+                                    <label>Bill Rate :</label>
+                                    <input type="text" class="form-control" name="PayRate"
+                                           ng-value="+dataJSON.PayRate+(dataJSON.PayRate*(refData.vacancyData.Vacancy.payRateMarkUp/100))"
+                                           placeholder="Bill Rate" ng-disabled="true" />
+
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -618,47 +643,47 @@
                 </div>
 
                 <!--<div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.candidate.$error.required }">
-                    <label>Candidate * :</label>
-                    <select ng-model="csdataJSON.CandidateId" class="form-control" required name="country">
-                        <option value="">Choose Candidate</option>
-                        <option ng-repeat="res in resCandidates" value="{{res.Candidate.id}}">{{res.Candidate.FirstName+" "+res.Candidate.LastName}}</option>
-                    </select>
-                    <span ng-show="submitted && form.candidate.$error.required" class="text-danger">
-                        * Candidate is required
-                    </span>
-                </div>
-                <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.BillRate.$error.required }">
-                    <label>Bill Rate * :</label>
-                    <input type="text" class="form-control" name="BillRate"
-                           ng-model="csdataJSON.BillRate"
-                           placeholder="Name" required />
-                    <span ng-show="submitted && form.BillRate.$error.required" class="text-danger">
-                        * Bill Rate is required
-                    </span>
-                </div>
-                <div class="form-group  col-md-12" ng-class="{ 'has-error': submitted && form.StatusId.$error.required }">
-                    <label>Status * :</label>
-                    <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId">
-                        <option value="">Choose Status</option>
-                        <option ng-repeat="res in refData.candidateStatusList" value="{{res.ID}}">{{res.Name}}</option>
-                    </select>
+        <label>Candidate * :</label>
+        <select ng-model="csdataJSON.CandidateId" class="form-control" required name="country">
+            <option value="">Choose Candidate</option>
+            <option ng-repeat="res in resCandidates" value="{{res.Candidate.id}}">{{res.Candidate.FirstName+" "+res.Candidate.LastName}}</option>
+        </select>
+        <span ng-show="submitted && form.candidate.$error.required" class="text-danger">
+            * Candidate is required
+        </span>
+    </div>
+    <div class="form-group col-md-12" ng-class="{ 'has-error': submitted && form.BillRate.$error.required }">
+        <label>Bill Rate * :</label>
+        <input type="text" class="form-control" name="BillRate"
+               ng-model="csdataJSON.BillRate"
+               placeholder="Name" required />
+        <span ng-show="submitted && form.BillRate.$error.required" class="text-danger">
+            * Bill Rate is required
+        </span>
+    </div>
+    <div class="form-group  col-md-12" ng-class="{ 'has-error': submitted && form.StatusId.$error.required }">
+        <label>Status * :</label>
+        <select ng-model="csdataJSON.StatusId" class="form-control" required name="StatusId">
+            <option value="">Choose Status</option>
+            <option ng-repeat="res in refData.candidateStatusList" value="{{res.ID}}">{{res.Name}}</option>
+        </select>
 
-                    <span ng-show="submitted && form.StatusId.$error.required" class="text-danger">
-                        * Status is required
-                    </span>
-                </div>
-                <div class="form-group col-md-12">
-                    <label>
-                        <input icheck type="checkbox" name="IsActive" ng-model="csdataJSON.isActive">
-                        <i></i> Is Active
-                    </label>
-                </div>
+        <span ng-show="submitted && form.StatusId.$error.required" class="text-danger">
+            * Status is required
+        </span>
+    </div>
+    <div class="form-group col-md-12">
+        <label>
+            <input icheck type="checkbox" name="IsActive" ng-model="csdataJSON.isActive">
+            <i></i> Is Active
+        </label>
+    </div>
 
-                <div class="form-group col-md-12">
-                    <button type="submit" ng-if="!editform" ng-click="submit(form)" class="btn btn-primary m-b">Create</button>
-                    <button type="submit" ng-if="editform" ng-click="submit(form)" class="btn btn-primary m-b">Update</button>
-                    <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
-                </div>-->
+    <div class="form-group col-md-12">
+        <button type="submit" ng-if="!editform" ng-click="submit(form)" class="btn btn-primary m-b">Create</button>
+        <button type="submit" ng-if="editform" ng-click="submit(form)" class="btn btn-primary m-b">Update</button>
+        <button type="submit" ng-click="reset()" class="btn btn-white m-b">cancel</button>
+    </div>-->
             </form>
 
         </div>

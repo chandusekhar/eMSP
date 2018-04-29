@@ -113,24 +113,26 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Delete
 
-        //internal static async Task DeleteVacancySkills(long Id)
-        //{
-        //    try
-        //    {
-        //        using (db = new eMSPEntities())
-        //        {
-        //            tblVacancieSkill obj = await db.tblVacancieSkills.FindAsync(Id);
-        //            db.tblVacancieSkills.Remove(obj);
-        //            int x = await Task.Run(() => db.SaveChangesAsync());
+        internal static async Task DeleteVacancySkills(long VacancyId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    List<tblVacanciesQuestion> questionsList = db.tblVacanciesQuestions
+                                                                        .Where(q => q.VacancyID == VacancyId)
+                                                                        .ToList();
+                    db.tblVacanciesQuestions.RemoveRange(questionsList);
+                    int x = await Task.Run(() => db.SaveChangesAsync());
 
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
 
-        //    }
-        //}
+            }
+        }
 
 
         #endregion

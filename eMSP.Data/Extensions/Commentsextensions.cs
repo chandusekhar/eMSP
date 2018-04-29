@@ -39,7 +39,7 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
-                commentUser = data.tblCommentUsers?.Select(x => x.ConvertToCommentUsers()).ToList()
+                //commentUser = data.tblCommentUsers?.Select(x => x.ConvertToCommentUsers()).ToList()
             };
         }
 

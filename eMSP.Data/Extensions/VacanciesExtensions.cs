@@ -23,6 +23,7 @@ namespace eMSP.Data.Extensions
                 HiringManager = data.hiringManager,
                 ReportingManager = data.reportingManager,
                 PositionTitle = data.positionTitle,
+                NoOfPositions = data.noOfPositions,
                 VacancyDescription = data.vacancyDescription,
                 YearOfExperience = data.yearOfExperience.ToString(),
                 ShowCustomerDetailsToSupplier = data.showCustomerDetailsToSupplier,
@@ -36,7 +37,7 @@ namespace eMSP.Data.Extensions
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
                 UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now,
-                JobStatusID=data.jobStatusId                
+                JobStatusID = Convert.ToInt16(data.jobStatusId ?? null)
             };
         }
 
@@ -56,6 +57,7 @@ namespace eMSP.Data.Extensions
                 hiringManager = data.HiringManager,
                 reportingManager = data.ReportingManager,
                 positionTitle = data.PositionTitle,
+                noOfPositions = data.NoOfPositions,
                 vacancyDescription = data.VacancyDescription,
                 yearOfExperience = Convert.ToDecimal(data.YearOfExperience),
                 showCustomerDetailsToSupplier = data.ShowCustomerDetailsToSupplier,
@@ -69,7 +71,7 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
-                jobStatusId = data.tblJobVacanciesStatu.ID,
+                jobStatusId = data.tblJobVacanciesStatu.ID.ToString(),
                 vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
             };
         }
@@ -91,6 +93,7 @@ namespace eMSP.Data.Extensions
                     hiringManager = data.HiringManager,
                     reportingManager = data.ReportingManager,
                     positionTitle = data.PositionTitle,
+                    noOfPositions = data.NoOfPositions,
                     vacancyDescription = data.VacancyDescription,
                     yearOfExperience = Convert.ToDecimal(data.YearOfExperience),
                     showCustomerDetailsToSupplier = data.ShowCustomerDetailsToSupplier,
@@ -104,13 +107,14 @@ namespace eMSP.Data.Extensions
                     createdUserID = data.CreatedUserID,
                     updatedTimestamp = data.UpdatedTimestamp,
                     updatedUserID = data.UpdatedUserID,
+                    jobStatusId = data.JobStatusID.ToString(),
                     vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
                 },
                 VacancyFiles = data.tblVacancyFiles?.Select(a => a.ConvertToVacancyFile()).ToList(),
-                //VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
+                VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
                 VacancySkills = data.tblVacancieSkills?.Select(a => a.tblIndustrySkill?.ConvertToIndustrySkill()).ToList(),
-                VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblCustomerLocationBranch?.tblLocation.ConvertToLocation()).ToList(),
-                VacancySuppliers = data.tblVacancySuppliers?.Select(a => a.tblSupplier?.ConvertTocompany()).ToList(),
+                VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblLocation.ConvertToLocation()).ToList(),
+                VacancySuppliers = data.tblVacancySuppliers?.Where(x => !(x.IsDeleted ?? false)).Select(a => a.tblSupplier?.ConvertTocompany()).ToList(),
                 Questions = data.tblVacanciesQuestions?.Select(a => a.ConvertToVacancyQuestion()).ToList(),
                 RequiredDocument = data.tblVacanciesRequiredDocuments?.Select(a => a.ConvertToVacancyRequiredDocument()).ToList()
             };
@@ -206,7 +210,7 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 vacancyId = data.VacancyID,
                 locationId = data.LocationID,
-                locationName = data.tblCustomerLocationBranch != null ? data.tblCustomerLocationBranch.tblLocation.LocationName : "",
+                locationName = data.tblLocation?.LocationName,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -358,11 +362,11 @@ namespace eMSP.Data.Extensions
             return new tblVacanciesQuestion()
             {
                 ID = Convert.ToInt16(data.ID),
-                QuestionName=data.QuestionName,
-                QuestionDescription=data.QuestionDescription,
-                IsMandatory=data.IsMandatory,
-                QuestionID=data.QuestionID,
-                VacancyID=data.VacancyID,
+                QuestionName = data.QuestionName,
+                QuestionDescription = data.QuestionDescription,
+                IsMandatory = data.IsMandatory,
+                QuestionID = data.QuestionID,
+                VacancyID = data.VacancyID,
                 IsActive = data.isActive,
                 IsDeleted = data.isDeleted ?? false,
                 CreatedUserID = data.createdUserID,
@@ -377,12 +381,12 @@ namespace eMSP.Data.Extensions
             return new VacancyQuestionViewModel()
             {
                 ID = data.ID,
-                VacancyID=data.VacancyID,
-                QuestionID=data.QuestionID,
-                IsMandatory=data.IsMandatory,
-                QuestionName=data.QuestionName,
-                QuestionDescription=data.QuestionDescription,
-                IsSelected=false,                
+                VacancyID = data.VacancyID,
+                QuestionID = data.QuestionID,
+                IsMandatory = data.IsMandatory,
+                QuestionName = data.QuestionName,
+                QuestionDescription = data.QuestionDescription,
+                IsSelected = false,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,
                 createdUserID = data.CreatedUserID,
@@ -397,9 +401,9 @@ namespace eMSP.Data.Extensions
             return new tblVacanciesRequiredDocument()
             {
                 ID = Convert.ToInt16(data.ID),
-                RequiredDocumentName=data.RequiredDocumentName,
-                RequiredDocumentDescription=data.RequiredDocumentDescription,
-                RequiredDocumentID=data.RequiredDocumentID,                
+                RequiredDocumentName = data.RequiredDocumentName,
+                RequiredDocumentDescription = data.RequiredDocumentDescription,
+                RequiredDocumentID = data.RequiredDocumentID,
                 IsMandatory = data.IsMandatory,
                 VacancyID = data.VacancyID,
                 IsActive = data.isActive,
@@ -417,10 +421,10 @@ namespace eMSP.Data.Extensions
             {
                 ID = data.ID,
                 VacancyID = data.VacancyID,
-                RequiredDocumentID=data.RequiredDocumentID,
+                RequiredDocumentID = data.RequiredDocumentID,
                 IsMandatory = data.IsMandatory,
-                RequiredDocumentName=data.RequiredDocumentName,
-                RequiredDocumentDescription=data.RequiredDocumentDescription,               
+                RequiredDocumentName = data.RequiredDocumentName,
+                RequiredDocumentDescription = data.RequiredDocumentDescription,
                 IsSelected = false,
                 isActive = data.IsActive,
                 isDeleted = data.IsDeleted,

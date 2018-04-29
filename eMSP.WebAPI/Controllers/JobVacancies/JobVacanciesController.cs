@@ -187,7 +187,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model.Vacancy, "update", userId);
-
+                
                 return Ok(await VacanciesService.UpdateVacancy(model));
             }
             catch (Exception)

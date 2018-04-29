@@ -95,7 +95,7 @@
 
                             <div class="row">
                                 <!-- Job Title -->
-                                <div class="form-group col-md-12" ng-class="{ 'has-error': dataJSON.submitted && form.positionTitle.$error.required }">
+                                <div class="form-group col-md-8" ng-class="{ 'has-error': dataJSON.submitted && form.positionTitle.$error.required }">
                                     <label>Job Title * :</label>
                                     <input type="text" class="form-control" name="positionTitle"
                                            ng-model="dataJSON.Vacancy.positionTitle"
@@ -103,6 +103,16 @@
                                            required />
                                     <span ng-show="dataJSON.submitted && form.positionTitle.$error.required" class="text-danger">
                                         * Job Title is required
+                                    </span>
+                                </div>
+                                <div class="form-group col-md-4" ng-class="{ 'has-error': dataJSON.submitted && form.noOfPositions.$error.required }">
+                                    <label>Job Title * :</label>
+                                    <input type="text" class="form-control" name="noOfPositions"
+                                           ng-model="dataJSON.Vacancy.noOfPositions"
+                                           placeholder="Job Title"
+                                           required />
+                                    <span ng-show="dataJSON.submitted && form.noOfPositions.$error.required" class="text-danger">
+                                        * No of positions required
                                     </span>
                                 </div>
                                 <!-- Job Description -->
@@ -561,9 +571,7 @@
                             <div class="row">
                                 <!-- Comments -->
                                 <div class="form-group col-md-12">
-                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].createdUserID" ng-init="dataJSON.VacancyComment[0].createdUserID=refData.loginUserId" ng-value="refData.loginUserId" />
-                                    <input type="hidden" ng-model="dataJSON.VacancyComment[0].updatedUserID" ng-init="dataJSON.VacancyComment[0].updatedUserID=refData.loginUserId" ng-value="refData.loginUserId" />
-                                    <textarea type="text" class="form-control summernote" name="VacancyComment"
+                                    <textarea type="text" class="form-control summernote" name="dataJSON.VacancyComment[0]"
                                               ng-model="dataJSON.VacancyComment[0].comment"
                                               placeholder="Comments" summernote
                                               height="250"></textarea>

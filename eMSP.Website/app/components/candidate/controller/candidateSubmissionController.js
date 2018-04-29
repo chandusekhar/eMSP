@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
-function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, $uibModalInstance) {
+function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, AppIndustries, AppCoutries) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.submitted = false;
     $scope.refData = {};
@@ -96,6 +96,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     }
 
     $scope.submit = function (form) {
+        debugger;
         $scope.submitted = true;
         if (form.$valid) {
             var suc = false;

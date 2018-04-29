@@ -70,7 +70,7 @@
                 <a ng-if="config.navCandidate" href="#"><i class="fa fa-user-o"></i> <span class="nav-label">{{'Candidate'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('candidate')}">
                     <li ng-if="config.navManageCandidates" ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
-                    <li ng-if="config.navManageCandidateSubmission" ui-sref-active="active"><a ui-sref="candidate.appointment">{{'Manage Candidate Submission'|translate}} </a></li>
+                    <li ng-if="config.navManageCandidateSubmission" ui-sref-active="active"><a ui-sref="candidate.manageSubmission">{{'Manage Candidate Submission'|translate}} </a></li>
                     <li ng-if="config.navCreateCandidate" ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
                 </ul>
             </li>

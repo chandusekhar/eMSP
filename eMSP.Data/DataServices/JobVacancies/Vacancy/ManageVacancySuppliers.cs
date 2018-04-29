@@ -78,26 +78,17 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        internal static async Task<tblVacancySupplier> UpdateVacancySupplier(string a, tblVacancy vacancy)
+        internal static async Task UpdateVacancySupplier(long VacancyId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    long supplierId = Convert.ToInt64(a);
-                    tblVacancySupplier model = await Task.Run(() => db.tblVacancySuppliers.Where(b => b.VacancyID == vacancy.ID && b.SupplierID == supplierId).FirstOrDefaultAsync());
-                    if (model != null)
-                    {
-                        db.Entry(model).State = EntityState.Modified;
+                    List<tblVacancySupplier> model = await Task.Run(() => db.tblVacancySuppliers.Where(q => q.VacancyID == VacancyId)
+                                                                           .ToList());
+                    model.All(vs => { vs.IsDeleted = true; return true; });
 
-                        int x = await Task.Run(() => db.SaveChangesAsync());
-                    }
-                    else
-                    {
-                        model = await Task.Run(() => InsertVacancySupplier(a, vacancy));
-                    }
-
-                    return model;
+                    await Task.Run(() => db.SaveChangesAsync());
                 }
             }
             catch (Exception)
@@ -110,14 +101,15 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Delete
 
-        internal static async Task DeleteVacancySupplier(long Id)
+        internal static async Task DeleteVacancySupplier(long VacancyId)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblVacancySupplier obj = await db.tblVacancySuppliers.FindAsync(Id);
-                    db.tblVacancySuppliers.Remove(obj);
+                    List<tblVacancySupplier> vacancySupplierList = db.tblVacancySuppliers.Where(q => q.VacancyID == VacancyId)
+                                                                           .ToList();
+                    db.tblVacancySuppliers.RemoveRange(vacancySupplierList);
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                 }

@@ -82,13 +82,15 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Update
 
-        //internal static async Task<tblVacanciesRequiredDocument> UpdateVacanciesRequiredDocument(long a, tblVacancy vacancy)
+        //internal static async Task<tblVacanciesRequiredDocument> UpdateVacanciesRequiredDocument(tblVacanciesRequiredDocument data, tblVacancy vacancy)
         //{
         //    try
         //    {
         //        using (db = new eMSPEntities())
         //        {
-        //            tblVacancieSkill model = await Task.Run(() => db.tblVacancieSkills.Where(b => b.VacancyID == vacancy.ID && b.SkillID == a).FirstOrDefaultAsync());
+        //            tblVacanciesRequiredDocument model = await Task.Run(() => db.tblVacanciesRequiredDocuments
+        //                                                                        .Where(b => b.VacancyID == vacancy.ID && b.ID == data.ID)
+        //                                                                        .FirstOrDefaultAsync());
 
         //            if (model != null)
         //            {
@@ -96,9 +98,8 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         //                int x = await Task.Run(() => db.SaveChangesAsync());
         //            }
-        //            else
-        //            {
-        //                model = await Task.Run(() => AddVacancySkills(a, vacancy));
+        //            else {
+        //                model = await Task.Run(() => AddVacanciesRequiredDocument(data, vacancy));
         //            }
         //            return model;
         //        }
@@ -113,24 +114,26 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Delete
 
-        //internal static async Task DeleteVacanciesRequiredDocument(long Id)
-        //{
-        //    try
-        //    {
-        //        using (db = new eMSPEntities())
-        //        {
-        //            tblVacancieSkill obj = await db.tblVacancieSkills.FindAsync(Id);
-        //            db.tblVacancieSkills.Remove(obj);
-        //            int x = await Task.Run(() => db.SaveChangesAsync());
+        internal static async Task DeleteVacanciesRequiredDocument(long VacancyId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    List<tblVacanciesRequiredDocument> requiredDocsList = db.tblVacanciesRequiredDocuments
+                                                                            .Where(rd => rd.VacancyID == VacancyId)
+                                                                            .ToList();
+                    db.tblVacanciesRequiredDocuments.RemoveRange(requiredDocsList);
+                    int x = await Task.Run(() => db.SaveChangesAsync());
 
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
 
-        //    }
-        //}
+            }
+        }
 
 
         #endregion

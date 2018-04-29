@@ -1,4 +1,7 @@
-﻿<style>
+﻿@@ -0,0 +1,97 @@
+﻿
+<style>
+
     .project-people, .project-actions {
         text-align: left;
     }
@@ -31,7 +34,7 @@
                     <div class="ibox-title">
                         <h5>All Jobs</h5>
                     </div>
-                    <div class="ibox-content">                        
+                    <div class="ibox-content">
                         <div class="project-list">
                             <table class="table table-hover">
                                 <thead>
@@ -58,7 +61,6 @@
                                             <br />
                                             <small>Duration : {{v.Vacancy.startDate | date}} - {{v.Vacancy.endDate | date}}</small>
                                         </td>
-
                                         <td class="project-people">
                                             <ng-letter-avatar charCount="2" height="28" width="28" fontsize="10"
                                                               data="{{v.Vacancy.customerName}}" shape="round"></ng-letter-avatar>
@@ -67,7 +69,6 @@
                                             <ng-letter-avatar ng-repeat="sup in v.VacancySuppliers" charCount="2" height="28" width="28" fontsize="10"
                                                               data="{{sup.companyName}}" shape="round"></ng-letter-avatar>
                                         </td>
-
                                         <td class="project-actions" width="15%">
                                             <a ng-repeat="skill in v.VacancySkills">#{{skill.skillName}} </a>
                                         </td>

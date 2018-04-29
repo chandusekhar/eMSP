@@ -24,6 +24,7 @@ namespace eMSP.ViewModel.JobVacancies
         public string hiringManager { get; set; }
         public string reportingManager { get; set; }
         public string positionTitle { get; set; }
+        public short noOfPositions { get; set; }
         public string vacancyDescription { get; set; }
         public decimal yearOfExperience { get; set; }
         public Nullable<bool> showCustomerDetailsToSupplier { get; set; }
@@ -31,7 +32,7 @@ namespace eMSP.ViewModel.JobVacancies
         public decimal maxPayRate { get; set; }
         public decimal targetPayRate { get; set; }
         public decimal payRateMarkUp { get; set; }
-        public Nullable<long> jobStatusId { get; set; }
+        public string jobStatusId { get; set; }
         public VacanciesStatus vacancyStatus { get; set; }
     }
 

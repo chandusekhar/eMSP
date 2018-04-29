@@ -45,15 +45,16 @@ namespace eMSP.Data.DataServices.JobVacancies
 
         #region Insert
 
-        internal static async Task<tblVacancyComment> InsertComment(tblVacancy vacancy,tblComment comment)
+        internal static async Task<tblVacancyComment> InsertComment(tblVacancy vacancy, tblComment comment)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblVacancyComment model = db.tblVacancyComments.Add(new tblVacancyComment {
-                        CommentID=comment.ID,
-                        VacancyID= vacancy.ID,                        
+                    tblVacancyComment model = db.tblVacancyComments.Add(new tblVacancyComment
+                    {
+                        CommentID = comment.ID,
+                        VacancyID = vacancy.ID,
                         IsActive = true,
                         IsDeleted = false,
                         CreatedTimestamp = vacancy.CreatedTimestamp,
@@ -63,7 +64,7 @@ namespace eMSP.Data.DataServices.JobVacancies
 
                     });
 
-                    int x = await Task.Run(() => db.SaveChangesAsync());                    
+                    int x = await Task.Run(() => db.SaveChangesAsync());
                     return model;
 
                 }

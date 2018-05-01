@@ -1,4 +1,5 @@
-﻿using eMSP.ViewModel.Shared;
+﻿using eMSP.ViewModel.JobVacancies;
+using eMSP.ViewModel.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,25 +75,24 @@ namespace eMSP.ViewModel.Candidate
     public class CandidateSubmissionModel : BaseModel
     {
         public CandidateSubmissionModel() { }
-
         public int ID { get; set; }
         public int CandidateId { get; set; }
         public int VacancyId { get; set; }
-        public int StatusId { get; set; }
+        public string StatusId { get; set; }
         public decimal BillRate { get; set; }
+        public decimal PayRate { get; set; }
         public CandidateStatusModel CandidateStatus { get; set; }
     }
 
     public class CandidateSubmissionCreateModel
     {
         public CandidateSubmissionCreateModel() { }
-
-        public CandidateSubmissionModel candidateSubmission { get; set; }
-        public CandidateCreateModel candidate { get; set; }
-        public CandidateSubmissionDocumentResponseModel canSubmissionDocResponse { get; set; }
-        public CandidateSubmissionsQuestionsResponseModel canSubmissionQuesResponse { get; set; }
-        public bool isNewCustomer { get; set; }
-        public bool isCustomerEdited { get; set; }
+        public CandidateSubmissionModel CandidateSubmission { get; set; }
+        public CandidateCreateModel Candidate { get; set; }
+        public List<VacancyQuestionViewModel> Questions { get; set; }
+        public List<VacancyRequiredDocumentViewModel> RequiredDocument { get; set; }
+        public bool IsNewCustomer { get; set; }
+        public bool IsCustomerEdited { get; set; }
     }
 
     public partial class CandidateSubmissionDocumentResponseModel : BaseModel

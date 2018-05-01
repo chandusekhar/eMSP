@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eMSP.Data.DataServices.MSP
 {
-   public class ManageMSP:IDisposable
+    public class ManageMSP : IDisposable
     {
 
         private bool IsDisposed = false;
@@ -23,9 +23,9 @@ namespace eMSP.Data.DataServices.MSP
         {
             try
             {
-                using (var db=mContext)
+                using (var db = mContext)
                 {
-                    var data = await Task.Run(()=> db.tblMSPDetails.Where(x => x.ID == MspId).SingleOrDefault());
+                    var data = await Task.Run(() => db.tblMSPDetails.Where(x => x.ID == MspId).SingleOrDefault());
 
                     return new MSPDetailsUIModel()
                     {

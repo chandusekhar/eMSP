@@ -72,5 +72,9 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string VacancyFull = "Vacancy Full";
         public const string VacancyCreate= "Vacancy Create";
         public const string VacancyView = "Vacancy View";
+
+        public const string MSPPayPeriodView = "MSPPayPeriod View";
+        public const string MSPPayPeriodCreate = "MSPPayPeriod Create";
+        public const string MSPPayPeriodFull = "MSPPayPeriod Full";
     }
 }

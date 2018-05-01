@@ -392,7 +392,10 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                CandidateSubmissionsQuestionsResponse = data.tblCandidateSubmissionsQuestionsResponses?
+                                                            .Select(x => x.ConvertToCandidateSubmissionsQuestionsResponseModel())
+                                                            .ToList()
             };
         }
 
@@ -431,7 +434,10 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                CandidateSubmissionDocumentResponse = data.tblCandidateSubmissionDocumentResponses?
+                                                        .Select(x => x.ConvertToCandidateSubmissionDocumentResponseModel())
+                                                        .ToList()
             };
         }
     }

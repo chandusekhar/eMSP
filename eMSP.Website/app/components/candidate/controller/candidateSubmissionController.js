@@ -7,7 +7,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     $scope.submitted = false;
     $scope.refData = {};
     $scope.refData.candidateStatusList = candidateStatusList;
-
+    
     $scope.refData.vacancyData = localStorageService.get('vacancyData');
     $scope.refData.submittedCandidate = localStorageService.get('submittedCandidate');
     $scope.edit = $scope.refData.submittedCandidate !== null ? true : false;
@@ -35,11 +35,12 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     $scope.dataJSON.CandidateContact = [];
     $scope.refData.isNewCustomer = false;
     $scope.refData.isCustomerEdited = false;
-
-    console.log($scope.refData.vacancyData);
-    console.log($scope.refData.submittedCandidate);
+    $scope.SubmissionDetails = {}
     
-
+    if ($scope.refData.submittedCandidate !== null) {
+        $scope.SubmissionDetails = $scope.refData.submittedCandidate;
+    }
+    
     var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + 1, { 'SupplierId': 1 });
     apires.then(function (data) {
         $scope.refData.customerList = data;
@@ -53,12 +54,12 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         });
     }
 
-    if ($scope.edit) {
+    if ($scope.edit) {        
         $scope.SupplierState = true;
         $scope.dataJSON = localStorageService.get('editCandidateData');
         if ($scope.dataJSON === null) {
             var apiCandidateData = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + $scope.refData.submittedCandidate.CandidateId, { 'candidateId': $scope.refData.submittedCandidate.CandidateId });
-            apiCandidateData.then(function (data) {
+            apiCandidateData.then(function (data) {                
                 $scope.loadCandidate(data);
             });
         } else {
@@ -66,8 +67,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         }
     }
 
-    $scope.getCandidate = function (data) {
-        debugger;
+    $scope.getCandidate = function (data) {        
         $scope.refData.isNewCustomer = false;
         var apiCandidateData = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + data.id, { 'candidateId': data.id });
         apiCandidateData.then(function (data) {
@@ -76,9 +76,8 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     }
 
     $scope.loadCandidate = function (data) {
-
         $scope.dataJSON = data;
-
+        $scope.SubmissionDetails.CandidateId = $scope.dataJSON.Candidate.id;
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
         $scope.getStateList();
         $scope.LoadIndustriesData();
@@ -95,25 +94,37 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         });
     }
 
-    $scope.submit = function (form) {
-        debugger;
+    $scope.submit = function (form) {   
+        
         $scope.submitted = true;
+        $scope.CreateIndustriesData();
+        $scope.CreateIndustrySkillsData();
+
+        $scope.candidateSubmission = {
+            Candidate: $scope.dataJSON,
+            CandidateSubmission: $scope.SubmissionDetails,
+            Questions: $scope.refData.vacancyData.Questions,
+            RequiredDocument: $scope.refData.vacancyData.RequiredDocument,
+            IsNewCustomer: false,
+            IsCustomerEdited: false
+        };
+        
         if (form.$valid) {
             var suc = false;
-            if ($scope.editform) {
-                var resUpdate = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.UPDATEURL, $scope.csdataJSON);
-                resUpdate.then(function (data) {
-                    $scope.csdataJSON = data;
+            if ($scope.edit) {
+                var resUpdate = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.UPDATEURL, $scope.candidateSubmission);
+                resUpdate.then(function (data) { 
                     toaster.warning({ body: "Data Updated Successfully." });
+                    $state.go($scope.configJSON.successCandidateSubmissionUrl);
                 });
             }
             else {
-                var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.CREATEURL, $scope.csdataJSON);
+                var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.CREATEURL, $scope.candidateSubmission);
                 res.then(function (data) {
-                    $scope.csdataJSON = data;
                     toaster.success({ body: "Data Created Successfully." });
+                    $state.go($scope.configJSON.successCandidateSubmissionUrl);
                 });
-            }
+            }            
         }
     }
 
@@ -132,7 +143,6 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
             }
             $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
 
-            console.log($scope.dataJSON.CandidateFile);
             $scope.contact = false;
         }
     }
@@ -168,13 +178,12 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
             angular.forEach($scope.CandidateDocs, function (file) {
                 file.FileName = $scope.CandidateDocument.docFileName;
                 file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
-                file.FileTypeId = 10007;
+                file.FileTypeId = 6;
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateDocs = [];
             $scope.CandidateDocument.docFileName = "";
             $scope.CandidateDocument.docExpiryDate = null;
-            console.log($scope.dataJSON.CandidateFile);
             $scope.docUpload = false;
         }
     }
@@ -190,13 +199,11 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateResume = [];
-            console.log($scope.dataJSON.CandidateFile);
             $scope.resumeUpload = false;
         }
     }
 
     $scope.removeFile = function (list, index) {
-        //$scope.dataJSON.CandidateFile.splice(index, 1);
         list.splice(index, 1);
     }
 
@@ -323,13 +330,38 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         $scope.formAction = "Update";
     }
 
-    $scope.test = function (index) {
-        console.log(index);
-    }
+    $scope.$watch('SubmissionDetails.PayRate', function (val) {        
+        if (!angular.isUndefined(val)) {
+            $scope.SubmissionDetails.BillRate = val + (val * ($scope.refData.vacancyData.Vacancy.payRateMarkUp / 100));
+        }
+    });    
 
     $scope.newCustomer = function () {
         $scope.refData.isNewCustomer = true;
         $scope.reset();
+    }
+
+
+    $scope.candidateSubmissionsQuestionsResponse = function (event) {  
+        var response = [{
+            SubmissionID: 0,
+            VacancyQuestionID: event.qus.ID,
+            Responses: event.response_qus
+        }];
+        event.qus.CandidateSubmissionsQuestionsResponse = response;        
+    }
+
+    $scope.candidateSubmissionDocumentResponse = function (data, doc) {        
+        var docResponse = [];
+        data.requiredDocumentResponse.forEach(function (res) {
+            var response = {
+                CandidateSubmissionID: 0,
+                VacancyRequiredDocumentID: doc.ID,
+                CandidateFileID: res.ID
+            };
+            docResponse.push(response);
+        });
+        doc.CandidateSubmissionDocumentResponse = docResponse;
     }
 
     $scope.reset = function () {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using eMSP.DataModel;
 using System.Configuration;
 using eMSP.ViewModel.Candidate;
+using eMSP.ViewModel.JobVacancies;
 
 namespace eMSP.Data.DataServices.Candidate
 {
@@ -121,16 +122,53 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-        public async Task<CandidateSubmissionModel> CreateCandidateSubmission(CandidateSubmissionModel data)
+        public async Task<CandidateSubmissionCreateModel> CreateCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
             {
-                CandidateSubmissionModel model = null;
+                CandidateSubmissionCreateModel model = null;
+
+                if (data.IsNewCustomer)
+                {
+                    CandidateCreateModel candidate= await Task.Run(() => CreateCandidate(data.Candidate));
+                    data.CandidateSubmission.CandidateId = candidate.Candidate.id;
+                }
+
+                if (data.IsCustomerEdited)
+                {
+                    await Task.Run(() => UpdateCandidate(data.Candidate));
+                }
+
+                CandidateSubmissionModel submissionResp = await Task.Run(() => ManageCandidate.InsertCandidateSubmissions(data.CandidateSubmission.ConverToTblCandidateSubmission()));
 
 
-                CandidateSubmissionModel res = await Task.Run(() => ManageCandidate.InsertCandidateSubmissions(data.ConverToTblCandidateSubmission()));
-                // model = res.ConvertToCandidateCreateModel();
+                foreach (VacancyQuestionViewModel vq in data.Questions)
+                {
+                    vq.CandidateSubmissionsQuestionsResponse.All(re =>
+                    {
+                        re.createdTimestamp = data.CandidateSubmission.createdTimestamp;
+                        re.createdUserID = data.CandidateSubmission.createdUserID;
+                        re.updatedUserID = data.CandidateSubmission.updatedUserID;
+                        re.updatedTimestamp = data.CandidateSubmission.updatedTimestamp;
+                        re.submissionId = submissionResp.ID;
+                        return true;
+                    });
+                    await Task.Run(() => ManageCandidateSubmissionsQuestionsResponses.InsertCandidateSubmissionsQuestionsRespons(vq.CandidateSubmissionsQuestionsResponse.Select(re => re.ConvertTotblCandidateSubmissionsQuestionsRespons()).ToList()));
+                }
 
+                foreach (VacancyRequiredDocumentViewModel rd in data.RequiredDocument)
+                {
+                    rd.CandidateSubmissionDocumentResponse.All(re => {
+                        re.createdTimestamp = data.CandidateSubmission.createdTimestamp;
+                        re.createdUserID = data.CandidateSubmission.createdUserID;
+                        re.updatedUserID = data.CandidateSubmission.updatedUserID;
+                        re.updatedTimestamp = data.CandidateSubmission.updatedTimestamp;
+                        re.candidateSubmissionId = submissionResp.ID;
+                        return true;
+                    });
+
+                    await Task.Run(() => ManageCandidateSubmissionDocumentResponses.InsertCandidateSubmissionDocumentRespons(rd.CandidateSubmissionDocumentResponse.Select(res => res.ConvertTotblCandidateSubmissionsQuestionsResponses()).ToList()));
+                }
 
                 return model;
             }
@@ -154,11 +192,54 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
-        public async Task<CandidateSubmissionModel> UpdateCandidateSubmission(CandidateSubmissionModel data)
+        public async Task<CandidateSubmissionCreateModel> UpdateCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
             {
-                return await Task.Run(() => ManageCandidate.UpdateCandidateSubmissions(data.ConverToTblCandidateSubmission()));
+                CandidateSubmissionCreateModel model = null;
+
+                if (data.IsNewCustomer)
+                {
+                    CandidateCreateModel candidate = await Task.Run(() => CreateCandidate(data.Candidate));
+                    data.CandidateSubmission.CandidateId = candidate.Candidate.id;
+                }
+
+                if (data.IsCustomerEdited)
+                {
+                    await Task.Run(() => UpdateCandidate(data.Candidate));
+                }
+
+                await Task.Run(() => ManageCandidate.UpdateCandidateSubmissions(data.CandidateSubmission.ConverToTblCandidateSubmission()));
+
+                await Task.Run(() => ManageCandidateSubmissionsQuestionsResponses.DeleteCandidateSubmissionsQuestionsRespons(data.CandidateSubmission.ID));
+                foreach (VacancyQuestionViewModel vq in data.Questions)
+                {
+                    vq.CandidateSubmissionsQuestionsResponse.All(re =>
+                    {
+                        re.createdTimestamp = data.CandidateSubmission.createdTimestamp;
+                        re.createdUserID = data.CandidateSubmission.createdUserID;
+                        re.updatedUserID = data.CandidateSubmission.updatedUserID;
+                        re.updatedTimestamp = data.CandidateSubmission.updatedTimestamp;
+                        return true;
+                    });
+                    await Task.Run(() => ManageCandidateSubmissionsQuestionsResponses.InsertCandidateSubmissionsQuestionsRespons(vq.CandidateSubmissionsQuestionsResponse.Select(re => re.ConvertTotblCandidateSubmissionsQuestionsRespons()).ToList()));
+                }
+
+                await Task.Run(() => ManageCandidateSubmissionDocumentResponses.DeleteCandidateSubmissionDocumentRespons(data.CandidateSubmission.ID));
+                foreach (VacancyRequiredDocumentViewModel rd in data.RequiredDocument)
+                {
+                    rd.CandidateSubmissionDocumentResponse.All(re => {
+                        re.createdTimestamp = data.CandidateSubmission.createdTimestamp;
+                        re.createdUserID = data.CandidateSubmission.createdUserID;
+                        re.updatedUserID = data.CandidateSubmission.updatedUserID;
+                        re.updatedTimestamp = data.CandidateSubmission.updatedTimestamp;
+                        return true;
+                    });
+
+                    await Task.Run(() => ManageCandidateSubmissionDocumentResponses.InsertCandidateSubmissionDocumentRespons(rd.CandidateSubmissionDocumentResponse.Select(res => res.ConvertTotblCandidateSubmissionsQuestionsResponses()).ToList()));
+                }
+
+                return model;
             }
             catch (Exception)
             {

@@ -28,11 +28,10 @@ function manageCandidateSubmissionController($scope, $state, localStorageService
 function submitedCandidateListController($scope, $state, localStorageService, APP_CONSTANTS, apiCall, $uibModal) {
 
     $scope = $scope.$parent.$parent;
-    console.log($scope);
+
     var apiCL = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETURL + $scope.jobData.Vacancy.id, { 'VacancyId': $scope.jobData.Vacancy.id} );
     apiCL.then(function (data) {        
         $scope.submitedCandidateList = data;
-        console.log(data);
     });
 
     $scope.submitCandidate = function (data) {

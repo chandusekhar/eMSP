@@ -444,7 +444,7 @@ namespace eMSP.Data.DataServices.Candidate
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
 
@@ -708,7 +708,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -722,15 +721,12 @@ namespace eMSP.Data.DataServices.Candidate
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
-                    return model.ConvertToCandidateSubmissionModel();
-                    
-
+                    return model.ConvertToCandidateSubmissionModel();    
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
-
             }
         }
 

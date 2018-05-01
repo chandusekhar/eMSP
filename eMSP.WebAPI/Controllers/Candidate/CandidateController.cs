@@ -138,14 +138,14 @@ namespace eMSP.WebAPI.Controllers.Candidate
         [Route("creatCandidateSubmission")]
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.CandidateCreate)]
-        [ResponseType(typeof(CandidateSubmissionModel))]
-        public async Task<IHttpActionResult> creatCandidateSubmission(CandidateSubmissionModel data)
+       // [ResponseType(typeof(CandidateSubmissionCreateModel))]
+        public async Task<IHttpActionResult> creatCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
             {
                 string userId = User.Identity.GetUserId();
 
-                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+                Helpers.Helpers.AddBaseProperties(data.CandidateSubmission, "create", userId);
 
                 return Ok(await CandidateService.CreateCandidateSubmission(data));
             }
@@ -193,15 +193,14 @@ namespace eMSP.WebAPI.Controllers.Candidate
         [Route("updateCandidateSubmission")]
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.CandidateCreate)]
-        [ResponseType(typeof(CandidateSubmissionModel))]
-        public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionModel data)
+        //[ResponseType(typeof(CandidateSubmissionCreateModel))]
+        public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
             {
                 string userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(data, "update", userId);
-                Helpers.Helpers.AddBaseProperties(data.CandidateStatus, "update", userId);
-                return Ok(await CandidateService.UpdateCandidateSubmission(data));
+                Helpers.Helpers.AddBaseProperties(data.CandidateSubmission, "create", userId);
+                return Ok(await CandidateService.UpdateCandidateSubmission(data));                
             }
             catch (Exception)
             {

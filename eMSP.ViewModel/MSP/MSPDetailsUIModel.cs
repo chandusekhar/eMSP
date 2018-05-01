@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.MSP
 {
-   public partial class MSPDetailsUIModel
+    public partial class MSPDetailsUIModel
     {
-        public MSPDetailsUIModel()
-        {
-
-        }
+        public MSPDetailsUIModel() { }
 
         public string ID { get; set; }
         public string CompanyName { get; set; }
-        public string WebSite { get; set; }        
+        public string WebSite { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }

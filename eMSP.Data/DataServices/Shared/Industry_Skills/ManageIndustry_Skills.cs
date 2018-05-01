@@ -85,13 +85,11 @@ namespace eMSP.Data.DataServices.Shared.Industry_Skills
                     {
                         return await Task.Run(() => db.tblIndustrySkills.OrderByDescending(x => x.ID).ToList());
                     }
-
                 }
             }
             catch (Exception)
             {
                 throw;
-
             }
         }
 

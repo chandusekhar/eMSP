@@ -38,7 +38,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "app/components/accounts/view/registration.html",
             data: { pageTitle: 'Registration', specialClass: 'gray-bg' }
         })
-        
+
         .state('forgot-password', {
             url: "/forgot-password",
             templateUrl: "app/components/accounts/view/forgotPassword.html",
@@ -1772,7 +1772,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         })
 
         //Appointment
-        
+
         .state('appointment', {
             abstract: true,
             url: "/appointment",
@@ -1789,7 +1789,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 },
                 AppointmentList: function (apiCall, localStorageService, APP_CONSTANTS) {
                     var id = localStorageService.get('createSubmissionId');
-                    return apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.GETALLAPPOINTMENTURL+id, {})
+                    return apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.GETALLAPPOINTMENTURL + id, {})
                         .then(function (data) {
                             return data;
                         });
@@ -1876,6 +1876,178 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             resolve: {
                 configJSON: function ($http) {
                     return $http.get("app/components/payPeriod/config/payPeriod.json").success(function (data) { return data; });
+                },
+                PayPeriodList: function (apiCall, localStorageService, APP_CONSTANTS) {
+
+                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLPAYPERIODS, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        }, {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                        }
+                    ]);
+                }
+            }
+        })
+
+        //expenses
+        .state('expenses', {
+            abstract: true,
+            url: "/expenses",
+            templateUrl: "views/common/content.html",
+            controller: "dashboardController",
+        })
+        .state("expenses.manageExpenses", {
+            url: '/manageExpenses',
+            templateUrl: 'app/components/expenses/view/manageExpenses.html',
+            controller: 'manageExpensesController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/expenses/config/expenses.json").success(function (data) { return data; });
+                },
+                PayPeriodList: function (apiCall, localStorageService, APP_CONSTANTS) {
+
+                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLPAYPERIODS, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                SpendCategoryList: function (apiCall, localStorageService, APP_CONSTANTS) {
+
+                    return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETSPENDCATEGORY, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                CurrentStatusList: function (apiCall, localStorageService, APP_CONSTANTS) {
+
+                    return apiCall.post(APP_CONSTANTS.URL.TIMESHEET.GETTIMESHEETSTATUS, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                ExpenseList: function (apiCall, localStorageService, APP_CONSTANTS) {
+                    var id = 6; //localStorageService.get('PlacementId');
+                    return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETALLEXPENSES + id, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        }, {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                        }
+                    ]);
+                }
+            }
+        })
+
+        //timeSheet
+        .state('timeSheet', {
+            abstract: true,
+            url: "/timeSheet",
+            templateUrl: "views/common/content.html",
+            controller: "dashboardController",
+        })
+        .state("timeSheet.manageTimeSheet", {
+            url: '/manageTimeSheet',
+            templateUrl: 'app/components/timeSheet/view/manageTimeSheet.html',
+            controller: 'manageTimeSheetController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/payPeriod/config/payPeriod.json").success(function (data) { return data; });
+                },
+                PayPeriodList: function (apiCall, localStorageService, APP_CONSTANTS) {
+
+                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLPAYPERIODS, {})
+                        .then(function (data) {
+                            return data;
+                        });
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

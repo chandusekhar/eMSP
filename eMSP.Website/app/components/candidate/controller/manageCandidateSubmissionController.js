@@ -42,7 +42,8 @@ function submitedCandidateListController($scope, $state, localStorageService, AP
     }
 
     $scope.createAppointment = function (data) {
-        localStorageService.set('createCandidateAppointment', data);
+        localStorageService.set('createSubmissionId', data.ID);
+        $state.go('appointment.manageAppointment');
     }
 }
 

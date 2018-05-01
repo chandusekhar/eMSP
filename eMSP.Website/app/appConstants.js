@@ -138,6 +138,20 @@ angular.module('eMSPApp')
             },
             DASHBOARD: {
                 GETDETAILS: "api/dashboard/msp"
+            },
+            TIMESHEET: {
+                GETTIMESHEETSTATUS: "api/timesheet/getTimesheetStatus",
+                GETPAYPERIOD: "api/timesheet/getMSPPayPeriod?id=",
+                GETALLPAYPERIODS: "api/timesheet/getAllMSPPayPeriods",
+                CREATEPAYPERIODURL: "api/timesheet/insertMSPPayPeriod",
+                UPDATEPAYPERIODURL: "api/timesheet/updateMSPPayPeriod"
+            },
+            EXPENSES: {
+                GETSPENDCATEGORY: "api/expenses/getMSPSpendCategory",
+                GETEXPENSE: "api/expenses/getExpenseDetails?ExpenseId=",
+                GETALLEXPENSES: "api/expenses/getCandidateExpenseSpend?PlacementId=",
+                CREATEEXPENSE: "api/expenses/insertCandidateSpend",
+                UPDATEEXPENSE: "api/expenses/updateCandidateSpend"
             }
 
         }

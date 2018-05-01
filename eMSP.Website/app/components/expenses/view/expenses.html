@@ -1,0 +1,194 @@
+<style>
+    .one {
+        cursor: pointer;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 4px;
+        font: caption;
+        text-align: center;
+        border: 1px dotted green;
+        box-sizing: border-box;
+    }
+
+
+        .one span {
+            display: block;
+            font-size: 10px;
+        }
+
+        .one img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100px;
+        }
+
+        .one input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 9999px;
+            cursor: pointer;
+        }
+
+
+
+
+
+    .two {
+        display: block;
+        margin: 30px;
+    }
+
+
+    pre {
+        margin: 30px;
+        font-size: 10px;
+    }
+</style>
+
+<div class="row wrapper">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
+            <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
+        </div>
+        <div class="ibox-content">
+            <form name="form" novalidate>               
+
+                <!-- Job Title -->
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Name.$error.required }">
+                    <label>Name * :</label>
+                    <input type="text" class="form-control" name="Name"
+                           ng-model="dataJSON.Name"
+                           placeholder="Name"
+                           required />
+                    <span ng-show="dataJSON.submitted && form.Name.$error.required" class="text-danger">
+                        * Name is required
+                    </span>
+                </div>
+                <!-- Job Title -->
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Description.$error.required }">
+                    <label>Description * :</label>
+                    <input type="text" class="form-control" name="Description"
+                           ng-model="dataJSON.Description"
+                           placeholder="Description"
+                           required />
+                    <span ng-show="dataJSON.submitted && form.Description.$error.required" class="text-danger">
+                        * Description is required
+                    </span>
+                </div>
+                <!-- Job Title -->
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Amount.$error.required }">
+                    <label>Amount * :</label>
+                    <input type="text" class="form-control" name="Amount"
+                           ng-model="dataJSON.Amount"
+                           placeholder="Amount"
+                           required />
+                    <span ng-show="dataJSON.submitted && form.Amount.$error.required" class="text-danger">
+                        * Amount is required
+                    </span>
+                </div>
+
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.PayPeriodID.$error.required }">
+                    <label>Pay Period * :</label>
+                    <select ng-model="dataJSON.PayPeriodID" class="form-control" required name="PayPeriodID">
+                        <option value="">-- Select Pay Period --</option>
+                        <option ng-repeat="res in refData.payPeriodList" value="{{res.ID}}">{{res.StartDate | stringToDate : "MM/dd/yyyy" }} - {{res.EndDate | stringToDate : "MM/dd/yyyy" }}</option>
+                    </select>
+                    <span ng-show="dataJSON.submitted && form.PayPeriodID.$error.required" class="text-danger">
+                        * Pay Period is required
+                    </span>
+                </div>
+
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.SpendCategoryID.$error.required }">
+                    <label>Spend Category * :</label>
+                    <select ng-model="dataJSON.SpendCategoryID" class="form-control" required name="SpendCategoryID">
+                        <option value="">-- Select Spend Category --</option>
+                        <option ng-repeat="res in refData.spendCategoryList" value="{{res.ID}}">{{res.Name}}</option>
+                    </select>
+                    <span ng-show="dataJSON.submitted && form.SpendCategoryID.$error.required" class="text-danger">
+                        * Spend Category is required
+                    </span>
+                </div>
+                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.CurrentStatusID.$error.required }">
+                    <label>Current Status * :</label>
+                    <select ng-model="dataJSON.CurrentStatusID" class="form-control" required name="CurrentStatusID">
+                        <option value="">-- Select Current Status --</option>
+                        <option ng-repeat="res in refData.currentStatusList" value="{{res.ID}}">{{res.Name}}</option>
+                    </select>
+                    <span ng-show="dataJSON.submitted && form.CurrentStatusID.$error.required" class="text-danger">
+                        * Customer is required
+                    </span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Expense Documents * :<a class="text-navy" style="margin-left: 5px;" ng-click="fnExpenseDocumentUpload(false)"> <i class="fa fa-plus-circle"></i></a></label>
+                    
+                    <!--<input type="button" ng-click="uploadFiles()" value="Upload" />-->
+                    <div ng-if="expenseDocumentUpload == true">
+                        <div drop-zone custom="true" id="Documents" ng-model="ExpenseDocument" class="one btn btn-default"></div>
+                        <div ng-repeat="file in ExpenseDocument track by $index">
+
+
+                            <div class="ibox-tools pull-left small">
+                                <i class="fa fa fa-dot-circle-o"></i> <a target="_blank" style="text-decoration:underline; color:darkblue" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a> <a ng-click="removeFile(ExpenseDocument,$index)"> <i class="fa fa-trash"></i></a>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group"><button ng-disabled="ExpenseDocument.length == 0" ng-click="fnExpenseDocumentUpload(true);" class="btn btn-primary">Upload</button>&nbsp;&nbsp;<a class="btn btn-primary btn-white center" ng-click="close('expenseDocumentUpload')">Cancel</a></div>
+                    </div>
+
+
+
+                    <div ng-if="expenseDocumentUpload != true">
+
+                        <div class="col-lg-12 ibox-tools pull-left ">
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th>Type</th>
+                                        <th>Actions</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="file in dataJSON.Files track by $index">
+
+                                        <td style="width:80%; float:left">
+                                            <a target="_blank" style="text-decoration:underline; color:darkblue;float:left" href="{{baseUrl+file.FilePath}}">{{file.FileName}}</a>
+                                        </td>
+                                        <td style="width:10%">
+                                            Document
+                                        </td>
+                                        <td style="width:10%">
+                                            <a ng-click="removeFile(dataJSON.Files,$index)"> <i class="fa fa-trash"></i> </a>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-lg-12">
+                    <button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>
+                    <button type="submit" ng-click="close()" class="btn btn-white">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

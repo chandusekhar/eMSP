@@ -116,6 +116,8 @@ namespace eMSP.WebAPI.Controllers.Timesheet
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "create", userId);
 
+                model.Files.All(x => { Helpers.Helpers.AddBaseProperties(x, "create", userId); return true; });
+
                 return Ok(await CandidateService.InsertCandidateExpenseSpent(model));
             }
             catch (Exception)
@@ -137,6 +139,8 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "update", userId);
+
+                model.Files.All(x => { Helpers.Helpers.AddBaseProperties(x, "create", userId); return true; });
 
                 return Ok(await CandidateService.UpdateCandidateExpenseSpent(model));
             }

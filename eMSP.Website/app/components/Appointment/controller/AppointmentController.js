@@ -107,6 +107,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
         if (!flag) {
             $scope.AppointmentSlot = $scope.dataJSON.Slots[index];
             $scope.AppointmentSlot.index = index;
+            $scope.dataJSON.dateRange = { startDate: new Date($scope.AppointmentSlot.StartDate), endDate: new Date($scope.AppointmentSlot.EndDate) };
             $scope.slotEdit = true;
         }
         else {

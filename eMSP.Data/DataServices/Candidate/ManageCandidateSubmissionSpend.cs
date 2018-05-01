@@ -27,6 +27,12 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles)
+                                                  .Include(a => a.tblMSPPayPeriod)
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles.Select(b => b.tblFile))
+                                                  .Include(a => a.tblMSPSpendCategory)
+                                                  .Include(a => a.tblTimesheetStatu)
+                                                  .Include(a => a.tblCandidatePlacement)
                                                   .Where(x => x.ID == Id).SingleOrDefault());
 
                 }
@@ -44,6 +50,12 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles)
+                                                  .Include(a => a.tblMSPPayPeriod)
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles.Select(b => b.tblFile))
+                                                  .Include(a => a.tblMSPSpendCategory)
+                                                  .Include(a => a.tblTimesheetStatu)
+                                                  .Include(a => a.tblCandidatePlacement)
                                                   .Where(x => x.PayPeriodID == PayPeriodId).ToList());
 
                 }
@@ -61,6 +73,12 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Include(a=>a.tblCandidateSubmissionSpendFiles)
+                                                  .Include(a=>a.tblMSPPayPeriod)
+                                                  .Include(a=>a.tblCandidateSubmissionSpendFiles.Select(b=>b.tblFile))
+                                                  .Include(a=>a.tblMSPSpendCategory)
+                                                  .Include(a=>a.tblTimesheetStatu)
+                                                  .Include(a=>a.tblCandidatePlacement)
                                                   .Where(x => x.PlacementID == PlacementId).ToList());
 
                 }

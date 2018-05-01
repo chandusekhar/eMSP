@@ -53,8 +53,13 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
+                Files = data.tblCandidateSubmissionSpendFiles?.Select(x => x?.tblFile?.ConvertToCandidateFileModel()).ToList(),
+                MSPPayperiod = data.tblMSPPayPeriod?.ConvertToMSPPayPeriodViewModel(),
+                MSPSpendCategory = data?.tblMSPSpendCategory?.ConvertToMSPSpendCategoryViewModel(),
+                TimesheetStatus = data?.tblTimesheetStatu?.ConvertToTimesheetStatusViewModel(),
+                CandidatePlacement = data?.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
                 CandidateSubmissionSpendFiles = data?.tblCandidateSubmissionSpendFiles?
-                                                        .Select(x => x.ConvertToCandidateSubmissionSpendFilesViewModel())
+                                                        .Select(x => x?.ConvertToCandidateSubmissionSpendFilesViewModel())
                                                         .ToList()
             };
         }

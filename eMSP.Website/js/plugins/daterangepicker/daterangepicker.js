@@ -20,7 +20,7 @@
             jQuery = require('jquery');
         } catch (err) {
             jQuery = window.jQuery;
-            if (!jQuery) throw new Error('jQuery dependency not found');
+            if (!jQuery) throw new Error('jQuery dependency not found'); 
         }
 
         factory(root, exports, momentjs, jQuery);

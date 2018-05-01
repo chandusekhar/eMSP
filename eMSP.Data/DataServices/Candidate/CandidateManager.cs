@@ -120,7 +120,7 @@ namespace eMSP.Data.DataServices.Candidate
 
                 return res.Select(x => x.ConvertToCandidateSubmissionSpendViewModel()).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -237,12 +237,24 @@ namespace eMSP.Data.DataServices.Candidate
         public async Task<CandidateSubmissionSpendViewModel> InsertCandidateExpenseSpent(CandidateSubmissionSpendViewModel data)
         {
             try
-            {                
-                tblCandidateSubmissionSpend res = await Task.Run(() => ManageCandidateSubmissionSpend.InsertCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));                
+            {
+                foreach (var a in data.Files)
+                {
+                    CandidateSubmissionSpendFilesViewModel submittedfiles = new CandidateSubmissionSpendFilesViewModel();
+                    var file = await Task.Run(() => ManageCandidate.InsertFiles(a.ConvertTotblFile()));
+                    submittedfiles.FileID = file.ID;
+                    submittedfiles.createdUserID = a.createdUserID;
+                    submittedfiles.createdTimestamp = a.createdTimestamp;
+                    submittedfiles.updatedTimestamp = a.updatedTimestamp;
+                    submittedfiles.updatedUserID = a.updatedUserID;
+                    data.CandidateSubmissionSpendFiles.Add(submittedfiles);
+                }
 
+                tblCandidateSubmissionSpend res = await Task.Run(() => ManageCandidateSubmissionSpend.InsertCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));
+                
                 return res.ConvertToCandidateSubmissionSpendViewModel();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -335,7 +347,28 @@ namespace eMSP.Data.DataServices.Candidate
         {
             try
             {
-                await Task.Run(() => ManageCandidateSubmissionSpend.UpdateCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));
+                foreach (var a in data.Files)
+                {
+                    CandidateSubmissionSpendFilesViewModel submittedfiles = new CandidateSubmissionSpendFilesViewModel();
+                    var file = await Task.Run(() => ManageCandidate.InsertFiles(a.ConvertTotblFile()));
+                    submittedfiles.FileID = file.ID;
+                    submittedfiles.createdUserID = a.createdUserID;
+                    submittedfiles.createdTimestamp = a.createdTimestamp;
+                    submittedfiles.updatedTimestamp = a.updatedTimestamp;
+                    submittedfiles.updatedUserID = a.updatedUserID;
+                    data.CandidateSubmissionSpendFiles.Add(submittedfiles);
+                }
+
+                await Task.Run(() => ManageCandidateSubmissionSpendFiles.DeleteCandidateSubmissionSpendFiles(data.ID));
+
+                data.CandidateSubmissionSpendFiles.All(x => { x.SpendID = data.ID; return true; });
+
+                tblCandidateSubmissionSpend res = await Task.Run(() => ManageCandidateSubmissionSpend.UpdateCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));                
+
+                
+
+                List<tblCandidateSubmissionSpendFile> submittedFiles = await Task.Run(() => ManageCandidateSubmissionSpendFiles.InsertCandidateSubmissionSpendFiles(data.CandidateSubmissionSpendFiles.Select(x => x.ConvertTotblCandidateSubmissionSpendFile()).ToList()));
+                data.CandidateSubmissionSpendFiles = submittedFiles.Select(x => x.ConvertToCandidateSubmissionSpendFilesViewModel()).ToList();
 
                 return data;
             }

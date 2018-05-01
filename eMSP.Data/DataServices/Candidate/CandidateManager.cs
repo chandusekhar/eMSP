@@ -126,6 +126,34 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<List<CandidatePlacementViewModel>> GetPlacedCandidates()
+        {
+            try
+            {
+                List<tblCandidatePlacement> res = await Task.Run(() => ManageCandidatePlacement.GetAllPlacements());
+
+                return res.Select(x => x.ConvertToCandidatePlacementViewModel()).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidatePlacementViewModel> GetPlacementDetails(long PlacementId)
+        {
+            try
+            {
+                tblCandidatePlacement res = await Task.Run(() => ManageCandidatePlacement.GetPlacementDetails(PlacementId));
+
+                return res.ConvertToCandidatePlacementViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         #endregion
 
@@ -219,6 +247,20 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
+        public async Task<CandidatePlacementViewModel> CreateCandidatePlacement(CandidatePlacementViewModel data)
+        {
+            try
+            {
+                tblCandidatePlacement res = await Task.Run(() => ManageCandidatePlacement.InsertCandidatePlacement(data.ConvertTotblCandidatePlacement()));
+
+                return res.ConvertToCandidatePlacementViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Update
@@ -294,6 +336,20 @@ namespace eMSP.Data.DataServices.Candidate
             try
             {
                 await Task.Run(() => ManageCandidateSubmissionSpend.UpdateCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));
+
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidatePlacementViewModel> UpdateCandidatePlacement(CandidatePlacementViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidatePlacement.UpdateCandidatePlacement(data.ConvertTotblCandidatePlacement()));
 
                 return data;
             }

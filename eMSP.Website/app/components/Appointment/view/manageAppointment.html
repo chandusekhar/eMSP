@@ -1,0 +1,90 @@
+﻿<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#/dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="ibox-tools">
+                            <a ng-click="model(false,null)" class="btn btn-primary">Create</a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div ng-if="appointmentList.length > 0" class="row">
+                            <div class="project-list">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Name</th>
+                                            <th>Details</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Slots</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="v in appointmentList" id="row_{{v.ID}}">
+                                            <td class="project-actions">
+
+                                                <span style="float:left">AP000{{v.ID}}</span>
+
+                                            </td>
+                                            <td class="project-title">
+                                                <span style="float:left">{{v.Name}}</span>
+                                            </td>
+                                            <td class="project-people">
+                                                <span style="float:left">{{v.Details}}</span>
+                                            </td>
+                                            <td class="project-people">
+                                                <span style="float:left">{{v.Type.Name}}</span>
+                                            </td>
+                                            <td class="project-actions" width="15%">
+                                                <span style="float:left">{{v.Status.Name}}</span>
+                                            </td>
+                                            <td class="project-actions">
+                                                <span style="float:left">
+                                                    <small ng-repeat="s in v.Slots">{{s.StartDate | stringToDate : "MM/dd/yyyy  h:mma" }} - {{s.EndDate | stringToDate : "MM/dd/yyyy  h:mma" }} <br /></small>
+                                                </span>
+                                            </td>
+
+                                            <td class="project-status center">
+                                                <a ng-click="model(true,v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div ng-if="!appointmentList.length > 0">
+                            There is no Appointment Available for this Submission.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- End wrapper-->

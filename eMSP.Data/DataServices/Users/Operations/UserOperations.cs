@@ -1,4 +1,6 @@
-﻿using eMSP.DataModel;
+﻿using eMSP.Data.Extensions;
+using eMSP.DataModel;
+using eMSP.ViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -186,6 +188,46 @@ namespace eMSP.Data.DataServices.Users
 
             }
             return data;
+        }
+
+        internal static async Task<List<UserCreateModel>> GetAllUsers()
+        {
+            List<tblUserProfile> data = null;
+            List<UserCreateModel> res = null;
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    res = new List<UserCreateModel>();
+                    data = await db.tblUserProfiles
+                                   .Include(a => a.tblMSPUsers)
+                                   .Join(db.tblMSPUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
+                                   .Where(x => x.b.IsDeleted == false)
+                                   .Select(x => x.a)
+                                   .OrderByDescending(x => x.UserID).ToListAsync();
+
+                    res.AddRange(data.Select(a => a.ConvertToUser()).ToList());
+
+                    data = await db.tblUserProfiles                                  
+                                   .Include(a => a.tblCustomerUsers)
+                                   .Join(db.tblCustomerUsers, a => a.UserID, b => b.UserID, (a, b) => new { a, b })
+                                   .Where(x => x.b.IsDeleted == false)
+                                   .Select(x => x.a)
+                                   .OrderByDescending(x => x.UserID)
+                                   .ToListAsync();
+
+                    res.AddRange(data.Select(a => a.ConvertToUser()).ToList());
+
+
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+            return res;
         }
 
         internal static async Task<List<tblUserProfile>> GetAllUsers(long Id, string companyType)

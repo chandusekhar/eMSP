@@ -25,7 +25,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.dataJSON.companyId = $scope.res.id;
             $scope.loadUsers($scope.res.id);
 
-            if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
+            if ($scope.configJSON.companyType === 'Supplier' || $scope.configJSON.companyType === 'Customer') {
                 $scope.loadCandidates($scope.res.id);
                 $scope.loadJobs();
             }
@@ -109,7 +109,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.loadUsers(data.id);
 
             $scope.dataJSON.id = data.id;
-            if ($scope.configJSON.companyType == 'Supplier' || $scope.configJSON.companyType == 'Customer') {
+            if ($scope.configJSON.companyType === 'Supplier' || $scope.configJSON.companyType === 'Customer') {
                 localStorageService.set('supplierId', data.id);
                 $scope.loadCandidates(data.id);
                 $scope.loadJobs();
@@ -172,7 +172,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.modalB = function (model) {
         $scope.editform = false;
         $scope.bdataJSON = {};
-        if (model.branchId == null) {
+        if (model.branchId === null) {
             $scope.bdataJSON.locationId = model.id;
             $scope.bdataJSON.locationName = model.locationName;
         } else {

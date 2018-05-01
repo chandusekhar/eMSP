@@ -111,6 +111,23 @@ namespace eMSP.WebAPI.Controllers.User
             }
         }
 
+        [Route("getAllUsers")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.SupplierUserFull + "," + ApplicationRoles.CustomerUserFull + "," + ApplicationRoles.MSPUserFull + "," + ApplicationRoles.SupplierUserView + "," + ApplicationRoles.CustomerUserView + "," + ApplicationRoles.MSPUserView)]
+        [ResponseType(typeof(List<UserModel>))]
+        public async Task<IHttpActionResult> GetAllUsers()
+        {
+            try
+            {
+                return Ok(await dao.GetAllUsers());
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         #endregion
 

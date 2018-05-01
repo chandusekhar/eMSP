@@ -15,7 +15,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.dataJSON.CandidateFile = [];
     $scope.dataJSON.Candidate = {};
     $scope.dataJSON.Contact = {};
-    $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
+    $scope.IsMangePage = $scope.formAction === "Manage" ? true : false;
     $scope.compId = 1;
     $scope.refData.userViewType = "Card";
     $scope.baseUrl = ngAuthSettings.contentURL;
@@ -42,7 +42,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
     $scope.loadIndustrySkills = function (industryId) {
 
-        if (industryId && industryId.length && industryId.length >0 ) {
+        if (industryId && industryId.length && industryId.length > 0) {
             var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLINDUSTRYSKILLSURL, { "industryIds": industryId });
             apires.then(function (data) {
                 angular.extend($scope.refData.industrySkillsList, data);
@@ -50,8 +50,8 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
             });
         }
         else if (industryId && !industryId.skillList) {
-            var apires = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
-            apires.then(function (data) {
+            var apiresn = apiCall.post(APP_CONSTANTS.URL.INDUSTRY.GETALLSKILLSURL + industryId, { "industryId": industryId });
+            apiresn.then(function (data) {
                 angular.extend($scope.refData.industrySkillsList, data);
                 $scope.LoadIndustrySkillsData();
             });
@@ -73,7 +73,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
         angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
             angular.forEach($scope.refData.industryList, function (value, key) {
-                if (value.id == v) {
+                if (value.id === v) {
                     $scope.dataJSON.CandidateIndustries[k] = value;
                 }
             });
@@ -98,7 +98,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
         angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
             angular.forEach($scope.refData.industrySkillsList, function (value, key) {
-                if (value.id == v) {
+                if (value.id === v) {
                     $scope.dataJSON.CandidateSkills[k] = value;
                 }
             });
@@ -107,7 +107,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     }
 
     $scope.CreateIndustrySkillsData = function () {
-        debugger;
+
         angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
 
             if (v.id) {
@@ -143,7 +143,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         $scope.dataJSON.CandidateIndustryIds = angular.copy($scope.dataJSON.CandidateIndustries);
         $scope.LoadIndustriesData();
         $scope.loadIndustrySkills($scope.dataJSON.CandidateIndustryIds);
-        
+
 
     }
 
@@ -170,8 +170,8 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         angular.forEach($scope.dataJSON.CandidateContact, function (con) {
             con.FirstName = $scope.dataJSON.Candidate.FirstName;
             con.LastName = $scope.dataJSON.Candidate.LastName;
-        });  
-        
+        });
+
 
         $scope.CreateIndustriesData();
         $scope.CreateIndustrySkillsData();
@@ -185,19 +185,19 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                     //$scope.cancel();
                     toaster.warning({ body: "Data Updated Successfully." });
 
-                    if ($scope.configJSON.successURL == "candidate.manageCandidate") {
+                    if ($scope.configJSON.successURL === "candidate.manageCandidate") {
                         $state.reload();
                     }
                     else {
                         $state.go($scope.configJSON.successURL);
 
                     }
-                    
+
                 });
             }
             else {
-                var res = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.CREATEURL, $scope.dataJSON);
-                res.then(function (data) {
+                var resn = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.CREATEURL, $scope.dataJSON);
+                resn.then(function (data) {
                     $scope.dataJSON = data;
                     toaster.warning({ body: "Data Created Successfully." });
                     //$scope.cancel();
@@ -232,14 +232,14 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {                
+            if ($scope.dataJSON.Contact.IsPrimary === true) {
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
                 });
             }
             $scope.dataJSON.CandidateContact.push($scope.dataJSON.Contact);
 
-           
+
             console.log($scope.dataJSON.CandidateFile);
             $scope.contact = false;
         }
@@ -254,7 +254,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {                
+            if ($scope.dataJSON.Contact.IsPrimary === true) {
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
                 });
@@ -278,7 +278,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
             angular.forEach($scope.CandidateDocs, function (file) {
                 file.FileName = $scope.CandidateDocument.docFileName;
                 file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
-                file.FileTypeId = 6;
+                file.FileTypeId = 10007;
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateDocs = [];
@@ -312,7 +312,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
             $scope[flag] = false;
         }
-        
+
 
     }
 }
@@ -322,7 +322,7 @@ angular.module('eMSPApp')
         function (ngAuthSettings) {
 
             var config = {
-                template: function (element, attributes) {                   
+                template: function (element, attributes) {
                     var temp = '<label class="drop-zone">' +
                         '<input type="file" multiple />' +
                         ' <p style="position:relative">Drop files here <span>(or click to upload)</span></p>' +

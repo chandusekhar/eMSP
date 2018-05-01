@@ -34,7 +34,7 @@ namespace eMSP.WebAPI.Controllers
         #region Appointment Type
 
         [Route("type/getlist")]
-        [HttpPost]
+        [HttpGet]
         [ResponseType(typeof(List<AppointmentTypeViewModel>))]
         public async Task<IHttpActionResult> GetTypeList()
         {
@@ -102,7 +102,7 @@ namespace eMSP.WebAPI.Controllers
         #region Appointment Status
 
         [Route("status/getlist")]
-        [HttpPost]
+        [HttpGet]
         [ResponseType(typeof(List<AppointmentStatusViewModel>))]
         public async Task<IHttpActionResult> GetStatusList()
         {
@@ -142,7 +142,7 @@ namespace eMSP.WebAPI.Controllers
         {
             try
             {
-                return Ok((await _service.Get(id)));
+                return Ok((await _service.GetList(id)));
             }
             catch (Exception)
             {
@@ -159,6 +159,21 @@ namespace eMSP.WebAPI.Controllers
             {
                 string userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(data, "create", userId);
+                foreach (var con in data.Slots)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
+                foreach (var con in data.Users)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
+                foreach (var con in data.UserComments)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
+                }
+
                 return Ok((await _service.Save(data)));
             }
             catch (Exception)
@@ -170,13 +185,27 @@ namespace eMSP.WebAPI.Controllers
         [Route("update")]
         [HttpPost]
         [ResponseType(typeof(CandidateSubmissionAppointmentViewModel))]
-        public async Task<IHttpActionResult> Update(long id, CandidateSubmissionAppointmentViewModel data)
+        public async Task<IHttpActionResult> Update(CandidateSubmissionAppointmentViewModel data)
         {
             try
             {
                 string userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(data, "update", userId);
-                return Ok((await _service.Update(id, data, userId)));
+                foreach (var con in data.Slots)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                }
+
+                foreach (var con in data.Users)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                }
+
+                foreach (var con in data.UserComments)
+                {
+                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                }
+                return Ok((await _service.Update(data.ID, data, userId)));
             }
             catch (Exception)
             {

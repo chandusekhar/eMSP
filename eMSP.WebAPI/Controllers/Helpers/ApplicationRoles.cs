@@ -76,5 +76,9 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string MSPPayPeriodView = "MSPPayPeriod View";
         public const string MSPPayPeriodCreate = "MSPPayPeriod Create";
         public const string MSPPayPeriodFull = "MSPPayPeriod Full";
+
+        public const string AppointmentFull = "Appointment Full";
+        public const string AppointmentCreate = "Appointment Create";
+        public const string AppointentView = "Appointment View";
     }
 }

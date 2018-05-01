@@ -246,16 +246,16 @@ namespace eMSP.Data.DataServices.Appointment
                     Details = appointment.Details,
                     isActive = appointment.IsActive,
                     createdTimestamp = appointment.CreatedTimestamp,
-                    Status = new AppointmentStatusViewModel()
-                    {
-                        ID = appointment.tblAppointmentStatu.ID,
-                        Name = appointment.tblAppointmentStatu.Name
-                    },
-                    Type = new AppointmentTypeViewModel()
-                    {
-                        ID = appointment.tblAppointmentType.ID,
-                        Name = appointment.tblAppointmentType.Name
-                    },
+                    //Status = new AppointmentStatusViewModel()
+                    //{
+                    //    ID = appointment.tblAppointmentStatu != null ? appointment.tblAppointmentStatu.ID : null,
+                    //    Name = appointment.tblAppointmentStatu.Name
+                    //},
+                    //Type = new AppointmentTypeViewModel()
+                    //{
+                    //    ID = appointment.tblAppointmentType.ID,
+                    //    Name = appointment.tblAppointmentType.Name
+                    //},
                     Slots = appointment.tblCandidateSubmissionAppointmentSlots.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
                     {
                         ID = x.ID,

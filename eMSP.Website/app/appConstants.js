@@ -53,6 +53,7 @@ angular.module('eMSPApp')
             },
             USER: {
                 GETALLUSERSURL: "api/user/getUsers",
+                GETALLCUSERSURL: "api/user/getAllUsers",
                 GETUSERURL: "api/user/getUser",
                 CREATEUSRURL: "api/user/creatUser",
                 UPDATEUSERURL: "api/user/updateUser",
@@ -92,7 +93,15 @@ angular.module('eMSPApp')
                 GETALLAPPOINTMENTTYPEURL: "api/Appointment/type/getlist",
                 GETAPPOINTMENTTYPEURL: "api/Appointment/type/get?id=",
                 CREATEAPPOINTMENTTYPEURL: "api/Appointment/type/save",
-                UPDATEAPPOINTMENTTYPEURL: "api/Appointment/type/update"
+                UPDATEAPPOINTMENTTYPEURL: "api/Appointment/type/update",
+                GETALLAPPOINTMENTSTATUSURL: "api/Appointment/status/getlist",
+                GETAPPOINTMENTSTATUSURL: "api/Appointment/type/get?id=",
+                CREATEAPPOINTMENTSTATUSURL: "api/Appointment/type/save",
+                UPDATEAPPOINTMENTSTATUSURL: "api/Appointment/type/update",
+                GETALLAPPOINTMENTURL: "api/Appointment/getlist?id=",
+                GETAPPOINTMENTURL: "api/Appointment/get?id=",
+                CREATEAPPOINTMENTURL: "api/Appointment/save",
+                UPDATEAPPOINTMENTURL: "api/Appointment/update"
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",

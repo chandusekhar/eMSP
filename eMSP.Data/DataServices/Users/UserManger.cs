@@ -84,7 +84,21 @@ namespace eMSP.Data.DataServices.Users
                 throw;
             }
         }
+        public async Task<List<UserCreateModel>> GetAllUsers()
+        {
+            try
+            {
 
+
+                return await Task.Run(() => UserOperations.GetAllUsers());
+                
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

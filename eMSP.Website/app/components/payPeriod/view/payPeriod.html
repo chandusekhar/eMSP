@@ -1,0 +1,153 @@
+<style>
+    .clockpicker-popover {
+        z-index: 999999 !important;
+    }
+</style>
+
+<div class="row wrapper">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5 ng-if="!edit">{{configJSON.titleFormCreate}}</h5>
+            <h5 ng-if="edit">{{configJSON.titleFormEdit}}</h5>
+        </div>
+        <div class="ibox-content">
+            <form name="form" novalidate>
+
+                <div class="form-group col-lg-6" ng-class="{ 'has-error': refData.submitted && form.AppintmentTypeID.$error.required }">
+                    <label>Appointment Type* :</label>
+                    <select ng-model="dataJSON.AppintmentTypeID" class="form-control" required name="AppintmentTypeID">
+                        <option value="">Appointment Type</option>
+                        <option ng-repeat="res in refData.appointmentTypeList" value="{{res.ID}}">{{res.Name}}</option>
+                    </select>
+                    <span ng-show="refData.submitted && form.AppintmentTypeID.$error.required" class="help-block">
+                        * Appointment Type is required
+                    </span>
+                </div>
+
+                <div class="form-group col-lg-6 " ng-class="{ 'has-error': refData.submitted && form.AppointmentStatusID.$error.required }">
+                    <label>Appointment Status* :</label>
+                    <select ng-model="dataJSON.AppointmentStatusID" class="form-control" required name="AppointmentStatusID">
+                        <option value="">Appointment Type</option>
+                        <option ng-repeat="res in refData.appointmentStatusList" value="{{res.ID}}">{{res.Name}}</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group col-lg-12" ng-class="{ 'has-error': refData.submitted && form.Name.$error.required }">
+                    <label>Name* :</label>
+                    <input type="text" class="form-control" name="Name"
+                           ng-model="dataJSON.Name"
+                           placeholder="Name" required />
+                    <span ng-show="refData.submitted && form.Name.$error.required" class="help-block">
+                        * Appointment Type is required
+                    </span>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label>Details* :</label>
+                    <textarea type="text" class="form-control"
+                              ng-model="dataJSON.Details"
+                              placeholder="Appointment Details" name="Description" />
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': refData.submitted && form.Name.$error.required }">
+
+                    <div>
+                        <div>
+                            <label>Slots* :</label><a class="text-navy" style="margin-left: 5px;" ng-click="fnAddEditSlot(true,0)">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <div ng-hide="create">
+                                <div class="col-lg-12 ibox-tools pull-left ">
+
+                                    <table style="font-size:small" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Start</th>
+                                                <th>End</th>
+                                                <th>Actions</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="con in dataJSON.Slots track by $index">
+
+                                                <td>{{$index + 1}}</td>
+                                                <td style="width:45%">
+                                                    <span style="float:left">{{  con.StartDate | stringToDate : "MM/dd/yyyy  h:mma" }}</span>
+                                                </td>
+
+                                                <td style="width:45%">
+                                                    <span style="float:left">{{ con.EndDate | stringToDate : "MM/dd/yyyy  h:mma" }}</span>
+                                                </td>
+                                                <td style="width:10%">
+                                                    <span ng-click="fnAddEditSlot(false,$index)" class="text-navy">
+                                                        <span class="fa fa-pencil"></span>
+                                                    </span><a ng-click="fnRemoveSlot($index)"> <i class="fa fa-trash"></i> </a>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div ng-show="create === true">
+
+                                <ng-form name="form1" novalidate>
+                                    <!-- Date range Job Start and End Date -->
+                                    <div class="form-group col-md-12" ng-class="{ 'has-error': form1.$invalid && form1.date.$error.required }">
+                                        <label>Select Start and End date * :</label>
+                                        <div class="input-group date">
+                                            <input type="hidden" ng-model="AppointmentSlot.StartDate" />
+                                            <input type="hidden" ng-model="AppointmentSlot.EndDate" />
+
+                                            <input date-range-picker type="datetime" class="form-control date-picker" name="date"
+                                                   ng-model="dataJSON.dateRange"
+                                                   placeholder="Start Date & End Date"
+                                                   timePicker="true"
+                                                   format="MM/DD/YYYY h:mma"
+                                                   required />
+                                            <span class="input-group-addon" data-toggle="datepicker"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                        <span ng-show="form1.$invalid && form.date.$error.required" class="text-danger">
+                                            * Select Start and End date is required
+                                        </span>
+                                    </div>
+
+                                    <div style="margin-top:20px" class="col-lg-12">
+                                        <button type="submit" ng-hide="slotEdit" ng-click="addEditSlot(form1,true)" class="btn btn-primary">Add</button>
+                                        <button type="submit" ng-show="slotEdit" ng-click="addEditSlot(form1,false)" class="btn btn-primary">Update</button>
+                                        <button type="submit" ng-click="cancel()" class="btn btn-white">Cancel</button>
+                                    </div>
+                                </ng-form>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <label>User* :</label>
+                    <ui-select multiple ng-model="dataJSON.Users" theme="bootstrap" class="form-control" ng-disabled="disabled">
+                        <ui-select-match placeholder="Select Users...">{{$item.firstName +' '+ $item.lastName}}</ui-select-match>
+                        <ui-select-choices repeat="res as res in refData.usersList | filter:$select.search">
+                            {{res.firstName +' '+ res.lastName}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="col-lg-12">
+                    <button type="submit" ng-click="submit(form)" class="btn btn-primary">{{formAction}}</button>
+                    <button type="submit" ng-click="close()" class="btn btn-white">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

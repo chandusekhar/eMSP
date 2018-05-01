@@ -1,10 +1,12 @@
 ﻿using eMSP.Data.DataServices.MSP;
 using eMSP.Data.DataServices.Shared;
+using eMSP.ViewModel.Candidate;
 using eMSP.ViewModel.MSP;
 using eMSP.ViewModel.Shared;
 using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -13,7 +15,6 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.Timesheet
 {
     [RoutePrefix("api/timesheet")]
-    [Queryable]
     [AllowAnonymous]
     [Authorize(Roles = ApplicationRoles.MSPPayPeriodFull)]
     public class TimesheetController : ApiController
@@ -21,6 +22,7 @@ namespace eMSP.WebAPI.Controllers.Timesheet
         #region Intialisation
 
         private MSPManager MSPManagerService;
+        
         string userId;
 
         public TimesheetController()
@@ -62,7 +64,23 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             {
                 throw;
             }
-        }       
+        }
+
+        [Route("getTimesheetStatus")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.TimesheetStatusView)]
+        [ResponseType(typeof(List<TimesheetStatusViewModel>))]
+        public async Task<IHttpActionResult> GetTimesheetStatus()
+        {
+            try
+            {
+                return Ok(await MSPManagerService.GetTimesheetStatus());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

@@ -1,8 +1,13 @@
-﻿using eMSP.Data.DataServices.Shared;
+﻿using eMSP.Data.DataServices.Candidate;
+using eMSP.Data.DataServices.MSP;
+using eMSP.Data.DataServices.Shared;
+using eMSP.ViewModel.Candidate;
+using eMSP.ViewModel.MSP;
 using eMSP.ViewModel.Shared;
 using eMSP.WebAPI.Controllers.Helpers;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -11,37 +16,35 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.Timesheet
 {
     [RoutePrefix("api/expenses")]
-    [Queryable]
     [AllowAnonymous]
-    [Authorize(Roles = ApplicationRoles.CountryFull)]
+    [Authorize(Roles = ApplicationRoles.ExpenseSpentFull)]
     public class ExpensesController : ApiController
     {
         #region Intialisation
 
-        private CountryManager CountryService;
-        private StateManager StateService;
+        private CandidateManager CandidateService;
+        private MSPManager MSPService;
         string userId;
 
         public ExpensesController()
         {
-            CountryService = new CountryManager();
-            StateService = new StateManager();
+            CandidateService = new CandidateManager();
+            MSPService = new MSPManager();
         }
 
         #endregion
 
         #region Get
 
-        [Route("getCountry")]
+        [Route("getExpenseDetails")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryView)]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> GetCountry(int id)
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentView)]
+        [ResponseType(typeof(CandidateSubmissionSpendViewModel))]
+        public async Task<IHttpActionResult> GetExpense(long ExpenseId)
         {
             try
             {
-                long Id = Convert.ToInt64(id);
-                return Ok(await CountryService.GetCountry(Id));
+                return Ok(await CandidateService.GetExpenseDetails(ExpenseId));
             }
             catch (Exception)
             {
@@ -49,15 +52,15 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
-        [Route("getAllCountries")]
-        [HttpGet]
-        [Authorize(Roles = ApplicationRoles.CountryView)]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> GetAllCountries()
+        [Route("getCandidateExpenseSpend")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentView)]
+        [ResponseType(typeof(List<CandidateSubmissionSpendViewModel>))]
+        public async Task<IHttpActionResult> GetCandidateExpenseSpend(long PlacementId)
         {
             try
-            {
-                return Ok((await CountryService.GetAllCountries()).AsQueryable());
+            {                
+                return Ok(await CandidateService.GetCandidateExpenseSpend(PlacementId));
             }
             catch (Exception)
             {
@@ -65,16 +68,15 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
-        [Route("getState")]
+        [Route("getPayperiodExpenceSubmitted")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryView)]
-        [ResponseType(typeof(StateCreateModel))]
-        public async Task<IHttpActionResult> GetState(int id)
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentView)]
+        [ResponseType(typeof(List<CandidateSubmissionSpendViewModel>))]
+        public async Task<IHttpActionResult> GetPayperiodExpenseSubmitted(long PayperiodId)
         {
             try
             {
-                long Id = Convert.ToInt64(id);
-                return Ok(await StateService.GetState(Id));
+                return Ok(await MSPService.GetPayperiodExpenseSpends(PayperiodId));
             }
             catch (Exception)
             {
@@ -82,58 +84,39 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
-        [Route("getAllStates")]
+        [Route("getMSPSpendCategory")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryView)]
-        [ResponseType(typeof(StateCreateModel))]
-        public async Task<IHttpActionResult> GetAllStates(int countryId)
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentView)]
+        [ResponseType(typeof(List<MSPSpendCategoryViewModel>))]
+        public async Task<IHttpActionResult> GetMSPSpendCategory()
         {
             try
             {
-                long Id = Convert.ToInt64(countryId);
-                return Ok((await StateService.GetAllStates(Id)).AsQueryable());
+                return Ok(await MSPService.GetMSPSpendCategory());
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        
 
         #endregion
 
         #region Insert
 
-        [Route("insertCountry")]
+        [Route("insertCandidateSpend")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryCreate)]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> InsertCountry(CountryCreateModel model)
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentCreate)]
+        [ResponseType(typeof(CandidateSubmissionSpendViewModel))]
+        public async Task<IHttpActionResult> InsertCandidateSpend(CandidateSubmissionSpendViewModel model)
         {
             try
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "create", userId);
 
-                return Ok(await CountryService.CreateCountry(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [Route("insertState")]
-        [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryCreate)]
-        [ResponseType(typeof(StateCreateModel))]
-        public async Task<IHttpActionResult> InsertState(StateCreateModel model)
-        {
-            try
-            {
-                userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "create", userId);
-
-                return Ok(await StateService.CreateState(model));
+                return Ok(await CandidateService.InsertCandidateExpenseSpent(model));
             }
             catch (Exception)
             {
@@ -144,18 +127,18 @@ namespace eMSP.WebAPI.Controllers.Timesheet
         #endregion
 
         #region update
-        [Route("updateCountry")]
+        [Route("updateCandidateSpend")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryCreate)]
-        [ResponseType(typeof(CountryCreateModel))]
-        public async Task<IHttpActionResult> UpdateCountry(CountryCreateModel model)
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentCreate)]
+        [ResponseType(typeof(CandidateSubmissionSpendViewModel))]
+        public async Task<IHttpActionResult> UpdateCandidateSpend(CandidateSubmissionSpendViewModel model)
         {
             try
             {
                 userId = User.Identity.GetUserId();
                 Helpers.Helpers.AddBaseProperties(model, "update", userId);
 
-                return Ok(await CountryService.UpdateCountry(model));
+                return Ok(await CandidateService.UpdateCandidateExpenseSpent(model));
             }
             catch (Exception)
             {
@@ -163,24 +146,7 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
-        [Route("updateState")]
-        [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CountryCreate)]
-        [ResponseType(typeof(StateCreateModel))]
-        public async Task<IHttpActionResult> UpdateState(StateCreateModel model)
-        {
-            try
-            {
-                userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "update", userId);
-
-                return Ok(await StateService.UpdateState(model));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+       
         #endregion
 
     }

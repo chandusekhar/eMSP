@@ -80,5 +80,13 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string AppointmentFull = "Appointment Full";
         public const string AppointmentCreate = "Appointment Create";
         public const string AppointentView = "Appointment View";
+
+        public const string ExpenseSpentFull = "ExpenseSpent Full";
+        public const string ExpenseSpentCreate = "ExpenseSpent Create";
+        public const string ExpenseSpentView = "ExpenseSpent View";
+
+        public const string TimesheetStatusFull = "TimesheetStatus Full";
+        public const string TimesheetStatusCreate = "TimesheetStatus Create";
+        public const string TimesheetStatusView = "TimesheetStatus View";
     }
 }

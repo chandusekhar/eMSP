@@ -20,7 +20,7 @@ namespace eMSP.Data.DataServices.Candidate
 
         #region Get
 
-        internal static async Task<tblCandidateSubmissionSpend> GetCandidateSubmissionSpends(long Id)
+        internal static async Task<tblCandidateSubmissionSpend> GetExpenseDetails(long Id)
         {
             try
             {
@@ -34,7 +34,40 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
+            }
+        }
 
+        internal static async Task<List<tblCandidateSubmissionSpend>> GetPayperiodExpenseSpends(long PayPeriodId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Where(x => x.PayPeriodID == PayPeriodId).ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal static async Task<List<tblCandidateSubmissionSpend>> GetCandidateExpenseSpends(long PlacementId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Where(x => x.PlacementID == PlacementId).ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -42,7 +75,7 @@ namespace eMSP.Data.DataServices.Candidate
 
         #region Insert
 
-        internal static async Task InsertCandidateSubmissionSpend(tblCandidateSubmissionSpend model)
+        internal static async Task<tblCandidateSubmissionSpend> InsertCandidateSubmissionSpend(tblCandidateSubmissionSpend model)
         {
             try
             {
@@ -50,6 +83,7 @@ namespace eMSP.Data.DataServices.Candidate
                 {
                     var response = db.tblCandidateSubmissionSpends.Add(model);
                     int x = await Task.Run(() => db.SaveChangesAsync());
+                    return model;
                 }
             }
             catch (Exception ex)

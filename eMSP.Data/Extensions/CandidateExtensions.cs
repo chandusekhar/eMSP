@@ -298,5 +298,37 @@ namespace eMSP.Data.Extensions
                 updatedTimestamp = data.UpdatedTimestamp
             };
         }
+
+        public static tblCandidatePlacement ConvertTotblCandidatePlacement(this CandidatePlacementViewModel data)
+        {
+            return new tblCandidatePlacement()
+            {
+                ID = Convert.ToInt64(data.ID),
+                SubmissionID = data.SubmissionID,
+                TimeGroupID = data.TimeGroupID,
+                IsActive = data.isActive,
+                IsDeleted = data.isDeleted ?? false,
+                CreatedUserID = data.createdUserID,
+                UpdatedUserID = data.updatedUserID,
+                CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
+                UpdatedTimestamp = data.updatedTimestamp ?? DateTime.Now
+            };
+        }
+
+        public static CandidatePlacementViewModel ConvertToCandidatePlacementViewModel(this tblCandidatePlacement data)
+        {
+            return new CandidatePlacementViewModel()
+            {
+                ID = Convert.ToInt32(data.ID),
+                SubmissionID = data.SubmissionID,
+                TimeGroupID = data.TimeGroupID,
+                isActive = data.IsActive,
+                isDeleted = data.IsDeleted,
+                createdUserID = data.CreatedUserID,
+                updatedUserID = data.UpdatedUserID,
+                createdTimestamp = data.CreatedTimestamp,
+                updatedTimestamp = data.UpdatedTimestamp
+            };
+        }
     }
 }

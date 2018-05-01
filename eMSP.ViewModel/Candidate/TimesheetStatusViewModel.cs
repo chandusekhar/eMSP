@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace eMSP.ViewModel.Candidate
 {
-    public class CandidateSubmissionSpendFilesViewModel : BaseModel
+    public class TimesheetStatusViewModel: BaseModel
     {
         public long ID { get; set; }
-        public long SpendID { get; set; }
-        public long FileID { get; set; }
-
+        public string Name { get; set; }
+        public string Description { get; set; }        
     }
 }

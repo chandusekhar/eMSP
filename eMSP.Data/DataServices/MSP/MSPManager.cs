@@ -1,5 +1,7 @@
-﻿using eMSP.Data.Extensions;
+﻿using eMSP.Data.DataServices.Candidate;
+using eMSP.Data.Extensions;
 using eMSP.DataModel;
+using eMSP.ViewModel.Candidate;
 using eMSP.ViewModel.MSP;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,7 @@ namespace eMSP.Data.DataServices.MSP
             {
                 List<tblMSPPayPeriod> res = await Task.Run(() => ManageMSPPayPeriods.GetMSPPayPeriods());
 
-                return res.Select(x => x.ConvertToCandidateCreateModel()).ToList();
+                return res.Select(pp => pp.ConvertToMSPPayPeriodViewModel()).ToList();
             }
             catch (Exception)
             {
@@ -41,13 +43,57 @@ namespace eMSP.Data.DataServices.MSP
             {
                 tblMSPPayPeriod res = await Task.Run(() => ManageMSPPayPeriods.GetMSPPayPeriod(Id));
 
-                return res.ConvertToCandidateCreateModel();
+                return res.ConvertToMSPPayPeriodViewModel();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        public async Task<List<CandidateSubmissionSpendViewModel>> GetPayperiodExpenseSpends(long PayperiodId)
+        {
+            try
+            {
+                List<tblCandidateSubmissionSpend> res = await Task.Run(() => ManageCandidateSubmissionSpend.GetPayperiodExpenseSpends(PayperiodId));
+
+                return res.Select(x => x.ConvertToCandidateSubmissionSpendViewModel()).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MSPSpendCategoryViewModel>> GetMSPSpendCategory()
+        {
+            try
+            {
+                List<tblMSPSpendCategory> res = await Task.Run(() => ManageMSPSpendCategory.GetMSPSpendCategory());
+
+                return res.Select(x => x.ConvertToMSPSpendCategoryViewModel()).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<TimesheetStatusViewModel>> GetTimesheetStatus()
+        {
+            try
+            {
+                List<tblTimesheetStatu> res = await Task.Run(() => ManageTimesheetStatus.GetTimesheetStatus());
+
+                return res.Select(x => x.ConvertToTimesheetStatusViewModel()).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
         #endregion
 
@@ -59,7 +105,7 @@ namespace eMSP.Data.DataServices.MSP
             {
                tblMSPPayPeriod model= await Task.Run(() => ManageMSPPayPeriods.InsertMSPPayPeriod(data.ConvertTotblMSPPayPeriod()));
 
-                return model.ConvertToCandidateCreateModel();
+                return model.ConvertToMSPPayPeriodViewModel();
             }
             catch (Exception ex)
             {
@@ -77,7 +123,7 @@ namespace eMSP.Data.DataServices.MSP
             {
                 tblMSPPayPeriod model = await Task.Run(() => ManageMSPPayPeriods.UpdateMSPPayPeriod(data.ConvertTotblMSPPayPeriod()));
 
-                return model.ConvertToCandidateCreateModel();
+                return model.ConvertToMSPPayPeriodViewModel();
             }
             catch (Exception ex)
             {

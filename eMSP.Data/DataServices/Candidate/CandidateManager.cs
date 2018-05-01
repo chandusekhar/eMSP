@@ -98,6 +98,34 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<CandidateSubmissionSpendViewModel> GetExpenseDetails(long ExpenseId)
+        {
+            try
+            {
+                tblCandidateSubmissionSpend res = await Task.Run(() => ManageCandidateSubmissionSpend.GetExpenseDetails(ExpenseId));
+
+                return res.ConvertToCandidateSubmissionSpendViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<CandidateSubmissionSpendViewModel>> GetCandidateExpenseSpend(long PlacementId)
+        {
+            try
+            {
+                List<tblCandidateSubmissionSpend> res = await Task.Run(() => ManageCandidateSubmissionSpend.GetCandidateExpenseSpends(PlacementId));
+
+                return res.Select(x => x.ConvertToCandidateSubmissionSpendViewModel()).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         #endregion
 
@@ -177,6 +205,20 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
+        public async Task<CandidateSubmissionSpendViewModel> InsertCandidateExpenseSpent(CandidateSubmissionSpendViewModel data)
+        {
+            try
+            {                
+                tblCandidateSubmissionSpend res = await Task.Run(() => ManageCandidateSubmissionSpend.InsertCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));                
+
+                return res.ConvertToCandidateSubmissionSpendViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Update
@@ -246,6 +288,20 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
+        public async Task<CandidateSubmissionSpendViewModel> UpdateCandidateExpenseSpent(CandidateSubmissionSpendViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidateSubmissionSpend.UpdateCandidateSubmissionSpend(data.ConvertTotblCandidateSubmissionSpend()));
+
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Delete
@@ -254,11 +310,7 @@ namespace eMSP.Data.DataServices.Candidate
         {
             try
             {
-                long Id = Convert.ToInt64(data.id);
-                
-                        //await Task.Run(() => ManageCandidate.Delete(Id));
-                       
-
+                long Id = Convert.ToInt64(data.id);                
             }
             catch (Exception)
             {

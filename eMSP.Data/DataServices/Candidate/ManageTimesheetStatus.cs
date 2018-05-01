@@ -6,26 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eMSP.Data.DataServices.MSP
+namespace eMSP.Data.DataServices.Candidate
 {
-    public class ManageMSPPayPeriods
+    public class ManageTimesheetStatus
     {
         #region Initialization
 
         internal static eMSPEntities db;
 
-        static ManageMSPPayPeriods() { }
+        static ManageTimesheetStatus() { }
 
         #endregion
 
         #region Get
-        internal static async Task<tblMSPPayPeriod> GetMSPPayPeriod(long Id)
+
+        internal static async Task<tblTimesheetStatu> GetTimesheetStatus(long Id)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPPayPeriods
+                    return await Task.Run(() => db.tblTimesheetStatus
                                                   .Where(x => x.ID == Id).SingleOrDefault());
 
                 }
@@ -37,32 +38,32 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
-        internal static async Task<List<tblMSPPayPeriod>> GetMSPPayPeriods()
+        internal static async Task<List<tblTimesheetStatu>> GetTimesheetStatus()
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblMSPPayPeriods.ToList());
+                    return await Task.Run(() => db.tblTimesheetStatus.ToList());
                 }
             }
             catch (Exception)
             {
                 throw;
+
             }
         }
-
         #endregion
 
         #region Insert
 
-        internal static async Task<tblMSPPayPeriod> InsertMSPPayPeriod(tblMSPPayPeriod data)
+        internal static async Task<tblTimesheetStatu> InsertTimesheetStatus(tblTimesheetStatu data)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    db.tblMSPPayPeriods.Add(data);
+                    db.tblTimesheetStatus.Add(data);
 
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
@@ -79,7 +80,7 @@ namespace eMSP.Data.DataServices.MSP
 
         #region Update
 
-        internal static async Task<tblMSPPayPeriod> UpdateMSPPayPeriod(tblMSPPayPeriod model)
+        internal static async Task<tblTimesheetStatu> UpdateTimesheetStatus(tblTimesheetStatu model)
         {
             try
             {
@@ -102,14 +103,14 @@ namespace eMSP.Data.DataServices.MSP
 
         #region Delete
 
-        internal static async Task DeleteMSPPayPeriod(long Id)
+        internal static async Task DeleteTimesheetStatus(long Id)
         {
             try
             {
                 using (db = new eMSPEntities())
                 {
-                    tblMSPPayPeriod obj = await db.tblMSPPayPeriods.FindAsync(Id);
-                    db.tblMSPPayPeriods.Remove(obj);
+                    tblTimesheetStatu obj = await db.tblTimesheetStatus.FindAsync(Id);
+                    db.tblTimesheetStatus.Remove(obj);
 
                     await Task.Run(() => db.SaveChangesAsync());
                 }
@@ -117,7 +118,6 @@ namespace eMSP.Data.DataServices.MSP
             catch (Exception)
             {
                 throw;
-
             }
         }
 

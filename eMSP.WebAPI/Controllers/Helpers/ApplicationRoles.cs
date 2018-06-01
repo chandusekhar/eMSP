@@ -92,5 +92,11 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string TimesheetStatusFull = "TimesheetStatus Full";
         public const string TimesheetStatusCreate = "TimesheetStatus Create";
         public const string TimesheetStatusView = "TimesheetStatus View";
+
+        public const string TimesheetFull = "Timesheet Full";
+        public const string TimesheetCreate = "Timesheet Create";
+        public const string TimesheetView = "Timesheet View";
+
+
     }
 }

@@ -154,7 +154,61 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<CandidateTimesheetViewModel> GetCandidateTimesheetDetails(long PlacementId)
+        {
+            try
+            {
+                tblCandidateTimesheet res = await Task.Run(() => ManageCandidateTimesheets.GetCandidateTimesheet(PlacementId));
 
+                return res.ConvertToCandidateTimesheetViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetViewModel> GetTimesheetDetailsById(long TimesheetId)
+        {
+            try
+            {
+                tblCandidateTimesheet res = await Task.Run(() => ManageCandidateTimesheets.GetTimesheetDetailsById(TimesheetId));
+
+                return res.ConvertToCandidateTimesheetViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetHoursViewModel> GetCandidateTimesheetHours(long Id)
+        {
+            try
+            {
+                tblCandidateTimesheetHour res = await Task.Run(() => ManageCandidateTimesheetHours.GetCandidateTimesheetHours(Id));
+
+                return res.ConvertToCandidateTimesheetHoursViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetCategoriesHoursViewModel> GetCandidateTimesheetCategoriesHours(long Id)
+        {
+            try
+            {
+                tblCandidateTimesheetCategoriesHour res = await Task.Run(() => ManageCandidateTimesheetCategoriesHours.GetCandidateTimesheetCategoriesHours(Id));
+
+                return res.ConvertToCandidateTimesheetCategoriesHoursViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Insert
@@ -273,6 +327,48 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
+        public async Task<CandidateTimesheetViewModel> CreateCandidateTimesheet(CandidateTimesheetViewModel data)
+        {
+            try
+            {
+                tblCandidateTimesheet res = await Task.Run(() => ManageCandidateTimesheets.InsertCandidateTimesheet(data.ConvertTotblCandidateTimesheet()));
+
+                return res.ConvertToCandidateTimesheetViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetHoursViewModel> CreateCandidateTimesheetHours(CandidateTimesheetHoursViewModel data)
+        {
+            try
+            {
+                tblCandidateTimesheetHour res = await Task.Run(() => ManageCandidateTimesheetHours.InsertCandidateTimesheetHours(data.ConvertTotblCandidateTimesheetHour()));
+
+                return res.ConvertToCandidateTimesheetHoursViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetCategoriesHoursViewModel> CreateCandidateTimesheetCategoriesHours(CandidateTimesheetCategoriesHoursViewModel data)
+        {
+            try
+            {
+                tblCandidateTimesheetCategoriesHour res = await Task.Run(() => ManageCandidateTimesheetCategoriesHours.InsertCandidateTimesheetCategoriesHours(data.ConvertTotblCandidateTimesheetCategoriesHour()));
+
+                return res.ConvertToCandidateTimesheetCategoriesHoursViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Update
@@ -288,6 +384,7 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
         public async Task<CandidateSubmissionCreateModel> UpdateCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
@@ -383,6 +480,48 @@ namespace eMSP.Data.DataServices.Candidate
             try
             {
                 await Task.Run(() => ManageCandidatePlacement.UpdateCandidatePlacement(data.ConvertTotblCandidatePlacement()));
+
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetViewModel> UpdateCandidateTimesheet(CandidateTimesheetViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidateTimesheets.UpdateCandidateTimesheet(data.ConvertTotblCandidateTimesheet()));
+
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetHoursViewModel> UpdateCandidateTimesheetHours(CandidateTimesheetHoursViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidateTimesheetHours.UpdateCandidateTimesheetHours(data.ConvertTotblCandidateTimesheetHour()));
+
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateTimesheetCategoriesHoursViewModel> UpdateCandidateTimesheetCategoriesHours(CandidateTimesheetCategoriesHoursViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidateTimesheetCategoriesHours.UpdateCandidateTimesheetCategoriesHours(data.ConvertTotblCandidateTimesheetCategoriesHour()));
 
                 return data;
             }

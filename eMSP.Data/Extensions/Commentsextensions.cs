@@ -39,7 +39,7 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
-                //commentUser = data.tblCommentUsers?.Select(x => x.ConvertToCommentUsers()).ToList()
+                commentUser = data.tblCommentUsers?.Select(x => x.ConvertToCommentUsers()).ToList()
             };
         }
 
@@ -68,7 +68,7 @@ namespace eMSP.Data.Extensions
                 id = data.ID,
                 commentId = data.CommentID,
                 userId = data.UserID,
-                //user = data.tblUserProfile?.ConvertToUser(),
+                user = data.tblUserProfile?.ConvertToUser(),
                 isRead = data.IsRead,
                 readBy = data.ReadBy,
                 isActive = data.IsActive,

@@ -278,7 +278,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
             angular.forEach($scope.CandidateDocs, function (file) {
                 file.FileName = $scope.CandidateDocument.docFileName;
                 file.ExpiryDate = new Date($scope.CandidateDocument.docExpiryDate);
-                file.FileTypeId = 10007;
+                file.FileTypeId = 6;
                 $scope.dataJSON.CandidateFile.push(file);
             });
             $scope.CandidateDocs = [];

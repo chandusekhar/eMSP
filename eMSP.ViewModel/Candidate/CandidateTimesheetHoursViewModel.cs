@@ -13,5 +13,7 @@ namespace eMSP.ViewModel.Candidate
         public System.DateTime TimeDate { get; set; }
         public Nullable<decimal> HoursWorked { get; set; }
         public Nullable<decimal> BreakHours { get; set; }
+
+        public CandidateTimesheetViewModel CandidateTimesheet { get; set; }
     }
 }

@@ -65,7 +65,7 @@ function expensesController($scope, $state, localStorageService, ngAuthSettings,
         }
         else {
             angular.forEach($scope.ExpenseDocument, function (file) {               
-                file.FileTypeId = 10007;
+                file.FileTypeId = 6;
                 $scope.dataJSON.Files.push(file);
             });
             $scope.ExpenseDocument = [];

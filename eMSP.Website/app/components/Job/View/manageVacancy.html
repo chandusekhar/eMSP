@@ -113,13 +113,13 @@
                                             <div class="feed-activity-list">
                                                 <div class="feed-element" ng-repeat="comments in vacancyData.VacancyComment">
                                                     <a href="" class="pull-left">
-                                                        <!--<img alt="image" class="img-circle" src="img/a2.jpg">-->
+                                                        <img alt="image" ng-if={{userProfilePhotoPath!=""}} class="img-circle" src="{{comments.commentUser[0].user.userProfilePhotoPath}}">
                                                         <ng-letter-avatar charCount="2" height="28" width="28" fontsize="10"
-                                                                          data="{{comments.createdUserID}}" shape="round"></ng-letter-avatar>
+                                                                          data="{{comments.commentUser[0].user.firstName}}" shape="round"></ng-letter-avatar>
                                                     </a>
                                                     <div class="media-body ">
                                                         <!--<small class="pull-right">2h ago</small>-->
-                                                        <strong>Mark Johnson</strong><br>
+                                                        <strong>{{comments.commentUser[0].user.firstName}}</strong><br>
                                                         <small class="text-muted">{{comments.createdTimestamp | date:'MMMM dd, yyyy hh:mm:ss a'}}</small>
                                                         <div class="well">
                                                             {{comments.comment}}
@@ -175,14 +175,14 @@
                 </ul>
                 <div class="row"> </div>
 
-                <h5>Manage Candidate Submission:</h5>
+                <!--<h5>Manage Candidate Submission:</h5>
                 <ul class="list-unstyled project-files">
-                    <!--<li ng-repeat="files in vacancyData.VacancyFiles"><a href="files.filePath" target="_blank"><i class="fa fa-file"></i> {{files.fileName}}</a></li>-->
+                    <li ng-repeat="files in vacancyData.VacancyFiles"><a href="files.filePath" target="_blank"><i class="fa fa-file"></i> {{files.fileName}}</a></li>
                     <li>Candidate 1</li>
                     <li>Candidate 2</li>
                     <li>Candidate 3</li>
                     <li>Candidate 4</li>
-                </ul>
+                </ul>-->
                 <div class="col-lg-12">
                     <button type="submit" ng-click="manageCandidates()" class="btn btn-primary btn-block">Manage</button>
                 </div>

@@ -205,11 +205,11 @@ namespace eMSP.Data.DataServices.JobVacancies
                 tblComment resComment = await Task.Run(() => ManageComments.InsertComment(data.comment.ConvertTotblComment()));
                 data.vacancyComment.commentId = resComment.ID;
 
-                tblVacancyComment res = await Task.Run(() => ManageVacancy.CommentVacancy(data.vacancyComment.ConvertTotblVacancyComment()));
+                tblVacancyComment res = await Task.Run(() => ManageVacancyComments.CommentVacancy(data.vacancyComment.ConvertTotblVacancyComment()));
                 data.vacancyComment.Id = res.ID;
 
                 data.commentUser.commentId = resComment.ID;                
-                tblCommentUser resCommentUser= await Task.Run(() => ManageComments.InsertCommentUser(data.commentUser.ConvertTotblCommentUser()));
+                tblCommentUser resCommentUser= await Task.Run(() => ManageComments.InsertCommentUser(data.commentUser.ConvertTotblCommentUser()));                
 
                 return resComment.ConvertToComment();
             }

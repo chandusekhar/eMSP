@@ -142,7 +142,10 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                   .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                   .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers))
                                                   .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile)))
-                                                  .Where(x => x.ID == Id).SingleOrDefault());
+                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile).Select(d => d.tblCountry)))
+                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile).Select(d => d.tblCountryState)))
+                                                  .Where(x => x.ID == Id)
+                                                  .SingleOrDefault());
 
 
                 }
@@ -205,9 +208,37 @@ namespace eMSP.Data.DataServices.JobVacancies
                             c.createdUserID = vacancy.CreatedUserID;
                             c.createdTimestamp = vacancy.CreatedTimestamp;
                             c.updatedUserID = vacancy.UpdatedUserID;
-                            c.updatedTimestamp = vacancy.UpdatedTimestamp;
+                            c.updatedTimestamp = vacancy.UpdatedTimestamp;                            
                             tblComment comment = await Task.Run(() => ManageComments.InsertComment(c.ConvertTotblComment()));
-                            await Task.Run(() => ManageVacancyComments.InsertComment(vacancy, comment));
+
+                            tblVacancyComment vc = db.tblVacancyComments.Add(new tblVacancyComment
+                            {
+                                CommentID = comment.ID,
+                                VacancyID = vacancy.ID,
+                                IsActive = true,
+                                IsDeleted = false,
+                                CreatedTimestamp = vacancy.CreatedTimestamp,
+                                CreatedUserID = vacancy.CreatedUserID,
+                                UpdatedTimestamp = vacancy.UpdatedTimestamp,
+                                UpdatedUserID = vacancy.UpdatedUserID
+                            });
+
+                            tblVacancyComment resVC = await Task.Run(() => ManageVacancyComments.CommentVacancy(vc));
+
+                            CommentUsersModel commentUM = new CommentUsersModel
+                            {
+                                commentId = comment.ID,
+                                userId = vacancy.CreatedUserID,
+                                isActive = true,
+                                isDeleted = false,
+                                createdTimestamp = vacancy.CreatedTimestamp,
+                                createdUserID = vacancy.CreatedUserID,
+                                updatedTimestamp = vacancy.UpdatedTimestamp,
+                                updatedUserID = vacancy.UpdatedUserID
+                            };
+                            
+                            tblCommentUser resCommentUser = await Task.Run(() => ManageComments.InsertCommentUser(commentUM.ConvertTotblCommentUser()));
+
                         }
                     }
                     return model;
@@ -303,25 +334,7 @@ namespace eMSP.Data.DataServices.JobVacancies
         }
 
 
-        internal static async Task<tblVacancyComment> CommentVacancy(tblVacancyComment model)
-        {
-            try
-            {
-                using (db = new eMSPEntities())
-                {
-                    model = db.tblVacancyComments.Add(model);
-
-                    int x = await Task.Run(() => db.SaveChangesAsync());
-
-                    return model;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-
-            }
-        }
+        
 
         #endregion
 

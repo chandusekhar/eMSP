@@ -118,7 +118,7 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         [Route("createVacancy")]
         [HttpPost]
         [ResponseType(typeof(VacancyCreateModel))]
-        [Authorize(Roles =ApplicationRoles.VacancyCreate)]
+        [Authorize(Roles = ApplicationRoles.VacancyCreate)]
         public async Task<IHttpActionResult> InsertVacancy(VacancyCreateModel model)
         {
             try
@@ -128,9 +128,9 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
 
                 return Ok(await VacanciesService.CreateVacancy(model));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return Ok(ex.StackTrace);
             }
         }
 

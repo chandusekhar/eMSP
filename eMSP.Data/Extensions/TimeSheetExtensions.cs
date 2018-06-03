@@ -57,7 +57,9 @@ namespace eMSP.Data.Extensions
                 CreatedUserID = data.createdUserID,
                 UpdatedUserID = data.updatedUserID,
                 CreatedTimestamp = data.createdTimestamp ?? DateTime.Now,
-                UpdatedTimestamp = data.updatedTimestamp
+                UpdatedTimestamp = data.updatedTimestamp,
+                tblCandidateTimesheetHours = data.CandidateTimesheetHours.Select(x => x?.ConvertTotblCandidateTimesheetHour()).ToList(),
+                tblCandidateTimesheetCategoriesHours = data.CandidateTimesheetCategoriesHours.Select(x => x?.ConvertTotblCandidateTimesheetCategoriesHour()).ToList()
             };
         }
 
@@ -75,7 +77,12 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                CandidateTimesheetHours = data.tblCandidateTimesheetHours.Select(x => x?.ConvertToCandidateTimesheetHoursViewModel()).ToList(),
+                CandidateTimesheetCategoriesHours = data.tblCandidateTimesheetCategoriesHours.Select(x => x?.ConvertToCandidateTimesheetCategoriesHoursViewModel()).ToList(),
+                CandidatePlacement = data.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
+                MSPPayPeriods = data.tblMSPPayPeriod?.ConvertToMSPPayPeriodViewModel(),
+                TimesheetStatus = data.tblTimesheetStatu?.ConvertToTimesheetStatusViewModel()
             };
         }
 

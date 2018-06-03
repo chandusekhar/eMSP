@@ -1,4 +1,5 @@
-﻿using eMSP.ViewModel.Shared;
+﻿using eMSP.ViewModel.MSP;
+using eMSP.ViewModel.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace eMSP.ViewModel.Candidate
     {
         public CandidateTimesheetViewModel()
         {
-            this.CandidateTimesheetCategoriesHours = new HashSet<CandidateTimesheetHoursViewModel>();
+            this.CandidateTimesheetHours = new HashSet<CandidateTimesheetHoursViewModel>();
+            this.CandidateTimesheetCategoriesHours=new HashSet<CandidateTimesheetCategoriesHoursViewModel>();
         }
 
         public long ID { get; set; }
@@ -20,6 +22,10 @@ namespace eMSP.ViewModel.Candidate
         public long StatusID { get; set; }
         public short VersionNumber { get; set; }
         
-        public virtual ICollection<CandidateTimesheetHoursViewModel> CandidateTimesheetCategoriesHours { get; set; }
+        public virtual ICollection<CandidateTimesheetHoursViewModel> CandidateTimesheetHours { get; set; }
+        public virtual ICollection<CandidateTimesheetCategoriesHoursViewModel> CandidateTimesheetCategoriesHours { get; set; }
+        public virtual CandidatePlacementViewModel CandidatePlacement { get; set; }
+        public MSPPayPeriodViewModel MSPPayPeriods { get; set; }
+        public TimesheetStatusViewModel TimesheetStatus { get; set; }
     }
 }

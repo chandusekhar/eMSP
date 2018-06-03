@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eMSP.ViewModel.MSP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,8 @@ namespace eMSP.ViewModel.Candidate
         public long TimesheetCategoryID { get; set; }
         public System.DateTime TimeDate { get; set; }
         public decimal Hours { get; set; }
+
+        public CandidateTimesheetViewModel CandidateTimesheet { get; set; }
+        public MSPTimeGroupCategoriesViewModel MSPTimeGroupCategories { get; set; }
     }
 }

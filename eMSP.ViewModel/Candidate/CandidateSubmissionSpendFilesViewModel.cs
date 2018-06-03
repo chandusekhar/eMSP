@@ -12,6 +12,7 @@ namespace eMSP.ViewModel.Candidate
         public long ID { get; set; }
         public long SpendID { get; set; }
         public long FileID { get; set; }
-
+        public virtual CandidateSubmissionSpendViewModel CandidateSubmissionSpend { get; set; }
+        public virtual FileModel File { get; set; }
     }
 }

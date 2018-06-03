@@ -111,7 +111,7 @@ namespace eMSP.Data.Extensions
                     vacancyStatus = data.tblJobVacanciesStatu?.ConvertToVacanciesStatus()
                 },
                 VacancyFiles = data.tblVacancyFiles?.Select(a => a.ConvertToVacancyFile()).ToList(),
-                VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
+                //VacancyComment = data.tblVacancyComments?.Select(a => a.tblComment?.ConvertToComment()).ToList(),
                 VacancySkills = data.tblVacancieSkills?.Select(a => a.tblIndustrySkill?.ConvertToIndustrySkill()).ToList(),
                 VacancyLocations = data.tblVacancyLocations?.Select(a => a.tblLocation.ConvertToLocation()).ToList(),
                 VacancySuppliers = data.tblVacancySuppliers?.Where(x => !(x.IsDeleted ?? false)).Select(a => a.tblSupplier?.ConvertTocompany()).ToList(),

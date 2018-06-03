@@ -26,6 +26,10 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool navManageDocuments = false;
         public bool navManageQuestions = false;
         public bool navManageVacancyTypes = false;
+        public bool navMSPPayPeriod = false;
+        public bool navAppointment = false;
+        public bool navExpenseSpent = false;
+        public bool navTimesheetStatus = false;
 
         //------------ Administration end ------------- // 
 
@@ -114,6 +118,19 @@ namespace eMSP.WebAPI.Controllers.Helpers
         //-------------Candidate end------------//
 
 
+        //-------------payperiod------------//
+
+        public bool MSPPayPeriodCreate = false;
+        public bool MSPPayPeriodEdit = false;
+        public bool AppointmentCreate = false;
+        public bool AppointmentEdit = false;
+        public bool ExpenseSpentCreate = false;
+        public bool ExpenseSpentEdit = false;
+        public bool TimesheetStatusCreate = false;
+        public bool TimesheetStatusEdit = false;
+
+        //-------------payperiod end------------//
+
 
         public UITemplate(List<string> Roles)
         {
@@ -125,6 +142,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.navManageIndustry = Roles.Where(a => a.StartsWith("Industry")).ToList().Count > 0;
             this.navManageDocuments = Roles.Where(a => a.StartsWith("Document")).ToList().Count > 0;
             this.navManageQuestions = Roles.Where(a => a.StartsWith("Question")).ToList().Count > 0;
+            this.navMSPPayPeriod = Roles.Where(a => a.StartsWith("MSPPayPeriod")).ToList().Count > 0;
 
             this.navManageRoleGroups = Roles.Where(a => a.StartsWith("Role")).ToList().Count > 0;
             this.navManageUserRoles = Roles.Contains(ApplicationRoles.RoleAuthorizationFull) || Roles.Contains(ApplicationRoles.RoleAuthorizationCreate);
@@ -136,7 +154,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.navManageMSP = Roles.Where(a => a.StartsWith("MSP")).ToList().Count > 0;
             this.navCompany = this.navManageSuppliers || this.navManageCustomers || this.navManageMSP;
 
-            this.navAdmistration = this.navManageVacancyTypes || this.navManageCountry || this.navManageIndustry || this.navManageDocuments || this.navManageQuestions || this.navAuthorization || this.navCompany;
+            this.navAdmistration = this.navManageVacancyTypes || this.navManageCountry || this.navManageIndustry || this.navManageDocuments || this.navManageQuestions || this.navAuthorization || this.navCompany || this.navMSPPayPeriod;
 
 
             #endregion
@@ -214,6 +232,17 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.CandidateSubmiddionCreate = Roles.Contains(ApplicationRoles.CandidateSubmissionFull) || Roles.Contains(ApplicationRoles.CandidateSubmissionCreate);
             this.CandidateSubmiddionEdit = Roles.Contains(ApplicationRoles.CandidateSubmissionFull);
 
+            this.MSPPayPeriodCreate = Roles.Contains(ApplicationRoles.MSPPayPeriodCreate) || Roles.Contains(ApplicationRoles.MSPPayPeriodFull);
+            this.MSPPayPeriodEdit = Roles.Contains(ApplicationRoles.MSPPayPeriodFull);
+
+            this.AppointmentCreate = Roles.Contains(ApplicationRoles.AppointmentCreate) || Roles.Contains(ApplicationRoles.AppointmentFull);
+            this.AppointmentEdit = Roles.Contains(ApplicationRoles.AppointmentFull);
+
+            this.ExpenseSpentCreate = Roles.Contains(ApplicationRoles.ExpenseSpentCreate) || Roles.Contains(ApplicationRoles.ExpenseSpentFull);
+            this.ExpenseSpentEdit = Roles.Contains(ApplicationRoles.ExpenseSpentFull);
+
+            this.TimesheetStatusCreate = Roles.Contains(ApplicationRoles.TimesheetStatusCreate) || Roles.Contains(ApplicationRoles.TimesheetStatusFull);
+            this.TimesheetStatusEdit = Roles.Contains(ApplicationRoles.TimesheetStatusFull);
 
         }
 

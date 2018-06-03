@@ -9,7 +9,7 @@ function manageAppointmentTypeController($scope, $state, localStorageService, co
     $scope.formAction = "Create";
     $scope.refData.submitted = false;
     
-    var resAppointmentType = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.GETALLAPPOINTMENTTYPEURL);
+    var resAppointmentType = apiCall.get(APP_CONSTANTS.URL.APPOINTMENT.GETALLAPPOINTMENTTYPEURL);
     resAppointmentType.then(function (data) {
         $scope.appointmentTypeList = data;
         console.log(data);

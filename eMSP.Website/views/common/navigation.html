@@ -45,9 +45,10 @@
                         <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('role')}">
                             <li ng-if="config.navManageRoleGroups" ui-sref-active="active"><a ui-sref="role.manageRoleGroup">{{'Application Roles'|translate}} </a></li>
                             <li ng-if="config.navManageUserRoles" ui-sref-active="active"><a ui-sref="role.manageUserRole">{{'Manage User Roles'|translate}} </a></li>
+                            <li ui-sref-active="active"><a ui-sref="account.changeUserPassword">{{'Manage User Passwords'|translate}} </a></li>
                         </ul>
                     </li>
-                    <li ng-if="config.navManageMSP" ui-sref-active="active"><a ui-sref="payperiod.managePayperiod">{{'Manage Pay Period'|translate}}</a></li>
+                    <li ng-if="config.navMSPPayPeriod" ui-sref-active="active"><a ui-sref="payperiod.managePayperiod">{{'Manage Pay Period'|translate}}</a></li>
                     <li ng-if="config.navManageCountry" ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
                     <li ng-if="config.navManageIndustry" ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
                     <li ng-if="config.navManageDocuments" ui-sref-active="active"><a ui-sref="vacancy.manageAppointmentType">{{'Manage Appointment Types'|translate}} </a></li>

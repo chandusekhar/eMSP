@@ -118,27 +118,56 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
 
     }
 
+
+
     $scope.addEditSlot = function (form, create) {
 
         if (form.$valid) {
 
-            $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
-            $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
 
-            if (create) {
+            if ($scope.editform) {
+                if (create) {
+                    $scope.AppointmentSlot.AppintmentID=$scope.dataJSON.ID
+                    $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
+                    $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
+                    $scope.create = false;
+                   
+                    var resn = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.SLOTADDAPPOINTMENTURL, $scope.AppointmentSlot);
+                    resn.then(function (data) {
+                        $scope.dataJSON.Slots.push($scope.AppointmentSlot);
+                    });
 
+                }
+                else {
 
-                $scope.create = false;
-                $scope.dataJSON.Slots.push($scope.AppointmentSlot);
-
-
+                    $scope.AppointmentSlot = $scope.dataJSON.Slots[$scope.AppointmentSlot.index];
+                    $scope.create = false;
+                    $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
+                    $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
+                    var resn = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.SLOTUPDATEAPPOINTMENTURL + $scope.AppointmentSlot.ID, $scope.AppointmentSlot);
+                    resn.then(function (data) {
+                        
+                    });
+                }
             }
             else {
+                if (create) {
+
+                    $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
+                    $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
+                    $scope.create = false;
+                    $scope.dataJSON.Slots.push($scope.AppointmentSlot);
 
 
-                $scope.create = false;
-                $scope.dataJSON.Slots[$scope.AppointmentSlot.index] = $scope.AppointmentSlot;
+                }
+                else {
 
+                    $scope.AppointmentSlot = $scope.dataJSON.Slots[$scope.AppointmentSlot.index];
+                    $scope.create = false;
+                    $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
+                    $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
+
+                }
             }
         }
 

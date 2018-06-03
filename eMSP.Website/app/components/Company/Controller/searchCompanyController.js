@@ -148,6 +148,27 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         });
     }
 
+    $scope.modelRP = function (model) {
+       
+        if (model) {
+            
+            $scope.dataJSON.user = model;
+            $scope.dataJSON.user.emailAddress = model.user.emailAddress;
+        }
+        var modalInstance = $uibModal.open({
+            templateUrl: 'app/components/accounts/view/changeUserPasswordModel.html',
+            scope: $scope,
+            controller: 'changeUserPasswordController',
+            windowClass: 'animated slideInRight',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/accounts/config/changeUserPassword.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Change"; },
+            }
+        });
+    }
+
     $scope.modelL = function (model) {
         $scope.ldataJSON = {};
         if (model) {
@@ -254,6 +275,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         model.companyType = $scope.res.companyType;
         model.companyName = $scope.res.companyName;
         $scope.modelU(model);
+    }
+
+    $scope.resetPassword = function (model) {
+        model.companyId = $scope.res.id;
+        model.companyType = $scope.res.companyType;
+        model.companyName = $scope.res.companyName;
+        $scope.modelRP(model);
     }
 
     $scope.updateLocation = function (model) {

@@ -61,7 +61,7 @@
                                         </td>
                                         <td class="project-actions">
                                             <a ng-click="submitCandidate(jsl)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                            <a ng-click="createAppointment(jsl)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Appointment </a>
+                                            <a ng-if="config.AppointmentCreate" ng-click="createAppointment(jsl)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Appointment </a>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -18,6 +18,7 @@ using eMSP.WebAPI.Providers;
 using eMSP.WebAPI.Results;
 using System.Configuration;
 using eMSP.WebAPI.Utility;
+using System.Web.Security;
 
 namespace eMSP.WebAPI.Controllers
 {
@@ -124,10 +125,33 @@ namespace eMSP.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+           
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
             
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/ChangePassword ChangePasswordBindingModel model
+        [Route("ChangeUserPassword")]        
+        public async Task<IHttpActionResult> ChangeUserPassword(RegisterBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await UserManager.FindByNameAsync(model.Email);
+
+            var token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+            IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, token, model.Password);
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

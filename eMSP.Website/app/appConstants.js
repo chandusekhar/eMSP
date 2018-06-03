@@ -101,7 +101,13 @@ angular.module('eMSPApp')
                 GETALLAPPOINTMENTURL: "api/Appointment/getlist?id=",
                 GETAPPOINTMENTURL: "api/Appointment/get?id=",
                 CREATEAPPOINTMENTURL: "api/Appointment/save",
-                UPDATEAPPOINTMENTURL: "api/Appointment/update"
+                UPDATEAPPOINTMENTURL: "api/Appointment/update",
+                APPOINTMENTSLOTFINALIZEURL: "api/Appointment/slot/finalize",
+                SLOTUPDATEAPPOINTMENTURL: "api/Appointment/slot/update?id=",
+                SLOTADDAPPOINTMENTURL: "api/Appointment/slot/add",
+                APPOINTMENTUSERADDURL: "api/Appointment/user/add",
+                APPOINTMENTUSERREMOVEURL: "api/Appointment/user/remove",                
+
             },
             APP: {
                 GETCOUNTRYURL: "api/App/getCountries",
@@ -133,6 +139,7 @@ angular.module('eMSPApp')
             },
             ACCOUNT: {
                 CHANGEPASSWORD: "api/Account/ChangePassword",
+                CHANGEUSERPASSWORD: "api/Account/ChangeUserPassword",
                 RESETPASSWORD: "api/Account/SetPassword",
                 FORGOTPASSWORD: "api/Account/ForgotPassword?Email="
             },

@@ -16,7 +16,8 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.dataJSON.Candidate = {};
     $scope.dataJSON.Contact = {};
     $scope.IsMangePage = $scope.formAction === "Manage" ? true : false;
-    $scope.compId = 1;
+    $scope.compType = localStorageService.get('CurrentUser').companyType;
+    $scope.compId = localStorageService.get('CurrentUser').companyId;
     $scope.refData.userViewType = "Card";
     $scope.baseUrl = ngAuthSettings.contentURL;
     $scope.contact = false;
@@ -28,7 +29,8 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.CandidateDocument = {};
     $scope.CandidateDocument.docExpiryDate = null;
     $scope.CandidateDocument.docFileName = "";
-    $scope.dataJSON.CandidateContact = [];
+    $scope.dataJSON.CandidateContact = []; 
+    
 
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {
@@ -73,7 +75,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
         angular.forEach($scope.dataJSON.CandidateIndustries, function (v, k) {
             angular.forEach($scope.refData.industryList, function (value, key) {
-                if (value.id === v) {
+                if (value.id == v) {
                     $scope.dataJSON.CandidateIndustries[k] = value;
                 }
             });
@@ -98,7 +100,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
 
         angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
             angular.forEach($scope.refData.industrySkillsList, function (value, key) {
-                if (value.id === v) {
+                if (value.id ==  v) {
                     $scope.dataJSON.CandidateSkills[k] = value;
                 }
             });
@@ -125,13 +127,39 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
         } else { $scope.refData.userViewType = "Card"; }
     };
 
-    //Function to load candidates
-    if ($scope.IsMangePage) {
-        //if()
+    $scope.loadCandidates = function () {
         var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.compId, { 'SupplierId': $scope.compId });
         apires.then(function (data) {
             $scope.resCandidates = data;
         });
+    }
+
+    $scope.changeCompany = function (model) {
+
+        if (model) {
+            $scope.compId = model.id;
+        }     
+
+        if ($scope.IsMangePage) {
+            $scope.loadCandidates();
+        }
+
+    }
+
+    if ($scope.compType == 'MSP') {
+        var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
+        res.then(function (data) {
+            $scope.companyList = data;
+            $scope.compId = 0;
+        });
+    }
+
+    //Function to load candidates
+    if ($scope.IsMangePage) {
+        if ($scope.compType != 'MSP') {
+            //if()
+            $scope.loadCandidates();
+        }
     }
 
 
@@ -165,7 +193,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     }
     $scope.submit = function (form) {
 
-        $scope.dataJSON.SupplierId = 1;//localStorageService.get('supplierId');
+        $scope.dataJSON.SupplierId = $scope.compId ;//localStorageService.get('supplierId');
 
         angular.forEach($scope.dataJSON.CandidateContact, function (con) {
             con.FirstName = $scope.dataJSON.Candidate.FirstName;

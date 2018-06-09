@@ -1,0 +1,113 @@
+﻿
+<style>
+    .header {
+        background-color: #1abc9c;
+        color: white;
+        padding: 20px;
+        font-weight: bolder;
+        text-align: center;
+        margin: 0px;
+        border: 1px solid #e5e5e5;
+    }
+
+        .header ul {
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+
+            .header ul li {
+                color: white;
+                font-size: 20px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+        .header .prev {
+            float: left;
+            padding-top: 10px;
+            cursor:pointer;
+        }
+
+        .header .next {
+            float: right;
+            padding-top: 10px;
+            cursor: pointer;
+        }
+
+    .names {
+        color: white;
+        background-color: #fd7790;
+        font-weight: bold;
+        border: 1px solid #e5e5e5;
+    }
+    .names p {
+        margin: 5px;
+    }
+    .week {
+    }
+
+    .different-month {
+        background-color: #f8f8f8;
+    }
+
+    .nopadding {
+        padding: 0px !important;
+    }
+
+    @media (min-width: 992px) {
+        .week .col-md-2 {
+            width: 14.285714285714285714285714285714%;
+            *width: 14.285714285714285714285714285714%;
+        }
+    }
+</style>
+
+
+
+<div class="row text-center header">
+    <!--<i class="fa fa-angle-left" ng-click="previous()"></i>
+    <span>{{month.format("MMMM, YYYY")}}</span>
+    <i class="fa fa-angle-right" ng-click="next()"></i>-->
+    <ul>
+        <li class="prev" ng-click="previous()">&#10094;</li>
+        <li class="next" ng-click="next()">&#10095;</li>
+        <li>
+            {{month.format("MMMM")}}<br>
+            <span style="font-size:12px">{{month.format("YYYY")}}</span>
+        </li>
+    </ul>
+</div>
+<div class="row ">
+    <div class=" col-md-12  week">
+        <div class="col-md-2 text-center names" >
+            <p>Sun</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Mon</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Tue</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Wed</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Thu</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Fri</p>
+        </div>
+        <div class="col-md-2 text-center names" >
+            <p>Sat</p>
+        </div>
+    </div>
+    <div class="col-md-12  week" ng-repeat="week in weeks">
+        <div class="col-md-2 nopadding" style="border:1px solid #e5e5e5; height: 50px !important;" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">
+            <div class="day" style="padding:2px"><b>{{day.number}}</b></div>
+            <div ng-if="day.isCurrentMonth" class="text-center" style="padding:5px;font-size:10px">
+                <a ng-click="addHours(day)">log hours</a>
+            </div>
+        </div>
+    </div>
+</div>

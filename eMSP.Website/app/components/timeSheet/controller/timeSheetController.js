@@ -1,8 +1,8 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-    .controller('managePayPeriodController', managePayPeriodController)
-    .controller('payPeriodController', payPeriodController)
-function managePayPeriodController($scope, $state, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, toaster, $filter) {
+    .controller('manageTimeSheetController', manageTimeSheetController)
+    .controller('timeSheetController', timeSheetController)
+function manageTimeSheetController($scope, $state, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, toaster, $filter) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -32,7 +32,7 @@ function managePayPeriodController($scope, $state, $uibModal, localStorageServic
     
 }
 
-function payPeriodController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster, $uibModalInstance) {
+function timeSheetController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
 
     $scope.config = localStorageService.get('pageSettings');
 
@@ -49,18 +49,16 @@ function payPeriodController($scope, $state, localStorageService, ngAuthSettings
             $scope.dataJSON.EndDate = $scope.dataJSON.dateRange.endDate;
 
             if ($scope.editform) {
-                var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATEPAYPERIODURL, $scope.dataJSON);
+                var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATETIMESHEETURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;                   
-                    toaster.warning({ body: "Data Updated Successfully." });
                     $state.reload();
                 });
             }
             else {
-                var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATEPAYPERIODURL, $scope.dataJSON);
+                var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
                 resn.then(function (data) {
                     $scope.dataJSON = data;
-                    toaster.warning({ body: "Data Created Successfully." });                    
                     $state.reload();
                 });
             }          

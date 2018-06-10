@@ -151,7 +151,10 @@ angular.module('eMSPApp')
                 GETPAYPERIOD: "api/timesheet/getMSPPayPeriod?id=",
                 GETALLPAYPERIODS: "api/timesheet/getAllMSPPayPeriods",
                 CREATEPAYPERIODURL: "api/timesheet/insertMSPPayPeriod",
-                UPDATEPAYPERIODURL: "api/timesheet/updateMSPPayPeriod"
+                UPDATEPAYPERIODURL: "api/timesheet/updateMSPPayPeriod",
+                GETALLTIMESHEETS: "api/timesheet/getCandidateTimesheet?PlacementId=",
+                CREATETIMESHEETURL: "api/timesheet/insertTimeSheet",
+                UPDATETIMESHEETURL: "api/timesheet/updateTimeSheet"
             },
             EXPENSES: {
                 GETSPENDCATEGORY: "api/expenses/getMSPSpendCategory",

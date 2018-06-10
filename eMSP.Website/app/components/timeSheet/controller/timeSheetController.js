@@ -1,73 +1,87 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-    .controller('manageTimeSheetController', manageTimeSheetController)
     .controller('timeSheetController', timeSheetController)
-function manageTimeSheetController($scope, $state, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, toaster, $filter) {
+    .controller('addHoursController', addHoursController)
+
+function timeSheetController($scope, $state, localStorageService, configJSON, dataJSON, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster) {
+
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
-    $scope.dataJSON = {};
-    $scope.PayPeriodList = PayPeriodList; 
+    $scope.day = moment();
+    $scope.dataJSON = dataJSON ? dataJSON : {};
+    $scope.formAction;
+    $scope.TimeSheetList = [];
 
-    $scope.model = function (model, data) {
 
-        $scope.dataJSON = {};
+    if ($scope.dataJSON) {
+        $scope.editform = true;
+        $scope.formAction = "Update";
+    } else {
+        $scope.formAction = "Create";
+        $scope.editform = false;
+        $scope.dataJSON.CandidateTimesheetHours = [];
+    }
 
-        if (model) {
-            $scope.editform = true;
-            $scope.dataJSON = data;
-            $scope.formAction = "Update";
+
+
+    $scope.submit = function (form) {
+
+        if ($scope.editform) {
+            var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATETIMESHEETURL, $scope.dataJSON);
+            resn.then(function (data) {
+                $scope.dataJSON = data;
+                toaster.warning({ body: "Data updated Successfully." });
+                $state.reload();
+            });
         }
         else {
-            $scope.formAction = "Create";
-            $scope.editform = false;
+            $scope.dataJSON.PayPeriodID = 1;
+            $scope.dataJSON.PlacementID = 6;
+            $scope.dataJSON.StatusID = 1;
+            $scope.dataJSON.VersionNumber = 1;
+            var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
+            resn.then(function (data) {
+                $scope.dataJSON = data;
+                toaster.warning({ body: "Data Created Successfully." });
+                $state.reload();
+            });
         }
 
-        var modalInstance = $uibModal.open({
-            templateUrl: 'app/components/payPeriod/view/payPeriod.html',
-            scope: $scope,
-            controller: 'payPeriodController',
-            windowClass: 'animated slideInRight'
-        });
+
+
+
     }
-    
+
+    $scope.close = function () {
+        $uibModalInstance.close();
+    }
 }
 
-function timeSheetController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
+function addHoursController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
 
     $scope.config = localStorageService.get('pageSettings');
 
-    if ($scope.editform){
-        $scope.dataJSON.dateRange = { startDate: $scope.dataJSON.StartDate, endDate: $scope.dataJSON.EndDate };
-    }
-  
+
+
     $scope.submit = function (form) {
 
 
         if (form.$valid) {
-
-            $scope.dataJSON.StartDate = $scope.dataJSON.dateRange.startDate;
-            $scope.dataJSON.EndDate = $scope.dataJSON.dateRange.endDate;
-
-            if ($scope.editform) {
-                var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATETIMESHEETURL, $scope.dataJSON);
-                res.then(function (data) {
-                    $scope.dataJSON = data;                   
-                    $state.reload();
-                });
+            if ($scope.dataJSON.ID) {
+                $scope.filterFn();
+                $uibModalInstance.close();
             }
             else {
-                var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
-                resn.then(function (data) {
-                    $scope.dataJSON = data;
-                    $state.reload();
-                });
-            }          
-
+                $scope.data.push($scope.dataJSON);
+                $scope.filterFn();
+                $uibModalInstance.close();
+            }
+            
         }
 
 
     }
-    
+
     $scope.close = function () {
         $uibModalInstance.close();
     }

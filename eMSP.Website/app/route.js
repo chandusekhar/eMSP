@@ -2082,19 +2082,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         })
         .state("timeSheet.manageTimeSheet", {
             url: '/manageTimeSheet',
-            templateUrl: 'app/components/timeSheet/view/manageTimeSheet.html',
-            controller: 'manageTimeSheetController',
+            templateUrl: 'app/components/timeSheet/view/timeSheet.html',
+            controller: 'timeSheetController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("app/components/payPeriod/config/payPeriod.json").success(function (data) { return data; });
+                    return $http.get("app/components/timeSheet/config/timeSheet.json").success(function (data) { return data; });
                 },
-                PayPeriodList: function (apiCall, localStorageService, APP_CONSTANTS) {
-
-                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLPAYPERIODS, {})
+                dataJSON: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLTIMESHEETS + 6, {})
                         .then(function (data) {
                             return data;
                         });
                 },
+                formAction: function () { return "Manage"; },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -2144,6 +2144,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        
 
         //country Routes Ends
         .state('off_canvas', {

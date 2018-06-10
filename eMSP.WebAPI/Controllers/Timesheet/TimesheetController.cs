@@ -83,7 +83,6 @@ namespace eMSP.WebAPI.Controllers.Timesheet
         }
 
         [Route("getCandidateTimesheet")]
-        [HttpPost]
         [Authorize(Roles = ApplicationRoles.TimesheetView)]
         [ResponseType(typeof(CandidateTimesheetViewModel))]
         public async Task<IHttpActionResult> GetCandidateTimesheet(long PlacementId)

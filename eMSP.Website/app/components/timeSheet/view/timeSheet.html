@@ -1,49 +1,47 @@
-<div class="row wrapper">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5 ng-if="!edit">Add Hours</h5>
-            <h5 ng-if="edit">Edit</h5>
+﻿
+<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#/dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>
         </div>
-        <div class="ibox-content">
-            <form name="form" novalidate>
-                <!-- Job Title -->
-                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Name.$error.required }">
-                    <label>Date * :</label>
-                    <input type="text" class="form-control" name="Name"
-                           ng-model="dataJSON.date"
-                           placeholder="Hours Worked"
-                           readonly />
-                    <span ng-show="dataJSON.submitted && form.Name.$error.required" class="text-danger">
-                        * Hours Worked is required
-                    </span>
-                </div>
-                <!-- Job Title -->
-                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Name.$error.required }">
-                    <label>Hours Worked * :</label>
-                    <input type="text" class="form-control" name="Name"
-                           ng-model="dataJSON.workHours"
-                           placeholder="Hours Worked"
-                           required />
-                    <span ng-show="dataJSON.submitted && form.Name.$error.required" class="text-danger">
-                        * Hours Worked is required
-                    </span>
-                </div>
-                <!-- Job Title -->
-                <div class="form-group col-md-6" ng-class="{ 'has-error': dataJSON.submitted && form.Description.$error.required }">
-                    <label>Break Hours * :</label>
-                    <input type="text" class="form-control" name="Description"
-                           ng-model="dataJSON.breakHours"
-                           placeholder="Break Hours"
-                           required />
-                    <span ng-show="dataJSON.submitted && form.Description.$error.required" class="text-danger">
-                        * Break Hours field is required
-                    </span>
-                </div>
-                <div class="col-lg-12">
-                    <button type="submit" ng-click="submit(form)" class="btn btn-primary">Submit</button>
-                    <button type="submit" ng-click="close()" class="btn btn-white">Cancel</button>
-                </div>
-            </form>
+        <div class="col-lg-2">
         </div>
     </div>
+    
+
+    <div  class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Time Sheet</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <timeSheet selected="day" data="dataJSON.CandidateTimesheetHours"></timeSheet>
+                            <div style="margin:10px">
+                                <button type="submit" ng-click="submit()" class="btn btn-primary">Submit</button>
+                                
+                            </div>
+                          
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+<!-- End wrapper-->

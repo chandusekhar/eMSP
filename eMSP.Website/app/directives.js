@@ -663,7 +663,7 @@ function hasPermission(authService) {
                 value = value.slice(1).trim();
             }
 
-            function toggleVisibilityBasedOnPermission() {                
+            function toggleVisibilityBasedOnPermission() {
                 var hasPermission = authService.hasPermission(value);
                 if (hasPermission && !notPermissionFlag || !hasPermission && notPermissionFlag) {
                     element[0].style.visibility = 'visible';
@@ -674,18 +674,19 @@ function hasPermission(authService) {
             }
 
             toggleVisibilityBasedOnPermission();
-            
-        }    
+
+        }
     };
 };
 
-function timesheet(){
+function timesheet() {
     return {
         restrict: "E",
-        templateUrl: 'views/common/timeSheet.html',
+        templateUrl: 'views/common/timeSheetTemplate.html',
         transclude: true,
         scope: {
-            selected: "="
+            selected: "=",
+            data: "="
         },
         link: function (scope) {
             scope.selected = _removeTime(scope.selected || moment());
@@ -706,6 +707,7 @@ function timesheet(){
                 _removeTime(next.month(next.month() + 1).date(1));
                 scope.month.month(scope.month.month() + 1);
                 _buildMonth(scope, next, scope.month);
+                scope.filterFn();
             };
 
             scope.previous = function () {
@@ -713,55 +715,98 @@ function timesheet(){
                 _removeTime(previous.month(previous.month() - 1).date(1));
                 scope.month.month(scope.month.month() - 1);
                 _buildMonth(scope, previous, scope.month);
+                scope.filterFn();
             };
 
-            
+            if (scope.data) {
+                scope.filterFn();
+            }
         },
-        controller: function ($scope, $uibModal) {
+        controller: function ($scope, $uibModal, $filter) {            
+
+            $scope.filterFn = function () {
+                angular.forEach($scope.weeks, function (week, key) {
+                    angular.forEach(week.days, function (day, key) {
+                        
+                        angular.forEach($scope.data, function (value, key) {
+                           
+                            if ($filter('date')(new Date(day.date), "MM-dd-yyyy") == $filter('date')(new Date(value.TimeDate), "MM-dd-yyyy")) {
+                                day.HoursWorked = value.HoursWorked;
+                                day.BreakHours = value.BreakHours;
+                            }
+
+                        });
+                    });
+
+                });
+
+            }
+
             $scope.addHours = function (date) {
                 $scope.editForm = false;
                 $scope.dataJSON = {};
-                $scope.dataJSON.date = date.date;
+                $scope.dataJSON.TimeDate = new Date(date.date);//$filter('date')(date.date, "MM-dd-yyyy");
+
                 var modalInstance = $uibModal.open({
-                    templateUrl: 'app/components/timeSheet/view/timeSheet.html',
+                    templateUrl: 'app/components/timeSheet/view/addHours.html',
                     scope: $scope,
-                    controller: 'timeSheetController',
+                    controller: 'addHoursController',
+                    windowClass: 'animated slideInRight'
+                });
+            }
+            $scope.updateHours = function (day) {
+                $scope.editForm = true;
+                $scope.dataJSON = {};
+
+                angular.forEach($scope.data, function (value, key) {
+
+                    if ($filter('date')(new Date(day.date), "MM-dd-yyyy") == $filter('date')(new Date(value.TimeDate), "MM-dd-yyyy")) {
+                        $scope.dataJSON = value;
+                    }
+
+                });
+               // $scope.dataJSON.TimeDate = new Date(date.date);//$filter('date')(date.date, "MM-dd-yyyy");
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/components/timeSheet/view/addHours.html',
+                    scope: $scope,
+                    controller: 'addHoursController',
                     windowClass: 'animated slideInRight'
                 });
             }
         }
     }
 }
-    function _removeTime(date) {
-        return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-    }
+function _removeTime(date) {
+    return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+}
 
-    function _buildMonth(scope, start, month) {
-        scope.weeks = [];
-        var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
-        while (!done) {
-            scope.weeks.push({ days: _buildWeek(date.clone(), month) });
-            date.add(1, "w");
-            done = count++ > 2 && monthIndex !== date.month();
-            monthIndex = date.month();
-        }
+function _buildMonth(scope, start, month) {
+    scope.weeks = [];
+    var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
+    while (!done) {
+        scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+        date.add(1, "w");
+        done = count++ > 2 && monthIndex !== date.month();
+        monthIndex = date.month();
     }
+}
 
-    function _buildWeek(date, month) {
-        var days = [];
-        for (var i = 0; i < 7; i++) {
-            days.push({
-                name: date.format("dd").substring(0, 1),
-                number: date.date(),
-                isCurrentMonth: date.month() === month.month(),
-                isToday: date.isSame(new Date(), "day"),
-                date: date
-            });
-            date = date.clone();
-            date.add(1, "d");
-        }
-        return days;
-    };
+function _buildWeek(date, month) {
+    var days = [];
+    for (var i = 0; i < 7; i++) {
+        days.push({
+            name: date.format("dd").substring(0, 1),
+            number: date.date(),
+            isCurrentMonth: date.month() === month.month(),
+            isToday: date.isSame(new Date(), "day"),
+            date: date
+        });
+        date = date.clone();
+        date.add(1, "d");
+    }
+    return days;
+};
 
 /**
  *

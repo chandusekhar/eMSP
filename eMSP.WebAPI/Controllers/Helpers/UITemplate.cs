@@ -30,6 +30,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool navAppointment = false;
         public bool navExpenseSpent = false;
         public bool navTimesheetStatus = false;
+        public bool navTimeSheet = false;
 
         //------------ Administration end ------------- // 
 
@@ -128,6 +129,8 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool ExpenseSpentEdit = false;
         public bool TimesheetStatusCreate = false;
         public bool TimesheetStatusEdit = false;
+        public bool TimesheetCreate = false;
+        public bool TimesheetEdit = false;
 
         //-------------payperiod end------------//
 
@@ -135,29 +138,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public UITemplate(List<string> Roles)
         {
 
-            #region Administration 
 
-            this.navManageVacancyTypes = Roles.Where(a => a.StartsWith("VacancyType")).ToList().Count > 0;
-            this.navManageCountry = Roles.Where(a => a.StartsWith("Country")).ToList().Count > 0;
-            this.navManageIndustry = Roles.Where(a => a.StartsWith("Industry")).ToList().Count > 0;
-            this.navManageDocuments = Roles.Where(a => a.StartsWith("Document")).ToList().Count > 0;
-            this.navManageQuestions = Roles.Where(a => a.StartsWith("Question")).ToList().Count > 0;
-            this.navMSPPayPeriod = Roles.Where(a => a.StartsWith("MSPPayPeriod")).ToList().Count > 0;
-
-            this.navManageRoleGroups = Roles.Where(a => a.StartsWith("Role")).ToList().Count > 0;
-            this.navManageUserRoles = Roles.Contains(ApplicationRoles.RoleAuthorizationFull) || Roles.Contains(ApplicationRoles.RoleAuthorizationCreate);
-            this.navAuthorization = this.navManageRoleGroups || this.navManageUserRoles;
-
-
-            this.navManageSuppliers = Roles.Where(a => a.StartsWith("Supplier")).ToList().Count > 0;
-            this.navManageCustomers = Roles.Where(a => a.StartsWith("Customer")).ToList().Count > 0;
-            this.navManageMSP = Roles.Where(a => a.StartsWith("MSP")).ToList().Count > 0;
-            this.navCompany = this.navManageSuppliers || this.navManageCustomers || this.navManageMSP;
-
-            this.navAdmistration = this.navManageVacancyTypes || this.navManageCountry || this.navManageIndustry || this.navManageDocuments || this.navManageQuestions || this.navAuthorization || this.navCompany || this.navMSPPayPeriod;
-
-
-            #endregion
 
             #region Job
 
@@ -244,6 +225,35 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.TimesheetStatusCreate = Roles.Contains(ApplicationRoles.TimesheetStatusCreate) || Roles.Contains(ApplicationRoles.TimesheetStatusFull);
             this.TimesheetStatusEdit = Roles.Contains(ApplicationRoles.TimesheetStatusFull);
 
+            this.TimesheetCreate = Roles.Contains(ApplicationRoles.TimesheetCreate) || Roles.Contains(ApplicationRoles.TimesheetFull);
+            this.TimesheetEdit = Roles.Contains(ApplicationRoles.TimesheetFull);
+
+
+            #region Administration 
+
+            this.navManageVacancyTypes = Roles.Where(a => a.StartsWith("VacancyType")).ToList().Count > 0;
+            this.navManageCountry = Roles.Where(a => a.StartsWith("Country")).ToList().Count > 0;
+            this.navManageIndustry = Roles.Where(a => a.StartsWith("Industry")).ToList().Count > 0;
+            this.navManageDocuments = Roles.Where(a => a.StartsWith("Document")).ToList().Count > 0;
+            this.navManageQuestions = Roles.Where(a => a.StartsWith("Question")).ToList().Count > 0;
+            this.navMSPPayPeriod = Roles.Where(a => a.StartsWith("MSPPayPeriod")).ToList().Count > 0;
+            this.navExpenseSpent = this.ExpenseSpentCreate || this.ExpenseSpentEdit;
+            this.navTimeSheet = this.TimesheetCreate || this.TimesheetEdit;
+
+            this.navManageRoleGroups = Roles.Where(a => a.StartsWith("Role")).ToList().Count > 0;
+            this.navManageUserRoles = Roles.Contains(ApplicationRoles.RoleAuthorizationFull) || Roles.Contains(ApplicationRoles.RoleAuthorizationCreate);
+            this.navAuthorization = this.navManageRoleGroups || this.navManageUserRoles;
+
+
+            this.navManageSuppliers = Roles.Where(a => a.StartsWith("Supplier")).ToList().Count > 0;
+            this.navManageCustomers = Roles.Where(a => a.StartsWith("Customer")).ToList().Count > 0;
+            this.navManageMSP = Roles.Where(a => a.StartsWith("MSP")).ToList().Count > 0;
+            this.navCompany = this.navManageSuppliers || this.navManageCustomers || this.navManageMSP;
+
+            this.navAdmistration = this.navManageVacancyTypes || this.navManageCountry || this.navManageIndustry || this.navManageDocuments || this.navManageQuestions || this.navAuthorization || this.navCompany || this.navMSPPayPeriod;
+
+
+            #endregion
         }
 
 

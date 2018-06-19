@@ -96,9 +96,44 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-                    db.Entry(model).State = EntityState.Modified;
 
-                    int x = await Task.Run(() => db.SaveChangesAsync());
+                    var existingParent = db.tblCandidateTimesheets
+                                           .Where(p => p.ID == model.ID)
+                                           .Include(p => p.tblCandidateTimesheetHours)
+                                           .SingleOrDefault();
+
+                    if (existingParent != null)
+                    {
+                        db.Entry(existingParent).CurrentValues.SetValues(model);
+
+                        foreach (var existingChild in existingParent.tblCandidateTimesheetHours.ToList())
+                        {
+                            if (!model.tblCandidateTimesheetHours.Any(c => c.ID == existingChild.ID))
+                                db.tblCandidateTimesheetHours.Remove(existingChild);
+                        }
+
+                        foreach (var childModel in model.tblCandidateTimesheetHours)
+                        {
+                            var existingChild = existingParent.tblCandidateTimesheetHours
+                                .Where(c => c.ID == childModel.ID)
+                                .SingleOrDefault();
+
+                            if (existingChild != null)
+                                db.Entry(existingChild).CurrentValues.SetValues(childModel);
+                            else
+                            {
+                                
+                                existingParent.tblCandidateTimesheetHours.Add(childModel);
+                            }
+                        }
+
+                        int x = await Task.Run(() => db.SaveChangesAsync());
+                    }
+                    else
+                    {
+                        await Task.Run(() => InsertCandidateTimesheet(model));
+                    }
+                   
                 }
             }
             catch (Exception)

@@ -64,6 +64,28 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+
+        internal static async Task<List<tblCandidateTimesheet>> GetTimesheetDetailsByDate(DateTime fromDate , DateTime toDate)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateTimesheets
+                                               .Include(x => x.tblCandidatePlacement)
+                                               .Include(x => x.tblTimesheetStatu)
+                                               .Include(x => x.tblMSPPayPeriod)
+                                               .Include(x => x.tblCandidateTimesheetHours)
+                                               .Include(x => x.tblCandidateTimesheetCategoriesHours)
+                                               .Where(x => x.tblMSPPayPeriod.StartDate >= fromDate || x.tblMSPPayPeriod.EndDate <= toDate).ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
         #endregion
 
         #region Insert

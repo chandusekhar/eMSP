@@ -686,7 +686,9 @@ function timesheet() {
         transclude: true,
         scope: {
             selected: "=",
-            data: "="
+            data: "=",
+            startDate: "=",
+            endDate: "="
         },
         link: function (scope) {
             scope.selected = _removeTime(scope.selected || moment());
@@ -697,7 +699,10 @@ function timesheet() {
             _removeTime(start.day(0));
 
             _buildMonth(scope, start, scope.month);
-
+            if (scope.data) {
+                scope.filterFn();
+            }
+            
             scope.select = function (day) {
                 scope.selected = day.date;
             };
@@ -718,9 +723,31 @@ function timesheet() {
                 scope.filterFn();
             };
 
-            if (scope.data) {
-                scope.filterFn();
-            }
+            scope.$watch("startDate", function (newValue, oldValue) {
+
+                if (newValue) {
+
+
+                    scope.selected = _removeTime(newValue || moment());
+                    scope.startDate = _removeTime(newValue || moment());
+                    scope.month = scope.selected.clone();
+
+                    var start = scope.selected.clone();
+                    start.date(1);
+                    _removeTime(start.day(0));
+
+                    _buildMonth(scope, start, scope.month);
+                    if (scope.data) {
+                        scope.filterFn();
+                    }
+                }
+            });
+            scope.$watch("endDate", function (newValue, oldValue) {
+                if (newValue) {
+                    scope.endDate = _removeTime(newValue || moment());
+                }
+            });
+           
         },
         controller: function ($scope, $uibModal, $filter) {            
 
@@ -778,7 +805,7 @@ function timesheet() {
     }
 }
 function _removeTime(date) {
-    return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+    return date.hour(0).minute(0).second(0).millisecond(0);
 }
 
 function _buildMonth(scope, start, month) {

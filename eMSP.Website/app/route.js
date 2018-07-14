@@ -2088,12 +2088,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/timeSheet/config/timeSheet.json").success(function (data) { return data; });
                 },
-                dataJSON: function (apiCall, APP_CONSTANTS) {
-                    return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLTIMESHEETS + 6, {})
-                        .then(function (data) {
-                            return data;
-                        });
-                },
                 formAction: function () { return "Manage"; },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

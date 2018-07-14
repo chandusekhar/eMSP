@@ -65,25 +65,33 @@ namespace eMSP.Data.Extensions
 
         public static CandidateTimesheetViewModel ConvertToCandidateTimesheetViewModel(this tblCandidateTimesheet data)
         {
-            return new CandidateTimesheetViewModel()
+            if(data == null)
             {
-                ID = Convert.ToInt64(data.ID),
-                PayPeriodID = data.PayPeriodID,
-                PlacementID = data.PlacementID,
-                StatusID = data.StatusID,
-                VersionNumber = data.VersionNumber,
-                isActive = data.IsActive,
-                isDeleted = data.IsDeleted ?? false,
-                createdUserID = data.CreatedUserID,
-                updatedUserID = data.UpdatedUserID,
-                createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp,
-                CandidateTimesheetHours = data.tblCandidateTimesheetHours.Select(x => x?.ConvertToCandidateTimesheetHoursViewModel()).ToList(),
-                CandidateTimesheetCategoriesHours = data.tblCandidateTimesheetCategoriesHours.Select(x => x?.ConvertToCandidateTimesheetCategoriesHoursViewModel()).ToList(),
-                CandidatePlacement = data.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
-                MSPPayPeriods = data.tblMSPPayPeriod?.ConvertToMSPPayPeriodViewModel(),
-                TimesheetStatus = data.tblTimesheetStatu?.ConvertToTimesheetStatusViewModel()
-            };
+                return null;
+            }
+            else
+            {
+                return new CandidateTimesheetViewModel()
+                {
+                    ID = Convert.ToInt64(data.ID),
+                    PayPeriodID = data.PayPeriodID,
+                    PlacementID = data.PlacementID,
+                    StatusID = data.StatusID,
+                    VersionNumber = data.VersionNumber,
+                    isActive = data.IsActive,
+                    isDeleted = data.IsDeleted ?? false,
+                    createdUserID = data.CreatedUserID,
+                    updatedUserID = data.UpdatedUserID,
+                    createdTimestamp = data.CreatedTimestamp,
+                    updatedTimestamp = data.UpdatedTimestamp,
+                    CandidateTimesheetHours = data.tblCandidateTimesheetHours.Select(x => x?.ConvertToCandidateTimesheetHoursViewModel()).ToList(),
+                    CandidateTimesheetCategoriesHours = data.tblCandidateTimesheetCategoriesHours.Select(x => x?.ConvertToCandidateTimesheetCategoriesHoursViewModel()).ToList(),
+                    CandidatePlacement = data.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
+                    MSPPayPeriods = data.tblMSPPayPeriod?.ConvertToMSPPayPeriodViewModel(),
+                    TimesheetStatus = data.tblTimesheetStatu?.ConvertToTimesheetStatusViewModel()
+                };
+            }
+            
         }
 
         public static tblCandidateTimesheetHour ConvertTotblCandidateTimesheetHour(this CandidateTimesheetHoursViewModel data)

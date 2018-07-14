@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using eMSP.WebAPI.Controllers.Helpers;
 using System.Collections.Generic;
+using eMSP.WebAPI.Models;
+using System.Net.Http;
+using eMSP.WebAPI.Utility;
 
 namespace eMSP.WebAPI.Controllers.Candidate
 {
@@ -21,12 +25,23 @@ namespace eMSP.WebAPI.Controllers.Candidate
         #region Intialisation
 
         private CandidateManager CandidateService;
+        private ApplicationUserManager _userManager;
 
         public CandidateController()
         {
             CandidateService = new CandidateManager();
         }
-
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         #endregion
 
         #region Get
@@ -135,6 +150,22 @@ namespace eMSP.WebAPI.Controllers.Candidate
                 throw;
             }
         }
+
+        [Route("getSupplierCandidatePlacementDetails")]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> GetSupplierCandidatePlacementDetails(long SuplierId)
+        {
+            try
+            {
+                return Ok(await CandidateService.GetSupplierCandidatePlacement(SuplierId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region Insert
@@ -147,6 +178,10 @@ namespace eMSP.WebAPI.Controllers.Candidate
         {
             try
             {
+                var user = new ApplicationUser() { UserName = data.Candidate.Email, Email = data.Candidate.Email };
+
+                IdentityResult result = await UserManager.CreateAsync(user, AppConstant.AppPassword);
+
                 string userId = User.Identity.GetUserId();
 
                 Helpers.Helpers.AddBaseProperties(data.Candidate, "create", userId);
@@ -160,6 +195,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
                     Helpers.Helpers.AddBaseProperties(con, "create", userId);
                 }
 
+              
 
                 return Ok(await CandidateService.CreateCandidate(data));
             }

@@ -168,6 +168,21 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+
+        public async Task<CandidateTimesheetViewModel> GetCandidateTimesheetDetails(long placementId, long payPeriodId)
+        {
+            try
+            {
+                tblCandidateTimesheet res = await Task.Run(() => ManageCandidateTimesheets.GetCandidateTimesheet(placementId, payPeriodId));
+
+                return res.ConvertToCandidateTimesheetViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<CandidateTimesheetViewModel> GetTimesheetDetailsById(long TimesheetId)
         {
             try
@@ -203,6 +218,20 @@ namespace eMSP.Data.DataServices.Candidate
                 tblCandidateTimesheetCategoriesHour res = await Task.Run(() => ManageCandidateTimesheetCategoriesHours.GetCandidateTimesheetCategoriesHours(Id));
 
                 return res.ConvertToCandidateTimesheetCategoriesHoursViewModel();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<SuplierCandidatePlacementModel>> GetSupplierCandidatePlacement(long SupplierId)
+        {
+            try
+            {
+                return await Task.Run(() => ManageCandidate.GetSupplierCandidatePlacement(SupplierId));
+
+                
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
 ﻿using eMSP.DataModel;
+using eMSP.ViewModel.Candidate;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -33,6 +34,28 @@ namespace eMSP.Data.DataServices.Candidate
                                                .Include(x => x.tblCandidateTimesheetHours)
                                                .Include(x => x.tblCandidateTimesheetCategoriesHours)
                                                .Where(x => x.PlacementID == PlacementId).FirstOrDefault());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        internal static async Task<tblCandidateTimesheet> GetCandidateTimesheet(long placementId, long payPeriodId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateTimesheets
+                                               .Include(x => x.tblCandidatePlacement)
+                                               .Include(x => x.tblTimesheetStatu)
+                                               .Include(x => x.tblMSPPayPeriod)
+                                               .Include(x => x.tblCandidateTimesheetHours)
+                                               .Include(x => x.tblCandidateTimesheetCategoriesHours)
+                                               .Where(x => x.PlacementID == placementId & x.PayPeriodID == payPeriodId).FirstOrDefault());
                 }
             }
             catch (Exception)
@@ -164,6 +187,8 @@ namespace eMSP.Data.DataServices.Candidate
 
             }
         }
+
+       
 
         #endregion
 

@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using eMSP.ViewModel.User;
 using eMSP.WebAPI.Controllers.Helpers;
+using eMSP.WebAPI.Utility;
 
 namespace eMSP.WebAPI.Controllers.User
 {
@@ -143,7 +144,7 @@ namespace eMSP.WebAPI.Controllers.User
             {
                 var user = new ApplicationUser() { UserName = data.emailAddress, Email = data.emailAddress };
 
-                IdentityResult result = await UserManager.CreateAsync(user, "Welcome@123");
+                IdentityResult result = await UserManager.CreateAsync(user, AppConstant.AppPassword);
 
                 if (!result.Succeeded)
                 {

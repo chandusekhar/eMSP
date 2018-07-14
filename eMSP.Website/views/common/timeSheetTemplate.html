@@ -115,11 +115,12 @@
         <div class="col-md-2 nopadding" style="border:1px solid #e5e5e5; height: 50px !important;" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">
             <div class="day" style="padding:2px"><b>{{day.number}}</b></div>
             <div ng-if="day.isCurrentMonth" class="text-center" style="padding:5px;font-size:10px">
-                
-                <a ng-if="!day.HoursWorked" ng-click="addHours(day)">log hours</a>
+
                
+                <a ng-if="!day.HoursWorked && (day.date >= startDate && day.date <= endDate)" ng-click="addHours(day)">log hours</a>
+
                 <a ng-if="day.HoursWorked" ng-click="updateHours(day)" style="color:orangered">{{day.HoursWorked}} &nbsp; hours.</a>
-               
+
 
             </div>
     </div>

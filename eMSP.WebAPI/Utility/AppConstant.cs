@@ -10,6 +10,10 @@ namespace eMSP.WebAPI.Utility
     {
         static string filename =  HttpContext.Current.Server.MapPath(String.Format("{0}{1}.txt",ConfigurationManager.AppSettings["logFileName"] , DateTime.Now.ToString("yyyyMMdd")));
         static string _apppath = HttpContext.Current.Server.MapPath("~/");
+        static string _password = ConfigurationManager.AppSettings["CustomPassword"].ToUpper();
+
+
+
         public static string AppPath
         {
             get { return _apppath; }
@@ -27,6 +31,14 @@ namespace eMSP.WebAPI.Utility
             get { return ConfigurationManager.AppSettings["baseUploadPath"]; }
 
         }
+
+        public static string AppPassword
+        {
+            get { return _password; }
+
+        }
+
+        
     }
 
 }

@@ -127,6 +127,7 @@ angular.module('eMSPApp')
             CANDIDATEURL: {
                 SEARCHURL: "api/candidate/getAllCandidates",
                 GETURL: "api/candidate/getCandidate?candidateId=",
+                GETSUPLIERCANDIDATEPLACEMENTURL: "api/candidate/getSupplierCandidatePlacementDetails?SuplierId=",
                 CREATEURL: "api/candidate/creatCandidate",
                 UPDATEURL: "api/candidate/updateCandidate",
                 DELETEURL: "api/candidate/deleteCandidate"
@@ -152,7 +153,7 @@ angular.module('eMSPApp')
                 GETALLPAYPERIODS: "api/timesheet/getAllMSPPayPeriods",
                 CREATEPAYPERIODURL: "api/timesheet/insertMSPPayPeriod",
                 UPDATEPAYPERIODURL: "api/timesheet/updateMSPPayPeriod",
-                GETALLTIMESHEETS: "api/timesheet/getCandidateTimesheet?PlacementId=",
+                GETALLTIMESHEETS: "api/timesheet/getCandidateTimesheetDetails?",
                 CREATETIMESHEETURL: "api/timesheet/insertTimeSheet",
                 UPDATETIMESHEETURL: "api/timesheet/updateTimeSheet"
             },

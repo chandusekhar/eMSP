@@ -153,6 +153,27 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+
+        internal static async Task<List<SuplierCandidatePlacementModel>> GetSupplierCandidatePlacement(long supplierId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await db.tblCandidatePlacements.Where(a => a.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().SupplierID == supplierId)
+                        .Include(a => a.tblCandidateSubmission.tblCandidate)
+                        .Select(a => new SuplierCandidatePlacementModel() { CandidateId = a.tblCandidateSubmission.tblCandidate.ID, CandidateName = a.tblCandidateSubmission.tblCandidate.FirstName + " " + a.tblCandidateSubmission.tblCandidate.LastName, PlacementId = a.ID, SupplierId = supplierId }).ToListAsync();
+                   
+
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
         #endregion
 
         #region Insert
@@ -211,6 +232,8 @@ namespace eMSP.Data.DataServices.Candidate
 
             }
         }
+
+        
 
         internal static async Task<tblCandidate> InsertCandidate(tblCandidate model)
         {

@@ -27,16 +27,55 @@
                     <div class="ibox-title">
                         <h5>Time Sheet</h5>
                     </div>
-                    <div class="ibox-content">
+                   
+                    <div ng-if="compType == 'MSP'">
+                        <div class="form-group col-md-4">
+                            <label>Supplier* :</label>
+                            <ui-select ng-model="compId" theme="bootstrap" required name="companyId" ng-change="changeCompany($select.selected)">
+                                <ui-select-match placeholder="Supplier">{{$select.selected.companyName}}</ui-select-match>
+                                <ui-select-choices repeat="res.companyName  as res in companyList | filter: $select.search">
+                                    <div ng-bind-html="res.companyName | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </div>
+                    </div>
+                    <div ng-if="compType == 'MSP' || compType == 'Supplier'">
+                        <div class="form-group col-md-4">
+                            <label>Candidate* :</label>
+                            <ui-select ng-model="dataJSON.PlacementID" theme="bootstrap" required name="PlacementId">
+                                <ui-select-match placeholder="Candidate">{{$select.selected.CandidateName}}</ui-select-match>
+                                <ui-select-choices repeat="res.PlacementId  as res in placementList | filter: $select.search">
+                                    <div ng-bind-html="res.CandidateName | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group col-md-4">
+                            <label>Pay Period* :</label>
+                            <ui-select ng-model="dataJSON.PayPeriodID" theme="bootstrap" required name="ID" ng-change="changePayperiod($select.selected)">
+                                <ui-select-match placeholder="Pay Period">{{$select.selected.StartDate | date}} - {{$select.selected.EndDate | date}}</ui-select-match>
+                                <ui-select-choices repeat="res.ID  as res in payPeriodList | filter: $select.search">
+                                    <div>{{res.StartDate | date}} - {{res.EndDate | date}}</div>
+                                </ui-select-choices>
+                            </ui-select>
+
+                        </div>
+                    </div>
+                    <div ng-if="showTimeSheet == true" class="ibox-content">
+
                         <div>
-                            <timeSheet selected="day" data="dataJSON.CandidateTimesheetHours"></timeSheet>
+
+                            <timeSheet selected="day" start-date="startDate" end-date="endDate" data="dataJSON.CandidateTimesheetHours"></timeSheet>
                             <div style="margin:10px">
                                 <button type="submit" ng-click="submit()" class="btn btn-primary">Submit</button>
-                                
+
                             </div>
-                          
+
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

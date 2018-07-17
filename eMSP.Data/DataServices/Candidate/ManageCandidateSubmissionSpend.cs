@@ -89,6 +89,29 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task<List<tblCandidateSubmissionSpend>> GetCandidateExpenseSpends(long placementId, long payPeriodId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateSubmissionSpends
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles)
+                                                  .Include(a => a.tblMSPPayPeriod)
+                                                  .Include(a => a.tblCandidateSubmissionSpendFiles.Select(b => b.tblFile))
+                                                  .Include(a => a.tblMSPSpendCategory)
+                                                  .Include(a => a.tblTimesheetStatu)
+                                                  .Include(a => a.tblCandidatePlacement)
+                                                  .Where(x => x.PlacementID == placementId && x.PayPeriodID == payPeriodId).ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Insert
@@ -109,6 +132,8 @@ namespace eMSP.Data.DataServices.Candidate
                 throw;
             }
         }
+
+        
 
         #endregion
 

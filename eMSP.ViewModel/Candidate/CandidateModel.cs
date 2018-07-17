@@ -113,4 +113,13 @@ namespace eMSP.ViewModel.Candidate
         public long vacancyQuestionId { get; set; }
         public string responses { get; set; }
     }
+
+    public partial class SuplierCandidatePlacementModel : BaseModel
+    {
+        public SuplierCandidatePlacementModel() { }
+        public long CandidateId { get; set; }
+        public long SupplierId { get; set; }
+        public long PlacementId { get; set; }
+        public string CandidateName { get; set; }
+    }
 }

@@ -53,7 +53,7 @@ function manageVacancieTypeController($scope, $state, $uibModal, localStorageSer
     }
 }
 
-function createVacancieTypeController($scope, apiCall, APP_CONSTANTS, $http, toaster) {
+function createVacancieTypeController($state, $scope, apiCall, APP_CONSTANTS, $http, toaster) {
     $scope.configJSON = {};
     $scope.edit = false;
     $scope.formAction = $scope.editform ? "Update" : "Create";
@@ -65,7 +65,7 @@ function createVacancieTypeController($scope, apiCall, APP_CONSTANTS, $http, toa
 
     $scope.submit = function (form) {
         $scope.submitted = true;
-        
+
         if (form.$valid) {
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.VACANCY.UPDATEMSPVACANCYTYPEURL, $scope.ltdataJSON);
@@ -79,14 +79,15 @@ function createVacancieTypeController($scope, apiCall, APP_CONSTANTS, $http, toa
                 res.then(function (data) {
                     $scope.ltdataJSON = data;
                     $scope.resMSPVacancieType.unshift(data);
-                    toaster.warning({ body: "Data Created Successfully." });
+                    toaster.success({ body: "Data Created Successfully." });
                 });
             }
             //$uibModalInstance.close();
+            $state.reload();
         }
     }
-    
+
     $scope.reset = function () {
         //$uibModalInstance.close();
-    }    
+    }
 }

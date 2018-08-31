@@ -23,7 +23,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <a ng-click="model(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
+                            <a ng-click="model(false,null)" class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                                Create
+                            </a>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -53,7 +56,11 @@
                                                 <span style="float:left">{{v.PlacementID}}</span>
                                             </td>
                                             <td class="project-title">
-                                                <span style="float:left"><small>{{v.MSPPayperiod.StartDate | stringToDate : "MM/dd/yyyy" }} - {{v.MSPPayperiod.EndDate | stringToDate : "MM/dd/yyyy" }}</small></span>
+                                                <span style="float:left">
+                                                    <small>
+                                                        {{v.MSPPayperiod.StartDate | stringToDate : "MM/dd/yyyy" }} - {{v.MSPPayperiod.EndDate | stringToDate : "MM/dd/yyyy" }}
+                                                    </small>
+                                                </span>
                                             </td>
                                             <td class="project-people">
                                                 <span style="float:left">{{v.MSPSpendCategory.Name}}</span>
@@ -84,9 +91,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>

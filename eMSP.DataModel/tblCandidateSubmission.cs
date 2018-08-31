@@ -17,6 +17,7 @@ namespace eMSP.DataModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCandidateSubmission()
         {
+            this.tblCandidatePlacements = new HashSet<tblCandidatePlacement>();
             this.tblCandidateSubmissionAppointments = new HashSet<tblCandidateSubmissionAppointment>();
             this.tblCandidateSubmissionComments = new HashSet<tblCandidateSubmissionComment>();
             this.tblCandidateSubmissionDocumentResponses = new HashSet<tblCandidateSubmissionDocumentRespons>();
@@ -34,7 +35,11 @@ namespace eMSP.DataModel
         public string CreatedUserID { get; set; }
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
+        public decimal PayRate { get; set; }
+        public Nullable<decimal> PayRateMarkUp { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidatePlacement> tblCandidatePlacements { get; set; }
         public virtual tblCandidate tblCandidate { get; set; }
         public virtual tblCandidateStatu tblCandidateStatu { get; set; }
         public virtual tblVacancy tblVacancy { get; set; }

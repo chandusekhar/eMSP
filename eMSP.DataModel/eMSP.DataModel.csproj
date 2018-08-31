@@ -69,9 +69,6 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>eMSP.tt</DependentUpon>
-    </Compile>
     <Compile Include="eMSP.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,6 +112,9 @@
     <Compile Include="tblCandidateIndustry.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidatePlacement.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblCandidateSkill.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
@@ -142,7 +142,22 @@
     <Compile Include="tblCandidateSubmissionDocumentRespons.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblCandidateSubmissionSpend.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateSubmissionSpendFile.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblCandidateSubmissionsQuestionsRespons.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateTimesheet.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateTimesheetCategoriesHour.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCandidateTimesheetHour.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblComment.cs">
@@ -196,10 +211,25 @@
     <Compile Include="tblMSPLocationBranch.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblMSPPayPeriod.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblMSPQuestion.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPRequiredDocument.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPSpendCategory.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPTimeCategory.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPTimeGroup.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMSPTimeGroupCategory.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblMSPUser.cs">
@@ -218,6 +248,9 @@
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblSupplierUser.cs">
+      <DependentUpon>eMSP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblTimesheetStatu.cs">
       <DependentUpon>eMSP.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserLocationBranch.cs">
@@ -252,7 +285,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="eMSP.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>eMSP.Designer.cs</LastGenOutput>

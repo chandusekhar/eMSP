@@ -155,7 +155,7 @@ namespace eMSP.WebAPI.Controllers.User
                 Helpers.Helpers.AddBaseProperties(data, "create", data.userId);
                 return Ok(await dao.CreateUser(data));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -10,7 +10,7 @@ namespace eMSP.WebAPI.Utility
     {
         static string filename =  HttpContext.Current.Server.MapPath(String.Format("{0}{1}.txt",ConfigurationManager.AppSettings["logFileName"] , DateTime.Now.ToString("yyyyMMdd")));
         static string _apppath = HttpContext.Current.Server.MapPath("~/");
-        static string _password = ConfigurationManager.AppSettings["CustomPassword"].ToUpper();
+        static string _password = ConfigurationManager.AppSettings["CustomPassword"];
 
 
 

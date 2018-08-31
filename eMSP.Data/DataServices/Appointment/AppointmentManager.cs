@@ -287,7 +287,7 @@ namespace eMSP.Data.DataServices.Appointment
         {
             try
             {
-                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.ID == ID).FirstOrDefaultAsync();
+                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.CandidateSubmissionID == ID).FirstOrDefaultAsync();
 
                 CandidateSubmissionAppointmentViewModel obj = null;
 
@@ -330,7 +330,7 @@ namespace eMSP.Data.DataServices.Appointment
                             isActive = x.IsActive,
                             isDeleted = x.IsDeleted
                         }).ToList(),
-                        UserComments = appointment.tblCandidateSubmissionAppointmentUserComments.Select(x => new CandidateSubmissionAppointmentUserCommentViewModel()
+                        UserComments = appointment?.tblCandidateSubmissionAppointmentUserComments?.Select(x => new CandidateSubmissionAppointmentUserCommentViewModel()
                         {
                             ID = x.ID,
                             AppointmentID = x.AppointmentID,
@@ -384,7 +384,7 @@ namespace eMSP.Data.DataServices.Appointment
                             ID = appointment.tblAppointmentType.ID,
                             Name = appointment.tblAppointmentType.Name
                         },
-                        Slots = appointment.tblCandidateSubmissionAppointmentSlots.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
+                        Slots = appointment?.tblCandidateSubmissionAppointmentSlots?.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
                         {
                             ID = x.ID,
                             AppintmentID = x.AppintmentID,
@@ -393,7 +393,7 @@ namespace eMSP.Data.DataServices.Appointment
                             isActive = x.IsActive,
                             IsFinalised = x.IsFinalised
                         }).ToList(),
-                        Users = appointment.tblCandidateSubmissionAppointmentUsers.Select(x => new CandidateSubmissionAppointmentUserViewModel()
+                        Users = appointment?.tblCandidateSubmissionAppointmentUsers?.Select(x => new CandidateSubmissionAppointmentUserViewModel()
                         {
                             ID = x.ID,
                             AppointmentID = x.AppointmentID,
@@ -401,7 +401,7 @@ namespace eMSP.Data.DataServices.Appointment
                             isActive = x.IsActive,
                             isDeleted = x.IsDeleted
                         }).ToList(),
-                        UserComments = appointment.tblCandidateSubmissionAppointmentUserComments.Select(x => new CandidateSubmissionAppointmentUserCommentViewModel()
+                        UserComments = appointment?.tblCandidateSubmissionAppointmentUserComments?.Select(x => new CandidateSubmissionAppointmentUserCommentViewModel()
                         {
                             ID = x.ID,
                             AppointmentID = x.AppointmentID,
@@ -430,7 +430,7 @@ namespace eMSP.Data.DataServices.Appointment
             try
             {
 
-                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.ID == id).FirstOrDefaultAsync();
+                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.CandidateSubmissionID == id).FirstOrDefaultAsync();
                 CandidateSubmissionAppointmentViewModel obj = null;
                 if (appointment != null)
                 {

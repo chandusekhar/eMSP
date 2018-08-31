@@ -18,6 +18,7 @@ namespace eMSP.DataModel
         public tblCandidateSubmissionAppointment()
         {
             this.tblCandidateSubmissionAppointmentSlots = new HashSet<tblCandidateSubmissionAppointmentSlot>();
+            this.tblCandidateSubmissionAppointmentUserComments = new HashSet<tblCandidateSubmissionAppointmentUserComment>();
             this.tblCandidateSubmissionAppointmentUsers = new HashSet<tblCandidateSubmissionAppointmentUser>();
         }
     
@@ -39,6 +40,8 @@ namespace eMSP.DataModel
         public virtual tblCandidateSubmission tblCandidateSubmission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateSubmissionAppointmentSlot> tblCandidateSubmissionAppointmentSlots { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCandidateSubmissionAppointmentUserComment> tblCandidateSubmissionAppointmentUserComments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
     }

@@ -29,7 +29,15 @@ function managePayPeriodController($scope, $state, $uibModal, localStorageServic
             windowClass: 'animated slideInRight'
         });
     }
-    
+
+    $scope.delete = function (data) {
+        data.isDeleted = true;
+        var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATEPAYPERIODURL, data);
+        res.then(function (data) {
+            toaster.warning({ body: "Data Updated Successfully." });
+            $scope.PayPeriodList.splice(data,1)
+        });
+    }
 }
 
 function payPeriodController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster, $uibModalInstance) {
@@ -42,33 +50,29 @@ function payPeriodController($scope, $state, localStorageService, ngAuthSettings
   
     $scope.submit = function (form) {
 
-
         if (form.$valid) {
 
             $scope.dataJSON.StartDate = $scope.dataJSON.dateRange.startDate;
             $scope.dataJSON.EndDate = $scope.dataJSON.dateRange.endDate;
 
-            if ($scope.editform) {
+            if ($scope.editform) {                
                 var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATEPAYPERIODURL, $scope.dataJSON);
                 res.then(function (data) {
-                    $scope.dataJSON = data;                   
+                    $uibModalInstance.close();
                     toaster.warning({ body: "Data Updated Successfully." });
-                    $state.reload();
                 });
             }
             else {
                 var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATEPAYPERIODURL, $scope.dataJSON);
-                resn.then(function (data) {
-                    $scope.dataJSON = data;
-                    toaster.warning({ body: "Data Created Successfully." });                    
+                resn.then(function (data) {                                        
+                    $uibModalInstance.close();
+                    toaster.success({ body: "Data Created Successfully." });                    
                     $state.reload();
                 });
-            }          
-
+            }
         }
+    }    
 
-
-    }
     
     $scope.close = function () {
         $uibModalInstance.close();

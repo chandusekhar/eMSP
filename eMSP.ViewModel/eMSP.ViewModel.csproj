@@ -40,11 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment\AppointmentModel.cs" />
+    <Compile Include="Appointment\AppointmentStatusViewModel.cs" />
+    <Compile Include="Appointment\AppointmentTypeViewModel.cs" />
+    <Compile Include="Appointment\CandidateSubmissionAppointmentSlotViewModel.cs" />
+    <Compile Include="Appointment\CandidateSubmissionAppointmentUserCommentViewModel.cs" />
+    <Compile Include="Appointment\CandidateSubmissionAppointmentUserViewModel.cs" />
+    <Compile Include="Appointment\CandidateSubmissionAppointmentViewModel.cs" />
     <Compile Include="App\App.cs" />
     <Compile Include="Candidate\CandidateModel.cs" />
+    <Compile Include="Candidate\CandidatePlacementViewModel.cs" />
+    <Compile Include="Candidate\CandidateSubmissionSpendFilesViewModel.cs" />
+    <Compile Include="Candidate\CandidateSubmissionSpendViewModel.cs" />
+    <Compile Include="Candidate\CandidateTimesheetCategoriesHoursViewModel.cs" />
+    <Compile Include="Candidate\CandidateTimesheetHoursViewModel.cs" />
+    <Compile Include="Candidate\CandidateTimesheetViewModel.cs" />
+    <Compile Include="Candidate\TimesheetStatusViewModel.cs" />
     <Compile Include="Comments\CommentModel.cs" />
     <Compile Include="Comments\CommentUsersModel.cs" />
     <Compile Include="Company\CommonModel.cs" />
+    <Compile Include="Dashboard\DashboardDataViewModel.cs" />
     <Compile Include="Enum\CompanyType.cs" />
     <Compile Include="Files\FilesModel.cs" />
     <Compile Include="JobVacancies\MSPVacancieType.cs" />
@@ -56,6 +71,11 @@
     <Compile Include="LocationBranch\LocationBranchUIModel.cs" />
     <Compile Include="LocationBranch\LocationModel.cs" />
     <Compile Include="MSP\MSPDetailsUIModel.cs" />
+    <Compile Include="MSP\MSPPayPeriodViewModel.cs" />
+    <Compile Include="MSP\MSPSpendCategoryViewModel.cs" />
+    <Compile Include="MSP\MSPTimeCategoriesViewModel.cs" />
+    <Compile Include="MSP\MSPTimeGroupCategoriesViewModel.cs" />
+    <Compile Include="MSP\MSPTimeGroupViewModel.cs" />
     <Compile Include="MSP\QuestionViewModel.cs" />
     <Compile Include="MSP\RequiredDocumentViewModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />

@@ -1314,6 +1314,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         },
                         {
                             files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
                         }
                     ]);
                 }
@@ -2017,7 +2021,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                         });
                 },
                 ExpenseList: function (apiCall, localStorageService, APP_CONSTANTS) {
-                    var id = 6; //localStorageService.get('PlacementId');
+                    var id = 1; //localStorageService.get('PlacementId');
                     return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETALLEXPENSES + id, {})
                         .then(function (data) {
                             return data;

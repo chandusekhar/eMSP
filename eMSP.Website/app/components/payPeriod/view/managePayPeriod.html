@@ -23,7 +23,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <a ng-click="model(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
+                            <a ng-click="model(false,null)" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Create
+                            </a>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -35,27 +37,31 @@
                                         <tr>
                                             <th>S.No</th>
                                             <th>Start Date</th>
-                                            <th>End Date</th>                                            
+                                            <th>End Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="v in PayPeriodList" id="row_{{v.ID}}">
                                             <td class="project-actions">
-
                                                 <span style="float:left">PP000{{v.ID}}</span>
-
                                             </td>
                                             <td class="project-title">
                                                 <span style="float:left">{{v.StartDate | stringToDate : "MM/dd/yyyy" }}</span>
                                             </td>
                                             <td class="project-people">
                                                 <span style="float:left">{{v.EndDate | stringToDate : "MM/dd/yyyy" }}</span>
-                                            </td>                                        
-                                            
-
+                                            </td>
                                             <td class="project-status center">
-                                                <a ng-click="model(true,v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                                <a ng-click="model(true,v)" class="btn btn-white btn-sm">
+                                                    <i class="fa fa-pencil"></i>
+                                                    Edit
+                                                </a>
+                                                <a ng-click="delete(v)" class="btn btn-white btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                    Delete
+                                                </a>
+                                               
                                             </td>
                                         </tr>
                                     </tbody>
@@ -68,9 +74,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>

@@ -20,6 +20,7 @@ namespace eMSP.DataModel
             this.tblFileTypes = new HashSet<tblFileType>();
             this.tblMSPCustomers = new HashSet<tblMSPCustomer>();
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
+            this.tblMSPTimeCategories = new HashSet<tblMSPTimeCategory>();
             this.tblMSPUsers = new HashSet<tblMSPUser>();
             this.tblMSPVacancieTypes = new HashSet<tblMSPVacancieType>();
         }
@@ -47,6 +48,8 @@ namespace eMSP.DataModel
         public virtual ICollection<tblMSPCustomer> tblMSPCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMSPTimeCategory> tblMSPTimeCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMSPUser> tblMSPUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

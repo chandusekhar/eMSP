@@ -39,8 +39,6 @@ function manageAppointmentController($scope, $state, $filter, localStorageServic
     $scope.date = function (datestr, dateFormat) {
         return $filter('date')(new Date(ele), dateFormat);
     }
-
-
 }
 
 function appointmentController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster, $uibModalInstance) {
@@ -52,7 +50,6 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
     $scope.dataJSON.Users = [];
 
     $scope.LoadUsersData = function () {
-
         angular.forEach($scope.dataJSON.Users, function (v, k) {
             angular.forEach($scope.refData.usersList, function (value, key) {
                 if (value.userId === v.UserID) {
@@ -60,16 +57,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                 }
             });
         });
-
-    }
-    if ($scope.editform) {
-        $scope.dataJSON = $scope.udataJSON;
-        $scope.dataJSON.AppintmentTypeID = $scope.udataJSON.AppintmentTypeID.toString();
-        $scope.dataJSON.AppointmentStatusID = $scope.udataJSON.AppointmentStatusID.toString();
-        $scope.LoadUsersData();
-    }
-
-
+    }    
 
     $scope.submit = function (form) {
 
@@ -81,27 +69,22 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                 var res = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.UPDATEAPPOINTMENTURL, $scope.dataJSON);
                 res.then(function (data) {
                     $scope.dataJSON = data;
-                    //$scope.cancel();
                     toaster.warning({ body: "Data Updated Successfully." });
-
-
-                    $state.reload();
-
-
+                    $uibModalInstance.close();
+                    
                 });
             }
             else {
                 var resn = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.CREATEAPPOINTMENTURL, $scope.dataJSON);
                 resn.then(function (data) {
                     $scope.dataJSON = data;
-                    toaster.warning({ body: "Data Created Successfully." });
-                    //$scope.cancel();
-                    $state.reload();
+                    toaster.success({ body: "Data Created Successfully." });
+                    $uibModalInstance.close();
                 });
             }
-
         }
     }
+
     $scope.fnAddEditSlot = function (flag, index) {
 
         if (!flag) {
@@ -113,18 +96,20 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
         else {
             $scope.slotEdit = false;
         }
-
         $scope.create = true;
-
     }
 
-
+    if ($scope.editform) {
+        $scope.dataJSON = $scope.udataJSON;
+        $scope.dataJSON.AppintmentTypeID = $scope.udataJSON.AppintmentTypeID.toString();
+        $scope.dataJSON.AppointmentStatusID = $scope.udataJSON.AppointmentStatusID.toString();
+        $scope.LoadUsersData();
+        $scope.fnAddEditSlot(false, 0);
+    }       
 
     $scope.addEditSlot = function (form, create) {
 
         if (form.$valid) {
-
-
             if ($scope.editform) {
                 if (create) {
                     $scope.AppointmentSlot.AppintmentID=$scope.dataJSON.ID
@@ -157,8 +142,6 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                     $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
                     $scope.create = false;
                     $scope.dataJSON.Slots.push($scope.AppointmentSlot);
-
-
                 }
                 else {
 
@@ -166,7 +149,6 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                     $scope.create = false;
                     $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
                     $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
-
                 }
             }
         }

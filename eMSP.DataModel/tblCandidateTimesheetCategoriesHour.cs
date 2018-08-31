@@ -12,11 +12,15 @@ namespace eMSP.DataModel
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class tblCandidateTimesheetCategoriesHour
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public long ID { get; set; }
+        public long TimesheetID { get; set; }
+        public long TimesheetCategoryID { get; set; }
+        public System.DateTime TimeDate { get; set; }
+        public decimal Hours { get; set; }
+    
+        public virtual tblCandidateTimesheet tblCandidateTimesheet { get; set; }
+        public virtual tblMSPTimeGroupCategory tblMSPTimeGroupCategory { get; set; }
     }
 }

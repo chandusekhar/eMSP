@@ -22,6 +22,7 @@ namespace eMSP.DataModel
             this.tblMSPLocationBranches = new HashSet<tblMSPLocationBranch>();
             this.tblSupplierLocationBranches = new HashSet<tblSupplierLocationBranch>();
             this.tblUserLocationBranches = new HashSet<tblUserLocationBranch>();
+            this.tblVacancyLocations = new HashSet<tblVacancyLocation>();
         }
     
         public long ID { get; set; }
@@ -50,5 +51,7 @@ namespace eMSP.DataModel
         public virtual ICollection<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUserLocationBranch> tblUserLocationBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblVacancyLocation> tblVacancyLocations { get; set; }
     }
 }

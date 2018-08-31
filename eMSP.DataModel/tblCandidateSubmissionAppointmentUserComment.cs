@@ -15,7 +15,7 @@ namespace eMSP.DataModel
     public partial class tblCandidateSubmissionAppointmentUserComment
     {
         public long ID { get; set; }
-        public long UserID { get; set; }
+        public long AppointmentID { get; set; }
         public long CommentID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
@@ -24,7 +24,7 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCandidateSubmissionAppointmentUser tblCandidateSubmissionAppointmentUser { get; set; }
+        public virtual tblCandidateSubmissionAppointment tblCandidateSubmissionAppointment { get; set; }
         public virtual tblComment tblComment { get; set; }
     }
 }

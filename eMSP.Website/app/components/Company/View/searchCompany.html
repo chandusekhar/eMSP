@@ -62,7 +62,7 @@
                             </div>
                             <div>
                                 <button type="submit" ng-click="search()" class="btn btn-primary">Search</button>
-                                &nbsp;&nbsp;                                
+                                &nbsp;&nbsp;
                                 <a class="btn btn-primary btn-white center" ui-sref="dashboard">Cancel</a>
                             </div>
 
@@ -82,7 +82,7 @@
                         <a class="btn btn-primary center" ng-if="(config.SupplierCreate == true && configJSON.companyType == 'Supplier') || (config.CustomerCreate == true && configJSON.companyType == 'Customer')" ui-sref="{{configJSON.createUrl}}">Add</a>
                         &nbsp;&nbsp;
                         <div class="row">
-                            
+
                             <!--repeater-->
                             <div ng-repeat="res in searchResults">
                                 <div class="col-lg-4">
@@ -207,11 +207,11 @@
                                                                                 <span style="margin-left:10px" ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" ng-click="updateUser(loc)" class="text-navy">
                                                                                     <span class="fa fa-pencil"></span>
                                                                                 </span>
-                                                                               
-                                                                                    <span ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" ng-click="resetPassword(loc)" class="text-navy">
-                                                                                        <span class="fa fa-key"></span>
-                                                                                    </span>
-                                                                                
+
+                                                                                <span ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" ng-click="resetPassword(loc)" class="text-navy">
+                                                                                    <span class="fa fa-key"></span>
+                                                                                </span>
+
                                                                                 <!--<span ng-click="deleteCandidate(loc)" class="btn btn-danger">
                                                                                     <span class="fa fa-trash"></span>
                                                                                 </span>-->
@@ -271,7 +271,7 @@
                                                                                             <span class="fa fa-pencil"></span>
                                                                                         </span>
                                                                                     </div>
-                                                                                    
+
                                                                                 </td>
                                                                                 <td>
                                                                                     <div>
@@ -294,7 +294,13 @@
                                                 <div class="ibox float-e-margins">
                                                     <div class="ibox-title" ng-show="!toggleBranches">
                                                         <h5><strong>Locations:</strong></h5>
-                                                        <button ng-if="(config.SupplierSupplierLBCreate == true && configJSON.companyType == 'Supplier') || (config.CustomerLBCreate == true && configJSON.companyType == 'Customer') || (config.MSPLBCreate == true && configJSON.companyType == 'MSP')" type="submit" ng-click="modelL()" class="btn btn-primary m-b pull-right">Add Location</button>
+                                                        <button ng-if="(config.SupplierLBCreate == true && configJSON.companyType == 'Supplier')
+                                                                || (config.CustomerLBCreate == true && configJSON.companyType == 'Customer')
+                                                                || (config.MSPLBCreate == true && configJSON.companyType == 'MSP')"
+                                                                type="submit" ng-click="modelL()"
+                                                                class="btn btn-primary m-b pull-right">
+                                                            Add Location
+                                                        </button>
                                                     </div>
                                                     <div class="ibox-title" ng-show="toggleBranches">
                                                         <h5><strong>{{refData.locationData.locationName}} (Branches):</strong></h5>
@@ -397,7 +403,7 @@
                                                 </div>
                                             </uib-tab>
 
-                                           
+
                                         </uib-tabset>
                                     </div>
                                 </div>

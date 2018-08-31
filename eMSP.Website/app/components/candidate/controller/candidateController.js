@@ -218,9 +218,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                     }
                     else {
                         $state.go($scope.configJSON.successURL);
-
                     }
-
                 });
             }
             else {
@@ -229,7 +227,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
                     $scope.dataJSON = data;
                     toaster.warning({ body: "Data Created Successfully." });
                     //$scope.cancel();
-                    $state.reload();
+                    $state.go($scope.configJSON.successURL);
                 });
             }
 

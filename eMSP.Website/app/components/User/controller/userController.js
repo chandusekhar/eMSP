@@ -60,7 +60,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
                     $scope.udataJSON = data;
                     toaster.warning({ body: "Data Created Successfully." });
                     //$state.reload();                    
-                    $scope.$parent.resUsers.push(data);
+                    $scope.$parent.resUsers.unshift(data);
                     $uibModalInstance.close();
                 }).catch(function (err) {
                     $scope.error = err.data;

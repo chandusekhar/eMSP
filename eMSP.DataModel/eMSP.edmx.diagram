@@ -5,65 +5,76 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="86b7a2a2a7e745d880f07e527ac83171" Name="Diagram1">
-        <EntityTypeShape EntityType="eMSPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroupRole" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroup" Width="1.5" PointX="9" PointY="76.125" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetRole" Width="1.5" PointX="6.75" PointY="79.75" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetUserClaim" Width="1.5" PointX="11.25" PointY="75.25" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetUserLogin" Width="1.5" PointX="11.25" PointY="83" />
-        <EntityTypeShape EntityType="eMSPModel.AspNetUser" Width="1.5" PointX="9" PointY="78.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblAppointmentStatu" Width="1.5" PointX="18.75" PointY="35.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblAppointmentType" Width="1.5" PointX="18.75" PointY="39.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblBranch" Width="1.5" PointX="8.25" PointY="63.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateContact" Width="1.5" PointX="10.5" PointY="58.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateFile" Width="1.5" PointX="12.75" PointY="49.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateIndustry" Width="1.5" PointX="13.5" PointY="40.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidate" Width="1.5" PointX="8.25" PointY="40.125" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSkill" Width="1.5" PointX="21.75" PointY="36.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateStatu" Width="1.5" PointX="16.5" PointY="41.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmission" Width="1.5" PointX="18.75" PointY="46" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointment" Width="1.5" PointX="21" PointY="41.125" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentSlot" Width="1.5" PointX="23.25" PointY="41.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUserComment" Width="1.5" PointX="25.5" PointY="53.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUser" Width="1.5" PointX="23.25" PointY="53.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionComment" Width="1.5" PointX="24" PointY="46.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionDocumentRespons" Width="1.5" PointX="21" PointY="51.125" />
-        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionsQuestionsRespons" Width="1.5" PointX="21" PointY="46.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblComment" Width="1.5" PointX="23.25" PointY="58.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblCommentUser" Width="1.5" PointX="16.5" PointY="66.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblContact" Width="1.5" PointX="5.25" PointY="64" />
-        <EntityTypeShape EntityType="eMSPModel.tblCountry" Width="1.5" PointX="0.75" PointY="58.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblCountryState" Width="1.5" PointX="3" PointY="69.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblCustomerLocationBranch" Width="1.5" PointX="13.5" PointY="59.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblCustomer" Width="1.5" PointX="8.25" PointY="57.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblCustomerUser" Width="1.5" PointX="16.5" PointY="62" />
-        <EntityTypeShape EntityType="eMSPModel.tblFile" Width="1.5" PointX="10.5" PointY="39.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblFileType" Width="1.5" PointX="7.5" PointY="53.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblIndustry" Width="1.5" PointX="11.25" PointY="44.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblIndustrySkill" Width="1.5" PointX="13.5" PointY="44.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblJobVacanciesStatu" Width="1.5" PointX="8.25" PointY="45.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblLocation" Width="1.5" PointX="5.25" PointY="69.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPCustomer" Width="1.5" PointX="13.5" PointY="54.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPDetail" Width="1.5" PointX="5.25" PointY="57.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPLocationBranch" Width="1.5" PointX="13.5" PointY="64.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPQuestion" Width="1.5" PointX="16.5" PointY="37.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPRequiredDocument" Width="1.5" PointX="16.5" PointY="75.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPUser" Width="1.5" PointX="16.5" PointY="58" />
-        <EntityTypeShape EntityType="eMSPModel.tblMSPVacancieType" Width="1.5" PointX="7.5" PointY="49.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblSupplier" Width="1.5" PointX="8.25" PointY="69.875" />
-        <EntityTypeShape EntityType="eMSPModel.tblSupplierCandidate" Width="1.5" PointX="13.5" PointY="73.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblSupplierLocationBranch" Width="1.5" PointX="10.5" PointY="70.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblSupplierUser" Width="1.5" PointX="16.5" PointY="71.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblUserLocationBranch" Width="1.5" PointX="13.5" PointY="69.25" />
-        <EntityTypeShape EntityType="eMSPModel.tblUserProfile" Width="1.5" PointX="11.25" PointY="63.375" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancy" Width="1.5" PointX="10.5" PointY="49.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancieSkill" Width="1.5" PointX="15.75" PointY="45.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacanciesQuestion" Width="1.5" PointX="18.75" PointY="51.25" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacanciesRequiredDocument" Width="1.5" PointX="18.75" PointY="56.25" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancyComment" Width="1.5" PointX="15.75" PointY="49.625" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancyFile" Width="1.5" PointX="12.75" PointY="78.5" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancyLocation" Width="1.5" PointX="15.75" PointY="53.75" />
-        <EntityTypeShape EntityType="eMSPModel.tblVacancySupplier" Width="1.5" PointX="18.75" PointY="61.5" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroupRole" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRoleGroup" Width="1.5" PointX="9" PointY="61.875" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetRole" Width="1.5" PointX="6.75" PointY="91.5" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUserClaim" Width="1.5" PointX="11.25" PointY="90" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUserLogin" Width="1.5" PointX="11.25" PointY="92.75" />
+        <EntityTypeShape EntityType="eMSPModel.AspNetUser" Width="1.5" PointX="9" PointY="90.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblAppointmentStatu" Width="1.5" PointX="24" PointY="100" />
+        <EntityTypeShape EntityType="eMSPModel.tblAppointmentType" Width="1.5" PointX="24" PointY="96.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblBranch" Width="1.5" PointX="5.25" PointY="73.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateContact" Width="1.5" PointX="13.5" PointY="86.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateFile" Width="1.5" PointX="12.75" PointY="61.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateIndustry" Width="1.5" PointX="21" PointY="100.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidatePlacement" Width="1.5" PointX="26.25" PointY="85.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidate" Width="1.5" PointX="18.75" PointY="95.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSkill" Width="1.5" PointX="27" PointY="102.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateStatu" Width="1.5" PointX="18.75" PointY="100.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmission" Width="1.5" PointX="21" PointY="85" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointment" Width="1.5" PointX="26.25" PointY="90.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentSlot" Width="1.5" PointX="28.5" PointY="98.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUserComment" Width="1.5" PointX="28.5" PointY="94" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionAppointmentUser" Width="1.5" PointX="28.5" PointY="79.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionComment" Width="1.5" PointX="26.25" PointY="80.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionDocumentRespons" Width="1.5" PointX="29.25" PointY="88.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionSpend" Width="1.5" PointX="34.5" PointY="85.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionSpendFile" Width="1.5" PointX="36.75" PointY="86" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateSubmissionsQuestionsRespons" Width="1.5" PointX="29.25" PointY="84.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateTimesheetCategoriesHour" Width="1.5" PointX="36.75" PointY="82.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateTimesheetHour" Width="1.5" PointX="33.75" PointY="91.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblCandidateTimesheet" Width="1.5" PointX="31.5" PointY="85.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblComment" Width="1.5" PointX="15.75" PointY="95.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblCommentUser" Width="1.5" PointX="18.5" PointY="79.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblContact" Width="1.5" PointX="8.25" PointY="79.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblCountry" Width="1.5" PointX="0.75" PointY="70.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCountryState" Width="1.5" PointX="3" PointY="76.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomerLocationBranch" Width="1.5" PointX="13.5" PointY="66.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomer" Width="1.5" PointX="5.25" PointY="67.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblCustomerUser" Width="1.5" PointX="16.5" PointY="69.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblFile" Width="1.5" PointX="34.5" PointY="80.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblFileType" Width="1.5" PointX="10.5" PointY="64.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblIndustry" Width="1.5" PointX="17.5" PointY="91" />
+        <EntityTypeShape EntityType="eMSPModel.tblIndustrySkill" Width="1.5" PointX="19.75" PointY="90.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblJobVacanciesStatu" Width="1.5" PointX="13.5" PointY="91" />
+        <EntityTypeShape EntityType="eMSPModel.tblLocation" Width="1.5" PointX="8.25" PointY="73.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPCustomer" Width="1.5" PointX="10.5" PointY="68.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPDetail" Width="1.5" PointX="8.25" PointY="67.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPLocationBranch" Width="1.5" PointX="13.5" PointY="71.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPPayPeriod" Width="1.5" PointX="32.25" PointY="76.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPQuestion" Width="1.5" PointX="21.75" PointY="72.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPRequiredDocument" Width="1.5" PointX="21.75" PointY="95.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPSpendCategory" Width="1.5" PointX="32.25" PointY="81.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPTimeCategory" Width="1.5" PointX="10.5" PointY="80.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPTimeGroup" Width="1.5" PointX="24" PointY="92.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPTimeGroupCategory" Width="1.5" PointX="34.5" PointY="75.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPUser" Width="1.5" PointX="16.5" PointY="65.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblMSPVacancieType" Width="1.5" PointX="10.5" PointY="84.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplier" Width="1.5" PointX="5.25" PointY="79.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierCandidate" Width="1.5" PointX="7.5" PointY="85.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierLocationBranch" Width="1.5" PointX="13.5" PointY="77.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblSupplierUser" Width="1.5" PointX="13.5" PointY="82.25" />
+        <EntityTypeShape EntityType="eMSPModel.tblTimesheetStatu" Width="1.5" PointX="32.25" PointY="94.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblUserLocationBranch" Width="1.5" PointX="16.5" PointY="74.375" />
+        <EntityTypeShape EntityType="eMSPModel.tblUserProfile" Width="1.5" PointX="11.25" PointY="73.125" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancy" Width="1.5" PointX="15.75" PointY="78.75" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancieSkill" Width="1.5" PointX="22" PointY="77" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacanciesQuestion" Width="1.5" PointX="24" PointY="81.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacanciesRequiredDocument" Width="1.5" PointX="24" PointY="86.625" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyComment" Width="1.5" PointX="18" PointY="84" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyFile" Width="1.5" PointX="18" PointY="111.875" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancyLocation" Width="1.5" PointX="19" PointY="75.5" />
+        <EntityTypeShape EntityType="eMSPModel.tblVacancySupplier" Width="1.5" PointX="21" PointY="80.875" />
         <AssociationConnector Association="eMSPModel.FK_tblUserProfile_AspNetRoleGroups" />
         <AssociationConnector Association="eMSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="eMSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -82,9 +93,12 @@
         <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblCandidates" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblFiles" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateFiles_tblFileTypes" />
-        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateIndustries_tblCandidates" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateIndustries_tblIndustries" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidatePlacements_tblCandidateSubmission" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidatePlacements_tblMSPTimeGroup" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblCandidatePlacements" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheets_tblCandidatePlacements" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSkills_tblCandidates" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmission_tblCandidates" />
         <AssociationConnector Association="eMSPModel.FK_tblSupplierCandidates_tblCandidates" />
@@ -97,14 +111,25 @@
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateSubmission" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionsQuestionsResponses_tblCandidateSubmission" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" />
-        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionComments_tblComments" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblComments" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblFiles" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPPayPeriods" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPSpendCategory" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblTimesheetStatus" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblFiles" />
         <AssociationConnector Association="eMSPModel.FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheets_tblCandidateTimesheets" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheets_tblMSPPayPeriods" />
+        <AssociationConnector Association="eMSPModel.FK_tblCandidateTimesheets_tblTimesheetStatus" />
         <AssociationConnector Association="eMSPModel.FK_tblCommentUsers_tblComments" />
         <AssociationConnector Association="eMSPModel.FK_tblVacancyComments_tblComments" />
         <AssociationConnector Association="eMSPModel.FK_tblCommentUsers_tblUserProfile" />
@@ -123,7 +148,6 @@
         <AssociationConnector Association="eMSPModel.FK_tblUserProfile_tblCountryStates" />
         <AssociationConnector Association="eMSPModel.FK_tblCustomerLocationBranches_tblCustomers" />
         <AssociationConnector Association="eMSPModel.FK_tblCustomerLocationBranches_tblLocations" />
-        <AssociationConnector Association="eMSPModel.FK_tblVacancyLocations_tblCustomerLocationBranches" />
         <AssociationConnector Association="eMSPModel.FK_tblCustomerUsers_tblCustomers" />
         <AssociationConnector Association="eMSPModel.FK_tblMSPCustomers_tblCustomers" />
         <AssociationConnector Association="eMSPModel.FK_tblVacancies_tblCustomers" />
@@ -135,8 +159,10 @@
         <AssociationConnector Association="eMSPModel.FK_tblMSPLocationBranches_tblLocations" />
         <AssociationConnector Association="eMSPModel.FK_tblSupplierLocationBranches_tblLocations" />
         <AssociationConnector Association="eMSPModel.FK_tblUserLocationBranches_tblLocations" />
+        <AssociationConnector Association="eMSPModel.FK_tblVacancyLocations_tblLocations" />
         <AssociationConnector Association="eMSPModel.FK_tblMSPCustomers_tblMSPDetails" />
         <AssociationConnector Association="eMSPModel.FK_tblMSPLocationBranches_tblMSPDetails" />
+        <AssociationConnector Association="eMSPModel.FK_tblMSPTimeCategories_tblMSPDetails" />
         <AssociationConnector Association="eMSPModel.FK_tblMSPUsers_tblMSPDetails" />
         <AssociationConnector Association="eMSPModel.FK_tblMSPVacancieTypes_tblMSPDetails" />
         <AssociationConnector Association="eMSPModel.FK_tblVacanciesQuestions_tblMSPQuestions" />

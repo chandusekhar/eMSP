@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="eMSPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRoleGroupRoles">
           <Key>
             <PropertyRef Name="RoleGroupId" />
@@ -175,6 +165,20 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="tblCandidatePlacements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubmissionID" Type="bigint" Nullable="false" />
+          <Property Name="TimeGroupID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="tblCandidates">
           <Key>
             <PropertyRef Name="ID" />
@@ -235,12 +239,14 @@
           <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="PayRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="PayRateMarkUp" Type="decimal" Precision="9" Scale="4" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionAppointments">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppintmentTypeID" Type="bigint" Nullable="false" />
           <Property Name="CandidateSubmissionID" Type="bigint" Nullable="false" />
           <Property Name="AppointmentStatusID" Type="bigint" Nullable="false" />
@@ -274,7 +280,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="AppointmentID" Type="bigint" Nullable="false" />
           <Property Name="CommentID" Type="bigint" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
@@ -316,7 +322,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CandidateSubmissionID" Type="bigint" Nullable="false" />
           <Property Name="VacancyRequiredDocumentID" Type="bigint" Nullable="false" />
           <Property Name="CandidateFileID" Type="bigint" Nullable="false" />
@@ -328,14 +334,83 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <EntityType Name="tblCandidateSubmissionsQuestionsResponses">
+        <EntityType Name="tblCandidateSubmissionSpend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayPeriodID" Type="bigint" Nullable="false" />
+          <Property Name="SpendCategoryID" Type="bigint" Nullable="false" />
+          <Property Name="PlacementID" Type="bigint" Nullable="false" />
+          <Property Name="CurrentStatusID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionSpendFiles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="SpendID" Type="bigint" Nullable="false" />
+          <Property Name="FileID" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionsQuestionsResponses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubmissionID" Type="bigint" Nullable="false" />
           <Property Name="VacancyQuestionID" Type="bigint" Nullable="false" />
           <Property Name="Responses" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheetCategoriesHours">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimesheetID" Type="bigint" Nullable="false" />
+          <Property Name="TimesheetCategoryID" Type="bigint" Nullable="false" />
+          <Property Name="TimeDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="Hours" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheetHours">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimesheetID" Type="bigint" Nullable="false" />
+          <Property Name="TimeDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="HoursWorked" Type="decimal" Precision="9" Scale="4" />
+          <Property Name="BreakHours" Type="decimal" Precision="9" Scale="4" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayPeriodID" Type="bigint" Nullable="false" />
+          <Property Name="PlacementID" Type="bigint" Nullable="false" />
+          <Property Name="StatusID" Type="bigint" Nullable="false" />
+          <Property Name="VersionNumber" Type="smallint" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -610,6 +685,20 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="tblMSPPayPeriods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="StartDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="EndDate" Type="smalldatetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblMSPQuestions">
           <Key>
             <PropertyRef Name="ID" />
@@ -630,11 +719,71 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RequiredDocumentName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="RequiredDocumentDescription" Type="nvarchar(max)" />
           <Property Name="IsDefault" Type="bit" />
           <Property Name="IsMandatory" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblMSPSpendCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeCategories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MSPID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeGroupCategories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="bigint" Nullable="false" />
+          <Property Name="CategoryID" Type="bigint" Nullable="false" />
+          <Property Name="WeeklyMarkup" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="DailyMaxHours" Type="int" Nullable="false" />
+          <Property Name="WeeklyMaxHours" Type="int" Nullable="false" />
+          <Property Name="MonthlyMaxHours" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
@@ -732,6 +881,20 @@
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="tblTimesheetStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedTimestamp" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UpdatedTimestamp" Type="datetime" />
+          <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="tblUserLocationBranches">
           <Key>
             <PropertyRef Name="ID" />
@@ -774,7 +937,6 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VacancyType" Type="smallint" Nullable="false" />
-          <Property Name="JobStatusID" Type="bigint" />
           <Property Name="CustomerID" Type="bigint" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" />
@@ -795,6 +957,8 @@
           <Property Name="CreatedUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UpdatedTimestamp" Type="datetime" />
           <Property Name="UpdatedUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="JobStatusID" Type="bigint" />
+          <Property Name="NoOfPositions" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="tblVacancieSkills">
           <Key>
@@ -1078,6 +1242,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidatePlacements_tblCandidateSubmission">
+          <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="1" />
+          <End Role="tblCandidatePlacements" Type="Self.tblCandidatePlacements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidatePlacements">
+              <PropertyRef Name="SubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidatePlacements_tblMSPTimeGroup">
+          <End Role="tblMSPTimeGroup" Type="Self.tblMSPTimeGroup" Multiplicity="1" />
+          <End Role="tblCandidatePlacements" Type="Self.tblCandidatePlacements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPTimeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidatePlacements">
+              <PropertyRef Name="TimeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateSkills_tblCandidates">
           <End Role="tblCandidates" Type="Self.tblCandidates" Multiplicity="1" />
           <End Role="tblCandidateSkills" Type="Self.tblCandidateSkills" Multiplicity="*" />
@@ -1186,15 +1374,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
-          <End Role="tblCandidateSubmissionAppointmentUsers" Type="Self.tblCandidateSubmissionAppointmentUsers" Multiplicity="1" />
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments">
+          <End Role="tblCandidateSubmissionAppointments" Type="Self.tblCandidateSubmissionAppointments" Multiplicity="1" />
           <End Role="tblCandidateSubmissionAppointmentUserComments" Type="Self.tblCandidateSubmissionAppointmentUserComments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCandidateSubmissionAppointmentUsers">
+            <Principal Role="tblCandidateSubmissionAppointments">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblCandidateSubmissionAppointmentUserComments">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="AppointmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1270,18 +1458,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles">
-          <End Role="tblCandidateFiles" Type="Self.tblCandidateFiles" Multiplicity="1" />
-          <End Role="tblCandidateSubmissionDocumentResponses" Type="Self.tblCandidateSubmissionDocumentResponses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCandidateFiles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblCandidateSubmissionDocumentResponses">
-              <PropertyRef Name="CandidateFileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateSubmission">
           <End Role="tblCandidateSubmission" Type="Self.tblCandidateSubmission" Multiplicity="1" />
           <End Role="tblCandidateSubmissionDocumentResponses" Type="Self.tblCandidateSubmissionDocumentResponses" Multiplicity="*" />
@@ -1306,6 +1482,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblFiles">
+          <End Role="tblFiles" Type="Self.tblFiles" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionDocumentResponses" Type="Self.tblCandidateSubmissionDocumentResponses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionDocumentResponses">
+              <PropertyRef Name="CandidateFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments">
           <End Role="tblVacanciesRequiredDocuments" Type="Self.tblVacanciesRequiredDocuments" Multiplicity="1" />
           <End Role="tblCandidateSubmissionDocumentResponses" Type="Self.tblCandidateSubmissionDocumentResponses" Multiplicity="*" />
@@ -1315,6 +1503,78 @@
             </Principal>
             <Dependent Role="tblCandidateSubmissionDocumentResponses">
               <PropertyRef Name="VacancyRequiredDocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblCandidatePlacements">
+          <End Role="tblCandidatePlacements" Type="Self.tblCandidatePlacements" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpend" Type="Self.tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidatePlacements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="PlacementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblMSPPayPeriods">
+          <End Role="tblMSPPayPeriods" Type="Self.tblMSPPayPeriods" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpend" Type="Self.tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPPayPeriods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="PayPeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblMSPSpendCategory">
+          <End Role="tblMSPSpendCategory" Type="Self.tblMSPSpendCategory" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpend" Type="Self.tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPSpendCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="SpendCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblTimesheetStatus">
+          <End Role="tblTimesheetStatus" Type="Self.tblTimesheetStatus" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpend" Type="Self.tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTimesheetStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="CurrentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend">
+          <End Role="tblCandidateSubmissionSpend" Type="Self.tblCandidateSubmissionSpend" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpendFiles" Type="Self.tblCandidateSubmissionSpendFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpendFiles">
+              <PropertyRef Name="SpendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpendFiles_tblFiles">
+          <End Role="tblFiles" Type="Self.tblFiles" Multiplicity="1" />
+          <End Role="tblCandidateSubmissionSpendFiles" Type="Self.tblCandidateSubmissionSpendFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpendFiles">
+              <PropertyRef Name="FileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1339,6 +1599,78 @@
             </Principal>
             <Dependent Role="tblCandidateSubmissionsQuestionsResponses">
               <PropertyRef Name="VacancyQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets">
+          <End Role="tblCandidateTimesheets" Type="Self.tblCandidateTimesheets" Multiplicity="1" />
+          <End Role="tblCandidateTimesheetCategoriesHours" Type="Self.tblCandidateTimesheetCategoriesHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateTimesheets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetCategoriesHours">
+              <PropertyRef Name="TimesheetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories">
+          <End Role="tblMSPTimeGroupCategories" Type="Self.tblMSPTimeGroupCategories" Multiplicity="1" />
+          <End Role="tblCandidateTimesheetCategoriesHours" Type="Self.tblCandidateTimesheetCategoriesHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPTimeGroupCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetCategoriesHours">
+              <PropertyRef Name="TimesheetCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblCandidatePlacements">
+          <End Role="tblCandidatePlacements" Type="Self.tblCandidatePlacements" Multiplicity="1" />
+          <End Role="tblCandidateTimesheets" Type="Self.tblCandidateTimesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidatePlacements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheets">
+              <PropertyRef Name="PlacementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblCandidateTimesheets">
+          <End Role="tblCandidateTimesheets" Type="Self.tblCandidateTimesheets" Multiplicity="1" />
+          <End Role="tblCandidateTimesheetHours" Type="Self.tblCandidateTimesheetHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateTimesheets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetHours">
+              <PropertyRef Name="TimesheetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblMSPPayPeriods">
+          <End Role="tblMSPPayPeriods" Type="Self.tblMSPPayPeriods" Multiplicity="1" />
+          <End Role="tblCandidateTimesheets" Type="Self.tblCandidateTimesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPPayPeriods">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheets">
+              <PropertyRef Name="PayPeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblTimesheetStatus">
+          <End Role="tblTimesheetStatus" Type="Self.tblTimesheetStatus" Multiplicity="1" />
+          <End Role="tblCandidateTimesheets" Type="Self.tblCandidateTimesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTimesheetStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheets">
+              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1614,6 +1946,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblMSPLocationBranches">
+              <PropertyRef Name="MSPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMSPTimeCategories_tblMSPDetails">
+          <End Role="tblMSPDetails" Type="Self.tblMSPDetails" Multiplicity="1" />
+          <End Role="tblMSPTimeCategories" Type="Self.tblMSPTimeCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMSPTimeCategories">
               <PropertyRef Name="MSPID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1990,11 +2334,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblVacancyLocations_tblCustomerLocationBranches">
-          <End Role="tblCustomerLocationBranches" Type="Self.tblCustomerLocationBranches" Multiplicity="1" />
+        <Association Name="FK_tblVacancyLocations_tblLocations">
+          <End Role="tblLocations" Type="Self.tblLocations" Multiplicity="1" />
           <End Role="tblVacancyLocations" Type="Self.tblVacancyLocations" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCustomerLocationBranches">
+            <Principal Role="tblLocations">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblVacancyLocations">
@@ -2039,7 +2383,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="eMSPModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoleGroupRoles" EntityType="Self.AspNetRoleGroupRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoleGroups" EntityType="Self.AspNetRoleGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -2053,6 +2396,7 @@
           <EntitySet Name="tblCandidateContacts" EntityType="Self.tblCandidateContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateFiles" EntityType="Self.tblCandidateFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateIndustries" EntityType="Self.tblCandidateIndustries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidatePlacements" EntityType="Self.tblCandidatePlacements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidates" EntityType="Self.tblCandidates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateSkills" EntityType="Self.tblCandidateSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateStatus" EntityType="Self.tblCandidateStatus" Schema="dbo" store:Type="Tables" />
@@ -2063,7 +2407,12 @@
           <EntitySet Name="tblCandidateSubmissionAppointmentUsers" EntityType="Self.tblCandidateSubmissionAppointmentUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateSubmissionComments" EntityType="Self.tblCandidateSubmissionComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateSubmissionDocumentResponses" EntityType="Self.tblCandidateSubmissionDocumentResponses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionSpend" EntityType="Self.tblCandidateSubmissionSpend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateSubmissionSpendFiles" EntityType="Self.tblCandidateSubmissionSpendFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCandidateSubmissionsQuestionsResponses" EntityType="Self.tblCandidateSubmissionsQuestionsResponses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateTimesheetCategoriesHours" EntityType="Self.tblCandidateTimesheetCategoriesHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateTimesheetHours" EntityType="Self.tblCandidateTimesheetHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCandidateTimesheets" EntityType="Self.tblCandidateTimesheets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblComments" EntityType="Self.tblComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCommentUsers" EntityType="Self.tblCommentUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContacts" EntityType="Self.tblContacts" Schema="dbo" store:Type="Tables" />
@@ -2081,14 +2430,20 @@
           <EntitySet Name="tblMSPCustomers" EntityType="Self.tblMSPCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPDetails" EntityType="Self.tblMSPDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPLocationBranches" EntityType="Self.tblMSPLocationBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMSPPayPeriods" EntityType="Self.tblMSPPayPeriods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPQuestions" EntityType="Self.tblMSPQuestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPRequiredDocument" EntityType="Self.tblMSPRequiredDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMSPSpendCategory" EntityType="Self.tblMSPSpendCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMSPTimeCategories" EntityType="Self.tblMSPTimeCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMSPTimeGroup" EntityType="Self.tblMSPTimeGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMSPTimeGroupCategories" EntityType="Self.tblMSPTimeGroupCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPUsers" EntityType="Self.tblMSPUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMSPVacancieTypes" EntityType="Self.tblMSPVacancieTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSupplier" EntityType="Self.tblSupplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSupplierCandidates" EntityType="Self.tblSupplierCandidates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSupplierLocationBranches" EntityType="Self.tblSupplierLocationBranches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSupplierUsers" EntityType="Self.tblSupplierUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTimesheetStatus" EntityType="Self.tblTimesheetStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserLocationBranches" EntityType="Self.tblUserLocationBranches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserProfile" EntityType="Self.tblUserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblVacancies" EntityType="Self.tblVacancies" Schema="dbo" store:Type="Tables" />
@@ -2155,6 +2510,14 @@
             <End Role="tblIndustries" EntitySet="tblIndustries" />
             <End Role="tblCandidateIndustries" EntitySet="tblCandidateIndustries" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidatePlacements_tblCandidateSubmission" Association="Self.FK_tblCandidatePlacements_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
+            <End Role="tblCandidatePlacements" EntitySet="tblCandidatePlacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidatePlacements_tblMSPTimeGroup" Association="Self.FK_tblCandidatePlacements_tblMSPTimeGroup">
+            <End Role="tblMSPTimeGroup" EntitySet="tblMSPTimeGroup" />
+            <End Role="tblCandidatePlacements" EntitySet="tblCandidatePlacements" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSkills_tblCandidates" Association="Self.FK_tblCandidateSkills_tblCandidates">
             <End Role="tblCandidates" EntitySet="tblCandidates" />
             <End Role="tblCandidateSkills" EntitySet="tblCandidateSkills" />
@@ -2191,8 +2554,8 @@
             <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
             <End Role="tblCandidateSubmissionAppointmentSlots" EntitySet="tblCandidateSubmissionAppointmentSlots" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" Association="Self.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
-            <End Role="tblCandidateSubmissionAppointmentUsers" EntitySet="tblCandidateSubmissionAppointmentUsers" />
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments" Association="Self.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointments" EntitySet="tblCandidateSubmissionAppointments" />
             <End Role="tblCandidateSubmissionAppointmentUserComments" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments" Association="Self.FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
@@ -2219,10 +2582,6 @@
             <End Role="tblComments" EntitySet="tblComments" />
             <End Role="tblCandidateSubmissionComments" EntitySet="tblCandidateSubmissionComments" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles" Association="Self.FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles">
-            <End Role="tblCandidateFiles" EntitySet="tblCandidateFiles" />
-            <End Role="tblCandidateSubmissionDocumentResponses" EntitySet="tblCandidateSubmissionDocumentResponses" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateSubmission" Association="Self.FK_tblCandidateSubmissionDocumentResponses_tblCandidateSubmission">
             <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
             <End Role="tblCandidateSubmissionDocumentResponses" EntitySet="tblCandidateSubmissionDocumentResponses" />
@@ -2231,9 +2590,37 @@
             <End Role="tblComments" EntitySet="tblComments" />
             <End Role="tblCandidateSubmissionDocumentResponses" EntitySet="tblCandidateSubmissionDocumentResponses" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblFiles" Association="Self.FK_tblCandidateSubmissionDocumentResponses_tblFiles">
+            <End Role="tblFiles" EntitySet="tblFiles" />
+            <End Role="tblCandidateSubmissionDocumentResponses" EntitySet="tblCandidateSubmissionDocumentResponses" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments" Association="Self.FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments">
             <End Role="tblVacanciesRequiredDocuments" EntitySet="tblVacanciesRequiredDocuments" />
             <End Role="tblCandidateSubmissionDocumentResponses" EntitySet="tblCandidateSubmissionDocumentResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblCandidatePlacements" Association="Self.FK_tblCandidateSubmissionSpend_tblCandidatePlacements">
+            <End Role="tblCandidatePlacements" EntitySet="tblCandidatePlacements" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblMSPPayPeriods" Association="Self.FK_tblCandidateSubmissionSpend_tblMSPPayPeriods">
+            <End Role="tblMSPPayPeriods" EntitySet="tblMSPPayPeriods" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblMSPSpendCategory" Association="Self.FK_tblCandidateSubmissionSpend_tblMSPSpendCategory">
+            <End Role="tblMSPSpendCategory" EntitySet="tblMSPSpendCategory" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblTimesheetStatus" Association="Self.FK_tblCandidateSubmissionSpend_tblTimesheetStatus">
+            <End Role="tblTimesheetStatus" EntitySet="tblTimesheetStatus" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend" Association="Self.FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend">
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpend" />
+            <End Role="tblCandidateSubmissionSpendFiles" EntitySet="tblCandidateSubmissionSpendFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpendFiles_tblFiles" Association="Self.FK_tblCandidateSubmissionSpendFiles_tblFiles">
+            <End Role="tblFiles" EntitySet="tblFiles" />
+            <End Role="tblCandidateSubmissionSpendFiles" EntitySet="tblCandidateSubmissionSpendFiles" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionsQuestionsResponses_tblCandidateSubmission" Association="Self.FK_tblCandidateSubmissionsQuestionsResponses_tblCandidateSubmission">
             <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmission" />
@@ -2242,6 +2629,30 @@
           <AssociationSet Name="FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions" Association="Self.FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions">
             <End Role="tblVacanciesQuestions" EntitySet="tblVacanciesQuestions" />
             <End Role="tblCandidateSubmissionsQuestionsResponses" EntitySet="tblCandidateSubmissionsQuestionsResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets" Association="Self.FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets">
+            <End Role="tblCandidateTimesheets" EntitySet="tblCandidateTimesheets" />
+            <End Role="tblCandidateTimesheetCategoriesHours" EntitySet="tblCandidateTimesheetCategoriesHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories" Association="Self.FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories">
+            <End Role="tblMSPTimeGroupCategories" EntitySet="tblMSPTimeGroupCategories" />
+            <End Role="tblCandidateTimesheetCategoriesHours" EntitySet="tblCandidateTimesheetCategoriesHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblCandidatePlacements" Association="Self.FK_tblCandidateTimesheets_tblCandidatePlacements">
+            <End Role="tblCandidatePlacements" EntitySet="tblCandidatePlacements" />
+            <End Role="tblCandidateTimesheets" EntitySet="tblCandidateTimesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblCandidateTimesheets" Association="Self.FK_tblCandidateTimesheets_tblCandidateTimesheets">
+            <End Role="tblCandidateTimesheets" EntitySet="tblCandidateTimesheets" />
+            <End Role="tblCandidateTimesheetHours" EntitySet="tblCandidateTimesheetHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblMSPPayPeriods" Association="Self.FK_tblCandidateTimesheets_tblMSPPayPeriods">
+            <End Role="tblMSPPayPeriods" EntitySet="tblMSPPayPeriods" />
+            <End Role="tblCandidateTimesheets" EntitySet="tblCandidateTimesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblTimesheetStatus" Association="Self.FK_tblCandidateTimesheets_tblTimesheetStatus">
+            <End Role="tblTimesheetStatus" EntitySet="tblTimesheetStatus" />
+            <End Role="tblCandidateTimesheets" EntitySet="tblCandidateTimesheets" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCommentUsers_tblComments" Association="Self.FK_tblCommentUsers_tblComments">
             <End Role="tblComments" EntitySet="tblComments" />
@@ -2334,6 +2745,10 @@
           <AssociationSet Name="FK_tblMSPLocationBranches_tblMSPDetails" Association="Self.FK_tblMSPLocationBranches_tblMSPDetails">
             <End Role="tblMSPDetails" EntitySet="tblMSPDetails" />
             <End Role="tblMSPLocationBranches" EntitySet="tblMSPLocationBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMSPTimeCategories_tblMSPDetails" Association="Self.FK_tblMSPTimeCategories_tblMSPDetails">
+            <End Role="tblMSPDetails" EntitySet="tblMSPDetails" />
+            <End Role="tblMSPTimeCategories" EntitySet="tblMSPTimeCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMSPUsers_tblMSPDetails" Association="Self.FK_tblMSPUsers_tblMSPDetails">
             <End Role="tblMSPDetails" EntitySet="tblMSPDetails" />
@@ -2459,8 +2874,8 @@
             <End Role="tblVacancies" EntitySet="tblVacancies" />
             <End Role="tblVacancyFiles" EntitySet="tblVacancyFiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblVacancyLocations_tblCustomerLocationBranches" Association="Self.FK_tblVacancyLocations_tblCustomerLocationBranches">
-            <End Role="tblCustomerLocationBranches" EntitySet="tblCustomerLocationBranches" />
+          <AssociationSet Name="FK_tblVacancyLocations_tblLocations" Association="Self.FK_tblVacancyLocations_tblLocations">
+            <End Role="tblLocations" EntitySet="tblLocations" />
             <End Role="tblVacancyLocations" EntitySet="tblVacancyLocations" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVacancyLocations_tblVacancies" Association="Self.FK_tblVacancyLocations_tblVacancies">
@@ -2511,7 +2926,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="C__MigrationHistory" EntityType="eMSPModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoleGroupRoles" EntityType="eMSPModel.AspNetRoleGroupRole" />
           <EntitySet Name="AspNetRoleGroups" EntityType="eMSPModel.AspNetRoleGroup" />
           <EntitySet Name="AspNetRoles" EntityType="eMSPModel.AspNetRole" />
@@ -2524,6 +2938,7 @@
           <EntitySet Name="tblCandidateContacts" EntityType="eMSPModel.tblCandidateContact" />
           <EntitySet Name="tblCandidateFiles" EntityType="eMSPModel.tblCandidateFile" />
           <EntitySet Name="tblCandidateIndustries" EntityType="eMSPModel.tblCandidateIndustry" />
+          <EntitySet Name="tblCandidatePlacements" EntityType="eMSPModel.tblCandidatePlacement" />
           <EntitySet Name="tblCandidates" EntityType="eMSPModel.tblCandidate" />
           <EntitySet Name="tblCandidateSkills" EntityType="eMSPModel.tblCandidateSkill" />
           <EntitySet Name="tblCandidateStatus" EntityType="eMSPModel.tblCandidateStatu" />
@@ -2534,7 +2949,12 @@
           <EntitySet Name="tblCandidateSubmissionAppointmentUsers" EntityType="eMSPModel.tblCandidateSubmissionAppointmentUser" />
           <EntitySet Name="tblCandidateSubmissionComments" EntityType="eMSPModel.tblCandidateSubmissionComment" />
           <EntitySet Name="tblCandidateSubmissionDocumentResponses" EntityType="eMSPModel.tblCandidateSubmissionDocumentRespons" />
+          <EntitySet Name="tblCandidateSubmissionSpends" EntityType="eMSPModel.tblCandidateSubmissionSpend" />
+          <EntitySet Name="tblCandidateSubmissionSpendFiles" EntityType="eMSPModel.tblCandidateSubmissionSpendFile" />
           <EntitySet Name="tblCandidateSubmissionsQuestionsResponses" EntityType="eMSPModel.tblCandidateSubmissionsQuestionsRespons" />
+          <EntitySet Name="tblCandidateTimesheetCategoriesHours" EntityType="eMSPModel.tblCandidateTimesheetCategoriesHour" />
+          <EntitySet Name="tblCandidateTimesheetHours" EntityType="eMSPModel.tblCandidateTimesheetHour" />
+          <EntitySet Name="tblCandidateTimesheets" EntityType="eMSPModel.tblCandidateTimesheet" />
           <EntitySet Name="tblComments" EntityType="eMSPModel.tblComment" />
           <EntitySet Name="tblCommentUsers" EntityType="eMSPModel.tblCommentUser" />
           <EntitySet Name="tblContacts" EntityType="eMSPModel.tblContact" />
@@ -2552,14 +2972,20 @@
           <EntitySet Name="tblMSPCustomers" EntityType="eMSPModel.tblMSPCustomer" />
           <EntitySet Name="tblMSPDetails" EntityType="eMSPModel.tblMSPDetail" />
           <EntitySet Name="tblMSPLocationBranches" EntityType="eMSPModel.tblMSPLocationBranch" />
+          <EntitySet Name="tblMSPPayPeriods" EntityType="eMSPModel.tblMSPPayPeriod" />
           <EntitySet Name="tblMSPQuestions" EntityType="eMSPModel.tblMSPQuestion" />
           <EntitySet Name="tblMSPRequiredDocuments" EntityType="eMSPModel.tblMSPRequiredDocument" />
+          <EntitySet Name="tblMSPSpendCategories" EntityType="eMSPModel.tblMSPSpendCategory" />
+          <EntitySet Name="tblMSPTimeCategories" EntityType="eMSPModel.tblMSPTimeCategory" />
+          <EntitySet Name="tblMSPTimeGroups" EntityType="eMSPModel.tblMSPTimeGroup" />
+          <EntitySet Name="tblMSPTimeGroupCategories" EntityType="eMSPModel.tblMSPTimeGroupCategory" />
           <EntitySet Name="tblMSPUsers" EntityType="eMSPModel.tblMSPUser" />
           <EntitySet Name="tblMSPVacancieTypes" EntityType="eMSPModel.tblMSPVacancieType" />
           <EntitySet Name="tblSuppliers" EntityType="eMSPModel.tblSupplier" />
           <EntitySet Name="tblSupplierCandidates" EntityType="eMSPModel.tblSupplierCandidate" />
           <EntitySet Name="tblSupplierLocationBranches" EntityType="eMSPModel.tblSupplierLocationBranch" />
           <EntitySet Name="tblSupplierUsers" EntityType="eMSPModel.tblSupplierUser" />
+          <EntitySet Name="tblTimesheetStatus" EntityType="eMSPModel.tblTimesheetStatu" />
           <EntitySet Name="tblUserLocationBranches" EntityType="eMSPModel.tblUserLocationBranch" />
           <EntitySet Name="tblUserProfiles" EntityType="eMSPModel.tblUserProfile" />
           <EntitySet Name="tblVacancies" EntityType="eMSPModel.tblVacancy" />
@@ -2642,10 +3068,6 @@
             <End Role="tblFileType" EntitySet="tblFileTypes" />
             <End Role="tblCandidateFile" EntitySet="tblCandidateFiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles" Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles">
-            <End Role="tblCandidateFile" EntitySet="tblCandidateFiles" />
-            <End Role="tblCandidateSubmissionDocumentRespons" EntitySet="tblCandidateSubmissionDocumentResponses" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateIndustries_tblCandidates" Association="eMSPModel.FK_tblCandidateIndustries_tblCandidates">
             <End Role="tblCandidate" EntitySet="tblCandidates" />
             <End Role="tblCandidateIndustry" EntitySet="tblCandidateIndustries" />
@@ -2653,6 +3075,22 @@
           <AssociationSet Name="FK_tblCandidateIndustries_tblIndustries" Association="eMSPModel.FK_tblCandidateIndustries_tblIndustries">
             <End Role="tblIndustry" EntitySet="tblIndustries" />
             <End Role="tblCandidateIndustry" EntitySet="tblCandidateIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidatePlacements_tblCandidateSubmission" Association="eMSPModel.FK_tblCandidatePlacements_tblCandidateSubmission">
+            <End Role="tblCandidateSubmission" EntitySet="tblCandidateSubmissions" />
+            <End Role="tblCandidatePlacement" EntitySet="tblCandidatePlacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidatePlacements_tblMSPTimeGroup" Association="eMSPModel.FK_tblCandidatePlacements_tblMSPTimeGroup">
+            <End Role="tblMSPTimeGroup" EntitySet="tblMSPTimeGroups" />
+            <End Role="tblCandidatePlacement" EntitySet="tblCandidatePlacements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblCandidatePlacements" Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblCandidatePlacements">
+            <End Role="tblCandidatePlacement" EntitySet="tblCandidatePlacements" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblCandidatePlacements" Association="eMSPModel.FK_tblCandidateTimesheets_tblCandidatePlacements">
+            <End Role="tblCandidatePlacement" EntitySet="tblCandidatePlacements" />
+            <End Role="tblCandidateTimesheet" EntitySet="tblCandidateTimesheets" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSkills_tblCandidates" Association="eMSPModel.FK_tblCandidateSkills_tblCandidates">
             <End Role="tblCandidate" EntitySet="tblCandidates" />
@@ -2702,13 +3140,13 @@
             <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
             <End Role="tblCandidateSubmissionAppointmentSlot" EntitySet="tblCandidateSubmissionAppointmentSlots" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments" Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments">
+            <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
+            <End Role="tblCandidateSubmissionAppointmentUserComment" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
             <End Role="tblCandidateSubmissionAppointment" EntitySet="tblCandidateSubmissionAppointments" />
             <End Role="tblCandidateSubmissionAppointmentUser" EntitySet="tblCandidateSubmissionAppointmentUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
-            <End Role="tblCandidateSubmissionAppointmentUser" EntitySet="tblCandidateSubmissionAppointmentUsers" />
-            <End Role="tblCandidateSubmissionAppointmentUserComment" EntitySet="tblCandidateSubmissionAppointmentUserComments" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionAppointmentUserComments_tblComments" Association="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments">
             <End Role="tblComment" EntitySet="tblComments" />
@@ -2726,13 +3164,57 @@
             <End Role="tblComment" EntitySet="tblComments" />
             <End Role="tblCandidateSubmissionDocumentRespons" EntitySet="tblCandidateSubmissionDocumentResponses" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblFiles" Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblFiles">
+            <End Role="tblFile" EntitySet="tblFiles" />
+            <End Role="tblCandidateSubmissionDocumentRespons" EntitySet="tblCandidateSubmissionDocumentResponses" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments" Association="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments">
             <End Role="tblVacanciesRequiredDocument" EntitySet="tblVacanciesRequiredDocuments" />
             <End Role="tblCandidateSubmissionDocumentRespons" EntitySet="tblCandidateSubmissionDocumentResponses" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblMSPPayPeriods" Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPPayPeriods">
+            <End Role="tblMSPPayPeriod" EntitySet="tblMSPPayPeriods" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblMSPSpendCategory" Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPSpendCategory">
+            <End Role="tblMSPSpendCategory" EntitySet="tblMSPSpendCategories" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpend_tblTimesheetStatus" Association="eMSPModel.FK_tblCandidateSubmissionSpend_tblTimesheetStatus">
+            <End Role="tblTimesheetStatu" EntitySet="tblTimesheetStatus" />
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend" Association="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend">
+            <End Role="tblCandidateSubmissionSpend" EntitySet="tblCandidateSubmissionSpends" />
+            <End Role="tblCandidateSubmissionSpendFile" EntitySet="tblCandidateSubmissionSpendFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateSubmissionSpendFiles_tblFiles" Association="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblFiles">
+            <End Role="tblFile" EntitySet="tblFiles" />
+            <End Role="tblCandidateSubmissionSpendFile" EntitySet="tblCandidateSubmissionSpendFiles" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions" Association="eMSPModel.FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions">
             <End Role="tblVacanciesQuestion" EntitySet="tblVacanciesQuestions" />
             <End Role="tblCandidateSubmissionsQuestionsRespons" EntitySet="tblCandidateSubmissionsQuestionsResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets" Association="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets">
+            <End Role="tblCandidateTimesheet" EntitySet="tblCandidateTimesheets" />
+            <End Role="tblCandidateTimesheetCategoriesHour" EntitySet="tblCandidateTimesheetCategoriesHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories" Association="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories">
+            <End Role="tblMSPTimeGroupCategory" EntitySet="tblMSPTimeGroupCategories" />
+            <End Role="tblCandidateTimesheetCategoriesHour" EntitySet="tblCandidateTimesheetCategoriesHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblCandidateTimesheets" Association="eMSPModel.FK_tblCandidateTimesheets_tblCandidateTimesheets">
+            <End Role="tblCandidateTimesheet" EntitySet="tblCandidateTimesheets" />
+            <End Role="tblCandidateTimesheetHour" EntitySet="tblCandidateTimesheetHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblMSPPayPeriods" Association="eMSPModel.FK_tblCandidateTimesheets_tblMSPPayPeriods">
+            <End Role="tblMSPPayPeriod" EntitySet="tblMSPPayPeriods" />
+            <End Role="tblCandidateTimesheet" EntitySet="tblCandidateTimesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCandidateTimesheets_tblTimesheetStatus" Association="eMSPModel.FK_tblCandidateTimesheets_tblTimesheetStatus">
+            <End Role="tblTimesheetStatu" EntitySet="tblTimesheetStatus" />
+            <End Role="tblCandidateTimesheet" EntitySet="tblCandidateTimesheets" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCommentUsers_tblComments" Association="eMSPModel.FK_tblCommentUsers_tblComments">
             <End Role="tblComment" EntitySet="tblComments" />
@@ -2806,10 +3288,6 @@
             <End Role="tblLocation" EntitySet="tblLocations" />
             <End Role="tblCustomerLocationBranch" EntitySet="tblCustomerLocationBranches" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblVacancyLocations_tblCustomerLocationBranches" Association="eMSPModel.FK_tblVacancyLocations_tblCustomerLocationBranches">
-            <End Role="tblCustomerLocationBranch" EntitySet="tblCustomerLocationBranches" />
-            <End Role="tblVacancyLocation" EntitySet="tblVacancyLocations" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblCustomerUsers_tblCustomers" Association="eMSPModel.FK_tblCustomerUsers_tblCustomers">
             <End Role="tblCustomer" EntitySet="tblCustomers" />
             <End Role="tblCustomerUser" EntitySet="tblCustomerUsers" />
@@ -2854,6 +3332,10 @@
             <End Role="tblLocation" EntitySet="tblLocations" />
             <End Role="tblUserLocationBranch" EntitySet="tblUserLocationBranches" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblVacancyLocations_tblLocations" Association="eMSPModel.FK_tblVacancyLocations_tblLocations">
+            <End Role="tblLocation" EntitySet="tblLocations" />
+            <End Role="tblVacancyLocation" EntitySet="tblVacancyLocations" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblMSPCustomers_tblMSPDetails" Association="eMSPModel.FK_tblMSPCustomers_tblMSPDetails">
             <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
             <End Role="tblMSPCustomer" EntitySet="tblMSPCustomers" />
@@ -2861,6 +3343,10 @@
           <AssociationSet Name="FK_tblMSPLocationBranches_tblMSPDetails" Association="eMSPModel.FK_tblMSPLocationBranches_tblMSPDetails">
             <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
             <End Role="tblMSPLocationBranch" EntitySet="tblMSPLocationBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMSPTimeCategories_tblMSPDetails" Association="eMSPModel.FK_tblMSPTimeCategories_tblMSPDetails">
+            <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
+            <End Role="tblMSPTimeCategory" EntitySet="tblMSPTimeCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMSPUsers_tblMSPDetails" Association="eMSPModel.FK_tblMSPUsers_tblMSPDetails">
             <End Role="tblMSPDetail" EntitySet="tblMSPDetails" />
@@ -2954,16 +3440,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="AspNetRoleGroupRole">
           <Key>
             <PropertyRef Name="RoleGroupId" />
@@ -3123,7 +3599,6 @@
           <NavigationProperty Name="tblCandidate" Relationship="eMSPModel.FK_tblCandidateFiles_tblCandidates" FromRole="tblCandidateFile" ToRole="tblCandidate" />
           <NavigationProperty Name="tblFile" Relationship="eMSPModel.FK_tblCandidateFiles_tblFiles" FromRole="tblCandidateFile" ToRole="tblFile" />
           <NavigationProperty Name="tblFileType" Relationship="eMSPModel.FK_tblCandidateFiles_tblFileTypes" FromRole="tblCandidateFile" ToRole="tblFileType" />
-          <NavigationProperty Name="tblCandidateSubmissionDocumentResponses" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles" FromRole="tblCandidateFile" ToRole="tblCandidateSubmissionDocumentRespons" />
         </EntityType>
         <EntityType Name="tblCandidateIndustry">
           <Key>
@@ -3140,6 +3615,24 @@
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidate" Relationship="eMSPModel.FK_tblCandidateIndustries_tblCandidates" FromRole="tblCandidateIndustry" ToRole="tblCandidate" />
           <NavigationProperty Name="tblIndustry" Relationship="eMSPModel.FK_tblCandidateIndustries_tblIndustries" FromRole="tblCandidateIndustry" ToRole="tblIndustry" />
+        </EntityType>
+        <EntityType Name="tblCandidatePlacement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubmissionID" Type="Int64" Nullable="false" />
+          <Property Name="TimeGroupID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmission" Relationship="eMSPModel.FK_tblCandidatePlacements_tblCandidateSubmission" FromRole="tblCandidatePlacement" ToRole="tblCandidateSubmission" />
+          <NavigationProperty Name="tblMSPTimeGroup" Relationship="eMSPModel.FK_tblCandidatePlacements_tblMSPTimeGroup" FromRole="tblCandidatePlacement" ToRole="tblMSPTimeGroup" />
+          <NavigationProperty Name="tblCandidateSubmissionSpends" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblCandidatePlacements" FromRole="tblCandidatePlacement" ToRole="tblCandidateSubmissionSpend" />
+          <NavigationProperty Name="tblCandidateTimesheets" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblCandidatePlacements" FromRole="tblCandidatePlacement" ToRole="tblCandidateTimesheet" />
         </EntityType>
         <EntityType Name="tblCandidate">
           <Key>
@@ -3211,6 +3704,9 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PayRate" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="PayRateMarkUp" Type="Decimal" Precision="9" Scale="4" />
+          <NavigationProperty Name="tblCandidatePlacements" Relationship="eMSPModel.FK_tblCandidatePlacements_tblCandidateSubmission" FromRole="tblCandidateSubmission" ToRole="tblCandidatePlacement" />
           <NavigationProperty Name="tblCandidate" Relationship="eMSPModel.FK_tblCandidateSubmission_tblCandidates" FromRole="tblCandidateSubmission" ToRole="tblCandidate" />
           <NavigationProperty Name="tblCandidateStatu" Relationship="eMSPModel.FK_tblCandidateSubmission_tblCandidateStatus" FromRole="tblCandidateSubmission" ToRole="tblCandidateStatu" />
           <NavigationProperty Name="tblVacancy" Relationship="eMSPModel.FK_tblCandidateSubmission_tblVacancies" FromRole="tblCandidateSubmission" ToRole="tblVacancy" />
@@ -3223,7 +3719,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppintmentTypeID" Type="Int64" Nullable="false" />
           <Property Name="CandidateSubmissionID" Type="Int64" Nullable="false" />
           <Property Name="AppointmentStatusID" Type="Int64" Nullable="false" />
@@ -3239,6 +3735,7 @@
           <NavigationProperty Name="tblAppointmentType" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointments_tblAppointmentTypes" FromRole="tblCandidateSubmissionAppointment" ToRole="tblAppointmentType" />
           <NavigationProperty Name="tblCandidateSubmission" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointments_tblCandidateSubmission" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmission" />
           <NavigationProperty Name="tblCandidateSubmissionAppointmentSlots" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentSlots_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmissionAppointmentSlot" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointmentUserComments" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmissionAppointmentUserComment" />
           <NavigationProperty Name="tblCandidateSubmissionAppointmentUsers" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointment" ToRole="tblCandidateSubmissionAppointmentUser" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionAppointmentSlot">
@@ -3263,7 +3760,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="AppointmentID" Type="Int64" Nullable="false" />
           <Property Name="CommentID" Type="Int64" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsDeleted" Type="Boolean" />
@@ -3271,7 +3768,7 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblCandidateSubmissionAppointmentUser" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" FromRole="tblCandidateSubmissionAppointmentUserComment" ToRole="tblCandidateSubmissionAppointmentUser" />
+          <NavigationProperty Name="tblCandidateSubmissionAppointment" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointmentUserComment" ToRole="tblCandidateSubmissionAppointment" />
           <NavigationProperty Name="tblComment" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblComments" FromRole="tblCandidateSubmissionAppointmentUserComment" ToRole="tblComment" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionAppointmentUser">
@@ -3288,7 +3785,6 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidateSubmissionAppointment" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblCandidateSubmissionAppointment" />
-          <NavigationProperty Name="tblCandidateSubmissionAppointmentUserComments" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblCandidateSubmissionAppointmentUserComment" />
           <NavigationProperty Name="tblUserProfile" Relationship="eMSPModel.FK_tblCandidateSubmissionAppointmentUsers_tblUserProfile" FromRole="tblCandidateSubmissionAppointmentUser" ToRole="tblUserProfile" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionComment">
@@ -3313,7 +3809,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CandidateSubmissionID" Type="Int64" Nullable="false" />
           <Property Name="VacancyRequiredDocumentID" Type="Int64" Nullable="false" />
           <Property Name="CandidateFileID" Type="Int64" Nullable="false" />
@@ -3324,16 +3820,56 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblCandidateFile" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles" FromRole="tblCandidateSubmissionDocumentRespons" ToRole="tblCandidateFile" />
           <NavigationProperty Name="tblCandidateSubmission" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblCandidateSubmission" FromRole="tblCandidateSubmissionDocumentRespons" ToRole="tblCandidateSubmission" />
           <NavigationProperty Name="tblComment" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblComments" FromRole="tblCandidateSubmissionDocumentRespons" ToRole="tblComment" />
+          <NavigationProperty Name="tblFile" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblFiles" FromRole="tblCandidateSubmissionDocumentRespons" ToRole="tblFile" />
           <NavigationProperty Name="tblVacanciesRequiredDocument" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments" FromRole="tblCandidateSubmissionDocumentRespons" ToRole="tblVacanciesRequiredDocument" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionSpend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayPeriodID" Type="Int64" Nullable="false" />
+          <Property Name="SpendCategoryID" Type="Int64" Nullable="false" />
+          <Property Name="PlacementID" Type="Int64" Nullable="false" />
+          <Property Name="CurrentStatusID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidatePlacement" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblCandidatePlacements" FromRole="tblCandidateSubmissionSpend" ToRole="tblCandidatePlacement" />
+          <NavigationProperty Name="tblMSPPayPeriod" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPPayPeriods" FromRole="tblCandidateSubmissionSpend" ToRole="tblMSPPayPeriod" />
+          <NavigationProperty Name="tblMSPSpendCategory" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPSpendCategory" FromRole="tblCandidateSubmissionSpend" ToRole="tblMSPSpendCategory" />
+          <NavigationProperty Name="tblTimesheetStatu" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblTimesheetStatus" FromRole="tblCandidateSubmissionSpend" ToRole="tblTimesheetStatu" />
+          <NavigationProperty Name="tblCandidateSubmissionSpendFiles" Relationship="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend" FromRole="tblCandidateSubmissionSpend" ToRole="tblCandidateSubmissionSpendFile" />
+        </EntityType>
+        <EntityType Name="tblCandidateSubmissionSpendFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="SpendID" Type="Int64" Nullable="false" />
+          <Property Name="FileID" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionSpend" Relationship="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend" FromRole="tblCandidateSubmissionSpendFile" ToRole="tblCandidateSubmissionSpend" />
+          <NavigationProperty Name="tblFile" Relationship="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblFiles" FromRole="tblCandidateSubmissionSpendFile" ToRole="tblFile" />
         </EntityType>
         <EntityType Name="tblCandidateSubmissionsQuestionsRespons">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SubmissionID" Type="Int64" Nullable="false" />
           <Property Name="VacancyQuestionID" Type="Int64" Nullable="false" />
           <Property Name="Responses" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -3345,6 +3881,50 @@
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidateSubmission" Relationship="eMSPModel.FK_tblCandidateSubmissionsQuestionsResponses_tblCandidateSubmission" FromRole="tblCandidateSubmissionsQuestionsRespons" ToRole="tblCandidateSubmission" />
           <NavigationProperty Name="tblVacanciesQuestion" Relationship="eMSPModel.FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions" FromRole="tblCandidateSubmissionsQuestionsRespons" ToRole="tblVacanciesQuestion" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheetCategoriesHour">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimesheetID" Type="Int64" Nullable="false" />
+          <Property Name="TimesheetCategoryID" Type="Int64" Nullable="false" />
+          <Property Name="TimeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hours" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+          <NavigationProperty Name="tblCandidateTimesheet" Relationship="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets" FromRole="tblCandidateTimesheetCategoriesHour" ToRole="tblCandidateTimesheet" />
+          <NavigationProperty Name="tblMSPTimeGroupCategory" Relationship="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories" FromRole="tblCandidateTimesheetCategoriesHour" ToRole="tblMSPTimeGroupCategory" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheetHour">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimesheetID" Type="Int64" Nullable="false" />
+          <Property Name="TimeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HoursWorked" Type="Decimal" Precision="9" Scale="4" />
+          <Property Name="BreakHours" Type="Decimal" Precision="9" Scale="4" />
+          <NavigationProperty Name="tblCandidateTimesheet" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblCandidateTimesheets" FromRole="tblCandidateTimesheetHour" ToRole="tblCandidateTimesheet" />
+        </EntityType>
+        <EntityType Name="tblCandidateTimesheet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayPeriodID" Type="Int64" Nullable="false" />
+          <Property Name="PlacementID" Type="Int64" Nullable="false" />
+          <Property Name="StatusID" Type="Int64" Nullable="false" />
+          <Property Name="VersionNumber" Type="Int16" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidatePlacement" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblCandidatePlacements" FromRole="tblCandidateTimesheet" ToRole="tblCandidatePlacement" />
+          <NavigationProperty Name="tblCandidateTimesheetCategoriesHours" Relationship="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets" FromRole="tblCandidateTimesheet" ToRole="tblCandidateTimesheetCategoriesHour" />
+          <NavigationProperty Name="tblCandidateTimesheetHours" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblCandidateTimesheets" FromRole="tblCandidateTimesheet" ToRole="tblCandidateTimesheetHour" />
+          <NavigationProperty Name="tblMSPPayPeriod" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblMSPPayPeriods" FromRole="tblCandidateTimesheet" ToRole="tblMSPPayPeriod" />
+          <NavigationProperty Name="tblTimesheetStatu" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblTimesheetStatus" FromRole="tblCandidateTimesheet" ToRole="tblTimesheetStatu" />
         </EntityType>
         <EntityType Name="tblComment">
           <Key>
@@ -3469,7 +4049,6 @@
           <NavigationProperty Name="tblBranch" Relationship="eMSPModel.FK_tblCustomerLocationBranches_tblBranches" FromRole="tblCustomerLocationBranch" ToRole="tblBranch" />
           <NavigationProperty Name="tblCustomer" Relationship="eMSPModel.FK_tblCustomerLocationBranches_tblCustomers" FromRole="tblCustomerLocationBranch" ToRole="tblCustomer" />
           <NavigationProperty Name="tblLocation" Relationship="eMSPModel.FK_tblCustomerLocationBranches_tblLocations" FromRole="tblCustomerLocationBranch" ToRole="tblLocation" />
-          <NavigationProperty Name="tblVacancyLocations" Relationship="eMSPModel.FK_tblVacancyLocations_tblCustomerLocationBranches" FromRole="tblCustomerLocationBranch" ToRole="tblVacancyLocation" />
         </EntityType>
         <EntityType Name="tblCustomer">
           <Key>
@@ -3528,6 +4107,8 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCandidateFiles" Relationship="eMSPModel.FK_tblCandidateFiles_tblFiles" FromRole="tblFile" ToRole="tblCandidateFile" />
+          <NavigationProperty Name="tblCandidateSubmissionDocumentResponses" Relationship="eMSPModel.FK_tblCandidateSubmissionDocumentResponses_tblFiles" FromRole="tblFile" ToRole="tblCandidateSubmissionDocumentRespons" />
+          <NavigationProperty Name="tblCandidateSubmissionSpendFiles" Relationship="eMSPModel.FK_tblCandidateSubmissionSpendFiles_tblFiles" FromRole="tblFile" ToRole="tblCandidateSubmissionSpendFile" />
         </EntityType>
         <EntityType Name="tblFileType">
           <Key>
@@ -3618,6 +4199,7 @@
           <NavigationProperty Name="tblMSPLocationBranches" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblMSPLocationBranch" />
           <NavigationProperty Name="tblSupplierLocationBranches" Relationship="eMSPModel.FK_tblSupplierLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblSupplierLocationBranch" />
           <NavigationProperty Name="tblUserLocationBranches" Relationship="eMSPModel.FK_tblUserLocationBranches_tblLocations" FromRole="tblLocation" ToRole="tblUserLocationBranch" />
+          <NavigationProperty Name="tblVacancyLocations" Relationship="eMSPModel.FK_tblVacancyLocations_tblLocations" FromRole="tblLocation" ToRole="tblVacancyLocation" />
         </EntityType>
         <EntityType Name="tblMSPCustomer">
           <Key>
@@ -3658,6 +4240,7 @@
           <NavigationProperty Name="tblFileTypes" Relationship="eMSPModel.FK_tblFileTypes_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblFileType" />
           <NavigationProperty Name="tblMSPCustomers" Relationship="eMSPModel.FK_tblMSPCustomers_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPCustomer" />
           <NavigationProperty Name="tblMSPLocationBranches" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPLocationBranch" />
+          <NavigationProperty Name="tblMSPTimeCategories" Relationship="eMSPModel.FK_tblMSPTimeCategories_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPTimeCategory" />
           <NavigationProperty Name="tblMSPUsers" Relationship="eMSPModel.FK_tblMSPUsers_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPUser" />
           <NavigationProperty Name="tblMSPVacancieTypes" Relationship="eMSPModel.FK_tblMSPVacancieTypes_tblMSPDetails" FromRole="tblMSPDetail" ToRole="tblMSPVacancieType" />
         </EntityType>
@@ -3678,6 +4261,22 @@
           <NavigationProperty Name="tblBranch" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblBranches" FromRole="tblMSPLocationBranch" ToRole="tblBranch" />
           <NavigationProperty Name="tblLocation" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblLocations" FromRole="tblMSPLocationBranch" ToRole="tblLocation" />
           <NavigationProperty Name="tblMSPDetail" Relationship="eMSPModel.FK_tblMSPLocationBranches_tblMSPDetails" FromRole="tblMSPLocationBranch" ToRole="tblMSPDetail" />
+        </EntityType>
+        <EntityType Name="tblMSPPayPeriod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tblCandidateSubmissionSpends" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPPayPeriods" FromRole="tblMSPPayPeriod" ToRole="tblCandidateSubmissionSpend" />
+          <NavigationProperty Name="tblCandidateTimesheets" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblMSPPayPeriods" FromRole="tblMSPPayPeriod" ToRole="tblCandidateTimesheet" />
         </EntityType>
         <EntityType Name="tblMSPQuestion">
           <Key>
@@ -3700,7 +4299,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RequiredDocumentName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="RequiredDocumentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDefault" Type="Boolean" />
@@ -3712,6 +4311,70 @@
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblVacanciesRequiredDocuments" Relationship="eMSPModel.FK_tblVacanciesRequiredDocuments_tblMSPRequiredDocument" FromRole="tblMSPRequiredDocument" ToRole="tblVacanciesRequiredDocument" />
+        </EntityType>
+        <EntityType Name="tblMSPSpendCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionSpends" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblMSPSpendCategory" FromRole="tblMSPSpendCategory" ToRole="tblCandidateSubmissionSpend" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MSPID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblMSPDetail" Relationship="eMSPModel.FK_tblMSPTimeCategories_tblMSPDetails" FromRole="tblMSPTimeCategory" ToRole="tblMSPDetail" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidatePlacements" Relationship="eMSPModel.FK_tblCandidatePlacements_tblMSPTimeGroup" FromRole="tblMSPTimeGroup" ToRole="tblCandidatePlacement" />
+        </EntityType>
+        <EntityType Name="tblMSPTimeGroupCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int64" Nullable="false" />
+          <Property Name="CategoryID" Type="Int64" Nullable="false" />
+          <Property Name="WeeklyMarkup" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+          <Property Name="DailyMaxHours" Type="Int32" Nullable="false" />
+          <Property Name="WeeklyMaxHours" Type="Int32" Nullable="false" />
+          <Property Name="MonthlyMaxHours" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateTimesheetCategoriesHours" Relationship="eMSPModel.FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories" FromRole="tblMSPTimeGroupCategory" ToRole="tblCandidateTimesheetCategoriesHour" />
         </EntityType>
         <EntityType Name="tblMSPUser">
           <Key>
@@ -3820,6 +4483,22 @@
           <NavigationProperty Name="tblSupplier" Relationship="eMSPModel.FK_tblSupplierUsers_tblSupplier" FromRole="tblSupplierUser" ToRole="tblSupplier" />
           <NavigationProperty Name="tblUserProfile" Relationship="eMSPModel.FK_tblSupplierUsers_tblUserProfile" FromRole="tblSupplierUser" ToRole="tblUserProfile" />
         </EntityType>
+        <EntityType Name="tblTimesheetStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCandidateSubmissionSpends" Relationship="eMSPModel.FK_tblCandidateSubmissionSpend_tblTimesheetStatus" FromRole="tblTimesheetStatu" ToRole="tblCandidateSubmissionSpend" />
+          <NavigationProperty Name="tblCandidateTimesheets" Relationship="eMSPModel.FK_tblCandidateTimesheets_tblTimesheetStatus" FromRole="tblTimesheetStatu" ToRole="tblCandidateTimesheet" />
+        </EntityType>
         <EntityType Name="tblUserLocationBranch">
           <Key>
             <PropertyRef Name="ID" />
@@ -3875,7 +4554,6 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VacancyType" Type="Int16" Nullable="false" />
-          <Property Name="JobStatusID" Type="Int64" />
           <Property Name="CustomerID" Type="Int64" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
@@ -3896,6 +4574,8 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JobStatusID" Type="Int64" />
+          <Property Name="NoOfPositions" Type="Int16" Nullable="false" />
           <NavigationProperty Name="tblCandidateSubmissions" Relationship="eMSPModel.FK_tblCandidateSubmission_tblVacancies" FromRole="tblVacancy" ToRole="tblCandidateSubmission" />
           <NavigationProperty Name="tblCustomer" Relationship="eMSPModel.FK_tblVacancies_tblCustomers" FromRole="tblVacancy" ToRole="tblCustomer" />
           <NavigationProperty Name="tblJobVacanciesStatu" Relationship="eMSPModel.FK_tblVacancies_tblJobVacanciesStatus" FromRole="tblVacancy" ToRole="tblJobVacanciesStatu" />
@@ -4009,7 +4689,7 @@
           <Property Name="CreatedUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedTimestamp" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblCustomerLocationBranch" Relationship="eMSPModel.FK_tblVacancyLocations_tblCustomerLocationBranches" FromRole="tblVacancyLocation" ToRole="tblCustomerLocationBranch" />
+          <NavigationProperty Name="tblLocation" Relationship="eMSPModel.FK_tblVacancyLocations_tblLocations" FromRole="tblVacancyLocation" ToRole="tblLocation" />
           <NavigationProperty Name="tblVacancy" Relationship="eMSPModel.FK_tblVacancyLocations_tblVacancies" FromRole="tblVacancyLocation" ToRole="tblVacancy" />
         </EntityType>
         <EntityType Name="tblVacancySupplier">
@@ -4249,18 +4929,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblCandidateFiles">
-          <End Type="eMSPModel.tblCandidateFile" Role="tblCandidateFile" Multiplicity="1" />
-          <End Type="eMSPModel.tblCandidateSubmissionDocumentRespons" Role="tblCandidateSubmissionDocumentRespons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCandidateFile">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblCandidateSubmissionDocumentRespons">
-              <PropertyRef Name="CandidateFileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblCandidateIndustries_tblCandidates">
           <End Type="eMSPModel.tblCandidate" Role="tblCandidate" Multiplicity="1" />
           <End Type="eMSPModel.tblCandidateIndustry" Role="tblCandidateIndustry" Multiplicity="*" />
@@ -4282,6 +4950,54 @@
             </Principal>
             <Dependent Role="tblCandidateIndustry">
               <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidatePlacements_tblCandidateSubmission">
+          <End Type="eMSPModel.tblCandidateSubmission" Role="tblCandidateSubmission" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidatePlacement" Role="tblCandidatePlacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmission">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidatePlacement">
+              <PropertyRef Name="SubmissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidatePlacements_tblMSPTimeGroup">
+          <End Type="eMSPModel.tblMSPTimeGroup" Role="tblMSPTimeGroup" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidatePlacement" Role="tblCandidatePlacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPTimeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidatePlacement">
+              <PropertyRef Name="TimeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblCandidatePlacements">
+          <End Type="eMSPModel.tblCandidatePlacement" Role="tblCandidatePlacement" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpend" Role="tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidatePlacement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="PlacementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblCandidatePlacements">
+          <End Type="eMSPModel.tblCandidatePlacement" Role="tblCandidatePlacement" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheet" Role="tblCandidateTimesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidatePlacement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheet">
+              <PropertyRef Name="PlacementID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4429,6 +5145,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointments">
+          <End Type="eMSPModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionAppointmentUserComment" Role="tblCandidateSubmissionAppointmentUserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionAppointment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionAppointmentUserComment">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateSubmissionAppointmentUsers_tblCandidateSubmissionAppointments">
           <End Type="eMSPModel.tblCandidateSubmissionAppointment" Role="tblCandidateSubmissionAppointment" Multiplicity="1" />
           <End Type="eMSPModel.tblCandidateSubmissionAppointmentUser" Role="tblCandidateSubmissionAppointmentUser" Multiplicity="*" />
@@ -4438,18 +5166,6 @@
             </Principal>
             <Dependent Role="tblCandidateSubmissionAppointmentUser">
               <PropertyRef Name="AppointmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblCandidateSubmissionAppointmentUserComments_tblCandidateSubmissionAppointmentUsers">
-          <End Type="eMSPModel.tblCandidateSubmissionAppointmentUser" Role="tblCandidateSubmissionAppointmentUser" Multiplicity="1" />
-          <End Type="eMSPModel.tblCandidateSubmissionAppointmentUserComment" Role="tblCandidateSubmissionAppointmentUserComment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCandidateSubmissionAppointmentUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblCandidateSubmissionAppointmentUserComment">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4501,6 +5217,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblFiles">
+          <End Type="eMSPModel.tblFile" Role="tblFile" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionDocumentRespons" Role="tblCandidateSubmissionDocumentRespons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionDocumentRespons">
+              <PropertyRef Name="CandidateFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateSubmissionDocumentResponses_tblVacanciesRequiredDocuments">
           <End Type="eMSPModel.tblVacanciesRequiredDocument" Role="tblVacanciesRequiredDocument" Multiplicity="1" />
           <End Type="eMSPModel.tblCandidateSubmissionDocumentRespons" Role="tblCandidateSubmissionDocumentRespons" Multiplicity="*" />
@@ -4513,6 +5241,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblMSPPayPeriods">
+          <End Type="eMSPModel.tblMSPPayPeriod" Role="tblMSPPayPeriod" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpend" Role="tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPPayPeriod">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="PayPeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblMSPSpendCategory">
+          <End Type="eMSPModel.tblMSPSpendCategory" Role="tblMSPSpendCategory" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpend" Role="tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPSpendCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="SpendCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpend_tblTimesheetStatus">
+          <End Type="eMSPModel.tblTimesheetStatu" Role="tblTimesheetStatu" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpend" Role="tblCandidateSubmissionSpend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTimesheetStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="CurrentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpendFiles_tblCandidateSubmissionSpend">
+          <End Type="eMSPModel.tblCandidateSubmissionSpend" Role="tblCandidateSubmissionSpend" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpendFile" Role="tblCandidateSubmissionSpendFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateSubmissionSpend">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpendFile">
+              <PropertyRef Name="SpendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateSubmissionSpendFiles_tblFiles">
+          <End Type="eMSPModel.tblFile" Role="tblFile" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateSubmissionSpendFile" Role="tblCandidateSubmissionSpendFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateSubmissionSpendFile">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblCandidateSubmissionsQuestionsResponses_tblVacanciesQuestions">
           <End Type="eMSPModel.tblVacanciesQuestion" Role="tblVacanciesQuestion" Multiplicity="1" />
           <End Type="eMSPModel.tblCandidateSubmissionsQuestionsRespons" Role="tblCandidateSubmissionsQuestionsRespons" Multiplicity="*" />
@@ -4522,6 +5310,66 @@
             </Principal>
             <Dependent Role="tblCandidateSubmissionsQuestionsRespons">
               <PropertyRef Name="VacancyQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheetCategoriesHours_tblCandidateTimesheets">
+          <End Type="eMSPModel.tblCandidateTimesheet" Role="tblCandidateTimesheet" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheetCategoriesHour" Role="tblCandidateTimesheetCategoriesHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateTimesheet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetCategoriesHour">
+              <PropertyRef Name="TimesheetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheetCategoriesHours_tblMSPTimeGroupCategories">
+          <End Type="eMSPModel.tblMSPTimeGroupCategory" Role="tblMSPTimeGroupCategory" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheetCategoriesHour" Role="tblCandidateTimesheetCategoriesHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPTimeGroupCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetCategoriesHour">
+              <PropertyRef Name="TimesheetCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblCandidateTimesheets">
+          <End Type="eMSPModel.tblCandidateTimesheet" Role="tblCandidateTimesheet" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheetHour" Role="tblCandidateTimesheetHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCandidateTimesheet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheetHour">
+              <PropertyRef Name="TimesheetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblMSPPayPeriods">
+          <End Type="eMSPModel.tblMSPPayPeriod" Role="tblMSPPayPeriod" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheet" Role="tblCandidateTimesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPPayPeriod">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheet">
+              <PropertyRef Name="PayPeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCandidateTimesheets_tblTimesheetStatus">
+          <End Type="eMSPModel.tblTimesheetStatu" Role="tblTimesheetStatu" Multiplicity="1" />
+          <End Type="eMSPModel.tblCandidateTimesheet" Role="tblCandidateTimesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTimesheetStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblCandidateTimesheet">
+              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4741,18 +5589,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblVacancyLocations_tblCustomerLocationBranches">
-          <End Type="eMSPModel.tblCustomerLocationBranch" Role="tblCustomerLocationBranch" Multiplicity="1" />
-          <End Type="eMSPModel.tblVacancyLocation" Role="tblVacancyLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCustomerLocationBranch">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblVacancyLocation">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblCustomerUsers_tblCustomers">
           <End Type="eMSPModel.tblCustomer" Role="tblCustomer" Multiplicity="1" />
           <End Type="eMSPModel.tblCustomerUser" Role="tblCustomerUser" Multiplicity="*" />
@@ -4885,6 +5721,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblVacancyLocations_tblLocations">
+          <End Type="eMSPModel.tblLocation" Role="tblLocation" Multiplicity="1" />
+          <End Type="eMSPModel.tblVacancyLocation" Role="tblVacancyLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLocation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblVacancyLocation">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblMSPCustomers_tblMSPDetails">
           <End Type="eMSPModel.tblMSPDetail" Role="tblMSPDetail" Multiplicity="1" />
           <End Type="eMSPModel.tblMSPCustomer" Role="tblMSPCustomer" Multiplicity="*" />
@@ -4905,6 +5753,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tblMSPLocationBranch">
+              <PropertyRef Name="MSPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMSPTimeCategories_tblMSPDetails">
+          <End Type="eMSPModel.tblMSPDetail" Role="tblMSPDetail" Multiplicity="1" />
+          <End Type="eMSPModel.tblMSPTimeCategory" Role="tblMSPTimeCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMSPDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMSPTimeCategory">
               <PropertyRef Name="MSPID" />
             </Dependent>
           </ReferentialConstraint>
@@ -5147,16 +6007,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="eMSPModelStoreContainer" CdmEntityContainer="eMSPEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="eMSPModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoleGroupRoles">
             <EntityTypeMapping TypeName="eMSPModel.AspNetRoleGroupRole">
               <MappingFragment StoreEntitySet="AspNetRoleGroupRoles">
@@ -5318,6 +6168,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidatePlacements">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidatePlacement">
+              <MappingFragment StoreEntitySet="tblCandidatePlacements">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TimeGroupID" ColumnName="TimeGroupID" />
+                <ScalarProperty Name="SubmissionID" ColumnName="SubmissionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblCandidates">
             <EntityTypeMapping TypeName="eMSPModel.tblCandidate">
               <MappingFragment StoreEntitySet="tblCandidates">
@@ -5369,6 +6234,8 @@
           <EntitySetMapping Name="tblCandidateSubmissions">
             <EntityTypeMapping TypeName="eMSPModel.tblCandidateSubmission">
               <MappingFragment StoreEntitySet="tblCandidateSubmission">
+                <ScalarProperty Name="PayRateMarkUp" ColumnName="PayRateMarkUp" />
+                <ScalarProperty Name="PayRate" ColumnName="PayRate" />
                 <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
                 <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
                 <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
@@ -5428,7 +6295,7 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5481,6 +6348,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionSpends">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidateSubmissionSpend">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionSpend">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CurrentStatusID" ColumnName="CurrentStatusID" />
+                <ScalarProperty Name="PlacementID" ColumnName="PlacementID" />
+                <ScalarProperty Name="SpendCategoryID" ColumnName="SpendCategoryID" />
+                <ScalarProperty Name="PayPeriodID" ColumnName="PayPeriodID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateSubmissionSpendFiles">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidateSubmissionSpendFile">
+              <MappingFragment StoreEntitySet="tblCandidateSubmissionSpendFiles">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="SpendID" ColumnName="SpendID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblCandidateSubmissionsQuestionsResponses">
             <EntityTypeMapping TypeName="eMSPModel.tblCandidateSubmissionsQuestionsRespons">
               <MappingFragment StoreEntitySet="tblCandidateSubmissionsQuestionsResponses">
@@ -5493,6 +6395,45 @@
                 <ScalarProperty Name="Responses" ColumnName="Responses" />
                 <ScalarProperty Name="VacancyQuestionID" ColumnName="VacancyQuestionID" />
                 <ScalarProperty Name="SubmissionID" ColumnName="SubmissionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateTimesheetCategoriesHours">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidateTimesheetCategoriesHour">
+              <MappingFragment StoreEntitySet="tblCandidateTimesheetCategoriesHours">
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="TimeDate" ColumnName="TimeDate" />
+                <ScalarProperty Name="TimesheetCategoryID" ColumnName="TimesheetCategoryID" />
+                <ScalarProperty Name="TimesheetID" ColumnName="TimesheetID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateTimesheetHours">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidateTimesheetHour">
+              <MappingFragment StoreEntitySet="tblCandidateTimesheetHours">
+                <ScalarProperty Name="BreakHours" ColumnName="BreakHours" />
+                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+                <ScalarProperty Name="TimeDate" ColumnName="TimeDate" />
+                <ScalarProperty Name="TimesheetID" ColumnName="TimesheetID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCandidateTimesheets">
+            <EntityTypeMapping TypeName="eMSPModel.tblCandidateTimesheet">
+              <MappingFragment StoreEntitySet="tblCandidateTimesheets">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="PlacementID" ColumnName="PlacementID" />
+                <ScalarProperty Name="PayPeriodID" ColumnName="PayPeriodID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5781,6 +6722,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblMSPPayPeriods">
+            <EntityTypeMapping TypeName="eMSPModel.tblMSPPayPeriod">
+              <MappingFragment StoreEntitySet="tblMSPPayPeriods">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblMSPQuestions">
             <EntityTypeMapping TypeName="eMSPModel.tblMSPQuestion">
               <MappingFragment StoreEntitySet="tblMSPQuestions">
@@ -5811,6 +6767,70 @@
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="RequiredDocumentDescription" ColumnName="RequiredDocumentDescription" />
                 <ScalarProperty Name="RequiredDocumentName" ColumnName="RequiredDocumentName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMSPSpendCategories">
+            <EntityTypeMapping TypeName="eMSPModel.tblMSPSpendCategory">
+              <MappingFragment StoreEntitySet="tblMSPSpendCategory">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMSPTimeCategories">
+            <EntityTypeMapping TypeName="eMSPModel.tblMSPTimeCategory">
+              <MappingFragment StoreEntitySet="tblMSPTimeCategories">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MSPID" ColumnName="MSPID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMSPTimeGroups">
+            <EntityTypeMapping TypeName="eMSPModel.tblMSPTimeGroup">
+              <MappingFragment StoreEntitySet="tblMSPTimeGroup">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMSPTimeGroupCategories">
+            <EntityTypeMapping TypeName="eMSPModel.tblMSPTimeGroupCategory">
+              <MappingFragment StoreEntitySet="tblMSPTimeGroupCategories">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MonthlyMaxHours" ColumnName="MonthlyMaxHours" />
+                <ScalarProperty Name="WeeklyMaxHours" ColumnName="WeeklyMaxHours" />
+                <ScalarProperty Name="DailyMaxHours" ColumnName="DailyMaxHours" />
+                <ScalarProperty Name="WeeklyMarkup" ColumnName="WeeklyMarkup" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5911,6 +6931,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblTimesheetStatus">
+            <EntityTypeMapping TypeName="eMSPModel.tblTimesheetStatu">
+              <MappingFragment StoreEntitySet="tblTimesheetStatus">
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="CreatedTimestamp" ColumnName="CreatedTimestamp" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblUserLocationBranches">
             <EntityTypeMapping TypeName="eMSPModel.tblUserLocationBranch">
               <MappingFragment StoreEntitySet="tblUserLocationBranches">
@@ -5952,6 +6987,8 @@
           <EntitySetMapping Name="tblVacancies">
             <EntityTypeMapping TypeName="eMSPModel.tblVacancy">
               <MappingFragment StoreEntitySet="tblVacancies">
+                <ScalarProperty Name="NoOfPositions" ColumnName="NoOfPositions" />
+                <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
                 <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
                 <ScalarProperty Name="UpdatedTimestamp" ColumnName="UpdatedTimestamp" />
                 <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
@@ -5972,7 +7009,6 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
                 <ScalarProperty Name="VacancyType" ColumnName="VacancyType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -27,7 +27,6 @@ namespace eMSP.DataModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRoleGroupRole> AspNetRoleGroupRoles { get; set; }
         public virtual DbSet<AspNetRoleGroup> AspNetRoleGroups { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
@@ -40,6 +39,7 @@ namespace eMSP.DataModel
         public virtual DbSet<tblCandidateContact> tblCandidateContacts { get; set; }
         public virtual DbSet<tblCandidateFile> tblCandidateFiles { get; set; }
         public virtual DbSet<tblCandidateIndustry> tblCandidateIndustries { get; set; }
+        public virtual DbSet<tblCandidatePlacement> tblCandidatePlacements { get; set; }
         public virtual DbSet<tblCandidate> tblCandidates { get; set; }
         public virtual DbSet<tblCandidateSkill> tblCandidateSkills { get; set; }
         public virtual DbSet<tblCandidateStatu> tblCandidateStatus { get; set; }
@@ -50,7 +50,12 @@ namespace eMSP.DataModel
         public virtual DbSet<tblCandidateSubmissionAppointmentUser> tblCandidateSubmissionAppointmentUsers { get; set; }
         public virtual DbSet<tblCandidateSubmissionComment> tblCandidateSubmissionComments { get; set; }
         public virtual DbSet<tblCandidateSubmissionDocumentRespons> tblCandidateSubmissionDocumentResponses { get; set; }
+        public virtual DbSet<tblCandidateSubmissionSpend> tblCandidateSubmissionSpends { get; set; }
+        public virtual DbSet<tblCandidateSubmissionSpendFile> tblCandidateSubmissionSpendFiles { get; set; }
         public virtual DbSet<tblCandidateSubmissionsQuestionsRespons> tblCandidateSubmissionsQuestionsResponses { get; set; }
+        public virtual DbSet<tblCandidateTimesheetCategoriesHour> tblCandidateTimesheetCategoriesHours { get; set; }
+        public virtual DbSet<tblCandidateTimesheetHour> tblCandidateTimesheetHours { get; set; }
+        public virtual DbSet<tblCandidateTimesheet> tblCandidateTimesheets { get; set; }
         public virtual DbSet<tblComment> tblComments { get; set; }
         public virtual DbSet<tblCommentUser> tblCommentUsers { get; set; }
         public virtual DbSet<tblContact> tblContacts { get; set; }
@@ -68,14 +73,20 @@ namespace eMSP.DataModel
         public virtual DbSet<tblMSPCustomer> tblMSPCustomers { get; set; }
         public virtual DbSet<tblMSPDetail> tblMSPDetails { get; set; }
         public virtual DbSet<tblMSPLocationBranch> tblMSPLocationBranches { get; set; }
+        public virtual DbSet<tblMSPPayPeriod> tblMSPPayPeriods { get; set; }
         public virtual DbSet<tblMSPQuestion> tblMSPQuestions { get; set; }
         public virtual DbSet<tblMSPRequiredDocument> tblMSPRequiredDocuments { get; set; }
+        public virtual DbSet<tblMSPSpendCategory> tblMSPSpendCategories { get; set; }
+        public virtual DbSet<tblMSPTimeCategory> tblMSPTimeCategories { get; set; }
+        public virtual DbSet<tblMSPTimeGroup> tblMSPTimeGroups { get; set; }
+        public virtual DbSet<tblMSPTimeGroupCategory> tblMSPTimeGroupCategories { get; set; }
         public virtual DbSet<tblMSPUser> tblMSPUsers { get; set; }
         public virtual DbSet<tblMSPVacancieType> tblMSPVacancieTypes { get; set; }
         public virtual DbSet<tblSupplier> tblSuppliers { get; set; }
         public virtual DbSet<tblSupplierCandidate> tblSupplierCandidates { get; set; }
         public virtual DbSet<tblSupplierLocationBranch> tblSupplierLocationBranches { get; set; }
         public virtual DbSet<tblSupplierUser> tblSupplierUsers { get; set; }
+        public virtual DbSet<tblTimesheetStatu> tblTimesheetStatus { get; set; }
         public virtual DbSet<tblUserLocationBranch> tblUserLocationBranches { get; set; }
         public virtual DbSet<tblUserProfile> tblUserProfiles { get; set; }
         public virtual DbSet<tblVacancy> tblVacancies { get; set; }

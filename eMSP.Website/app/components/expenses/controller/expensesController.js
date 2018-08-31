@@ -43,7 +43,7 @@ function expensesController($scope, $state, localStorageService, ngAuthSettings,
 
     $scope.config = localStorageService.get('pageSettings');
     
-    $scope.dataJSON.PlacementID = 6;//localStorageService.get('PlacementId');
+    $scope.dataJSON.PlacementID = 1;//localStorageService.get('PlacementId');
     if ($scope.editform) {
 
         $scope.dataJSON.PayPeriodID = $scope.dataJSON.PayPeriodID.toString();

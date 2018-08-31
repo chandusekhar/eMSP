@@ -26,9 +26,9 @@ namespace eMSP.DataModel
         public Nullable<System.DateTime> UpdatedTimestamp { get; set; }
         public string UpdatedUserID { get; set; }
     
-        public virtual tblCandidateFile tblCandidateFile { get; set; }
         public virtual tblCandidateSubmission tblCandidateSubmission { get; set; }
         public virtual tblComment tblComment { get; set; }
+        public virtual tblFile tblFile { get; set; }
         public virtual tblVacanciesRequiredDocument tblVacanciesRequiredDocument { get; set; }
     }
 }

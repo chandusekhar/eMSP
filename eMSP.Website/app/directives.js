@@ -709,7 +709,8 @@ function timesheet() {
 
             scope.next = function () {
                 var next = scope.month.clone();
-                _removeTime(next.month(next.month() + 1).date(1));
+                next.month(next.month() + 1).date(1);               
+                _removeTime(next.day(0));
                 scope.month.month(scope.month.month() + 1);
                 _buildMonth(scope, next, scope.month);
                 scope.filterFn();
@@ -717,7 +718,8 @@ function timesheet() {
 
             scope.previous = function () {
                 var previous = scope.month.clone();
-                _removeTime(previous.month(previous.month() - 1).date(1));
+                previous.month(previous.month() - 1).date(1);
+                _removeTime(previous.day(0));
                 scope.month.month(scope.month.month() - 1);
                 _buildMonth(scope, previous, scope.month);
                 scope.filterFn();
@@ -827,13 +829,13 @@ function _buildWeek(date, month) {
             number: date.date(),
             isCurrentMonth: date.month() === month.month(),
             isToday: date.isSame(new Date(), "day"),
-            date: date
+            date: _removeTime(date)
         });
         date = date.clone();
         date.add(1, "d");
     }
     return days;
-};
+}
 
 /**
  *

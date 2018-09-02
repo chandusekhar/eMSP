@@ -6,7 +6,7 @@ angular.module('eMSPApp')
 function timeSheetController($scope, $state, localStorageService, configJSON, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster) {
 
     $scope.config = localStorageService.get('pageSettings');
-    $scope.configJSON = configJSON.data;    
+    $scope.configJSON = configJSON.data;
     $scope.day = moment();
     $scope.startDate = moment(new Date());
     $scope.endDate = moment(new Date());
@@ -21,7 +21,7 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
     $scope.showTimeSheet = false;
 
 
-    
+
 
 
     if ($scope.compType == 'MSP') {
@@ -65,7 +65,7 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
             $scope.endDate = moment(model.EndDate);
             apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLTIMESHEETS + "PlacementId=" + $scope.dataJSON.PlacementID + "&PayPeriodId=" + $scope.dataJSON.PayPeriodID, {})
                 .then(function (data) {
-                   
+
                     if (data) {
                         $scope.dataJSON = data;
                         $scope.editform = true;
@@ -80,7 +80,7 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
                 });
         }
 
-      
+
     }
 
     $scope.submit = function (form) {
@@ -94,8 +94,8 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
             });
         }
         else {
-           // $scope.dataJSON.PayPeriodID = 1;
-          //  $scope.dataJSON.PlacementID = 6;
+            // $scope.dataJSON.PayPeriodID = 1;
+            //  $scope.dataJSON.PlacementID = 6;
             $scope.dataJSON.StatusID = 1;
             $scope.dataJSON.VersionNumber = 1;
             var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
@@ -135,7 +135,7 @@ function addHoursController($scope, $state, localStorageService, ngAuthSettings,
                 $scope.$parent.filterFn();
                 $uibModalInstance.close();
             }
-            
+
         }
 
 

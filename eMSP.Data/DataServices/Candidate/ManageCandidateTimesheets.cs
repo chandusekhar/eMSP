@@ -160,11 +160,14 @@ namespace eMSP.Data.DataServices.Candidate
                         foreach (var childModel in model.tblCandidateTimesheetHours)
                         {
                             var existingChild = existingParent.tblCandidateTimesheetHours
-                                .Where(c => c.ID == childModel.ID)
+                                .Where(c => c.ID == childModel.ID && childModel.ID !=0)
                                 .SingleOrDefault();
 
                             if (existingChild != null)
+                            {
                                 db.Entry(existingChild).CurrentValues.SetValues(childModel);
+
+                            }
                             else
                             {
                                 

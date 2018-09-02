@@ -13,7 +13,7 @@
         .header ul {
             margin: 0;
             padding: 0;
-            list-style:none;
+            list-style: none;
         }
 
             .header ul li {
@@ -26,7 +26,7 @@
         .header .prev {
             float: left;
             padding-top: 10px;
-            cursor:pointer;
+            cursor: pointer;
         }
 
         .header .next {
@@ -41,9 +41,11 @@
         font-weight: bold;
         border: 1px solid #e5e5e5;
     }
-    .names p {
-        margin: 5px;
-    }
+
+        .names p {
+            margin: 5px;
+        }
+
     .week {
     }
 
@@ -54,15 +56,16 @@
     .nopadding {
         padding: 0px !important;
     }
-    .today{
-        background-color:darkcyan;
-        color:white;
-    }
 
-    .today a {
+    .today {
         background-color: darkcyan;
         color: white;
     }
+
+        .today a {
+            background-color: darkcyan;
+            color: white;
+        }
 
     @media (min-width: 992px) {
         .week .col-md-2 {
@@ -89,39 +92,41 @@
 </div>
 <div class="row ">
     <div class=" col-md-12  week">
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Sun</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Mon</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Tue</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Wed</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Thu</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Fri</p>
         </div>
-        <div class="col-md-2 text-center names" >
+        <div class="col-md-2 text-center names">
             <p>Sat</p>
         </div>
     </div>
-    <div class="col-md-12  week" ng-repeat="week in weeks">
-        <div class="col-md-2 nopadding" style="border:1px solid #e5e5e5; height: 50px !important;" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">
+    <div class="col-md-12  week" ng-repeat="week in weeks track by $index">
+        <div class="col-md-2 nopadding" style="border:1px solid #e5e5e5; height: 50px !important;" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days track by $index">
             <div class="day" style="padding:2px"><b>{{day.number}}</b></div>
             <div ng-if="day.isCurrentMonth" class="text-center" style="padding:5px;font-size:10px">
 
-               
+
+
                 <a ng-if="!day.HoursWorked && (day.date >= startDate && day.date <= endDate)" ng-click="addHours(day)">log hours</a>
 
                 <a ng-if="day.HoursWorked" ng-click="updateHours(day)" style="color:orangered">{{day.HoursWorked}} &nbsp; hours.</a>
 
 
             </div>
+        </div>
     </div>
 </div>

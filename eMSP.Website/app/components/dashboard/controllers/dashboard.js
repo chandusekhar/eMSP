@@ -9,6 +9,11 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
     $scope.SubmissionMonthlyDataSet = [];
     $scope.JobsMonthDataSet = [];
     $scope.MonthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var getRandomColor = function () {
+
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+        
+    };
     if (authService.authentication.isAuth) {
         $scope.userName = authService.authentication.userName;
     } else {
@@ -27,7 +32,7 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
      this.push( {
             value: val.Count,
             label: val.Name,
-            color: 'rgba(120,' + i +',46,21)'
+         color: getRandomColor()
         });
     }, $scope.CustomerJobsList);
 
@@ -36,7 +41,7 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
         this.push({
             value: val.Count,
             label: val.Name,
-            color: 'rgba(30,' + i+100 + ',200,12)'
+            color: getRandomColor()
         });
     }, $scope.JobActiveList);
 
@@ -45,7 +50,7 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
         this.push({
             value: val.Count,
             label: val.Name,
-            color: 'rgba(310,' + i + 100 + ',120,35)'
+            color: getRandomColor()
         });
     }, $scope.SupplierJobsList);
 

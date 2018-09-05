@@ -125,14 +125,48 @@ namespace eMSP.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
+
+            var user = await UserManager.FindAsync(User.Identity.GetUserName(), model.OldPassword); 
+
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
+
+            return Ok();
+        }
+
+        // POST api/Account/ChangeUserName
+        [Route("ChangeUserName")]
+        public async Task<IHttpActionResult> ChangeUserName(RegisterBindingModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = await UserManager.FindAsync(User.Identity.GetUserName(), model.Password);
+
+                user.UserName = model.Email;
+
+                IdentityResult result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
             return Ok();
         }

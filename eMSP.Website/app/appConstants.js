@@ -140,6 +140,7 @@ angular.module('eMSPApp')
             },
             ACCOUNT: {
                 CHANGEPASSWORD: "api/Account/ChangePassword",
+                CHANGEUSERNAME: "api/Account/ChangeUserName",
                 CHANGEUSERPASSWORD: "api/Account/ChangeUserPassword",
                 RESETPASSWORD: "api/Account/SetPassword",
                 FORGOTPASSWORD: "api/Account/ForgotPassword?Email="

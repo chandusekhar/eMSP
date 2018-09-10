@@ -59,6 +59,7 @@ angular.module('eMSPApp')
                 UPDATEUSERURL: "api/user/updateUser",
                 UPDATECOMPANYUSER: "api/user/updateCompanyUser",
                 DELETEUSERURL: "api/user/deleteUser",
+                GETALLACCOUNTUSERSURL: "api/account/AllUsers"
             },
             VACANCY: {
                 GETMSPVACANCYTYPEURL: "api/JobVacancie/getMSPVacancyType",

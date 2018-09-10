@@ -19,6 +19,9 @@ using eMSP.WebAPI.Results;
 using System.Configuration;
 using eMSP.WebAPI.Utility;
 using System.Web.Security;
+using System.Web.Http.Description;
+using System.Data.Entity;
+using System.Linq;
 
 namespace eMSP.WebAPI.Controllers
 {
@@ -231,6 +234,30 @@ namespace eMSP.WebAPI.Controllers
             return BadRequest("The email is required."); ;
         }
 
+        //api/Account/AllUsers
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("AllUsers")]          
+        public async Task<List<UserViewModel>> AllUsers()
+        {
+            try
+            {
+
+                List<UserViewModel> users = await  UserManager.Users.Select(a=> new UserViewModel (){ Username = a.UserName, Email = a.Email, Id = a.Id, IsLockedOut = (a.LockoutEnabled && a.LockoutEndDateUtc != null && a.LockoutEndDateUtc > DateTimeOffset.UtcNow)  }).ToListAsync();
+              
+              
+                return users;
+            }
+            catch (Exception ex)
+            {
+                // If we got this far, something failed, redisplay form
+                throw ex;
+            }
+          
+
+           
+        }
+
         // POST api/Account/SetPassword
         [AllowAnonymous]
         [Route("SetPassword")]
@@ -328,6 +355,34 @@ namespace eMSP.WebAPI.Controllers
             return Ok();
         }
 
+        // POST api/Account/RemoveLogin
+        [Route("LockUser")]
+        public async Task<IHttpActionResult> LockUser(UserViewModel user)
+        {
+         
+          IdentityResult  result = await UserManager.SetLockoutEnabledAsync(user.Id,true);
+            result = await UserManager.SetLockoutEndDateAsync(user.Id, DateTimeOffset.MaxValue);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+            return Ok();
+        }
+
+        // POST api/Account/RemoveLogin
+        [Route("UnLockUser")]
+        public async Task<IHttpActionResult> UnLockUser(UserViewModel user)
+        {
+
+            IdentityResult result = await UserManager.SetLockoutEnabledAsync(user.Id, false);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+            return Ok();
+        }
+
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -357,7 +412,7 @@ namespace eMSP.WebAPI.Controllers
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 return new ChallengeResult(provider, this);
             }
-
+            
             ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 

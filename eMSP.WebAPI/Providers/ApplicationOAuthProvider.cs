@@ -38,6 +38,11 @@ namespace eMSP.WebAPI.Providers
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
+            else if (userManager.IsLockedOut(user.Id))
+            {
+                context.SetError("User_LockedOut", "The user has been Locked, Please reachout the Admin to unlock it.");
+                return;
+            }
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);

@@ -1,0 +1,5 @@
+{
+  "title": "Manage Users",
+  "urlLock": "api/account/LockUser",
+  "urlUnlock": "api/account/UnLockUser"
+}

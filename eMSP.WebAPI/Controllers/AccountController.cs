@@ -176,24 +176,35 @@ namespace eMSP.WebAPI.Controllers
 
         // POST api/Account/ChangePassword ChangePasswordBindingModel model
         [Route("ChangeUserPassword")]        
-        public async Task<IHttpActionResult> ChangeUserPassword(RegisterBindingModel model)
+        public async Task<IHttpActionResult> ChangeUserPassword(ChangeUserNamePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
 
             var token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
             IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, token, model.Password);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
+            {
+                user.UserName = model.UserName;
+
+                result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+               
+            }
+            else
             {
                 return GetErrorResult(result);
-            }
-
+            }    
             return Ok();
         }
 

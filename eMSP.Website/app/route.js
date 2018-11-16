@@ -2016,13 +2016,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             return data;
                         });
                 },
-                ExpenseList: function (apiCall, localStorageService, APP_CONSTANTS) {
-                    var id = 6; //localStorageService.get('PlacementId');
-                    return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETALLEXPENSES + id, {})
-                        .then(function (data) {
-                            return data;
-                        });
-                },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {

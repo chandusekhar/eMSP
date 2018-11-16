@@ -22,13 +22,44 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <div class="ibox-tools">
-                            <a ng-click="model(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
-                        </div>
+                        <h5>Expenses</h5>
+                        
                     </div>
                     <div class="ibox-content">
+                        <div class="row">
+                            <div ng-if="compType == 'MSP'">
+                                <div class="form-group col-md-4">
+                                    <label>Supplier* :</label>
+                                    <ui-select ng-model="compId" theme="bootstrap" required name="companyId" ng-change="changeCompany($select.selected)">
+                                        <ui-select-match placeholder="Supplier">{{$select.selected.companyName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.companyName  as res in companyList | filter: $select.search">
+                                            <div ng-bind-html="res.companyName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
 
+                                </div>
+                            </div>
+                            <div ng-if="compType == 'MSP' || compType == 'Supplier'">
+                                <div class="form-group col-md-4">
+                                    <label>Candidate* :</label>
+                                    <ui-select ng-model="dataJSON.PlacementID" theme="bootstrap" required name="PlacementId" ng-change="changePlacement()">
+                                        <ui-select-match placeholder="Candidate">{{$select.selected.CandidateName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.PlacementId  as res in placementList | filter: $select.search">
+                                            <div ng-bind-html="res.CandidateName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+
+                                </div>
+                            </div>
+                            <div ng-if="dataJSON.PlacementID" class="ibox-tools">
+
+                                <a ng-click="model(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
+                            </div>
+                        </div>
+                        
+                      
                         <div ng-if="ExpenseList.length > 0" class="row">
+                           
                             <div class="project-list">
                                 <table class="table table-hover">
                                     <thead>

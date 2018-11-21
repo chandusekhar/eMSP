@@ -33,13 +33,25 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 List<CandidateSubmissionModel> model = null;
                 
-
-                
                        List< tblCandidateSubmission> res = await Task.Run(() => ManageCandidate.GetCandidateSubmission(Convert.ToInt64(vacancyId)));
                         model = res.Select(a=>a.ConvertToCandidateSubmissionModel()).ToList();
                        
 
                 return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CandidateSubmissionModel> GetCandidateDetails(int SubmissionId)
+        {
+            try
+            {
+                tblCandidateSubmission res = await Task.Run(() => ManageCandidate.GetCandidateDetails(Convert.ToInt64(SubmissionId)));
+
+                return res.ConvertToCandidateSubmissionModel();
             }
             catch (Exception)
             {
@@ -154,6 +166,34 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<CandidatePlacementViewModel> GetPlacementByCandidateId(long CandidateId)
+        {
+            try
+            {
+                tblCandidatePlacement res = await Task.Run(() => ManageCandidatePlacement.GetPlacementByCandidateId(CandidateId));
+
+                return res.ConvertToCandidatePlacementViewModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<AllTimesheetViewModel>> GetAllTimesheetEntries()
+        {
+            try
+            {
+                List<tblCandidateTimesheet> res = await Task.Run(() => ManageCandidateTimesheets.GetAllTimesheet());                               
+
+                return res.Select(x => x.ConvertToTimesheetViewModel()).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<CandidateTimesheetViewModel> GetCandidateTimesheetDetails(long PlacementId)
         {
             try
@@ -229,9 +269,8 @@ namespace eMSP.Data.DataServices.Candidate
         {
             try
             {
-                return await Task.Run(() => ManageCandidate.GetSupplierCandidatePlacement(SupplierId));
-
-                
+                var supplierCandidatePlacement= await Task.Run(() => ManageCandidate.GetSupplierCandidatePlacement(SupplierId));
+                return supplierCandidatePlacement;
             }
             catch (Exception ex)
             {

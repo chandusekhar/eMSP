@@ -1,0 +1,30 @@
+{
+  "title": "Manage Time Sheet",
+  "tableHeading": "TimeSheet List",
+  "gridElements": [
+    {
+      "lable": "S.No",
+      "id": "SNo"
+    },
+    {
+      "lable": "Candidate Name",
+      "id": "CandidateName"
+    },
+    {
+      "lable": "Supplier Name",
+      "id": "SupplierName"
+    },
+    {
+      "lable": "Pay Period",
+      "id": "PayPeriod"
+    },
+    {
+      "lable": "Total Hours",
+      "id": "TotalHours"
+    },
+    {
+      "lable": "Action",
+      "id": "Action"
+    }
+  ]
+}

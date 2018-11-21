@@ -1,5 +1,43 @@
 {
   "title": "Manage Expenses",
   "titleFormCreate": "Add an Expense",
-  "titleFormEdit": "Edit an Expense"
+  "titleFormEdit": "Edit an Expense",
+  "gridElements": [
+    {
+      "lable": "S.No",
+      "id": "SNo"
+    },
+    {
+      "lable": "Placement ID",
+      "id": "PlacementID"
+    },
+    {
+      "lable": "Pay Period",
+      "id": "PayPeriod"
+    },
+    {
+      "lable": "Spend Category",
+      "id": "SpendCategory"
+    },
+    {
+      "lable": "Current Status",
+      "id": "CurrentStatus"
+    },
+    {
+      "lable": "Name",
+      "id": "Name"
+    },
+    {
+      "lable": "Description",
+      "id": "Description"
+    },
+    {
+      "lable": "Amount",
+      "id": "Amount"
+    },
+    {
+      "lable": "Action",
+      "id": "Action"
+    }
+  ]
 }

@@ -135,6 +135,7 @@ angular.module('eMSPApp')
             CANDIDATESUBMISSIONURL: {
                 GETCANDIDATESTATUS: "api/candidate/getAllCandidateStatus",
                 GETURL: "api/candidate/getCandidateSubmission?VacancyId=",
+                GETCANDIDATEDETAILSBYSUBBIDURL: "api/candidate/getCandidateDetails?SubmissionId=",
                 CREATEURL: "api/candidate/creatCandidateSubmission",
                 UPDATEURL: "api/candidate/updateCandidateSubmission"
             },
@@ -153,9 +154,11 @@ angular.module('eMSPApp')
                 GETALLPAYPERIODS: "api/timesheet/getAllMSPPayPeriods",
                 CREATEPAYPERIODURL: "api/timesheet/insertMSPPayPeriod",
                 UPDATEPAYPERIODURL: "api/timesheet/updateMSPPayPeriod",
-                GETALLTIMESHEETS: "api/timesheet/getCandidateTimesheetDetails?",
+                GETCANDIDATETIMESHEETS: "api/timesheet/getCandidateTimesheetDetails?",
                 CREATETIMESHEETURL: "api/timesheet/insertTimeSheet",
-                UPDATETIMESHEETURL: "api/timesheet/updateTimeSheet"
+                UPDATETIMESHEETURL: "api/timesheet/updateTimeSheet",
+                GETALLTIMESHEETS: "api/timesheet/getAllTimesheetEntries",
+                
             },
             EXPENSES: {
                 GETSPENDCATEGORY: "api/expenses/getMSPSpendCategory",
@@ -163,7 +166,10 @@ angular.module('eMSPApp')
                 GETALLEXPENSES: "api/expenses/getCandidateExpenseSpend?PlacementId=",
                 CREATEEXPENSE: "api/expenses/insertCandidateSpend",
                 UPDATEEXPENSE: "api/expenses/updateCandidateSpend"
+            },
+            PLACEMENT: {
+                CREATEPLACEMENT: "api/candidate/creatCandidatePlacement",
+                GETPLACEMENTBYCANDIDATEID:"api/candidate/getPlacementByCandidateId?CandidateId="
             }
-
         }
     });

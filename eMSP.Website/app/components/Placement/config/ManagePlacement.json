@@ -1,0 +1,31 @@
+{
+  "title": "Placement",
+  "titleFormCreate": "",
+  "titleFormEdit": "",
+  "gridElements": [
+    {
+      "lable": "S.No",
+      "id": "SNo"
+    },
+    {
+      "lable": "Candidate Name",
+      "id": "CandidateName"
+    },
+    {
+      "lable": "Supplier Name",
+      "id": "SupplierName"
+    },
+    {
+      "lable": "Job Title",
+      "id": "JobTitle"
+    },
+    {
+      "lable": "Placement Date",
+      "id": "PlacementDate"
+    },
+    {
+      "lable": "Action",
+      "id": "Action"
+    }
+  ]
+}

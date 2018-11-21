@@ -38,6 +38,26 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task<tblCandidatePlacement> GetPlacementByCandidateId(long Id)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidatePlacements                                                  
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidate)
+                                                  .Where(x => x.tblCandidateSubmission.tblCandidate.ID == Id && (x.IsActive ?? true))
+                                                  .SingleOrDefault());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<List<tblCandidatePlacement>> GetAllPlacements()
         {
             try

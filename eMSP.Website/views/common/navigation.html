@@ -25,7 +25,7 @@
                 <div class="logo-element">
                     IN+
                 </div>
-            </li>            
+            </li>
             <!-- Administration Menu -->
             <li ng-class="{active: $state.includes('company') || $state.includes('country') || $state.includes('industry') || $state.includes('vacancy') || $state.includes('role')}">
                 <a ng-if="config.navAdmistration == true" href="#"><i class="fa fa-th-list"></i> <span class="nav-label">{{'Administration'|translate}}</span> <span class="fa arrow"></span></a>
@@ -49,8 +49,6 @@
                         </ul>
                     </li>
                     <li ng-if="config.navMSPPayPeriod" ui-sref-active="active"><a ui-sref="payperiod.managePayperiod">{{'Manage Pay Period'|translate}}</a></li>
-                    <li ng-if="config.navExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
-                    <li ng-if="config.navTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.manageTimeSheet">{{'Manage TimeSheets'|translate}}</a></li>
                     <li ng-if="config.navManageCountry" ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
                     <li ng-if="config.navManageIndustry" ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
                     <li ng-if="config.navManageDocuments" ui-sref-active="active"><a ui-sref="vacancy.manageAppointmentType">{{'Manage Appointment Types'|translate}} </a></li>
@@ -75,6 +73,21 @@
                     <li ng-if="config.navManageCandidates" ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
                     <li ng-if="config.navManageCandidateSubmission" ui-sref-active="active"><a ui-sref="candidate.manageSubmission">{{'Manage Candidate Submission'|translate}} </a></li>
                     <li ng-if="config.navCreateCandidate" ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
+                </ul>
+            </li>
+            <!-- Time Sheet-->
+            <li ng-class="{active: $state.includes('time')}">
+                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'TimeSheet'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('time')}">
+                    <li ng-if="config.navTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.enterTimeSheet">{{'Add TimeSheets'|translate}}</a></li>
+                    <li ng-if="config.navTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.manageTimeSheet">{{'Manage TimeSheets'|translate}}</a></li>
+                </ul>
+            </li>
+            <!-- Expence-->
+            <li ng-class="{active: $state.includes('expense')}">
+                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Expense'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('expense')}">
+                    <li ng-if="config.navExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
                 </ul>
             </li>
         </ul>

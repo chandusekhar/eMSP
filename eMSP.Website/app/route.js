@@ -116,7 +116,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             }
         })
 
-        
+
         .state('dashboard', {
             url: "/dashboard",
             templateUrl: "app/components/dashboard/view/dashboard.html",
@@ -1844,6 +1844,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                             return data;
                         });
                 },
+                CandidateDetails: function (apiCall, localStorageService, APP_CONSTANTS) {
+                    var id = localStorageService.get('createSubmissionId');
+                    return apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETCANDIDATEDETAILSBYSUBBIDURL + id, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
                 AppUsers: function (apiCall, APP_CONSTANTS) {
                     return apiCall.get(APP_CONSTANTS.URL.USER.GETALLCUSERSURL, {})
                         .then(function (data) {
@@ -1999,30 +2006,23 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/expenses/config/expenses.json").success(function (data) { return data; });
                 },
-                PayPeriodList: function (apiCall, localStorageService, APP_CONSTANTS) {
+                PayPeriodList: function (apiCall, APP_CONSTANTS) {
 
                     return apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLPAYPERIODS, {})
                         .then(function (data) {
                             return data;
                         });
                 },
-                SpendCategoryList: function (apiCall, localStorageService, APP_CONSTANTS) {
+                SpendCategoryList: function (apiCall, APP_CONSTANTS) {
 
                     return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETSPENDCATEGORY, {})
                         .then(function (data) {
                             return data;
                         });
                 },
-                CurrentStatusList: function (apiCall, localStorageService, APP_CONSTANTS) {
+                CurrentStatusList: function (apiCall, APP_CONSTANTS) {
 
                     return apiCall.post(APP_CONSTANTS.URL.TIMESHEET.GETTIMESHEETSTATUS, {})
-                        .then(function (data) {
-                            return data;
-                        });
-                },
-                ExpenseList: function (apiCall, localStorageService, APP_CONSTANTS) {
-                    var id = 1; //localStorageService.get('PlacementId');
-                    return apiCall.post(APP_CONSTANTS.URL.EXPENSES.GETALLEXPENSES + id, {})
                         .then(function (data) {
                             return data;
                         });
@@ -2084,13 +2084,72 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/common/content.html",
             controller: "dashboardController",
         })
-        .state("timeSheet.manageTimeSheet", {
-            url: '/manageTimeSheet',
-            templateUrl: 'app/components/timeSheet/view/timeSheet.html',
-            controller: 'timeSheetController',
+        .state("timeSheet.enterTimeSheet", {
+            url: '/enterTimeSheetController',
+            templateUrl: 'app/components/timeSheet/view/enterTimeSheet.html',
+            controller: 'enterTimeSheetController',
             resolve: {
                 configJSON: function ($http) {
-                    return $http.get("app/components/timeSheet/config/timeSheet.json").success(function (data) { return data; });
+                    return $http.get("app/components/timeSheet/config/enterTimeSheet.json").success(function (data) { return data; });
+                },
+                formAction: function () { return "Manage"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        }, {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                        }
+                    ]);
+                }
+            }
+        })
+
+        .state("timeSheet.manageTimeSheet", {
+            url: '/manageTimeSheetController',
+            templateUrl: 'app/components/timeSheet/view/manageTimeSheet.html',
+            controller: 'manageTimeSheetController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/timeSheet/config/manageTimeSheet.json").success(function (data) { return data; });
                 },
                 formAction: function () { return "Manage"; },
                 loadPlugin: function ($ocLazyLoad) {

@@ -62,12 +62,36 @@ namespace eMSP.Data.DataServices.Candidate
                 {
 
                     return await Task.Run(() => db.tblCandidateSubmissions
-                                                  .Where(x => x.VacancyID == vacancyId && x.IsActive == true && x.IsDeleted == false)
+                                                  .Where(x => x.VacancyID == vacancyId && (x.IsActive ?? true) && (!x.IsDeleted ?? false))
                                                   .Include(a => a.tblCandidate)
                                                   .Include(b => b.tblCandidateStatu)
                                                   .Include(a => a.tblVacancy)
                                                   .Include(a => a.tblVacancy.tblVacancySuppliers)
                                                   .ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        internal static async Task<tblCandidateSubmission> GetCandidateDetails(long SubmissionId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    return await Task.Run(() => db.tblCandidateSubmissions
+                                                  .Where(x => x.ID == SubmissionId && (x.IsActive ?? true) && (!x.IsDeleted ?? false))
+                                                  .Include(a => a.tblCandidate)
+                                                  .Include(b => b.tblCandidateStatu)
+                                                  .Include(a => a.tblVacancy)
+                                                  .Include(a => a.tblVacancy.tblVacancySuppliers)
+                                                  .SingleOrDefault());
 
                 }
             }
@@ -160,7 +184,11 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-                    return await db.tblCandidatePlacements.Where(a => a.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().SupplierID == supplierId)
+                    var supplierCandidatePlacement = await db.tblCandidatePlacements
+                                                           .Where(a => a.tblCandidateSubmission
+                                                                        .tblCandidate
+                                                                        .tblSupplierCandidates
+                                                                        .FirstOrDefault().SupplierID == supplierId && (a.IsActive ?? true))
                         .Include(a => a.tblCandidateSubmission.tblCandidate)
                         .Select(a => new SuplierCandidatePlacementModel()
                         {
@@ -169,6 +197,7 @@ namespace eMSP.Data.DataServices.Candidate
                             PlacementId = a.ID,
                             SupplierId = supplierId
                         }).ToListAsync();
+                    return supplierCandidatePlacement;
                 }
             }
             catch (Exception)

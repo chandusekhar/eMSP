@@ -21,6 +21,33 @@ namespace eMSP.Data.DataServices.Candidate
 
         #region Get
 
+        internal static async Task<List<tblCandidateTimesheet>> GetAllTimesheet()
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblCandidateTimesheets
+                                               .Include(x => x.tblCandidatePlacement
+                                                              .tblCandidateSubmission
+                                                              .tblCandidate
+                                                              .tblSupplierCandidates
+                                                              .Select(c => c.tblSupplier))
+                                               .Include(x => x.tblTimesheetStatu)
+                                               .Include(x => x.tblMSPPayPeriod)
+                                               .Include(x => x.tblCandidateTimesheetHours)
+                                               .Include(x => x.tblCandidateTimesheetCategoriesHours)
+                                               .Where(x => x.tblCandidatePlacement.IsActive ?? true)
+                                               .ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<tblCandidateTimesheet> GetCandidateTimesheet(long PlacementId)
         {
             try
@@ -88,7 +115,7 @@ namespace eMSP.Data.DataServices.Candidate
         }
 
 
-        internal static async Task<List<tblCandidateTimesheet>> GetTimesheetDetailsByDate(DateTime fromDate , DateTime toDate)
+        internal static async Task<List<tblCandidateTimesheet>> GetTimesheetDetailsByDate(DateTime fromDate, DateTime toDate)
         {
             try
             {
@@ -160,7 +187,7 @@ namespace eMSP.Data.DataServices.Candidate
                         foreach (var childModel in model.tblCandidateTimesheetHours)
                         {
                             var existingChild = existingParent.tblCandidateTimesheetHours
-                                .Where(c => c.ID == childModel.ID && childModel.ID !=0)
+                                .Where(c => c.ID == childModel.ID && childModel.ID != 0)
                                 .SingleOrDefault();
 
                             if (existingChild != null)
@@ -170,7 +197,7 @@ namespace eMSP.Data.DataServices.Candidate
                             }
                             else
                             {
-                                
+
                                 existingParent.tblCandidateTimesheetHours.Add(childModel);
                             }
                         }
@@ -181,7 +208,7 @@ namespace eMSP.Data.DataServices.Candidate
                     {
                         await Task.Run(() => InsertCandidateTimesheet(model));
                     }
-                   
+
                 }
             }
             catch (Exception)
@@ -191,7 +218,7 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-       
+
 
         #endregion
 

@@ -192,6 +192,8 @@
     <Content Include="app\components\payPeriod\controller\payPeriodController.js" />
     <Content Include="app\components\payPeriod\view\managePayPeriod.html" />
     <Content Include="app\components\payPeriod\view\payPeriod.html" />
+    <Content Include="app\components\Placement\controller\managePlacementController.js" />
+    <Content Include="app\components\Placement\view\managePlacement.html" />
     <Content Include="app\components\Roles\controller\manageRolesController.js" />
     <Content Include="app\components\Roles\controller\manageUserRoleController.js" />
     <Content Include="app\components\Roles\service\user-role-service.js" />
@@ -200,9 +202,11 @@
     <Content Include="app\components\Roles\view\manageRoleGroups.html" />
     <Content Include="app\components\Roles\view\manageRoles.html" />
     <Content Include="app\components\Roles\view\manageUserRole.html" />
-    <Content Include="app\components\timeSheet\controller\timeSheetController.js" />
+    <Content Include="app\components\timeSheet\controller\enterTimeSheetController.js" />
+    <Content Include="app\components\timeSheet\controller\manageTimeSheetController.js" />
     <Content Include="app\components\timeSheet\view\addHours.html" />
-    <Content Include="app\components\timeSheet\view\timeSheet.html" />
+    <Content Include="app\components\timeSheet\view\enterTimeSheet.html" />
+    <Content Include="app\components\timeSheet\view\manageTimeSheet.html" />
     <Content Include="app\components\User\config\manageUser.json" />
     <Content Include="app\components\User\controller\userController.js" />
     <Content Include="app\components\User\controller\userProfileController.js" />
@@ -2572,7 +2576,9 @@
     <Content Include="app\components\Appointment\config\manageCandidateSubmissionAppointment.json" />
     <Content Include="app\components\payPeriod\config\payPeriod.json" />
     <Content Include="app\components\expenses\config\expenses.json" />
-    <Content Include="app\components\timeSheet\config\timeSheet.json" />
+    <Content Include="app\components\timeSheet\config\enterTimeSheet.json" />
+    <Content Include="app\components\timeSheet\config\manageTimeSheet.json" />
+    <Content Include="app\components\Placement\config\ManagePlacement.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

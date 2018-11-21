@@ -1,5 +1,7 @@
 {
   "title": "Manage Candidate Appointment",
   "titleFormCreate": "Fix an Appointment",
-  "titleFormEdit": "Edit Appointment"
+  "titleFormEdit": "Edit Appointment",
+  "labelCreatePlacement": "Create Placement",
+  "labelCreateAppointment": "Create"
 }

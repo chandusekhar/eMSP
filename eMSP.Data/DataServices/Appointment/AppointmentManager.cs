@@ -276,9 +276,8 @@ namespace eMSP.Data.DataServices.Appointment
                 };
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -430,53 +429,71 @@ namespace eMSP.Data.DataServices.Appointment
             try
             {
 
-                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.CandidateSubmissionID == id).FirstOrDefaultAsync();
+                var appointment = await db.tblCandidateSubmissionAppointments.Where(x => x.ID == id).FirstOrDefaultAsync();
                 CandidateSubmissionAppointmentViewModel obj = null;
                 if (appointment != null)
                 {
                     appointment.Name = data.Name;
                     appointment.Details = data.Details;
                     appointment.IsActive = data.isActive;
+                    appointment.tblCandidateSubmissionAppointmentSlots = data.Slots.Select(x => new tblCandidateSubmissionAppointmentSlot()
+                    {
+                        StartDate = x.StartDate,
+                        EndDate = x.EndDate,
+                        IsActive = x.isActive,
+                        IsDeleted = x.isDeleted,
+                        CreatedUserID = data.createdUserID,
+                        CreatedTimestamp = DateTime.UtcNow,
+                        IsFinalised = x.IsFinalised
+                    }).ToList();
+                    appointment.tblCandidateSubmissionAppointmentUsers = data.Users.Select(x => new tblCandidateSubmissionAppointmentUser()
+                    {
+                        UserID = x.UserID,
+                        IsActive = x.isActive,
+                        IsDeleted = x.isDeleted,
+                        CreatedTimestamp = DateTime.UtcNow,
+                        CreatedUserID = data.createdUserID
+                    }).ToList();
                     await db.SaveChangesAsync();
 
-                    obj = new CandidateSubmissionAppointmentViewModel()
-                    {
-                        ID = appointment.ID,
-                        AppintmentTypeID = appointment.AppintmentTypeID,
-                        AppointmentStatusID = appointment.AppointmentStatusID,
-                        CandidateSubmissionID = appointment.CandidateSubmissionID,
-                        Name = appointment.Name,
-                        Details = appointment.Details,
-                        isActive = appointment.IsActive,
-                        createdTimestamp = appointment.CreatedTimestamp,
-                        Status = new AppointmentStatusViewModel()
-                        {
-                            ID = appointment.tblAppointmentStatu.ID,
-                            Name = appointment.tblAppointmentStatu.Name
-                        },
-                        Type = new AppointmentTypeViewModel()
-                        {
-                            ID = appointment.tblAppointmentType.ID,
-                            Name = appointment.tblAppointmentType.Name
-                        },
-                        Slots = appointment.tblCandidateSubmissionAppointmentSlots.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
-                        {
-                            ID = x.ID,
-                            AppintmentID = x.AppintmentID,
-                            StartDate = x.StartDate,
-                            EndDate = x.EndDate,
-                            isActive = x.IsActive,
-                            IsFinalised = x.IsFinalised
-                        }).ToList(),
-                        Users = appointment.tblCandidateSubmissionAppointmentUsers.Select(x => new CandidateSubmissionAppointmentUserViewModel()
-                        {
-                            ID = x.ID,
-                            AppointmentID = x.AppointmentID,
-                            UserID = x.UserID,
-                            isActive = x.IsActive,
-                            isDeleted = x.IsDeleted
-                        }).ToList()
-                    };
+                    //obj = new CandidateSubmissionAppointmentViewModel()
+                    //{
+                    //    ID = appointment.ID,
+                    //    AppintmentTypeID = appointment.AppintmentTypeID,
+                    //    AppointmentStatusID = appointment.AppointmentStatusID,
+                    //    CandidateSubmissionID = appointment.CandidateSubmissionID,
+                    //    Name = appointment.Name,
+                    //    Details = appointment.Details,
+                    //    isActive = appointment.IsActive,
+                    //    createdTimestamp = appointment.CreatedTimestamp,
+                    //    Status = new AppointmentStatusViewModel()
+                    //    {
+                    //        ID =  appointment.tblAppointmentStatu.ID,
+                    //        Name = appointment.tblAppointmentStatu.Name
+                    //    },
+                    //    Type = new AppointmentTypeViewModel()
+                    //    {
+                    //        ID = appointment.tblAppointmentType.ID,
+                    //        Name = appointment.tblAppointmentType.Name
+                    //    },
+                    //    Slots = appointment.tblCandidateSubmissionAppointmentSlots.Select(x => new CandidateSubmissionAppointmentSlotViewModel()
+                    //    {
+                    //        ID = x.ID,
+                    //        AppintmentID = x.AppintmentID,
+                    //        StartDate = x.StartDate,
+                    //        EndDate = x.EndDate,
+                    //        isActive = x.IsActive,
+                    //        IsFinalised = x.IsFinalised
+                    //    }).ToList(),
+                    //    Users = appointment.tblCandidateSubmissionAppointmentUsers.Select(x => new CandidateSubmissionAppointmentUserViewModel()
+                    //    {
+                    //        ID = x.ID,
+                    //        AppointmentID = x.AppointmentID,
+                    //        UserID = x.UserID,
+                    //        isActive = x.IsActive,
+                    //        isDeleted = x.IsDeleted
+                    //    }).ToList()
+                    //};
 
                 }
                 return obj;

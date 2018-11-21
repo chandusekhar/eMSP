@@ -1,9 +1,9 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-    .controller('timeSheetController', timeSheetController)
+    .controller('enterTimeSheetController', enterTimeSheetController)
     .controller('addHoursController', addHoursController)
 
-function timeSheetController($scope, $state, localStorageService, configJSON, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster) {
+function enterTimeSheetController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster) {
 
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
@@ -19,10 +19,6 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
     $scope.formAction;
     $scope.TimeSheetList = [];
     $scope.showTimeSheet = false;
-
-
-
-
 
     if ($scope.compType == 'MSP') {
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
@@ -63,7 +59,7 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
         if (model) {
             $scope.startDate = moment(model.StartDate);
             $scope.endDate = moment(model.EndDate);
-            apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETALLTIMESHEETS + "PlacementId=" + $scope.dataJSON.PlacementID + "&PayPeriodId=" + $scope.dataJSON.PayPeriodID, {})
+            apiCall.get(APP_CONSTANTS.URL.TIMESHEET.GETCANDIDATETIMESHEETS + "PlacementId=" + $scope.dataJSON.PlacementID + "&PayPeriodId=" + $scope.dataJSON.PayPeriodID, {})
                 .then(function (data) {
 
                     if (data) {
@@ -116,7 +112,7 @@ function timeSheetController($scope, $state, localStorageService, configJSON, ng
     }
 }
 
-function addHoursController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, $uibModalInstance) {
+function addHoursController($scope, $state, localStorageService, $uibModalInstance) {
 
     $scope.config = localStorageService.get('pageSettings');
 

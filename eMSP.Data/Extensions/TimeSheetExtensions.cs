@@ -94,6 +94,32 @@ namespace eMSP.Data.Extensions
             
         }
 
+
+        public static AllTimesheetViewModel ConvertToTimesheetViewModel(this tblCandidateTimesheet data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new AllTimesheetViewModel()
+                {
+                    ID = data.ID,
+                    PayPeriodID = data.PayPeriodID,
+                    PlacementID = data.PlacementID,
+                    TotalHousr = data.tblCandidateTimesheetHours.Sum(x => x.HoursWorked) ?? 0,
+                    //Candidate = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.ConvertToCandidateCreateModel(),
+                    CandidateFirstName = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.FirstName,
+                    CandidateId = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.ID,
+                    SupplierId = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().tblSupplier.ID,
+                    SupplierName = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().tblSupplier.Name,
+                    PayPeriodDetails = data.tblMSPPayPeriod.ConvertToMSPPayPeriodViewModel()
+                };
+            }
+
+        }
+
         public static tblCandidateTimesheetHour ConvertTotblCandidateTimesheetHour(this CandidateTimesheetHoursViewModel data)
         {
             return new tblCandidateTimesheetHour()

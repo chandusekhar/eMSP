@@ -89,12 +89,27 @@ namespace eMSP.WebAPI.Controllers.Candidate
         {
             try
             {
-
                 return Ok(await CandidateService.GetCandidateSubmission(VacancyId));
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        [Route("getCandidateDetails")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]
+        [ResponseType(typeof(CandidateSubmissionModel))]
+        public async Task<IHttpActionResult> GetCandidateDetails(int SubmissionId)
+        {
+            try
+            {
+                return Ok(await CandidateService.GetCandidateDetails(SubmissionId));
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -143,6 +158,23 @@ namespace eMSP.WebAPI.Controllers.Candidate
             try
             {
                 return Ok(await CandidateService.GetPlacementDetails(PlacementId));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Route("getPlacementByCandidateId")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]
+        [ResponseType(typeof(CandidatePlacementViewModel))]
+        public async Task<IHttpActionResult> GetPlacementByCandidateId(long CandidateId)
+        {
+            try
+            {
+                return Ok(await CandidateService.GetPlacementByCandidateId(CandidateId));
             }
             catch (Exception)
             {

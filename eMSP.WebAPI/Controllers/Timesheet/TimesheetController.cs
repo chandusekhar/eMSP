@@ -82,6 +82,22 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
+        [Route("getAllTimesheetEntries")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.TimesheetView)]
+        [ResponseType(typeof(CandidateTimesheetViewModel))]
+        public async Task<IHttpActionResult> GetCandidateTimesheet()
+        {
+            try
+            {
+                return Ok(await CandidateManager.GetAllTimesheetEntries());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Route("getCandidateTimesheet")]
         [HttpGet]
         [Authorize(Roles = ApplicationRoles.TimesheetView)]

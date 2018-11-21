@@ -59,6 +59,7 @@ angular.module('eMSPApp')
                 UPDATEUSERURL: "api/user/updateUser",
                 UPDATECOMPANYUSER: "api/user/updateCompanyUser",
                 DELETEUSERURL: "api/user/deleteUser",
+                GETALLACCOUNTUSERSURL: "api/account/AllUsers"
             },
             VACANCY: {
                 GETMSPVACANCYTYPEURL: "api/JobVacancie/getMSPVacancyType",
@@ -141,6 +142,7 @@ angular.module('eMSPApp')
             },
             ACCOUNT: {
                 CHANGEPASSWORD: "api/Account/ChangePassword",
+                CHANGEUSERNAME: "api/Account/ChangeUserName",
                 CHANGEUSERPASSWORD: "api/Account/ChangeUserPassword",
                 RESETPASSWORD: "api/Account/SetPassword",
                 FORGOTPASSWORD: "api/Account/ForgotPassword?Email="

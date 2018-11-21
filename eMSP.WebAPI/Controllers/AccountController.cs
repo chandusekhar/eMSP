@@ -19,6 +19,9 @@ using eMSP.WebAPI.Results;
 using System.Configuration;
 using eMSP.WebAPI.Utility;
 using System.Web.Security;
+using System.Web.Http.Description;
+using System.Data.Entity;
+using System.Linq;
 
 namespace eMSP.WebAPI.Controllers
 {
@@ -125,10 +128,12 @@ namespace eMSP.WebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
+
+            var user = await UserManager.FindAsync(User.Identity.GetUserName(), model.OldPassword); 
+
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -137,26 +142,69 @@ namespace eMSP.WebAPI.Controllers
             return Ok();
         }
 
+        // POST api/Account/ChangeUserName
+        [Route("ChangeUserName")]
+        public async Task<IHttpActionResult> ChangeUserName(RegisterBindingModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = await UserManager.FindAsync(User.Identity.GetUserName(), model.Password);
+
+                user.UserName = model.Email;
+
+                IdentityResult result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+
+            return Ok();
+        }
+
         // POST api/Account/ChangePassword ChangePasswordBindingModel model
         [Route("ChangeUserPassword")]        
-        public async Task<IHttpActionResult> ChangeUserPassword(RegisterBindingModel model)
+        public async Task<IHttpActionResult> ChangeUserPassword(ChangeUserNamePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
 
             var token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
             IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, token, model.Password);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
+            {
+                user.UserName = model.UserName;
+
+                result = await UserManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+               
+            }
+            else
             {
                 return GetErrorResult(result);
-            }
-
+            }    
             return Ok();
         }
 
@@ -195,6 +243,30 @@ namespace eMSP.WebAPI.Controllers
 
             // If we got this far, something failed, redisplay form
             return BadRequest("The email is required."); ;
+        }
+
+        //api/Account/AllUsers
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("AllUsers")]          
+        public async Task<List<UserViewModel>> AllUsers()
+        {
+            try
+            {
+
+                List<UserViewModel> users = await  UserManager.Users.Select(a=> new UserViewModel (){ Username = a.UserName, Email = a.Email, Id = a.Id, IsLockedOut = (a.LockoutEnabled && a.LockoutEndDateUtc != null && a.LockoutEndDateUtc > DateTimeOffset.UtcNow)  }).ToListAsync();
+              
+              
+                return users;
+            }
+            catch (Exception ex)
+            {
+                // If we got this far, something failed, redisplay form
+                throw ex;
+            }
+          
+
+           
         }
 
         // POST api/Account/SetPassword
@@ -294,6 +366,34 @@ namespace eMSP.WebAPI.Controllers
             return Ok();
         }
 
+        // POST api/Account/RemoveLogin
+        [Route("LockUser")]
+        public async Task<IHttpActionResult> LockUser(UserViewModel user)
+        {
+         
+          IdentityResult  result = await UserManager.SetLockoutEnabledAsync(user.Id,true);
+            result = await UserManager.SetLockoutEndDateAsync(user.Id, DateTimeOffset.MaxValue);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+            return Ok();
+        }
+
+        // POST api/Account/RemoveLogin
+        [Route("UnLockUser")]
+        public async Task<IHttpActionResult> UnLockUser(UserViewModel user)
+        {
+
+            IdentityResult result = await UserManager.SetLockoutEnabledAsync(user.Id, false);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+            return Ok();
+        }
+
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -323,7 +423,7 @@ namespace eMSP.WebAPI.Controllers
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 return new ChallengeResult(provider, this);
             }
-
+            
             ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 

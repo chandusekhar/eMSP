@@ -50,6 +50,15 @@ namespace eMSP.WebAPI.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeUserNamePasswordModel: RegisterBindingModel
+    {
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+      
+    }
+
     public class RegisterExternalBindingModel
     {
         [Required]

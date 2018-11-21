@@ -59,7 +59,7 @@ function changeUserPasswordController($scope, $state, localStorageService, confi
         if (form.$valid) {
             var apires = apiCall.post(APP_CONSTANTS.URL.ACCOUNT.CHANGEUSERPASSWORD, $scope.dataJSON.model);
             apires.then(function (data) {
-                toaster.success({ body: "Password changed Successfully." });
+                toaster.success({ body: "User Name & Password changed Successfully." });
                 $state.reload();
             });
         }

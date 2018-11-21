@@ -1,6 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
-    .controller('userController', userController);
+    .controller('userController', userController)
+    .controller('userManagerController', userManagerController);
 
 function userController($scope, $state, $uibModal, localStorageService, apiCall, ngAuthSettings, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
@@ -144,7 +145,7 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
     function transferComplete(e) {
         console.log(e);
         var obj = angular.fromJson(e.srcElement.response);
-        $scope.udataJSON.userProfilePhotoPath = obj[0].FilePath;        
+        $scope.udataJSON.userProfilePhotoPath = obj[0].FilePath;
         $scope.crop = false;
     };
     $scope.modelLogo = function (filename, ftype) {
@@ -214,6 +215,32 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
 
 }
 
+
+function userManagerController($scope, localStorageService, apiCall, APP_CONSTANTS, toaster, configJSON, usersList) {
+    $scope.configJSON = configJSON.data;
+    $scope.resUsers = usersList;
+
+
+    $scope.toggleLockUser = function (model) {
+
+        if (model.IsLockedOut == true) {
+            var res = apiCall.post($scope.configJSON.urlLock, model);
+            res.then(function (data) {
+                toaster.warning({ body: "User Locked Successfully." });
+            });
+        } else {
+            var res = apiCall.post($scope.configJSON.urlUnlock, model);
+            res.then(function (data) {
+                toaster.warning({ body: "User Unlocked Successfully." });
+            });
+        }
+
+    }
+
+
+
+
+}
 angular.module('eMSPApp').directive('toNumber', function () {
     return {
         require: 'ngModel',

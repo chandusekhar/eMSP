@@ -34,6 +34,18 @@ namespace eMSP.WebAPI.Models
         public string LoginProvider { get; set; }
     }
 
+    public class UserViewModel
+    {
+
+        public string Email { get; set; }
+
+        public string Id { get; set; }
+
+        public string Username { get; set; }
+
+        public bool IsLockedOut { get; set; }
+    }
+
     public class UserLoginInfoViewModel
     {
         public string LoginProvider { get; set; }

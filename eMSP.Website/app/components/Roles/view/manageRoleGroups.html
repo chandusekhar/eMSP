@@ -21,7 +21,7 @@
         <div class="row">
           
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5><strong>Role-Group:</strong></h5>
@@ -32,11 +32,55 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-lg-12">
-                                <ul class="list-group clear-list m-t">
+                                <div class="ibox-content">
+
+                                    <div ng-if="roleGroupsList.length > 0" class="row">
+                                        <div class="project-list">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No</th>
+                                                        <th>Role Group</th>
+                                                        <th>Roles</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="v in roleGroupsList" id="row_{{v.ID}}">
+                                                        <td class="project-actions">
+                                                            <span style="float:left">{{$index+1}}</span>
+                                                        </td>
+                                                        <td class="project-title">
+                                                            <span style="float:left">{{v.roleGroup.roleGroupName}}</span>
+                                                        </td>
+                                                        <td class="project-people">
+                                                            <span style="float:left" ng-if="v.roles.length >0" ng-repeat="r in v.roles">{{r.Name}} ,</span>
+                                                        </td>
+                                                        <td class="project-status center">
+                                                            <a ng-click="AddRoleGroup(v)" class="btn btn-white btn-sm">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Edit
+                                                            </a>
+                                                            <a ng-click="deleteRoleGroup(v)" class="btn btn-white btn-sm">
+                                                                <i class="fa fa-trash"></i>
+                                                                Delete
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div ng-if="!roleGroupsList.length > 0">
+                                        There is no Role group available.
+                                    </div>
+                                </div>
+                                <!--<ul class="list-group clear-list m-t">
                                     <li class="list-group-item" ng-class="{'fist-item':$index==0}" ng-repeat="rg in roleGroupsList">
                                         <span class="label label-success">{{$index+1}}</span> {{rg.roleGroupName}}
                                     </li>
-                                </ul>
+                                </ul>-->
                             </div>
                         </div>
                     </div>

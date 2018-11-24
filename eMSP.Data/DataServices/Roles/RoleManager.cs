@@ -87,6 +87,29 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
+        public async Task<List<RoleGroupRolesModel>> GetAllRoleGroupRoles()
+        {
+            List<RoleGroupRolesModel> rgr = new List<RoleGroupRolesModel>();
+            try
+            {
+                List<AspNetRoleGroup> data = await Task.Run(() => ManageRole.GetAllRoleGroup());
+                List<RoleGroupModel> datarg = data.Select(x => x.ConvertToRoleGroup()).ToList();
+
+                foreach(RoleGroupModel rg in datarg)
+                {
+                    List<AspNetRole> roles = await Task.Run(() => ManageRole.GetRoleGroupRoles(rg.id));
+                    rgr.Add(new RoleGroupRolesModel() { roleGroup = rg, roles = roles.Select(x => x.ConvertToRole()).ToList() });
+                }
+
+                
+                return rgr;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Insert
@@ -128,13 +151,45 @@ namespace eMSP.Data.DataServices.Roles
 
         #region Update
 
+        public async Task<RoleGroupRolesModel> UpdateRoleGroupRoles(RoleGroupRolesModel model)
+        {
+            try
+            {
+                await Task.Run(() => ManageRole.UpdateRoleGroup(model.roleGroup.ConvertToAspNetRoleGroup()));
+                await Task.Run(() => ManageRole.DeleteRoleGroupRoles(model.roleGroup.id));
+                foreach (RoleModel r in model.roles)
+                {
+                    AspNetRoleGroupRole data = new AspNetRoleGroupRole();
+                    data.RoleGroupId = model.roleGroup.id;
+                    data.RoleId = r.id;
+                    AspNetRoleGroupRole res = await Task.Run(() => ManageRole.InsertRoleGroupRoles(data));
+                }
 
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 
         #region Delete
 
-
+        public async Task DeleteRoleGroupRoles(string Id)
+        {
+            try
+            {
+                await Task.Run(() => ManageRole.DeleteRoleGroup(Id));
+                await Task.Run(() => ManageRole.DeleteRoleGroupRoles(Id));
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 

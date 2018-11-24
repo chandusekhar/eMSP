@@ -105,7 +105,7 @@ namespace eMSP.WebAPI.Controllers.Roles
         [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
         public async Task<IHttpActionResult> GetAllRoles()
         {
-            return Ok(await Task.Run(() => this.AppRoleManager.Roles.ToList()));
+            return Ok(await Task.Run(() => this.AppRoleManager.Roles.Select(a=> new RoleModel() { id = a.Id, Name = a.Name }).ToList()));
         }
 
         //Get User roles List
@@ -138,12 +138,21 @@ namespace eMSP.WebAPI.Controllers.Roles
         }
 
         //Get all Roles List by Role role GroupID
-        [Route("GetAllRoleGroupRoles")]
+        [Route("GetRoleGroupRoles")]
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
-        public async Task<IHttpActionResult> GetAllRoleGroupRoles(string id)
+        public async Task<IHttpActionResult> GetRoleGroupRoles(string id)
         {
             return Ok(await Task.Run(() => rm.GetRoleGroupRoles(id)));
+        }
+
+        //Get all Roles List by Role role GroupID
+        [Route("GetAllRoleGroupRoles")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
+        public async Task<IHttpActionResult> GetAllRoleGroupRoles()
+        {
+            return Ok(await Task.Run(() => rm.GetAllRoleGroupRoles()));
         }
 
         #endregion
@@ -258,7 +267,14 @@ namespace eMSP.WebAPI.Controllers.Roles
         #endregion
 
         #region Update
-
+        [Route("updateRoleGroupRoles")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationFull)]
+        public async Task<IHttpActionResult> updateRoleGroupRoles(RoleGroupRolesModel model)
+        {
+           
+            return Ok(await Task.Run(() => rm.UpdateRoleGroupRoles(model)));
+        }
 
         #endregion
 
@@ -285,6 +301,15 @@ namespace eMSP.WebAPI.Controllers.Roles
 
             return NotFound();
 
+        }
+
+        [Route("deleteRoleGroupRoles")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationFull)]
+        public async Task<IHttpActionResult> DeleteRoleGroupRoles(RoleGroupRolesModel model)
+        {
+            await Task.Run(() => rm.DeleteRoleGroupRoles(model.roleGroup.id));
+            return Ok();
         }
 
         #endregion

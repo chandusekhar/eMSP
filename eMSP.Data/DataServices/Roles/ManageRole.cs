@@ -198,7 +198,7 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
-
+        
         #endregion
 
         #region Insert
@@ -260,13 +260,63 @@ namespace eMSP.Data.DataServices.Roles
         #endregion
 
         #region Update
+        internal static async Task UpdateRoleGroup(AspNetRoleGroup model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    db.Entry(model).State = EntityState.Modified;
 
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 
         #region Delete
 
+        internal static async Task DeleteRoleGroup(string Id)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    AspNetRoleGroup roleGroup = db.AspNetRoleGroups.FirstOrDefault(a => a.Id == Id);
 
+                    db.AspNetRoleGroups.Remove(roleGroup);                    
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal static async Task DeleteRoleGroupRoles(string Id)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    List<AspNetRoleGroupRole> roleGroup = db.AspNetRoleGroupRoles.Where(a => a.RoleGroupId == Id).ToList();
+                    roleGroup.ForEach(a => db.AspNetRoleGroupRoles.Remove(a));                    
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
     }

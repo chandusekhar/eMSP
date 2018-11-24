@@ -19,7 +19,7 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
         $scope.rolesList = data;
     });
 
-    var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPURL);
+    var apires = apiCall.get(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPROLESURL);
     apires.then(function (data) {
         $scope.roleGroupsList = data;
     });
@@ -36,12 +36,19 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
         });
     }
 
+    $scope.deleteRoleGroup = function (model) {
+        var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.DELETEROLEGROUPROLESURL, model);
+        apires.then(function (data) {
+            toaster.success({ body: "Role Group deleted Successfully." });
+        }).catch(function (err) { toaster.error({ body: "Role Group is in use, cannot delete it at the moment." }); });
+    }
+
     $scope.AddRoleGroup = function (model) {
         $scope.refData.submitted = false;
-        
-        $scope.editform = false;   
+
+        $scope.editform = false;
         if (model) {
-            $scope.editform = true;   
+            $scope.editform = true;
             $scope.rgdataJSON = model;
         }
 
@@ -51,7 +58,7 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
             size: $scope.configJSON.modelSizeLarge,
             controller: 'createRoleGroupController',
             windowClass: 'animated slideInRight',
-            resolve: {                
+            resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -89,10 +96,28 @@ function createRolesController($scope, $state, localStorageService, $uibModal, a
 //Controller to create Role Group
 function createRoleGroupController($scope, $state, localStorageService, $uibModal, apiCall, APP_CONSTANTS, toaster, $uibModalInstance) {
     $scope.config = localStorageService.get('pageSettings');
-    $scope.rgdataJSON.roleGroup = {};
-    $scope.rgdataJSON.roles = [];
     $scope.formAction = $scope.editform ? "Update" : "Create";
-    
+    $scope.models = {};
+    if (!($scope.rgdataJSON.roleGroup && $scope.rgdataJSON.roles)) {
+        $scope.rgdataJSON.roleGroup = {};
+        $scope.rgdataJSON.roles = [];
+    }
+    console.log($scope.rgdataJSON.roles);
+    console.log($scope.rolesList);
+    $scope.checkRoles = function (role) {
+
+        if ($scope.rgdataJSON.roles && role) {
+            var res = $scope.rgdataJSON.roles.findIndex(r => r.id == role.id) > -1 ? true : false;
+            if (res) {
+                $scope.models[role.id] = true;
+            }
+            return res;
+        }
+        else {
+            return false;
+        }
+    }
+
     $scope.submit = function (form) {
         var isFormValid = false;
         $scope.refData.submitted = true;
@@ -102,12 +127,23 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
             isFormValid = true;
         }
         if (form.$valid && !isFormValid) {
-            var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.CREATEROLEGROUPROLESURL, $scope.rgdataJSON);
-            apires.then(function (data) {
-                $scope.roleGroupsList.unshift(data.roleGroup);
-                toaster.success({ body: "Role Group Created Successfully." });
-                $scope.close();
-            });
+
+            if (!$scope.editform) {
+                var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.CREATEROLEGROUPROLESURL, $scope.rgdataJSON);
+                apires.then(function (data) {
+                    $scope.roleGroupsList.unshift(data);
+                    toaster.success({ body: "Role Group Created Successfully." });
+                    $scope.close();
+                });
+            }
+            else {
+                var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.UPDATEROLEGROUPROLESURL, $scope.rgdataJSON);
+                apires.then(function (data) {
+                    $scope.roleGroupsList.unshift(data);
+                    toaster.success({ body: "Role Group Updated Successfully." });
+                    $scope.close();
+                });
+            }
         }
     }
 
@@ -120,10 +156,12 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
 
         if (Role != 'All') {
 
-            var idx = $scope.rgdataJSON.roles.indexOf(Role);
+            var idx = $scope.rgdataJSON.roles.findIndex(r => r.id == Role.id) > -1 ? true : false;
+
+           // var idx = $scope.rgdataJSON.roles.indexOf(Role);
 
             // is currently selected
-            if (idx > -1) {
+            if (idx) {
                 $scope.rgdataJSON.roles.splice(idx, 1);
             }
 
@@ -143,7 +181,7 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
             }
 
         }
-        
+
     };
 }
 

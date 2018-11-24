@@ -47,9 +47,9 @@
                                         <div ng-repeat="res in rolesList">
                                             <div ng-if="res.Name.indexOf('MSP') == 0" class="action-checkbox">
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" icheck value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           ng-change="toggleSelection(res)" ng-model="rolesMSP" />
-                                                    {{res.Name}}
+                                                    <input id="{{res.Name}}" type="checkbox" icheck value="{{res}}" ng-checked="checkRoles(res)"
+                                                           ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}} 
                                                 </label>
 
                                             </div>
@@ -73,8 +73,8 @@
                                         <div ng-repeat="res in rolesList">
                                             <div ng-if="res.Name.indexOf('Customer ') == 0" class="action-checkbox">
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesCustomer" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
 
@@ -99,9 +99,9 @@
                                             <div ng-if="res.Name.indexOf('Supplier ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesSupplier" />
-                                                    {{res.Name}}
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}    
                                                 </label>
                                             </div>
                                         </div>
@@ -123,8 +123,8 @@
                                             <div ng-if="res.Name.indexOf('Candidate ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesCandidate" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -149,8 +149,8 @@
                                             <div ng-if="res.Name.indexOf('Country ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesCountry" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -175,8 +175,8 @@
                                             <div ng-if="res.Name.indexOf('Industry ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesIndustry" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -201,8 +201,8 @@
                                             <div ng-if="res.Name.indexOf('Vacancy ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesVacancy" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -227,8 +227,8 @@
                                             <div ng-if="res.Name.indexOf('Question ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesQuestion" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -253,8 +253,8 @@
                                             <div ng-if="res.Name.indexOf('Document ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesDocument" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>
@@ -278,8 +278,8 @@
                                             <div ng-if="res.Name.indexOf('Role Authorization ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
-                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="rgdataJSON.roles.indexOf(res) > -1"
-                                                           icheck ng-change="toggleSelection(res)" ng-model="rolesRoleAuthorize" />
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
                                                     {{res.Name}}
                                                 </label>
                                             </div>

@@ -119,10 +119,13 @@ angular.module('eMSPApp')
                 GETUSERROLESURL: "api/role/GetUserRoles",
                 GETROLEGROUPURL: "api/role/GetRoleGroup?id=",
                 GETALLROLEGROUPURL: "api/role/GetAllRoleGroup",
-                GETROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles?id=",
+                GETROLEGROUPROLESURL: "api/role/GetRoleGroupRoles?id=",
+                GETALLROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles",
                 CREATEROLEURL: "api/role/create",
                 CREATEROLEGROUPURL: "api/role/createRoleGroup",
                 CREATEROLEGROUPROLESURL: "api/role/createRoleGroupRoles",
+                UPDATEROLEGROUPROLESURL: "api/role/updateRoleGroupRoles",
+                DELETEROLEGROUPROLESURL: "api/role/deleteRoleGroupRoles",
                 ASSIGNUSERROLEURL: "api/role/AssignUserRoles"
             },
             CANDIDATEURL: {

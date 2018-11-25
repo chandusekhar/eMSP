@@ -22,6 +22,7 @@ namespace eMSP.ViewModel.Dashboard
         public List<DashboardChartDataViewModel> SupplierJobsList { get; set; } // supplier jobs list
         public List<DashboardStackedChartDataViewModel> SupplierMonthlyJobsList { get; set; } // monthly supplier jobs
         public List<DashboardChartDataViewModel> SubmissionMonthlyList { get; set; } // supplier jobs list
+        public List<DashboardChartDataViewModel> CandidateProfilesMonthlyList { get; set; } // candidate profile list
 
     }
 

@@ -1,13 +1,16 @@
 ﻿'use strict';
-angular.module('eMSPApp').controller("dashboardController", function ($scope, $filter, $http, authService, localStorageService, $location, apiCall, APP_CONSTANTS) {
+angular.module('eMSPApp').controller("dashboardController", function ($scope, $filter, $http, ngAuthSettings, authService, localStorageService, $location, apiCall, APP_CONSTANTS) {
 
     $scope.dataJSON = localStorageService.get('DashBoardData');
     $scope.config = localStorageService.get('pageSettings');
+    $scope.user = localStorageService.get('CurrentUser');
+    $scope.baseUrl = ngAuthSettings.contentURL + "";
     $scope.CustomerJobsList =[];
     $scope.JobActiveList = [];
     $scope.SupplierJobsList = [];
     $scope.SubmissionMonthlyDataSet = [];
     $scope.JobsMonthDataSet = [];
+    $scope.CpMonthDataSet = [];
     $scope.MonthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var getRandomColor = function () {
 
@@ -57,10 +60,13 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
     angular.forEach($scope.MonthList, function (val, key) {
         var smvl = $filter('filter')($scope.dataJSON.ChartData.SubmissionMonthlyList, function (item) { return item.Name == val; }, true);
         var jmvl = $filter('filter')($scope.dataJSON.ChartData.JobsMonthList, function (item) { return item.Name == val; }, true);
+        var cmvl = $filter('filter')($scope.dataJSON.ChartData.CandidateProfilesMonthlyList, function (item) { return item.Name == val; }, true);
         var smv = smvl[0] ? smvl[0].Count : '';
         var jml = jmvl[0] ? jmvl[0].Count : '';
+        var cml = cmvl[0] ? cmvl[0].Count : '';
         $scope.SubmissionMonthlyDataSet.push(smv);
         $scope.JobsMonthDataSet.push(jml);
+        $scope.CpMonthDataSet.push(cml);
     });
     
     
@@ -278,6 +284,20 @@ angular.module('eMSPApp').controller("dashboardController", function ($scope, $f
                 highlightFill: "rgba(20,220,20,0.75)",
                 highlightStroke: "rgba(20,220,20,1)",
                 data: $scope.JobsMonthDataSet
+            }
+        ]
+    };//$scope.CpMonthDataSet
+
+    $scope.CpMonthList = {
+        labels: $scope.MonthList,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(101,221,221,0.5)",
+                strokeColor: "rgba(101,221,221,0.8)",
+                highlightFill: "rgba(1011,221,221,0.75)",
+                highlightStroke: "rgba(101,221,221,1)",
+                data: $scope.CpMonthDataSet
             }
         ]
     };

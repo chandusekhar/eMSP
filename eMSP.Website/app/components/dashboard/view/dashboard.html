@@ -10,20 +10,20 @@
     <!-- Page wrapper -->
     <div ng-include="'views/common/topnavbar.html'"></div>
     <!-- Main view  -->
-    <div class="row  border-bottom white-bg dashboard-header" >
+    <!--<div class="row  border-bottom white-bg dashboard-header" >
         <div class="col-sm-3">
             <h2>{{ 'WELCOME' | translate }} {{userName}}</h2>
-            <!--<small>{{ 'MESSAGEINFO' | translate }}</small>-->
+            
 
         </div>
-    </div>
+    </div>-->
     <div class="wrapper wrapper-content" >
         <div class="row">
             <div class="col-lg-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-important pull-right">Status</span>
-                        <h5>Number of jobs </h5>
+                        <h5>Number of Jobs </h5>
                     </div>
                     <div class="ibox-content">
                         <div>
@@ -194,7 +194,7 @@
                     </div>
                     <div class="ibox-content">
                         <div>
-                            <canvas barchart options="chart.barOptions" data="SubmissionMonthlyList" height="140" responsive=true></canvas>
+                            <canvas barchart options="chart.barOptions" data="CpMonthList" height="140" responsive=true></canvas>
                         </div>
                     </div>
                 </div>

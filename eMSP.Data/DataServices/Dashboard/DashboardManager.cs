@@ -59,6 +59,12 @@ namespace eMSP.Data.DataServices.Dashboard
 
                 ddata.SubmissionMonthlyList = candidateSubmission.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
 
+
+                var candidateProfiles = await dbContext.tblCandidates.ToListAsync();
+
+                ddata.CandidateProfilesMonthlyList = candidateProfiles.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
+
+
                 data.ChartData = ddata;
 
                 return data;
@@ -104,6 +110,11 @@ namespace eMSP.Data.DataServices.Dashboard
 
                 ddata.SubmissionMonthlyList = candidateSubmission.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
 
+                var candidateProfiles = await dbContext.tblCandidates.ToListAsync();
+
+                ddata.CandidateProfilesMonthlyList = candidateProfiles.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
+
+
                 data.ChartData = ddata;
 
                 return data;
@@ -148,6 +159,11 @@ namespace eMSP.Data.DataServices.Dashboard
                 var candidateSubmission = await dbContext.tblCandidateSubmissions.ToListAsync();
 
                 ddata.SubmissionMonthlyList = candidateSubmission.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
+
+                var candidateProfiles = await dbContext.tblCandidates.ToListAsync();
+
+                ddata.CandidateProfilesMonthlyList = candidateProfiles.GroupBy(x => x.CreatedTimestamp.ToString("MMM")).Select(x => new DashboardChartDataViewModel { Name = x.Key, Count = x.Count() }).ToList();
+
 
                 data.ChartData = ddata;
 

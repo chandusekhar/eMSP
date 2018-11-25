@@ -156,12 +156,9 @@ function createRoleGroupController($scope, $state, localStorageService, $uibModa
 
         if (Role != 'All') {
 
-            var idx = $scope.rgdataJSON.roles.findIndex(r => r.id == Role.id) > -1 ? true : false;
-
-           // var idx = $scope.rgdataJSON.roles.indexOf(Role);
-
+            var idx = $scope.rgdataJSON.roles.findIndex(r => r.id == Role.id); 
             // is currently selected
-            if (idx) {
+            if (idx > -1) {
                 $scope.rgdataJSON.roles.splice(idx, 1);
             }
 

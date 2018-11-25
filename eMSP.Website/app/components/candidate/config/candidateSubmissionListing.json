@@ -1,11 +1,9 @@
 {
-  "title": "Placement",
-  "tableHeading": "Placed Candidate List",
-  "actionRelease": "Release",
+  "title": "Candidate Submission Listing",
   "gridElements": [
     {
-      "lable": "S.No",
-      "id": "SNo"
+      "lable": "Submission Id",
+      "id": "SubmissionId"
     },
     {
       "lable": "Job Id",
@@ -16,6 +14,10 @@
       "id": "JobTitle"
     },
     {
+      "lable": "Bill Rate",
+      "id": "BillRate"
+    },
+    {
       "lable": "Candidate Name",
       "id": "CandidateName"
     },
@@ -24,12 +26,17 @@
       "id": "SupplierName"
     },
     {
-      "lable": "Placement Date",
-      "id": "PlacementDate"
+      "lable": "Submission Date",
+      "id": "SubmissionDate"
+    },
+    {
+      "lable": "Status",
+      "id": "Status"
     },
     {
       "lable": "Action",
       "id": "Action"
     }
   ]
+
 }

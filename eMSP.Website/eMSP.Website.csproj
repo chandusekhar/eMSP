@@ -132,11 +132,13 @@
     <Content Include="app\components\Appointment\view\manageAppointmentType.html" />
     <Content Include="app\components\Candidate\config\ManageCandidate.json" />
     <Content Include="app\components\Candidate\controller\candidateController.js" />
+    <Content Include="app\components\Candidate\controller\candidateSubmissionListingController.js" />
     <Content Include="app\components\Candidate\controller\manageCandidateSubmissionController.js" />
     <Content Include="app\components\Candidate\controller\candidateSubmissionAppointmentController.js" />
     <Content Include="app\components\Candidate\controller\candidateSubmissionController.js" />
     <Content Include="app\components\Candidate\service\candidateService.js" />
     <Content Include="app\components\Candidate\view\candidateSubmission.html" />
+    <Content Include="app\components\Candidate\view\candidateSubmissionListing.html" />
     <Content Include="app\components\Candidate\view\submitedCandidateList.html" />
     <Content Include="app\components\Candidate\view\manageCandidateSubmission.html" />
     <Content Include="app\components\Candidate\view\candidateSubmissionAppointment.html" />
@@ -2579,6 +2581,7 @@
     <Content Include="app\components\timeSheet\config\enterTimeSheet.json" />
     <Content Include="app\components\timeSheet\config\manageTimeSheet.json" />
     <Content Include="app\components\Placement\config\ManagePlacement.json" />
+    <Content Include="app\components\Candidate\config\candidateSubmissionListing.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

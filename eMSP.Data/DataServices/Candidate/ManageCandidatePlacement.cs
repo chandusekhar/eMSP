@@ -64,7 +64,12 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCandidatePlacements.ToList());
+                    return await Task.Run(() => db.tblCandidatePlacements.Where(x => x.IsActive ?? true)
+                                                  .Include(x => x.tblCandidateSubmission.tblVacancy)
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidateStatu)
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidate)
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.Select(y => y.tblSupplier))
+                                                  .ToList());
                 }
             }
             catch (Exception)

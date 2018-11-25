@@ -1,4 +1,10 @@
-﻿<toaster-container></toaster-container>
+﻿<style>
+
+    .project-people, .project-actions {
+        text-align: left;
+    }
+</style>
+<toaster-container></toaster-container>
 <!-- Wrapper-->
 <div id="wrapper">
     <!-- Main view  -->
@@ -7,7 +13,7 @@
             <h2>{{configJSON.title}}</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="#/dashboard">Home</a>
+                    <a href="#dashboard">Home</a>
                 </li>
                 <li class="active">
                     <strong>{{configJSON.title}}</strong>
@@ -17,6 +23,7 @@
         <div class="col-lg-2">
         </div>
     </div>
+    <!--Search-->
     <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
         <div class="row">
             <div class="col-lg-12">
@@ -28,7 +35,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <div ng-if="placementList.length > 0" class="row">
+                        <div ng-if="candidateSubmissionList.length > 0" class="row">
                             <div class="project-list">
                                 <table class="table table-hover">
                                     <thead>
@@ -39,16 +46,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="v in placementList" id="row_{{v.PlacementId}}">
+                                        <tr ng-repeat="v in candidateSubmissionList" id="row_{{v.SubmissionId}}">
                                             <td class="project-actions">
-                                                <span style="float:left">PL000{{v.PlacementId}}</span>
+                                                <span style="float:left">SU000{{v.SubmissionId}}</span>
                                             </td>
                                             <td class="project-title">
-                                                <span style="float:left">{{v.JobId}}</span>
+                                                <span style="float:left">{{v.CustomerName | uppercase | limitTo : 2}}000{{v.JobId}}</span>
                                             </td>
                                             <td class="project-people">
                                                 <span style="float:left">{{v.JobTitle}}</span>
                                             </td>
+                                            <td class="project-people">
+                                                <span style="float:left">{{v.BillRate}}</span>
+                                            </td>
+
                                             <td class="project-people">
                                                 <span style="float:left">{{v.CandidateFirstName + " " + v.CandidateLastName}}</span>
                                             </td>
@@ -57,7 +68,12 @@
                                             </td>
                                             <td class="project-actions">
                                                 <span style="float:left">
-                                                    <small>{{v.PlacementDate | stringToDate : "MM/dd/yyyy  h:mma" }}</small>
+                                                    <small>{{v.SubmissionDate | stringToDate : "MM/dd/yyyy  h:mma" }}</small>
+                                                </span>
+                                            </td>
+                                            <td class="project-actions">
+                                                <span class="label m-b-n-lg" ng-class="{'label-primary' : v.Vacancy.isActive,'label-warning':!v.Vacancy.isActive}">
+                                                    {{v.Status}}
                                                 </span>
                                             </td>
 
@@ -69,7 +85,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div ng-if="!placementList.length > 0">
+                        <div ng-if="!candidateSubmissionList.length > 0">
                             There is no Placements Available.
                         </div>
                     </div>
@@ -77,4 +93,6 @@
             </div>
         </div>
     </div>
+    <!--Manage-->
+    <!-- End wrapper-->
 </div>

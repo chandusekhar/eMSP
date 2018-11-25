@@ -63,9 +63,9 @@ namespace eMSP.Data.DataServices.Candidate
 
                     return await Task.Run(() => db.tblCandidateSubmissions
                                                   .Where(x => x.VacancyID == vacancyId && (x.IsActive ?? true) && (!x.IsDeleted ?? false))
-                                                  .Include(a => a.tblCandidate)
+                                                  .Include(a => a.tblCandidate.tblSupplierCandidates.Select(x => x.tblSupplier))
                                                   .Include(b => b.tblCandidateStatu)
-                                                  .Include(a => a.tblVacancy)
+                                                  .Include(b => b.tblVacancy.tblCustomer)
                                                   .Include(a => a.tblVacancy.tblVacancySuppliers)
                                                   .ToList());
 
@@ -74,7 +74,29 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
+            }
+        }
 
+        internal static async Task<List<tblCandidateSubmission>> GetAllSubmissions()
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    return await Task.Run(() => db.tblCandidateSubmissions
+                                                  .Where(x => (x.IsActive ?? true) && (!x.IsDeleted ?? false))
+                                                  .Include(a => a.tblCandidate.tblSupplierCandidates.Select(x => x.tblSupplier))
+                                                  .Include(b => b.tblCandidateStatu)
+                                                  .Include(b => b.tblVacancy.tblCustomer)
+                                                  .Include(a => a.tblVacancy.tblVacancySuppliers)
+                                                  .ToList());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -98,7 +120,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -119,7 +140,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -146,7 +166,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -173,7 +192,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -203,7 +221,6 @@ namespace eMSP.Data.DataServices.Candidate
             catch (Exception)
             {
                 throw;
-
             }
         }
         #endregion
@@ -248,20 +265,15 @@ namespace eMSP.Data.DataServices.Candidate
                 if (model.CandidateSkills != null)
                 {
                     x = await Task.Run(() => InsertCandidateSkills(model.CandidateSkills.Select(a => Convert.ToInt32(a)).ToList(), candidate));
-
                 }
-
 
                 candidate = await Task.Run(() => Get(candidate.ID));
 
                 return candidate.ConvertToCandidateCreateModel();
-
-
             }
             catch (Exception)
             {
                 throw;
-
             }
         }
 

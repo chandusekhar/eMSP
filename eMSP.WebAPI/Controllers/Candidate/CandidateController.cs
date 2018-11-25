@@ -93,7 +93,21 @@ namespace eMSP.WebAPI.Controllers.Candidate
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        [Route("getAllSubmissions")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.CandidateView)]        
+        public async Task<IHttpActionResult> GetAllSubmissions()
+        {
+            try
+            {
+                return Ok(await CandidateService.GetAllSubmissions());
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -134,8 +148,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllPlacedCandidates")]
         [HttpGet]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]
-        [ResponseType(typeof(List<CandidatePlacementViewModel>))]
+        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]        
         public async Task<IHttpActionResult> GetAllPlacedCandidates()
         {
             try
@@ -161,7 +174,6 @@ namespace eMSP.WebAPI.Controllers.Candidate
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

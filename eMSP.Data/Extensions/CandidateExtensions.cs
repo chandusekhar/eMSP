@@ -182,6 +182,8 @@ namespace eMSP.Data.Extensions
                 ID = Convert.ToInt32(data.ID),
                 VacancyId = Convert.ToInt32(data.VacancyID),
                 CandidateId = Convert.ToInt32(data.CandidateID),
+                CandidateFirstName = data.tblCandidate.FirstName,
+                CandidateLastName = data.tblCandidate.LastName,
                 StatusId = data.StatusID.ToString(),
                 BillRate = data.BillRate,
                 isActive = data.IsActive,
@@ -327,7 +329,8 @@ namespace eMSP.Data.Extensions
                 createdUserID = data.CreatedUserID,
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
-                updatedTimestamp = data.UpdatedTimestamp
+                updatedTimestamp = data.UpdatedTimestamp,
+                CandidateSubmission = data.tblCandidateSubmission.ConvertToCandidateSubmissionModel()                
             };
         }
     }

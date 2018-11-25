@@ -45,6 +45,33 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<dynamic> GetAllSubmissions()
+        {
+            try
+            {
+                List<tblCandidateSubmission> res = await Task.Run(() => ManageCandidate.GetAllSubmissions());
+
+                return res.Select(x => new
+                {
+                    SubmissionId = x.ID,
+                    CandidateId = x.CandidateID,
+                    CandidateFirstName = x.tblCandidate.FirstName,
+                    CandidateLastName = x.tblCandidate.LastName,
+                    SupplierName = x.tblCandidate.tblSupplierCandidates.FirstOrDefault().tblSupplier.Name,
+                    JobId = x.VacancyID,
+                    JobTitle = x.tblVacancy.PositionTitle,
+                    x.BillRate,
+                    SubmissionDate = x.CreatedTimestamp,
+                    Status = x.tblCandidateStatu.Name,
+                    CustomerName = x.tblVacancy.tblCustomer.Name
+                }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<CandidateSubmissionModel> GetCandidateDetails(int SubmissionId)
         {
             try
@@ -138,13 +165,22 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
-        public async Task<List<CandidatePlacementViewModel>> GetPlacedCandidates()
+        public async Task<dynamic> GetPlacedCandidates()
         {
             try
             {
                 List<tblCandidatePlacement> res = await Task.Run(() => ManageCandidatePlacement.GetAllPlacements());
-
-                return res.Select(x => x.ConvertToCandidatePlacementViewModel()).ToList();
+                
+                return res.Select(x => new
+                {
+                    PlacementId = x.ID,
+                    JobId = x.tblCandidateSubmission.tblVacancy.ID,
+                    JobTitle = x.tblCandidateSubmission.tblVacancy.PositionTitle,
+                    CandidateFirstName = x.tblCandidateSubmission.tblCandidate.FirstName,
+                    CandidateLastName = x.tblCandidateSubmission.tblCandidate.LastName,
+                    SupplierName = x.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().tblSupplier.Name,
+                    PlacementDate = x.CreatedTimestamp
+                }).ToList();
             }
             catch (Exception)
             {

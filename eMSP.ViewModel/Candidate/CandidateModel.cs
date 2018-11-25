@@ -77,11 +77,13 @@ namespace eMSP.ViewModel.Candidate
         public CandidateSubmissionModel() { }
         public int ID { get; set; }
         public int CandidateId { get; set; }
+        public string CandidateFirstName { get; set; }
+        public string CandidateLastName { get; set; }
         public int VacancyId { get; set; }
         public string StatusId { get; set; }
         public decimal BillRate { get; set; }
         public decimal PayRate { get; set; }
-        public CandidateStatusModel CandidateStatus { get; set; }
+        public CandidateStatusModel CandidateStatus { get; set; }        
     }
 
     public class CandidateSubmissionCreateModel

@@ -1666,6 +1666,56 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state("candidate.candidateSubmissionListing", {
+            url: '/candidateSubmissionListing',
+            templateUrl: 'app/components/candidate/view/candidateSubmissionListing.html',
+            controller: 'candidateSubmissionListingController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/candidate/config/candidateSubmissionListing.json").success(function (data) { return data; });
+                },
+                CandidateSubmissionList: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETALLSUBMISSIONURL)
+                        .then(function (data) {
+                            return data;
+                        });
+                    return {};
+                },                
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
         .state("candidate.appointment", {
             url: '/appointment',
             templateUrl: 'app/components/candidate/view/candidateSubmissionAppointment.html',
@@ -1710,7 +1760,67 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        
         //country Routes Ends
+
+        .state('placement', {
+            abstract: true,
+            url: "/placement",
+            templateUrl: "views/common/content.html",
+            controller: "dashboardController",
+
+        })
+        .state("placement.placements", {
+            url: '/managePlacements',
+            templateUrl: 'app/components/Placement/view/managePlacement.html',
+            controller: 'managePlacementController',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Placement/config/ManagePlacement.json").success(function (data) { return data; });
+                },
+                PlacementList: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.PLACEMENT.GETALLPLACEDCANDIDATES)
+                        .then(function (data) {
+                            return data;
+                        });
+                    return {};
+                },
+                formAction: function () { return "Create"; },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        }, {
+                            insertBefore: '#loadBefore',
+                            name: 'toaster',
+                            files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
 
         //industry Routes starts
         .state('industry', {

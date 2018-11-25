@@ -27,7 +27,7 @@
                     IN+
                 </div>
             </li>
-            <li ng-class="{active: $state.includes('dashboard')}" ui-sref-active="active" >
+            <li ng-class="{active: $state.includes('dashboard')}" ui-sref-active="active">
                 <a href="#" ui-sref="dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i> <span class="nav-label">{{'Dashboard'|translate}}</span></a>
 
             </li>
@@ -79,6 +79,7 @@
                     <li ng-if="config.navManageCandidates" ui-sref-active="active"><a ui-sref="candidate.manageCandidate">{{'Manage Candidates'|translate}} </a></li>
                     <li ng-if="config.navManageCandidateSubmission" ui-sref-active="active"><a ui-sref="candidate.manageSubmission">{{'Manage Candidate Submission'|translate}} </a></li>
                     <li ng-if="config.navCreateCandidate" ui-sref-active="active"><a ui-sref="candidate.create">{{'Create Candidate Profile'|translate}} </a></li>
+                    <li ng-if="config.navCandidateSubmissionListing" ui-sref-active="active"><a ui-sref="candidate.candidateSubmissionListing">{{'All Candidate Submissions'|translate}} </a></li>
                 </ul>
             </li>
             <!-- Time Sheet-->
@@ -94,6 +95,13 @@
                 <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Expense'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('expense')}">
                     <li ng-if="config.navExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
+                </ul>
+            </li>
+            <!-- Placement-->
+            <li ng-class="{active: $state.includes('placement')}">
+                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Placement'|translate}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('placement')}">
+                    <li ui-sref-active="active"><a ui-sref="placement.placements">{{'Manage Placement'|translate}}</a></li>
                 </ul>
             </li>
         </ul>

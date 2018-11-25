@@ -32,6 +32,8 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool navTimesheetStatus = false;
         public bool navTimeSheet = false;
 
+        public bool navManagePlacement = false;        
+
         //------------ Administration end ------------- // 
 
         //------------ Job start ------------- // 
@@ -47,6 +49,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool navCandidate = false;
         public bool navManageCandidates = false;
         public bool navManageCandidateSubmission = false;
+        public bool navCandidateSubmissionListing = false;
         public bool navCreateCandidate = false;
 
         //------------ candidate end ------------- // 
@@ -134,6 +137,16 @@ namespace eMSP.WebAPI.Controllers.Helpers
 
         //-------------payperiod end------------//
 
+        //-------------Placement------------//
+
+        public bool PlacementCreate = false;
+        public bool PlacementEdit = false;
+        public bool PlacementView = false;
+
+        //-------------Placement end------------//
+
+
+
 
         public UITemplate(List<string> Roles)
         {
@@ -153,6 +166,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
 
             this.navCreateCandidate = Roles.Contains(ApplicationRoles.CandidateFull) || Roles.Contains(ApplicationRoles.CandidateCreate);
             this.navManageCandidateSubmission = Roles.Where(a => a.StartsWith("CandidateSubmission")).ToList().Count > 0;
+            this.navCandidateSubmissionListing = Roles.Where(a => a.StartsWith("CandidateSubmission")).ToList().Count > 0;
             this.navManageCandidates = Roles.Where(a => a.StartsWith("Candidate ")).ToList().Count > 0;
             this.navCandidate = this.navCreateCandidate || this.navManageCandidates || this.navManageCandidateSubmission;
 
@@ -239,6 +253,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.navMSPPayPeriod = Roles.Where(a => a.StartsWith("MSPPayPeriod")).ToList().Count > 0;
             this.navExpenseSpent = this.ExpenseSpentCreate || this.ExpenseSpentEdit;
             this.navTimeSheet = this.TimesheetCreate || this.TimesheetEdit;
+            this.navManagePlacement = this.PlacementCreate || this.PlacementEdit || this.PlacementView;
 
             this.navManageRoleGroups = Roles.Where(a => a.StartsWith("Role")).ToList().Count > 0;
             this.navManageUserRoles = Roles.Contains(ApplicationRoles.RoleAuthorizationFull) || Roles.Contains(ApplicationRoles.RoleAuthorizationCreate);

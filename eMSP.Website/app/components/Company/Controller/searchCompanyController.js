@@ -117,10 +117,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
         }
 
     }
-    $scope.submit = function () {
-        if ($scope.form.valid) {
-            alert("Form submitted");
-            var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, dataJSON);
+    $scope.submit = function (form) {
+        if (form.$valid) {
+            //alert("Form submitted");
+            var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, $scope.dataJSON);
+            res.then(function (data) {
+                $scope.searchResults = data;
+            });
         }
     }
 

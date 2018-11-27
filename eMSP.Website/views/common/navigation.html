@@ -1,10 +1,14 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
+            
             <li class="nav-header">
-                <div class="profile-element" uib-dropdown>
+                <div class="row profile-image">
                     <img ng-if="user.user.userProfilePhotoPath" alt="image" class="img-circle" src="{{baseUrl+user.user.userProfilePhotoPath}}" />
                     <ng-letter-avatar ng-if="!user.user.userProfilePhotoPath" avatarborder="true" charCount="2" data="{{user.user.firstName.charAt(0).toUpperCase() + user.user.lastName.charAt(0).toUpperCase()}}" shape="round"></ng-letter-avatar>
+
+                </div>
+                <div class="profile-content" uib-dropdown>
                     <a uib-dropdown-toggle>
                         <span class="clear">
                             <span class="block m-t-xs">
@@ -22,9 +26,6 @@
                         <li class="divider"></li>
                         <li><a ui-sref="login">Logout</a></li>
                     </ul>
-                </div>
-                <div class="logo-element">
-                    IN+
                 </div>
             </li>
             <li ng-class="{active: $state.includes('dashboard')}" ui-sref-active="active">
@@ -57,7 +58,7 @@
                     <li ng-if="config.navMSPPayPeriod" ui-sref-active="active"><a ui-sref="payperiod.managePayperiod">{{'Manage Pay Period'|translate}}</a></li>
                     <li ng-if="config.navManageCountry" ui-sref-active="active"><a ui-sref="country.manageCountry">{{'Manage Country'|translate}}</a></li>
                     <li ng-if="config.navManageIndustry" ui-sref-active="active"><a ui-sref="industry.manageIndustry">{{'Manage Industry'|translate}}</a></li>
-                    <li ng-if="config.navManageDocuments" ui-sref-active="active"><a ui-sref="vacancy.manageAppointmentType">{{'Manage Appointment Types'|translate}} </a></li>
+                    <li ng-if="config.navManageAppointmentType" ui-sref-active="active"><a ui-sref="vacancy.manageAppointmentType">{{'Manage Appointment Types'|translate}} </a></li>
                     <li ng-if="config.navManageDocuments" ui-sref-active="active"><a ui-sref="vacancy.manageDocuments">{{'Manage Documents'|translate}}</a></li>
                     <li ng-if="config.navManageQuestions" ui-sref-active="active"><a ui-sref="vacancy.manageQuestions">{{'Manage Questions'|translate}}</a></li>
                     <li ng-if="config.navManageVacancyTypes" ui-sref-active="active"><a ui-sref="vacancy.manageVacancieType">{{'Manage Vacancies Types'|translate}} </a></li>

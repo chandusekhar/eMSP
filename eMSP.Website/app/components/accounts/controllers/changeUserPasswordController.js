@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller("changeUserPasswordController", changeUserPasswordController)
-function changeUserPasswordController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction) {
+function changeUserPasswordController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction, $uibModalInstance) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = $scope.dataJSON ? $scope.dataJSON : {};
@@ -13,6 +13,7 @@ function changeUserPasswordController($scope, $state, localStorageService, confi
     $scope.roleGroupsList = [];
     $scope.refData.submitted = false;
     $scope.formAction = formAction;
+    $scope.strongPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
     $scope.CUser = localStorageService.get('CurrentUser');    
 
@@ -54,9 +55,9 @@ function changeUserPasswordController($scope, $state, localStorageService, confi
     //Function to assign Role to user
     $scope.submit = function (form) {
         $scope.dataJSON.model.Email = $scope.dataJSON.user.emailAddress;
-        $scope.refData.submitted = false;
+        $scope.refData.submitted = true;
 
-        if (form.$valid) {
+        if (form.$valid && $scope.dataJSON.model.Password == $scope.dataJSON.model.ConfirmPassword) {
             var apires = apiCall.post(APP_CONSTANTS.URL.ACCOUNT.CHANGEUSERPASSWORD, $scope.dataJSON.model);
             apires.then(function (data) {
                 toaster.success({ body: "User Name & Password changed Successfully." });
@@ -64,4 +65,8 @@ function changeUserPasswordController($scope, $state, localStorageService, confi
             });
         }
     }
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 }

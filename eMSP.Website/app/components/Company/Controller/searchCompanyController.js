@@ -162,7 +162,7 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             templateUrl: 'app/components/accounts/view/changeUserPasswordModel.html',
             scope: $scope,
             controller: 'changeUserPasswordController',
-            windowClass: 'animated slideInRight',
+            windowClass: 'animated slideInRight app-modal-window',
             resolve: {
                 configJSON: function ($http) {
                     return $http.get("app/components/accounts/config/changeUserPassword.json").success(function (data) { return data; });

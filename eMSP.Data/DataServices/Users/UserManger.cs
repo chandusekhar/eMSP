@@ -116,7 +116,6 @@ namespace eMSP.Data.DataServices.Users
                     default:
                         List<tblMSPUser> liMSP = await Task.Run(() => UserOperations.GetAllMSPUsers(model.companyId));
                         return liMSP.SingleOrDefault(a => a.UserID == data.UserID).ConvertToUserModel();
-
                         break;
                     case "Customer":
                         List<tblCustomerUser> licust = await Task.Run(() => UserOperations.GetAllCustomerUsers(model.companyId));

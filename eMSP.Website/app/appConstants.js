@@ -119,6 +119,7 @@ angular.module('eMSPApp')
                     GETUSERROLESURL: "api/role/GetUserRoles",
                     GETROLEGROUPURL: "api/role/GetRoleGroup?id=",
                     GETALLROLEGROUPURL: "api/role/GetAllRoleGroup",
+                    GETUSERROLEGROUPS: "api/role/GetUserRoleGroups",
                     GETROLEGROUPROLESURL: "api/role/GetRoleGroupRoles?id=",
                     GETALLROLEGROUPROLESURL: "api/role/GetAllRoleGroupRoles",
                     CREATEROLEURL: "api/role/create",
@@ -177,6 +178,7 @@ angular.module('eMSPApp')
                     CREATEPLACEMENT: "api/candidate/creatCandidatePlacement",
                     GETPLACEMENTBYCANDIDATEID: "api/candidate/getPlacementByCandidateId?CandidateId=",
                     GETALLPLACEDCANDIDATES: "api/candidate/getAllPlacedCandidates",
+                    UPDATECANDIDATEPLACEMENT:"api/candidate/updateCandidatePlacement"
                 }
             }
         });

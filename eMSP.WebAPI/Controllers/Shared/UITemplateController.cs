@@ -27,7 +27,7 @@ namespace eMSP.WebAPI.Controllers.Shared
         public async Task<UITemplate>  getTemplate(string UserID)
         {
 
-            var OBJ = await  rm.GetUserRoles(UserID);
+            var OBJ = await  rm.GetRoles(UserID);
              
             return new UITemplate(OBJ.Select(x=>x.Name).ToList());
         }

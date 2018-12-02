@@ -116,8 +116,18 @@ namespace eMSP.WebAPI.Controllers.Roles
         {
             string UserID = User.Identity.GetUserId();
             
-            return Ok(await Task.Run(() => rm.GetUserRolesn(UserID)));
+            return Ok(await Task.Run(() => rm.GetUserRoles(UserID)));
         }
+
+        [Route("GetUserRoleGroups")]
+        [HttpGet]
+        [Authorize(Roles = ApplicationRoles.RoleAuthorizationView)]
+        public async Task<IHttpActionResult> GetUserRoleGroups()
+        {   
+            return Ok(await Task.Run(() => rm.GetUserRoleGroups()));
+        }
+
+
 
         //Get Role Group by Role GroupID
         [Route("GetRoleGroup")]

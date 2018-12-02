@@ -315,7 +315,6 @@ namespace eMSP.Data.DataServices.Users
             catch (Exception e)
             {
                 throw;
-
             }
         }
 

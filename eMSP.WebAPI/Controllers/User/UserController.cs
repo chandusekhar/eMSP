@@ -157,7 +157,6 @@ namespace eMSP.WebAPI.Controllers.User
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

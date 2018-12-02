@@ -35,15 +35,12 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     list = db.tblCandidates
-                             .Include(a => a.tblCandidateContacts)
-                             .Include(a => a.tblCandidateContacts.Select(b => b.tblContact))
+                             .Where(x => x.ID == Id && (x.IsActive ?? true) && (!x.IsDeleted ?? false))
                              .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountry))
                              .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountryState))
                              .Include(b => b.tblCandidateFiles.Select(a => a.tblFile))
                              .Include(b => b.tblCandidateSkills.Select(a => a.tblIndustrySkill))
-                             .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry))
-                             .Where(x => x.ID == Id && x.IsActive == true && x.IsDeleted == false);
-
+                             .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry));
 
                     return await Task.Run(() => list.FirstOrDefault());
                 }
@@ -110,8 +107,7 @@ namespace eMSP.Data.DataServices.Candidate
                     return await Task.Run(() => db.tblCandidateSubmissions
                                                   .Where(x => x.ID == SubmissionId && (x.IsActive ?? true) && (!x.IsDeleted ?? false))
                                                   .Include(a => a.tblCandidate)
-                                                  .Include(b => b.tblCandidateStatu)
-                                                  .Include(a => a.tblVacancy)
+                                                  .Include(b => b.tblCandidateStatu)                                                  
                                                   .Include(a => a.tblVacancy.tblVacancySuppliers)
                                                   .SingleOrDefault());
 
@@ -129,11 +125,9 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-
                     return await Task.Run(() => db.tblCandidateStatus
-
-                    .Where(x=> x.IsActive == true && x.IsDeleted == false)
-                    .ToList());
+                                                  .Where(x=> (x.IsActive ?? true) && (!x.IsDeleted ?? false))
+                                                  .ToList());
 
                 }
             }
@@ -151,16 +145,13 @@ namespace eMSP.Data.DataServices.Candidate
                 {
 
                     return await Task.Run(() => db.tblSupplierCandidates
-
-                    .Where(x => x.SupplierID == supplierId && x.tblCandidate.IsActive == true && x.tblCandidate.IsDeleted == false)
-                    .Select(a => a.tblCandidate)
-                    .Include(b => b.tblCandidateSkills.Select(a => a.tblIndustrySkill))
-                    .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountry))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountryState))
-                    .Include(a => a.tblCandidateFiles.Select(b => b.tblFile)).ToList());
-
+                                                  .Where(x => x.SupplierID == supplierId)
+                                                  .Select(a => a.tblCandidate).Where(a=> (a.IsActive ?? true) && (!a.IsDeleted ?? false))
+                                                  .Include(b => b.tblCandidateSkills.Select(a => a.tblIndustrySkill))
+                                                  .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry))
+                                                  .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountry))
+                                                  .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountryState))
+                                                  .Include(a => a.tblCandidateFiles.Select(b => b.tblFile)).ToList());
                 }
             }
             catch (Exception)
@@ -177,17 +168,14 @@ namespace eMSP.Data.DataServices.Candidate
                 {
 
                     return await Task.Run(() => db.tblSupplierCandidates
-
-                    .Where(x => x.ID == candidateId && x.tblCandidate.IsActive == true && x.tblCandidate.IsDeleted == false)
-                    .Select(a => a.tblCandidate)
-                    .Include(b => b.tblCandidateSkills.Select(a => a.tblIndustrySkill))
-                    .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountry))
-                    .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountryState))
-                    .Include(a => a.tblCandidateFiles.Select(b => b.tblFile)).FirstOrDefault());
-
-                }
+                                                  .Where(x => x.ID == candidateId)
+                                                  .Select(a => a.tblCandidate).Where(a => (a.IsActive ?? true) && (!a.IsDeleted ?? false))
+                                                  .Include(b => b.tblCandidateSkills.Select(a => a.tblIndustrySkill))
+                                                  .Include(b => b.tblCandidateIndustries.Select(a => a.tblIndustry))
+                                                  .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountry))
+                                                  .Include(a => a.tblCandidateContacts.Select(b => b.tblContact).Select(c => c.tblCountryState))
+                                                  .Include(a => a.tblCandidateFiles.Select(b => b.tblFile)).FirstOrDefault());
+}
             }
             catch (Exception)
             {

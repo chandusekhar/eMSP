@@ -16,7 +16,7 @@ using eMSP.WebAPI.Utility;
 namespace eMSP.WebAPI.Controllers.Candidate
 {
     [RoutePrefix("api/candidate")]
-    [Authorize(Roles = ApplicationRoles.CandidateFull + "," + ApplicationRoles.CandidatePlacementFull)]
+    [Authorize(Roles = ApplicationRoles.CandidateFull + "," + ApplicationRoles.PlacementFull)]
     [AllowAnonymous]
     public class CandidateController : ApiController
     {
@@ -148,7 +148,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getAllPlacedCandidates")]
         [HttpGet]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]        
+        [Authorize(Roles = ApplicationRoles.PlacementView)]        
         public async Task<IHttpActionResult> GetAllPlacedCandidates()
         {
             try
@@ -164,7 +164,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getPlacementDetails")]
         [HttpGet]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]
+        [Authorize(Roles = ApplicationRoles.PlacementView)]
         [ResponseType(typeof(CandidatePlacementViewModel))]
         public async Task<IHttpActionResult> GetPlacementDetails(long PlacementId)
         {
@@ -180,7 +180,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("getPlacementByCandidateId")]
         [HttpGet]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementView)]
+        [Authorize(Roles = ApplicationRoles.PlacementView)]
         [ResponseType(typeof(CandidatePlacementViewModel))]
         public async Task<IHttpActionResult> GetPlacementByCandidateId(long CandidateId)
         {
@@ -272,7 +272,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("creatCandidatePlacement")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementCreate)]
+        [Authorize(Roles = ApplicationRoles.PlacementCreate)]
         [ResponseType(typeof(CandidatePlacementViewModel))]
         public async Task<IHttpActionResult> CreatCandidatePlacement(CandidatePlacementViewModel data)
         {
@@ -344,7 +344,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidatePlacement")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CandidatePlacementCreate)]
+        [Authorize(Roles = ApplicationRoles.PlacementCreate)]
         [ResponseType(typeof(CandidatePlacementViewModel))]
         public async Task<IHttpActionResult> UpdateCandidatePlacement(CandidatePlacementViewModel data)
         {

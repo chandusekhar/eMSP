@@ -23,7 +23,19 @@ namespace eMSP.Data.DataServices.Roles
         #region Get
 
         //Get User roles List
-        public async Task<List<UserAuthorization>> GetUserRoles(string UserID)
+        public async Task<List<UserAuthorization>> GetRoles(string UserID)
+        {
+            try
+            {
+                return await Task.Run(() => ManageRole.GetRoles(UserID));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<UserRolesModel> GetUserRoles(string UserID)
         {
             try
             {
@@ -35,13 +47,13 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
-        public async Task<UserRolesModel> GetUserRolesn(string UserID)
+        public async Task<dynamic> GetUserRoleGroups()
         {
             try
             {
-                return await Task.Run(() => ManageRole.GetUserRolesn(UserID));
+                return await Task.Run(() => ManageRole.GetUserRoleGroups());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

@@ -68,7 +68,7 @@ angular.module('eMSPApp').factory('authService', ['$http', '$q', 'localStorageSe
         _permissionList = [];
         var apires = apiCall.post('api/role/GetUserRoles');
         apires.then(function (data) {
-
+            debugger;
             _permissionList = data.roles;
             localStorageService.set('CurrentUser', data.user);
             localStorageService.set('permissionList', _permissionList);

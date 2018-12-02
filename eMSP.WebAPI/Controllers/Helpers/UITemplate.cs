@@ -31,7 +31,11 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool navExpenseSpent = false;
         public bool navTimesheetStatus = false;
         public bool navTimeSheet = false;
+        public bool navAddTimeSheet = false;
+        public bool navManageTimeSheet = false;
 
+        public bool navPlacement = false;
+        public bool navCreatePlacement = false;
         public bool navManagePlacement = false;        
 
         //------------ Administration end ------------- // 
@@ -132,7 +136,7 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public bool ExpenseSpentEdit = false;
         public bool TimesheetStatusCreate = false;
         public bool TimesheetStatusEdit = false;
-        public bool TimesheetCreate = false;
+        public bool TimesheetCreate = false;        
         public bool TimesheetEdit = false;
 
         //-------------payperiod end------------//
@@ -242,6 +246,9 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.TimesheetCreate = Roles.Contains(ApplicationRoles.TimesheetCreate) || Roles.Contains(ApplicationRoles.TimesheetFull);
             this.TimesheetEdit = Roles.Contains(ApplicationRoles.TimesheetFull);
 
+            this.PlacementCreate = Roles.Contains(ApplicationRoles.PlacementCreate) || Roles.Contains(ApplicationRoles.PlacementFull);
+            this.PlacementEdit = Roles.Contains(ApplicationRoles.PlacementFull);
+
 
             #region Administration 
 
@@ -252,8 +259,14 @@ namespace eMSP.WebAPI.Controllers.Helpers
             this.navManageQuestions = Roles.Where(a => a.StartsWith("Question")).ToList().Count > 0;
             this.navMSPPayPeriod = Roles.Where(a => a.StartsWith("MSPPayPeriod")).ToList().Count > 0;
             this.navExpenseSpent = this.ExpenseSpentCreate || this.ExpenseSpentEdit;
+
             this.navTimeSheet = this.TimesheetCreate || this.TimesheetEdit;
-            this.navManagePlacement = this.PlacementCreate || this.PlacementEdit || this.PlacementView;
+            this.navAddTimeSheet = this.TimesheetCreate;
+            this.navManageTimeSheet = this.TimesheetEdit;
+
+            this.navPlacement = this.PlacementCreate || this.PlacementEdit;
+            this.navCreatePlacement = this.PlacementCreate;
+            this.navManagePlacement =  this.PlacementEdit;
 
             this.navManageRoleGroups = Roles.Where(a => a.StartsWith("Role")).ToList().Count > 0;
             this.navManageUserRoles = Roles.Contains(ApplicationRoles.RoleAuthorizationFull) || Roles.Contains(ApplicationRoles.RoleAuthorizationCreate);

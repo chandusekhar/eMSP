@@ -34,9 +34,9 @@
                             All
                         </label>
                         <!--<select class="form-control" ng-model="rgdataJSON.roles"
-                        ng-options="res.Name for res in rolesList"
-                        multiple="" required
-                        name="roles"></select>-->
+    ng-options="res.Name for res in rolesList"
+    multiple="" required
+    name="roles"></select>-->
                         <div class="col-lg-6">
                             <div>
                                 <div>
@@ -49,7 +49,7 @@
                                                 <label for="{{res.Name}}">
                                                     <input id="{{res.Name}}" type="checkbox" icheck value="{{res}}" ng-checked="checkRoles(res)"
                                                            ng-change="toggleSelection(res)" ng-model="models[res.id]" />
-                                                    {{res.Name}} 
+                                                    {{res.Name}}
                                                 </label>
 
                                             </div>
@@ -85,23 +85,22 @@
                             </div>
                         </div>
 
+
+
                         <div class="col-lg-6">
                             <div>
                                 <div>
-                                    <label>Supplier Roles</label>
-
+                                    <label>Candidate Roles</label>
                                 </div>
-
                                 <div class="ibox-content">
-
                                     <div class="row">
                                         <div ng-repeat="res in rolesList">
-                                            <div ng-if="res.Name.indexOf('Supplier ') == 0" class="action-checkbox">
+                                            <div ng-if="res.Name.indexOf('Candidate ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
                                                     <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
                                                            icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
-                                                    {{res.Name}}    
+                                                    {{res.Name}}
                                                 </label>
                                             </div>
                                         </div>
@@ -115,12 +114,15 @@
                         <div class="col-lg-6">
                             <div>
                                 <div>
-                                    <label>Candidate Roles</label>
+                                    <label>Supplier Roles</label>
+
                                 </div>
+
                                 <div class="ibox-content">
+
                                     <div class="row">
                                         <div ng-repeat="res in rolesList">
-                                            <div ng-if="res.Name.indexOf('Candidate ') == 0" class="action-checkbox">
+                                            <div ng-if="res.Name.indexOf('Supplier ') == 0" class="action-checkbox">
 
                                                 <label for="{{res.Name}}">
                                                     <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
@@ -277,6 +279,142 @@
                                         <div ng-repeat="res in rolesList">
                                             <div ng-if="res.Name.indexOf('Role Authorization ') == 0" class="action-checkbox">
 
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Vacancy Type Roles</label>
+
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('VacancyType') == 0" class="action-checkbox">
+
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>TimeSheet Roles</label>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Timesheet ') == 0" class="action-checkbox">
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Expense Roles</label>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Expense') == 0" class="action-checkbox">
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>CandidateSubmission Roles</label>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('CandidateSubmission ') == 0" class="action-checkbox">
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Appointment Roles</label>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Appointment ') == 0" class="action-checkbox">
+                                                <label for="{{res.Name}}">
+                                                    <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
+                                                           icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />
+                                                    {{res.Name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div>
+                                <div>
+                                    <label>Placement Roles</label>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div ng-repeat="res in rolesList">
+                                            <div ng-if="res.Name.indexOf('Placement ') == 0" class="action-checkbox">
                                                 <label for="{{res.Name}}">
                                                     <input id="{{res.Name}}" type="checkbox" value="{{res}}" ng-checked="checkRoles(res)"
                                                            icheck ng-change="toggleSelection(res)" ng-model="models[res.id]" />

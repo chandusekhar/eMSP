@@ -85,24 +85,24 @@
             </li>
             <!-- Time Sheet-->
             <li ng-class="{active: $state.includes('time')}">
-                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'TimeSheet'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navTimeSheet" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'TimeSheet'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('time')}">
-                    <li ng-if="config.navTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.enterTimeSheet">{{'Add TimeSheets'|translate}}</a></li>
-                    <li ng-if="config.navTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.manageTimeSheet">{{'Manage TimeSheets'|translate}}</a></li>
+                    <li ng-if="config.navAddTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.enterTimeSheet">{{'Add TimeSheets'|translate}}</a></li>
+                    <li ng-if="config.navManageTimeSheet" ui-sref-active="active"><a ui-sref="timeSheet.manageTimeSheet">{{'Manage TimeSheets'|translate}}</a></li>
                 </ul>
             </li>
             <!-- Expence-->
             <li ng-class="{active: $state.includes('expense')}">
-                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Expense'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navExpenseSpent" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Expense'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('expense')}">
                     <li ng-if="config.navExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
                 </ul>
             </li>
             <!-- Placement-->
             <li ng-class="{active: $state.includes('placement')}">
-                <a ng-if="config.navJob" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Placement'|translate}}</span> <span class="fa arrow"></span></a>
+                <a ng-if="config.navPlacement" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Placement'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('placement')}">
-                    <li ui-sref-active="active"><a ui-sref="placement.placements">{{'Manage Placement'|translate}}</a></li>
+                    <li ng-if="config.navManagePlacement" ui-sref-active="active"><a ui-sref="placement.placements">{{'Manage Placement'|translate}}</a></li>
                 </ul>
             </li>
         </ul>

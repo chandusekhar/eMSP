@@ -19,6 +19,13 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
     $scope.ExpenseList = [];
     $scope.ExpenseDocument = [];
 
+    $scope.loadPlacements = function () {
+
+        var res = apiCall.get(APP_CONSTANTS.URL.CANDIDATEURL.GETSUPLIERCANDIDATEPLACEMENTURL + $scope.compId);
+        res.then(function (data) {
+            $scope.placementList = data;
+        });
+    }
 
     if ($scope.compType == 'MSP') {
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
@@ -44,13 +51,7 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
         $scope.loadPlacements();
     }
 
-    $scope.loadPlacements = function () {
-
-        var res = apiCall.get(APP_CONSTANTS.URL.CANDIDATEURL.GETSUPLIERCANDIDATEPLACEMENTURL + $scope.compId);
-        res.then(function (data) {
-            $scope.placementList = data;
-        });
-    }
+    
 
     $scope.changePlacement = function () {
 

@@ -5,5 +5,33 @@
   "titleRG": "Manage Roles",
   "titleRGFormCreate": "Add Role",
   "titleRGFormEdit": "Edit Role",
-  "companyType": "MSP"
+  "companyType": "MSP",
+  "actionEdit": "Edit",
+  "tableHeading": "User Role Listing",
+  "gridElements": [
+    {
+      "lable": "S.No",
+      "id": "SNo"
+    },
+    {
+      "lable": "Image",
+      "id": "Image"
+    },
+    {
+      "lable": "User",
+      "id": "User"
+    },
+    {
+      "lable": "Company Type",
+      "id": "CompayType"
+    },
+    {
+      "lable": "Role Name",
+      "id": "RoleName"
+    },
+    {
+      "lable": "Action",
+      "id": "Action"
+    }
+  ]
 }

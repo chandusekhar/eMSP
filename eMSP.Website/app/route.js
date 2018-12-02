@@ -1980,6 +1980,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/Roles/Config/ManageUserRoles.json").success(function (data) { return data; });
                 },
+                UserRoles: function (apiCall, APP_CONSTANTS) {                    
+                    return apiCall.get(APP_CONSTANTS.URL.ROLE.GETUSERROLEGROUPS, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
                 formAction: function () { return "Create"; },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

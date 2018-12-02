@@ -26,7 +26,7 @@ namespace eMSP.Data.DataServices.Roles
 
         #region Get
 
-        internal static async Task<List<UserAuthorization>> GetUserRoles(string UserID)
+        internal static async Task<List<UserAuthorization>> GetRoles(string UserID)
         {
             try
             {
@@ -52,9 +52,9 @@ namespace eMSP.Data.DataServices.Roles
                     //                                              }).ToList());
 
 
-                   var objlist = db.AspNetUsers.Where(x => x.Id == UserID).SingleOrDefault();
+                    var objlist = db.AspNetUsers.Where(x => x.Id == UserID).SingleOrDefault();
 
-                   return objlist.AspNetRoles.Select(X => new UserAuthorization() { Name=X.Name }).ToList();
+                    return await Task.Run(() => objlist.AspNetRoles.Select(X => new UserAuthorization() { Name = X.Name }).ToList());
 
                     //return objlist.Select(x=> new UserAuthorization() { Name=})
 
@@ -71,7 +71,7 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
-        internal static async Task<UserRolesModel> GetUserRolesn(string UserID)
+        internal static async Task<UserRolesModel> GetUserRoles(string UserID)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace eMSP.Data.DataServices.Roles
 
                     var objlist = db.AspNetUsers.Where(x => x.Id == UserID).SingleOrDefault();
 
-                    user.roles= objlist.AspNetRoles.Select(X => new RoleModel() { Name = X.Name,id=X.Id }).ToList();
+                    user.roles = objlist.AspNetRoles.Select(X => new RoleModel() { Name = X.Name, id = X.Id }).ToList();
 
 
                     //user.roles = await (from profile in db.tblUserProfiles
@@ -112,10 +112,11 @@ namespace eMSP.Data.DataServices.Roles
 
                     //db.AspNetRoleGroupRoles.Where(x=>x.RoleGroupId==)
 
-                    tblUserProfile up = db.tblUserProfiles.Where(a => a.UserID == UserID)
+                    tblUserProfile up = await Task.Run(() => db.tblUserProfiles.Where(a => a.UserID == UserID)
                                                   .Include(a => a.tblCountry)
                                                   .Include(a => a.tblCountryState)
-                                                  .SingleOrDefault();
+                                                  .SingleOrDefault());
+
                     user.user = new UserModel();
 
                     user.user.user = up.ConvertToUser();
@@ -124,6 +125,7 @@ namespace eMSP.Data.DataServices.Roles
                     long mspId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblMSPUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.MSPID).FirstOrDefault();
                     long supId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblSupplierUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.SupplierID).FirstOrDefault();
                     long cutId = db.tblUserProfiles.Where(x => x.AspNetUser.Id == UserID).Join(db.tblCustomerUsers, u => u.UserID, rg => rg.UserID, (l, r) => new { l, r }).Select(b => b.r.CustomerID).FirstOrDefault();
+
 
                     if (mspId != 0)
                     {
@@ -135,13 +137,42 @@ namespace eMSP.Data.DataServices.Roles
                         user.user.companyId = supId;
                         user.user.companyType = "Supplier";
                     }
-                    else if (supId != 0)
+                    else if (cutId != 0)
                     {
                         user.user.companyId = cutId;
                         user.user.companyType = "Customer";
                     }
 
                     return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        internal static async Task<dynamic> GetUserRoleGroups()
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    UserRolesModel user = new UserRolesModel();
+
+                    return await Task.Run(() => db.tblUserProfiles.Select(x => new
+                    {                        
+                        UserId = x.UserID,
+                        Email = x.EmailAddress,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        ProfilePic = x.UserProfilePhotoPath,
+                        RoleId = x.RoleGroupId,
+                        RoleName = x.AspNetRoleGroup.Name,
+                        MspId = db.tblMSPUsers.Where(y => y.UserID == x.UserID).Select(z => z.MSPID).FirstOrDefault(),
+                        CustomerId = db.tblCustomerUsers.Where(y => y.UserID == x.UserID).Select(z => z.CustomerID).FirstOrDefault(),
+                        SupplierId = db.tblSupplierUsers.Where(y => y.UserID == x.UserID).Select(z => z.SupplierID).FirstOrDefault()
+                    }).ToList());
                 }
             }
             catch (Exception ex)

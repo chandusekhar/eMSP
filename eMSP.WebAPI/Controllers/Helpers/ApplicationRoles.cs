@@ -35,9 +35,9 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string CandidateView = "Candidate View";
         public const string CandidateFull = "Candidate Full";
 
-        public const string CandidatePlacementCreate = "CandidatePlacement Create";
-        public const string CandidatePlacementView = "CandidatePlacement View";
-        public const string CandidatePlacementFull = "CandidatePlacement Full";
+        public const string PlacementCreate = "Placement Create";
+        public const string PlacementView = "Placement View";
+        public const string PlacementFull = "Placement Full";
 
         public const string MSPCreate = "MSP Create";
         public const string MSPView = "MSP View";

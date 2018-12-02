@@ -62,14 +62,13 @@ namespace eMSP.Data.DataServices.JobVacancies
                     if (companyId != 0 && model.companyType == "Customer")
                     {
                         return await Task.Run(() => db.tblVacancies
+                                                      .Where(x => x.tblCustomer.ID == companyId)
+                                                      .OrderByDescending(x => x.ID)
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
                                                       .Include(a => a.tblJobVacanciesStatu)
-                                                      .Include(a => a.tblVacancyComments)
                                                       .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                       .Include(a => a.tblVacancyFiles)
-                                                      .Include(a => a.tblVacanciesQuestions)
-                                                      .Include(a => a.tblVacanciesRequiredDocuments)
                                                       .Include(a => a.tblVacanciesQuestions.Select(b => b.tblCandidateSubmissionsQuestionsResponses))
                                                       .Include(a => a.tblVacanciesRequiredDocuments.Select(b => b.tblCandidateSubmissionDocumentResponses))
                                                       .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
@@ -77,20 +76,17 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
-                                                      .Where(x => x.tblCustomer.ID == companyId)
-                                                      .OrderByDescending(x => x.ID).ToList());
+                                                      .ToList());
                     }
                     else if (companyId != 0 && model.companyType == "Supplier")
                     {
                         return await Task.Run(() => db.tblVacancies
+                                                      .Where(x => x.tblVacancySuppliers.Any(r => r.SupplierID == companyId))
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
-                                                      .Include(a => a.tblJobVacanciesStatu)
-                                                      .Include(a => a.tblVacancyComments)
+                                                      .Include(a => a.tblJobVacanciesStatu)                                                      
                                                       .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
                                                       .Include(a => a.tblVacancyFiles)
-                                                      .Include(a => a.tblVacanciesQuestions)
-                                                      .Include(a => a.tblVacanciesRequiredDocuments)
                                                       .Include(a => a.tblVacanciesQuestions.Select(b => b.tblCandidateSubmissionsQuestionsResponses))
                                                       .Include(a => a.tblVacanciesRequiredDocuments.Select(b => b.tblCandidateSubmissionDocumentResponses))
                                                       .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
@@ -98,20 +94,17 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
-                                                      .Where(x => x.tblVacancySuppliers.Any(r => r.SupplierID == companyId))
                                                       .OrderByDescending(x => x.ID).ToList());
                     }
                     else
                     {
                         return await Task.Run(() => db.tblVacancies
+                                                      .OrderByDescending(x => x.ID)
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)
-                                                      .Include(a => a.tblJobVacanciesStatu)
-                                                      .Include(a => a.tblVacancyComments)
+                                                      .Include(a => a.tblJobVacanciesStatu)                                                      
                                                       .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
-                                                      .Include(a => a.tblVacancyFiles)
-                                                      .Include(a => a.tblVacanciesQuestions)
-                                                      .Include(a => a.tblVacanciesRequiredDocuments)
+                                                      .Include(a => a.tblVacancyFiles)                                                                                                            
                                                       .Include(a => a.tblVacanciesQuestions.Select(b=>b.tblCandidateSubmissionsQuestionsResponses))
                                                       .Include(a => a.tblVacanciesRequiredDocuments.Select(b=>b.tblCandidateSubmissionDocumentResponses))
                                                       .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
@@ -119,7 +112,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
                                                       .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
                                                       .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
-                                                      .OrderByDescending(x => x.ID).ToList());
+                                                      .ToList());
                     }
                 }
             }
@@ -137,23 +130,16 @@ namespace eMSP.Data.DataServices.JobVacancies
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblVacancies
-                                                  .Include(a => a.tblCustomer)
-                                                  .Include(a => a.tblVacancyComments)
-                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
-                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers))
-                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile)))
+                                                  .Where(x => x.ID == Id)
+                                                  .Include(a => a.tblCustomer)                                                  
                                                   .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile).Select(d => d.tblCountry)))
                                                   .Include(a => a.tblVacancyComments.Select(b => b.tblComment).Select(c => c.tblCommentUsers.Select(x => x.tblUserProfile).Select(d => d.tblCountryState)))
-                                                  .Where(x => x.ID == Id)
                                                   .SingleOrDefault());
-
-
                 }
             }
             catch (Exception)
             {
                 throw;
-
             }
         }
 

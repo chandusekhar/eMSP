@@ -24,7 +24,7 @@
         </div>
     </div>
     <!--Search-->
-    <div ng-if="!IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+    <div ng-if="!IsMSP" class="wrapper wrapper-content animated fadeInRight" >
         <div class="row">
             <!--serach Form start-->
             <div class="col-lg-12">
@@ -113,7 +113,8 @@
         </div>
     </div>
     <!--Manage-->
-    <div ng-if="IsMSP" class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+    <div ng-if="IsMSP" class="wrapper wrapper-content animated fadeInRight" >
+
 
         <div ng-if="res" class="row">
             <div class="col-lg-12">
@@ -213,8 +214,8 @@
                                                                                 </span>
 
                                                                                 <!--<span ng-click="deleteCandidate(loc)" class="btn btn-danger">
-                                                                                    <span class="fa fa-trash"></span>
-                                                                                </span>-->
+                                                                                <span class="fa fa-trash"></span>
+                                                                            </span>-->
 
                                                                             </div>
                                                                         </div>
@@ -225,17 +226,20 @@
                                                         </div>
                                                         <div class="row" ng-show="refData.userViewType === 'List'">
                                                             <!--User repeater-->
-                                                            <div class="full-height-scroll" full-scroll>
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-striped table-hover">
+                                                            <div >
+
+                                                                <div >
+
+                                                                    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="row-border hover table table-striped table-bordered table-hover dataTables-example">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th></th>
+                                                                                <th>#</th>
                                                                                 <th>User</th>
                                                                                 <th>Address</th>
                                                                                 <th>Email</th>
                                                                                 <th>Status</th>
                                                                                 <th ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')">Action</th>
+                                                                                <th></th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -249,34 +253,37 @@
                                                                                     </span>
 
                                                                                 </td>
-                                                                                <td style="width:35%">
+                                                                                <td>
                                                                                     <a ng-click="updateUser(loc)" class="client-link">{{loc.user.firstName}} {{loc.user.lastName}}</a>
                                                                                 </td>
-                                                                                <td style="width:30%">
+                                                                                <td>
                                                                                     <i class="fa fa-map-marker"></i> {{loc.user.address}},
                                                                                     {{loc.user.city}}, {{loc.user.state}},
                                                                                     {{loc.user.country}} - {{loc.user.zipCode}}.
                                                                                 </td>
-                                                                                <td style="width:15%" class="contact-type"><i class="fa fa-envelope"> </i>{{loc.user.emailAddress}}</td>
+                                                                                <td class="contact-type"><i class="fa fa-envelope"> </i>{{loc.user.emailAddress}}</td>
 
-                                                                                <td style="width:10%">
+                                                                                <td>
                                                                                     <p class="small inline" ng-if="loc.isActive">Active</p>
                                                                                     <p class="small inline" ng-if="!loc.isActive">Deactive</p>
                                                                                     <input ng-disabled="!(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || !(config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || !(config.MSPUserEdit == true && configJSON.companyType == 'MSP')" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
                                                                                            ng-change="ctoggleActive(loc)" ng-model="loc.isActive" />
                                                                                 </td>
-                                                                                <td style="width:5%">
+                                                                                <td>
                                                                                     <div>
                                                                                         <span ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" style="margin-left:10px" ng-click="updateUser(loc)" class="text-navy">
-                                                                                            <span class="fa fa-pencil"></span>
+                                                                                            
+                                                                                            <button type="button" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+
                                                                                         </span>
                                                                                     </div>
 
                                                                                 </td>
                                                                                 <td>
                                                                                     <div>
-                                                                                        <span ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" style="margin-left:10px" ng-click="updateUser(loc)" class="text-navy">
-                                                                                            <span class="fa fa-key"></span>
+                                                                                        <span ng-if="(config.SupplierUserEdit == true && configJSON.companyType == 'Supplier') || (config.CustomerUserEdit == true && configJSON.companyType == 'Customer') || (config.MSPUserEdit == true && configJSON.companyType == 'MSP')" ng-click="resetPassword(loc)" class="text-navy">
+
+                                                                                            <button type="button" class="btn btn-warning"><i class="fa fa-key"></i></button>
                                                                                         </span>
                                                                                     </div>
                                                                                 </td>
@@ -344,11 +351,11 @@
                                                                                    ng-change="toggleActiveLocation(loc)" ng-model="loc.isActive" />
                                                                             <!-- Location Deleted toggle -->
                                                                             <!--<div class="pull-right">
-                                                                                <p class="small inline" ng-if="loc.isDeleted">Deleted</p>
-                                                                                <p class="small inline" ng-if="!loc.isDeleted">Deleted</p>
-                                                                                <input type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                                                       ng-change="toggleActiveLocation(loc)" ng-model="loc.isDeleted" />
-                                                                            </div>-->
+                                                                            <p class="small inline" ng-if="loc.isDeleted">Deleted</p>
+                                                                            <p class="small inline" ng-if="!loc.isDeleted">Deleted</p>
+                                                                            <input type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                                                   ng-change="toggleActiveLocation(loc)" ng-model="loc.isDeleted" />
+                                                                        </div>-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -389,11 +396,11 @@
                                                                                    ng-change="toggleActiveBranch(brn)" ng-model="brn.isActive" />
                                                                             <!-- Branch Deleted toggle -->
                                                                             <!--<div class="pull-right">
-                                                                                <p class="small inline" ng-if="brn.isDeleted">Deleted</p>
-                                                                                <p class="small inline" ng-if="!brn.isDeleted">Deleted</p>
-                                                                                <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                                                       ng-change="toggleActiveBranch(brn)" ng-model="brn.isDeleted" />
-                                                                            </div>-->
+                                                                            <p class="small inline" ng-if="brn.isDeleted">Deleted</p>
+                                                                            <p class="small inline" ng-if="!brn.isDeleted">Deleted</p>
+                                                                            <input type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                                                   ng-change="toggleActiveBranch(brn)" ng-model="brn.isDeleted" />
+                                                                        </div>-->
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -413,6 +420,11 @@
                 </div>
             </div>
         </div>
+
+
+       
     </div>
+
+    
     <!-- End wrapper-->
 </div>

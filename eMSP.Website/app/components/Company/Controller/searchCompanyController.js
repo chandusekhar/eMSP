@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('searchCompanyController', searchCompanyController)
-function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster, ngAuthSettings) {// APP_CONSTANTS, apiCall
+function searchCompanyController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, AppCoutries, toaster, ngAuthSettings, DTOptionsBuilder, DTColumnDefBuilder) {// APP_CONSTANTS, apiCall
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -12,6 +12,36 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.refData.countryList = AppCoutries;
     $scope.refData.userViewType = "Card";
     $scope.baseUrl = ngAuthSettings.contentURL+"";
+    $scope.persons = [{
+        "id": 860,
+        "firstName": "Superman",
+        "lastName": "Yoda"
+    }, {
+        "id": 870,
+        "firstName": "Foo",
+        "lastName": "Whateveryournameis"
+    }, {
+        "id": 590,
+        "firstName": "Toto",
+        "lastName": "Titi"
+    }, {
+        "id": 803,
+        "firstName": "Luke",
+        "lastName": "Kyle"
+        }];
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
+
+    $scope.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(0).notSortable(),
+        DTColumnDefBuilder.newColumnDef(1),
+        DTColumnDefBuilder.newColumnDef(2).notSortable(),
+        DTColumnDefBuilder.newColumnDef(3).notSortable(),
+        DTColumnDefBuilder.newColumnDef(4).notSortable(),
+        DTColumnDefBuilder.newColumnDef(5).notSortable(),
+        DTColumnDefBuilder.newColumnDef(6).notSortable()
+
+    ];
+   
 
     if ($scope.configJSON.companyType === "MSP") {
         $scope.dataJSON.companyName = "";

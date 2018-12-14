@@ -208,7 +208,7 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 tblCandidatePlacement res = await Task.Run(() => ManageCandidatePlacement.GetPlacementByCandidateId(CandidateId));
 
-                return res.ConvertToCandidatePlacementViewModel();
+                return res?.ConvertToCandidatePlacementViewModel();
             }
             catch (Exception)
             {

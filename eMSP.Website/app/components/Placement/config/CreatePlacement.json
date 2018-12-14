@@ -1,0 +1,19 @@
+{
+  "title": "Create Placement",
+  "tableHeading": "Create Placement",
+  "actionCreate": "Create",
+  "formName": "formPlacement",
+  "formJobNumber": "Job ID",
+  "formJobTitle": "Job Title",
+  "formJobStartDate": "Start Date",
+  "formJobEndDate": "End Date",  
+  "formCandidateFirstName": "First Name",
+  "formCandidateLastName": "Last Name",
+  "formCandidateEmail": "Email",
+  "formPhoneNumber": "Phone Number",
+  "formPayRate": "Pay Rate",
+  "formBillRate": "Bill Rate",
+  "formPassword": "Password",
+  "formTimeGroup": "MSP Time Group",
+  "formIsActive": "Is Active"
+}

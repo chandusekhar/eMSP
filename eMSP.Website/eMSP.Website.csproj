@@ -194,7 +194,9 @@
     <Content Include="app\components\payPeriod\controller\payPeriodController.js" />
     <Content Include="app\components\payPeriod\view\managePayPeriod.html" />
     <Content Include="app\components\payPeriod\view\payPeriod.html" />
+    <Content Include="app\components\Placement\controller\createPlacementController.js" />
     <Content Include="app\components\Placement\controller\managePlacementController.js" />
+    <Content Include="app\components\Placement\view\createPlacement.html" />
     <Content Include="app\components\Placement\view\managePlacement.html" />
     <Content Include="app\components\Roles\controller\manageRolesController.js" />
     <Content Include="app\components\Roles\controller\manageUserRoleController.js" />
@@ -2582,6 +2584,7 @@
     <Content Include="app\components\timeSheet\config\manageTimeSheet.json" />
     <Content Include="app\components\Placement\config\ManagePlacement.json" />
     <Content Include="app\components\Candidate\config\candidateSubmissionListing.json" />
+    <Content Include="app\components\Placement\config\CreatePlacement.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

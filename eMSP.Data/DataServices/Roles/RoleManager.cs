@@ -72,6 +72,20 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
+        public async Task<RoleGroupModel> GetRoleGroupByName(string name)
+        {
+            try
+            {
+                AspNetRoleGroup data = await Task.Run(() => ManageRole.GetRoleGroupByName(name));
+                return data.ConvertToRoleGroup();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
 
         public async Task<List<RoleGroupModel>> GetAllRoleGroup()
         {

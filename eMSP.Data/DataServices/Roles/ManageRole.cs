@@ -187,7 +187,25 @@ namespace eMSP.Data.DataServices.Roles
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.AspNetRoleGroups.Where(x => x.Id == Id).SingleOrDefault());
+                    return await Task.Run(() => db.AspNetRoleGroups
+                    .Where(x => x.Id == Id)
+                    .SingleOrDefault());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        internal static async Task<AspNetRoleGroup> GetRoleGroupByName(string roleName)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.AspNetRoleGroups
+                    .Where(x => x.Name == roleName)
+                    .SingleOrDefault());
                 }
             }
             catch (Exception)

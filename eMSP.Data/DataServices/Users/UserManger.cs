@@ -108,7 +108,6 @@ namespace eMSP.Data.DataServices.Users
         {
             try
             {
-
                 tblUserProfile data = await Task.Run(() => UserOperations.InsertUser(model.ConvertTotblUser(), model.companyType, model.companyId));
                 switch (model.companyType)
                 {
@@ -125,12 +124,10 @@ namespace eMSP.Data.DataServices.Users
                         List<tblSupplierUser> lisup = await Task.Run(() => UserOperations.GetAllSupplierUsers(model.companyId));
                         return lisup.SingleOrDefault(a => a.UserID == data.UserID).ConvertToUserModel();
                         break;
-
-
+                    case "Candidate":
+                        return new UserModel();
+                        break;
                 }
-
-
-
             }
             catch (Exception)
             {

@@ -37,6 +37,20 @@ namespace eMSP.Data.DataServices.MSP
             }
         }
 
+        public async Task<List<MSPTimeGroupViewModel>> GetMSPTimeGroups()
+        {
+            try
+            {
+                List<tblMSPTimeGroup> res = await Task.Run(() => ManageMSPTimeGroup.GetMSPTimeGroups());
+
+                return res.Select(pp => pp.ConvertToMSPTimeGroupViewModel()).ToList();
+            }
+            catch (Exception)   
+            {
+                throw;
+            }
+        }
+
         public async Task<MSPPayPeriodViewModel> GetMSPPayPeriod(long Id)
         {
             try

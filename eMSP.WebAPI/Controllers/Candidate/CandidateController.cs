@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using eMSP.WebAPI.Models;
 using System.Net.Http;
 using eMSP.WebAPI.Utility;
+using eMSP.Data.DataServices.Users;
+using eMSP.ViewModel.User;
+using eMSP.Data.DataServices.Roles;
 
 namespace eMSP.WebAPI.Controllers.Candidate
 {
@@ -26,10 +29,14 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         private CandidateManager CandidateService;
         private ApplicationUserManager _userManager;
+        private UserManger dao;
+        private RoleManager roleManager;
 
         public CandidateController()
         {
             CandidateService = new CandidateManager();
+            dao = new UserManger();
+            roleManager= new RoleManager();
         }
         public ApplicationUserManager UserManager
         {
@@ -65,7 +72,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
         }
 
         [Route("getCandidate")]
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = ApplicationRoles.CandidateView)]
         [ResponseType(typeof(CandidateCreateModel))]
         public async Task<IHttpActionResult> GetCandidate(int candidateId)
@@ -274,15 +281,44 @@ namespace eMSP.WebAPI.Controllers.Candidate
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.PlacementCreate)]
         [ResponseType(typeof(CandidatePlacementViewModel))]
-        public async Task<IHttpActionResult> CreatCandidatePlacement(CandidatePlacementViewModel data)
+        public async Task<IHttpActionResult> CreatCandidatePlacement(CreateCandidatePlacementViewModel data)
         {
             try
-            {
+            {   
                 string userId = User.Identity.GetUserId();
 
-                Helpers.Helpers.AddBaseProperties(data, "create", userId);
+                var candidateRole = await Task.Run(() => roleManager.GetRoleGroupByName("Candidate"));
 
-                return Ok(await CandidateService.CreateCandidatePlacement(data));
+                UserCreateModel dataUser = new UserCreateModel
+                {
+                    firstName = data.firstName,
+                    lastName = data.lastName,                    
+                    emailAddress = data.email,
+                    roleGroupId = candidateRole?.id,
+                    companyType="Candidate"
+                };
+
+                var user = new ApplicationUser() { UserName = dataUser.emailAddress, Email = dataUser.emailAddress };
+
+                IdentityResult result = await UserManager.CreateAsync(user, AppConstant.AppPassword);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+
+                dataUser.userId = user.Id;
+                Helpers.Helpers.AddBaseProperties(dataUser, "create", userId);
+                var createdUser = await dao.CreateUser(dataUser);
+
+                CandidatePlacementViewModel dataCP = new CandidatePlacementViewModel
+                {
+                    SubmissionID = data.SubmissionID,
+                    TimeGroupID = data.timeGroup
+                };
+                Helpers.Helpers.AddBaseProperties(dataCP, "create", userId);
+
+                return Ok(await CandidateService.CreateCandidatePlacement(dataCP));
             }
             catch (Exception)
             {
@@ -318,7 +354,6 @@ namespace eMSP.WebAPI.Controllers.Candidate
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -326,14 +361,13 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         [Route("updateCandidateSubmission")]
         [HttpPost]
-        [Authorize(Roles = ApplicationRoles.CandidateCreate)]
-        //[ResponseType(typeof(CandidateSubmissionCreateModel))]
+        [Authorize(Roles = ApplicationRoles.CandidateCreate)]        
         public async Task<IHttpActionResult> UpdateCandidateSubmission(CandidateSubmissionCreateModel data)
         {
             try
             {
                 string userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(data.CandidateSubmission, "create", userId);
+                Helpers.Helpers.AddBaseProperties(data.CandidateSubmission, "update", userId);
                 return Ok(await CandidateService.UpdateCandidateSubmission(data));
             }
             catch (Exception)
@@ -345,14 +379,43 @@ namespace eMSP.WebAPI.Controllers.Candidate
         [Route("updateCandidatePlacement")]
         [HttpPost]
         [Authorize(Roles = ApplicationRoles.PlacementCreate)]
-        [ResponseType(typeof(CandidatePlacementViewModel))]
-        public async Task<IHttpActionResult> UpdateCandidatePlacement(CandidatePlacementViewModel data)
+        public async Task<IHttpActionResult> UpdateCandidatePlacement(CreateCandidatePlacementViewModel data)
         {
             try
             {
                 string userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(data, "create", userId);
-                return Ok(await CandidateService.UpdateCandidatePlacement(data));
+
+                var user = await UserManager.FindByEmailAsync(data.email);
+
+                var token = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, token, data.password);
+
+                if (result.Succeeded)
+                {
+                    user.UserName = data.email;
+
+                    result = await UserManager.UpdateAsync(user);
+
+                    if (!result.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+                }
+                else
+                {
+                    return GetErrorResult(result);
+                }
+
+                CandidatePlacementViewModel dataCP = new CandidatePlacementViewModel
+                {
+                    SubmissionID = data.SubmissionID,
+                    TimeGroupID = data.timeGroup,
+                    isActive = data.formIsActive
+                };
+                Helpers.Helpers.AddBaseProperties(dataCP, "update", userId);
+
+                return Ok(await CandidateService.UpdateCandidatePlacement(dataCP));
             }
             catch (Exception)
             {
@@ -366,6 +429,34 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
         #endregion
 
+        private IHttpActionResult GetErrorResult(IdentityResult result)
+        {
+            if (result == null)
+            {
+                return InternalServerError();
+            }
+
+            if (!result.Succeeded)
+            {
+                if (result.Errors != null)
+                {
+                    foreach (string error in result.Errors)
+                    {
+                        ModelState.AddModelError("errors", error);
+                    }
+                }
+
+                if (ModelState.IsValid)
+                {
+                    // No ModelState errors are available to send, so just return an empty BadRequest.
+                    return BadRequest();
+                }
+
+                return BadRequest(ModelState);
+            }
+
+            return null;
+        }
 
     }
 }

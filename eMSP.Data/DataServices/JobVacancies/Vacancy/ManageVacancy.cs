@@ -36,9 +36,20 @@ namespace eMSP.Data.DataServices.JobVacancies
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblVacancies
+                                                  .Where(x => x.ID == Id)
                                                   .Include(a => a.tblCustomer)
                                                   .Include(a => a.tblMSPVacancieType)
-                                                  .Where(x => x.ID == Id).SingleOrDefault());
+                                                  .Include(a => a.tblJobVacanciesStatu)
+                                                  .Include(a => a.tblVacancyComments.Select(b => b.tblComment))
+                                                  .Include(a => a.tblVacancyFiles)
+                                                  .Include(a => a.tblVacanciesQuestions.Select(b => b.tblCandidateSubmissionsQuestionsResponses))
+                                                  .Include(a => a.tblVacanciesRequiredDocuments.Select(b => b.tblCandidateSubmissionDocumentResponses))
+                                                  .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(e => e.tblCountry))
+                                                  .Include(a => a.tblVacancyLocations.Select(c => c.tblLocation).Select(d => d.tblCountryState).Select(e => e.tblCountry))
+                                                  .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountry))
+                                                  .Include(a => a.tblVacancySuppliers.Select(b => b.tblSupplier).Select(e => e.tblCountryState))
+                                                  .Include(a => a.tblVacancieSkills.Select(b => b.tblIndustrySkill))
+                                                  .SingleOrDefault());
 
 
                 }

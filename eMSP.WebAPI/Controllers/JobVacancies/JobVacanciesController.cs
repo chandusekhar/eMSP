@@ -35,14 +35,13 @@ namespace eMSP.WebAPI.Controllers.JobVacancies
         #region Get
 
         [Route("getVacancy")]
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = ApplicationRoles.VacancyView+","+ ApplicationRoles.VacancyCreate)]
         [ResponseType(typeof(VacancyCreateModel))]
         public async Task<IHttpActionResult> GetVacancy(long id)
         {
             try
             {
-
                 return Ok(await VacanciesService.GetVacancy(id));
             }
             catch (Exception)

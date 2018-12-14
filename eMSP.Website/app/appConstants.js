@@ -66,7 +66,7 @@ angular.module('eMSPApp')
                     CREATWMSPVACANCYTYPEURL: "api/JobVacancie/createMSPVacancieType",
                     UPDATEMSPVACANCYTYPEURL: "api/JobVacancie/updateMSPVacancieType",
                     DELETEMSPVACANCYTYPEURL: "api/JobVacancie/deleteMSPVacancieType",
-                    GETVACANCYURL: "api/JobVacancie/getVacancy",
+                    GETVACANCYURL: "api/JobVacancie/getVacancy?id=",
                     GETVACANCIESURL: "api/JobVacancie/getAllVacancy",
                     CREATEVACANCY: "api/JobVacancie/createVacancy",
                     UPDATEBVACANCY: "api/JobVacancie/updateVacancy",
@@ -179,6 +179,9 @@ angular.module('eMSPApp')
                     GETPLACEMENTBYCANDIDATEID: "api/candidate/getPlacementByCandidateId?CandidateId=",
                     GETALLPLACEDCANDIDATES: "api/candidate/getAllPlacedCandidates",
                     UPDATECANDIDATEPLACEMENT:"api/candidate/updateCandidatePlacement"
+                },
+                MSPTIMEGROUP: {
+                    GETMSPALLTIMEGROUP:"api/MSPTimeGroup/getAllMSPTimeGroup"
                 }
             }
         });

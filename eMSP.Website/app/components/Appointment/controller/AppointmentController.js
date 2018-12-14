@@ -1,8 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('appointmentController', appointmentController)
-    .controller('manageAppointmentController', manageAppointmentController)
-
+    .controller('manageAppointmentController', manageAppointmentController);
 function manageAppointmentController($scope, $filter, localStorageService, apiCall, $uibModal, APP_CONSTANTS, configJSON, toaster, AppointmentList, AppUsers, AppAppointmentTypes, AppAppointmentStatus, CandidateDetails) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
@@ -12,21 +11,37 @@ function manageAppointmentController($scope, $filter, localStorageService, apiCa
     $scope.refData.usersList = AppUsers;
     $scope.dataJSON = {};
     $scope.appointmentList = AppointmentList;
-    $scope.placementDetails = {};
-    $scope.AppointmentSlot = {};
-    var submissionId = localStorageService.get('createSubmissionId');
-    $scope.placement = null;
-    $scope.candidateDetails = CandidateDetails;
+    $scope.placementDetails = null;
+    $scope.AppointmentSlot = {};    
+    $scope.candidateDetails = {};
+    $scope.vacancyDetails = {};
+    $scope.submitCandidate = CandidateDetails;
+    $scope.showAppointmentCreate = true;
 
-    apiCall.get(APP_CONSTANTS.URL.PLACEMENT.GETPLACEMENTBYCANDIDATEID + $scope.candidateDetails.CandidateId, {})
+    apiCall.get(APP_CONSTANTS.URL.PLACEMENT.GETPLACEMENTBYCANDIDATEID + CandidateDetails.CandidateId, {})
+        .then(function (data) {           
+            if (data !== null) {
+                $scope.showAppointmentCreate = !data.isActive;
+                $scope.placementDetails = data;
+            }
+        });
+
+    apiCall.get(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + CandidateDetails.CandidateId, {})
         .then(function (data) {
-            $scope.placement = data;
+            if (data !== null) {
+                $scope.candidateDetails = data;
+            }
+        });
+
+    apiCall.get(APP_CONSTANTS.URL.VACANCY.GETVACANCYURL + CandidateDetails.VacancyId, {})
+        .then(function (data) {
+            if (data !== null) {
+                $scope.vacancyDetails = data;
+            }
         });
 
     $scope.model = function (model, data) {
-
         $scope.dataJSON = {};
-
         if (model) {
             $scope.editform = true;
             $scope.udataJSON = data;
@@ -37,31 +52,42 @@ function manageAppointmentController($scope, $filter, localStorageService, apiCa
             $scope.editform = false;
         }
 
-        var modalInstance = $uibModal.open({
+        $uibModal.open({
             templateUrl: 'app/components/Appointment/view/appointment.html',
             scope: $scope,
             controller: 'appointmentController',
             windowClass: 'animated slideInRight'
         });
-    }
+    };
 
     $scope.createPlacement = function () {
-        $scope.placement = {
-            SubmissionID: submissionId,
-            TimeGroupID: 1
-        };
-        var res = apiCall.post(APP_CONSTANTS.URL.PLACEMENT.CREATEPLACEMENT, $scope.placement);
-        res.then(function (data) {
-            $scope.dataJSON = data;
-            toaster.success({ body: "Placement Created Successfully." });
-            $uibModalInstance.close();
-
+        if ($scope.showAppointmentCreate) {
+            $scope.formAction = "Create";
+        } else {
+            $scope.formAction = "Update";
+        }
+        $uibModal.open({
+            templateUrl: 'app/components/Placement/view/createPlacement.html',
+            scope: $scope,
+            controller: 'createPlacementController',
+            windowClass: 'animated slideInRight',
+            resolve: {
+                configJSON: function ($http) {
+                    return $http.get("app/components/Placement/config/CreatePlacement.json")
+                        .success(function (data) {
+                            return data;
+                        });
+                },
+                MSPTimeGroup: function (apiCall, APP_CONSTANTS) {
+                    return apiCall.get(APP_CONSTANTS.URL.MSPTIMEGROUP.GETMSPALLTIMEGROUP).then(function (data) { return data; });
+                }
+            }
         });
-    }
+    };
 
     $scope.date = function (datestr, dateFormat) {
         return $filter('date')(new Date(ele), dateFormat);
-    }
+    };
 }
 
 function appointmentController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster, $uibModalInstance) {
@@ -80,7 +106,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                 }
             });
         });
-    }
+    };
 
     $scope.submit = function (form) {
 
@@ -107,7 +133,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                 });
             }
         }
-    }
+    };
 
     $scope.fnAddEditSlot = function (flag, index) {
 
@@ -121,7 +147,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
             $scope.slotEdit = false;
         }
         $scope.create = true;
-    }
+    };
 
     if ($scope.editform) {
         $scope.dataJSON = $scope.udataJSON;
@@ -129,7 +155,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
         $scope.dataJSON.AppointmentStatusID = $scope.udataJSON.AppointmentStatusID.toString();
         $scope.LoadUsersData();
         $scope.fnAddEditSlot(false, 0);
-    }
+    };
 
     $scope.addEditSlot = function (form, create) {
 
@@ -153,8 +179,8 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                     $scope.create = false;
                     $scope.AppointmentSlot.StartDate = $scope.dataJSON.dateRange.startDate;
                     $scope.AppointmentSlot.EndDate = $scope.dataJSON.dateRange.endDate;
-                    var resn = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.SLOTUPDATEAPPOINTMENTURL + $scope.AppointmentSlot.ID, $scope.AppointmentSlot);
-                    resn.then(function (data) {
+                    var result = apiCall.post(APP_CONSTANTS.URL.APPOINTMENT.SLOTUPDATEAPPOINTMENTURL + $scope.AppointmentSlot.ID, $scope.AppointmentSlot);
+                    result.then(function (data) {
 
                     });
                 }

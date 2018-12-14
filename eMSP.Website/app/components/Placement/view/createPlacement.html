@@ -1,0 +1,131 @@
+﻿<style type="text/css">
+    .form-control[disabled]{
+        background-color: #fff;
+    }
+    .ibox-content {
+        border-color: #fff;
+    }
+</style>
+<toaster-container></toaster-container>
+<!-- Wrapper-->
+<div id="wrapper">
+    <!-- Main view  -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{configJSON.title}}</h2>
+            <!--<ol class="breadcrumb">
+                <li>
+                    <a href="#/dashboard">Home</a>
+                </li>
+                <li class="active">
+                    <strong>{{configJSON.title}}</strong>
+                </li>
+            </ol>-->
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-content">
+                    <form class="m-t" name="form">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formJobNumber}} :</label>
+                                <input type="text" class="form-control" name="jobId"
+                                       ng-model="dataJSON.jobId"
+                                       disabled />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formJobTitle}} :</label>
+                                <input type="text" class="form-control" name="jobTitle"
+                                       ng-model="dataJSON.jobTitle"
+                                       disabled />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formJobStartDate}} :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.jobStart  |date:'dd-MMM-yyyy'"
+                                       name="jobPeriod" disabled />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formJobEndDate}} :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.jobEnd |date:'dd-MMM-yyyy'"
+                                       name="jobPeriod" disabled />
+                            </div>
+                            <div class="form-group col-md-12">
+                                &nbsp;
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formCandidateFirstName}} :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.firstName"
+                                       name="firstName" disabled />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>{{configJSON.formCandidateLastName}} :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.lastName"
+                                       name="firstName" disabled />
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.address.$error.required && refData.submitted==true }">
+                                <label>{{configJSON.formCandidateEmail}} * :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.email"
+                                       name="email" disabled />
+                            </div>
+                            <div class="form-group col-md-12">
+                                &nbsp;
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$error.required && refData.submitted==true }">
+                                <label>{{configJSON.formPayRate}} * :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.payRate"
+                                       name="payRate" disabled />
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$error.required && refData.submitted==true }">
+                                <label>{{configJSON.formBillRate}} * :</label>
+                                <input type="text" class="form-control"
+                                       ng-model="dataJSON.billRate"
+                                       name="billRate" disabled />
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$error.required && refData.submitted==true }">
+                                <label>{{configJSON.formTimeGroup}} * :</label>
+                                <select ng-model="dataJSON.timeGroup" class="form-control" required name="timeGroup">
+                                    <option value="">Time Group</option>
+                                    <option ng-repeat="res in MSPTimeGroup" value="{{res.ID}}">{{res.Name}}</option>
+                                </select>
+                                <span ng-show="form.timeGroup.$error.required && refData.submitted==true" class="text-danger">
+                                    * Time Group is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6" ng-class="{ 'has-error': form.password.$error.required && refData.submitted==true }">
+                                <label>{{configJSON.formPassword}} * :</label>
+                                <input type="password" class="form-control"
+                                       ng-model="dataJSON.password"
+                                       name="password" required />
+                                <span ng-show="form.password.$error.required && refData.submitted==true" class="text-danger">
+                                    * Password is required
+                                </span>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>
+                                    <input icheck type="checkbox" name="IsActive" ng-model="dataJSON.formIsActive">
+                                    <i></i> {{configJSON.formIsActive}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <button type="submit" ng-click="createPlacement(form)" class="btn btn-primary">{{formAction}}</button>&nbsp;&nbsp;
+                                <a class="btn btn-primary btn-white center" ui-sref="dashboard">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

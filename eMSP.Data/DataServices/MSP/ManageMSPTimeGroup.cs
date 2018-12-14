@@ -18,7 +18,24 @@ namespace eMSP.Data.DataServices.MSP
         #endregion
 
         #region Get
+        internal static async Task<List<tblMSPTimeGroup>> GetMSPTimeGroups()
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblMSPTimeGroups
+                                                  .Where(x => (x.IsActive ?? true) && (!x.IsDeleted ?? false))
+                                                  .ToList());
 
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Insert

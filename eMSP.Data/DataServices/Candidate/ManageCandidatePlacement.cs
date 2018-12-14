@@ -44,10 +44,13 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCandidatePlacements                                                  
+                    return await Task.Run(() => db.tblCandidatePlacements
+                                                  .Where(x => (x.IsActive ?? true))
                                                   .Include(x => x.tblCandidateSubmission.tblCandidate)
-                                                  .Where(x => x.tblCandidateSubmission.tblCandidate.ID == Id && (x.IsActive ?? true))
-                                                  .SingleOrDefault());
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidateStatu)
+                                                  .Include(x => x.tblMSPTimeGroup)
+                                                  .Where(x => x.tblCandidateSubmission.tblCandidate.ID == Id && (x.tblCandidateSubmission.IsActive ?? true))
+                                                  .FirstOrDefault());
 
                 }
             }

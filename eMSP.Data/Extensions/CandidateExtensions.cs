@@ -182,8 +182,8 @@ namespace eMSP.Data.Extensions
                 ID = Convert.ToInt32(data.ID),
                 VacancyId = Convert.ToInt32(data.VacancyID),
                 CandidateId = Convert.ToInt32(data.CandidateID),
-                CandidateFirstName = data.tblCandidate.FirstName,
-                CandidateLastName = data.tblCandidate.LastName,
+                CandidateFirstName = data.tblCandidate?.FirstName,
+                CandidateLastName = data.tblCandidate?.LastName,
                 StatusId = data.StatusID.ToString(),
                 BillRate = data.BillRate,
                 isActive = data.IsActive,
@@ -321,7 +321,7 @@ namespace eMSP.Data.Extensions
         {
             return new CandidatePlacementViewModel()
             {
-                ID = Convert.ToInt32(data.ID),
+                ID = data.ID,
                 SubmissionID = data.SubmissionID,
                 TimeGroupID = data.TimeGroupID,
                 isActive = data.IsActive,
@@ -330,7 +330,8 @@ namespace eMSP.Data.Extensions
                 updatedUserID = data.UpdatedUserID,
                 createdTimestamp = data.CreatedTimestamp,
                 updatedTimestamp = data.UpdatedTimestamp,
-                CandidateSubmission = data.tblCandidateSubmission.ConvertToCandidateSubmissionModel()                
+                CandidateSubmission = data.tblCandidateSubmission?.ConvertToCandidateSubmissionModel(),
+                MSPTimeGroup = data.tblMSPTimeGroup?.ConvertToMSPTimeGroupViewModel()
             };
         }
     }

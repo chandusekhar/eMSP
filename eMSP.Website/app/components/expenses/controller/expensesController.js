@@ -27,14 +27,14 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
         });
     }
 
-    if ($scope.compType == 'MSP') {
+    if ($scope.compType === 'MSP') {
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
         res.then(function (data) {
             $scope.companyList = data;
             $scope.compId = 0;
         });
     }
-    else if ($scope.compType == 'Supplier') {
+    else if ($scope.compType === 'Supplier') {
         $scope.loadPlacements();
 
     }

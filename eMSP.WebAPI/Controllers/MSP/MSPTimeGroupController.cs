@@ -14,34 +14,34 @@ using System.Web.Http.Description;
 namespace eMSP.WebAPI.Controllers.MSP
 {
     [RoutePrefix("api/MSPTimeGroup")]
-    [Queryable]
-    [Authorize(Roles = ApplicationRoles.QuestionFull)]
+    
+    //[Authorize(Roles = ApplicationRoles.QuestionFull)]
     [AllowAnonymous]
     public class MSPTimeGroupController : ApiController
     {
         #region Intialisation
 
-        private ManageMSPQuestions Service;
+        private MSPManager Service;
         string userId;
 
         public MSPTimeGroupController()
         {
-            Service = new ManageMSPQuestions();
+            Service = new MSPManager();
         }
 
         #endregion
 
         #region "CRUD"
 
-        [Route("get")]
-        [HttpPost]
-        [Authorize(Roles = ApplicationRoles.QuestionCreate+","+ApplicationRoles.QuestionView)]
+        [Route("getAllMSPTimeGroup")]
+        [HttpGet]
+        //[Authorize(Roles =ApplicationRoles.MSPTimeGroupView)]
         [ResponseType(typeof(QuestionViewModel))]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> GetAllMSPTimeGroup()
         {
             try
             {
-                return Ok(await Service.Get());
+                return Ok(await Service.GetMSPTimeGroups());
             }
             catch (Exception)
             {
@@ -50,58 +50,58 @@ namespace eMSP.WebAPI.Controllers.MSP
         }
 
 
-        [Route("save")]
-        [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
-        [Authorize(Roles = ApplicationRoles.QuestionCreate)]
-        public async Task<IHttpActionResult> Save(QuestionViewModel model)
-        {
-            try
-            {
-                userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "create", userId);
-                return Ok(await Service.Save(model));
+        //[Route("save")]
+        //[HttpPost]
+        //[ResponseType(typeof(QuestionViewModel))]
+        //[Authorize(Roles = ApplicationRoles.QuestionCreate)]
+        //public async Task<IHttpActionResult> Save(QuestionViewModel model)
+        //{
+        //    try
+        //    {
+        //        userId = User.Identity.GetUserId();
+        //        Helpers.Helpers.AddBaseProperties(model, "create", userId);
+        //        return Ok(await Service.Save(model));
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("update")]
-        [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
-        public async Task<IHttpActionResult> Update(QuestionViewModel model)
-        {
-            try
-            {
-                userId = User.Identity.GetUserId();
-                Helpers.Helpers.AddBaseProperties(model, "update", userId);
-                return Ok(await Service.Update(model.ID, model));
+        //[Route("update")]
+        //[HttpPost]
+        //[ResponseType(typeof(QuestionViewModel))]
+        //public async Task<IHttpActionResult> Update(QuestionViewModel model)
+        //{
+        //    try
+        //    {
+        //        userId = User.Identity.GetUserId();
+        //        Helpers.Helpers.AddBaseProperties(model, "update", userId);
+        //        return Ok(await Service.Update(model.ID, model));
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [Route("changestatus")]
-        [HttpPost]
-        [ResponseType(typeof(QuestionViewModel))]
-        public async Task<IHttpActionResult> ChangeStatus(long ID, bool status)
-        {
-            try
-            {
-                userId = User.Identity.GetUserId();
-                return Ok(await Service.ChangeStatus(ID, status,userId));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //[Route("changestatus")]
+        //[HttpPost]
+        //[ResponseType(typeof(QuestionViewModel))]
+        //public async Task<IHttpActionResult> ChangeStatus(long ID, bool status)
+        //{
+        //    try
+        //    {
+        //        userId = User.Identity.GetUserId();
+        //        return Ok(await Service.ChangeStatus(ID, status,userId));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         #endregion
     }

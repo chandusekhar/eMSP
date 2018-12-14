@@ -3,5 +3,6 @@
   "titleFormCreate": "Fix an Appointment",
   "titleFormEdit": "Edit Appointment",
   "labelCreatePlacement": "Create Placement",
+  "labelEditPlacement": "Update Placement",
   "labelCreateAppointment": "Create"
 }

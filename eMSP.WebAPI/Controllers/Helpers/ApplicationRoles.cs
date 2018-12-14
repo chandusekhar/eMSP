@@ -48,6 +48,9 @@ namespace eMSP.WebAPI.Controllers.Helpers
         public const string MSPLocationBranchCreate = "MSP LocationBranch Create";
         public const string MSPLocationBranchView = "MSP LocationBranch View";
         public const string MSPLocationBranchFull = "MSP LocationBranch Full";
+        public const string MSPTimeGroupCreate = "MSP TimeGroup Create";
+        public const string MSPTimeGroupView = "MSP TimeGroup View";
+        public const string MSPTimeGroupFull = "MSP TimeGroup Full";
 
         public const string RoleAuthorizationCreate = "Role Authorization Create";
         public const string RoleAuthorizationView = "Role Authorization View";

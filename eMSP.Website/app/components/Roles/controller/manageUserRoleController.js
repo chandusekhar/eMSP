@@ -28,15 +28,15 @@ function manageUserRoleController($scope, localStorageService, configJSON, apiCa
 
     $scope.changeCompanyType = function (model) {
 
-        if (model != "MSP") {
+        if (model !== "MSP") {
             var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { companyType: model, companyName: "%" });
             res.then(function (data) {
                 $scope.companyList = data;
             });
         }
         else {
-            var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, { companyType: model, companyName: "" });
-            res.then(function (data) {
+            var result = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.GETURL, { companyType: model, companyName: "" });
+            result.then(function (data) {
                 $scope.companyList.push(data);  
             });
         }
@@ -47,7 +47,7 @@ function manageUserRoleController($scope, localStorageService, configJSON, apiCa
         var apires = apiCall.post(APP_CONSTANTS.URL.USER.GETALLUSERSURL, { companyType: model.companyType, id: model.id });
         apires.then(function (data) {
             $scope.userList = data;
-            if ($scope.editUserId != null) {                
+            if ($scope.editUserId !== null) {                
                 $scope.userList.filter(function (v) {
                     if (v.userId === $scope.editUserId) {
                         $scope.dataJSON.roleUser = v;

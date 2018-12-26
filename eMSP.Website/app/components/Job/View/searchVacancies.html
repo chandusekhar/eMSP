@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         <div class="project-list">
-                            <table class="table table-hover">
+                            <table datatable="ng" dt-options="dtOptions" class="row-border hover table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>
@@ -176,18 +176,18 @@
                                         <td class="project-completion">
                                             <small>{{v.Vacancy.vacancyStatus.Name}}</small>
                                             <!--<div class="progress progress-mini">
-                                                <div style="width: 48%;" class="progress-bar"></div>
-                                            </div>-->
+                    <div style="width: 48%;" class="progress-bar"></div>
+                </div>-->
                                         </td>
-                                        <td class="project-status center">
+                                        <td class="project-status text-center">
                                             <span class="label m-b-n-lg" ng-class="{'label-primary' : v.Vacancy.isActive,'label-warning':!v.Vacancy.isActive}">
                                                 {{v.Vacancy.isActive?'Open':'Closed'}}
                                             </span>
                                         </td>
-                                        <td class="project-actions">
+                                        <td class="project-actions text-center" style="padding:0px;margin:0px">
                                             <!--has-permission='Customer View'-->
-                                            <a ng-click="view(v)" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-                                            <a ng-if="config.VacancyEdit == true" ng-click="edit(v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                            <a ng-click="view(v)" class="btn btn-white btn-sm col-md-5" style="margin-left:5px"><i class="fa fa-eye "></i> </a>
+                                            <a ng-if="config.VacancyEdit == true" ng-click="edit(v)" style="margin-left:5px" class="btn btn-white btn-sm col-md-5"><i class="fa fa-pencil"></i>  </a>
                                         </td>
 
                                     </tr>

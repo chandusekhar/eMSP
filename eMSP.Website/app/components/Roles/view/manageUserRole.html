@@ -84,52 +84,55 @@
                     </div>
                     <div class="ibox-content">
                         
-                            <div class="project-list" ng-if="userRoles.length > 0">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th ng-repeat="v in configJSON.gridElements">
-                                                {{v.lable}}
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="v in userRoles" id="row_{{v.UserId}}">
-                                            <td class="project-actions">
-                                                <span style="float:left">U000{{$index+1}}</span>
-                                            </td>
+                        <div class="project-list" ng-if="userRoles.length > 0">
+                            <table datatable="ng" dt-options="dtOptions" class="row-border hover table table-striped table-bordered table-hover dataTables-example">
 
-                                            <td class="project-people">
-                                                <span style="float:left">
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="v in configJSON.gridElements">
+                                            {{v.lable}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="v in userRoles" id="row_{{v.UserId}}">
+                                        <td class="project-actions">
+                                            <span style="float:left">U000{{$index+1}}</span>
+                                        </td>
 
-                                                    <img ng-if="v.ProfilePic!=''" height="28" width="28" alt="image" class="img-circle m-t-xs img-responsive" src="{{baseUrl+v.ProfilePic}}" />
+                                        <td class="project-people">
+                                            <span style="float:left">
 
-                                                    <ng-letter-avatar ng-if="v.ProfilePic ===''" charCount="2" height="28" width="28" fontsize="10"
-                                                                      data="{{v.FirstName}} {{v.LastName}}" shape="round"></ng-letter-avatar>
+                                                <img ng-if="v.ProfilePic!=''" height="28" width="28" alt="image" class="img-circle m-t-xs img-responsive" src="{{baseUrl+v.ProfilePic}}" />
 
-                                                </span>
-                                            </td>
-                                            <td class="project-title">
-                                                <span style="float:left">{{v.FirstName+" "+v.LastName}}</span>
-                                            </td>
-                                            <td class="project-people">
-                                                <span style="float:left" ng-if="v.CustomerId">Customer</span>
-                                                <span style="float:left" ng-if="v.MspId">MSP</span>
-                                                <span style="float:left" ng-if="v.SupplierId">Supplier</span>
-                                            </td>
-                                            <td class="project-actions">
-                                                <span style="float:left">{{v.RoleName}}</span>
-                                            </td>
-                                            <td class="project-status center">
-                                                <a ng-click="updateRole(v)" class="btn btn-white btn-sm">
-                                                    <i class="fa fa-pencil"></i>
-                                                    {{configJSON.actionEdit}}
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                <ng-letter-avatar ng-if="v.ProfilePic ===''" charCount="2" height="28" width="28" fontsize="10"
+                                                                  data="{{v.FirstName}} {{v.LastName}}" shape="round"></ng-letter-avatar>
+
+                                            </span>
+                                        </td>
+                                        <td class="project-title">
+                                            <span style="float:left">{{v.FirstName+" "+v.LastName}}</span>
+                                        </td>
+                                        <td class="project-people">
+                                            <span style="float:left" ng-if="v.CustomerId">Customer</span>
+                                            <span style="float:left" ng-if="v.MspId">MSP</span>
+                                            <span style="float:left" ng-if="v.SupplierId">Supplier</span>
+                                        </td>
+                                        <td class="project-actions">
+                                            <span style="float:left">{{v.RoleName}}</span>
+                                        </td>
+                                        <td class="project-status text-center">
+                                            <a title="{{configJSON.actionEdit}}" ng-click="updateRole(v)" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-pencil"></i>
+                                                {{configJSON.actionEdit}}
+
+                                            </a>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         
                         <div ng-if="!userRoles.length > 0">
                             There is no Users Available.

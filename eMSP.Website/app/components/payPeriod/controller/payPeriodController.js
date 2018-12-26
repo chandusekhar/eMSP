@@ -2,11 +2,12 @@
 angular.module('eMSPApp')
     .controller('managePayPeriodController', managePayPeriodController)
     .controller('payPeriodController', payPeriodController)
-function managePayPeriodController($scope, $state, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, toaster, $filter) {
+function managePayPeriodController($scope, $state, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, toaster, $filter, DTOptionsBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
-    $scope.PayPeriodList = PayPeriodList; 
+    $scope.PayPeriodList = PayPeriodList;
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     $scope.model = function (model, data) {
 

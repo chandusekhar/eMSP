@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('createCandidateController', createCandidateController)
 
-function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster) {
+function createCandidateController($scope, $state, localStorageService, ngAuthSettings, apiCall, formAction, AppIndustries, AppCoutries, APP_CONSTANTS, $http, configJSON, toaster, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.refData = {};
@@ -30,7 +30,7 @@ function createCandidateController($scope, $state, localStorageService, ngAuthSe
     $scope.CandidateDocument.docExpiryDate = null;
     $scope.CandidateDocument.docFileName = "";
     $scope.dataJSON.CandidateContact = []; 
-    
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     $scope.getStateList = function () {
         if ($scope.dataJSON.Contact && $scope.dataJSON.Contact.CountyID) {

@@ -28,31 +28,39 @@
                         
                     </div>
                     <div class="ibox-content">
+                        <div class="col-md-12">
+                            <div class="row form-group col-md-4">
+                                <input type="text" class="form-control" name="search"
+                                       ng-model="Search"
+                                       placeholder="Search Text">
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div ng-repeat="vt in resMSPVacancieType">
+                            <div ng-repeat="vt in resMSPVacancieType | filter:Search">
                                 <div class="col-lg-3">
                                     <div class="panel panel-info">
-                                        <div class="panel-heading">                                            
-                                            {{vt.name}} 
+                                        <div class="panel-heading">
+                                            {{vt.name}}
                                             <div class="btn-group-xs pull-right">
                                                 <a ng-if="config.VacancyTypeEdit == true" ng-click="update(vt)" class="text-white">
                                                     <span class="fa fa-pencil"></span>
                                                 </a>
                                                 <!--<a class="btn btn-danger" ng-click="delete(vt)">
-                                                    <span class="fa fa-trash"></span>
-                                                </a>-->
+                                <span class="fa fa-trash"></span>
+                            </a>-->
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="form-control inline">
                                             <p class="small inline" ng-if="vt.isActive">Active</p>
                                             <p class="small inline" ng-if="!vt.isActive">Deactive</p>
                                             <input ng-disabled="!(config.VacancyTypeEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                   ng-model="vt.isActive" ng-change="toggleActive(vt)"  />
+                                                   ng-model="vt.isActive" ng-change="toggleActive(vt)" />
                                             <div class="pull-right">
                                                 <p class="small inline" ng-if="vt.isDeleted">Deleted</p>
                                                 <p class="small inline" ng-if="!vt.isDeleted">Deleted</p>
                                                 <input ng-disabled="!(config.VacancyTypeEdit == true)" type="checkbox" class="switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                       ng-model="vt.isDeleted" ng-change="toggleActive(vt)"  />
+                                                       ng-model="vt.isDeleted" ng-change="toggleActive(vt)" />
                                             </div>
                                         </div>
 

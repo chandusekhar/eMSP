@@ -18,6 +18,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+
         <div class="row">
             <div class="col-lg-12" ng-show="search">
                 <div class="ibox float-e-margins">
@@ -28,8 +29,16 @@
                         </div>
                     </div>
                     <div class="ibox-content">
+                        <div class="col-md-12">
+                            <div class="row form-group col-md-4">
+                                <input type="text" class="form-control" name="search"
+                                       ng-model="Search"
+                                       placeholder="Search Text">
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div ng-repeat="qus in questionsList">
+                            <div ng-repeat="qus in questionsList | filter:Search">
                                 <div class="col-lg-4">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
@@ -66,28 +75,28 @@
                                             </div>
                                         </div>
 
-                                            <div class="form-control inline">
-                                                <!-- Country Active/Deactive toggle -->
-                                                <p class="small inline" ng-if="qus.isActive">Active</p>
-                                                <p class="small inline" ng-if="!qus.isActive">Deactive</p>
-                                                <input ng-disabled="!(config.QuestionEdit)" type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
-                                                       ng-change="toggleActive(qus)"
-                                                       ng-model="qus.isActive" />
+                                        <div class="form-control inline">
+                                            <!-- Country Active/Deactive toggle -->
+                                            <p class="small inline" ng-if="qus.isActive">Active</p>
+                                            <p class="small inline" ng-if="!qus.isActive">Deactive</p>
+                                            <input ng-disabled="!(config.QuestionEdit)" type="checkbox" class=" switchery small" ui-switch="{color:'#1AB394', size:'small'}"
+                                                   ng-change="toggleActive(qus)"
+                                                   ng-model="qus.isActive" />
 
-                                                <!-- Country Deleted toggle -->
-                                                <div class="pull-right">
-                                                    <p class="small inline" ng-if="qus.isDeleted">Deleted</p>
-                                                    <p class="small inline" ng-if="!qus.isDeleted">Deleted</p>
-                                                    <input ng-disabled="!(config.QuestionEdit)" type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
-                                                           ng-change="toggleActive(qus)"
-                                                           ng-model="qus.isDeleted" />
-                                                </div>
+                                            <!-- Country Deleted toggle -->
+                                            <div class="pull-right">
+                                                <p class="small inline" ng-if="qus.isDeleted">Deleted</p>
+                                                <p class="small inline" ng-if="!qus.isDeleted">Deleted</p>
+                                                <input ng-disabled="!(config.QuestionEdit)" type="checkbox" class=" switchery small" ui-switch="{color:'#f8ac59', size:'small'}"
+                                                       ng-change="toggleActive(qus)"
+                                                       ng-model="qus.isDeleted" />
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

@@ -216,9 +216,10 @@ function userController($scope, $state, $uibModal, localStorageService, apiCall,
 }
 
 
-function userManagerController($scope, localStorageService, apiCall, APP_CONSTANTS, toaster, configJSON, usersList) {
+function userManagerController($scope, localStorageService, apiCall, APP_CONSTANTS, toaster, configJSON, usersList, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.configJSON = configJSON.data;
     $scope.resUsers = usersList;
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
 
     $scope.toggleLockUser = function (model) {

@@ -2,13 +2,13 @@
 angular.module('eMSPApp')
     .controller('manageCandidateSubmissionController', manageCandidateSubmissionController)
     .controller('submitedCandidateListController', submitedCandidateListController)
-function manageCandidateSubmissionController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, $compile) {
+function manageCandidateSubmissionController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, $compile, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.searchResults = [];
     $scope.refData = {};
     $scope.jobData = {};
-
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
     var apires = apiCall.post(APP_CONSTANTS.URL.VACANCY.GETVACANCIESURL, $scope.dataJSON);
     apires.then(function (data) {
         $scope.resVacancie = data;
@@ -25,9 +25,10 @@ function manageCandidateSubmissionController($scope, $state, localStorageService
     }    
 }
 // Controller to get submited Candidate list
-function submitedCandidateListController($scope, $state, localStorageService, APP_CONSTANTS, apiCall, $uibModal) {
+function submitedCandidateListController($scope, $state, localStorageService, APP_CONSTANTS, apiCall, $uibModal, DTOptionsBuilder, DTColumnDefBuilder) {
 
     $scope = $scope.$parent.$parent;
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     var apiCL = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.GETURL + $scope.jobData.Vacancy.id, { 'VacancyId': $scope.jobData.Vacancy.id} );
     apiCL.then(function (data) {        

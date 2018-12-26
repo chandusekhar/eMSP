@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller("changeUserPasswordController", changeUserPasswordController)
-function changeUserPasswordController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction, $uibModalInstance) {
+function changeUserPasswordController($scope, $state, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = $scope.dataJSON ? $scope.dataJSON : {};
@@ -67,6 +67,6 @@ function changeUserPasswordController($scope, $state, localStorageService, confi
     }
 
     $scope.close = function () {
-        $uibModalInstance.dismiss('cancel');
+        //$uibModalInstance.dismiss('cancel');
     };
 }

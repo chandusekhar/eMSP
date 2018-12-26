@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('manageExpensesController', manageExpensesController)
     .controller('expensesController', expensesController)
-function manageExpensesController($scope, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, SpendCategoryList, CurrentStatusList) {
+function manageExpensesController($scope, $uibModal, localStorageService, configJSON, PayPeriodList, apiCall, APP_CONSTANTS, SpendCategoryList, CurrentStatusList, DTOptionsBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -18,6 +18,7 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
     $scope.refData.currentStatusList = CurrentStatusList;
     $scope.ExpenseList = [];
     $scope.ExpenseDocument = [];
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     $scope.loadPlacements = function () {
 

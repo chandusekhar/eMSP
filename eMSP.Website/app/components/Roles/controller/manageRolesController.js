@@ -3,7 +3,7 @@ angular.module('eMSPApp')
     .controller("manageRolesController", manageRolesController)
     .controller("createRolesController", createRolesController)
     .controller("createRoleGroupController", createRoleGroupController)
-function manageRolesController($scope, $state, localStorageService, $uibModal, configJSON, apiCall, APP_CONSTANTS, toaster) {
+function manageRolesController($scope, $state, localStorageService, $uibModal, configJSON, apiCall, APP_CONSTANTS, toaster, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -13,6 +13,8 @@ function manageRolesController($scope, $state, localStorageService, $uibModal, c
     $scope.rolesList = [];
     $scope.roleGroupsList = [];
     $scope.refData.submitted = false;
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     var apires = apiCall.post(APP_CONSTANTS.URL.ROLE.GETROLESURL);
     apires.then(function (data) {

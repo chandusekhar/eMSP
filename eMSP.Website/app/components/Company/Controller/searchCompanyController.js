@@ -12,24 +12,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     $scope.refData.countryList = AppCoutries;
     $scope.refData.userViewType = "Card";
     $scope.baseUrl = ngAuthSettings.contentURL+"";
-    $scope.persons = [{
-        "id": 860,
-        "firstName": "Superman",
-        "lastName": "Yoda"
-    }, {
-        "id": 870,
-        "firstName": "Foo",
-        "lastName": "Whateveryournameis"
-    }, {
-        "id": 590,
-        "firstName": "Toto",
-        "lastName": "Titi"
-    }, {
-        "id": 803,
-        "firstName": "Luke",
-        "lastName": "Kyle"
-        }];
+   
     $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
+    
 
     $scope.dtColumnDefs = [
         DTColumnDefBuilder.newColumnDef(0).notSortable(),

@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller("manageUserRoleController", manageUserRoleController)
-function manageUserRoleController($scope, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction, UserRoles) {
+function manageUserRoleController($scope, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, formAction, UserRoles, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -16,6 +16,8 @@ function manageUserRoleController($scope, localStorageService, configJSON, apiCa
     $scope.editUserId = null;
     
     $scope.CUser = localStorageService.get('CurrentUser');
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
 
     var apiresroles = apiCall.post(APP_CONSTANTS.URL.ROLE.GETALLROLEGROUPURL);
     apiresroles.then(function (data) {

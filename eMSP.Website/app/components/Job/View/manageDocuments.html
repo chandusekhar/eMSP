@@ -28,8 +28,17 @@
                         </div>
                     </div>
                     <div class="ibox-content">
+                        <div class="col-md-12">
+                            <div class="row form-group col-md-4">
+                                <input type="text" class="form-control" name="search"
+                                       ng-model="Search"
+                                       placeholder="Search Text">
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div ng-repeat="doc in documentsList">
+
+                            <div ng-repeat="doc in documentsList | filter:Search">
                                 <div class="col-lg-4">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
@@ -87,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

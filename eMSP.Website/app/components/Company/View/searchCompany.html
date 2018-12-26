@@ -178,8 +178,16 @@
                                                     </div>
                                                     <div class="ibox-content">
                                                         <div ng-show="refData.userViewType === 'Card'">
+                                                            <div class="col-md-12">
+                                                                <div class="row form-group col-md-4">
+                                                                    <input type="text" class="form-control" name="user"
+                                                                           ng-model="userSearch"
+                                                                           placeholder="Search Text">
+
+                                                                </div>
+                                                            </div>
                                                             <!--User repeater-->
-                                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="loc in resUsers">
+                                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="loc in resUsers|filter:userSearch">
                                                                 <div class="contact-box">
                                                                     <a ui-sref="profile">
                                                                         <div class="col-sm-5">
@@ -322,8 +330,16 @@
                                                     </div>
                                                     <div class="ibox-content" ng-show="!toggleBranches">
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row form-group col-md-4">
+                                                                    <input type="text" class="form-control" name="LocationName"
+                                                                           ng-model="locationSearch"
+                                                                           placeholder="Search Text">
+
+                                                                </div>
+                                                            </div>
                                                             <!--Location repeater-->
-                                                            <div ng-repeat="loc in resLocations">
+                                                            <div ng-repeat="loc in resLocations|filter:locationSearch">
                                                                 <div class="col-lg-4">
                                                                     <div class="panel panel-primary">
                                                                         <div class="panel-heading">
@@ -371,8 +387,16 @@
 
                                                     <div class="ibox-content" ng-show="toggleBranches">
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row form-group col-md-4">
+                                                                    <input type="text" class="form-control" name="branchName"
+                                                                           ng-model="branchSearch"
+                                                                           placeholder="Search Text">
+
+                                                                </div>
+                                                            </div>
                                                             <!--Branch repeater-->
-                                                            <div ng-repeat="brn in resBranches">
+                                                            <div ng-repeat="brn in resBranches|filter:branchSearch">
                                                                 <div class="col-lg-4">
                                                                     <div class="panel panel-primary">
                                                                         <div class="panel-heading">

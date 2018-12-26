@@ -32,7 +32,7 @@
 
                         <div ng-if="PayPeriodList.length > 0" class="row">
                             <div class="project-list">
-                                <table class="table table-hover">
+                                <table datatable="ng" dt-options="dtOptions" class="row-border hover table table-striped table-bordered table-hover dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
@@ -43,16 +43,16 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="v in PayPeriodList" id="row_{{v.ID}}">
-                                            <td class="project-actions">
+                                            <td class="project-actions col-md-3">
                                                 <span style="float:left">PP000{{v.ID}}</span>
                                             </td>
-                                            <td class="project-title">
+                                            <td class="project-title col-md-3">
                                                 <span style="float:left">{{v.StartDate | stringToDate : "MM/dd/yyyy" }}</span>
                                             </td>
-                                            <td class="project-people">
+                                            <td class="project-people col-md-3">
                                                 <span style="float:left">{{v.EndDate | stringToDate : "MM/dd/yyyy" }}</span>
                                             </td>
-                                            <td class="project-status center">
+                                            <td class="project-status text-center col-md-3">
                                                 <a ng-click="model(true,v)" class="btn btn-white btn-sm">
                                                     <i class="fa fa-pencil"></i>
                                                     Edit
@@ -61,7 +61,7 @@
                                                     <i class="fa fa-trash"></i>
                                                     Delete
                                                 </a>
-                                               
+                                                        
                                             </td>
                                         </tr>
                                     </tbody>

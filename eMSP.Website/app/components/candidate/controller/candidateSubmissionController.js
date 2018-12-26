@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('candidateSubmissionController', candidateSubmissionController)
    
-function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, AppIndustries, AppCoutries) {
+function candidateSubmissionController($scope, $state, $uibModal, localStorageService, configJSON, apiCall, APP_CONSTANTS, toaster, $filter, candidateStatusList, AppIndustries, AppCoutries, DTOptionsBuilder) {
     $scope.config = localStorageService.get('pageSettings');
     $scope.submitted = false;
     $scope.refData = {};
@@ -35,7 +35,8 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     $scope.dataJSON.CandidateContact = [];
     $scope.refData.isNewCustomer = false;
     $scope.refData.isCustomerEdited = false;
-    $scope.SubmissionDetails = {}
+    $scope.SubmissionDetails = {};
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
     
     if ($scope.refData.submittedCandidate !== null) {
         $scope.SubmissionDetails = $scope.refData.submittedCandidate;

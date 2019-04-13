@@ -57,8 +57,25 @@
                                             <td class="project-people">
                                                 <span style="float:left">{{v.TotalHousr}}</span>
                                             </td>
+                                            <td class="project-people">
+                                                <span style="float:left">{{v.Status}}</span>
+                                            </td>
                                             <td class="project-status center">
-                                                <a ng-click="model(v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Manage </a>
+                                                <div ng-if="v.Status !== 'Pending'">                                                    
+                                                    <span><strong>{{v.Status}}</strong></span>
+                                                </div>
+                                                <div ng-if="v.Status === 'Pending'">
+                                                    <a ng-if="config.TimesheetEdit" ng-click="edit(v)" class="btn btn-white btn-sm">
+                                                        <i class="fa fa-pencil"></i> Edit
+                                                    </a>
+                                                    <a ng-if="config.TimesheetApprove" ng-click="approve(v)" class="btn btn-white btn-sm">
+                                                        <span class="fa fa-check"></span> Approve
+                                                    </a>
+                                                    <a ng-if="config.TimesheetReject" ng-click="reject(v)" class="btn btn-white btn-sm">
+                                                        <span class="fa fa-times"></span> Reject
+                                                    </a>
+                                                </div>
+                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -66,7 +83,7 @@
                             </div>
                         </div>
                         <div ng-if="!TimeSheetList.length > 0">
-                            There is no Expenses available.
+                            There is no TimeSheet available.
                         </div>
                     </div>
                 </div>

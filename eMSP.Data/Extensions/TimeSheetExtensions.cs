@@ -108,6 +108,8 @@ namespace eMSP.Data.Extensions
                     ID = data.ID,
                     PayPeriodID = data.PayPeriodID,
                     PlacementID = data.PlacementID,
+                    StatusId = data.StatusID,
+                    Status = data?.tblTimesheetStatu?.Name,
                     TotalHousr = data.tblCandidateTimesheetHours.Sum(x => x.HoursWorked) ?? 0,
                     //Candidate = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.ConvertToCandidateCreateModel(),
                     CandidateFirstName = data.tblCandidatePlacement.tblCandidateSubmission.tblCandidate.FirstName,
@@ -117,7 +119,6 @@ namespace eMSP.Data.Extensions
                     PayPeriodDetails = data.tblMSPPayPeriod.ConvertToMSPPayPeriodViewModel()
                 };
             }
-
         }
 
         public static tblCandidateTimesheetHour ConvertTotblCandidateTimesheetHour(this CandidateTimesheetHoursViewModel data)

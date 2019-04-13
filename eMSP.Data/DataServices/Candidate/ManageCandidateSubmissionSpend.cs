@@ -1,4 +1,5 @@
 ﻿using eMSP.DataModel;
+using eMSP.ViewModel.Candidate;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -150,6 +151,32 @@ namespace eMSP.Data.DataServices.Candidate
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                     return model;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal static async Task UpdateCandidateExpenseStatus(ExpenseStateChangeViewModel model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    var Expense = db.tblCandidateSubmissionSpends
+                                           .Where(p => p.ID == model.ID)
+                                           .SingleOrDefault();
+
+                    if (Expense != null)
+                    {
+                        Expense.CurrentStatusID = model.StatusID;
+                        Expense.UpdatedTimestamp = model.updatedTimestamp;
+                        Expense.UpdatedUserID = model.updatedUserID;
+
+                        await Task.Run(() => db.SaveChangesAsync());
+                    }
                 }
             }
             catch (Exception)

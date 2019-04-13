@@ -85,7 +85,7 @@ function enterTimeSheetController($scope, $state, localStorageService, configJSO
             var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.UPDATETIMESHEETURL, $scope.dataJSON);
             resn.then(function (data) {
                 $scope.dataJSON = data;
-                toaster.warning({ body: "Data updated Successfully." });
+                toaster.success({ body: "Data updated Successfully." });
                 $state.reload();
             });
         }
@@ -94,10 +94,10 @@ function enterTimeSheetController($scope, $state, localStorageService, configJSO
             //  $scope.dataJSON.PlacementID = 6;
             $scope.dataJSON.StatusID = 1;
             $scope.dataJSON.VersionNumber = 1;
-            var resn = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
-            resn.then(function (data) {
+            var res = apiCall.post(APP_CONSTANTS.URL.TIMESHEET.CREATETIMESHEETURL, $scope.dataJSON);
+            res.then(function (data) {
                 $scope.dataJSON = data;
-                toaster.warning({ body: "Data Created Successfully." });
+                toaster.success({ body: "Data Created Successfully." });
                 $state.reload();
             });
         }

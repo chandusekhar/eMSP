@@ -150,7 +150,43 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
-       
+        [Route("approveExpense")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentApprove)]
+        public async Task<IHttpActionResult> ApproveExpense(ExpenseStateChangeViewModel model)
+        {
+            try
+            {
+                model.updatedUserID = User.Identity.GetUserId();
+                model.updatedTimestamp = DateTime.Now;
+
+                return Ok(await CandidateService.UpdateCandidateExpenseStatus(model));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("rejectExpense")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.ExpenseSpentReject)]
+        public async Task<IHttpActionResult> RejectExpense(ExpenseStateChangeViewModel model)
+        {
+            try
+            {
+                model.updatedUserID = User.Identity.GetUserId();
+                model.updatedTimestamp = DateTime.Now;
+
+                return Ok(await CandidateService.UpdateCandidateExpenseStatus(model));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         #endregion
 
     }

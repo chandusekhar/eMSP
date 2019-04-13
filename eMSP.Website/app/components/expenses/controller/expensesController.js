@@ -26,7 +26,7 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
         res.then(function (data) {
             $scope.placementList = data;
         });
-    }
+    };
 
     if ($scope.compType === 'MSP') {
         var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
@@ -50,9 +50,7 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
             $scope.compId = model.id;
         }
         $scope.loadPlacements();
-    }
-
-    
+    };    
 
     $scope.changePlacement = function () {
 
@@ -61,12 +59,10 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
             res.then(function (data) {
                 $scope.ExpenseList = data;
             });
-
         }
-    }
+    };
 
-    $scope.model = function (model, data) {        
-
+    $scope.edit = function (model, data) {
         if (model) {
             $scope.editform = true;
             $scope.dataJSON = data;
@@ -77,17 +73,47 @@ function manageExpensesController($scope, $uibModal, localStorageService, config
             $scope.editform = false;
         }
 
-        var modalInstance = $uibModal.open({
+        $uibModal.open({
             templateUrl: 'app/components/expenses/view/expenses.html',
             scope: $scope,
             controller: 'expensesController',
             windowClass: 'animated slideInRight'
         });
-    }
+    };
 
+    $scope.approve = function (d) {
+        var status = CurrentStatusList.filter(function (v) { if (v.Name === "Approved") return v; });
+        var data = {
+            ID: d.ID,
+            StatusID: status[0].ID
+        };
+        apiCall.post(APP_CONSTANTS.URL.EXPENSES.APPROVEEXPENSE, data)
+            .then(function (data) {
+                if (data) {
+                    toaster.success({ body: "Expense Approved Successfully." });
+                } else {
+                    toaster.warning({ body: "Expense Approved Not Successfull." });
+                }
+            });
+    };
+    $scope.reject = function (d) {
+        var status = CurrentStatusList.filter(function (v) { if (v.Name === "Rejected") return v; });
+        var data = {
+            ID: d.ID,
+            StatusID: status[0].ID
+        };
+        apiCall.post(APP_CONSTANTS.URL.EXPENSES.REJECTEXPENSE, data)
+            .then(function (data) {
+                if (data) {
+                    toaster.success({ body: "Expense Rejected Successfully." });
+                } else {
+                    toaster.warning({ body: "Expense Rejected Not Successfully." });
+                }
+            });
+    };
 }
 
-function expensesController($scope, $state, localStorageService, ngAuthSettings, apiCall, APP_CONSTANTS, $http, toaster, $uibModalInstance) {
+function expensesController($scope, $state, localStorageService, apiCall, APP_CONSTANTS, toaster, $uibModalInstance) {
 
     $scope.config = localStorageService.get('pageSettings');
 
@@ -103,12 +129,10 @@ function expensesController($scope, $state, localStorageService, ngAuthSettings,
     $scope.removeFile = function (list, index) {
 
         list.splice(index, 1);
-    }
-    $scope.fnExpenseDocumentUpload = function (flag) {
+    };
 
-
+    $scope.fnExpenseDocumentUpload = function (flag) {        
         if (!flag) {
-
             $scope.expenseDocumentUpload = true;
         }
         else {
@@ -120,13 +144,10 @@ function expensesController($scope, $state, localStorageService, ngAuthSettings,
             console.log($scope.dataJSON.Files);
             $scope.expenseDocumentUpload = false;
         }
-    }
+    };
 
     $scope.submit = function (form) {
-
-
         if (form.$valid) {
-
             if ($scope.editform) {
                 var res = apiCall.post(APP_CONSTANTS.URL.EXPENSES.UPDATEEXPENSE, $scope.dataJSON);
                 res.then(function (data) {
@@ -143,13 +164,10 @@ function expensesController($scope, $state, localStorageService, ngAuthSettings,
                     $state.reload();
                 });
             }
-
         }
-
-
-    }
+    };
 
     $scope.close = function () {
         $uibModalInstance.close();
-    }
+    };
 }

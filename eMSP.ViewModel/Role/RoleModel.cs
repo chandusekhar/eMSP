@@ -42,4 +42,19 @@ namespace eMSP.ViewModel.Role
         public UserAuthorization() { }
         public string Name { get; set; }
     }
+
+    public class UserRoleGrupDetails
+    {
+        public UserRoleGrupDetails() { }
+        public string UserId { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ProfilePic { get; set; }
+        public string RoleId { get; set; }
+        public string RoleName { get; set; }
+        public long MspId { get; set; }
+        public long CustomerId { get; set; }
+        public long SupplierId { get; set; }
+    }
 }

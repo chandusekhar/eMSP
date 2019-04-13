@@ -53,7 +53,7 @@
                             </div>
                             <div ng-if="dataJSON.PlacementID" class="ibox-tools">
 
-                                <a ng-click="model(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
+                                <a ng-click="edit(false,null)" class="btn btn-primary"><i class="fa fa-plus"></i>Create</a>
                             </div>
                         </div>
 
@@ -95,8 +95,24 @@
                                             <td class="project-people">
                                                 <span style="float:left">{{v.Amount}}</span>
                                             </td>
+                                            <td class="project-people">
+                                                <span style="float:left">{{v.TimesheetStatus.Name}}</span>
+                                            </td>
                                             <td class="project-status center">
-                                                <a ng-click="model(true,v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                                <div ng-if="v.TimesheetStatus.Name !== 'Pending'">
+                                                    <span><strong>{{v.TimesheetStatus.Name}}</strong></span>
+                                                </div>
+                                                <div ng-if="v.TimesheetStatus.Name === 'Pending'">
+                                                    <a ng-click="edit(true,v)" class="btn btn-white btn-sm">
+                                                        <i class="fa fa-pencil"></i> Edit
+                                                    </a>
+                                                    <a ng-if="config.ExpenseSpentApprove" ng-click="approve(v)" class="text-white">
+                                                        <span class="fa fa-pencil"></span> Approve
+                                                    </a>
+                                                    <a ng-if="config.ExpenseSpentReject" ng-click="reject(v)" class="text-white">
+                                                        <span class="fa fa-pencil"></span> Reject
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

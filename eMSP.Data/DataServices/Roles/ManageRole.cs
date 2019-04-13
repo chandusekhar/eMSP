@@ -181,6 +181,33 @@ namespace eMSP.Data.DataServices.Roles
             }
         }
 
+        internal static async Task<List<UserRoleGrupDetails>> GetUserRoleGroups(string roleGroupId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.RoleGroupId == roleGroupId).Select(x => new UserRoleGrupDetails
+                    {
+                        UserId = x.UserID,
+                        Email = x.EmailAddress,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        ProfilePic = x.UserProfilePhotoPath,
+                        RoleId = x.RoleGroupId,
+                        RoleName = x.AspNetRoleGroup.Name,
+                        MspId = db.tblMSPUsers.Where(y => y.UserID == x.UserID).Select(z => z.MSPID).FirstOrDefault(),
+                        CustomerId = db.tblCustomerUsers.Where(y => y.UserID == x.UserID).Select(z => z.CustomerID).FirstOrDefault(),
+                        SupplierId = db.tblSupplierUsers.Where(y => y.UserID == x.UserID).Select(z => z.SupplierID).FirstOrDefault()
+                    }).ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         internal static async Task<AspNetRoleGroup> GetRoleGroup(string Id)
         {
             try
@@ -357,6 +384,25 @@ namespace eMSP.Data.DataServices.Roles
                 {
                     List<AspNetRoleGroupRole> roleGroup = db.AspNetRoleGroupRoles.Where(a => a.RoleGroupId == Id).ToList();
                     roleGroup.ForEach(a => db.AspNetRoleGroupRoles.Remove(a));                    
+                    int x = await Task.Run(() => db.SaveChangesAsync());
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal static async Task DeleteAspNetUserRoles(string Id)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    AspNetRoleGroup roleGroup = db.AspNetRoleGroups.FirstOrDefault(a => a.Id == Id);
+
+                    db.AspNetRoleGroups.Remove(roleGroup);
                     int x = await Task.Run(() => db.SaveChangesAsync());
 
                 }

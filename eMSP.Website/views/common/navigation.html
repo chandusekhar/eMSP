@@ -95,7 +95,7 @@
             <li ng-class="{active: $state.includes('expense')}">
                 <a ng-if="config.navExpenseSpent" href="#"><i class="fa fa-paste"></i> <span class="nav-label">{{'Expense'|translate}}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{active: $state.includes('expense')}">
-                    <li ng-if="config.navExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
+                    <li ng-if="config.navManageExpenseSpent" ui-sref-active="active"><a ui-sref="expenses.manageExpenses">{{'Manage Expenses'|translate}}</a></li>
                 </ul>
             </li>
             <!-- Placement-->

@@ -165,14 +165,17 @@ angular.module('eMSPApp')
                     CREATETIMESHEETURL: "api/timesheet/insertTimeSheet",
                     UPDATETIMESHEETURL: "api/timesheet/updateTimeSheet",
                     GETALLTIMESHEETS: "api/timesheet/getAllTimesheetEntries",
-
+                    APPROVETIMESHEETS: "api/timesheet/approveTimeSheet",
+                    REJECTTIMESHEETS: "api/timesheet/rejectTimeSheet"
                 },
                 EXPENSES: {
                     GETSPENDCATEGORY: "api/expenses/getMSPSpendCategory",
                     GETEXPENSE: "api/expenses/getExpenseDetails?ExpenseId=",
                     GETALLEXPENSES: "api/expenses/getCandidateExpenseSpend?PlacementId=",
                     CREATEEXPENSE: "api/expenses/insertCandidateSpend",
-                    UPDATEEXPENSE: "api/expenses/updateCandidateSpend"
+                    UPDATEEXPENSE: "api/expenses/updateCandidateSpend",
+                    APPROVEEXPENSE: "api/expenses/approveExpense",
+                    REJECTEXPENSE: "api/expenses/rejectExpense"
                 },
                 PLACEMENT: {
                     CREATEPLACEMENT: "api/candidate/creatCandidatePlacement",

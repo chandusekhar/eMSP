@@ -23,6 +23,10 @@
       "id": "TotalHours"
     },
     {
+      "lable": "Status",
+      "id": "Status"
+    },
+    {
       "lable": "Action",
       "id": "Action"
     }

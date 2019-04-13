@@ -579,6 +579,20 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        public async Task<bool> UpdateCandidateExpenseStatus(ExpenseStateChangeViewModel data)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidateSubmissionSpend.UpdateCandidateExpenseStatus(data));
+                
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<CandidatePlacementViewModel> UpdateCandidatePlacement(CandidatePlacementViewModel data)
         {
             try
@@ -600,6 +614,20 @@ namespace eMSP.Data.DataServices.Candidate
                 await Task.Run(() => ManageCandidateTimesheets.UpdateCandidateTimesheet(data.ConvertTotblCandidateTimesheet()));
 
                 return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> UpdateCandidateTimesheetStatus(TimesheetStateChangeViewModel data)
+        {
+            try
+            {                
+                await Task.Run(() => ManageCandidateTimesheets.UpdateCandidateTimesheetStatus(data));
+
+                return true;
             }
             catch (Exception)
             {

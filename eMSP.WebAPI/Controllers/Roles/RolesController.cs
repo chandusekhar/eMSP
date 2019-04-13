@@ -127,8 +127,6 @@ namespace eMSP.WebAPI.Controllers.Roles
             return Ok(await Task.Run(() => rm.GetUserRoleGroups()));
         }
 
-
-
         //Get Role Group by Role GroupID
         [Route("GetRoleGroup")]
         [HttpPost]
@@ -282,8 +280,13 @@ namespace eMSP.WebAPI.Controllers.Roles
         [Authorize(Roles = ApplicationRoles.RoleAuthorizationFull)]
         public async Task<IHttpActionResult> updateRoleGroupRoles(RoleGroupRolesModel model)
         {
-           
-            return Ok(await Task.Run(() => rm.UpdateRoleGroupRoles(model)));
+            var _result = await Task.Run(() => rm.UpdateRoleGroupRoles(model));
+            var _RoleGroupUsers = await Task.Run(() => rm.GetUserRoleGroups(model.roleGroup.id));
+            foreach (var r in _RoleGroupUsers)
+            {
+                await Task.Run(() => AssignRolesToUser(r.UserId, model.roles.Select(x => x.Name).ToArray()));
+            }
+            return Ok(_result);
         }
 
         #endregion

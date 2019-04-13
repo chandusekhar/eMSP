@@ -2354,6 +2354,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 configJSON: function ($http) {
                     return $http.get("app/components/timeSheet/config/manageTimeSheet.json").success(function (data) { return data; });
                 },
+                CurrentStatusList: function (apiCall, APP_CONSTANTS) {
+
+                    return apiCall.post(APP_CONSTANTS.URL.TIMESHEET.GETTIMESHEETSTATUS, {})
+                        .then(function (data) {
+                            return data;
+                        });
+                },
                 formAction: function () { return "Manage"; },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

@@ -218,6 +218,33 @@ namespace eMSP.Data.DataServices.Candidate
             }
         }
 
+        internal static async Task UpdateCandidateTimesheetStatus(TimesheetStateChangeViewModel model)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+
+                    var timesheet = db.tblCandidateTimesheets
+                                           .Where(p => p.ID == model.ID)
+                                           .SingleOrDefault();
+
+                    if (timesheet != null)
+                    {
+                        timesheet.StatusID = model.StatusID;
+                        timesheet.UpdatedTimestamp = model.updatedTimestamp;
+                        timesheet.UpdatedUserID = model.updatedUserID;
+
+                        await Task.Run(() => db.SaveChangesAsync());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
 
         #endregion

@@ -228,6 +228,40 @@ namespace eMSP.WebAPI.Controllers.Timesheet
             }
         }
 
+        [Route("approveTimeSheet")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.TimesheetApprove)]
+        public async Task<IHttpActionResult> approveTimeSheet(TimesheetStateChangeViewModel model)
+        {
+            try
+            {
+                model.updatedUserID = User.Identity.GetUserId();
+                model.updatedTimestamp = DateTime.Now;
+                return Ok(await CandidateManager.UpdateCandidateTimesheetStatus(model));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Route("rejectTimeSheet")]
+        [HttpPost]
+        [Authorize(Roles = ApplicationRoles.TimesheetReject)]
+        public async Task<IHttpActionResult> rejectTimeSheet(TimesheetStateChangeViewModel model)
+        {
+            try
+            {
+                model.updatedUserID = User.Identity.GetUserId();
+                model.updatedTimestamp = DateTime.Now;
+                return Ok(await CandidateManager.UpdateCandidateTimesheetStatus(model));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
     }

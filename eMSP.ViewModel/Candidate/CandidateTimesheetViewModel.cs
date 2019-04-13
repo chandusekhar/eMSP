@@ -35,6 +35,8 @@ namespace eMSP.ViewModel.Candidate
         public long ID { get; set; }
         public long PayPeriodID { get; set; }
         public long PlacementID { get; set; }
+        public long StatusId { get; set; }
+        public string Status { get; set; }
         //public CandidateCreateModel Candidate { get; set; }        
         public string CandidateFirstName { get; set; }
         public long CandidateId { get; set; }
@@ -42,5 +44,17 @@ namespace eMSP.ViewModel.Candidate
         public string SupplierName { get; set; }
         public decimal TotalHousr { get; set; }
         public MSPPayPeriodViewModel PayPeriodDetails { get; set; }
+    }
+
+    public class TimesheetStateChangeViewModel
+    {
+        public TimesheetStateChangeViewModel()
+        {   
+        }
+
+        public long ID { get; set; }
+        public long StatusID { get; set; }
+        public Nullable<DateTime> updatedTimestamp { get; set; }
+        public string updatedUserID { get; set; }
     }
 }

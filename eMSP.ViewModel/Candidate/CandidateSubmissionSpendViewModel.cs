@@ -33,4 +33,16 @@ namespace eMSP.ViewModel.Candidate
 
         public virtual ICollection<FileModel> Files { get; set; }
     }
+
+    public class ExpenseStateChangeViewModel
+    {
+        public ExpenseStateChangeViewModel()
+        {
+        }
+
+        public long ID { get; set; }
+        public long StatusID { get; set; }
+        public Nullable<DateTime> updatedTimestamp { get; set; }
+        public string updatedUserID { get; set; }
+    }
 }

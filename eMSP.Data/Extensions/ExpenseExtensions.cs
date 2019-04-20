@@ -57,10 +57,8 @@ namespace eMSP.Data.Extensions
                 MSPPayperiod = data.tblMSPPayPeriod?.ConvertToMSPPayPeriodViewModel(),
                 MSPSpendCategory = data?.tblMSPSpendCategory?.ConvertToMSPSpendCategoryViewModel(),
                 TimesheetStatus = data?.tblTimesheetStatu?.ConvertToTimesheetStatusViewModel(),
-                CandidatePlacement = data?.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
-                CandidateSubmissionSpendFiles = data?.tblCandidateSubmissionSpendFiles?
-                                                        .Select(x => x?.ConvertToCandidateSubmissionSpendFilesViewModel())
-                                                        .ToList()
+                //CandidatePlacement = data?.tblCandidatePlacement?.ConvertToCandidatePlacementViewModel(),
+                CandidateSubmissionSpendFiles = data?.tblCandidateSubmissionSpendFiles?.Select(x => x?.ConvertToCandidateSubmissionSpendFilesViewModel()).ToList()
             };
         }
 

@@ -193,17 +193,17 @@ namespace eMSP.WebAPI.Controllers
                 Helpers.Helpers.AddBaseProperties(data, "update", userId);
                 foreach (var con in data.Slots)
                 {
-                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
                 }
 
                 foreach (var con in data.Users)
                 {
-                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
                 }
 
                 foreach (var con in data.UserComments)
                 {
-                    Helpers.Helpers.AddBaseProperties(con, "update", userId);
+                    Helpers.Helpers.AddBaseProperties(con, "create", userId);
                 }
                 return Ok((await _service.Update(data.ID, data, userId)));
             }

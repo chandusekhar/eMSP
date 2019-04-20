@@ -27,6 +27,9 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCandidatePlacements
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidate)
+                                                  .Include(x => x.tblCandidateSubmission.tblCandidateStatu)
+                                                  .Include(x => x.tblMSPTimeGroup)
                                                   .Where(x => x.ID == Id).SingleOrDefault());
 
                 }
@@ -45,7 +48,7 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     return await Task.Run(() => db.tblCandidatePlacements
-                                                  .Where(x => (x.IsActive ?? true))
+                                                  //.Where(x => (x.IsActive ?? true))
                                                   .Include(x => x.tblCandidateSubmission.tblCandidate)
                                                   .Include(x => x.tblCandidateSubmission.tblCandidateStatu)
                                                   .Include(x => x.tblMSPTimeGroup)
@@ -67,7 +70,8 @@ namespace eMSP.Data.DataServices.Candidate
             {
                 using (db = new eMSPEntities())
                 {
-                    return await Task.Run(() => db.tblCandidatePlacements.Where(x => x.IsActive ?? true)
+                    return await Task.Run(() => db.tblCandidatePlacements
+                                                  //.Where(x => x.IsActive ?? true)
                                                   .Include(x => x.tblCandidateSubmission.tblVacancy)
                                                   .Include(x => x.tblCandidateSubmission.tblCandidateStatu)
                                                   .Include(x => x.tblCandidateSubmission.tblCandidate)
@@ -138,7 +142,8 @@ namespace eMSP.Data.DataServices.Candidate
                 using (db = new eMSPEntities())
                 {
                     tblCandidatePlacement obj = await db.tblCandidatePlacements.FindAsync(Id);
-                    db.tblCandidatePlacements.Remove(obj);
+                    obj.IsActive = false;
+                    obj.IsDeleted = true;
 
                     await Task.Run(() => db.SaveChangesAsync());
                 }

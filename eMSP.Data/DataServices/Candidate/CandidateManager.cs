@@ -170,7 +170,7 @@ namespace eMSP.Data.DataServices.Candidate
             try
             {
                 List<tblCandidatePlacement> res = await Task.Run(() => ManageCandidatePlacement.GetAllPlacements());
-                
+
                 return res.Select(x => new
                 {
                     PlacementId = x.ID,
@@ -179,7 +179,9 @@ namespace eMSP.Data.DataServices.Candidate
                     CandidateFirstName = x.tblCandidateSubmission.tblCandidate.FirstName,
                     CandidateLastName = x.tblCandidateSubmission.tblCandidate.LastName,
                     SupplierName = x.tblCandidateSubmission.tblCandidate.tblSupplierCandidates.FirstOrDefault().tblSupplier.Name,
-                    PlacementDate = x.CreatedTimestamp
+                    PlacementDate = x.CreatedTimestamp,
+                    x.IsActive,
+                    x.IsDeleted
                 }).ToList();
             }
             catch (Exception)
@@ -671,6 +673,18 @@ namespace eMSP.Data.DataServices.Candidate
             try
             {
                 long Id = Convert.ToInt64(data.id);                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task DeleteCandidatePlacement(long PlacementId)
+        {
+            try
+            {
+                await Task.Run(() => ManageCandidatePlacement.DeleteCandidatePlacement(PlacementId));
             }
             catch (Exception)
             {

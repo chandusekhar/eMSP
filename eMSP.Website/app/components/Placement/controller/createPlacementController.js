@@ -21,7 +21,8 @@ function createPlacementController($scope, configJSON, $uibModalInstance, MSPTim
         SubmissionID: $scope.submissionId,
         timeGroup: $scope.placementDetails !== null ? $scope.placementDetails.TimeGroupID.toString():"",
         password: "",
-        formIsActive: $scope.placementDetails!=null?$scope.placementDetails.isActive:""
+        formIsActive: $scope.placementDetails != null ? $scope.placementDetails.isActive : "",
+        placementId: $scope.placementDetails != null ? $scope.placementDetails.ID : ""
     };
     $scope.refData = {};
     $scope.MSPTimeGroup = MSPTimeGroup;

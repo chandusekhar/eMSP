@@ -47,13 +47,13 @@
                                 <label>{{configJSON.formJobStartDate}} :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.jobStart  |date:'dd-MMM-yyyy'"
-                                       name="jobPeriod" disabled />
+                                       name="jobPeriod" disabled  />
                             </div>
                             <div class="form-group col-md-6">
                                 <label>{{configJSON.formJobEndDate}} :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.jobEnd |date:'dd-MMM-yyyy'"
-                                       name="jobPeriod" disabled />
+                                       name="jobPeriod" disabled  />
                             </div>
                             <div class="form-group col-md-12">
                                 &nbsp;
@@ -74,7 +74,7 @@
                                 <label>{{configJSON.formCandidateEmail}} * :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.email"
-                                       name="email" disabled />
+                                       name="email"  />
                             </div>
                             <div class="form-group col-md-12">
                                 &nbsp;
@@ -83,13 +83,13 @@
                                 <label>{{configJSON.formPayRate}} * :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.payRate"
-                                       name="payRate" disabled />
+                                       name="payRate"  />
                             </div>
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.city.$error.required && refData.submitted==true }">
                                 <label>{{configJSON.formBillRate}} * :</label>
                                 <input type="text" class="form-control"
                                        ng-model="dataJSON.billRate"
-                                       name="billRate" disabled />
+                                       name="billRate"  />
                             </div>
                             <div class="form-group col-md-6" ng-class="{ 'has-error': form.state.$error.required && refData.submitted==true }">
                                 <label>{{configJSON.formTimeGroup}} * :</label>

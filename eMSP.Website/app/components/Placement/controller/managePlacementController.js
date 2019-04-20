@@ -1,19 +1,17 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('managePlacementController', managePlacementController)
-function managePlacementController($scope, configJSON, PlacementList) {
+function managePlacementController($scope, configJSON, PlacementList, apiCall, APP_CONSTANTS, $state) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
     $scope.refData = {};
     $scope.placementList = PlacementList;
 
-    //var resAppointmentType = apiCall.get(APP_CONSTANTS.URL.PLACEMENT.GETALLPLACEDCANDIDATES);
-    //resAppointmentType.then(function (data) {
-    //    $scope.placementList = data;
-    //    console.log(data);
-    //});
-
-    $scope.release = function () {
+    $scope.release = function (data) {
+        var resAppointmentType = apiCall.delete(APP_CONSTANTS.URL.PLACEMENT.DELETECANDIDATEPLACEMENT + data.PlacementId, { 'PlacementId': data.PlacementId});
+        resAppointmentType.then(function (data) {
+            $state.reload();
+        });
     };
 
 }

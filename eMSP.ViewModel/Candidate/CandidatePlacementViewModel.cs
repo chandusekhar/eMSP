@@ -25,6 +25,7 @@ namespace eMSP.ViewModel.Candidate
 
     public class CreateCandidatePlacementViewModel
     {
+        public long placementId { get; set; }
         public long jobId { get; set; }
         public string jobTitle { get; set; }
         public DateTime? jobStart { get; set; }

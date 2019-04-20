@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('eMSPApp')
     .controller('manageCandidateSubmissionController', manageCandidateSubmissionController)
-    .controller('submitedCandidateListController', submitedCandidateListController)
+    .controller('submitedCandidateListController', submitedCandidateListController);
 function manageCandidateSubmissionController($scope, $state, localStorageService, configJSON, APP_CONSTANTS, apiCall, $uibModal, $compile, DTOptionsBuilder, DTColumnDefBuilder) {
     $scope.configJSON = configJSON.data;
     $scope.dataJSON = {};
@@ -22,7 +22,7 @@ function manageCandidateSubmissionController($scope, $state, localStorageService
         var templateGoesHere = angular.element($('#submittedCandidates'));
         templateGoesHere.html(html);
         $compile(templateGoesHere)($scope);
-    }    
+    };
 }
 // Controller to get submited Candidate list
 function submitedCandidateListController($scope, $state, localStorageService, APP_CONSTANTS, apiCall, $uibModal, DTOptionsBuilder, DTColumnDefBuilder) {
@@ -40,12 +40,12 @@ function submitedCandidateListController($scope, $state, localStorageService, AP
         localStorageService.set('submittedCandidate', data);
 
         $state.go($scope.configJSON.candidateSubmissionUrl);
-    }
+    };
 
     $scope.createAppointment = function (data) {
         localStorageService.set('createSubmissionId', data.ID);
         $state.go('appointment.manageAppointment');
-    }
+    };
 }
 
 

@@ -28,6 +28,10 @@
       "id": "PlacementDate"
     },
     {
+      "lable": "Status",
+      "id": "Status"
+    },
+    {
       "lable": "Action",
       "id": "Action"
     }

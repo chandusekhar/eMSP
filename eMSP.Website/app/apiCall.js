@@ -27,6 +27,9 @@ angular.module('eMSPApp').factory('apiCall', ['$http', '$q', 'localStorageServic
         },
         post: function (url, param) {
             return apicall('POST', url, param).then(function (data) { return data.data });
+        },
+        delete: function (url, param) {
+            return apicall('DELETE', url, param).then(function (data) { return data.data });
         }
     };
 }]);

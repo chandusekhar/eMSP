@@ -44,6 +44,25 @@ namespace eMSP.Data.DataServices.Users
             }
         }
 
+        internal static async Task<tblUserProfile> GetUserByEmail(string EmailId)
+        {
+            try
+            {
+                using (db = new eMSPEntities())
+                {
+                    return await Task.Run(() => db.tblUserProfiles.Where(x => x.EmailAddress == EmailId)
+                                                  .Include(a => a.tblCountry)
+                                                  .Include(a => a.tblCountryState)
+                                                  .SingleOrDefault());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
         internal static async Task<tblUserProfile> GetUser(string Id, string companyType)
         {
 

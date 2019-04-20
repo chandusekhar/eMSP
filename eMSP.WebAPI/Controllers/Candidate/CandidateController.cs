@@ -300,16 +300,28 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
                 var user = new ApplicationUser() { UserName = dataUser.emailAddress, Email = dataUser.emailAddress };
 
-                IdentityResult result = await UserManager.CreateAsync(user, AppConstant.AppPassword);
+                IdentityResult result = await UserManager.CreateAsync(user, data.password);
 
+                
                 if (!result.Succeeded)
                 {
-                    return GetErrorResult(result);
-                }
+                    var existingUser = await UserManager.FindByEmailAsync(data.email);
 
-                dataUser.userId = user.Id;
-                Helpers.Helpers.AddBaseProperties(dataUser, "create", userId);
-                var createdUser = await dao.CreateUser(dataUser);
+                    var token = await UserManager.GeneratePasswordResetTokenAsync(existingUser.Id);
+
+                    var passReset=await UserManager.ResetPasswordAsync(existingUser.Id, token, data.password);
+
+                    if (!passReset.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+                }
+                else
+                {
+                    dataUser.userId = user.Id;
+                    Helpers.Helpers.AddBaseProperties(dataUser, "create", userId);
+                    await dao.CreateUser(dataUser);
+                }
 
                 CandidatePlacementViewModel dataCP = new CandidatePlacementViewModel
                 {
@@ -320,7 +332,7 @@ namespace eMSP.WebAPI.Controllers.Candidate
 
                 return Ok(await CandidateService.CreateCandidatePlacement(dataCP));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -407,17 +419,13 @@ namespace eMSP.WebAPI.Controllers.Candidate
                     return GetErrorResult(result);
                 }
 
-                CandidatePlacementViewModel dataCP = new CandidatePlacementViewModel
-                {
-                    SubmissionID = data.SubmissionID,
-                    TimeGroupID = data.timeGroup,
-                    isActive = data.formIsActive
-                };
-                Helpers.Helpers.AddBaseProperties(dataCP, "update", userId);
+                var placementDetails = await Task.Run(() => CandidateService.GetPlacementDetails(data.placementId));
+                placementDetails.isActive = data.formIsActive;
+                Helpers.Helpers.AddBaseProperties(placementDetails, "update", userId);                
 
-                return Ok(await CandidateService.UpdateCandidatePlacement(dataCP));
+                return Ok(await CandidateService.UpdateCandidatePlacement(placementDetails));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -425,7 +433,21 @@ namespace eMSP.WebAPI.Controllers.Candidate
         #endregion
 
         #region Delete
-
+        [Route("deleteCandidatePlacement")]
+        [HttpDelete]
+        [Authorize(Roles = ApplicationRoles.PlacementCreate + "," + ApplicationRoles.PlacementFull)]        
+        public async Task<IHttpActionResult> DeleteCandidatePlacement(long PlacementId)
+        {
+            try
+            {
+                await CandidateService.DeleteCandidatePlacement(PlacementId);
+                return Ok("Success");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

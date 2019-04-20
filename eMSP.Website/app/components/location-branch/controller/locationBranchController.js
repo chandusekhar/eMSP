@@ -2,7 +2,7 @@
 angular.module('eMSPApp')
     .controller('locationController', locationController)
     .controller('branchController', branchController);
-function locationController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
+function locationController($scope, $state, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     $scope.configJSON = {};
     $scope.refData = {};
     $scope.refData.countryList = $scope.$parent.refData.countryList;
@@ -14,13 +14,13 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
 
     $scope.getStateList = function () {
         if ($scope.ldataJSON.countryId) {
-            var param = { "Id": $scope.ldataJSON.countryId }
+            var param = { "Id": $scope.ldataJSON.countryId };
             var apires = apiCall.post(APP_CONSTANTS.URL.APP.GETSTATEURL + $scope.ldataJSON.countryId, {});
             apires.then(function (data) {
                 $scope.refData.stateList = data;
             });
         }
-    }
+    };
 
     if ($scope.editform) {
         $scope.getStateList();
@@ -36,28 +36,27 @@ function locationController($scope, $state, $uibModal, localStorageService, apiC
                 res.then(function (data) {
                     $scope.ldataJSON = data;
                     toaster.warning({ body: "Data Updated Successfully." });
+                    $uibModalInstance.close();
                 });
             }
             else {
-                var res = apiCall.post(APP_CONSTANTS.URL.LOCATION.CREATELOCATIONURL, $scope.ldataJSON);
-                res.then(function (data) {
+                apiCall.post(APP_CONSTANTS.URL.LOCATION.CREATELOCATIONURL, $scope.ldataJSON).then(function (data) {
                     $scope.ldataJSON = data;
                     toaster.success({ body: "Data Created Successfully." });
                     $scope.resLocations.unshift(data);
+                    $uibModalInstance.close();
                 });
-            }
-            $uibModalInstance.close();
+            }            
         }
-    }
+    };
 
     $scope.reset = function () {
         $state.ldataJSON = {};
         $uibModalInstance.close();
-    }
+    };
 }
 
-function branchController($scope, $state, $uibModal, localStorageService, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
-    debugger;
+function branchController($scope, $state, apiCall, APP_CONSTANTS, $http, $uibModalInstance, toaster) {
     //var rawValue = angular.copy($scope.bdataJSON);
     $scope.configJSON = {};
     $scope.refData = {};
@@ -93,24 +92,24 @@ function branchController($scope, $state, $uibModal, localStorageService, apiCal
                 res.then(function (data) {
                     $scope.bdataJSON = data;
                     toaster.warning({ body: "Data Updated Successfully." });
+                    $uibModalInstance.close();
                 });
             }
             else {
-                var res = apiCall.post(APP_CONSTANTS.URL.BRANCH.CREATEBRANCHURL, $scope.bdataJSON);
-                res.then(function (data) {
+                apiCall.post(APP_CONSTANTS.URL.BRANCH.CREATEBRANCHURL, $scope.bdataJSON).then(function (data) {
                     $scope.bdataJSON = data;
                     toaster.success({ body: "Data Created Successfully." });
                     $scope.resBranches.unshift(data);
+                    $uibModalInstance.close();
                 });
-            }
-            $uibModalInstance.close();
+            }            
         }
-    }
+    };
 
 
 
     $scope.reset = function () {
         $state.bdataJSON = {};
         $uibModalInstance.close();
-    }
+    };
 }

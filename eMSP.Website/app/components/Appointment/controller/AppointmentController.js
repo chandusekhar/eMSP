@@ -120,6 +120,7 @@ function appointmentController($scope, $state, localStorageService, ngAuthSettin
                     $scope.dataJSON = data;
                     toaster.warning({ body: "Data Updated Successfully." });
                     $uibModalInstance.close();
+                    $state.reload();
 
                 });
             }

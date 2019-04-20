@@ -39,6 +39,21 @@ namespace eMSP.Data.DataServices.Users
                 throw;
             }
         }
+
+        public async Task<UserCreateModel> GetUserByEmail(string EmailId)
+        {
+            try
+            {
+
+                tblUserProfile data = await Task.Run(() => UserOperations.GetUserByEmail(EmailId));
+                return data.ConvertToUser();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public async Task<List<UserModel>> GetAllCompanyUsers(CompanyModel model)
         {
             try

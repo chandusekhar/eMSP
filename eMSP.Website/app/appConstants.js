@@ -181,7 +181,9 @@ angular.module('eMSPApp')
                     CREATEPLACEMENT: "api/candidate/creatCandidatePlacement",
                     GETPLACEMENTBYCANDIDATEID: "api/candidate/getPlacementByCandidateId?CandidateId=",
                     GETALLPLACEDCANDIDATES: "api/candidate/getAllPlacedCandidates",
-                    UPDATECANDIDATEPLACEMENT:"api/candidate/updateCandidatePlacement"
+                    UPDATECANDIDATEPLACEMENT: "api/candidate/updateCandidatePlacement",
+                    DELETECANDIDATEPLACEMENT: "api/candidate/deleteCandidatePlacement?PlacementId="
+
                 },
                 MSPTIMEGROUP: {
                     GETMSPALLTIMEGROUP:"api/MSPTimeGroup/getAllMSPTimeGroup"

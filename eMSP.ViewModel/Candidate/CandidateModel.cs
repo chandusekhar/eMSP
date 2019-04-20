@@ -83,6 +83,7 @@ namespace eMSP.ViewModel.Candidate
         public string StatusId { get; set; }
         public decimal BillRate { get; set; }
         public decimal PayRate { get; set; }
+        public decimal? PayRateMarkUp { get; set; }
         public CandidateStatusModel CandidateStatus { get; set; }        
     }
 

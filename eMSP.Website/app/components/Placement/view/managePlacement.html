@@ -60,9 +60,15 @@
                                                     <small>{{v.PlacementDate | stringToDate : "MM/dd/yyyy  h:mma" }}</small>
                                                 </span>
                                             </td>
-
                                             <td class="project-status center">
-                                                <a ng-click="release(v)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> {{configJSON.actionRelease}} </a>
+                                                <span class="label m-b-n-lg" ng-class="{'label-primary' : v.IsActive,'label-warning':!v.IsActive}">
+                                                    {{v.IsActive?'Open':'Closed'}}
+                                                </span>
+                                            </td>
+                                            <td class="project-status center">
+                                                <a ng-click="release(v)" class="btn btn-white btn-sm">
+                                                    <i class="fa fa-pencil"></i> {{configJSON.actionRelease}}
+                                                </a>
                                             </td>
                                         </tr>
                                     </tbody>

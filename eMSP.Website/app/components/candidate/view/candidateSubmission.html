@@ -72,10 +72,22 @@
                         </div>
                         <div class="ibox-content">
                             <div class="row">
+                                <div class="col-md-12" ng-if="compType == 'MSP'">
+                                    <label>Supplier* :</label>
+                                    <ui-select ng-model="supplierId" theme="bootstrap" required name="supplierId">
+                                        <ui-select-match placeholder="Supplier">{{$select.selected.companyName}}</ui-select-match>
+                                        <ui-select-choices repeat="res.id  as res in companyList | filter: $select.search">
+                                            <div ng-bind-html="res.companyName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
                                 <div class="col-md-6">
                                     <ui-select ng-model="SubmissionDetails.CandidateId" theme="bootstrap" name="searchCandidate" ng-change="getCandidate($select.selected.Candidate)">
                                         <ui-select-match placeholder="Search Candidate">{{$select.selected.Candidate.FirstName + ' ' + $select.selected.Candidate.LastName}}</ui-select-match>
-                                        <ui-select-choices repeat="res.Candidate.id  as res in refData.customerList | filter: $select.search">
+                                        <ui-select-choices repeat="res.Candidate.id  as res in refData.candidateList | filter: $select.search">
 
                                             <div ng-bind-html="res.Candidate.FirstName +' '+ res.Candidate.LastName | highlight: $select.search"></div>
                                         </ui-select-choices>
@@ -86,7 +98,7 @@
 
                                 </div>
                                 <div class="col-md-5">
-                                    <button type="submit" ng-if="!editform" ng-click="newCustomer()" class="btn btn-primary m-b">Create New Customer</button>
+                                    <button type="submit" ng-if="!editform" ng-click="newCustomer()" class="btn btn-primary m-b">Create New Candidate</button>
                                 </div>
                             </div>
 
@@ -600,12 +612,11 @@
                                 <div class="form-group col-md-6" ng-class="{ 'has-error': submitted && form.PayRate.$error.required }">
                                     <label>Pay Rate * :</label>
                                     <input type="number" class="form-control" name="PayRate"
-                                           ng-model="SubmissionDetails.PayRate"
-                                           ng-init="SubmissionDetails.PayRate=0"
+                                           ng-model="SubmissionDetails.PayRate"                                           
                                            placeholder="Pay Rate" required />
-                                    <span ng-show="submitted && form.PayRate.$error.required" class="text-danger">
-                                        * Pay Rate is required
-                                    </span>
+                                    <input type="number" class="form-control" name="PayRate"
+                                           ng-model="SubmissionDetails.PayRateMarkUp" ng-show="false"
+                                           ng-init="SubmissionDetails.PayRateMarkUp = refData.vacancyData.Vacancy.payRateMarkUp"/>                                    
                                 </div>
                                 <!--ng-show="SubmissionDetails.PayRate !== undefined"-->
                                 <div class="form-group col-md-6">

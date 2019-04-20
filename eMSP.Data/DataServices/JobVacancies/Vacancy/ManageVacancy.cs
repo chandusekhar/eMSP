@@ -73,7 +73,7 @@ namespace eMSP.Data.DataServices.JobVacancies
                     if (companyId != 0 && model.companyType == "Customer")
                     {
                         return await Task.Run(() => db.tblVacancies
-                                                      .Where(x => x.tblCustomer.ID == companyId)
+                                                      .Where(x => x.tblCustomer.ID == companyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false))
                                                       .OrderByDescending(x => x.ID)
                                                       .Include(a => a.tblCustomer)
                                                       .Include(a => a.tblMSPVacancieType)

@@ -167,9 +167,9 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
     }
 
     $scope.modelRP = function (model) {
-       
+
         if (model) {
-            
+
             $scope.dataJSON.user = model;
             $scope.dataJSON.user.emailAddress = model.user.emailAddress;
         }
@@ -185,13 +185,13 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
                 formAction: function () { return "Change"; },
             }
         });
-    }
+    };
 
     $scope.modelL = function (model) {
         $scope.ldataJSON = {};
         if (model) {
             $scope.editform = true;
-            $scope.ldataJSON = model;
+            $scope.ldataJSON = angular.copy(model);
         }
         else {
             $scope.editform = false;
@@ -200,13 +200,15 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.ldataJSON.companyName = $scope.res.companyName;
         }
 
-        var modalInstance = $uibModal.open({
+        $uibModal.open({
             templateUrl: 'app/components/location-branch/view/manageLocation.html',
             scope: $scope,
             controller: 'locationController',
             windowClass: 'animated slideInRight'
+        }).result.then(function () {
+            $scope.loadLocations(parseInt($scope.dataJSON.companyId));
         });
-    }
+    };
 
     $scope.modalB = function (model) {
         $scope.editform = false;
@@ -216,20 +218,22 @@ function searchCompanyController($scope, $state, localStorageService, configJSON
             $scope.bdataJSON.locationName = model.locationName;
         } else {
             $scope.editform = true;
-            $scope.bdataJSON = model;
+            $scope.bdataJSON = angular.copy(model);
         }
 
         $scope.bdataJSON.companyId = $scope.res.id;
         $scope.bdataJSON.companyType = $scope.res.companyType;
         $scope.bdataJSON.companyName = $scope.res.companyName;
 
-        var modalInstance = $uibModal.open({
+        $uibModal.open({
             templateUrl: 'app/components/location-branch/view/manageBranch.html',
             scope: $scope,
             controller: 'branchController',
             windowClass: 'animated slideInRight'
+        }).result.then(function () {
+            $scope.loadBranches($scope.refData.locationData);
         });
-    }
+    };
 
     $scope.AddCandidate = function (model) {
 

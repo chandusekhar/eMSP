@@ -10,6 +10,8 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     
     $scope.refData.vacancyData = localStorageService.get('vacancyData');
     $scope.refData.submittedCandidate = localStorageService.get('submittedCandidate');
+    $scope.compType = localStorageService.get('CurrentUser').companyType;
+    $scope.compId = localStorageService.get('CurrentUser').companyId;
     $scope.edit = $scope.refData.submittedCandidate !== null ? true : false;
     $scope.formAction = $scope.edit ? "Update" : "Create";
     $scope.refData.countryList = AppCoutries;//$scope.$parent.refData.countryList;
@@ -21,8 +23,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     $scope.dataJSON.Contact = {};
     $scope.refData.dataCandidateJSON = {};
     $scope.configJSON = configJSON.data;
-    $scope.IsMangePage = $scope.formAction == "Manage" ? true : false;
-    $scope.compId = 1;
+    $scope.IsMangePage = $scope.formAction === "Manage" ? true : false;    
     $scope.contact = false;
     $scope.resumeUpload = false;
     $scope.docUpload = false;
@@ -41,25 +42,46 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     if ($scope.refData.submittedCandidate !== null) {
         $scope.SubmissionDetails = $scope.refData.submittedCandidate;
     }
-    
-    var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + 1, { 'SupplierId': 1 });
-    apires.then(function (data) {
-        $scope.refData.customerList = data;
-    });
-
-    //Function to load candidates
-    if ($scope.IsMangePage) {
-        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + $scope.compId, { 'SupplierId': $scope.compId });
+    $scope.getCandidates = function () {
+        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.supplierId, { 'SupplierId': $scope.supplierId });
         apires.then(function (data) {
-            $scope.resCandidates = data;
+            $scope.refData.candidateList = data;
+        });
+    };
+
+    if ($scope.compType === 'MSP') {
+        var res = apiCall.post(APP_CONSTANTS.URL.COMPANYURL.SEARCHURL, { "companyType": "Supplier", "companyName": "%" });
+        res.then(function (data) {
+            $scope.companyList = data;
+            if ($scope.edit)
+                $scope.supplierId = $scope.compId.toString();
         });
     }
+    else if ($scope.compType === 'Supplier') {
+        $scope.supplierId = $scope.compId.toString();
+        $scope.getCandidates();
+    }
+
+    $scope.$watch('supplierId', function (val) {
+        if (!angular.isUndefined(val)) {
+            $scope.supplierId = val;
+            $scope.getCandidates();
+        }
+    }); 
+
+    //Function to load candidates
+    //if ($scope.IsMangePage) {
+    //    var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + $scope.supplierId, { 'SupplierId': $scope.supplierId });
+    //    apires.then(function (data) {
+    //        $scope.resCandidates = data;
+    //    })
+    //}
 
     if ($scope.edit) {        
         $scope.SupplierState = true;
         $scope.dataJSON = localStorageService.get('editCandidateData');
         if ($scope.dataJSON === null) {
-            var apiCandidateData = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + $scope.refData.submittedCandidate.CandidateId, { 'candidateId': $scope.refData.submittedCandidate.CandidateId });
+            var apiCandidateData = apiCall.get(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + $scope.refData.submittedCandidate.CandidateId, { 'candidateId': $scope.refData.submittedCandidate.CandidateId });
             apiCandidateData.then(function (data) {                
                 $scope.loadCandidate(data);
             });
@@ -68,17 +90,21 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         }
     }
 
-    $scope.getCandidate = function (data) {        
+    $scope.getCandidate = function (data) {
         $scope.refData.isNewCustomer = false;
-        var apiCandidateData = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + data.id, { 'candidateId': data.id });
+        var apiCandidateData = apiCall.get(APP_CONSTANTS.URL.CANDIDATEURL.GETURL + data.id, { 'candidateId': data.id });
         apiCandidateData.then(function (data) {
             $scope.loadCandidate(data);
         });
-    }
+    };
 
     $scope.loadCandidate = function (data) {
         $scope.dataJSON = data;
         $scope.SubmissionDetails.CandidateId = $scope.dataJSON.Candidate.id;
+        //if ($scope.edit) {
+        //    //$scope.supplierId = $scope.compId.toString();
+        //    $scope.supplierId = $scope.companyList.find(x => x.id = $scope.compId.toString());
+        //}
         $scope.dataJSON.Contact = $scope.dataJSON.CandidateContact.length > 0 ? $scope.dataJSON.CandidateContact[0] : {};
         $scope.getStateList();
         $scope.LoadIndustriesData();
@@ -93,10 +119,10 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
             }
             $scope.loadIndustrySkills(Id);
         });
-    }
+    };
 
-    $scope.submit = function (form) {   
-        
+    $scope.submit = function (form) {
+
         $scope.submitted = true;
         $scope.CreateIndustriesData();
         $scope.CreateIndustrySkillsData();
@@ -109,12 +135,12 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
             IsNewCustomer: false,
             IsCustomerEdited: false
         };
-        
+
         if (form.$valid) {
             var suc = false;
             if ($scope.edit) {
                 var resUpdate = apiCall.post(APP_CONSTANTS.URL.CANDIDATESUBMISSIONURL.UPDATEURL, $scope.candidateSubmission);
-                resUpdate.then(function (data) { 
+                resUpdate.then(function (data) {
                     toaster.warning({ body: "Data Updated Successfully." });
                     $state.go($scope.configJSON.successCandidateSubmissionUrl);
                 });
@@ -125,9 +151,9 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                     toaster.success({ body: "Data Created Successfully." });
                     $state.go($scope.configJSON.successCandidateSubmissionUrl);
                 });
-            }            
+            }
         }
-    }
+    };
 
     $scope.fnAddContact = function (flag) {
         if (!flag) {
@@ -136,7 +162,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {
+            if ($scope.dataJSON.Contact.IsPrimary) {
                 $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
@@ -157,7 +183,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         }
         else {
 
-            if ($scope.dataJSON.Contact.IsPrimary == true) {
+            if ($scope.dataJSON.Contact.IsPrimary) {
                 $scope.dataJSON.Candidate.Email = $scope.dataJSON.Contact.EmailAddress;
                 angular.forEach($scope.dataJSON.CandidateContact, function (con) {
                     con.IsPrimary = false;
@@ -251,7 +277,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         if (industryId && !industryId.skillList) {
             $scope.loadIndustrySkills(industryId);
         }
-    }
+    };
 
     $scope.LoadIndustriesData = function () {
 
@@ -262,7 +288,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 }
             });
         });
-    }
+    };
 
     $scope.CreateIndustriesData = function () {
 
@@ -272,7 +298,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 $scope.dataJSON.CandidateIndustries[k] = v.id;
             }
         });
-    }
+    };
 
     $scope.LoadIndustrySkillsData = function () {
         angular.forEach($scope.dataJSON.CandidateSkills, function (v, k) {
@@ -282,7 +308,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 }
             });
         });
-    }
+    };
 
     $scope.CreateIndustrySkillsData = function () {
 
@@ -292,7 +318,7 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
                 $scope.dataJSON.CandidateSkills[k] = v.id;
             }
         });
-    }
+    };
 
     $scope.toggleView = function () {
         if ($scope.refData.userViewType === "Card") {
@@ -301,13 +327,12 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
     };
 
     //Function to load candidates
-    if ($scope.IsMangePage) {
-        //if()
-        var apires = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.compId, { 'SupplierId': $scope.compId });
-        apires.then(function (data) {
-            $scope.resCandidates = data;
-        });
-    }
+    //if ($scope.IsMangePage) {
+    //    var apiresult = apiCall.post(APP_CONSTANTS.URL.CANDIDATEURL.SEARCHURL + '?SupplierId=' + $scope.supplierId, { 'SupplierId': $scope.supplierId });
+    //    apiresult.then(function (data) {
+    //        $scope.resCandidates = data;
+    //    });
+    //};
 
     $scope.editCanditate = function (candidate) {
         $scope.dataJSON = candidate;
@@ -329,28 +354,28 @@ function candidateSubmissionController($scope, $state, $uibModal, localStorageSe
         $scope.IsMangePage = false;
         $scope.edit = true;
         $scope.formAction = "Update";
-    }
+    };
 
     $scope.$watch('SubmissionDetails.PayRate', function (val) {        
         if (!angular.isUndefined(val)) {
-            $scope.SubmissionDetails.BillRate = val + (val * ($scope.refData.vacancyData.Vacancy.payRateMarkUp / 100));
-        }
+            $scope.SubmissionDetails.BillRate = val + (val * ($scope.SubmissionDetails.PayRateMarkUp / 100));
+        }        
     });    
 
     $scope.newCustomer = function () {
         $scope.refData.isNewCustomer = true;
         $scope.reset();
-    }
+    };
 
 
-    $scope.candidateSubmissionsQuestionsResponse = function (event) {  
+    $scope.candidateSubmissionsQuestionsResponse = function (event) {
         var response = [{
             SubmissionID: 0,
             VacancyQuestionID: event.qus.ID,
             Responses: event.response_qus
         }];
-        event.qus.CandidateSubmissionsQuestionsResponse = response;        
-    }
+        event.qus.CandidateSubmissionsQuestionsResponse = response;
+    };
 
     $scope.candidateSubmissionDocumentResponse = function (data, doc) {        
         var docResponse = [];

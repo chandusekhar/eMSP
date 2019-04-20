@@ -79,7 +79,8 @@ namespace eMSP.Data.DataServices.Candidate
                                                   .Include(a=>a.tblCandidateSubmissionSpendFiles.Select(b=>b.tblFile))
                                                   .Include(a=>a.tblMSPSpendCategory)
                                                   .Include(a=>a.tblTimesheetStatu)
-                                                  .Include(a=>a.tblCandidatePlacement)
+                                                  .Include(a=>a.tblCandidatePlacement.tblCandidateSubmission.tblCandidateStatu)
+                                                  .Include(a => a.tblCandidatePlacement.tblMSPTimeGroup)
                                                   .Where(x => x.PlacementID == PlacementId).ToList());
 
                 }
